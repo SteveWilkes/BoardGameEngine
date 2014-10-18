@@ -7,7 +7,8 @@
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/script"));
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                "~/Scripts/Game.Startup.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));

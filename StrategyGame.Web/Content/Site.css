@@ -1,17 +1,32 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+  margin: 0;
+  padding: 0;
 }
-
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.hidden {
+  visibility: hidden;
 }
-
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+div#board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) rotate(45deg);
+  -moz-transform: translate(-50%, -50%) rotate(45deg);
+  -o-transform: translate(-50%, -50%) rotate(45deg);
+  -ms-transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
+div#board,
+div.board-row {
+  margin: auto;
+  overflow: hidden;
+}
+div.board-row {
+  clear: both;
+}
+div.board-tile {
+  width: 12%;
+  border: 2px solid black;
+  float: left;
+  margin: auto;
+}
+/*# sourceMappingURL=Site.css.map */
