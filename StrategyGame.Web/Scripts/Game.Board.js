@@ -2,8 +2,6 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            var tileSizeFactor = 14;
-
             var Board = (function () {
                 // ReSharper disable InconsistentNaming
                 function Board(_container, _config) {
@@ -24,7 +22,7 @@
 
                 Board.prototype.resize = function () {
                     var containerSize = this._container.getSize();
-                    var tileSize = Math.floor(containerSize / tileSizeFactor);
+                    var tileSize = Math.floor(containerSize / this._config.tileSizeFactor);
                     for (var i = 0; i < this.tiles.length; i++) {
                         this.tiles[i].size = tileSize;
                     }

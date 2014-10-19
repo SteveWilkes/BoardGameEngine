@@ -1,7 +1,5 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    var tileSizeFactor = 14;
-
     export class Board {
         // ReSharper disable InconsistentNaming
         constructor(private _container: BoardContainer, private _config: BoardConfig) {
@@ -24,7 +22,7 @@
 
         public resize(): void {
             var containerSize = this._container.getSize();
-            var tileSize = Math.floor(containerSize / tileSizeFactor);
+            var tileSize = Math.floor(containerSize / this._config.tileSizeFactor);
             for (var i = 0; i < this.tiles.length; i++) {
                 this.tiles[i].size = tileSize;
             }

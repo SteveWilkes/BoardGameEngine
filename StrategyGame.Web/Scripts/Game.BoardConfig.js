@@ -6,6 +6,7 @@
                 function BoardConfig(gridSize, tileBorderWidth) {
                     this.gridSize = gridSize;
                     this.tileBorderWidth = tileBorderWidth;
+                    this.tileSizeFactor = (gridSize * 2) - Math.floor(gridSize / 4);
                 }
                 return BoardConfig;
             })();
