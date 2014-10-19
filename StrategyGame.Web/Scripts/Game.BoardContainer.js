@@ -13,8 +13,7 @@
                 };
                 return BoardContainer;
             })();
-
-            Game.game.service("$boardContainer", ["$window", BoardContainer]);
+            Game.BoardContainer = BoardContainer;
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

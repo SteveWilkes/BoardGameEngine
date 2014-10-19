@@ -2,7 +2,7 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            Game.game.directive("sizeToContainer", [
+            Game.game.directive("resizeable", [
                 "$window",
                 function ($window) {
                     return function ($scope) {
@@ -26,4 +26,4 @@
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
     var StrategyGame = AgileObjects.StrategyGame;
 })(AgileObjects || (AgileObjects = {}));
-//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Directives/Game.SizeToContainer.js.map
+//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Directives/Game.Resizeable.js.map

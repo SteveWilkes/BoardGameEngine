@@ -3,12 +3,11 @@
     (function (StrategyGame) {
         (function (Game) {
             Game.game.controller("BoardController", [
-                "$boardContainer", "$board", "$scope",
-                function (container, board, $scope) {
-                    $scope.container = container;
-                    $scope.board = board;
-
-                    $scope.board.sizeTo($scope.container);
+                "$window", "$scope",
+                function ($window, $scope) {
+                    var container = new Game.BoardContainer($window);
+                    var config = new Game.BoardConfig(8, 2);
+                    $scope.board = new Game.Board(container, config);
                 }
             ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));

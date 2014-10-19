@@ -3,15 +3,13 @@
     (function (StrategyGame) {
         (function (Game) {
             var BoardConfig = (function () {
-                function BoardConfig() {
-                    this.gridSize = 8;
-                    this.tileBorderWidth = 2;
+                function BoardConfig(gridSize, tileBorderWidth) {
+                    this.gridSize = gridSize;
+                    this.tileBorderWidth = tileBorderWidth;
                 }
                 return BoardConfig;
             })();
             Game.BoardConfig = BoardConfig;
-
-            Game.game.service("$boardConfig", BoardConfig);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

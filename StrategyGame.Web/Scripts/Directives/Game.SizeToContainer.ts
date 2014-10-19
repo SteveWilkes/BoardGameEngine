@@ -6,8 +6,8 @@
                     for (var propertyName in $scope) {
                         if (propertyName.substring(0, 1) === "$") { continue; }
                         var propertyValue = $scope[propertyName];
-                        if (typeof propertyValue.sizeTo === "function") {
-                            propertyValue.sizeTo($scope.container);
+                        if (typeof propertyValue.resize === "function") {
+                            propertyValue.resize();
                         }
                     }
                     $scope.$apply();

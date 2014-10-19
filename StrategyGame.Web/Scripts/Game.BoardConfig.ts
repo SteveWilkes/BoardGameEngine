@@ -1,9 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class BoardConfig {
-        public gridSize = 8;
-        public tileBorderWidth = 2;
+        constructor(public gridSize: number, public tileBorderWidth: number) {
+        }
     }
-
-    game.service("$boardConfig", BoardConfig);
 }
