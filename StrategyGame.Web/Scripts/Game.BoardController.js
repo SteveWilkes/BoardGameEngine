@@ -3,10 +3,12 @@
     (function (StrategyGame) {
         (function (Game) {
             Game.game.controller("BoardController", [
-                "$boardLayoutManager", "$boardManager", "$scope",
-                function ($layoutManager, $boardManager, $scope) {
-                    $scope.board = $boardManager.board;
-                    $scope.windowResizeListeners = [$layoutManager];
+                "$boardContainer", "$board", "$scope",
+                function (container, board, $scope) {
+                    $scope.container = container;
+                    $scope.board = board;
+
+                    $scope.board.sizeTo($scope.container);
                 }
             ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));

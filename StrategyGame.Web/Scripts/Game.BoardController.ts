@@ -1,9 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    game.controller("BoardController", ["$boardLayoutManager", "$boardManager", "$scope",
-        ($layoutManager: IBoardLayoutManager, $boardManager: IBoardManager, $scope: IGameScope) => {
-            $scope.board = $boardManager.board;
-            $scope.windowResizeListeners = [$layoutManager];
+    game.controller("BoardController", ["$boardContainer", "$board", "$scope",
+        (container: IBoardContainer, board: Board, $scope: IGameScope) => {
+            $scope.container = container;
+            $scope.board = board;
+
+            $scope.board.sizeTo($scope.container);
         }
     ]);
 }

@@ -10,15 +10,6 @@
                     return $window["jQuery"];
                 }
             ]);
-
-            Game.game.directive("removeClass", function () {
-                return {
-                    restrict: "A",
-                    link: function (scope, element, attrs) {
-                        element.removeClass(attrs["removeClass"]);
-                    }
-                };
-            });
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

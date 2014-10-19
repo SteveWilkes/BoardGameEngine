@@ -3,7 +3,7 @@
     using System.Web.Http;
     using Microsoft.Owin.Security.OAuth;
 
-    public static class WebApiConfig
+    internal static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {

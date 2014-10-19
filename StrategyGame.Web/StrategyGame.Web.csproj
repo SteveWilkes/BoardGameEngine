@@ -211,11 +211,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\Directives\Game.SizeToWindow.ts" />
+    <TypeScriptCompile Include="Scripts\Directives\Game.RemoveClass.ts" />
+    <TypeScriptCompile Include="Scripts\Directives\Game.SizeToContainer.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardConfig.ts" />
-    <TypeScriptCompile Include="Scripts\Game.BoardLayoutManager.ts" />
     <TypeScriptCompile Include="Scripts\Game.Board.ts" />
-    <TypeScriptCompile Include="Scripts\Game.BoardManager.ts" />
+    <TypeScriptCompile Include="Scripts\Game.BoardContainer.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardTile.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardController.ts" />
     <TypeScriptCompile Include="Scripts\Game.App.ts" />

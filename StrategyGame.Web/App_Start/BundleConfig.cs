@@ -9,16 +9,16 @@
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                 "~/Scripts/Game.App.js",
-                "~/Scripts/Game.SizeToWindow.js",
+                "~/Scripts/Directives/Game.RemoveClass.js",
+                "~/Scripts/Directives/Game.SizeToContainer.js",
                 "~/Scripts/Game.BoardConfig.js",
+                "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.BoardTile.js",
                 "~/Scripts/Game.Board.js",
-                "~/Scripts/Game.BoardManager.js",
-                "~/Scripts/Game.BoardLayoutManager.js",
                 "~/Scripts/Game.BoardController.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/site.css"));
+                "~/Content/site.css"));
 
 #if !DEBUG
             // Set EnableOptimizations to false for debugging. For more information,
