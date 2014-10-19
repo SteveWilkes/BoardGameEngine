@@ -1,5 +1,12 @@
-﻿<div id="board" class="hidden" data-ng-controller="BoardController">
-    <div class="board-tile" data-ng-repeat="tile in tiles" data-ng-class="{ 'dark-tile': tile.isDark }">
+﻿<div id="board" class="hidden"
+     data-remove-class="hidden"
+     data-size-to-window="true"
+     data-ng-controller="BoardController"
+     data-ng-style="{ width: board.size }">
+    <div class="board-tile"
+         data-ng-repeat="tile in board.tiles"
+         data-ng-class="{ 'dark-tile': tile.isDark }"
+         data-ng-style="{ width: tile.size, height: tile.size }">
         Row {{tile.row}}, Column {{tile.column}}
     </div>
 </div>

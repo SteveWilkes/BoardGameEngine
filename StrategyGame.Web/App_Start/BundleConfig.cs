@@ -8,7 +8,13 @@
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
-                "~/Scripts/Game.Startup.js"));
+                "~/Scripts/Game.App.js",
+                "~/Scripts/Game.BoardConfig.js",
+                "~/Scripts/Game.BoardTile.js",
+                "~/Scripts/Game.Board.js",
+                "~/Scripts/Game.BoardManager.js",
+                "~/Scripts/Game.BoardLayoutManager.js",
+                "~/Scripts/Game.BoardController.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/site.css"));

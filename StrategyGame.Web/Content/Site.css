@@ -9,7 +9,7 @@
   background-color: white;
 }
 .dark-tile {
-  background-color: #333;
+  background-color: #666;
 }
 div#board {
   overflow: hidden;
@@ -23,7 +23,6 @@ div#board {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 div.board-tile {
-  width: 12%;
   border: 2px solid black;
   float: left;
   margin: auto;
