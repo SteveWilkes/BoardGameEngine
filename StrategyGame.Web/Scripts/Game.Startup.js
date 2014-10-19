@@ -3,33 +3,47 @@
     (function (StrategyGame) {
         (function (Game) {
             (function (Startup) {
-                var tileNumber = 14;
+                var tileSizeFactor = 14;
+                var strategyGameApp = angular.module('strategyGameApp', []);
+
+                strategyGameApp.controller("BoardController", function ($scope) {
+                    var tiles = new Array();
+                    for (var row = 1; row < 9; row++) {
+                        for (var column = 1; column < 9; column++) {
+                            var isEvenRow = (row - 1) % 2 === 0;
+                            var isEvenColumn = (column - 1) % 2 === 0;
+                            var isDarkTile = (isEvenRow && isEvenColumn) || (!isEvenRow && !isEvenColumn);
+                            tiles.push({ row: row, column: column, isDark: isDarkTile });
+                        }
+                    }
+                    $scope["tiles"] = tiles;
+                });
 
                 var BoardLayoutManager = (function () {
                     function BoardLayoutManager() {
-                    }
-                    BoardLayoutManager.prototype.setupBoard = function () {
                         var _this = this;
                         $(window).resize(function () {
-                            return _this._layoutTiles();
+                            return _this._resizeTiles();
                         });
-                        this._layoutTiles();
-                        $("#board").removeClass("hidden");
+                        this._resizeTiles();
+                        this._$getBoard().removeClass("hidden");
+                    }
+                    BoardLayoutManager.prototype._resizeTiles = function () {
+                        var currentHeight = $(window).height();
+                        var tileSize = Math.floor(currentHeight / tileSizeFactor);
+                        $("div.board-tile").width(tileSize).height(tileSize);
+                        var boardWidth = (tileSize * 8) + (4 * 8);
+                        this._$getBoard().width(boardWidth);
                     };
 
-                    BoardLayoutManager.prototype._layoutTiles = function (attemptNumber) {
-                        if (typeof attemptNumber === "undefined") { attemptNumber = 1; }
-                        var currentHeight = $(window).height();
-                        var tileSize = Math.floor(currentHeight / tileNumber);
-                        $("div.board-tile").width(tileSize).height(tileSize);
+                    BoardLayoutManager.prototype._$getBoard = function () {
+                        return $("#board");
                     };
                     return BoardLayoutManager;
                 })();
 
-                var layoutManager = new BoardLayoutManager();
-
                 $(function () {
-                    return layoutManager.setupBoard();
+                    return new BoardLayoutManager();
                 });
             })(Game.Startup || (Game.Startup = {}));
             var Startup = Game.Startup;

@@ -6,10 +6,11 @@
     <title>Rich and Steve's Strategy Game</title>
     @Styles.Render("~/Content/css")
 </head>
-<body>
+<body data-ng-app="strategyGameApp">
     @RenderBody()
 
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", required: false)
 </body>

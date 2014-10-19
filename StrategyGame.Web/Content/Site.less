@@ -7,7 +7,16 @@
     visibility: hidden;
 }
 
+.light-tile {
+    background-color: white;
+}
+
+.dark-tile {
+    background-color: #333;
+}
+
 div#board {
+    overflow: hidden;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -16,15 +25,6 @@ div#board {
     -o-transform: translate(-50%, -50%) rotate(45deg);
     -ms-transform: translate(-50%, -50%) rotate(45deg);
     transform: translate(-50%, -50%) rotate(45deg);
-}
-
-div#board, div.board-row {
-    margin: auto;
-    overflow: hidden;
-}
-
-div.board-row {
-    clear: both;
 }
 
 div.board-tile {

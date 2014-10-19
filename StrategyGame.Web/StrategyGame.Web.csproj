@@ -212,6 +212,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Game.Startup.ts" />
+    <TypeScriptCompile Include="Scripts\Typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
   </ItemGroup>
   <ItemGroup />
