@@ -2,13 +2,14 @@
 {
     using System.Web.Optimization;
 
-    public class BundleConfig
+    internal class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                 "~/Scripts/Game.App.js",
+                "~/Scripts/Game.SizeToWindow.js",
                 "~/Scripts/Game.BoardConfig.js",
                 "~/Scripts/Game.BoardTile.js",
                 "~/Scripts/Game.Board.js",

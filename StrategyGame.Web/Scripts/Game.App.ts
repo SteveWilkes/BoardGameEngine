@@ -1,6 +1,15 @@
 ﻿module AgileObjects.StrategyGame.Game {
     export var game = angular.module('strategyGameApp', []);
 
+    export interface IListener {
+        handleEvent(): void;
+    }
+
+    export interface IGameScope extends ng.IScope {
+        board: Board;
+        windowResizeListeners: Array<IListener>;
+    }
+
     game.factory("$jQuery", ["$window",
         ($window: ng.IWindowService) => <JQueryStatic>$window["jQuery"]
     ]);
@@ -13,15 +22,4 @@
             }
         };
     });
-
-    game.directive("sizeToWindow", ["$window", "$boardLayoutManager",
-        ($window: ng.IWindowService, $layoutManager: IBoardLayoutManager) => {
-            return ($scope: ng.IScope) => {
-                return angular.element($window).bind("resize", () => {
-                    $layoutManager.resizeTiles();
-                    $scope.$apply();
-                });
-            };
-        }
-    ]);
 }

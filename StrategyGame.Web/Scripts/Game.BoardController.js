@@ -6,6 +6,7 @@
                 "$boardLayoutManager", "$boardManager", "$scope",
                 function ($layoutManager, $boardManager, $scope) {
                     $scope.board = $boardManager.board;
+                    $scope.windowResizeListeners = [$layoutManager];
                 }
             ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));

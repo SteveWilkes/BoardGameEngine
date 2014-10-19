@@ -211,6 +211,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Directives\Game.SizeToWindow.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardConfig.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardLayoutManager.ts" />
     <TypeScriptCompile Include="Scripts\Game.Board.ts" />

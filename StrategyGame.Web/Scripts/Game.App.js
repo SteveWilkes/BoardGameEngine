@@ -19,18 +19,6 @@
                     }
                 };
             });
-
-            Game.game.directive("sizeToWindow", [
-                "$window", "$boardLayoutManager",
-                function ($window, $layoutManager) {
-                    return function ($scope) {
-                        return angular.element($window).bind("resize", function () {
-                            $layoutManager.resizeTiles();
-                            $scope.$apply();
-                        });
-                    };
-                }
-            ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

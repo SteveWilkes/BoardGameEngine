@@ -2,8 +2,6 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            var tileSizeFactor = 14;
-
             var BoardLayoutManager = (function () {
                 // ReSharper disable InconsistentNaming
                 function BoardLayoutManager(_$window, _$config, _$boardManager) {
@@ -11,18 +9,14 @@
                     this._$config = _$config;
                     this._$boardManager = _$boardManager;
                     // ReSharper restore InconsistentNaming
-                    //this._$getWindow().resize(() => this._setTileSizes());
-                    this.resizeTiles();
+                    this._resizeTiles();
                 }
-                BoardLayoutManager.prototype.resizeTiles = function () {
-                    var currentHeight = this._$window.innerHeight;
-                    var tileSize = Math.floor(currentHeight / tileSizeFactor);
-                    for (var i = 0; i < this._$boardManager.board.tiles.length; i++) {
-                        this._$boardManager.board.tiles[i].size = tileSize;
-                    }
-                    var tilesSize = tileSize * this._$config.gridSize;
-                    var tileBordersSize = this._$config.tileBorderWidth * 2 * this._$config.gridSize;
-                    this._$boardManager.board.size = tilesSize + tileBordersSize;
+                BoardLayoutManager.prototype.handleEvent = function () {
+                    this._resizeTiles();
+                };
+
+                BoardLayoutManager.prototype._resizeTiles = function () {
+                    this._$boardManager.board.resizeTo(this._$window.innerHeight);
                 };
                 return BoardLayoutManager;
             })();

@@ -8,7 +8,7 @@
         // ReSharper disable InconsistentNaming
         constructor(private _$config: BoardConfig) {
             // ReSharper restore InconsistentNaming
-            this.board = new Board(this._$config.gridSize);
+            this.board = new Board(this._$config.gridSize, this._$config.tileBorderWidth);
         }
 
         public board: Board;

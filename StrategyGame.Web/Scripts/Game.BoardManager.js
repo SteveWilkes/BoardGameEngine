@@ -7,7 +7,7 @@
                 function BoardManager(_$config) {
                     this._$config = _$config;
                     // ReSharper restore InconsistentNaming
-                    this.board = new Game.Board(this._$config.gridSize);
+                    this.board = new Game.Board(this._$config.gridSize, this._$config.tileBorderWidth);
                 }
                 return BoardManager;
             })();
