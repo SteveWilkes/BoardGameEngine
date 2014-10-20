@@ -3,7 +3,8 @@
     game.controller("BoardController", ["$window", "$scope",
         ($window: ng.IWindowService, $scope: IGameScope) => {
             var container = new BoardContainer($window);
-            var config = new BoardConfig(8, 2);
+            var settings = new BoardSettings(8, 2);
+            var config = new BoardConfig(settings);
             $scope.board = new Board(container, config);
         }
     ]);

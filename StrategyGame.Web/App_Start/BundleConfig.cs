@@ -11,6 +11,7 @@
                 "~/Scripts/Game.App.js",
                 "~/Scripts/Directives/Game.RemoveClass.js",
                 "~/Scripts/Directives/Game.SizeToContainer.js",
+                "~/Scripts/Game.BoardSettings.js",
                 "~/Scripts/Game.BoardConfig.js",
                 "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.BoardTile.js",

@@ -213,6 +213,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Directives\Game.RemoveClass.ts" />
     <TypeScriptCompile Include="Scripts\Directives\Game.SizeToContainer.ts" />
+    <TypeScriptCompile Include="Scripts\Game.BoardSettings.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardConfig.ts" />
     <TypeScriptCompile Include="Scripts\Game.Board.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardContainer.ts" />

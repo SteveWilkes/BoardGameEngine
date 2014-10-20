@@ -6,7 +6,8 @@
                 "$window", "$scope",
                 function ($window, $scope) {
                     var container = new Game.BoardContainer($window);
-                    var config = new Game.BoardConfig(8, 2);
+                    var settings = new Game.BoardSettings(8, 2);
+                    var config = new Game.BoardConfig(settings);
                     $scope.board = new Game.Board(container, config);
                 }
             ]);
