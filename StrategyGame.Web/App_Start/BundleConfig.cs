@@ -16,6 +16,8 @@
                 "~/Scripts/Game.BoardConfig.js",
                 "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.BoardTile.js",
+                "~/Scripts/Game.IPiece.js",
+                "~/Scripts/Game.PieceBase.js",
                 "~/Scripts/Game.Board.js",
                 "~/Scripts/Game.BoardController.js"));
 

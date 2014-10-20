@@ -7,7 +7,20 @@
             this.isDark = (isEvenRow && isEvenColumn) || (!isEvenRow && !isEvenColumn);
         }
 
-        public isDark: boolean;
         public size: number;
+        public isDark: boolean;
+        public piece: IPiece;
+
+        public resize(newSize: number, resizeFactor: number): void {
+            this.size = newSize;
+
+            if (this.isOccupied()) {
+                this.piece.resize(resizeFactor);
+            }
+        }
+
+        public isOccupied(): boolean {
+            return this.piece !== undefined;
+        }
     }
 }

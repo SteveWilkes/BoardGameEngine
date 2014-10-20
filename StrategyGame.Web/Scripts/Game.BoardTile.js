@@ -10,6 +10,17 @@
                     var isEvenColumn = column % 2 === 0;
                     this.isDark = (isEvenRow && isEvenColumn) || (!isEvenRow && !isEvenColumn);
                 }
+                BoardTile.prototype.resize = function (newSize, resizeFactor) {
+                    this.size = newSize;
+
+                    if (this.isOccupied()) {
+                        this.piece.resize(resizeFactor);
+                    }
+                };
+
+                BoardTile.prototype.isOccupied = function () {
+                    return this.piece !== undefined;
+                };
                 return BoardTile;
             })();
             Game.BoardTile = BoardTile;

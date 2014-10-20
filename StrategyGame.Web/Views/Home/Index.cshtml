@@ -7,6 +7,10 @@
          data-ng-repeat="tile in board.tiles"
          data-ng-class="{ 'dark-tile': tile.isDark }"
          data-ng-style="{ width: tile.size, height: tile.size }">
+        <img class="piece"
+             data-ng-if="tile.isOccupied()"
+             data-ng-src="{{tile.piece.imageSource}}"
+             data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
         Row {{tile.row}}, Column {{tile.column}}
     </div>
 </div>

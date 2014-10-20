@@ -1,5 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
+    export var defaultContainerSize = 975;
+
     export class BoardContainer {
         // ReSharper disable InconsistentNaming
         constructor(private _$window: ng.IWindowService) {

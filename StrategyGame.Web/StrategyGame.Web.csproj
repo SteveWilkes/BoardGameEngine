@@ -177,6 +177,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Pieces\Example.png" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>
@@ -213,6 +214,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\Directives\Game.RemoveClass.ts" />
     <TypeScriptCompile Include="Scripts\Directives\Game.SizeToContainer.ts" />
+    <TypeScriptCompile Include="Scripts\Game.PieceBase.ts" />
+    <TypeScriptCompile Include="Scripts\Game.IPiece.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardState.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardSettings.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardConfig.ts" />
