@@ -15,7 +15,7 @@
                 }
             }
 
-            this.tiles[0].piece = new PieceBase("piece-1", "/Content/Pieces/Example.png");
+            this.tiles[0].assign(new PieceBase("piece-1", "/Content/Pieces/Example.png"));
         }
 
         public tiles: Array<BoardTile>;

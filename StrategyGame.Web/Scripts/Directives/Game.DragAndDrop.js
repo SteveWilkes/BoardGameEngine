@@ -5,8 +5,8 @@
             Game.game.directive("draggable", function () {
                 return {
                     scope: {
-                        dragStart: "&",
-                        dragEnd: "&",
+                        dragstart: "&",
+                        dragend: "&",
                         item: "="
                     },
                     link: function ($scope, element) {
@@ -16,16 +16,18 @@
                         el.draggable = true;
 
                         el.addEventListener("dragstart", function (e) {
+                            console.log("Drag started");
                             e.dataTransfer.effectAllowed = "move";
                             e.dataTransfer.setData("Text", this.id);
                             this.classList.add("drag");
-                            $scope.$apply("dragStart()");
+                            $scope.$apply("dragstart()");
                             return false;
                         }, false);
 
                         el.addEventListener("dragend", function () {
+                            console.log("Drag ended");
                             this.classList.remove("drag");
-                            $scope.$apply("dragEnd()");
+                            $scope.$apply("dragend()");
                             return false;
                         }, false);
                     }
@@ -64,6 +66,8 @@
                         }, false);
 
                         el.addEventListener("drop", function (e) {
+                            console.log("Drop");
+
                             // Stops some browsers from redirecting.
                             if (e.stopPropagation) {
                                 e.stopPropagation();
@@ -74,7 +78,6 @@
                             var item = document.getElementById(e.dataTransfer.getData("Text"));
                             this.appendChild(item);
 
-                            // call the drop passed drop function
                             $scope.$apply("drop()");
 
                             return false;

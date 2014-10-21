@@ -11,6 +11,14 @@
                     this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
                     this.height = Math.floor(Game.defaultPieceHeight * resizeFactor);
                 };
+
+                PieceBase.prototype.moving = function () {
+                    console.log("Piece " + this.id + " moving");
+                };
+
+                PieceBase.prototype.moved = function () {
+                    console.log("Piece " + this.id + " moved");
+                };
                 return PieceBase;
             })();
             Game.PieceBase = PieceBase;

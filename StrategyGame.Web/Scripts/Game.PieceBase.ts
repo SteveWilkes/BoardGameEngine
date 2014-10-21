@@ -12,5 +12,13 @@
             this.width = Math.floor(defaultPieceWidth * resizeFactor);
             this.height = Math.floor(defaultPieceHeight * resizeFactor);
         }
+
+        public moving(): void {
+            console.log("Piece " + this.id + " moving");
+        }
+
+        public moved(): void {
+            console.log("Piece " + this.id + " moved");
+        }
     }
 }

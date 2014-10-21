@@ -18,7 +18,7 @@
                         }
                     }
 
-                    this.tiles[0].piece = new Game.PieceBase("piece-1", "/Content/Pieces/Example.png");
+                    this.tiles[0].assign(new Game.PieceBase("piece-1", "/Content/Pieces/Example.png"));
                 };
 
                 Board.prototype.resize = function () {

@@ -21,6 +21,11 @@
                 BoardTile.prototype.isOccupied = function () {
                     return this.piece !== undefined;
                 };
+
+                BoardTile.prototype.assign = function (piece) {
+                    console.log("Piece " + piece.id + " assigned");
+                    this.piece = piece;
+                };
                 return BoardTile;
             })();
             Game.BoardTile = BoardTile;

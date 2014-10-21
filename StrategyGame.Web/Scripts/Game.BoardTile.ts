@@ -22,5 +22,10 @@
         public isOccupied(): boolean {
             return this.piece !== undefined;
         }
+
+        public assign(piece: IPiece): void {
+            console.log("Piece " + piece.id + " assigned");
+            this.piece = piece;
+        }
     }
 }
