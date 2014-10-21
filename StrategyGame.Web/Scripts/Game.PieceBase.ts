@@ -1,13 +1,16 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class PieceBase implements IPiece {
-        imageSource: string;
+
+        constructor(public id: string, public imageSource: string) {
+        }
+
         width: number;
         height: number;
 
         public resize(resizeFactor: number): void {
-            this.width = Math.floor(this.width * resizeFactor);
-            this.height = Math.floor(this.height * resizeFactor);
+            this.width = Math.floor(defaultPieceWidth * resizeFactor);
+            this.height = Math.floor(defaultPieceHeight * resizeFactor);
         }
     }
 }

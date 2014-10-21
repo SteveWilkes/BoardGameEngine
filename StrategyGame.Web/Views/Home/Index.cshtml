@@ -6,9 +6,12 @@
     <div class="board-tile"
          data-ng-repeat="tile in board.tiles"
          data-ng-class="{ 'dark-tile': tile.isDark }"
-         data-ng-style="{ width: tile.size, height: tile.size }">
-        <img class="piece"
+         data-ng-style="{ width: tile.size, height: tile.size }"
+         data-droppable>
+        <img id="{{tile.piece.id}}"
+             class="piece"
              data-ng-if="tile.isOccupied()"
+             data-draggable
              data-ng-src="{{tile.piece.imageSource}}"
              data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
         Row {{tile.row}}, Column {{tile.column}}

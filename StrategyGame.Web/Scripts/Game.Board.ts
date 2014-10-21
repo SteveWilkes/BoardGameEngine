@@ -15,15 +15,7 @@
                 }
             }
 
-            this.tiles[0].piece = <IPiece>{
-                imageSource: "/Content/Pieces/Example.png",
-                width: defaultPieceWidth,
-                height: defaultPieceHeight,
-                resize: function (resizeFactor: number) {
-                    this.width = Math.floor(defaultPieceWidth * resizeFactor);
-                    this.height = Math.floor(defaultPieceHeight * resizeFactor);
-                }
-            };
+            this.tiles[0].piece = new PieceBase("piece-1", "/Content/Pieces/Example.png");
         }
 
         public tiles: Array<BoardTile>;

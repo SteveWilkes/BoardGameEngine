@@ -18,15 +18,7 @@
                         }
                     }
 
-                    this.tiles[0].piece = {
-                        imageSource: "/Content/Pieces/Example.png",
-                        width: Game.defaultPieceWidth,
-                        height: Game.defaultPieceHeight,
-                        resize: function (resizeFactor) {
-                            this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
-                            this.height = Math.floor(Game.defaultPieceHeight * resizeFactor);
-                        }
-                    };
+                    this.tiles[0].piece = new Game.PieceBase("piece-1", "/Content/Pieces/Example.png");
                 };
 
                 Board.prototype.resize = function () {

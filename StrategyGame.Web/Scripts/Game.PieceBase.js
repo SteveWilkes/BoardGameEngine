@@ -3,11 +3,13 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceBase = (function () {
-                function PieceBase() {
+                function PieceBase(id, imageSource) {
+                    this.id = id;
+                    this.imageSource = imageSource;
                 }
                 PieceBase.prototype.resize = function (resizeFactor) {
-                    this.width = Math.floor(this.width * resizeFactor);
-                    this.height = Math.floor(this.height * resizeFactor);
+                    this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
+                    this.height = Math.floor(Game.defaultPieceHeight * resizeFactor);
                 };
                 return PieceBase;
             })();
