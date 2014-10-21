@@ -3,30 +3,40 @@
     (function (StrategyGame) {
         (function (Game) {
             Game.game.directive("draggable", function () {
-                return function ($scope, element) {
-                    // this gives us the native JS object
-                    var el = element[0];
+                return {
+                    scope: {
+                        dragStart: "&",
+                        dragEnd: "&",
+                        item: "="
+                    },
+                    link: function ($scope, element) {
+                        // this gives us the native JS object
+                        var el = element[0];
 
-                    el.draggable = true;
+                        el.draggable = true;
 
-                    el.addEventListener("dragstart", function (e) {
-                        e.dataTransfer.effectAllowed = "move";
-                        e.dataTransfer.setData("Text", this.id);
-                        this.classList.add("drag");
-                        return false;
-                    }, false);
+                        el.addEventListener("dragstart", function (e) {
+                            e.dataTransfer.effectAllowed = "move";
+                            e.dataTransfer.setData("Text", this.id);
+                            this.classList.add("drag");
+                            $scope.$apply("dragStart()");
+                            return false;
+                        }, false);
 
-                    el.addEventListener("dragend", function () {
-                        this.classList.remove("drag");
-                        return false;
-                    }, false);
+                        el.addEventListener("dragend", function () {
+                            this.classList.remove("drag");
+                            $scope.$apply("dragEnd()");
+                            return false;
+                        }, false);
+                    }
                 };
             });
 
             Game.game.directive("droppable", function () {
                 return {
                     scope: {
-                        drop: "&"
+                        drop: "&",
+                        item: "="
                     },
                     link: function ($scope, element) {
                         // again we need the native object

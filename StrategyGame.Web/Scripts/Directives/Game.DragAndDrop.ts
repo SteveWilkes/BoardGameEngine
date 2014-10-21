@@ -1,33 +1,45 @@
 ﻿module AgileObjects.StrategyGame.Game {
-    game.directive("draggable", () => ($scope: ng.IScope, element: ng.IAugmentedJQuery) => {
-        // this gives us the native JS object
-        var el = element[0];
-
-        el.draggable = true;
-
-        el.addEventListener(
-            "dragstart",
-            function (e: DragEvent) {
-                e.dataTransfer.effectAllowed = "move";
-                e.dataTransfer.setData("Text", this.id);
-                this.classList.add("drag");
-                return false;
+    game.directive("draggable", () => {
+        return {
+            scope: {
+                dragStart: "&", // parent
+                dragEnd: "&", // parent
+                item: "="
             },
-            false);
+            link: ($scope: ng.IScope, element: ng.IAugmentedJQuery) => {
+                // this gives us the native JS object
+                var el = element[0];
 
-        el.addEventListener(
-            "dragend",
-            function () {
-                this.classList.remove("drag");
-                return false;
-            },
-            false);
+                el.draggable = true;
+
+                el.addEventListener(
+                    "dragstart",
+                    function (e: DragEvent) {
+                        e.dataTransfer.effectAllowed = "move";
+                        e.dataTransfer.setData("Text", this.id);
+                        this.classList.add("drag");
+                        $scope.$apply("dragStart()");
+                        return false;
+                    },
+                    false);
+
+                el.addEventListener(
+                    "dragend",
+                    function () {
+                        this.classList.remove("drag");
+                        $scope.$apply("dragEnd()");
+                        return false;
+                    },
+                    false);
+            }
+        };
     });
 
     game.directive("droppable", () => {
         return {
             scope: {
-                drop: "&" // parent
+                drop: "&", // parent
+                item: "="
             },
             link: ($scope: ng.IScope, element: ng.IAugmentedJQuery) => {
                 // again we need the native object
