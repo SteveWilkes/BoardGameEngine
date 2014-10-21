@@ -5,7 +5,6 @@
         constructor(private _container: BoardContainer, public config: BoardConfig) {
             // ReSharper restore InconsistentNaming
             this._createTiles();
-            this.resize();
         }
 
         private _createTiles(): void {

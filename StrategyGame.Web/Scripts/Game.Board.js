@@ -9,7 +9,6 @@
                     this.config = config;
                     // ReSharper restore InconsistentNaming
                     this._createTiles();
-                    this.resize();
                 }
                 Board.prototype._createTiles = function () {
                     this.tiles = new Array();
