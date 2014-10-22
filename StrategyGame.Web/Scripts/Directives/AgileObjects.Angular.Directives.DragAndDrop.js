@@ -8,6 +8,7 @@
                         scope: {
                             dragstart: "&",
                             dragend: "&",
+                            subject: "=",
                             item: "="
                         },
                         link: function ($scope, element) {
@@ -44,6 +45,7 @@
                     return {
                         scope: {
                             drop: "&",
+                            subject: "=",
                             item: "="
                         },
                         link: function ($scope, element) {
@@ -95,14 +97,22 @@
             Directives.addDroppable = addDroppable;
 
             function evaluateScope($scope, functionName) {
-                if (typeof $scope[functionName] === "function") {
-                    var func = $scope[functionName]();
-                    if (typeof func === "function") {
-                        return func($scope["item"]) !== false;
+                return $scope.$apply(function ($s) {
+                    if (typeof $s[functionName] === "function") {
+                        var func = $s[functionName]();
+                        if (typeof func === "function") {
+                            var result;
+                            if (typeof $s["subject"] === "object") {
+                                result = func.call($s["subject"], $s["item"]);
+                            } else {
+                                result = func($s["item"]);
+                            }
+                            return result !== false;
+                        }
                     }
-                }
 
-                return true;
+                    return true;
+                });
             }
         })(Angular.Directives || (Angular.Directives = {}));
         var Directives = Angular.Directives;

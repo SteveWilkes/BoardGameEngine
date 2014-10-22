@@ -8,16 +8,19 @@
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                "~/Scripts/Directives/AgileObjects.Angular.Directives.RemoveClass.js",
+                "~/Scripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js",
+                "~/Scripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js",
                 "~/Scripts/Game.App.js",
-                "~/Scripts/Directives/Game.RemoveClass.js",
-                "~/Scripts/Directives/Game.SizeToContainer.js",
-                "~/Scripts/Directives/Game.DragAndDrop.js",
                 "~/Scripts/Game.BoardSettings.js",
+                "~/Scripts/Game.Coordinates.js",
+                "~/Scripts/Game.BoardTile.js",
+                "~/Scripts/Game.PieceMovement.js",
                 "~/Scripts/Game.BoardState.js",
                 "~/Scripts/Game.BoardContainer.js",
-                "~/Scripts/Game.BoardTile.js",
                 "~/Scripts/Game.IPiece.js",
                 "~/Scripts/Game.PieceBase.js",
+                "~/Scripts/Game.AnyDirectionMovementProfile.js",
                 "~/Scripts/Game.Board.js",
                 "~/Scripts/Game.BoardController.js"));
 

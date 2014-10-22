@@ -2,7 +2,10 @@
 
     export class PieceBase implements IPiece {
 
-        constructor(public id: string, public imageSource: string) {
+        constructor(
+            public id: string,
+            public imageSource: string,
+            public movementProfile: IPieceMovementProfile) {
         }
 
         width: number;

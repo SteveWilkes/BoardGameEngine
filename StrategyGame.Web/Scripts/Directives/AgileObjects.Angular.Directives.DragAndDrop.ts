@@ -5,6 +5,7 @@
                 scope: {
                     dragstart: "&", // parent
                     dragend: "&", // parent
+                    subject: "=",
                     item: "="
                 },
                 link: ($scope: ng.IScope, element: ng.IAugmentedJQuery) => {
@@ -46,6 +47,7 @@
             return {
                 scope: {
                     drop: "&", // parent
+                    subject: "=",
                     item: "="
                 },
                 link: ($scope: ng.IScope, element: ng.IAugmentedJQuery) => {
@@ -102,13 +104,21 @@
     }
 
     function evaluateScope($scope: ng.IScope, functionName: string): boolean {
-        if (typeof $scope[functionName] === "function") {
-            var func = $scope[functionName]();
-            if (typeof func === "function") {
-                return func($scope["item"]) !== false;
+        return $scope.$apply(($s: ng.IScope) => {
+            if (typeof $s[functionName] === "function") {
+                var func = $s[functionName]();
+                if (typeof func === "function") {
+                    var result: boolean;
+                    if (typeof $s["subject"] === "object") {
+                        result = func.call($s["subject"], $s["item"]);
+                    } else {
+                        result = func($s["item"]);
+                    }
+                    return result !== false;
+                }
             }
-        }
 
-        return true;
+            return true;
+        });
     }
 }

@@ -9,5 +9,6 @@
         width: number;
         height: number;
         resize(resizeFactor: number): void;
+        movementProfile: IPieceMovementProfile;
     }
 }

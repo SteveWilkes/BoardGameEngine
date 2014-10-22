@@ -215,6 +215,10 @@
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
+    <TypeScriptCompile Include="Scripts\Game.IPieceMovementProfile.ts" />
+    <TypeScriptCompile Include="Scripts\Game.Coordinates.ts" />
+    <TypeScriptCompile Include="Scripts\Game.AnyDirectionMovementProfile.ts" />
+    <TypeScriptCompile Include="Scripts\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="Scripts\Game.PieceBase.ts" />
     <TypeScriptCompile Include="Scripts\Game.IPiece.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardState.ts" />

@@ -1,10 +1,8 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class BoardTile {
-        constructor(public row: number, public column: number) {
-            var isEvenRow = row % 2 === 0;
-            var isEvenColumn = column % 2 === 0;
-            this.isDark = (isEvenRow && isEvenColumn) || (!isEvenRow && !isEvenColumn);
+        constructor(public position: Coordinates) {
+            this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
         }
 
         public size: number;
@@ -26,6 +24,13 @@
         public assign(piece: IPiece): void {
             console.log("Piece " + piece.id + " assigned");
             this.piece = piece;
+        }
+
+        public removePiece(): IPiece {
+            var piece = this.piece;
+            this.piece = undefined;
+
+            return piece;
         }
     }
 }

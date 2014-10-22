@@ -3,12 +3,9 @@
     (function (StrategyGame) {
         (function (Game) {
             var BoardTile = (function () {
-                function BoardTile(row, column) {
-                    this.row = row;
-                    this.column = column;
-                    var isEvenRow = row % 2 === 0;
-                    var isEvenColumn = column % 2 === 0;
-                    this.isDark = (isEvenRow && isEvenColumn) || (!isEvenRow && !isEvenColumn);
+                function BoardTile(position) {
+                    this.position = position;
+                    this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
                 }
                 BoardTile.prototype.resize = function (newSize, resizeFactor) {
                     this.size = newSize;
@@ -25,6 +22,13 @@
                 BoardTile.prototype.assign = function (piece) {
                     console.log("Piece " + piece.id + " assigned");
                     this.piece = piece;
+                };
+
+                BoardTile.prototype.removePiece = function () {
+                    var piece = this.piece;
+                    this.piece = undefined;
+
+                    return piece;
                 };
                 return BoardTile;
             })();

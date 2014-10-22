@@ -3,9 +3,10 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceBase = (function () {
-                function PieceBase(id, imageSource) {
+                function PieceBase(id, imageSource, movementProfile) {
                     this.id = id;
                     this.imageSource = imageSource;
+                    this.movementProfile = movementProfile;
                 }
                 PieceBase.prototype.resize = function (resizeFactor) {
                     this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
