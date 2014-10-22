@@ -4,6 +4,11 @@
         (function (Game) {
             Game.game = angular.module('strategyGameApp', []);
 
+            AgileObjects.Angular.Directives.addRemoveClass(Game.game);
+            AgileObjects.Angular.Directives.addSizeToContainer(Game.game);
+            AgileObjects.Angular.Directives.addDraggable(Game.game);
+            AgileObjects.Angular.Directives.addDroppable(Game.game);
+
             Game.game.factory("$jQuery", [
                 "$window",
                 function ($window) {
