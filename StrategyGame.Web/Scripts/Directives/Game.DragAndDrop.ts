@@ -16,10 +16,11 @@
                     "dragstart",
                     function (e: DragEvent) {
                         console.log("Drag started");
-                        e.dataTransfer.effectAllowed = "move";
-                        e.dataTransfer.setData("Text", this.id);
-                        this.classList.add("drag");
-                        $scope.$apply("dragstart()");
+                        if (evaluateScope($scope, "dragstart")) {
+                            e.dataTransfer.effectAllowed = "move";
+                            e.dataTransfer.setData("Text", this.id);
+                            this.classList.add("drag");
+                        }
                         return false;
                     },
                     false);
@@ -28,8 +29,9 @@
                     "dragend",
                     function () {
                         console.log("Drag ended");
-                        this.classList.remove("drag");
-                        $scope.$apply("dragend()");
+                        if (evaluateScope($scope, "dragend")) {
+                            this.classList.remove("drag");
+                        }
                         return false;
                     },
                     false);
@@ -83,10 +85,10 @@
 
                         this.classList.remove("over");
 
-                        var item = document.getElementById(e.dataTransfer.getData("Text"));
-                        this.appendChild(item);
-
-                        $scope.$apply("drop()");
+                        if (evaluateScope($scope, "drop")) {
+                            var item = document.getElementById(e.dataTransfer.getData("Text"));
+                            this.appendChild(item);
+                        }
 
                         return false;
                     },
@@ -94,4 +96,15 @@
             }
         }
     });
+
+    function evaluateScope($scope: ng.IScope, functionName: string): boolean {
+        if (typeof $scope[functionName] === "function") {
+            var func = $scope[functionName]();
+            if (typeof func === "function") {
+                return func($scope["item"]) !== false;
+            }
+        }
+
+        return true;
+    }
 }

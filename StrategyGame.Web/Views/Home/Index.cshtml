@@ -7,10 +7,10 @@
          data-ng-repeat="tile in board.tiles"
          data-ng-class="{ 'dark-tile': tile.isDark }"
          data-ng-style="{ width: tile.size, height: tile.size }"
-         data-droppable data-item="tile">
+         data-droppable data-item="tile" data-drop="board.state.pieceMoved">
         <img id="{{tile.piece.id}}" class="piece"
              data-ng-if="tile.isOccupied()"
-             data-draggable data-item="tile" data-dragstart="tile.piece.moving()" data-dragend="tile.piece.moved()"
+             data-draggable data-item="tile" data-dragstart="board.state.pieceMoving"
              data-ng-src="{{tile.piece.imageSource}}"
              data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
         Row {{tile.row}}, Column {{tile.column}}

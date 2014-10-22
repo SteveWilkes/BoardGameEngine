@@ -7,9 +7,7 @@
                 function ($window, $scope) {
                     var container = new Game.BoardContainer($window);
                     var settings = new Game.BoardSettings(8, 2);
-                    var state = new Game.BoardState();
-                    var config = new Game.BoardConfig(settings, state);
-                    $scope.board = new Game.Board(container, config);
+                    $scope.board = new Game.Board(container, settings);
                 }
             ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));

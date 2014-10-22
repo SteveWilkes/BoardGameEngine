@@ -14,7 +14,6 @@
                 "~/Scripts/Directives/Game.DragAndDrop.js",
                 "~/Scripts/Game.BoardSettings.js",
                 "~/Scripts/Game.BoardState.js",
-                "~/Scripts/Game.BoardConfig.js",
                 "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.BoardTile.js",
                 "~/Scripts/Game.IPiece.js",

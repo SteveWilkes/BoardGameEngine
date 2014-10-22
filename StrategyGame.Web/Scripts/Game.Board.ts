@@ -1,35 +1,27 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Board {
+
         // ReSharper disable InconsistentNaming
-        constructor(private _container: BoardContainer, public config: BoardConfig) {
+        constructor(private _container: BoardContainer, private _settings: BoardSettings) {
             // ReSharper restore InconsistentNaming
-            this._createTiles();
+            this.state = new BoardState(this._settings);
+            this.tiles = this.state.tiles;
         }
 
-        private _createTiles(): void {
-            this.tiles = new Array<BoardTile>();
-            for (var row = 0; row < this.config.settings.gridSize; row++) {
-                for (var column = 0; column < this.config.settings.gridSize; column++) {
-                    this.tiles.push(new BoardTile(row + 1, column + 1));
-                }
-            }
-
-            this.tiles[0].assign(new PieceBase("piece-1", "/Content/Pieces/Example.png"));
-        }
-
+        public state: BoardState;
         public tiles: Array<BoardTile>;
         public size: number;
 
         public resize(): void {
             var containerSize = this._container.getSize();
             var resizeFactor = containerSize / defaultContainerSize;
-            var tileSize = Math.floor(containerSize / this.config.settings.tileSizeFactor);
+            var tileSize = Math.floor(containerSize / this._settings.tileSizeFactor);
             for (var i = 0; i < this.tiles.length; i++) {
                 this.tiles[i].resize(tileSize, resizeFactor);
             }
-            var tilesSize = tileSize * this.config.settings.gridSize;
-            var tileBordersSize = this.config.settings.tileBorderWidth * 2 * this.config.settings.gridSize;
+            var tilesSize = tileSize * this._settings.gridSize;
+            var tileBordersSize = this._settings.tileBorderWidth * 2 * this._settings.gridSize;
             this.size = tilesSize + tileBordersSize;
         }
     }

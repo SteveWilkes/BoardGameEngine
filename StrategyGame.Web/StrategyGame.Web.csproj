@@ -219,7 +219,6 @@
     <TypeScriptCompile Include="Scripts\Game.IPiece.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardState.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardSettings.ts" />
-    <TypeScriptCompile Include="Scripts\Game.BoardConfig.ts" />
     <TypeScriptCompile Include="Scripts\Game.Board.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardContainer.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardTile.ts" />
