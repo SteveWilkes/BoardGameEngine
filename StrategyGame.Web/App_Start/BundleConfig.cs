@@ -16,7 +16,7 @@
                 "~/Scripts/Game.Coordinates.js",
                 "~/Scripts/Game.BoardTile.js",
                 "~/Scripts/Game.PieceMovement.js",
-                "~/Scripts/Game.BoardState.js",
+                "~/Scripts/Game.PieceMover.js",
                 "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.IPiece.js",
                 "~/Scripts/Game.PieceBase.js",

@@ -218,10 +218,11 @@
     <TypeScriptCompile Include="Scripts\Game.IPieceMovementProfile.ts" />
     <TypeScriptCompile Include="Scripts\Game.Coordinates.ts" />
     <TypeScriptCompile Include="Scripts\Game.AnyDirectionMovementProfile.ts" />
+    <TypeScriptCompile Include="Scripts\Game.ITilesByCoordinateSet.ts" />
     <TypeScriptCompile Include="Scripts\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="Scripts\Game.PieceBase.ts" />
     <TypeScriptCompile Include="Scripts\Game.IPiece.ts" />
-    <TypeScriptCompile Include="Scripts\Game.BoardState.ts" />
+    <TypeScriptCompile Include="Scripts\Game.PieceMover.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardSettings.ts" />
     <TypeScriptCompile Include="Scripts\Game.Board.ts" />
     <TypeScriptCompile Include="Scripts\Game.BoardContainer.ts" />
