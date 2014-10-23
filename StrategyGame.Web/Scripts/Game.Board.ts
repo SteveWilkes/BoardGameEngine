@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Board {
-        private _tilesByCoordinates: IStringDictionary<BoardTile>;
+        private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
 
         // ReSharper disable InconsistentNaming
         constructor(private _container: BoardContainer, private _settings: BoardSettings) {

@@ -21,8 +21,9 @@
                 "~/Scripts/Game.IPiece.js",
                 "~/Scripts/Game.Piece.js",
                 "~/Scripts/Game.AnyDirectionMovementProfile.js",
+                "~/Scripts/Game.Game.js",
                 "~/Scripts/Game.Board.js",
-                "~/Scripts/Game.BoardController.js"));
+                "~/Scripts/Game.GameController.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/site.css"));

@@ -43,7 +43,7 @@
     }
 
     export class CoordinatesRegistry {
-        private _coordinates: IStringDictionary<Coordinates>;
+        private _coordinates: AgileObjects.TypeScript.IStringDictionary<Coordinates>;
 
         constructor() {
             this._coordinates = {};

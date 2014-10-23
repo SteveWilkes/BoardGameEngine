@@ -98,17 +98,26 @@
 
             function evaluateScope($scope, functionName) {
                 return $scope.$apply(function ($s) {
-                    if (typeof $s[functionName] === "function") {
-                        var func = $s[functionName]();
-                        if (typeof func === "function") {
-                            var result;
-                            if (typeof $s["subject"] === "object") {
-                                result = func.call($s["subject"], $s["item"]);
-                            } else {
-                                result = func($s["item"]);
-                            }
-                            return result !== false;
+                    var func;
+                    if (typeof $s["subject"] === "object") {
+                        var subject = $s["subject"];
+                        var instanceMethodNameGetter = $s[functionName];
+                        if (typeof instanceMethodNameGetter === "function") {
+                            var instanceMethodName = instanceMethodNameGetter();
+                            func = function (item) {
+                                return subject[instanceMethodName].call(subject, item);
+                            };
                         }
+                    } else {
+                        var funcGetter = $s[functionName];
+                        if (typeof funcGetter === "function") {
+                            func = funcGetter();
+                        }
+                    }
+
+                    if (typeof func === "function") {
+                        var result = func($s["item"]);
+                        return result !== false;
                     }
 
                     return true;

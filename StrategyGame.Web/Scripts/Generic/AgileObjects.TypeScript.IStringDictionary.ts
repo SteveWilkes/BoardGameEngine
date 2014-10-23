@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.TypeScript {
 
     export interface IStringDictionary<TValue> {
         [key: string]: TValue;

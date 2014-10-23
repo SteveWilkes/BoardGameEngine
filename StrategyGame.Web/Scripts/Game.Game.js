@@ -3,7 +3,8 @@
     (function (StrategyGame) {
         (function (_Game) {
             var Game = (function () {
-                function Game() {
+                function Game(board) {
+                    this.board = board;
                 }
                 return Game;
             })();

@@ -105,17 +105,24 @@
 
     function evaluateScope($scope: ng.IScope, functionName: string): boolean {
         return $scope.$apply(($s: ng.IScope) => {
-            if (typeof $s[functionName] === "function") {
-                var func = $s[functionName]();
-                if (typeof func === "function") {
-                    var result: boolean;
-                    if (typeof $s["subject"] === "object") {
-                        result = func.call($s["subject"], $s["item"]);
-                    } else {
-                        result = func($s["item"]);
-                    }
-                    return result !== false;
+            var func: (item: Object) => boolean;
+            if (typeof $s["subject"] === "object") {
+                var subject = <AgileObjects.TypeScript.IStringDictionary<(item: Object) => boolean>>$s["subject"];
+                var instanceMethodNameGetter = <() => string>$s[functionName];
+                if (typeof instanceMethodNameGetter === "function") {
+                    var instanceMethodName = instanceMethodNameGetter();
+                    func = (item: Object) => subject[instanceMethodName].call(subject, item);
                 }
+            } else {
+                var funcGetter = $s[functionName];
+                if (typeof funcGetter === "function") {
+                    func = funcGetter();
+                }
+            }
+
+            if (typeof func === "function") {
+                var result = func($s["item"]);
+                return result !== false;
             }
 
             return true;

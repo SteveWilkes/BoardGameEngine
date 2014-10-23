@@ -3,7 +3,7 @@
     export var game = angular.module('strategyGameApp', []);
 
     export interface IGameScope extends ng.IScope {
-        board: Board;
+        game: Game;
     }
 
     AgileObjects.Angular.Directives.addRemoveClass(game);

@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Game {
-        constructor() {
+        constructor(public board: Board) {
         }
     }
 } 

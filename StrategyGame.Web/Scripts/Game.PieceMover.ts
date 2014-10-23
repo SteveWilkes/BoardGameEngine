@@ -4,7 +4,7 @@
         private _currentPieceMovement: PieceMovement;
 
         // ReSharper disable InconsistentNaming
-        constructor(private _tilesByCoordinates: IStringDictionary<BoardTile>) {
+        constructor(private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>) {
             // ReSharper restore InconsistentNaming
         }
 
