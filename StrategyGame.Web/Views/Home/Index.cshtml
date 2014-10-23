@@ -10,7 +10,7 @@
          data-droppable data-item="tile" data-subject="board.pieceMover" data-drop="board.pieceMover.pieceMoved">
         <img id="{{tile.piece.id}}" class="piece"
              data-ng-if="tile.isOccupied()"
-             data-draggable data-item="tile" data-subject="board.pieceMover" data-dragstart="board.pieceMover.pieceMoving"
+             data-draggable data-item="tile" data-subject="board.pieceMover" data-dragstart="board.pieceMover.pieceMoving" data-dragend="board.pieceMover.pieceReset"
              data-ng-src="{{tile.piece.imageSource}}"
              data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
         Row {{tile.position.row}}, Column {{tile.position.column}}

@@ -10,6 +10,10 @@
                     // ReSharper restore InconsistentNaming
                     this._setDestinationTileStates(true);
                 }
+                PieceMovement.prototype.cancel = function () {
+                    this._setDestinationTileStates(false);
+                };
+
                 PieceMovement.prototype.complete = function (destinationTile) {
                     if (destinationTile === this._originTile) {
                         return true;

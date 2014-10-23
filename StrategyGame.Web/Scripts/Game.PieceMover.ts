@@ -20,6 +20,11 @@
             }
             this._currentPieceMovement = new PieceMovement(originTile, validDestinationTiles);
         }
+        
+        public pieceReset(): boolean {
+            this._currentPieceMovement.cancel();
+            return true;
+        }
 
         public pieceMoved(destinationTile: BoardTile): boolean {
             return this._currentPieceMovement.complete(destinationTile);

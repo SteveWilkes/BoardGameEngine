@@ -22,6 +22,11 @@
                     this._currentPieceMovement = new Game.PieceMovement(originTile, validDestinationTiles);
                 };
 
+                PieceMover.prototype.pieceReset = function () {
+                    this._currentPieceMovement.cancel();
+                    return true;
+                };
+
                 PieceMover.prototype.pieceMoved = function (destinationTile) {
                     return this._currentPieceMovement.complete(destinationTile);
                 };

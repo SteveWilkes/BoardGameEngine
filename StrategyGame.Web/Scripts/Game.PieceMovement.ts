@@ -7,6 +7,10 @@
             this._setDestinationTileStates(true);
         }
 
+        public cancel(): void {
+            this._setDestinationTileStates(false);
+        }
+
         public complete(destinationTile: BoardTile): boolean {
             if (destinationTile === this._originTile) { return true; }
             if (this._validDestinationTiles.indexOf(destinationTile) === -1) { return false; }
