@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class PieceBase implements IPiece {
+    export class Piece implements IPiece {
 
         constructor(
             public id: string,

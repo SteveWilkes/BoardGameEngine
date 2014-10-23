@@ -22,7 +22,7 @@
                 }
             }
 
-            this.tiles[0].assign(new PieceBase(
+            this.tiles[0].assign(new Piece(
                 "piece-1",
                 "/Content/Pieces/Example.png",
                 new AnyDirectionMovementProfile(2)));

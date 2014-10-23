@@ -2,27 +2,27 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            var PieceBase = (function () {
-                function PieceBase(id, imageSource, movementProfile) {
+            var Piece = (function () {
+                function Piece(id, imageSource, movementProfile) {
                     this.id = id;
                     this.imageSource = imageSource;
                     this.movementProfile = movementProfile;
                 }
-                PieceBase.prototype.resize = function (resizeFactor) {
+                Piece.prototype.resize = function (resizeFactor) {
                     this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
                     this.height = Math.floor(Game.defaultPieceHeight * resizeFactor);
                 };
 
-                PieceBase.prototype.moving = function () {
+                Piece.prototype.moving = function () {
                     console.log("Piece " + this.id + " moving");
                 };
 
-                PieceBase.prototype.moved = function () {
+                Piece.prototype.moved = function () {
                     console.log("Piece " + this.id + " moved");
                 };
-                return PieceBase;
+                return Piece;
             })();
-            Game.PieceBase = PieceBase;
+            Game.Piece = Piece;
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

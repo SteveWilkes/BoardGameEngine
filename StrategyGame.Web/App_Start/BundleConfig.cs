@@ -19,7 +19,7 @@
                 "~/Scripts/Game.PieceMover.js",
                 "~/Scripts/Game.BoardContainer.js",
                 "~/Scripts/Game.IPiece.js",
-                "~/Scripts/Game.PieceBase.js",
+                "~/Scripts/Game.Piece.js",
                 "~/Scripts/Game.AnyDirectionMovementProfile.js",
                 "~/Scripts/Game.Board.js",
                 "~/Scripts/Game.BoardController.js"));
