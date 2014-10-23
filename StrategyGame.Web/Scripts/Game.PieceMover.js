@@ -12,7 +12,7 @@
                     var possibleDestinations = originTile.piece.movementProfile.getPossibleDestinations(originTile.position);
                     var validDestinationTiles = new Array();
                     for (var i = 0; i < possibleDestinations.length; i++) {
-                        var destinationTile = this._tilesByCoordinates[possibleDestinations[i].toString()];
+                        var destinationTile = this._tilesByCoordinates[possibleDestinations[i].signature];
 
                         // ReSharper disable once QualifiedExpressionMaybeNull
                         if (destinationTile !== undefined && !destinationTile.isOccupied()) {

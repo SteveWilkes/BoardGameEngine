@@ -3,10 +3,11 @@
     (function (StrategyGame) {
         (function (Game) {
             var Coordinates = (function () {
-                function Coordinates(row, column) {
+                function Coordinates(row, column, signature) {
+                    if (typeof signature === "undefined") { signature = getSignature(row, column); }
                     this.row = row;
                     this.column = column;
-                    this._signature = row + "x" + column;
+                    this.signature = signature;
                     this.isEvenRow = this.row % 2 === 0;
                     this.isEvenColumn = this.column % 2 === 0;
                 }
@@ -41,13 +42,31 @@
                 Coordinates.prototype.downLeft = function (distance) {
                     return new Coordinates(this.row + distance, this.column - distance);
                 };
-
-                Coordinates.prototype.toString = function () {
-                    return this._signature;
-                };
                 return Coordinates;
             })();
             Game.Coordinates = Coordinates;
+
+            var CoordinatesRegistry = (function () {
+                function CoordinatesRegistry() {
+                    this._coordinates = {};
+                }
+                CoordinatesRegistry.prototype.get = function (row, column) {
+                    var signature = getSignature(row, column);
+                    var coorindates = this._coordinates[signature];
+                    if (coorindates === undefined) {
+                        coorindates = this._coordinates[signature] = new Coordinates(row, column, signature);
+                    }
+                    return coorindates;
+                };
+                return CoordinatesRegistry;
+            })();
+            Game.CoordinatesRegistry = CoordinatesRegistry;
+
+            function getSignature(row, column) {
+                return row + "x" + column;
+            }
+
+            Game.coordinatesRegistry = new CoordinatesRegistry();
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

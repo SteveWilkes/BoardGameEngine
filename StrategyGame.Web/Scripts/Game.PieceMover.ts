@@ -4,7 +4,7 @@
         private _currentPieceMovement: PieceMovement;
 
         // ReSharper disable InconsistentNaming
-        constructor(private _tilesByCoordinates: ITilesByCoordinateSet) {
+        constructor(private _tilesByCoordinates: IStringDictionary<BoardTile>) {
             // ReSharper restore InconsistentNaming
         }
 
@@ -12,7 +12,7 @@
             var possibleDestinations = originTile.piece.movementProfile.getPossibleDestinations(originTile.position);
             var validDestinationTiles = new Array<BoardTile>();
             for (var i = 0; i < possibleDestinations.length; i++) {
-                var destinationTile = this._tilesByCoordinates[possibleDestinations[i].toString()];
+                var destinationTile = this._tilesByCoordinates[possibleDestinations[i].signature];
                 // ReSharper disable once QualifiedExpressionMaybeNull
                 if (destinationTile !== undefined && !destinationTile.isOccupied()) {
                     validDestinationTiles.push(destinationTile);
@@ -20,7 +20,7 @@
             }
             this._currentPieceMovement = new PieceMovement(originTile, validDestinationTiles);
         }
-        
+
         public pieceReset(): boolean {
             this._currentPieceMovement.cancel();
             return true;

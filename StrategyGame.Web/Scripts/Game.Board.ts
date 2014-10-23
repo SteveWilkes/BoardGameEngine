@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Board {
-        private _tilesByCoordinates: ITilesByCoordinateSet;
+        private _tilesByCoordinates: IStringDictionary<BoardTile>;
 
         // ReSharper disable InconsistentNaming
         constructor(private _container: BoardContainer, private _settings: BoardSettings) {
@@ -15,9 +15,9 @@
             this._tilesByCoordinates = {};
             for (var row = 0; row < this._settings.gridSize; row++) {
                 for (var column = 0; column < this._settings.gridSize; column++) {
-                    var coordinates = new Coordinates(row + 1, column + 1);
+                    var coordinates = coordinatesRegistry.get(row + 1, column + 1);
                     var tile = new BoardTile(coordinates);
-                    this._tilesByCoordinates[coordinates.toString()] = tile;
+                    this._tilesByCoordinates[coordinates.signature] = tile;
                     this.tiles.push(tile);
                 }
             }

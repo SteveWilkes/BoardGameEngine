@@ -218,7 +218,7 @@
     <TypeScriptCompile Include="Scripts\Game.IPieceMovementProfile.ts" />
     <TypeScriptCompile Include="Scripts\Game.Coordinates.ts" />
     <TypeScriptCompile Include="Scripts\Game.AnyDirectionMovementProfile.ts" />
-    <TypeScriptCompile Include="Scripts\Game.ITilesByCoordinateSet.ts" />
+    <TypeScriptCompile Include="Scripts\Game.IStringDictionary.ts" />
     <TypeScriptCompile Include="Scripts\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="Scripts\Game.PieceBase.ts" />
     <TypeScriptCompile Include="Scripts\Game.IPiece.ts" />

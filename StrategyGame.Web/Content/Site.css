@@ -9,7 +9,7 @@
   background-color: white;
 }
 .dark-tile {
-  background-color: #3A3145;
+  background-color: #2D6292;
 }
 div#board {
   overflow: hidden;
@@ -29,7 +29,7 @@ div.board-tile {
   position: relative;
 }
 div.board-destination-tile {
-  border: 2px solid #F09609;
+  border: 2px solid #8CBF26;
 }
 img.piece {
   border: 1px solid red;
