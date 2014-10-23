@@ -5,9 +5,10 @@
             this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
         }
 
-        public size: number;
-        public isDark: boolean;
         public piece: IPiece;
+        public isDark: boolean;
+        public isPotentialDestination: boolean;
+        public size: number;
 
         public resize(newSize: number, resizeFactor: number): void {
             this.size = newSize;

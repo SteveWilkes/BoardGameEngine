@@ -5,7 +5,7 @@
      data-ng-style="{ width: board.size }">
     <div class="board-tile"
          data-ng-repeat="tile in board.tiles"
-         data-ng-class="{ 'dark-tile': tile.isDark }"
+         data-ng-class="{ 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination }"
          data-ng-style="{ width: tile.size, height: tile.size }"
          data-droppable data-item="tile" data-subject="board.pieceMover" data-drop="board.pieceMover.pieceMoved">
         <img id="{{tile.piece.id}}" class="piece"

@@ -13,11 +13,11 @@
         public isEvenColumn: boolean;
 
         public left(distance: number): Coordinates {
-            return new Coordinates(this.row, this.column - 1);
+            return new Coordinates(this.row, this.column - distance);
         }
 
         public upLeft(distance: number): Coordinates {
-            return new Coordinates(this.row - distance, this.column - 1);
+            return new Coordinates(this.row - distance, this.column - distance);
         }
 
         public up(distance: number): Coordinates {
@@ -25,15 +25,15 @@
         }
 
         public upRight(distance: number): Coordinates {
-            return new Coordinates(this.row - distance, this.column + 1);
+            return new Coordinates(this.row - distance, this.column + distance);
         }
 
         public right(distance: number): Coordinates {
-            return new Coordinates(this.row, this.column + 1);
+            return new Coordinates(this.row, this.column + distance);
         }
 
         public downRight(distance: number): Coordinates {
-            return new Coordinates(this.row + distance, this.column + 1);
+            return new Coordinates(this.row + distance, this.column + distance);
         }
 
         public down(distance: number): Coordinates {
@@ -41,7 +41,7 @@
         }
 
         public downLeft(distance: number): Coordinates {
-            return new Coordinates(this.row + distance, this.column - 1);
+            return new Coordinates(this.row + distance, this.column - distance);
         }
 
         public toString(): string {

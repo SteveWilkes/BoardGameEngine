@@ -25,7 +25,7 @@
             this.tiles[0].assign(new PieceBase(
                 "piece-1",
                 "/Content/Pieces/Example.png",
-                new AnyDirectionMovementProfile(1)));
+                new AnyDirectionMovementProfile(2)));
         }
 
         public tiles: Array<BoardTile>;

@@ -23,7 +23,7 @@
                         }
                     }
 
-                    this.tiles[0].assign(new Game.PieceBase("piece-1", "/Content/Pieces/Example.png", new Game.AnyDirectionMovementProfile(1)));
+                    this.tiles[0].assign(new Game.PieceBase("piece-1", "/Content/Pieces/Example.png", new Game.AnyDirectionMovementProfile(2)));
                 };
 
                 Board.prototype.resize = function () {

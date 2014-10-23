@@ -11,11 +11,11 @@
                     this.isEvenColumn = this.column % 2 === 0;
                 }
                 Coordinates.prototype.left = function (distance) {
-                    return new Coordinates(this.row, this.column - 1);
+                    return new Coordinates(this.row, this.column - distance);
                 };
 
                 Coordinates.prototype.upLeft = function (distance) {
-                    return new Coordinates(this.row - distance, this.column - 1);
+                    return new Coordinates(this.row - distance, this.column - distance);
                 };
 
                 Coordinates.prototype.up = function (distance) {
@@ -23,15 +23,15 @@
                 };
 
                 Coordinates.prototype.upRight = function (distance) {
-                    return new Coordinates(this.row - distance, this.column + 1);
+                    return new Coordinates(this.row - distance, this.column + distance);
                 };
 
                 Coordinates.prototype.right = function (distance) {
-                    return new Coordinates(this.row, this.column + 1);
+                    return new Coordinates(this.row, this.column + distance);
                 };
 
                 Coordinates.prototype.downRight = function (distance) {
-                    return new Coordinates(this.row + distance, this.column + 1);
+                    return new Coordinates(this.row + distance, this.column + distance);
                 };
 
                 Coordinates.prototype.down = function (distance) {
@@ -39,7 +39,7 @@
                 };
 
                 Coordinates.prototype.downLeft = function (distance) {
-                    return new Coordinates(this.row + distance, this.column - 1);
+                    return new Coordinates(this.row + distance, this.column - distance);
                 };
 
                 Coordinates.prototype.toString = function () {
