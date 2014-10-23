@@ -17,8 +17,7 @@
                         return false;
                     }
 
-                    var piece = this._originTile.removePiece();
-                    destinationTile.assign(piece);
+                    this._originTile.pieceMovedTo(destinationTile);
                     return true;
                 };
                 return PieceMovement;

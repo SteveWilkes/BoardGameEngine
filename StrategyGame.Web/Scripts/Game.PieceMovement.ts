@@ -10,8 +10,7 @@
             if (destinationTile === this._originTile) { return true; }
             if (this._validDestinationTiles.indexOf(destinationTile) === -1) { return false; }
 
-            var piece = this._originTile.removePiece();
-            destinationTile.assign(piece);
+            this._originTile.pieceMovedTo(destinationTile);
             return true;
         }
     }

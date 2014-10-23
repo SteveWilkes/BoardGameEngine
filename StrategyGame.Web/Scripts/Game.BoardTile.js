@@ -24,11 +24,11 @@
                     this.piece = piece;
                 };
 
-                BoardTile.prototype.removePiece = function () {
+                BoardTile.prototype.pieceMovedTo = function (destinationTile) {
                     var piece = this.piece;
                     this.piece = undefined;
 
-                    return piece;
+                    destinationTile.assign(piece);
                 };
                 return BoardTile;
             })();

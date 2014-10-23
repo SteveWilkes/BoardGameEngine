@@ -26,11 +26,11 @@
             this.piece = piece;
         }
 
-        public removePiece(): IPiece {
+        public pieceMovedTo(destinationTile: BoardTile): void {
             var piece = this.piece;
             this.piece = undefined;
 
-            return piece;
+            destinationTile.assign(piece);
         }
     }
 }
