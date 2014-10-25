@@ -212,6 +212,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardPosition.ts" />
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardPositionRegistry.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
@@ -220,6 +222,7 @@
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceDefinition.ts" />
     <TypeScriptCompile Include="Scripts\History\Game.PieceMoveAction.ts" />
     <TypeScriptCompile Include="Scripts\History\Game.IGameAction.ts" />
+    <TypeScriptCompile Include="Scripts\Teams\Game.BoardTileConfig.ts" />
     <TypeScriptCompile Include="Scripts\Teams\Game.TeamStartingFormation.ts" />
     <TypeScriptCompile Include="Scripts\Teams\Game.Team.ts" />
     <TypeScriptCompile Include="Scripts\Game.Game.ts" />

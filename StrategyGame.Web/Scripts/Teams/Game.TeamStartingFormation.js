@@ -3,7 +3,8 @@
     (function (StrategyGame) {
         (function (Game) {
             var TeamStartingFormation = (function () {
-                function TeamStartingFormation() {
+                function TeamStartingFormation(tileConfigs) {
+                    this.tileConfigs = tileConfigs;
                 }
                 return TeamStartingFormation;
             })();

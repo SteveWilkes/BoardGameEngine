@@ -3,8 +3,12 @@
     (function (StrategyGame) {
         (function (Game) {
             var Team = (function () {
-                function Team() {
+                function Team(_startingFormations) {
+                    this._startingFormations = _startingFormations;
                 }
+                Team.prototype.getStartingFormation = function () {
+                    return this._startingFormations[0];
+                };
                 return Team;
             })();
             Game.Team = Team;

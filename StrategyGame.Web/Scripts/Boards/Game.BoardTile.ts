@@ -22,7 +22,7 @@
             return this.piece !== undefined;
         }
 
-        public assign(piece: IPiece): void {
+        public add(piece: IPiece): void {
             console.log("Piece " + piece.id + " assigned");
             this.piece = piece;
         }
@@ -31,7 +31,7 @@
             var piece = this.piece;
             this.piece = undefined;
 
-            destinationTile.assign(piece);
+            destinationTile.add(piece);
         }
     }
 }

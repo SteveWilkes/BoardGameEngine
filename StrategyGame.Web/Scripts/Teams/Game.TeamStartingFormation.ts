@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class TeamStartingFormation {
-        constructor() {
+        constructor(public tileConfigs: Array<BoardTileConfig>) {
         }
     }
 } 

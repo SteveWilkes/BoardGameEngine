@@ -19,7 +19,7 @@
                     return this.piece !== undefined;
                 };
 
-                BoardTile.prototype.assign = function (piece) {
+                BoardTile.prototype.add = function (piece) {
                     console.log("Piece " + piece.id + " assigned");
                     this.piece = piece;
                 };
@@ -28,7 +28,7 @@
                     var piece = this.piece;
                     this.piece = undefined;
 
-                    destinationTile.assign(piece);
+                    destinationTile.add(piece);
                 };
                 return BoardTile;
             })();

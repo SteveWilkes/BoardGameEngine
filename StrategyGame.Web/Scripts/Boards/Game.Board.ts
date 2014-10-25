@@ -2,10 +2,12 @@
 
     export class Board {
         private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
+        private _teams: Array<Team>;
 
         constructor(private _container: BoardContainer, private _sizeSet: BoardSizeSet) {
             this._createTiles();
             this.pieceMover = new PieceMover(this._tilesByCoordinates);
+            this._teams = new Array<Team>();
         }
 
         private _createTiles(): void {
@@ -19,16 +21,21 @@
                     this.tiles.push(tile);
                 }
             }
-
-            this.tiles[0].assign(new Piece(
-                "piece-1",
-                "/Content/Pieces/Example.png",
-                new AnyDirectionMovementProfile(2)));
         }
 
         public tiles: Array<BoardTile>;
         public pieceMover: PieceMover;
         public size: number;
+
+        public add(team: Team, position: BoardPosition) {
+            var startingFormation = team.getStartingFormation();
+            for (var i = 0; i < startingFormation.tileConfigs.length; i++) {
+                var tileConfig = startingFormation.tileConfigs[i];
+                var translatedCoordinates = position.translate(tileConfig.tileCoordinates, this._sizeSet.gridSize);
+                var tile = this._tilesByCoordinates[translatedCoordinates.signature];
+                tile.add(tileConfig.piece);
+            }
+        }
 
         public resize(): void {
             this._sizeSet.recalculate(this._container.getSize());

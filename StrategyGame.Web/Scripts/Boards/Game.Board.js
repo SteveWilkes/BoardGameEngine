@@ -8,6 +8,7 @@
                     this._sizeSet = _sizeSet;
                     this._createTiles();
                     this.pieceMover = new Game.PieceMover(this._tilesByCoordinates);
+                    this._teams = new Array();
                 }
                 Board.prototype._createTiles = function () {
                     this.tiles = new Array();
@@ -20,8 +21,16 @@
                             this.tiles.push(tile);
                         }
                     }
+                };
 
-                    this.tiles[0].assign(new Game.Piece("piece-1", "/Content/Pieces/Example.png", new Game.AnyDirectionMovementProfile(2)));
+                Board.prototype.add = function (team, position) {
+                    var startingFormation = team.getStartingFormation();
+                    for (var i = 0; i < startingFormation.tileConfigs.length; i++) {
+                        var tileConfig = startingFormation.tileConfigs[i];
+                        var translatedCoordinates = position.translate(tileConfig.tileCoordinates, this._sizeSet.gridSize);
+                        var tile = this._tilesByCoordinates[translatedCoordinates.signature];
+                        tile.add(tileConfig.piece);
+                    }
                 };
 
                 Board.prototype.resize = function () {

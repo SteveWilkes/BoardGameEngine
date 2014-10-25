@@ -5,11 +5,13 @@
             var PieceFactory = (function () {
                 function PieceFactory() {
                     this._definitions = {
-                        "1": new Game.PieceDefinition("1", "Blah", "/Content/Pieces/Example.png", "1")
+                        "1": new Game.PieceDefinition("1", "Example", "/Content/Pieces/Example.png", "1")
                     };
+                    this._nextPieceId = 1;
                 }
                 PieceFactory.prototype.createPiece = function (definitionId) {
-                    return this._definitions[definitionId].createPiece("1");
+                    var pieceId = this._nextPieceId++;
+                    return this._definitions[definitionId].createPiece("piece-" + pieceId);
                 };
                 return PieceFactory;
             })();
