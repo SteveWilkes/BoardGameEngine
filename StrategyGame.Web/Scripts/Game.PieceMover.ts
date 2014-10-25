@@ -8,7 +8,7 @@
             // ReSharper restore InconsistentNaming
         }
 
-        public pieceMoving(originTile: BoardTile): void {
+        public pieceSelected(originTile: BoardTile) {
             var possibleDestinations = originTile.piece.movementProfile.getPossibleDestinations(originTile.position);
             var validDestinationTiles = new Array<BoardTile>();
             for (var i = 0; i < possibleDestinations.length; i++) {
@@ -21,13 +21,13 @@
             this._currentPieceMovement = new PieceMovement(originTile, validDestinationTiles);
         }
 
-        public pieceReset(): boolean {
-            this._currentPieceMovement.cancel();
-            return true;
-        }
-
         public pieceMoved(destinationTile: BoardTile): boolean {
             return this._currentPieceMovement.complete(destinationTile);
+        }
+
+        public pieceDeselected(): boolean {
+            this._currentPieceMovement.cancel();
+            return true;
         }
     }
 }

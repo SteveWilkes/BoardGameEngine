@@ -7,6 +7,8 @@
             var boardSizeSet = new BoardSizeSet(boardSizeDefaults, 8);
             var board = new Board(container, boardSizeSet);
             $scope.game = new Game(board);
+            // BoardSizeManager
+            // 
         }
     ]);
 }

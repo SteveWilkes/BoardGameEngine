@@ -10,6 +10,8 @@
                     var boardSizeSet = new Game.BoardSizeSet(boardSizeDefaults, 8);
                     var board = new Game.Board(container, boardSizeSet);
                     $scope.game = new Game.Game(board);
+                    // BoardSizeManager
+                    //
                 }
             ]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));

@@ -3,11 +3,9 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceMovement = (function () {
-                // ReSharper disable InconsistentNaming
                 function PieceMovement(_originTile, _validDestinationTiles) {
                     this._originTile = _originTile;
                     this._validDestinationTiles = _validDestinationTiles;
-                    // ReSharper restore InconsistentNaming
                     this._setDestinationTileStates(true);
                 }
                 PieceMovement.prototype.cancel = function () {
@@ -15,17 +13,22 @@
                 };
 
                 PieceMovement.prototype.complete = function (destinationTile) {
-                    if (destinationTile === this._originTile) {
-                        return true;
-                    }
-                    if (this._validDestinationTiles.indexOf(destinationTile) === -1) {
-                        return false;
+                    if (this._moveResult !== undefined) {
+                        return this._moveResult;
                     }
 
-                    this._originTile.pieceMovedTo(destinationTile);
+                    this._moveResult = false;
+
+                    if (destinationTile === this._originTile) {
+                        this._moveResult = true;
+                    } else if (this._validDestinationTiles.indexOf(destinationTile) > -1) {
+                        this._originTile.movePieceTo(destinationTile);
+                        this._moveResult = true;
+                    }
+
                     this._setDestinationTileStates(false);
 
-                    return true;
+                    return this._moveResult;
                 };
 
                 PieceMovement.prototype._setDestinationTileStates = function (isPotentialDestination) {

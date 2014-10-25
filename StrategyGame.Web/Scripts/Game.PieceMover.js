@@ -8,7 +8,7 @@
                     this._tilesByCoordinates = _tilesByCoordinates;
                     // ReSharper restore InconsistentNaming
                 }
-                PieceMover.prototype.pieceMoving = function (originTile) {
+                PieceMover.prototype.pieceSelected = function (originTile) {
                     var possibleDestinations = originTile.piece.movementProfile.getPossibleDestinations(originTile.position);
                     var validDestinationTiles = new Array();
                     for (var i = 0; i < possibleDestinations.length; i++) {
@@ -22,13 +22,13 @@
                     this._currentPieceMovement = new Game.PieceMovement(originTile, validDestinationTiles);
                 };
 
-                PieceMover.prototype.pieceReset = function () {
-                    this._currentPieceMovement.cancel();
-                    return true;
-                };
-
                 PieceMover.prototype.pieceMoved = function (destinationTile) {
                     return this._currentPieceMovement.complete(destinationTile);
+                };
+
+                PieceMover.prototype.pieceDeselected = function () {
+                    this._currentPieceMovement.cancel();
+                    return true;
                 };
                 return PieceMover;
             })();

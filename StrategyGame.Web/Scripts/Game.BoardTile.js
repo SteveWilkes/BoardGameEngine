@@ -24,7 +24,7 @@
                     this.piece = piece;
                 };
 
-                BoardTile.prototype.pieceMovedTo = function (destinationTile) {
+                BoardTile.prototype.movePieceTo = function (destinationTile) {
                     var piece = this.piece;
                     this.piece = undefined;
 

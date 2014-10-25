@@ -6,7 +6,9 @@
                 angularModule.directive("draggable", function () {
                     return {
                         scope: {
+                            dragselect: "&",
                             dragstart: "&",
+                            dragdeselect: "&",
                             dragend: "&",
                             subject: "=",
                             item: "="
@@ -17,18 +19,30 @@
 
                             el.draggable = true;
 
+                            el.addEventListener("mousedown", function () {
+                                if (evaluateScope($scope, "dragselect")) {
+                                    this.classList.add("selected");
+                                }
+                                return false;
+                            }, false);
+
                             el.addEventListener("dragstart", function (e) {
-                                console.log("Drag started");
+                                e.dataTransfer.setData("Text", this.id);
                                 if (evaluateScope($scope, "dragstart")) {
                                     e.dataTransfer.effectAllowed = "move";
-                                    e.dataTransfer.setData("Text", this.id);
                                     this.classList.add("drag");
                                 }
                                 return false;
                             }, false);
 
+                            el.addEventListener("mouseup", function () {
+                                if (evaluateScope($scope, "dragdeselect")) {
+                                    this.classList.remove("selected");
+                                }
+                                return false;
+                            }, false);
+
                             el.addEventListener("dragend", function () {
-                                console.log("Drag ended");
                                 if (evaluateScope($scope, "dragend")) {
                                     this.classList.remove("drag");
                                 }
@@ -74,8 +88,6 @@
                             }, false);
 
                             el.addEventListener("drop", function (e) {
-                                console.log("Drop");
-
                                 // Stops some browsers from redirecting.
                                 if (e.stopPropagation) {
                                     e.stopPropagation();
@@ -104,9 +116,12 @@
                         var instanceMethodNameGetter = $s[functionName];
                         if (typeof instanceMethodNameGetter === "function") {
                             var instanceMethodName = instanceMethodNameGetter();
-                            func = function (item) {
-                                return subject[instanceMethodName].call(subject, item);
-                            };
+                            var instanceMethod = subject[instanceMethodName];
+                            if (instanceMethod !== undefined) {
+                                func = function (item) {
+                                    return instanceMethod.call(subject, item);
+                                };
+                            }
                         }
                     } else {
                         var funcGetter = $s[functionName];

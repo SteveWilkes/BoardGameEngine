@@ -10,7 +10,10 @@
          data-droppable data-subject="game.board.pieceMover" data-item="tile" data-drop="'pieceMoved'">
         <img id="{{tile.piece.id}}" class="piece"
              data-ng-if="tile.isOccupied()"
-             data-draggable data-subject="game.board.pieceMover" data-item="tile" data-dragstart="'pieceMoving'" data-dragend="'pieceReset'"
+             data-draggable data-subject="game.board.pieceMover" data-item="tile"
+             data-dragselect="'pieceSelected'"
+             data-dragend="'pieceMoved'"
+             data-dragdeselect="'pieceDeselected'"
              data-ng-src="{{tile.piece.imageSource}}"
              data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
     </div>

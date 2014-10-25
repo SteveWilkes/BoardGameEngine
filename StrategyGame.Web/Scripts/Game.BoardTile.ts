@@ -27,7 +27,7 @@
             this.piece = piece;
         }
 
-        public pieceMovedTo(destinationTile: BoardTile): void {
+        public movePieceTo(destinationTile: BoardTile): void {
             var piece = this.piece;
             this.piece = undefined;
 
