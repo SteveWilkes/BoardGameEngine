@@ -6,10 +6,17 @@
                 angularModule.directive("sizeToContainer", [
                     "$window",
                     function ($window) {
-                        return function ($scope) {
-                            return angular.element($window).bind("resize", function () {
-                                AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "resize");
-                            });
+                        return {
+                            scope: {
+                                resize: "&",
+                                subject: "=",
+                                item: "="
+                            },
+                            link: function ($scope) {
+                                return angular.element($window).bind("resize", function () {
+                                    AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "resize");
+                                });
+                            }
                         };
                     }
                 ]);

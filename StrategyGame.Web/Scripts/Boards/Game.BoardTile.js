@@ -7,20 +7,11 @@
                     this.position = position;
                     this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
                 }
-                BoardTile.prototype.resize = function (sizeSet) {
-                    this.size = sizeSet.tileSize;
-
-                    if (this.isOccupied()) {
-                        this.piece.resize(sizeSet);
-                    }
-                };
-
                 BoardTile.prototype.isOccupied = function () {
                     return this.piece !== undefined;
                 };
 
                 BoardTile.prototype.add = function (piece) {
-                    console.log("Piece " + piece.id + " assigned");
                     this.piece = piece;
                 };
 

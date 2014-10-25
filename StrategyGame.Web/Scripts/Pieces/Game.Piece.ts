@@ -8,14 +8,6 @@
             public movementProfile: IPieceMovementProfile) {
         }
 
-        width: number;
-        height: number;
-
-        public resize(sizeSet: BoardSizeSet): void {
-            this.width = sizeSet.pieceWidth;
-            this.height = sizeSet.pieceHeight;
-        }
-
         public moving(): void {
             console.log("Piece " + this.id + " moving");
         }

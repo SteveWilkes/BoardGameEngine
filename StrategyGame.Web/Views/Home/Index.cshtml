@@ -1,12 +1,12 @@
 ﻿<div id="board" class="hidden"
      data-ng-controller="GameController"
      data-remove-class="hidden"
-     data-size-to-container resize="{{game.board.resize()}}"
-     data-ng-style="{ width: game.board.size }">
+     data-size-to-container data-subject="game.sizeManager" resize="'resize'" data-item="game.board"
+     data-ng-style="{ width: game.sizeManager.boardSize }">
     <div class="board-tile"
          data-ng-repeat="tile in game.board.tiles"
          data-ng-class="{ 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination }"
-         data-ng-style="{ width: tile.size, height: tile.size }"
+         data-ng-style="{ width: game.sizeManager.tileSize, height: game.sizeManager.tileSize }"
          data-droppable data-subject="game.board.pieceMover" data-item="tile" data-drop="'pieceMoved'">
         <img id="{{tile.piece.id}}" class="piece"
              data-ng-if="tile.isOccupied()"
@@ -15,6 +15,6 @@
              data-dragend="'pieceMoved'"
              data-dragdeselect="'pieceDeselected'"
              data-ng-src="{{tile.piece.imageSource}}"
-             data-ng-style="{ width: tile.piece.width, height: tile.piece.height }" />
+             data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }" />
     </div>
 </div>

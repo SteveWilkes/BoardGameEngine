@@ -2,10 +2,7 @@
 
     class GameController {
         constructor($window: ng.IWindowService, $pieceFactory: PieceFactory, $scope: IGameScope) {
-            var container = new BoardContainer($window);
-            var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
-            var boardSizeSet = new BoardSizeSet(boardSizeDefaults, 8);
-            var board = new Board(container, boardSizeSet);
+            var board = new Board(8);
 
             var team1TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(2, 1), $pieceFactory.createPiece("1")), // row 1
@@ -48,7 +45,11 @@
             board.add(team1, boardPositions.north);
             board.add(team2, boardPositions.south);
 
-            $scope.game = new Game(board);
+            var container = new BoardContainer($window);
+            var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
+            var sizeManager = new BoardSizeManager(boardSizeDefaults, container);
+
+            $scope.game = new Game(board, sizeManager);
             // BoardSizeManager
             // 
         }

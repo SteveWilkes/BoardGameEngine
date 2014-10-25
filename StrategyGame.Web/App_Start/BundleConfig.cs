@@ -14,7 +14,7 @@
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js",
                 "~/Scripts/Game.App.js",
                 "~/Scripts/Boards/Game.BoardSizeDefaults.js",
-                "~/Scripts/Boards/Game.BoardSizeSet.js",
+                "~/Scripts/Boards/Game.BoardSizeManager.js",
                 "~/Scripts/Pieces/Game.Coordinates.js",
                 "~/Scripts/Teams/Game.BoardTileConfig.js",
                 "~/Scripts/Teams/Game.TeamStartingFormation.js",

@@ -8,11 +8,6 @@
                     this.imageSource = imageSource;
                     this.movementProfile = movementProfile;
                 }
-                Piece.prototype.resize = function (sizeSet) {
-                    this.width = sizeSet.pieceWidth;
-                    this.height = sizeSet.pieceHeight;
-                };
-
                 Piece.prototype.moving = function () {
                     console.log("Piece " + this.id + " moving");
                 };

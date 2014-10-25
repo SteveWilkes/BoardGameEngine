@@ -4,10 +4,7 @@
         (function (Game) {
             var GameController = (function () {
                 function GameController($window, $pieceFactory, $scope) {
-                    var container = new Game.BoardContainer($window);
-                    var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
-                    var boardSizeSet = new Game.BoardSizeSet(boardSizeDefaults, 8);
-                    var board = new Game.Board(container, boardSizeSet);
+                    var board = new Game.Board(8);
 
                     var team1TileConfigs = [
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 1), $pieceFactory.createPiece("1")),
@@ -50,7 +47,11 @@
                     board.add(team1, Game.boardPositions.north);
                     board.add(team2, Game.boardPositions.south);
 
-                    $scope.game = new Game.Game(board);
+                    var container = new Game.BoardContainer($window);
+                    var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
+                    var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container);
+
+                    $scope.game = new Game.Game(board, sizeManager);
                     // BoardSizeManager
                     //
                 }

@@ -234,7 +234,7 @@
     <TypeScriptCompile Include="Scripts\Pieces\Game.Piece.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.IPiece.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.PieceMover.ts" />
-    <TypeScriptCompile Include="Scripts\Boards\Game.BoardSizeSet.ts" />
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardSizeManager.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.Board.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardContainer.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardTile.ts" />

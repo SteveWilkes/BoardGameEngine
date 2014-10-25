@@ -3,8 +3,10 @@
     (function (StrategyGame) {
         (function (_Game) {
             var Game = (function () {
-                function Game(board) {
+                function Game(board, sizeManager) {
                     this.board = board;
+                    this.sizeManager = sizeManager;
+                    this.sizeManager.resize(this.board);
                 }
                 return Game;
             })();
