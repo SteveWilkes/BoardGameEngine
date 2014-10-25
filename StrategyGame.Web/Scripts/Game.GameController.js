@@ -18,7 +18,12 @@
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 1), $pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 2), $pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 3), $pieceFactory.createPiece("1")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), $pieceFactory.createPiece("1"))];
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(5, 1), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 2), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 4), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), $pieceFactory.createPiece("1"))];
 
                     var team1StartingFormations = [new Game.TeamStartingFormation(team1TileConfigs)];
                     var team1 = new Game.Team(team1StartingFormations);
@@ -32,7 +37,12 @@
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 1), $pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 2), $pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 3), $pieceFactory.createPiece("1")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), $pieceFactory.createPiece("1"))];
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(5, 1), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 2), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 4), $pieceFactory.createPiece("1")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), $pieceFactory.createPiece("1"))];
 
                     var team2StartingFormations = [new Game.TeamStartingFormation(team2TileConfigs)];
                     var team2 = new Game.Team(team2StartingFormations);

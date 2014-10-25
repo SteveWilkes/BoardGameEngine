@@ -23,7 +23,7 @@ div#board {
   transform: translate(-50%, -50%) rotate(45deg);
 }
 div.board-tile {
-  border: 2px solid #ccc;
+  border: 2px solid #ddd;
   float: left;
   margin: auto;
   position: relative;
