@@ -15,4 +15,4 @@
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
     var StrategyGame = AgileObjects.StrategyGame;
 })(AgileObjects || (AgileObjects = {}));
-//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Game.PieceMoveAction.js.map
+//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/History/Game.PieceMoveAction.js.map

@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class BoardState {
+    export class TeamStartingFormation {
         constructor() {
         }
     }

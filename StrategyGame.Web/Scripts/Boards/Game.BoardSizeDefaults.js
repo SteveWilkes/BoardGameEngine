@@ -17,4 +17,4 @@
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
     var StrategyGame = AgileObjects.StrategyGame;
 })(AgileObjects || (AgileObjects = {}));
-//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Game.BoardSizeDefaults.js.map
+//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Boards/Game.BoardSizeDefaults.js.map

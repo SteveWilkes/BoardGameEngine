@@ -2,15 +2,16 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            var BoardState = (function () {
-                function BoardState() {
+            var GameHistory = (function () {
+                function GameHistory(_gameActions) {
+                    this._gameActions = _gameActions;
                 }
-                return BoardState;
+                return GameHistory;
             })();
-            Game.BoardState = BoardState;
+            Game.GameHistory = GameHistory;
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
     var StrategyGame = AgileObjects.StrategyGame;
 })(AgileObjects || (AgileObjects = {}));
-//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Game.BoardState.js.map
+//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/History/Game.History.js.map
