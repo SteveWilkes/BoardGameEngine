@@ -3,9 +3,7 @@
     export class Board {
         private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
 
-        // ReSharper disable InconsistentNaming
-        constructor(private _container: BoardContainer, private _settings: BoardSettings) {
-            // ReSharper restore InconsistentNaming
+        constructor(private _container: BoardContainer, private _sizeSet: BoardSizeSet) {
             this._createTiles();
             this.pieceMover = new PieceMover(this._tilesByCoordinates);
         }
@@ -13,8 +11,8 @@
         private _createTiles(): void {
             this.tiles = new Array<BoardTile>();
             this._tilesByCoordinates = {};
-            for (var row = 0; row < this._settings.gridSize; row++) {
-                for (var column = 0; column < this._settings.gridSize; column++) {
+            for (var row = 0; row < this._sizeSet.gridSize; row++) {
+                for (var column = 0; column < this._sizeSet.gridSize; column++) {
                     var coordinates = coordinatesRegistry.get(row + 1, column + 1);
                     var tile = new BoardTile(coordinates);
                     this._tilesByCoordinates[coordinates.signature] = tile;
@@ -33,15 +31,11 @@
         public size: number;
 
         public resize(): void {
-            var containerSize = this._container.getSize();
-            var resizeFactor = containerSize / defaultContainerSize;
-            var tileSize = Math.floor(containerSize / this._settings.tileSizeFactor);
+            this._sizeSet.recalculate(this._container.getSize());
+            this.size = this._sizeSet.boardSize;
             for (var i = 0; i < this.tiles.length; i++) {
-                this.tiles[i].resize(tileSize, resizeFactor);
+                this.tiles[i].resize(this._sizeSet);
             }
-            var tilesSize = tileSize * this._settings.gridSize;
-            var tileBordersSize = this._settings.tileBorderWidth * 2 * this._settings.gridSize;
-            this.size = tilesSize + tileBordersSize;
         }
     }
 }

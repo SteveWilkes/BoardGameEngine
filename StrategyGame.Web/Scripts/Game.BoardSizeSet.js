@@ -2,17 +2,6 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            var BoardSizeDefaults = (function () {
-                function BoardSizeDefaults(containerSize, pieceWidth, pieceHeight, tileBorderWidth) {
-                    this.containerSize = containerSize;
-                    this.pieceWidth = pieceWidth;
-                    this.pieceHeight = pieceHeight;
-                    this.tileBorderWidth = tileBorderWidth;
-                }
-                return BoardSizeDefaults;
-            })();
-            Game.BoardSizeDefaults = BoardSizeDefaults;
-
             var squareRootOf2 = Math.sqrt(2);
 
             var BoardSizeSet = (function () {
@@ -38,4 +27,4 @@
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
     var StrategyGame = AgileObjects.StrategyGame;
 })(AgileObjects || (AgileObjects = {}));
-//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Game.BoardSettings.js.map
+//# sourceMappingURL=C:/Data/VisualStudio/StrategyGame/StrategyGame.Web//Scripts/Game.BoardSizeSet.js.map

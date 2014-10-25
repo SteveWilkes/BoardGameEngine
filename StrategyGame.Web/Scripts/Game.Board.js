@@ -3,19 +3,17 @@
     (function (StrategyGame) {
         (function (Game) {
             var Board = (function () {
-                // ReSharper disable InconsistentNaming
-                function Board(_container, _settings) {
+                function Board(_container, _sizeSet) {
                     this._container = _container;
-                    this._settings = _settings;
-                    // ReSharper restore InconsistentNaming
+                    this._sizeSet = _sizeSet;
                     this._createTiles();
                     this.pieceMover = new Game.PieceMover(this._tilesByCoordinates);
                 }
                 Board.prototype._createTiles = function () {
                     this.tiles = new Array();
                     this._tilesByCoordinates = {};
-                    for (var row = 0; row < this._settings.gridSize; row++) {
-                        for (var column = 0; column < this._settings.gridSize; column++) {
+                    for (var row = 0; row < this._sizeSet.gridSize; row++) {
+                        for (var column = 0; column < this._sizeSet.gridSize; column++) {
                             var coordinates = Game.coordinatesRegistry.get(row + 1, column + 1);
                             var tile = new Game.BoardTile(coordinates);
                             this._tilesByCoordinates[coordinates.signature] = tile;
@@ -27,15 +25,11 @@
                 };
 
                 Board.prototype.resize = function () {
-                    var containerSize = this._container.getSize();
-                    var resizeFactor = containerSize / Game.defaultContainerSize;
-                    var tileSize = Math.floor(containerSize / this._settings.tileSizeFactor);
+                    this._sizeSet.recalculate(this._container.getSize());
+                    this.size = this._sizeSet.boardSize;
                     for (var i = 0; i < this.tiles.length; i++) {
-                        this.tiles[i].resize(tileSize, resizeFactor);
+                        this.tiles[i].resize(this._sizeSet);
                     }
-                    var tilesSize = tileSize * this._settings.gridSize;
-                    var tileBordersSize = this._settings.tileBorderWidth * 2 * this._settings.gridSize;
-                    this.size = tilesSize + tileBordersSize;
                 };
                 return Board;
             })();

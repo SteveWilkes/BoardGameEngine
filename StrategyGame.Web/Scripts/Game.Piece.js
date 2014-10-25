@@ -8,9 +8,9 @@
                     this.imageSource = imageSource;
                     this.movementProfile = movementProfile;
                 }
-                Piece.prototype.resize = function (resizeFactor) {
-                    this.width = Math.floor(Game.defaultPieceWidth * resizeFactor);
-                    this.height = Math.floor(Game.defaultPieceHeight * resizeFactor);
+                Piece.prototype.resize = function (sizeSet) {
+                    this.width = sizeSet.pieceWidth;
+                    this.height = sizeSet.pieceHeight;
                 };
 
                 Piece.prototype.moving = function () {

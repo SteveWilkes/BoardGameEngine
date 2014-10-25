@@ -11,9 +11,9 @@
         width: number;
         height: number;
 
-        public resize(resizeFactor: number): void {
-            this.width = Math.floor(defaultPieceWidth * resizeFactor);
-            this.height = Math.floor(defaultPieceHeight * resizeFactor);
+        public resize(sizeSet: BoardSizeSet): void {
+            this.width = sizeSet.pieceWidth;
+            this.height = sizeSet.pieceHeight;
         }
 
         public moving(): void {

@@ -2,8 +2,6 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            Game.defaultContainerSize = 975;
-
             var BoardContainer = (function () {
                 // ReSharper disable InconsistentNaming
                 function BoardContainer(_$window) {

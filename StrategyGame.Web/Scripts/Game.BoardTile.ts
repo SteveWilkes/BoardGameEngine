@@ -10,11 +10,11 @@
         public isPotentialDestination: boolean;
         public size: number;
 
-        public resize(newSize: number, resizeFactor: number): void {
-            this.size = newSize;
+        public resize(sizeSet: BoardSizeSet): void {
+            this.size = sizeSet.tileSize;
 
             if (this.isOccupied()) {
-                this.piece.resize(resizeFactor);
+                this.piece.resize(sizeSet);
             }
         }
 

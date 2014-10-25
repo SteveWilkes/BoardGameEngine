@@ -7,11 +7,11 @@
                     this.position = position;
                     this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
                 }
-                BoardTile.prototype.resize = function (newSize, resizeFactor) {
-                    this.size = newSize;
+                BoardTile.prototype.resize = function (sizeSet) {
+                    this.size = sizeSet.tileSize;
 
                     if (this.isOccupied()) {
-                        this.piece.resize(resizeFactor);
+                        this.piece.resize(sizeSet);
                     }
                 };
 

@@ -6,8 +6,9 @@
                 "$window", "$scope",
                 function ($window, $scope) {
                     var container = new Game.BoardContainer($window);
-                    var settings = new Game.BoardSettings(8, 2);
-                    var board = new Game.Board(container, settings);
+                    var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
+                    var boardSizeSet = new Game.BoardSizeSet(boardSizeDefaults, 8);
+                    var board = new Game.Board(container, boardSizeSet);
                     $scope.game = new Game.Game(board);
                 }
             ]);
