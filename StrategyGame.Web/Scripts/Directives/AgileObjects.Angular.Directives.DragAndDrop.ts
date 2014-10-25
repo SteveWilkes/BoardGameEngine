@@ -19,7 +19,7 @@
                     el.addEventListener(
                         "mousedown",
                         function () {
-                            if (evaluateScope($scope, "dragselect")) {
+                            if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragselect")) {
                                 this.classList.add("selected");
                             }
                             return false;
@@ -30,7 +30,7 @@
                         "dragstart",
                         function (e: DragEvent) {
                             e.dataTransfer.setData("Text", this.id);
-                            if (evaluateScope($scope, "dragstart")) {
+                            if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragstart")) {
                                 e.dataTransfer.effectAllowed = "move";
                                 this.classList.add("drag");
                             }
@@ -41,7 +41,7 @@
                     el.addEventListener(
                         "mouseup",
                         function () {
-                            if (evaluateScope($scope, "dragdeselect")) {
+                            if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragdeselect")) {
                                 this.classList.remove("selected");
                             }
                             return false;
@@ -51,7 +51,7 @@
                     el.addEventListener(
                         "dragend",
                         function () {
-                            if (evaluateScope($scope, "dragend")) {
+                            if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragend")) {
                                 this.classList.remove("drag");
                             }
                             return false;
@@ -109,7 +109,7 @@
 
                             this.classList.remove("over");
 
-                            if (evaluateScope($scope, "drop")) {
+                            if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "drop")) {
                                 var item = document.getElementById(e.dataTransfer.getData("Text"));
                                 this.appendChild(item);
                             }
@@ -119,35 +119,6 @@
                         false);
                 }
             }
-        });
-    }
-
-    function evaluateScope($scope: ng.IScope, functionName: string): boolean {
-        return $scope.$apply(($s: ng.IScope) => {
-            var func: (item: Object) => boolean;
-            if (typeof $s["subject"] === "object") {
-                var subject = <AgileObjects.TypeScript.IStringDictionary<(item: Object) => boolean>>$s["subject"];
-                var instanceMethodNameGetter = <() => string>$s[functionName];
-                if (typeof instanceMethodNameGetter === "function") {
-                    var instanceMethodName = instanceMethodNameGetter();
-                    var instanceMethod = subject[instanceMethodName];
-                    if (instanceMethod !== undefined) {
-                        func = (item: Object) => instanceMethod.call(subject, item);
-                    }
-                }
-            } else {
-                var funcGetter = $s[functionName];
-                if (typeof funcGetter === "function") {
-                    func = funcGetter();
-                }
-            }
-
-            if (typeof func === "function") {
-                var result = func($s["item"]);
-                return result !== false;
-            }
-
-            return true;
         });
     }
 }

@@ -20,7 +20,7 @@
                             el.draggable = true;
 
                             el.addEventListener("mousedown", function () {
-                                if (evaluateScope($scope, "dragselect")) {
+                                if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragselect")) {
                                     this.classList.add("selected");
                                 }
                                 return false;
@@ -28,7 +28,7 @@
 
                             el.addEventListener("dragstart", function (e) {
                                 e.dataTransfer.setData("Text", this.id);
-                                if (evaluateScope($scope, "dragstart")) {
+                                if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragstart")) {
                                     e.dataTransfer.effectAllowed = "move";
                                     this.classList.add("drag");
                                 }
@@ -36,14 +36,14 @@
                             }, false);
 
                             el.addEventListener("mouseup", function () {
-                                if (evaluateScope($scope, "dragdeselect")) {
+                                if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragdeselect")) {
                                     this.classList.remove("selected");
                                 }
                                 return false;
                             }, false);
 
                             el.addEventListener("dragend", function () {
-                                if (evaluateScope($scope, "dragend")) {
+                                if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragend")) {
                                     this.classList.remove("drag");
                                 }
                                 return false;
@@ -95,7 +95,7 @@
 
                                 this.classList.remove("over");
 
-                                if (evaluateScope($scope, "drop")) {
+                                if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "drop")) {
                                     var item = document.getElementById(e.dataTransfer.getData("Text"));
                                     this.appendChild(item);
                                 }
@@ -107,37 +107,6 @@
                 });
             }
             Directives.addDroppable = addDroppable;
-
-            function evaluateScope($scope, functionName) {
-                return $scope.$apply(function ($s) {
-                    var func;
-                    if (typeof $s["subject"] === "object") {
-                        var subject = $s["subject"];
-                        var instanceMethodNameGetter = $s[functionName];
-                        if (typeof instanceMethodNameGetter === "function") {
-                            var instanceMethodName = instanceMethodNameGetter();
-                            var instanceMethod = subject[instanceMethodName];
-                            if (instanceMethod !== undefined) {
-                                func = function (item) {
-                                    return instanceMethod.call(subject, item);
-                                };
-                            }
-                        }
-                    } else {
-                        var funcGetter = $s[functionName];
-                        if (typeof funcGetter === "function") {
-                            func = funcGetter();
-                        }
-                    }
-
-                    if (typeof func === "function") {
-                        var result = func($s["item"]);
-                        return result !== false;
-                    }
-
-                    return true;
-                });
-            }
         })(Angular.Directives || (Angular.Directives = {}));
         var Directives = Angular.Directives;
     })(AgileObjects.Angular || (AgileObjects.Angular = {}));

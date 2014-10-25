@@ -4,7 +4,7 @@
             ($window: ng.IWindowService) => {
                 return ($scope: ng.IScope) => {
                     return angular.element($window).bind("resize", () => {
-                        $scope.$apply("resize()");
+                        AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "resize");
                     });
                 };
             }

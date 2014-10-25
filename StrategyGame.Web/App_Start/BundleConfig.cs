@@ -8,6 +8,7 @@
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                "~/Scripts/Generic/AgileObjects.Angular.ScopeEvaluator.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.RemoveClass.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js",

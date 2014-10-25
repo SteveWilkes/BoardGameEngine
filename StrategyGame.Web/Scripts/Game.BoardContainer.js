@@ -3,10 +3,8 @@
     (function (StrategyGame) {
         (function (Game) {
             var BoardContainer = (function () {
-                // ReSharper disable InconsistentNaming
                 function BoardContainer(_$window) {
                     this._$window = _$window;
-                    // ReSharper restore InconsistentNaming
                 }
                 BoardContainer.prototype.getSize = function () {
                     return Math.min(this._$window.innerWidth, this._$window.innerHeight);

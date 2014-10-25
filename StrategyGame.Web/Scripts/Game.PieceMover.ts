@@ -3,9 +3,7 @@
     export class PieceMover {
         private _currentPieceMovement: PieceMovement;
 
-        // ReSharper disable InconsistentNaming
         constructor(private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>) {
-            // ReSharper restore InconsistentNaming
         }
 
         public pieceSelected(originTile: BoardTile) {

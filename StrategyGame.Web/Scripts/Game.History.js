@@ -3,11 +3,9 @@
     (function (StrategyGame) {
         (function (Game) {
             var GameHistory = (function () {
-                // ReSharper disable InconsistentNaming
                 function GameHistory(_initialState, _gameActions) {
                     this._initialState = _initialState;
                     this._gameActions = _gameActions;
-                    // ReSharper restore InconsistentNaming
                 }
                 return GameHistory;
             })();

@@ -3,10 +3,8 @@
     (function (StrategyGame) {
         (function (Game) {
             var AnyDirectionMovementProfile = (function () {
-                // ReSharper disable InconsistentNaming
                 function AnyDirectionMovementProfile(_allowedDistance) {
                     this._allowedDistance = _allowedDistance;
-                    // ReSharper restore InconsistentNaming
                 }
                 AnyDirectionMovementProfile.prototype.getPossibleDestinations = function (origin) {
                     return [

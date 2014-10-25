@@ -8,7 +8,7 @@
                     function ($window) {
                         return function ($scope) {
                             return angular.element($window).bind("resize", function () {
-                                $scope.$apply("resize()");
+                                AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "resize");
                             });
                         };
                     }

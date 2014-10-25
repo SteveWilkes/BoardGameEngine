@@ -1,9 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class AnyDirectionMovementProfile implements IPieceMovementProfile {
-        // ReSharper disable InconsistentNaming
         constructor(private _allowedDistance: number) {
-            // ReSharper restore InconsistentNaming
         }
 
         public getPossibleDestinations(origin: Coordinates): Array<Coordinates> {

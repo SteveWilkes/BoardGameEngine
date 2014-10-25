@@ -3,10 +3,8 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceMover = (function () {
-                // ReSharper disable InconsistentNaming
                 function PieceMover(_tilesByCoordinates) {
                     this._tilesByCoordinates = _tilesByCoordinates;
-                    // ReSharper restore InconsistentNaming
                 }
                 PieceMover.prototype.pieceSelected = function (originTile) {
                     var possibleDestinations = originTile.piece.movementProfile.getPossibleDestinations(originTile.position);

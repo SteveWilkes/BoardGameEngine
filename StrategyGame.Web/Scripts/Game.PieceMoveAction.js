@@ -3,11 +3,9 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceMoveAction = (function () {
-                // ReSharper disable InconsistentNaming
                 function PieceMoveAction(_origin, _destination) {
                     this._origin = _origin;
                     this._destination = _destination;
-                    // ReSharper restore InconsistentNaming
                 }
                 return PieceMoveAction;
             })();

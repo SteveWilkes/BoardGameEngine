@@ -236,6 +236,7 @@
     <TypeScriptCompile Include="Scripts\Game.BoardTile.ts" />
     <TypeScriptCompile Include="Scripts\Game.GameController.ts" />
     <TypeScriptCompile Include="Scripts\Game.App.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="Scripts\Typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\Typings\jquery\jquery.d.ts" />
