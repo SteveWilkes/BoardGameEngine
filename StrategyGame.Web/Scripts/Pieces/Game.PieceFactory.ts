@@ -1,6 +1,12 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class PieceFactory {
+    export interface IPieceFactory {
+        createPiece(pieceDefinitionId: string): IPiece;
+    }
+
+    export var pieceFactory = "$pieceFactory";
+
+    class PieceFactory implements IPieceFactory {
         private _definitions: AgileObjects.TypeScript.IStringDictionary<PieceDefinition>;
         private _nextPieceId: number;
 
@@ -20,5 +26,5 @@
 
     angular
         .module(strategyGameApp)
-        .service("$pieceFactory", PieceFactory);
+        .service(pieceFactory, PieceFactory);
 }

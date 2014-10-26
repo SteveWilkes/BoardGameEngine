@@ -27,10 +27,11 @@
                 "~/Scripts/Pieces/Game.PieceFactory.js",
                 "~/Scripts/Pieces/Game.Piece.js",
                 "~/Scripts/Pieces/Game.AnyDirectionMovementProfile.js",
-                "~/Scripts/Game.Game.js",
                 "~/Scripts/Boards/Game.BoardPosition.js",
                 "~/Scripts/Boards/Game.BoardPositionRegistry.js",
                 "~/Scripts/Boards/Game.Board.js",
+                "~/Scripts/Game.Game.js",
+                "~/Scripts/Game.GameFactory.js",
                 "~/Scripts/Game.GameController.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

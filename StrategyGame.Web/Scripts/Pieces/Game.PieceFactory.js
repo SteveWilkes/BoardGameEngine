@@ -2,6 +2,8 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
+            Game.pieceFactory = "$pieceFactory";
+
             var PieceFactory = (function () {
                 function PieceFactory() {
                     this._definitions = {
@@ -16,9 +18,8 @@
                 };
                 return PieceFactory;
             })();
-            Game.PieceFactory = PieceFactory;
 
-            angular.module(Game.strategyGameApp).service("$pieceFactory", PieceFactory);
+            angular.module(Game.strategyGameApp).service(Game.pieceFactory, PieceFactory);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
