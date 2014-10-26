@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class BoardTile {
+    export class BoardTile implements IPieceLocation {
         constructor(public position: Coordinates) {
             this.isDark = (position.isEvenRow && position.isEvenColumn) || (!position.isEvenRow && !position.isEvenColumn);
         }
@@ -17,11 +17,11 @@
             this.piece = piece;
         }
 
-        public movePieceTo(destinationTile: BoardTile): void {
+        public movePieceTo(destination: IPieceLocation): void {
             var piece = this.piece;
             this.piece = undefined;
 
-            destinationTile.add(piece);
+            destination.add(piece);
         }
     }
 }

@@ -3,14 +3,14 @@
     (function (StrategyGame) {
         (function (Game) {
             var PieceDefinition = (function () {
-                function PieceDefinition(id, name, imageSource, _movementProfileId) {
+                function PieceDefinition(id, name, imageSource, _movementProfile) {
                     this.id = id;
                     this.name = name;
                     this.imageSource = imageSource;
-                    this._movementProfileId = _movementProfileId;
+                    this._movementProfile = _movementProfile;
                 }
                 PieceDefinition.prototype.createPiece = function (pieceId) {
-                    return new Game.Piece(pieceId, this.imageSource, new Game.AnyDirectionMovementProfile(1));
+                    return new Game.Piece(pieceId, this.imageSource, this._movementProfile);
                 };
                 return PieceDefinition;
             })();

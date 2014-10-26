@@ -7,8 +7,8 @@
             var PieceFactory = (function () {
                 function PieceFactory() {
                     this._definitions = {
-                        "1": new Game.PieceDefinition("1", "Bomb", "/Content/Pieces/Bomb.png", "1"),
-                        "2": new Game.PieceDefinition("2", "Example", "/Content/Pieces/Example.png", "2")
+                        "1": new Game.PieceDefinition("1", "Bomb", "/Content/Pieces/Bomb.png", new Game.AnyDirectionMovementProfile(1, [new Game.OnlyValidLocationsPieceMovementFilter(), new Game.OnlyOccupiedLocationsPieceMovementFilter()])),
+                        "2": new Game.PieceDefinition("2", "Example", "/Content/Pieces/Example.png", new Game.AnyDirectionMovementProfile(1, [new Game.OnlyValidLocationsPieceMovementFilter(), new Game.OnlyEmptyLocationsPieceMovementFilter()]))
                     };
                     this._nextPieceId = 1;
                 }

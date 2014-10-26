@@ -224,6 +224,7 @@
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceDefinition.ts" />
     <TypeScriptCompile Include="Scripts\History\Game.PieceMoveAction.ts" />
     <TypeScriptCompile Include="Scripts\History\Game.IGameAction.ts" />
+    <TypeScriptCompile Include="Scripts\Pieces\Game.IPieceLocation.ts" />
     <TypeScriptCompile Include="Scripts\Teams\Game.BoardTileConfig.ts" />
     <TypeScriptCompile Include="Scripts\Teams\Game.TeamStartingFormation.ts" />
     <TypeScriptCompile Include="Scripts\Teams\Game.Team.ts" />
@@ -232,10 +233,10 @@
     <TypeScriptCompile Include="Scripts\Pieces\Game.IPieceMovementProfile.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.Coordinates.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.AnyDirectionMovementProfile.ts" />
-    <TypeScriptCompile Include="Scripts\Boards\Game.PieceMovement.ts" />
+    <TypeScriptCompile Include="Scripts\Pieces\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.Piece.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.IPiece.ts" />
-    <TypeScriptCompile Include="Scripts\Boards\Game.PieceMover.ts" />
+    <TypeScriptCompile Include="Scripts\Pieces\Game.PieceMover.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardSizeManager.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.Board.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardContainer.ts" />

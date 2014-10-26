@@ -15,11 +15,11 @@
                     this.piece = piece;
                 };
 
-                BoardTile.prototype.movePieceTo = function (destinationTile) {
+                BoardTile.prototype.movePieceTo = function (destination) {
                     var piece = this.piece;
                     this.piece = undefined;
 
-                    destinationTile.add(piece);
+                    destination.add(piece);
                 };
                 return BoardTile;
             })();
