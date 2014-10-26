@@ -6,7 +6,8 @@
 
         constructor() {
             this._definitions = {
-                "1": new PieceDefinition("1", "Example", "/Content/Pieces/Example.png", "1")
+                "1": new PieceDefinition("1", "Bomb", "/Content/Pieces/Bomb.png", "1"),
+                "2": new PieceDefinition("2", "Example", "/Content/Pieces/Example.png", "2")
             };
             this._nextPieceId = 1;
         }

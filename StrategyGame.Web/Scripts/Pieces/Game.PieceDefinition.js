@@ -10,7 +10,7 @@
                     this._movementProfileId = _movementProfileId;
                 }
                 PieceDefinition.prototype.createPiece = function (pieceId) {
-                    return new Game.Piece(pieceId, this.imageSource, new Game.AnyDirectionMovementProfile(2));
+                    return new Game.Piece(pieceId, this.imageSource, new Game.AnyDirectionMovementProfile(1));
                 };
                 return PieceDefinition;
             })();

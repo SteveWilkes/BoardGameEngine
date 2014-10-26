@@ -32,7 +32,6 @@ div.board-destination-tile {
   border: 2px solid #8CBF26;
 }
 img.piece {
-  border: 1px solid red;
   position: absolute;
   top: 50%;
   left: 50%;

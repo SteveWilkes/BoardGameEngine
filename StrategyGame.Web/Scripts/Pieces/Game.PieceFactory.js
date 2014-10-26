@@ -5,7 +5,8 @@
             var PieceFactory = (function () {
                 function PieceFactory() {
                     this._definitions = {
-                        "1": new Game.PieceDefinition("1", "Example", "/Content/Pieces/Example.png", "1")
+                        "1": new Game.PieceDefinition("1", "Bomb", "/Content/Pieces/Bomb.png", "1"),
+                        "2": new Game.PieceDefinition("2", "Example", "/Content/Pieces/Example.png", "2")
                     };
                     this._nextPieceId = 1;
                 }

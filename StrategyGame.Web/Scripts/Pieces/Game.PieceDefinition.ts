@@ -10,7 +10,7 @@
         }
 
         public createPiece(pieceId: string) {
-            return new Piece(pieceId, this.imageSource, new AnyDirectionMovementProfile(2));
+            return new Piece(pieceId, this.imageSource, new AnyDirectionMovementProfile(1));
         }
     }
 }
