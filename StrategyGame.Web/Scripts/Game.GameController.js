@@ -59,7 +59,7 @@
                 return GameController;
             })();
 
-            Game.game.controller("GameController", ["$window", "$pieceFactory", "$scope", GameController]);
+            angular.module(Game.strategyGameApp).controller("GameController", ["$window", "$pieceFactory", "$scope", GameController]);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

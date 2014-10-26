@@ -56,5 +56,7 @@
         }
     }
 
-    game.controller("GameController", ["$window", "$pieceFactory", "$scope", GameController]);
+    angular
+        .module(strategyGameApp)
+        .controller("GameController", ["$window", "$pieceFactory", "$scope", GameController]);
 }

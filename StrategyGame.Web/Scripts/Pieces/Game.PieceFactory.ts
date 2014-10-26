@@ -18,5 +18,7 @@
         }
     }
 
-    game.service("$pieceFactory", PieceFactory);
+    angular
+        .module(strategyGameApp)
+        .service("$pieceFactory", PieceFactory);
 }

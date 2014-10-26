@@ -219,6 +219,7 @@
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardSizeDefaults.ts" />
+    <TypeScriptCompile Include="Scripts\Game.GameFactory.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceFactory.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceDefinition.ts" />
     <TypeScriptCompile Include="Scripts\History\Game.PieceMoveAction.ts" />

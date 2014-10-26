@@ -2,19 +2,14 @@
 (function (AgileObjects) {
     (function (StrategyGame) {
         (function (Game) {
-            Game.game = angular.module('strategyGameApp', []);
+            Game.strategyGameApp = "strategyGameApp";
 
-            AgileObjects.Angular.Directives.addRemoveClass(Game.game);
-            AgileObjects.Angular.Directives.addSizeToContainer(Game.game);
-            AgileObjects.Angular.Directives.addDraggable(Game.game);
-            AgileObjects.Angular.Directives.addDroppable(Game.game);
+            var game = angular.module(Game.strategyGameApp, []);
 
-            Game.game.factory("$jQuery", [
-                "$window",
-                function ($window) {
-                    return $window["jQuery"];
-                }
-            ]);
+            AgileObjects.Angular.Directives.addRemoveClass(game);
+            AgileObjects.Angular.Directives.addSizeToContainer(game);
+            AgileObjects.Angular.Directives.addDraggable(game);
+            AgileObjects.Angular.Directives.addDroppable(game);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));

@@ -18,7 +18,7 @@
             })();
             Game.PieceFactory = PieceFactory;
 
-            Game.game.service("$pieceFactory", PieceFactory);
+            angular.module(Game.strategyGameApp).service("$pieceFactory", PieceFactory);
         })(StrategyGame.Game || (StrategyGame.Game = {}));
         var Game = StrategyGame.Game;
     })(AgileObjects.StrategyGame || (AgileObjects.StrategyGame = {}));
