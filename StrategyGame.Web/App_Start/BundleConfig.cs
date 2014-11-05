@@ -9,6 +9,7 @@
         {
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
                 "~/Scripts/Generic/AgileObjects.Angular.ScopeEvaluator.js",
+                "~/Scripts/Generic/AgileObjects.TypeScript.EventHub.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.RemoveClass.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js",
                 "~/Scripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js",
@@ -20,6 +21,7 @@
                 "~/Scripts/Teams/Game.TeamStartingFormation.js",
                 "~/Scripts/Teams/Game.Team.js",
                 "~/Scripts/Boards/Game.BoardTile.js",
+                "~/Scripts/Game.EventSet.js",
                 "~/Scripts/Pieces/Game.PieceMovement.js",
                 "~/Scripts/Pieces/Game.PieceMover.js",
                 "~/Scripts/Pieces/Game.PieceDefinition.js",

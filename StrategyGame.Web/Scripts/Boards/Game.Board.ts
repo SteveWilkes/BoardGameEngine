@@ -2,11 +2,12 @@
 
     export class Board {
         private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
+        private _pieceMover: PieceMover;
         private _teams: Array<Team>;
 
-        constructor(public gridSize: number) {
+        constructor(public gridSize: number, eventSet: EventSet) {
             this._createTiles();
-            this.pieceMover = new PieceMover(this._tilesByCoordinates);
+            this._pieceMover = new PieceMover(this._tilesByCoordinates, eventSet);
             this._teams = new Array<Team>();
         }
 
@@ -24,7 +25,6 @@
         }
 
         public tiles: Array<BoardTile>;
-        public pieceMover: PieceMover;
         public size: number;
 
         public add(team: Team, position: BoardPosition) {

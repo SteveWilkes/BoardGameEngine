@@ -7,10 +7,10 @@
          data-ng-repeat="tile in game.board.tiles"
          data-ng-class="{ 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination }"
          data-ng-style="{ width: game.sizeManager.tileSize, height: game.sizeManager.tileSize }"
-         data-droppable data-subject="game.board.pieceMover" data-item="tile" data-drop="'pieceMoved'">
+         data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceMoved'">
         <img id="{{tile.piece.id}}" class="piece"
              data-ng-if="tile.isOccupied()"
-             data-draggable data-subject="game.board.pieceMover" data-item="tile"
+             data-draggable data-subject="game.events" data-item="tile"
              data-dragselect="'pieceSelected'"
              data-dragend="'pieceMoved'"
              data-dragdeselect="'pieceDeselected'"

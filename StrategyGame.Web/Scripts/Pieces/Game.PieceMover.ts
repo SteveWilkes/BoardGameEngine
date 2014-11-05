@@ -3,19 +3,24 @@
     export class PieceMover {
         private _currentPieceMovement: PieceMovement;
 
-        constructor(private _locationsByCoordinates: IPieceLocationDictionary) {
+        constructor(private _locationsByCoordinates: IPieceLocationDictionary, events: EventSet) {
+            events.pieceSelected.subscribe((tile: IPieceLocation) => this._pieceSelected(tile));
+            events.pieceMoved.subscribe((tile: IPieceLocation) => this._pieceMoved(tile));
+            events.pieceDeselected.subscribe(() => this._pieceDeselected());
         }
 
-        public pieceSelected(origin: IPieceLocation) {
+        _pieceSelected(origin: IPieceLocation): boolean {
             var validDestinations = origin.piece.movementProfile.getValidDestinations(origin, this._locationsByCoordinates);
             this._currentPieceMovement = new PieceMovement(origin, validDestinations);
+
+            return true;
         }
 
-        public pieceMoved(destination: IPieceLocation): boolean {
+        _pieceMoved(destination: IPieceLocation): boolean {
             return this._currentPieceMovement.complete(destination);
         }
 
-        public pieceDeselected(): boolean {
+        _pieceDeselected(): boolean {
             this._currentPieceMovement.cancel();
             return true;
         }

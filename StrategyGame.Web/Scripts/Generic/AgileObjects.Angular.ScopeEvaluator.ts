@@ -9,8 +9,12 @@
                 if (typeof instanceMethodNameGetter === "function") {
                     var instanceMethodName = instanceMethodNameGetter();
                     var instanceMethod = subject[instanceMethodName];
-                    if (instanceMethod !== undefined) {
+                    if (typeof instanceMethod === "function") {
                         func = (item: Object) => instanceMethod.call(subject, item);
+                    }
+                    else if (instanceMethod instanceof AgileObjects.TypeScript.EventHub) {
+                        var eventHub = <AgileObjects.TypeScript.EventHub<Object>><Object>instanceMethod;
+                        func = (item: Object) => eventHub.publish(item);
                     }
                 }
             } else {

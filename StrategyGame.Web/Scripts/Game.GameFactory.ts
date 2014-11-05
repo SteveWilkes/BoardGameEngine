@@ -11,7 +11,9 @@
         }
 
         public createNewGame(gridSize: number): Game {
-            var board = new Board(gridSize);
+            var eventSet = new EventSet();
+
+            var board = new Board(gridSize, eventSet);
 
             var team1TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(1, 1), this._$pieceFactory.createPiece("1")), // bomb
@@ -60,7 +62,7 @@
             var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
             var sizeManager = new BoardSizeManager(boardSizeDefaults, container);
 
-            return new Game(board, sizeManager);
+            return new Game(board, sizeManager, eventSet);
         }
     }
 

@@ -10,7 +10,9 @@
                     this._$pieceFactory = _$pieceFactory;
                 }
                 GameFactory.prototype.createNewGame = function (gridSize) {
-                    var board = new Game.Board(gridSize);
+                    var eventSet = new Game.EventSet();
+
+                    var board = new Game.Board(gridSize, eventSet);
 
                     var team1TileConfigs = [
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 1), this._$pieceFactory.createPiece("1")),
@@ -59,7 +61,7 @@
                     var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
                     var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container);
 
-                    return new Game.Game(board, sizeManager);
+                    return new Game.Game(board, sizeManager, eventSet);
                 };
                 return GameFactory;
             })();

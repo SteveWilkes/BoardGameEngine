@@ -3,10 +3,10 @@
     (function (StrategyGame) {
         (function (Game) {
             var Board = (function () {
-                function Board(gridSize) {
+                function Board(gridSize, eventSet) {
                     this.gridSize = gridSize;
                     this._createTiles();
-                    this.pieceMover = new Game.PieceMover(this._tilesByCoordinates);
+                    this._pieceMover = new Game.PieceMover(this._tilesByCoordinates, eventSet);
                     this._teams = new Array();
                 }
                 Board.prototype._createTiles = function () {
