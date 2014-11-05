@@ -59,7 +59,7 @@
 
                     var container = new Game.BoardContainer(this._$window);
                     var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
-                    var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container);
+                    var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container, eventSet);
 
                     return new Game.Game(board, sizeManager, eventSet);
                 };

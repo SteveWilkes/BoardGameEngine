@@ -5,13 +5,17 @@
             var squareRootOf2 = Math.sqrt(2);
 
             var BoardSizeManager = (function () {
-                function BoardSizeManager(_defaults, _container) {
+                function BoardSizeManager(_defaults, _container, events) {
+                    var _this = this;
                     this._defaults = _defaults;
                     this._container = _container;
+                    events.containerResized.subscribe(function (board) {
+                        return _this.resize(board);
+                    });
                 }
                 BoardSizeManager.prototype.resize = function (board) {
                     if (board === undefined) {
-                        return;
+                        return false;
                     }
                     var containerSize = this._container.getSize();
                     var boardDiagonalSize = containerSize * 0.9;
@@ -22,6 +26,8 @@
                     var resizeFactor = containerSize / this._defaults.containerSize;
                     this.pieceWidth = Math.floor(this._defaults.pieceWidth * resizeFactor);
                     this.pieceHeight = Math.floor(this._defaults.pieceHeight * resizeFactor);
+
+                    return true;
                 };
                 return BoardSizeManager;
             })();

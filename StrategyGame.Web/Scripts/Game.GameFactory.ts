@@ -60,7 +60,7 @@
 
             var container = new BoardContainer(this._$window);
             var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
-            var sizeManager = new BoardSizeManager(boardSizeDefaults, container);
+            var sizeManager = new BoardSizeManager(boardSizeDefaults, container, eventSet);
 
             return new Game(board, sizeManager, eventSet);
         }

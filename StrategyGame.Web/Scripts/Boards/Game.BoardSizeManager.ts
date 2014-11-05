@@ -3,7 +3,8 @@
     var squareRootOf2 = Math.sqrt(2);
 
     export class BoardSizeManager {
-        constructor(private _defaults: BoardSizeDefaults, private _container: BoardContainer) {
+        constructor(private _defaults: BoardSizeDefaults, private _container: BoardContainer, events: EventSet) {
+            events.containerResized.subscribe((board: Board) => this.resize(board));
         }
 
         public boardSize: number;
@@ -11,8 +12,8 @@
         public pieceWidth: number;
         public pieceHeight: number;
 
-        public resize(board: Board): void {
-            if (board === undefined) { return; }
+        public resize(board: Board): boolean {
+            if (board === undefined) { return false; }
             var containerSize = this._container.getSize();
             var boardDiagonalSize = containerSize * 0.9;
             var tileDiagonalSize = boardDiagonalSize / board.gridSize;
@@ -22,6 +23,8 @@
             var resizeFactor = containerSize / this._defaults.containerSize;
             this.pieceWidth = Math.floor(this._defaults.pieceWidth * resizeFactor);
             this.pieceHeight = Math.floor(this._defaults.pieceHeight * resizeFactor);
+
+            return true;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<div id="board" class="hidden"
      data-ng-controller="GameController"
      data-remove-class="hidden"
-     data-size-to-container data-subject="game.sizeManager" resize="'resize'" data-item="game.board"
+     data-size-to-container data-subject="game.events" resize="'containerResized'" data-item="game.board"
      data-ng-style="{ width: game.sizeManager.boardSize }">
     <div class="board-tile"
          data-ng-repeat="tile in game.board.tiles"
