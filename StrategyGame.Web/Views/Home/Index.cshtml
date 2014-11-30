@@ -13,7 +13,8 @@
                      'dark-tile': tile.isDark,
                      'board-destination-tile': tile.isPotentialDestination
                  }">
-                <div data-ng-if="tile.position"
+                <div class="max-size"
+                     data-ng-if="tile.position"
                      data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceMoved'">
                     <img id="{{tile.piece.id}}" class="piece"
                          data-ng-if="tile.isOccupied()"
