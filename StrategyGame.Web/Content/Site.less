@@ -20,18 +20,21 @@ div#board {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%) rotate(45deg);
-    -moz-transform: translate(-50%, -50%) rotate(45deg);
-    -o-transform: translate(-50%, -50%) rotate(45deg);
-    -ms-transform: translate(-50%, -50%) rotate(45deg);
-    transform: translate(-50%, -50%) rotate(45deg);
+    margin: -25% 0 0 -25%;
 }
 
 div.board-tile {
-    border: 2px solid #ddd;
     float: left;
     margin: auto;
+}
+
+div.placeholder {
+    border: 2px solid white;
+}
+
+div.available {
     position: relative;
+    border: 2px solid #ddd;
 }
 
 div.board-destination-tile {
@@ -42,9 +45,5 @@ img.piece {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%) rotate(-45deg);
-    -moz-transform: translate(-50%, -50%) rotate(-45deg);
-    -o-transform: translate(-50%, -50%) rotate(-45deg);
-    -ms-transform: translate(-50%, -50%) rotate(-45deg);
-    transform: translate(-50%, -50%) rotate(-45deg);
+    margin: -40% 0 0 -25%;
 }

@@ -3,21 +3,23 @@
     (function (StrategyGame) {
         (function (Game) {
             var Board = (function () {
-                function Board(gridSize, eventSet) {
-                    this.gridSize = gridSize;
-                    this._createTiles();
-                    this._pieceMover = new Game.PieceMover(this._tilesByCoordinates, eventSet);
+                function Board(type, events) {
+                    this.type = type;
                     this._teams = new Array();
+
+                    this._createTiles();
+                    Game.PieceMover.create(this._tilesByCoordinates, events);
                 }
                 Board.prototype._createTiles = function () {
-                    this.tiles = new Array();
+                    this.rows = this.type.createRows();
                     this._tilesByCoordinates = {};
-                    for (var row = 0; row < this.gridSize; row++) {
-                        for (var column = 0; column < this.gridSize; column++) {
-                            var coordinates = Game.coordinatesRegistry.get(row + 1, column + 1);
-                            var tile = new Game.BoardTile(coordinates);
-                            this._tilesByCoordinates[coordinates.signature] = tile;
-                            this.tiles.push(tile);
+                    for (var rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
+                        var row = this.rows[rowIndex];
+                        for (var columnIndex = 0; columnIndex < row.length; columnIndex++) {
+                            var tile = row[columnIndex];
+                            if (tile.position !== undefined) {
+                                this._tilesByCoordinates[tile.position.signature] = tile;
+                            }
                         }
                     }
                 };
@@ -26,7 +28,7 @@
                     var startingFormation = team.getStartingFormation();
                     for (var i = 0; i < startingFormation.tileConfigs.length; i++) {
                         var tileConfig = startingFormation.tileConfigs[i];
-                        var translatedCoordinates = position.translate(tileConfig.tileCoordinates, this.gridSize);
+                        var translatedCoordinates = position.translate(tileConfig.tileCoordinates, this.type.gridSize);
                         var tile = this._tilesByCoordinates[translatedCoordinates.signature];
                         tile.add(tileConfig.piece);
                     }

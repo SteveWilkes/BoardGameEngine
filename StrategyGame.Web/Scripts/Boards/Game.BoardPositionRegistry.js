@@ -8,7 +8,7 @@
                         return c;
                     });
                     this.south = new Game.BoardPosition(function (c, gridSize) {
-                        return Game.coordinatesRegistry.get(gridSize - (c.column - 1), gridSize - (c.row - 1));
+                        return Game.coordinatesRegistry.get(gridSize - (c.row - 1), c.column);
                     });
                 }
                 return BoardPositionRegistry;

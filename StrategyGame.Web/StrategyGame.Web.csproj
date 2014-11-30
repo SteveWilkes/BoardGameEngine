@@ -213,6 +213,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardTypeRegistry.ts" />
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardType.ts" />
+    <TypeScriptCompile Include="Scripts\Boards\Game.BoardRowConfig.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardPosition.ts" />
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardPositionRegistry.ts" />
     <TypeScriptCompile Include="Scripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
@@ -221,6 +224,7 @@
     <TypeScriptCompile Include="Scripts\Boards\Game.BoardSizeDefaults.ts" />
     <TypeScriptCompile Include="Scripts\Game.EventSet.ts" />
     <TypeScriptCompile Include="Scripts\Game.GameFactory.ts" />
+    <TypeScriptCompile Include="Scripts\Game.TurnManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceFactory.ts" />
     <TypeScriptCompile Include="Scripts\Pieces\Game.PieceDefinition.ts" />

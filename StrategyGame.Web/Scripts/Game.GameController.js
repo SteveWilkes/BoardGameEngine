@@ -4,7 +4,7 @@
         (function (Game) {
             var GameController = (function () {
                 function GameController($gameFactory, $scope) {
-                    $scope.game = $gameFactory.createNewGame(8);
+                    $scope.game = $gameFactory.createNewGame(Game.boardTypeRegistry.diamond);
                 }
                 return GameController;
             })();

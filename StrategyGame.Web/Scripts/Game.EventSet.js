@@ -5,6 +5,7 @@
             var EventSet = (function () {
                 function EventSet() {
                     this.containerResized = new AgileObjects.TypeScript.EventHub();
+                    this.teamLoaded = new AgileObjects.TypeScript.EventHub();
                     this.pieceSelected = new AgileObjects.TypeScript.EventHub();
                     this.pieceMoving = new AgileObjects.TypeScript.EventHub();
                     this.pieceMoved = new AgileObjects.TypeScript.EventHub();

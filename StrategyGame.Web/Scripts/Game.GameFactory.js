@@ -9,59 +9,52 @@
                     this._$window = _$window;
                     this._$pieceFactory = _$pieceFactory;
                 }
-                GameFactory.prototype.createNewGame = function (gridSize) {
-                    var eventSet = new Game.EventSet();
+                GameFactory.prototype.createNewGame = function (boardType) {
+                    var events = new Game.EventSet();
 
-                    var board = new Game.Board(gridSize, eventSet);
+                    var turnManager = new Game.TurnManager(events);
+
+                    var board = new Game.Board(boardType, events);
 
                     var team1TileConfigs = [
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 1), this._$pieceFactory.createPiece("1")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 3), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 3), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(5, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 4), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("2"))];
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 5), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 6), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 4), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 5), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
                     var team1StartingFormations = [new Game.TeamStartingFormation(team1TileConfigs)];
                     var team1 = new Game.Team(team1StartingFormations);
 
                     var team2TileConfigs = [
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 1), this._$pieceFactory.createPiece("1")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 3), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 3), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 4), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(5, 1), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(4, 2), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")),
                         new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 4), this._$pieceFactory.createPiece("2")),
-                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("2"))];
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 5), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(2, 6), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 4), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 5), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
+                        new Game.BoardTileConfig(Game.coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
                     var team2StartingFormations = [new Game.TeamStartingFormation(team2TileConfigs)];
                     var team2 = new Game.Team(team2StartingFormations);
+
+                    events.teamLoaded.publish(team1);
+                    events.teamLoaded.publish(team2);
 
                     board.add(team1, Game.boardPositions.north);
                     board.add(team2, Game.boardPositions.south);
 
                     var container = new Game.BoardContainer(this._$window);
                     var boardSizeDefaults = new Game.BoardSizeDefaults(975, 50, 80, 2);
-                    var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container, eventSet);
+                    var sizeManager = new Game.BoardSizeManager(boardSizeDefaults, container, events);
 
-                    return new Game.Game(board, sizeManager, eventSet);
+                    return new Game.Game(board, turnManager, sizeManager, events);
                 };
                 return GameFactory;
             })();
