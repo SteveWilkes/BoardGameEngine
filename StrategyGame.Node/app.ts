@@ -7,7 +7,7 @@ var app = express();
 
 // all environments
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(process.env.DIR_NAME, "views"));
 app.set("view engine", "jade");
 app.use(express.favicon());
 app.use(express.logger("dev"));
@@ -17,8 +17,8 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 import stylus = require("stylus");
-app.use(stylus.middleware(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "public")));
+app.use(stylus.middleware(path.join(process.env.DIR_NAME, "public")));
+app.use(express.static(path.join(process.env.DIR_NAME, "public")));
 
 // development only
 if (process.env.node_env === "Debug") {

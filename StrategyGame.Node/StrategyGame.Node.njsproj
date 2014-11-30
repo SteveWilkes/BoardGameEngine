@@ -7,7 +7,7 @@
     <RootNamespace>StrategyGame.Node</RootNamespace>
     <NodeExeArguments>
     </NodeExeArguments>
-    <Environment>node_env=$(Configuration)</Environment>
+    <Environment>NODE_ENV=$(Configuration)</Environment>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
