@@ -1,43 +1,45 @@
-﻿body
-    margin 0;
-    padding 0;
+﻿border(colour)
+	border 2px solid colour
+
+body
+	margin 0
+	padding 0
 
 .hidden
-    visibility hidden;
+	visibility hidden
 
 .max-size
-    width 100%;
-    height 100%;
+	width 100%
+	height 100%
 
 .light-tile
-    background-color white;
+	background-color white
 
 .dark-tile
-    background-color #2D6292;
+	background-color #2D6292
 
 div#board
-    overflow hidden;
-    position absolute;
-    top 50px;
-    left 50%;
-    margin-left -25%;
+	overflow hidden
+	position absolute
+	left 50%
+	margin-left -25%
 
 div.board-tile
-    float left;
-    margin auto;
+	float left
+	margin auto
 
 div.placeholder
-    border 2px solid white;
+	border white
 
 div.available
-    position relative;
-    border 2px solid #ddd;
+	position relative
+	border #ddd
 
 div.board-destination-tile
-    border 2px solid #8CBF26;
+	border #8CBF26
 
 img.piece
-    position absolute;
-    top 50%;
-    left 50%;
-    margin -40% 0 0 -25%;
+	position absolute
+	top 50%
+	left 50%
+	margin -40% 0 0 -25%
