@@ -21,7 +21,7 @@ app.use(stylus.middleware(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "public")));
 
 // development only
-if (app.get("env") === "development") {
+if (process.env.node_env === "Debug") {
     app.use(express.errorHandler());
 }
 
