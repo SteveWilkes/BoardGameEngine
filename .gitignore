@@ -151,6 +151,9 @@ ClientBin/
 *.publishsettings
 node_modules/
 *.js.map
+*.js
+*.dat
+*.css
 
 # RIA/Silverlight projects
 Generated_Code/

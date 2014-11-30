@@ -1,0 +1,25 @@
+﻿extends layout
+
+block content
+    #board.hidden(
+      data-ng-controller="GameController"
+      data-remove-class="hidden"
+      data-size-to-container data-subject="game.events" resize="'containerResized'" data-item="game.board"
+      data-ng-style="{ width: game.sizeManager.boardSize }")
+        div(data-ng-repeat="row in game.board.rows")
+            div(data-ng-repeat="tile in row track by $index")
+                .board-tile(
+                  data-ng-style="{ width: game.sizeManager.tileSize, height: game.sizeManager.tileSize }"
+                  data-ng-class="{ 'available': tile.position, 'placeholder': !tile.position, 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination}")
+                    .max-size(
+                      data-ng-if="tile.position"
+                      data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceMoved'")
+                    img.piece(
+                      id="{{tile.piece.id}}"
+                      data-ng-if="tile.isOccupied()"
+                      data-draggable data-subject="game.events" data-item="tile"
+                      data-dragselect="'pieceSelected'"
+                      data-dragend="'pieceMoved'"
+                      data-dragdeselect="'pieceDeselected'"
+                      data-ng-src="{{tile.piece.imageSource}}"
+                      data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")
