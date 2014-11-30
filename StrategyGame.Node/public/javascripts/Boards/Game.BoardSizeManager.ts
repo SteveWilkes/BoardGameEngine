@@ -5,6 +5,7 @@
             events.containerResized.subscribe((board: Board) => this.resize(board));
         }
 
+        public boardTopOffset: string;
         public boardSize: number;
         public tileSize: number;
         public pieceWidth: number;
@@ -13,7 +14,8 @@
         public resize(board: Board): boolean {
             if (board === undefined) { return false; }
             var containerSize = this._container.getSize();
-            this.boardSize = containerSize * 0.9;
+            this.boardTopOffset = Math.floor(containerSize * 0.05) + "px";
+            this.boardSize = Math.floor(containerSize * 0.9);
             var tileOuterSize = Math.floor(this.boardSize / board.type.gridSize);
             this.tileSize = tileOuterSize - (this._defaults.tileBorderWidth * 2);
             var resizeFactor = containerSize / this._defaults.containerSize;

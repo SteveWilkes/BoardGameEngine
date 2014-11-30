@@ -5,7 +5,7 @@ block content
       data-ng-controller="GameController"
       data-remove-class="hidden"
       data-size-to-container data-subject="game.events" resize="'containerResized'" data-item="game.board"
-      data-ng-style="{ width: game.sizeManager.boardSize }")
+      data-ng-style="{ top: game.sizeManager.boardTopOffset, width: game.sizeManager.boardSize }")
         div(data-ng-repeat="row in game.board.rows")
             div(data-ng-repeat="tile in row track by $index")
                 .board-tile(
