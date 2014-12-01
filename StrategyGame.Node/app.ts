@@ -1,4 +1,5 @@
 ﻿import express = require("express");
+import bundleUp = require("bundle-up");
 import routes = require("./routes/index");
 import http = require("http");
 import path = require("path");
@@ -7,7 +8,7 @@ var app = express();
 
 // all environments
 app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(process.env.DIR_NAME, "views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 app.use(express.favicon());
 app.use(express.logger("dev"));
@@ -17,11 +18,20 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 import stylus = require("stylus");
-app.use(stylus.middleware(path.join(process.env.DIR_NAME, "public")));
-app.use(express.static(path.join(process.env.DIR_NAME, "public")));
+app.use(stylus.middleware(path.join(__dirname, "public")));
+
+bundleUp(app, __dirname + "/assets", {
+    staticRoot: __dirname + "/public/",
+    staticUrlRoot: "/",
+    bundle: false,
+    minifyCss: false,
+    minifyJs: false
+});
+
+app.use(express.static(path.join(__dirname, "public")));
 
 // development only
-if (process.env.node_env === "Debug") {
+if (process.env.NODE_ENV === "Debug") {
     app.use(express.errorHandler());
 }
 

@@ -4,41 +4,11 @@ html
     meta(charset="utf-8")
     meta(name='viewport', content="width=device-width, initial-scale=1.0")
     title Rich and Steve's Strategy Game
-    link(rel="stylesheet", type="text/css", href="/stylesheets/site.css")
+    != renderStyles()
   body(data-ng-app="strategyGameApp")
 
     block content
 
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    <script type="text/javascript" src="/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js"></script>
-    <script type="text/javascript" src="/javascripts/Generic/AgileObjects.TypeScript.EventHub.js"></script>
-    <script type="text/javascript" src="/javascripts/Directives/AgileObjects.Angular.Directives.RemoveClass.js"></script>
-    <script type="text/javascript" src="/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js"></script>
-    <script type="text/javascript" src="/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.App.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardSizeDefaults.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardSizeManager.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.Coordinates.js"></script>
-    <script type="text/javascript" src="/javascripts/Teams/Game.BoardTileConfig.js"></script>
-    <script type="text/javascript" src="/javascripts/Teams/Game.TeamStartingFormation.js"></script>
-    <script type="text/javascript" src="/javascripts/Teams/Game.Team.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardTile.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardRowConfig.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardType.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardTypeRegistry.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.EventSet.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.PieceMovement.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.TurnManager.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.PieceMover.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.PieceDefinition.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.PieceFactory.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.Piece.js"></script>
-    <script type="text/javascript" src="/javascripts/Pieces/Game.AnyDirectionMovementProfile.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardContainer.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardPosition.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.BoardPositionRegistry.js"></script>
-    <script type="text/javascript" src="/javascripts/Boards/Game.Board.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.Game.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.GameFactory.js"></script>
-    <script type="text/javascript" src="/javascripts/Game.GameController.js"></script>
+    != renderJs()

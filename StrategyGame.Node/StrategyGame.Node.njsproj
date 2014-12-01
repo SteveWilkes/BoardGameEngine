@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardPosition.ts" />
@@ -78,6 +79,7 @@
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.App.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\bundle-up\bundle-up.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
@@ -111,6 +113,7 @@
     <Folder Include="Scripts\typings\angular\" />
     <Folder Include="Scripts\typings\express\" />
     <Folder Include="Scripts\typings\jquery\" />
+    <Folder Include="Scripts\typings\bundle-up\" />
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
     <Folder Include="views\" />
