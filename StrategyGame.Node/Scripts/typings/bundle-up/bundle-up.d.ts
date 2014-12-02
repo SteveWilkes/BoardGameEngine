@@ -1,4 +1,9 @@
-﻿declare module "bundle-up" {
+﻿// Type definitions for Bundle-Up v0.3.5
+// Project: https://github.com/Cowboy-coder/bundle-up
+// Definitions by: Steve Wilkes <https://github.com/Agileobjects>
+// Definitions: https://github.com/borisyankov/DefinitelyTyped
+
+declare module "bundle-up" {
     import express = require("express");
 
     function b(app: express.Express, pathToAssets: string, options: b.IBundleUpOptions): void;

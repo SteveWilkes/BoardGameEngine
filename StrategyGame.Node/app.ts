@@ -20,18 +20,19 @@ app.use(app.router);
 import stylus = require("stylus");
 app.use(stylus.middleware(path.join(__dirname, "public")));
 
+var isRelease = process.env.NODE_ENV === "Release";
+
 bundleUp(app, __dirname + "/assets", {
     staticRoot: __dirname + "/public/",
     staticUrlRoot: "/",
-    bundle: false,
-    minifyCss: false,
-    minifyJs: false
+    bundle: isRelease,
+    minifyCss: isRelease,
+    minifyJs: isRelease
 });
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// development only
-if (process.env.NODE_ENV === "Debug") {
+if (!isRelease) {
     app.use(express.errorHandler());
 }
 
