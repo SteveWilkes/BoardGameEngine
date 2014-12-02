@@ -13,8 +13,6 @@
         public createNewGame(boardType: BoardType): Game {
             var events = new EventSet();
 
-            var turnManager = new TurnManager(events);
-
             var board = new Board(boardType, events);
 
             var team1TileConfigs = [
@@ -45,17 +43,13 @@
             var team2StartingFormations = [new TeamStartingFormation(team2TileConfigs)];
             var team2 = new Team(team2StartingFormations);
 
-            events.teamLoaded.publish(team1);
-            events.teamLoaded.publish(team2);
-
-            board.add(team1, boardPositions.north);
-            board.add(team2, boardPositions.south);
-
             var container = new BoardContainer(this._$window);
             var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
             var sizeManager = new BoardSizeManager(boardSizeDefaults, container, events);
 
-            return new Game(board, turnManager, sizeManager, events);
+            var game = new Game(sizeManager, board, [team1, team2], events);
+
+            return game;
         }
     }
 

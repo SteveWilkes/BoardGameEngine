@@ -18,6 +18,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Teams/Game.TeamStartingFormation.js");
     assets.addJs("/public/javascripts/Teams/Game.Team.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardTile.js");
+    assets.addJs("/public/javascripts/Boards/Game.BoardPosition.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardRowConfig.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardType.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardTypeRegistry.js");
@@ -30,8 +31,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Game.Piece.js");
     assets.addJs("/public/javascripts/Pieces/Game.AnyDirectionMovementProfile.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardContainer.js");
-    assets.addJs("/public/javascripts/Boards/Game.BoardPosition.js");
-    assets.addJs("/public/javascripts/Boards/Game.BoardPositionRegistry.js");
     assets.addJs("/public/javascripts/Boards/Game.Board.js");
     assets.addJs("/public/javascripts/Game.Game.js");
     assets.addJs("/public/javascripts/Game.GameFactory.js");

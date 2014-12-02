@@ -42,7 +42,6 @@
     <TypeScriptCompile Include="public\javascripts\Boards\Game.Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardPosition.ts" />
-    <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardPositionRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardRowConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardSizeDefaults.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardSizeManager.ts" />

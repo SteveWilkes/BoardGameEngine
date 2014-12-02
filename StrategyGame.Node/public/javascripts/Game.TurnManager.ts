@@ -5,14 +5,13 @@
         constructor(events: EventSet) {
             this._teams = new Array<Team>();
 
-            events.teamLoaded.subscribe(team => {
-                this._teams.push(team);
-                return true;
-            });
-
             events.pieceMoving.subscribe(originTile => {
                 return true;
             });
+        }
+
+        public register(team: Team): void {
+            this._teams.push(team);
         }
     }
 } 
