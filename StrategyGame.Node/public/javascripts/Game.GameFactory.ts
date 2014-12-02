@@ -43,8 +43,8 @@
             var team2StartingFormations = [new TeamStartingFormation(team2TileConfigs)];
             var team2 = new Team(team2StartingFormations);
 
-            var container = new BoardContainer(this._$window);
             var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
+            var container = new BoardContainer(this._$window);
             var sizeManager = new BoardSizeManager(boardSizeDefaults, container, events);
 
             var game = new Game(sizeManager, board, [team1, team2], events);

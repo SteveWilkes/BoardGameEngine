@@ -7,7 +7,5 @@
             public pieceHeight: number,
             public tileBorderWidth: number) {
         }
-
-        public tileToPieceRatio: number;
     }
 }
