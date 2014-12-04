@@ -8,16 +8,10 @@
             public events: EventSet) {
 
             this.sizeManager.resize(this.board);
+
             this.board.add(teams);
 
-            this._registerTeams(teams);
-        }
-
-        private _registerTeams(teams: Array<Team>) {
-            var turnManager = new TurnManager(this.events);
-            for (var i = 0; i < teams.length; i++) {
-                turnManager.register(teams[i]);
-            }
+            TurnManager.create(teams, this.events);
         }
     }
 }

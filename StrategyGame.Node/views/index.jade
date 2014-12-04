@@ -19,6 +19,7 @@ block content
                       data-ng-if="tile.isOccupied()"
                       data-draggable data-subject="game.events" data-item="tile"
                       data-dragselect="'pieceSelected'"
+                      data-dragstart="'pieceMoving'"
                       data-dragend="'pieceMoved'"
                       data-dragdeselect="'pieceDeselected'"
                       data-ng-src="{{tile.piece.imageSource}}"

@@ -26,8 +26,8 @@
                 new BoardTileConfig(coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
                 new BoardTileConfig(coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
-            var team1StartingFormations = [new TeamStartingFormation(team1TileConfigs)];
-            var team1 = new Team(team1StartingFormations);
+            var team1StartingFormation = new TeamStartingFormation(team1TileConfigs);
+            var team1 = new Team(team1StartingFormation, true);
 
             var team2TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb
@@ -40,8 +40,8 @@
                 new BoardTileConfig(coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
                 new BoardTileConfig(coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
-            var team2StartingFormations = [new TeamStartingFormation(team2TileConfigs)];
-            var team2 = new Team(team2StartingFormations);
+            var team2StartingFormation = new TeamStartingFormation(team2TileConfigs);
+            var team2 = new Team(team2StartingFormation, false);
 
             var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
             var container = new BoardContainer(this._$window);

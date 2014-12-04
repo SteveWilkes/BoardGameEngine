@@ -18,10 +18,10 @@
 
                     el.addEventListener(
                         "mousedown",
-                        function () {
+                        function (e: MouseEvent) {
                             if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragselect")) {
                                 this.classList.add("selected");
-                            }
+                            } else if (e.preventDefault) { e.preventDefault(); }
                             return false;
                         },
                         false);
@@ -33,6 +33,16 @@
                             if (AgileObjects.Angular.ScopeEvaluator.evaluate($scope, "dragstart")) {
                                 e.dataTransfer.effectAllowed = "move";
                                 this.classList.add("drag");
+                            } else if (e.preventDefault) {
+                                e.preventDefault();
+                                if (typeof document.createEvent === "function") {
+                                    var evt = document.createEvent("HTMLEvents");
+                                    evt.initEvent("dragend", false, true);
+                                    this.dispatchEvent(evt);
+                                } else {
+                                    this.fireEvent("ondragend");
+                                }
+
                             }
                             return false;
                         },

@@ -29,7 +29,7 @@
 
         public add(teams: Array<Team>) {
             for (var i = 0; i < teams.length; i++) {
-                var startingFormation = teams[i].getStartingFormation();
+                var startingFormation = teams[i].startingFormation;
                 var position = this.type.getNextBoardPosition(i, teams.length);
                 for (var j = 0; j < startingFormation.tileConfigs.length; j++) {
                     var tileConfig = startingFormation.tileConfigs[j];

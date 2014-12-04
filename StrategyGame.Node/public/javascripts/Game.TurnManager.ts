@@ -1,17 +1,36 @@
 ﻿module AgileObjects.StrategyGame.Game {
-    export class TurnManager {
-        private _teams: Array<Team>;
+    export module TurnManager {
 
-        constructor(events: EventSet) {
-            this._teams = new Array<Team>();
+        class TurnManagerInstance {
+            private _currentTeamIndex: number;
+            private _currentOriginTile: IPieceLocation;
 
-            events.pieceMoving.subscribe(originTile => {
-                return true;
-            });
+            constructor(private _teams: Array<Team>, events: EventSet) {
+                this._currentTeamIndex = 0;
+
+                events.pieceMoving.subscribe(originTile => {
+                    this._currentOriginTile = originTile;
+                    var currentTeam = this._teams[this._currentTeamIndex];
+
+                    return currentTeam.isLocal && currentTeam.owns(originTile.piece);
+                });
+
+                events.pieceMoved.subscribe(destinationTile => {
+                    if (destinationTile !== this._currentOriginTile) {
+                        ++this._currentTeamIndex;
+                        if (this._currentTeamIndex === this._teams.length) {
+                            this._currentTeamIndex = 0;
+                        }
+                    }
+                    return true;
+                });
+            }
+
         }
 
-        public register(team: Team): void {
-            this._teams.push(team);
+        export function create(teams: Array<Team>, events: EventSet) {
+            // ReSharper disable once WrongExpressionStatement
+            new TurnManagerInstance(teams, events);
         }
     }
 } 

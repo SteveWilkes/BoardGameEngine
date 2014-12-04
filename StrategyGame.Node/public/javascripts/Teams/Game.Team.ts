@@ -1,11 +1,18 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Team {
-        constructor(private _startingFormations: Array<TeamStartingFormation>) {
+        private _pieces: Array<IPiece>;
+
+        constructor(public startingFormation: TeamStartingFormation, public isLocal: boolean) {
+            this._pieces = new Array<IPiece>();
+
+            for (var i = 0; i < startingFormation.tileConfigs.length; i++) {
+                this._pieces.push(startingFormation.tileConfigs[i].piece);
+            }
         }
 
-        public getStartingFormation(): TeamStartingFormation {
-            return this._startingFormations[0];
+        public owns(piece: IPiece): boolean {
+            return this._pieces.indexOf(piece) > -1;
         }
     }
 } 
