@@ -1,6 +1,8 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Game {
+        private _turnManager: TurnManager;
+
         constructor(
             public sizeManager: BoardSizeManager,
             public board: Board,
@@ -11,7 +13,7 @@
 
             this.board.add(teams);
 
-            TurnManager.create(teams, this.events);
+            this._turnManager = new TurnManager(this.board, teams, this.events);
         }
     }
 }

@@ -28,16 +28,9 @@
             }
         }
 
-        class Factory {
-            public create(tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>, events: EventSet): Implementation {
-                return new Implementation(tilesByCoordinates, events);
-            }
-        }
-
-        var factory = new Factory();
-
         export function create(tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>, events: EventSet): void {
-            factory.create(tilesByCoordinates, events);
+            // ReSharper disable once WrongExpressionStatement
+            new Implementation(tilesByCoordinates, events);
         }
     }
 }

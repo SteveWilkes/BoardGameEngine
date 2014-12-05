@@ -1,36 +1,38 @@
 ﻿module AgileObjects.StrategyGame.Game {
-    export module TurnManager {
 
-        class TurnManagerInstance {
-            private _currentTeamIndex: number;
-            private _currentOriginTile: IPieceLocation;
+    export class TurnManager {
+        private _currentTeamIndex: number;
+        private _currentOriginTile: IPieceLocation;
 
-            constructor(private _teams: Array<Team>, events: EventSet) {
-                this._currentTeamIndex = 0;
+        constructor(board: Board, private _teams: Array<Team>, events: EventSet) {
+            events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
+            events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
 
-                events.pieceMoving.subscribe(originTile => {
-                    this._currentOriginTile = originTile;
-                    var currentTeam = this._teams[this._currentTeamIndex];
+            this._currentTeamIndex = 0;
+            this.setCurrentTeam();
+        }
 
-                    return currentTeam.isLocal && currentTeam.owns(originTile.piece);
-                });
+        private _validatePieceIsMoveable(originTile: IPieceLocation): boolean {
+            this._currentOriginTile = originTile;
 
-                events.pieceMoved.subscribe(destinationTile => {
-                    if (destinationTile !== this._currentOriginTile) {
-                        ++this._currentTeamIndex;
-                        if (this._currentTeamIndex === this._teams.length) {
-                            this._currentTeamIndex = 0;
-                        }
-                    }
-                    return true;
-                });
+            return this.currentTeam.isLocal && this.currentTeam.owns(originTile.piece);
+        }
+
+        private _updateCurrentTeam(destinationTile: IPieceLocation): boolean {
+            if (destinationTile !== this._currentOriginTile) {
+                ++this._currentTeamIndex;
+                if (this._currentTeamIndex === this._teams.length) {
+                    this._currentTeamIndex = 0;
+                }
+                this.setCurrentTeam();
             }
-
+            return true;
         }
 
-        export function create(teams: Array<Team>, events: EventSet) {
-            // ReSharper disable once WrongExpressionStatement
-            new TurnManagerInstance(teams, events);
+        private setCurrentTeam() {
+            this.currentTeam = this._teams[this._currentTeamIndex];
         }
+
+        public currentTeam: Team;
     }
 } 

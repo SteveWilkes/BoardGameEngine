@@ -27,7 +27,7 @@
 
         public rows: Array<Array<BoardTile>>;
 
-        public add(teams: Array<Team>) {
+        public add(teams: Array<Team>): void {
             for (var i = 0; i < teams.length; i++) {
                 var startingFormation = teams[i].startingFormation;
                 var position = this.type.getNextBoardPosition(i, teams.length);
@@ -38,7 +38,6 @@
                     tile.add(tileConfig.piece);
                 }
             }
-
         }
     }
 }
