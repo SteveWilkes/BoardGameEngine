@@ -2,10 +2,17 @@
 
     export class BoardType {
         constructor(
-            public gridSize: number,
             private _availablePositions: Array<BoardPosition>,
             private _rowConfigs: Array<BoardRowConfig>) {
+
+            this.gridSize = this._rowConfigs.length;
+
+            for (var i = 0; i < this._availablePositions.length; i++) {
+                this._availablePositions[i].setGridSize(this.gridSize);
+            }
         }
+
+        public gridSize: number;
 
         public createRows(): Array<Array<BoardTile>> {
             var rows = new Array<Array<BoardTile>>();

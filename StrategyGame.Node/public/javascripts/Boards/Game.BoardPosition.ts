@@ -1,13 +1,19 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class BoardPosition {
+        private _gridSize: number;
+
         constructor(
             public name: string,
             private _coordinateTranslator: (coordinates: Coordinates, gridSize: number) => Coordinates) {
         }
 
-        public translate(coordinates: Coordinates, gridSize: number): Coordinates {
-            return this._coordinateTranslator(coordinates, gridSize);
+        public setGridSize(gridSize: number) {
+            this._gridSize = gridSize;
+        }
+
+        public translate(coordinates: Coordinates): Coordinates {
+            return this._coordinateTranslator(coordinates, this._gridSize);
         }
     }
 } 

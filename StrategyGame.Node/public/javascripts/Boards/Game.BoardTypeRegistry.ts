@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class BoardTypeRegistry {
-        public diamond = new BoardType(9,
+        public diamond = new BoardType(
             [
                 new BoardPosition("North", (c: Coordinates) => c),
                 new BoardPosition("East", (c: Coordinates) => c),

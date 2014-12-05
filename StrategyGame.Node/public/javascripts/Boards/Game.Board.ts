@@ -33,7 +33,7 @@
                 var position = this.type.getNextBoardPosition(i, teams.length);
                 for (var j = 0; j < startingFormation.tileConfigs.length; j++) {
                     var tileConfig = startingFormation.tileConfigs[j];
-                    var translatedCoordinates = position.translate(tileConfig.tileCoordinates, this.type.gridSize);
+                    var translatedCoordinates = position.translate(tileConfig.tileCoordinates);
                     var tile = this._tilesByCoordinates[translatedCoordinates.signature];
                     tile.add(tileConfig.piece);
                 }
