@@ -1,13 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class Board {
-        private _teams: Array<Team>;
         private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
 
-        constructor(public type: BoardType, events: EventSet) {
-            this._teams = new Array<Team>();
-
+        constructor(public type: BoardType, private _teams: Array<Team>, events: EventSet) {
             this._createTiles();
+            this._positionTeams();
             PieceMover.create(this._tilesByCoordinates, events);
         }
 
@@ -25,12 +23,10 @@
             }
         }
 
-        public rows: Array<Array<BoardTile>>;
-
-        public add(teams: Array<Team>): void {
-            for (var i = 0; i < teams.length; i++) {
-                var startingFormation = teams[i].startingFormation;
-                var position = this.type.getNextBoardPosition(i, teams.length);
+        private _positionTeams(): void {
+            for (var i = 0; i < this._teams.length; i++) {
+                var startingFormation = this._teams[i].startingFormation;
+                var position = this.type.getNextBoardPosition(i, this._teams.length);
                 for (var j = 0; j < startingFormation.tileConfigs.length; j++) {
                     var tileConfig = startingFormation.tileConfigs[j];
                     var translatedCoordinates = position.translate(tileConfig.tileCoordinates);
@@ -39,5 +35,7 @@
                 }
             }
         }
+
+        public rows: Array<Array<BoardTile>>;
     }
 }

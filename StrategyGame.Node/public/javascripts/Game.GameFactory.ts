@@ -13,7 +13,9 @@
         public createNewGame(boardType: BoardType): Game {
             var events = new EventSet();
 
-            var board = new Board(boardType, events);
+            var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
+            var container = new BoardContainer(this._$window);
+            var sizeManager = new BoardSizeManager(boardSizeDefaults, container, events);
 
             var team1TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb
@@ -43,11 +45,13 @@
             var team2StartingFormation = new TeamStartingFormation(team2TileConfigs);
             var team2 = new Team(team2StartingFormation, false);
 
-            var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
-            var container = new BoardContainer(this._$window);
-            var sizeManager = new BoardSizeManager(boardSizeDefaults, container, events);
+            var teams = [team1, team2];
 
-            var game = new Game(sizeManager, board, [team1, team2], events);
+            var board = new Board(boardType, teams, events);
+
+            var turnManager = new TurnManager(board, teams, 0, events);
+
+            var game = new Game(sizeManager, board, turnManager, events);
 
             return game;
         }

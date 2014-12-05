@@ -4,13 +4,15 @@
         private _currentTeamIndex: number;
         private _currentOriginTile: IPieceLocation;
 
-        constructor(board: Board, private _teams: Array<Team>, events: EventSet) {
+        constructor(board: Board, private _teams: Array<Team>, startingTeamIndex: number, events: EventSet) {
             events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
             events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
 
-            this._currentTeamIndex = 0;
+            this._currentTeamIndex = startingTeamIndex;
             this.setCurrentTeam();
         }
+
+        public currentTeam: Team;
 
         private _validatePieceIsMoveable(originTile: IPieceLocation): boolean {
             this._currentOriginTile = originTile;
@@ -32,7 +34,5 @@
         private setCurrentTeam() {
             this.currentTeam = this._teams[this._currentTeamIndex];
         }
-
-        public currentTeam: Team;
     }
 } 
