@@ -10,6 +10,8 @@
 
             this._currentTeamIndex = startingTeamIndex;
             this.setCurrentTeam();
+
+            board.orientTo(this.currentTeam);
         }
 
         public currentTeam: Team;

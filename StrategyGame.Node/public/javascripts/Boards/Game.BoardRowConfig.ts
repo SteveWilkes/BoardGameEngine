@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    var placeholderTile = <BoardTile>{};
+    var placeholderTile = <BoardTile>{ isGameTile: false };
 
     export class BoardRowConfig {
         constructor(private _tileConfigs: Array<boolean>) {

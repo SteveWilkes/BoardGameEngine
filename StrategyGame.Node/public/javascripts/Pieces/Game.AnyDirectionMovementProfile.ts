@@ -6,14 +6,14 @@
 
         public getValidDestinations(origin: IPieceLocation, allLocations: IPieceLocationDictionary): Array<IPieceLocation> {
             var destinations = [
-                allLocations[origin.position.left(this._allowedDistance).signature],
-                allLocations[origin.position.upLeft(this._allowedDistance).signature],
-                allLocations[origin.position.up(this._allowedDistance).signature],
-                allLocations[origin.position.upRight(this._allowedDistance).signature],
-                allLocations[origin.position.right(this._allowedDistance).signature],
-                allLocations[origin.position.downRight(this._allowedDistance).signature],
-                allLocations[origin.position.down(this._allowedDistance).signature],
-                allLocations[origin.position.downLeft(this._allowedDistance).signature]
+                allLocations[origin.coordinates.left(this._allowedDistance).signature],
+                allLocations[origin.coordinates.upLeft(this._allowedDistance).signature],
+                allLocations[origin.coordinates.up(this._allowedDistance).signature],
+                allLocations[origin.coordinates.upRight(this._allowedDistance).signature],
+                allLocations[origin.coordinates.right(this._allowedDistance).signature],
+                allLocations[origin.coordinates.downRight(this._allowedDistance).signature],
+                allLocations[origin.coordinates.down(this._allowedDistance).signature],
+                allLocations[origin.coordinates.downLeft(this._allowedDistance).signature]
             ];
             for (var i = 0; i < this._movementFilters.length; i++) {
                 destinations = this._movementFilters[i].filter(destinations);

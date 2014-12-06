@@ -10,9 +10,9 @@ block content
             div(data-ng-repeat="tile in row track by $index")
                 .board-tile(
                   data-ng-style="{ width: game.sizeManager.tileSize, height: game.sizeManager.tileSize }"
-                  data-ng-class="{ 'available': tile.position, 'placeholder': !tile.position, 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination}")
+                  data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'board-destination-tile': tile.isPotentialDestination}")
                     .max-size(
-                      data-ng-if="tile.position"
+                      data-ng-if="tile.isGameTile"
                       data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceMoved'")
                     img.piece(
                       id="{{tile.piece.id}}"

@@ -5,7 +5,8 @@
 
         constructor(
             public name: string,
-            private _coordinateTranslator: (coordinates: Coordinates, gridSize: number) => Coordinates) {
+            private _coordinateTranslator: (coordinates: Coordinates, gridSize: number) => Coordinates,
+            public isFocusPosition: boolean = false) {
         }
 
         public setGridSize(gridSize: number) {

@@ -4,7 +4,7 @@
     }
 
     export interface IPieceLocation {
-        position: Coordinates;
+        coordinates: Coordinates;
         isOccupied(): boolean;
         add(piece: IPiece): void;
         piece: IPiece;

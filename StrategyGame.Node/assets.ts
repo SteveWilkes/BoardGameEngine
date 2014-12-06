@@ -6,6 +6,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addCss("/public/stylesheets/site.styl");
 
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.RemoveClass.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js");
@@ -20,6 +21,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/Game.BoardTile.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardPosition.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardRowConfig.js");
+    assets.addJs("/public/javascripts/Boards/Game.BoardOrientationTranslator.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardType.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardTypeRegistry.js");
     assets.addJs("/public/javascripts/Game.EventSet.js");

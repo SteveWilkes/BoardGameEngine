@@ -41,6 +41,7 @@
     <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardContainer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardOrientationTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardPosition.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardRowConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Game.BoardSizeDefaults.ts" />
@@ -58,6 +59,7 @@
     <TypeScriptCompile Include="public\javascripts\Game.TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Dictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\History\Game.History.ts" />
     <TypeScriptCompile Include="public\javascripts\History\Game.IGameAction.ts" />

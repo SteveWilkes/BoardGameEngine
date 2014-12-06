@@ -3,12 +3,16 @@
     export class BoardType {
         constructor(
             private _availablePositions: Array<BoardPosition>,
-            private _rowConfigs: Array<BoardRowConfig>) {
+            private _rowConfigs: Array<BoardRowConfig>,
+            public orientationTranslator: BoardOrientationTranslator) {
 
             this.gridSize = this._rowConfigs.length;
 
             for (var i = 0; i < this._availablePositions.length; i++) {
                 this._availablePositions[i].setGridSize(this.gridSize);
+                if (this._availablePositions[i].isFocusPosition) {
+                    this.orientationTranslator.setFocusPosition(this._availablePositions[i]);
+                }
             }
         }
 
