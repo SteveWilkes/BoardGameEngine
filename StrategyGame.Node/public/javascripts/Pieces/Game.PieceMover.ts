@@ -11,19 +11,21 @@
                 events.pieceDeselected.subscribe(() => this._pieceDeselected());
             }
 
-            _pieceSelected(origin: IPieceLocation): boolean {
+            private _pieceSelected(origin: IPieceLocation): boolean {
                 var validDestinations = origin.piece.movementProfile.getValidDestinations(origin, this._locationsByCoordinates);
                 this._currentPieceMovement = new PieceMovement(origin, validDestinations);
 
                 return true;
             }
 
-            _pieceMoved(destination: IPieceLocation): boolean {
+            private _pieceMoved(destination: IPieceLocation): boolean {
                 return this._currentPieceMovement.complete(destination);
             }
 
-            _pieceDeselected(): boolean {
-                this._currentPieceMovement.cancel();
+            private _pieceDeselected(): boolean {
+                if (this._currentPieceMovement !== undefined) {
+                    this._currentPieceMovement.cancel();
+                }
                 return true;
             }
         }
