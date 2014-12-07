@@ -17,7 +17,7 @@
             var getResult = this.tryGet(key);
 
             if (getResult.found) {
-                throw Error("Key " + key + " already exists");
+                throw new Error("Key " + key + " already exists");
             }
 
             this._keys.push(key);
@@ -32,7 +32,7 @@
 
             if (getResult.found) { return getResult.value; }
 
-            throw Error("Unable to find value for key " + key);
+            throw new Error("Unable to find value for key " + key);
         }
 
         public tryGet(key: TKey): TryGetResult<TValue> {
