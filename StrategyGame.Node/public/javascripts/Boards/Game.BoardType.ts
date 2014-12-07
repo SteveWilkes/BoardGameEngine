@@ -20,8 +20,8 @@
 
         public createRows(): Array<Array<BoardTile>> {
             var rows = new Array<Array<BoardTile>>();
-            for (var i = this._rowConfigs.length; i > 0; i--) {
-                rows.push(this._rowConfigs[i - 1].createRow(i));
+            for (var rowNumber = this._rowConfigs.length; rowNumber > 0; rowNumber--) {
+                rows.push(this._rowConfigs[rowNumber - 1].createRow(rowNumber));
             }
             return rows;
         }
