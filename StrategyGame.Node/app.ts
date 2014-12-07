@@ -17,9 +17,6 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 
-import stylus = require("stylus");
-app.use(stylus.middleware(path.join(__dirname, "public")));
-
 var isRelease = process.env.NODE_ENV === "Release";
 
 bundleUp(app, __dirname + "/assets", {
