@@ -13,7 +13,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
     assets.addJs("/public/javascripts/Game.App.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardSizeDefaults.js");
-    assets.addJs("/public/javascripts/Boards/Game.BoardSizeManager.js");
+    assets.addJs("/public/javascripts/Boards/Game.BoardDisplayManager.js");
     assets.addJs("/public/javascripts/Pieces/Game.Coordinates.js");
     assets.addJs("/public/javascripts/Teams/Game.BoardTileConfig.js");
     assets.addJs("/public/javascripts/Teams/Game.TeamStartingFormation.js");
@@ -32,7 +32,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Game.PieceFactory.js");
     assets.addJs("/public/javascripts/Pieces/Game.Piece.js");
     assets.addJs("/public/javascripts/Pieces/Game.AnyDirectionMovementProfile.js");
-    assets.addJs("/public/javascripts/Boards/Game.BoardContainer.js");
+    assets.addJs("/public/javascripts/Boards/Game.BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Game.Board.js");
     assets.addJs("/public/javascripts/Game.Game.js");
     assets.addJs("/public/javascripts/Game.GameFactory.js");

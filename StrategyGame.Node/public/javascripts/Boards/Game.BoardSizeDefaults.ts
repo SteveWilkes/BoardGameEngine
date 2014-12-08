@@ -2,7 +2,7 @@
 
     export class BoardSizeDefaults {
         constructor(
-            public containerSize: number,
+            public boardSize: number,
             public pieceWidth: number,
             public pieceHeight: number,
             public tileBorderWidth: number) {

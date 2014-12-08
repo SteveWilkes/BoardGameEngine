@@ -13,9 +13,9 @@
         public createNewGame(boardType: BoardType): Game {
             var events = new EventSet();
 
-            var boardSizeDefaults = new BoardSizeDefaults(975, 50, 80, 2);
-            var container = new BoardContainer(this._$window);
-            var sizeManager = new BoardSizeManager(boardSizeDefaults, container, events);
+            var boardSizeDefaults = new BoardSizeDefaults(950, 50, 80, 2);
+            var container = new BoardDisplayDataService(this._$window);
+            var sizeManager = new BoardDisplayManager(boardSizeDefaults, container, events);
 
             var team1TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb

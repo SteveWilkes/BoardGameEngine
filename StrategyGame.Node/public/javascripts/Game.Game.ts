@@ -2,7 +2,7 @@
 
     export class Game {
         constructor(
-            public sizeManager: BoardSizeManager,
+            public sizeManager: BoardDisplayManager,
             public board: Board,
             private _turnManager: TurnManager,
             public events: EventSet) {
