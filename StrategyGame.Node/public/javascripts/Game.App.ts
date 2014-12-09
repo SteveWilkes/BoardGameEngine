@@ -8,8 +8,9 @@
         game: Game;
     }
 
-    AgileObjects.Angular.Directives.addRemoveClass(game);
-    AgileObjects.Angular.Directives.addSizeToContainer(game);
-    AgileObjects.Angular.Directives.addDraggable(game);
-    AgileObjects.Angular.Directives.addDroppable(game);
+    Angular.Directives.addRemoveClass(game);
+    Angular.Directives.addSizeToContainer(game);
+    Angular.Directives.addDraggable(game);
+    Angular.Directives.addDroppable(game);
+    Angular.Directives.addDraggableDroppable(game);
 }

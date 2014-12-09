@@ -17,11 +17,12 @@ block content
                     img.piece(
                       id="{{tile.piece.id}}"
                       data-ng-if="tile.isOccupied()"
-                      data-draggable data-subject="game.events" data-item="tile"
+                      data-draggabledroppable data-subject="game.events" data-item="tile"
                       data-dragselect="'pieceSelected'"
                       data-dragstart="'pieceMoving'"
                       data-dragend="'pieceMoved'"
                       data-dragdeselect="'pieceDeselected'"
+                      data-drop="'pieceMoved'"
                       data-ng-src="{{tile.piece.imageSource}}"
                       data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")
                     img.attachedPiece(
