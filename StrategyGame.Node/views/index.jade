@@ -24,3 +24,13 @@ block content
                       data-dragdeselect="'pieceDeselected'"
                       data-ng-src="{{tile.piece.imageSource}}"
                       data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")
+                    img.attachedPiece(
+                      id="{{tile.piece.attachedPiece.id}}"
+                      data-ng-if="tile.isOccupied() && tile.piece.attachedPiece"
+                      data-draggable data-subject="game.events" data-item="tile"
+                      data-dragselect="'pieceSelected'"
+                      data-dragstart="'pieceMoving'"
+                      data-dragend="'pieceMoved'"
+                      data-dragdeselect="'pieceDeselected'"
+                      data-ng-src="{{tile.piece.attachedPiece.imageSource}}"
+                      data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")

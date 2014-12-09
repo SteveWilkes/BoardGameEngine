@@ -1,10 +1,10 @@
 ﻿module AgileObjects.StrategyGame.Game {
     export class EventSet {
-        public containerResized = new AgileObjects.TypeScript.EventHub<Board>();
+        public containerResized = new TypeScript.EventHub<Board>();
 
-        public pieceSelected = new AgileObjects.TypeScript.EventHub<IPieceLocation>();
-        public pieceMoving = new AgileObjects.TypeScript.EventHub<IPieceLocation>();
-        public pieceMoved = new AgileObjects.TypeScript.EventHub<IPieceLocation>();
-        public pieceDeselected = new AgileObjects.TypeScript.EventHub<IPieceLocation>();
+        public pieceSelected = new TypeScript.EventHub<IPieceLocation>();
+        public pieceMoving = new TypeScript.EventHub<IPieceLocation>();
+        public pieceMoved = new TypeScript.EventHub<IPieceLocation>();
+        public pieceDeselected = new TypeScript.EventHub<IPieceLocation>();
     }
 } 

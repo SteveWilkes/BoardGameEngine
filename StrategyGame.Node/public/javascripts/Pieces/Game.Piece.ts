@@ -8,12 +8,10 @@
             public movementProfile: IPieceMovementProfile) {
         }
 
-        public moving(): void {
-            console.log("Piece " + this.id + " moving");
-        }
+        public attachedPiece: IPiece;
 
-        public moved(): void {
-            console.log("Piece " + this.id + " moved");
+        public add(piece: IPiece): void {
+            this.attachedPiece = piece;
         }
     }
 }

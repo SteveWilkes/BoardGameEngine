@@ -15,7 +15,11 @@
         }
 
         public add(piece: IPiece): void {
-            this.piece = piece;
+            if (this.isOccupied()) {
+                this.piece.add(piece);
+            } else {
+                this.piece = piece;
+            }
         }
 
         public movePieceTo(destination: IPieceLocation): void {
