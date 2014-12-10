@@ -1,17 +1,18 @@
 ﻿module AgileObjects.StrategyGame.Game {
-
+    
     export class Piece implements IPiece {
 
         constructor(
             public id: string,
             public imageSource: string,
-            public movementProfile: IPieceMovementProfile) {
+            public movementProfile: IPieceMovementProfile,
+            private _pieceDropHandler: IPieceDropHandler) {
         }
 
         public attachedPiece: IPiece;
 
-        public add(piece: IPiece): void {
-            this.attachedPiece = piece;
+        public attach(piece: IPiece): void {
+            this._pieceDropHandler.handleDrop(this, piece);
         }
     }
 }

@@ -28,10 +28,12 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Game.PieceMovement.js");
     assets.addJs("/public/javascripts/Game.TurnManager.js");
     assets.addJs("/public/javascripts/Pieces/Game.PieceMover.js");
+    assets.addJs("/public/javascripts/Pieces/Game.IPieceMovementFilter.js");
+    assets.addJs("/public/javascripts/Pieces/Game.IPieceMovementProfile.js");
+    assets.addJs("/public/javascripts/Pieces/Game.IPieceDropHandler.js");
     assets.addJs("/public/javascripts/Pieces/Game.PieceDefinition.js");
     assets.addJs("/public/javascripts/Pieces/Game.PieceFactory.js");
     assets.addJs("/public/javascripts/Pieces/Game.Piece.js");
-    assets.addJs("/public/javascripts/Pieces/Game.AnyDirectionMovementProfile.js");
     assets.addJs("/public/javascripts/Boards/Game.BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Game.Board.js");
     assets.addJs("/public/javascripts/Game.Game.js");

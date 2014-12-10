@@ -16,7 +16,7 @@
 
         public add(piece: IPiece): void {
             if (this.isOccupied()) {
-                this.piece.add(piece);
+                this.piece.attach(piece);
             } else {
                 this.piece = piece;
             }

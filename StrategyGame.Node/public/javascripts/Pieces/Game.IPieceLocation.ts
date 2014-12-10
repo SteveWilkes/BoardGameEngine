@@ -1,7 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export interface IPieceLocationDictionary extends AgileObjects.TypeScript.IStringDictionary<IPieceLocation> {
-    }
+    export interface IPieceLocationDictionary extends TypeScript.IStringDictionary<IPieceLocation> { }
 
     export interface IPieceLocation {
         coordinates: Coordinates;

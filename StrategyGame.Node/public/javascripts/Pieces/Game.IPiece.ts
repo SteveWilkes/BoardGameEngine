@@ -4,6 +4,6 @@
         imageSource: string;
         movementProfile: IPieceMovementProfile;
         attachedPiece: IPiece;
-        add(piece: IPiece): void;
+        attach(piece: IPiece): void;
     }
 }
