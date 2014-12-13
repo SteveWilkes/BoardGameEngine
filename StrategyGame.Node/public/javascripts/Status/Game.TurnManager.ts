@@ -1,15 +1,17 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
     export class TurnManager {
-        private _currentTeamIndex: number;
         private _currentOriginTile: IPieceLocation;
 
-        constructor(board: Board, private _teams: Array<Team>, startingTeamIndex: number, events: EventSet) {
+        constructor(
+            board: Board,
+            private _teams: Array<Team>,
+            startingTeamIndex: number,
+            events: EventSet) {
             events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
             events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
 
-            this._currentTeamIndex = startingTeamIndex;
-            this.setCurrentTeam();
+            this.setCurrentTeam(startingTeamIndex);
 
             board.orientTo(this.currentTeam);
         }
@@ -24,17 +26,18 @@
 
         private _updateCurrentTeam(destinationTile: IPieceLocation): boolean {
             if (destinationTile !== this._currentOriginTile) {
-                ++this._currentTeamIndex;
-                if (this._currentTeamIndex === this._teams.length) {
-                    this._currentTeamIndex = 0;
+                var currentTeamIndex = this._teams.indexOf(this.currentTeam);
+                ++currentTeamIndex;
+                if (currentTeamIndex === this._teams.length) {
+                    currentTeamIndex = 0;
                 }
-                this.setCurrentTeam();
+                this.setCurrentTeam(currentTeamIndex);
             }
             return true;
         }
 
-        private setCurrentTeam() {
-            this.currentTeam = this._teams[this._currentTeamIndex];
+        private setCurrentTeam(teamIndex: number) {
+            this.currentTeam = this._teams[teamIndex];
         }
     }
 } 

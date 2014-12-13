@@ -6,5 +6,4 @@ block content
 
     #game-status
         .heading-bar
-          h3 Current turn: 
-            span(data-ng-bind="game.status.turnManager.currentTeam.name")
+          h3(data-ng-bind="game.status.whosTurn()")
