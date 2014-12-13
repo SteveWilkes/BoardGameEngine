@@ -6,7 +6,7 @@
 
         public whosTurn(): string {
             if (this._turnManager.currentTeam.isLocal) {
-                return "Your turn";
+                return "Your turn!";
             }
 
             return this._turnManager.currentTeam.name + "'s turn";

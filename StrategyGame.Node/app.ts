@@ -18,16 +18,29 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 var isRelease = process.env.NODE_ENV === "Release";
+var publicRoot = path.join(__dirname, "public");
 
-bundleUp(app, __dirname + "/assets", {
-    staticRoot: __dirname + "/public/",
+if (!isRelease) {
+    var fileSystem = require("fs");
+    var stylusData = fileSystem.readFileSync(path.join(publicRoot, "stylesheets/site.styl"), { encoding: "UTF8" });
+    var stylus = require("stylus");
+    stylus(stylusData)
+        .render((stylusErr: Error, css: string) => {
+            if (stylusErr) { throw stylusErr; }
+            fileSystem.writeFileSync(path.join(publicRoot, "generated/stylesheets/site.css"), css);
+        });
+    console.log("Stylus CSS updated");
+}
+
+bundleUp(app, path.join(__dirname, "assets"), {
+    staticRoot: path.join(__dirname, "public/"),
     staticUrlRoot: "/",
     bundle: isRelease,
     minifyCss: isRelease,
     minifyJs: isRelease
 });
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(publicRoot));
 
 if (!isRelease) {
     app.use(express.errorHandler());
