@@ -64,7 +64,7 @@
     <TypeScriptCompile Include="public\javascripts\History\Game.History.ts" />
     <TypeScriptCompile Include="public\javascripts\History\Game.IGameAction.ts" />
     <TypeScriptCompile Include="public\javascripts\History\Game.PieceMoveAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceMovementFilter.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceDestinationFilter.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPiece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceDropHandler.ts" />

@@ -16,8 +16,11 @@
         }
     }
 
-    export class AnyDirectionMovementProfile extends OnlyValidDestinationsMovementProfile implements IPieceMovementProfile {
-        constructor(private _allowedDistance: number, private _movementFilters: Array<IPieceMovementFilter>) {
+    export class AnyDirectionMovementProfile
+        extends OnlyValidDestinationsMovementProfile
+        implements IPieceMovementProfile {
+
+        constructor(private _allowedDistance: number, private _movementFilters: Array<IPieceDestinationFilter>) {
             super();
         }
 
@@ -33,7 +36,7 @@
                 allLocations[origin.coordinates.downLeft(this._allowedDistance).signature]
             ]);
             for (var i = 0; i < this._movementFilters.length; i++) {
-                destinations = this._movementFilters[i].filter(destinations);
+                destinations = this._movementFilters[i].filter(origin.piece, destinations);
             }
             return destinations;
         }

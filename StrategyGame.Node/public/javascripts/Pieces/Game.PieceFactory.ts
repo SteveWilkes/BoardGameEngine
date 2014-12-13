@@ -16,19 +16,19 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    new AnyDirectionMovementProfile(1, [new OnlyOccupiedLocationsPieceMovementFilter()]),
-                    new AttachTargetPieceToDroppedPieceDropHandler()),
+                    new AnyDirectionMovementProfile(1, [new OnlyOccupiedLocationsPieceDestinationFilter()]),
+                    () => new AttachTargetPieceToDroppedPieceDropHandler(["2"])),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
-                    new AnyDirectionMovementProfile(1, [new OnlyEmptyLocationsPieceMovementFilter()]),
-                    new AttachDroppedPieceToTargetPieceDropHandler())
+                    new AnyDirectionMovementProfile(1, [new OnlyDroppableLocationsPieceDestinationFilter()]),
+                    () => new AttachDroppedPieceToTargetPieceDropHandler(["1"]))
             };
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string): Piece {
+        public createPiece(definitionId: string): IPiece {
             var pieceId = this._nextPieceId++;
             return this._definitions[definitionId].createPiece("piece-" + pieceId);
         }

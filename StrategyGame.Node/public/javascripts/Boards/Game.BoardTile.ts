@@ -16,10 +16,16 @@
 
         public add(piece: IPiece): void {
             if (this.isOccupied()) {
-                this.piece.attach(piece);
+                this.piece.pieceDropHandler.handleDrop(piece);
             } else {
                 this.piece = piece;
+                piece.location = this;
             }
+        }
+
+        public replacePieceWith(newPiece: IPiece): void {
+            this.clear();
+            this.piece = newPiece;
         }
 
         public movePieceTo(destination: IPieceLocation): void {

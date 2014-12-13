@@ -1,9 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game {
     export interface IPiece {
         id: string;
+        definitionId: string;
         imageSource: string;
-        movementProfile: IPieceMovementProfile;
+        location: IPieceLocation;
         attachedPiece: IPiece;
-        attach(piece: IPiece): void;
+        movementProfile: IPieceMovementProfile;
+        pieceDropHandler: IPieceDropHandler;
     }
 }

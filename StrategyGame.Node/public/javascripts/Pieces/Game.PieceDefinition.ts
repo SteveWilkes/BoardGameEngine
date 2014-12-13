@@ -7,11 +7,16 @@
             public name: string,
             public imageSource: string,
             private _movementProfile: IPieceMovementProfile,
-            private _pieceDropHandler: IPieceDropHandler) {
+            private _pieceDropHandlerFactory: () => IPieceDropHandler) {
         }
 
-        public createPiece(pieceId: string) {
-            return new Piece(pieceId, this.imageSource, this._movementProfile, this._pieceDropHandler);
+        public createPiece(pieceId: string): IPiece {
+            return new Piece(
+                pieceId,
+                this.id,
+                this.imageSource,
+                this._movementProfile,
+                this._pieceDropHandlerFactory());
         }
     }
 }
