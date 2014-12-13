@@ -7,7 +7,8 @@ html
     != renderStyles()
   body(data-ng-app="strategyGameApp")
 
-    block content
+    div(data-ng-controller="GameController")
+      block content
 
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>

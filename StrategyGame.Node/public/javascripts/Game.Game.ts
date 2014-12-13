@@ -4,10 +4,13 @@
         constructor(
             public sizeManager: BoardDisplayManager,
             public board: Board,
-            private _turnManager: TurnManager,
+            turnManager: TurnManager,
             public events: EventSet) {
 
+            this.status = new Status(turnManager);
             this.sizeManager.resize(this.board);
         }
+
+        public status: Status;
     }
 }

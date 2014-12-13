@@ -2,5 +2,5 @@
 
 // GET home page
 export function index(req: express.Request, res: express.Response) {
-    res.render("index", {});
+    res.render("board", {});
 }

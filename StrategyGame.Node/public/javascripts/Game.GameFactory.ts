@@ -29,7 +29,7 @@
                 new BoardTileConfig(coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
             var team1StartingFormation = new TeamStartingFormation(team1TileConfigs);
-            var team1 = new Team(team1StartingFormation, true);
+            var team1 = new Team("Team 1", team1StartingFormation, true);
 
             var team2TileConfigs = [
                 new BoardTileConfig(coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb
@@ -43,7 +43,7 @@
                 new BoardTileConfig(coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
 
             var team2StartingFormation = new TeamStartingFormation(team2TileConfigs);
-            var team2 = new Team(team2StartingFormation, false);
+            var team2 = new Team("Team 2", team2StartingFormation, false);
 
             var teams = [team1, team2];
 

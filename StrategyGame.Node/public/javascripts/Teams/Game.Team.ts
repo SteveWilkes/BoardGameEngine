@@ -3,7 +3,10 @@
     export class Team {
         private _pieces: Array<IPiece>;
 
-        constructor(public startingFormation: TeamStartingFormation, public isLocal: boolean) {
+        constructor(
+            public name: string,
+            public startingFormation: TeamStartingFormation,
+            public isLocal: boolean) {
             this._pieces = new Array<IPiece>();
 
             for (var i = 0; i < startingFormation.tileConfigs.length; i++) {

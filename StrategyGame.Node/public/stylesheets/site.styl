@@ -4,6 +4,7 @@
 body
 	margin 0
 	padding 0
+	font normal 13pt Segoe UI, Calibri, sans-serif
 
 .hidden
 	visibility hidden
@@ -47,7 +48,23 @@ img.piece
 
 img.attachedPiece
 	position absolute
+	z-index 2
 	top 50%
 	left 50%
 	margin -30% 0 0 -5%
-	z-index 2
+
+div#game-status
+	position absolute
+	z-index 5
+	top 20px
+	right 20px
+	width 25%
+
+.heading-bar
+	background-color #3A3145
+	padding .3em .5em
+
+	h3
+		margin 0
+		color white
+		font bold 15pt Segoe UI Light, Calibri, sans-serif

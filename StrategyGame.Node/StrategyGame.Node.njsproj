@@ -56,14 +56,14 @@
     <TypeScriptCompile Include="public\javascripts\Game.Game.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.GameFactory.ts" />
-    <TypeScriptCompile Include="public\javascripts\Game.TurnManager.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Dictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
-    <TypeScriptCompile Include="public\javascripts\History\Game.History.ts" />
-    <TypeScriptCompile Include="public\javascripts\History\Game.IGameAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\History\Game.PieceMoveAction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.History.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.IGameAction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.PieceMoveAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceDestinationFilter.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPiece.ts" />
@@ -75,6 +75,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMover.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.Status.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.BoardTileConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.Team.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.TeamStartingFormation.ts" />
@@ -94,6 +95,7 @@
     <Content Include="package.json" />
     <Content Include="public\stylesheets\site.styl" />
     <Content Include="README.md" />
+    <Content Include="views\board.jade" />
     <Content Include="views\index.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>
@@ -105,7 +107,7 @@
     <Folder Include="public\javascripts\Boards\" />
     <Folder Include="public\javascripts\Directives\" />
     <Folder Include="public\javascripts\Generic\" />
-    <Folder Include="public\javascripts\History\" />
+    <Folder Include="public\javascripts\Status\" />
     <Folder Include="public\javascripts\Pieces\" />
     <Folder Include="public\javascripts\Teams\" />
     <Folder Include="public\stylesheets\" />
