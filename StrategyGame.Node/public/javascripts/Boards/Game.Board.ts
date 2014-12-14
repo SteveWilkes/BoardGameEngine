@@ -1,13 +1,15 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
+    import Pieces = StrategyGame.Game.Pieces;
+    import Teams = StrategyGame.Game.Teams;
 
     export class Board {
-        private _tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>;
-        private _boardPositionsByTeam: AgileObjects.TypeScript.Dictionary<Team, BoardPosition>;
+        private _tilesByCoordinates: TypeScript.IStringDictionary<Pieces.IPieceLocation>;
+        private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
-        constructor(public type: BoardType, private _teams: Array<Team>, events: EventSet) {
+        constructor(public type: BoardType, private _teams: Array<Teams.Team>, events: EventSet) {
             this._createTiles();
             this._positionTeams();
-            PieceMover.create(this._tilesByCoordinates, events);
+            Pieces.PieceMover.create(this._tilesByCoordinates, events);
         }
 
         private _createTiles(): void {
@@ -25,7 +27,7 @@
         }
 
         private _positionTeams(): void {
-            this._boardPositionsByTeam = new AgileObjects.TypeScript.Dictionary<Team, BoardPosition>();
+            this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
             for (var i = 0; i < this._teams.length; i++) {
                 var startingFormation = this._teams[i].startingFormation;
                 var position = this.type.getNextBoardPosition(i, this._teams.length);
@@ -41,7 +43,7 @@
 
         public rows: Array<Array<BoardTile>>;
 
-        public orientTo(team: Team): void {
+        public orientTo(team: Teams.Team): void {
             var subjectTeamPosition = this._boardPositionsByTeam.get(team);
             if (this.type.orientationTranslator.focusPositionIs(subjectTeamPosition)) { return; }
             // TODO: Orientation translation; re-arrange the BoardTiles so that the given Team is moved to the focus position

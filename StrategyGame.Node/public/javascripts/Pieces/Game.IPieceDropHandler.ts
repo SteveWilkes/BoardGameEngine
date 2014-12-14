@@ -1,4 +1,5 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
+
     export interface IPieceDropHandler {
         setTarget(targetPiece: IPiece): void;
         canDrop(droppingPiece: IPiece): boolean;

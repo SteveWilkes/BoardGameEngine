@@ -1,6 +1,6 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Status {
 
-    export class Status {
+    export class StatusData {
         constructor(private _turnManager: TurnManager) {
         }
 

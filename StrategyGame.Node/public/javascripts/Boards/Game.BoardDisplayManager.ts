@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
 
     export class BoardDisplayManager {
         /** Initialises a new instance of the BoardDisplayManager class. */

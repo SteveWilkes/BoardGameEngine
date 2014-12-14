@@ -1,11 +1,14 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Status {
+    import Boards = StrategyGame.Game.Boards;
+    import Pieces = StrategyGame.Game.Pieces;
+    import Teams = StrategyGame.Game.Teams;
 
     export class TurnManager {
-        private _currentOriginTile: IPieceLocation;
+        private _currentOriginTile: Pieces.IPieceLocation;
 
         constructor(
-            board: Board,
-            private _teams: Array<Team>,
+            board: Boards.Board,
+            private _teams: Array<Teams.Team>,
             startingTeamIndex: number,
             events: EventSet) {
             events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
@@ -16,15 +19,15 @@
             board.orientTo(this.currentTeam);
         }
 
-        public currentTeam: Team;
+        public currentTeam: Teams.Team;
 
-        private _validatePieceIsMoveable(originTile: IPieceLocation): boolean {
+        private _validatePieceIsMoveable(originTile: Pieces.IPieceLocation): boolean {
             this._currentOriginTile = originTile;
 
             return this.currentTeam.isLocal && this.currentTeam.owns(originTile.piece);
         }
 
-        private _updateCurrentTeam(destinationTile: IPieceLocation): boolean {
+        private _updateCurrentTeam(destinationTile: Pieces.IPieceLocation): boolean {
             if (destinationTile !== this._currentOriginTile) {
                 var currentTeamIndex = this._teams.indexOf(this.currentTeam);
                 ++currentTeamIndex;

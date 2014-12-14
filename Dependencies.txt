@@ -1,0 +1,4 @@
+Root -> Boards
+Root -> Status -> Boards -> Pieces
+Root -> Teams -> Pieces
+Status -> Teams

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export class PieceMovement {
         private _moveResult: boolean;

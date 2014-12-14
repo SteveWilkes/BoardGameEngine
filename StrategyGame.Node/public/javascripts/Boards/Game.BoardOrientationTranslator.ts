@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
 
     export class BoardOrientationTranslator {
         private _focusPosition: BoardPosition;

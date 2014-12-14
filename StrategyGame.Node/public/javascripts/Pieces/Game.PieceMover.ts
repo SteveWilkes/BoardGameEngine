@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export module PieceMover {
 
@@ -30,7 +30,7 @@
             }
         }
 
-        export function create(tilesByCoordinates: AgileObjects.TypeScript.IStringDictionary<BoardTile>, events: EventSet): void {
+        export function create(tilesByCoordinates: TypeScript.IStringDictionary<IPieceLocation>, events: EventSet): void {
             // ReSharper disable once WrongExpressionStatement
             new Implementation(tilesByCoordinates, events);
         }

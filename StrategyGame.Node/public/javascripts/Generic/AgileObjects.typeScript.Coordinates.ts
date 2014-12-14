@@ -1,4 +1,8 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.TypeScript {
+
+    function getSignature(row: number, column: number): string {
+        return row + "x" + column;
+    }
 
     export class Coordinates {
         constructor(public row: number, public column: number, public signature: string = getSignature(row, column)) {
@@ -43,7 +47,7 @@
     }
 
     export class CoordinatesRegistry {
-        private _coordinates: AgileObjects.TypeScript.IStringDictionary<Coordinates>;
+        private _coordinates: TypeScript.IStringDictionary<Coordinates>;
 
         constructor() {
             this._coordinates = {};
@@ -51,16 +55,12 @@
 
         public get(row: number, column: number): Coordinates {
             var signature = getSignature(row, column);
-            var coorindates = this._coordinates[signature];
-            if (coorindates === undefined) {
-                coorindates = this._coordinates[signature] = new Coordinates(row, column, signature);
+            var coordinates = this._coordinates[signature];
+            if (coordinates === undefined) {
+                coordinates = this._coordinates[signature] = new Coordinates(row, column, signature);
             }
-            return coorindates;
+            return coordinates;
         }
-    }
-
-    function getSignature(row: number, column: number): string {
-        return row + "x" + column;
     }
 
     export var coordinatesRegistry = new CoordinatesRegistry();

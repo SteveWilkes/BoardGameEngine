@@ -65,8 +65,7 @@
     <TypeScriptCompile Include="public\javascripts\Status\Game.IGameAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\Game.PieceMoveAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceDestinationFilter.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Game.Coordinates.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPiece.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceDropHandler.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.IPieceMovementProfile.ts" />
@@ -75,7 +74,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMover.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\Game.Status.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\Game.StatusData.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.BoardTileConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.Team.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.TeamStartingFormation.ts" />

@@ -1,4 +1,14 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
+
+    export interface IPiece {
+        id: string;
+        definitionId: string;
+        imageSource: string;
+        location: IPieceLocation;
+        attachedPiece: IPiece;
+        movementProfile: IPieceMovementProfile;
+        pieceDropHandler: IPieceDropHandler;
+    }
 
     export class Piece implements IPiece {
 

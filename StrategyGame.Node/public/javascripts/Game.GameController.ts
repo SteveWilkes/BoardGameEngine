@@ -1,8 +1,9 @@
 ﻿module AgileObjects.StrategyGame.Game {
+    import Boards = StrategyGame.Game.Boards;
 
     class GameController {
         constructor($gameFactory: IGameFactory, $scope: IGameScope) {
-            $scope.game = $gameFactory.createNewGame(boardTypeRegistry.diamond);
+            $scope.game = $gameFactory.createNewGame(Boards.boardTypeRegistry.diamond);
         }
     }
 

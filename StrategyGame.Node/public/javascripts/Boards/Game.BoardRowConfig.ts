@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
 
     var placeholderTile = <BoardTile>{ isGameTile: false };
 
@@ -13,7 +13,7 @@
                     row.push(placeholderTile);
                     continue;
                 }
-                var coordinates = coordinatesRegistry.get(rowNumber, columnNumber);
+                var coordinates = TypeScript.coordinatesRegistry.get(rowNumber, columnNumber);
                 var tile = new BoardTile(coordinates);
                 row.push(tile);
             }

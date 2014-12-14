@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
         createPiece(pieceDefinitionId: string): IPiece;

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceDestinationFilter {
         filter(movingPiece: IPiece, possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation>;

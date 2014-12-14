@@ -1,11 +1,11 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
 
     export class BoardPosition {
         private _gridSize: number;
 
         constructor(
             public name: string,
-            private _coordinateTranslator: (coordinates: Coordinates, gridSize: number) => Coordinates,
+            private _coordinateTranslator: (coordinates: TypeScript.Coordinates, gridSize: number) => TypeScript.Coordinates,
             public isFocusPosition: boolean = false) {
         }
 
@@ -13,7 +13,7 @@
             this._gridSize = gridSize;
         }
 
-        public translate(coordinates: Coordinates): Coordinates {
+        public translate(coordinates: TypeScript.Coordinates): TypeScript.Coordinates {
             return this._coordinateTranslator(coordinates, this._gridSize);
         }
     }

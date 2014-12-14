@@ -1,12 +1,13 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Game.Boards {
+    import Pieces = StrategyGame.Game.Pieces;
 
-    export class BoardTile implements IPieceLocation {
-        constructor(public coordinates: Coordinates) {
+    export class BoardTile implements Pieces.IPieceLocation {
+        constructor(public coordinates: TypeScript.Coordinates) {
             this.isDark = (coordinates.isEvenRow && coordinates.isEvenColumn) || (!coordinates.isEvenRow && !coordinates.isEvenColumn);
         }
 
         public isGameTile = true;
-        public piece: IPiece;
+        public piece: Pieces.IPiece;
         public isDark: boolean;
         public isPotentialDestination: boolean;
 
@@ -14,7 +15,7 @@
             return this.piece !== undefined;
         }
 
-        public add(piece: IPiece): void {
+        public add(piece: Pieces.IPiece): void {
             if (this.isOccupied()) {
                 this.piece.pieceDropHandler.handleDrop(piece);
             } else {
@@ -23,12 +24,12 @@
             }
         }
 
-        public replacePieceWith(newPiece: IPiece): void {
+        public replacePieceWith(newPiece: Pieces.IPiece): void {
             this.clear();
             this.piece = newPiece;
         }
 
-        public movePieceTo(destination: IPieceLocation): void {
+        public movePieceTo(destination: Pieces.IPieceLocation): void {
             var piece = this.piece;
             this.clear();
 
