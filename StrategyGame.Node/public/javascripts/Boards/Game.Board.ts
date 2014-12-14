@@ -29,14 +29,14 @@
         private _positionTeams(): void {
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
             for (var i = 0; i < this._teams.length; i++) {
-                var startingFormation = this._teams[i].startingFormation;
+                var pieceLocations = this._teams[i].initialPieceLocations;
                 var position = this.type.getNextBoardPosition(i, this._teams.length);
                 this._boardPositionsByTeam.add(this._teams[i], position);
-                for (var j = 0; j < startingFormation.tileConfigs.length; j++) {
-                    var tileConfig = startingFormation.tileConfigs[j];
-                    var translatedCoordinates = position.translate(tileConfig.tileCoordinates);
+                for (var j = 0; j < pieceLocations.length; j++) {
+                    var pieceLocation = pieceLocations[j];
+                    var translatedCoordinates = position.translate(pieceLocation.tileCoordinates);
                     var tile = this._tilesByCoordinates[translatedCoordinates.signature];
-                    tile.add(tileConfig.piece);
+                    tile.add(pieceLocation.piece);
                 }
             }
         }

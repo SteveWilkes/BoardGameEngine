@@ -1,9 +1,8 @@
 ﻿module AgileObjects.StrategyGame.Game {
     import Boards = StrategyGame.Game.Boards;
-    import Pieces = StrategyGame.Game.Pieces;
+    import Players = StrategyGame.Game.Players;
     import Status = StrategyGame.Game.Status;
     import Teams = StrategyGame.Game.Teams;
-    import Ts = TypeScript;
 
     export interface IGameFactory {
         createNewGame(boardType: Boards.BoardType): Game;
@@ -12,8 +11,7 @@
     export var gameFactory = "$gameFactory";
 
     class GameFactory implements IGameFactory {
-        constructor(private _$window: ng.IWindowService, private _$pieceFactory: Pieces.IPieceFactory) {
-        }
+        constructor(private _$window: ng.IWindowService, private _$teamFactory: Teams.ITeamFactory) { }
 
         public createNewGame(boardType: Boards.BoardType): Game {
             var events = new EventSet();
@@ -22,33 +20,11 @@
             var container = new Boards.BoardDisplayDataService(this._$window);
             var sizeManager = new Boards.BoardDisplayManager(boardSizeDefaults, container, events);
 
-            var team1TileConfigs = [
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 4), this._$pieceFactory.createPiece("2")), // row 2
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 5), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 6), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")), // row 3
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 4), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 5), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
+            var player1 = new Players.HumanPlayer("Human", true);
+            var team1 = this._$teamFactory.createTeam(player1, boardType.id);
 
-            var team1StartingFormation = new Teams.TeamStartingFormation(team1TileConfigs);
-            var team1 = new Teams.Team("Team 1", team1StartingFormation, true);
-
-            var team2TileConfigs = [
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(1, 5), this._$pieceFactory.createPiece("1")), // bomb
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 4), this._$pieceFactory.createPiece("2")), // row 2
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 5), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(2, 6), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 3), this._$pieceFactory.createPiece("2")), // row 3
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 4), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 5), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 6), this._$pieceFactory.createPiece("2")),
-                new Teams.BoardTileConfig(Ts.coordinatesRegistry.get(3, 7), this._$pieceFactory.createPiece("2"))];
-
-            var team2StartingFormation = new Teams.TeamStartingFormation(team2TileConfigs);
-            var team2 = new Teams.Team("Team 2", team2StartingFormation, false);
+            var player2 = new Players.AiPlayer("CPU");
+            var team2 = this._$teamFactory.createTeam(player2, boardType.id);
 
             var teams = [team1, team2];
 
@@ -64,5 +40,5 @@
 
     angular
         .module(strategyGameApp)
-        .service(gameFactory, ["$window", Pieces.pieceFactory, GameFactory]);
+        .service(gameFactory, ["$window", Teams.teamFactory, GameFactory]);
 } 

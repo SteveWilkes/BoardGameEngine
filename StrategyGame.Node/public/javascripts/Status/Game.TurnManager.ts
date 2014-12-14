@@ -11,6 +11,7 @@
             private _teams: Array<Teams.Team>,
             startingTeamIndex: number,
             events: EventSet) {
+
             events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
             events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
 
@@ -24,7 +25,7 @@
         private _validatePieceIsMoveable(originTile: Pieces.IPieceLocation): boolean {
             this._currentOriginTile = originTile;
 
-            return this.currentTeam.isLocal && this.currentTeam.owns(originTile.piece);
+            return this.currentTeam.player.isLocal && this.currentTeam.owns(originTile.piece);
         }
 
         private _updateCurrentTeam(destinationTile: Pieces.IPieceLocation): boolean {
@@ -35,6 +36,7 @@
                     currentTeamIndex = 0;
                 }
                 this.setCurrentTeam(currentTeamIndex);
+                this.currentTeam.player.takeTurn();
             }
             return true;
         }

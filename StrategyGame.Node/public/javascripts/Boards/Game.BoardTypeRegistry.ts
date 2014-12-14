@@ -3,6 +3,7 @@
 
     export class BoardTypeRegistry {
         public diamond = new BoardType(
+            "1",
             [
                 new BoardPosition("North", (c: Ts.Coordinates) => c),
                 new BoardPosition("East", (c: Ts.Coordinates) => c),

@@ -1,4 +1,4 @@
-Root -> Boards
+Root -> Boards -> Teams
 Root -> Status -> Boards -> Pieces
 Root -> Teams -> Pieces
 Status -> Teams

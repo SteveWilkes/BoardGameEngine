@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="public\javascripts\Game.Game.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.GameFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\Game.TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
@@ -75,9 +76,9 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceMover.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\Game.StatusData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Teams\Game.BoardTileConfig.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceLocationConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.Team.ts" />
-    <TypeScriptCompile Include="public\javascripts\Teams\Game.TeamStartingFormation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.App.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
@@ -106,6 +107,7 @@
     <Folder Include="public\javascripts\Boards\" />
     <Folder Include="public\javascripts\Directives\" />
     <Folder Include="public\javascripts\Generic\" />
+    <Folder Include="public\javascripts\Players\" />
     <Folder Include="public\javascripts\Status\" />
     <Folder Include="public\javascripts\Pieces\" />
     <Folder Include="public\javascripts\Teams\" />
