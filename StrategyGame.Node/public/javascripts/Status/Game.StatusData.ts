@@ -5,7 +5,7 @@
         }
 
         public whosTurn(): string {
-            if (this._turnManager.currentTeam.player.isLocal) {
+            if (this._turnManager.currentTeam.owner.isLocal) {
                 return "Your turn!";
             }
 

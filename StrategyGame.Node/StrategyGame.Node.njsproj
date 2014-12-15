@@ -78,6 +78,7 @@
     <TypeScriptCompile Include="public\javascripts\Status\Game.StatusData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Game.PieceLocationConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Game.Team.ts" />
+    <TypeScriptCompile Include="public\javascripts\Teams\ITeamOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.App.ts" />

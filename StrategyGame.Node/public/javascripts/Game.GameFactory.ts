@@ -23,7 +23,7 @@
             var player1 = new Players.HumanPlayer("Human", true);
             var team1 = this._$teamFactory.createTeam(player1, boardType.id);
 
-            var player2 = new Players.AiPlayer("CPU");
+            var player2 = new Players.AiPlayerProxy("CPU", events);
             var team2 = this._$teamFactory.createTeam(player2, boardType.id);
 
             var teams = [team1, team2];

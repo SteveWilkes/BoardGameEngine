@@ -9,7 +9,7 @@
         constructor(public type: BoardType, private _teams: Array<Teams.Team>, events: EventSet) {
             this._createTiles();
             this._positionTeams();
-            Pieces.PieceMover.create(this._tilesByCoordinates, events);
+            Pieces.PieceMover.create(events);
         }
 
         private _createTiles(): void {
@@ -22,6 +22,16 @@
                     if (tile.isGameTile) {
                         this._tilesByCoordinates[tile.coordinates.signature] = tile;
                     }
+                }
+            }
+
+            this._registerTiles();
+        }
+
+        private _registerTiles(): void {
+            for (var i = 0; i < this._teams.length; i++) {
+                for (var j = 0; j < this._teams[i].pieces.length; j++) {
+                    this._teams[i].pieces[j].movementProfile.setLocations(this._tilesByCoordinates);
                 }
             }
         }

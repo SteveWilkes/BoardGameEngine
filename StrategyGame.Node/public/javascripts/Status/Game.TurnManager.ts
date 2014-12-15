@@ -25,7 +25,7 @@
         private _validatePieceIsMoveable(originTile: Pieces.IPieceLocation): boolean {
             this._currentOriginTile = originTile;
 
-            return this.currentTeam.player.isLocal && this.currentTeam.owns(originTile.piece);
+            return this.currentTeam.owner.isLocal && this.currentTeam.owns(originTile.piece);
         }
 
         private _updateCurrentTeam(destinationTile: Pieces.IPieceLocation): boolean {
@@ -36,7 +36,7 @@
                     currentTeamIndex = 0;
                 }
                 this.setCurrentTeam(currentTeamIndex);
-                this.currentTeam.player.takeTurn();
+                this.currentTeam.owner.takeTurn();
             }
             return true;
         }

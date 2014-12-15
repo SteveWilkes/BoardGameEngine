@@ -5,14 +5,14 @@
         class Implementation {
             private _currentPieceMovement: PieceMovement;
 
-            constructor(private _locationsByCoordinates: IPieceLocationDictionary, events: EventSet) {
-                events.pieceSelected.subscribe((tile: IPieceLocation) => this._pieceSelected(tile));
-                events.pieceMoved.subscribe((tile: IPieceLocation) => this._pieceMoved(tile));
+            constructor(events: EventSet) {
+                events.pieceSelected.subscribe((origin: IPieceLocation) => this._pieceSelected(origin));
+                events.pieceMoved.subscribe((destination: IPieceLocation) => this._pieceMoved(destination));
                 events.pieceDeselected.subscribe(() => this._pieceDeselected());
             }
 
             private _pieceSelected(origin: IPieceLocation): boolean {
-                var validDestinations = origin.piece.movementProfile.getValidDestinations(origin, this._locationsByCoordinates);
+                var validDestinations = origin.piece.movementProfile.getValidDestinations(origin);
                 this._currentPieceMovement = new PieceMovement(origin, validDestinations);
 
                 return true;
@@ -30,9 +30,9 @@
             }
         }
 
-        export function create(tilesByCoordinates: TypeScript.IStringDictionary<IPieceLocation>, events: EventSet): void {
+        export function create(events: EventSet): void {
             // ReSharper disable once WrongExpressionStatement
-            new Implementation(tilesByCoordinates, events);
+            new Implementation(events);
         }
     }
 }

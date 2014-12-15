@@ -21,12 +21,15 @@
             } else {
                 this.piece = piece;
                 piece.location = this;
+                if (piece.attachedPiece !== undefined) {
+                    piece.attachedPiece.location = this;
+                }
             }
         }
 
         public replacePieceWith(newPiece: Pieces.IPiece): void {
             this.clear();
-            this.piece = newPiece;
+            this.add(newPiece);
         }
 
         public movePieceTo(destination: Pieces.IPieceLocation): void {

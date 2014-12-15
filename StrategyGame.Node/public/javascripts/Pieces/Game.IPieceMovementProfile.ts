@@ -1,10 +1,17 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceMovementProfile {
-        getValidDestinations(origin: IPieceLocation, allLocations: IPieceLocationDictionary): Array<IPieceLocation>;
+        setLocations(locations: IPieceLocationDictionary): void;
+        getValidDestinations(origin: IPieceLocation): Array<IPieceLocation>;
     }
 
     export class OnlyValidDestinationsMovementProfile {
+        protected locations: IPieceLocationDictionary;
+
+        public setLocations(locations: IPieceLocationDictionary): void {
+            this.locations = locations;
+        }
+
         protected filterToOnlyValid(possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation> {
             var validDestinations = new Array<IPieceLocation>();
             for (var i = 0; i < possibleDestinations.length; i++) {
@@ -24,16 +31,16 @@
             super();
         }
 
-        public getValidDestinations(origin: IPieceLocation, allLocations: IPieceLocationDictionary): Array<IPieceLocation> {
+        public getValidDestinations(origin: IPieceLocation): Array<IPieceLocation> {
             var destinations = this.filterToOnlyValid([
-                allLocations[origin.coordinates.left(this._allowedDistance).signature],
-                allLocations[origin.coordinates.upLeft(this._allowedDistance).signature],
-                allLocations[origin.coordinates.up(this._allowedDistance).signature],
-                allLocations[origin.coordinates.upRight(this._allowedDistance).signature],
-                allLocations[origin.coordinates.right(this._allowedDistance).signature],
-                allLocations[origin.coordinates.downRight(this._allowedDistance).signature],
-                allLocations[origin.coordinates.down(this._allowedDistance).signature],
-                allLocations[origin.coordinates.downLeft(this._allowedDistance).signature]
+                this.locations[origin.coordinates.left(this._allowedDistance).signature],
+                this.locations[origin.coordinates.upLeft(this._allowedDistance).signature],
+                this.locations[origin.coordinates.up(this._allowedDistance).signature],
+                this.locations[origin.coordinates.upRight(this._allowedDistance).signature],
+                this.locations[origin.coordinates.right(this._allowedDistance).signature],
+                this.locations[origin.coordinates.downRight(this._allowedDistance).signature],
+                this.locations[origin.coordinates.down(this._allowedDistance).signature],
+                this.locations[origin.coordinates.downLeft(this._allowedDistance).signature]
             ]);
             for (var i = 0; i < this._movementFilters.length; i++) {
                 destinations = this._movementFilters[i].filter(origin.piece, destinations);

@@ -26,6 +26,7 @@
 
         public handleDrop(droppedPiece: IPiece): void {
             this.targetPiece.attachedPiece = droppedPiece;
+            droppedPiece.location = this.targetPiece.location;
         }
     }
 
