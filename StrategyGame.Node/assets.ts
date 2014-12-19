@@ -23,11 +23,14 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardOrientationTranslator.js");
     assets.addJs("/public/javascripts/Boards/BoardType.js");
     assets.addJs("/public/javascripts/Boards/BoardTypeRegistry.js");
-    assets.addJs("/public/javascripts/EventSet.js");
     assets.addJs("/public/javascripts/Pieces/PieceMovement.js");
-    assets.addJs("/public/javascripts/Status/TurnManager.js");
-    assets.addJs("/public/javascripts/Status/StatusData.js");
+    assets.addJs("/public/javascripts/EventSet.js");
+    assets.addJs("/public/javascripts/Pieces/PieceMovementTracker.js");
     assets.addJs("/public/javascripts/Pieces/PieceMover.js");
+    assets.addJs("/public/javascripts/Status/TurnManager.js");
+    assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
+    assets.addJs("/public/javascripts/Status/History.js");
+    assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Pieces/IPieceDestinationFilter.js");
     assets.addJs("/public/javascripts/Pieces/IPieceMovementProfile.js");
     assets.addJs("/public/javascripts/Pieces/IPieceDropHandler.js");

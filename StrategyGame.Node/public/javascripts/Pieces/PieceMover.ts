@@ -3,7 +3,7 @@
     export module PieceMover {
 
         class Implementation {
-            private _currentPieceMovement: PieceMovement;
+            private _currentPieceMovement: PieceMovementTracker;
 
             constructor(events: EventSet) {
                 events.pieceSelected.subscribe((origin: IPieceLocation) => this._pieceSelected(origin));
@@ -12,7 +12,7 @@
 
             private _pieceSelected(origin: IPieceLocation): boolean {
                 var validDestinations = origin.piece.movementProfile.getValidDestinations(origin);
-                this._currentPieceMovement = new PieceMovement(origin, validDestinations);
+                this._currentPieceMovement = new PieceMovementTracker(origin, validDestinations);
 
                 return true;
             }

@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
@@ -73,7 +74,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Piece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementTracker.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMover.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\StatusData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationConfig.ts" />

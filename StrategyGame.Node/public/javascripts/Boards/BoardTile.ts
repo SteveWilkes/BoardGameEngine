@@ -29,9 +29,10 @@
 
         public replacePieceWith(newPiece: Pieces.IPiece): void {
             this.clear();
+            var originalPieceLocation = newPiece.location;
             this.add(newPiece);
 
-            this._events.pieceMoved.publish(this);
+            this._events.pieceMoved.publish(new Pieces.PieceMovement(originalPieceLocation, this));
         }
 
         public movePieceTo(destination: Pieces.IPieceLocation): void {
@@ -40,7 +41,7 @@
 
             destination.add(piece);
 
-            this._events.pieceMoved.publish(destination);
+            this._events.pieceMoved.publish(new Pieces.PieceMovement(this, destination));
         }
 
         public clear(): void {

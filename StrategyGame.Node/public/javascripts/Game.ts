@@ -1,6 +1,4 @@
 ﻿module AgileObjects.StrategyGame.Game {
-    import Boards = StrategyGame.Game.Boards;
-    import Status = StrategyGame.Game.Status;
 
     export class Game {
         constructor(
@@ -9,7 +7,7 @@
             turnManager: Status.TurnManager,
             public events: EventSet) {
 
-            this.status = new Status.StatusData(turnManager);
+            this.status = new Status.StatusData(turnManager, this.events);
             this.sizeManager.resize(this.board);
         }
 
