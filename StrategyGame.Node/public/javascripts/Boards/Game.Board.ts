@@ -7,13 +7,13 @@
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
         constructor(public type: BoardType, private _teams: Array<Teams.Team>, events: EventSet) {
-            this._createTiles();
+            this._createTiles(events);
             this._positionTeams();
             Pieces.PieceMover.create(events);
         }
 
-        private _createTiles(): void {
-            this.rows = this.type.createRows();
+        private _createTiles(events: EventSet): void {
+            this.rows = this.type.createRows(events);
             this._tilesByCoordinates = {};
             for (var rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
                 var row = this.rows[rowIndex];

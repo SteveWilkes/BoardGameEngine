@@ -7,8 +7,7 @@
 
             constructor(events: EventSet) {
                 events.pieceSelected.subscribe((origin: IPieceLocation) => this._pieceSelected(origin));
-                events.pieceMoved.subscribe((destination: IPieceLocation) => this._pieceMoved(destination));
-                events.pieceDeselected.subscribe(() => this._pieceDeselected());
+                events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
             private _pieceSelected(origin: IPieceLocation): boolean {
@@ -18,13 +17,10 @@
                 return true;
             }
 
-            private _pieceMoved(destination: IPieceLocation): boolean {
-                return this._currentPieceMovement.complete(destination);
-            }
-
-            private _pieceDeselected(): boolean {
+            private _pieceDeselected(location: IPieceLocation): boolean {
                 if (this._currentPieceMovement !== undefined) {
-                    this._currentPieceMovement.cancel();
+                    this._currentPieceMovement.complete(location);
+                    this._currentPieceMovement = undefined;
                 }
                 return true;
             }

@@ -12,7 +12,7 @@
             startingTeamIndex: number,
             events: EventSet) {
 
-            events.pieceMoving.subscribe(originTile => this._validatePieceIsMoveable(originTile));
+            events.pieceMoving.subscribe(originTile => this._validatePieceIsFromCurrentTeam(originTile));
             events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
 
             this.setCurrentTeam(startingTeamIndex);
@@ -22,7 +22,7 @@
 
         public currentTeam: Teams.Team;
 
-        private _validatePieceIsMoveable(originTile: Pieces.IPieceLocation): boolean {
+        private _validatePieceIsFromCurrentTeam(originTile: Pieces.IPieceLocation): boolean {
             this._currentOriginTile = originTile;
 
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(originTile.piece);

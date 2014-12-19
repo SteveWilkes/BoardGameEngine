@@ -38,7 +38,6 @@
             var pieceDestinationIndex = Math.floor(Math.random() * (pieceDestinations.length - 1));
             var pieceDestination = pieceDestinations[pieceDestinationIndex];
             pieceToMove.location.movePieceTo(pieceDestination);
-            this._events.pieceMoved.publish(pieceDestination);
         }
     }
 

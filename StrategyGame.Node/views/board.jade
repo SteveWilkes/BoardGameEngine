@@ -12,16 +12,16 @@ block board
                   data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'light-tile': !tile.isDark, 'board-destination-tile': tile.isPotentialDestination }")
                     .max-size(
                       data-ng-if="tile.isGameTile"
-                      data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceMoved'")
+                      data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceDeselected'")
                     img.piece(
                       id="{{tile.piece.id}}"
                       data-ng-if="tile.isOccupied()"
                       data-draggabledroppable data-subject="game.events" data-item="tile"
                       data-dragselect="'pieceSelected'"
                       data-dragstart="'pieceMoving'"
-                      data-dragend="'pieceMoved'"
+                      data-dragend="'pieceDeselected'"
                       data-dragdeselect="'pieceDeselected'"
-                      data-drop="'pieceMoved'"
+                      data-drop="'pieceDeselected'"
                       data-ng-src="{{tile.piece.imageSource}}"
                       data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")
                     img.attachedPiece(
@@ -30,7 +30,7 @@ block board
                       data-draggable data-subject="game.events" data-item="tile"
                       data-dragselect="'pieceSelected'"
                       data-dragstart="'pieceMoving'"
-                      data-dragend="'pieceMoved'"
+                      data-dragend="'pieceDeselected'"
                       data-dragdeselect="'pieceDeselected'"
                       data-ng-src="{{tile.piece.attachedPiece.imageSource}}"
                       data-ng-style="{ width: game.sizeManager.pieceWidth, height: game.sizeManager.pieceHeight }")

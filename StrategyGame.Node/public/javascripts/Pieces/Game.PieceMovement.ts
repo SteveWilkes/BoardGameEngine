@@ -7,20 +7,16 @@
             this._setDestinationStates(true);
         }
 
-        public cancel(): void {
-            this._setDestinationStates(false);
-        }
-
-        public complete(destination: IPieceLocation): boolean {
+        public complete(location: IPieceLocation): boolean {
             if (this._moveResult !== undefined) { return this._moveResult; }
 
             this._moveResult = false;
 
-            if (destination === this._origin) {
+            if (location === this._origin) {
                 this._moveResult = true;
             }
-            else if (this._validDestinations.indexOf(destination) > -1) {
-                this._origin.movePieceTo(destination);
+            else if (this._validDestinations.indexOf(location) > -1) {
+                this._origin.movePieceTo(location);
                 this._moveResult = true;
             }
 

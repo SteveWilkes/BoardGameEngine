@@ -2,7 +2,7 @@
     import Pieces = StrategyGame.Game.Pieces;
 
     export class BoardTile implements Pieces.IPieceLocation {
-        constructor(public coordinates: TypeScript.Coordinates) {
+        constructor(public coordinates: TypeScript.Coordinates, private _events: EventSet) {
             this.isDark = (coordinates.isEvenRow && coordinates.isEvenColumn) || (!coordinates.isEvenRow && !coordinates.isEvenColumn);
         }
 
@@ -30,6 +30,8 @@
         public replacePieceWith(newPiece: Pieces.IPiece): void {
             this.clear();
             this.add(newPiece);
+
+            this._events.pieceMoved.publish(this);
         }
 
         public movePieceTo(destination: Pieces.IPieceLocation): void {
@@ -37,6 +39,8 @@
             this.clear();
 
             destination.add(piece);
+
+            this._events.pieceMoved.publish(destination);
         }
 
         public clear(): void {
