@@ -13,7 +13,7 @@
             events: EventSet) {
 
             events.pieceMoving.subscribe(originTile => this._validatePieceIsFromCurrentTeam(originTile));
-            events.pieceMoved.subscribe(destinationTile => this._updateCurrentTeam(destinationTile));
+            events.pieceMoved.subscribe(destinationTile => this._handlePieceMovement(destinationTile));
 
             this.setCurrentTeam(startingTeamIndex);
 
@@ -28,7 +28,7 @@
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(originTile.piece);
         }
 
-        private _updateCurrentTeam(destinationTile: Pieces.IPieceLocation): boolean {
+        private _handlePieceMovement(destinationTile: Pieces.IPieceLocation): boolean {
             if (destinationTile !== this._currentOriginTile) {
                 var currentTeamIndex = this._teams.indexOf(this.currentTeam);
                 ++currentTeamIndex;
