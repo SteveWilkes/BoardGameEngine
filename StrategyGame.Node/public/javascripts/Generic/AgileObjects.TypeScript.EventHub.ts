@@ -1,5 +1,4 @@
-﻿
-module AgileObjects.TypeScript {
+﻿module AgileObjects.TypeScript {
 
     export class EventHub<TData> {
         private _subscribers: Array<(eventData: TData) => boolean>;

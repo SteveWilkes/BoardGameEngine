@@ -9,7 +9,7 @@ block content
             h3(data-ng-bind="game.status.whosTurn()") Initialising...
         .body
             h4 Game History
-            .body-content
+            .body-content(data-scrolltobottom)
                 .history
                     div(data-ng-hide="game.status.history.actions.length")
                         span.no-moves [No moves yet]

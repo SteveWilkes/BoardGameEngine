@@ -11,14 +11,14 @@
     export var gameFactory = "$gameFactory";
 
     class GameFactory implements IGameFactory {
-        constructor(private _$window: ng.IWindowService, private _$teamFactory: Teams.ITeamFactory) { }
+        constructor(private _$windowService: ng.IWindowService, private _$teamFactory: Teams.ITeamFactory) { }
 
         public createNewGame(boardType: Boards.BoardType): Game {
             var events = new EventSet();
 
             var boardSizeDefaults = new Boards.BoardSizeDefaults(950, 50, 80, 2);
-            var container = new Boards.BoardDisplayDataService(this._$window);
-            var sizeManager = new Boards.BoardDisplayManager(boardSizeDefaults, container, events);
+            var displayDataService = new Boards.BoardDisplayDataService(this._$windowService);
+            var displayManager = new Boards.BoardDisplayManager(boardSizeDefaults, displayDataService, events);
 
             var player1 = new Players.HumanPlayer("Human", true);
             var team1 = this._$teamFactory.createTeam(player1, boardType.id);
@@ -32,7 +32,7 @@
 
             var turnManager = new Status.TurnManager(board, teams, 0, events);
 
-            var game = new Game(sizeManager, board, turnManager, events);
+            var game = new Game(displayManager, board, turnManager, events);
 
             return game;
         }

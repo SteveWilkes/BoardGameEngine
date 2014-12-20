@@ -4,8 +4,7 @@
     var rotationRadiansIndex = 6;
 
     export class BoardDisplayDataService {
-        constructor(private _$windowService: ng.IWindowService) {
-        }
+        constructor(private _$windowService: ng.IWindowService) { }
 
         public getData(): BoardDisplayData {
             var containerSize = Math.min(this._$windowService.innerWidth, this._$windowService.innerHeight);

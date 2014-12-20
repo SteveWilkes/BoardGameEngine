@@ -8,7 +8,7 @@
         game: Game;
     }
 
-    Angular.Directives.addRemoveClass(game);
+    Angular.Directives.addScrollToBottom(game);
     Angular.Directives.addSizeToContainer(game);
     Angular.Directives.addDraggable(game);
     Angular.Directives.addDroppable(game);
