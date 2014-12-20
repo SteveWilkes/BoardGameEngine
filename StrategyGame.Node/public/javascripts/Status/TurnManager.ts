@@ -10,7 +10,7 @@
             events: EventSet) {
 
             events.pieceMoving.subscribe(origin => this._validatePieceIsFromCurrentTeam(origin));
-            events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement.destination));
+            events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
 
             this.setCurrentTeam(startingTeamIndex);
 
@@ -25,15 +25,16 @@
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(origin.piece);
         }
 
-        private _handlePieceMovement(destination: Pieces.IPieceLocation): boolean {
-            if (destination !== this._currentOrigin) {
+        private _handlePieceMovement(movement: Pieces.PieceMovement): boolean {
+            if (movement.destination !== this._currentOrigin) {
                 var currentTeamIndex = this._teams.indexOf(this.currentTeam);
                 ++currentTeamIndex;
                 if (currentTeamIndex === this._teams.length) {
                     currentTeamIndex = 0;
                 }
                 this.setCurrentTeam(currentTeamIndex);
-                this.currentTeam.owner.takeTurn();
+
+                movement.whenEventCompletes(() => this.currentTeam.owner.takeTurn());
             }
             return true;
         }

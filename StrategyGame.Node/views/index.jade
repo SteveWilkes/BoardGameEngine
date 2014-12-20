@@ -5,5 +5,12 @@ block content
     block board
 
     #game-status
-        .heading-bar
-          h3(data-ng-bind="game.status.whosTurn()")
+        .heading
+            h3(data-ng-bind="game.status.whosTurn()")
+        .body
+            h4 Game History
+            .body-content
+                .history
+                    div(data-ng-repeat="action in game.status.history.actions")
+                        span.history-item-number(data-ng-bind="($index + 1) + '. '")
+                        span(data-ng-bind="action.description")

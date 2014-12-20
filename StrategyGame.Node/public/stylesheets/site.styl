@@ -59,12 +59,38 @@ div#game-status
 	top 0
 	right 0
 	width 25%
+	color white
 
-.heading-bar
-	background-color #3A3145
-	padding .4em .5em
+	.heading, .body
+		background-color #3A3145
+		padding .4em .5em
 
-	h3
-		margin 0
-		color white
-		font bold 18pt Segoe UI Light, Calibri, sans-serif
+		h3, h4
+			margin 0
+			font bold 18pt Segoe UI Light, Calibri, sans-serif
+
+		h4
+			font bold 15pt Segoe UI Light, Calibri, sans-serif
+			margin 0 0 .2em .3em
+
+	.body
+		background-color #4E4658
+		padding .4em 0 .8em .5em
+		
+		.body-content
+			padding .2em 0
+			height 10em
+			overflow auto
+
+			.history
+				div
+					padding 0.2em .2em 0 .3em
+					overflow auto
+
+					span
+						float left
+
+					span.history-item-number
+						width 1.8em
+						text-align right
+						margin-right .2em
