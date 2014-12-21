@@ -33,7 +33,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/History.js");
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Pieces/IPieceDestinationFilter.js");
-    assets.addJs("/public/javascripts/Pieces/IPieceMovementProfile.js");
+    assets.addJs("/public/javascripts/Pieces/PieceMovementCalculator.js");
+    assets.addJs("/public/javascripts/Pieces/PieceMovementProfile.js");
     assets.addJs("/public/javascripts/Pieces/IPieceDropHandler.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");

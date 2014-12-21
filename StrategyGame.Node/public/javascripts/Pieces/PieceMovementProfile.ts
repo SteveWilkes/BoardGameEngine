@@ -1,18 +1,10 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export class PotentialMovementSegment {
-        constructor(private _directionFunctionName: string, private _distance: number) { }
-
-        public applyMovementSegment(startingPoint: TypeScript.Coordinates): TypeScript.Coordinates {
-            return startingPoint[this._directionFunctionName](this._distance);
-        }
-    }
-
     export class PieceMovementProfile {
         private _locations: IPieceLocationDictionary;
 
         constructor(
-            private _potentialDestinationFactories: Array<Array<PotentialMovementSegment>>,
+            private _potentialDestinationCalculators: Array<Array<PieceMovementCalculator>>,
             private _destinationFilters: Array<IPieceDestinationFilter>) {
         }
 
@@ -30,11 +22,11 @@
 
         private _getDestinations(origin: IPieceLocation): Array<IPieceLocation> {
             var destinations = new Array<IPieceLocation>();
-            for (var i = 0; i < this._potentialDestinationFactories.length; i++) {
-                var potentialDestinationFactory = this._potentialDestinationFactories[i];
+            for (var i = 0; i < this._potentialDestinationCalculators.length; i++) {
+                var potentialDestinationCalculator = this._potentialDestinationCalculators[i];
                 var destinationCoordinates = origin.coordinates;
-                for (var j = 0; j < potentialDestinationFactory.length; j++) {
-                    destinationCoordinates = potentialDestinationFactory[j].applyMovementSegment(destinationCoordinates);
+                for (var j = 0; j < potentialDestinationCalculator.length; j++) {
+                    destinationCoordinates = potentialDestinationCalculator[j].applyMovement(destinationCoordinates);
                 }
                 var destination = this._locations[destinationCoordinates.signature];
                 if (destination !== undefined) {

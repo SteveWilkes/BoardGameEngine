@@ -7,14 +7,14 @@
     export var pieceFactory = "$pieceFactory";
 
     var anyDirectionOneSpaceDestinationFactories = [
-        [new PotentialMovementSegment("up", 1)],
-        [new PotentialMovementSegment("upRight", 1)],
-        [new PotentialMovementSegment("right", 1)],
-        [new PotentialMovementSegment("downRight", 1)],
-        [new PotentialMovementSegment("down", 1)],
-        [new PotentialMovementSegment("downLeft", 1)],
-        [new PotentialMovementSegment("left", 1)],
-        [new PotentialMovementSegment("upLeft", 1)]
+        [new PieceMovementCalculator("up", 1)],
+        [new PieceMovementCalculator("upRight", 1)],
+        [new PieceMovementCalculator("right", 1)],
+        [new PieceMovementCalculator("downRight", 1)],
+        [new PieceMovementCalculator("down", 1)],
+        [new PieceMovementCalculator("downLeft", 1)],
+        [new PieceMovementCalculator("left", 1)],
+        [new PieceMovementCalculator("upLeft", 1)]
     ];
 
     var anyOccupiedDirectionMovementProfile = new PieceMovementProfile(
