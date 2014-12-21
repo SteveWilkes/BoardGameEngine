@@ -1,21 +1,21 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceDropHandler {
-        setTarget(targetPiece: IPiece): void;
-        canDrop(droppingPiece: IPiece): boolean;
-        handleDrop(droppedPiece: IPiece): void;
+        setTarget(targetPiece: Piece): void;
+        canDrop(droppingPiece: Piece): boolean;
+        handleDrop(droppedPiece: Piece): void;
     }
 
     export class PieceDropHandlerBase {
-        protected targetPiece: IPiece;
+        protected targetPiece: Piece;
 
         constructor(private _droppablePieceDefinitionIds: Array<string>) { }
 
-        public setTarget(targetPiece: IPiece): void {
+        public setTarget(targetPiece: Piece): void {
             this.targetPiece = targetPiece;
         }
 
-        public canDrop(droppingPiece: IPiece): boolean {
+        public canDrop(droppingPiece: Piece): boolean {
             return this._droppablePieceDefinitionIds.indexOf(droppingPiece.definitionId) > -1;
         }
     }
@@ -24,7 +24,7 @@
         extends PieceDropHandlerBase
         implements IPieceDropHandler {
 
-        public handleDrop(droppedPiece: IPiece): void {
+        public handleDrop(droppedPiece: Piece): void {
             this.targetPiece.attachedPiece = droppedPiece;
             droppedPiece.location = this.targetPiece.location;
         }
@@ -34,7 +34,7 @@
         extends PieceDropHandlerBase
         implements IPieceDropHandler {
 
-        public handleDrop(droppedPiece: IPiece): void {
+        public handleDrop(droppedPiece: Piece): void {
             droppedPiece.attachedPiece = this.targetPiece;
             this.targetPiece.location.replacePieceWith(droppedPiece);
         }

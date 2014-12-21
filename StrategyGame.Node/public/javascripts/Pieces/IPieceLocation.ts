@@ -5,9 +5,9 @@
     export interface IPieceLocation {
         coordinates: TypeScript.Coordinates;
         isOccupied(): boolean;
-        add(piece: IPiece): void;
-        piece: IPiece;
-        replacePieceWith(newPiece: IPiece): void;
+        add(piece: Piece): void;
+        piece: Piece;
+        replacePieceWith(newPiece: Piece): void;
         movePieceTo(destination: IPieceLocation): void;
         isPotentialDestination: boolean;
     }

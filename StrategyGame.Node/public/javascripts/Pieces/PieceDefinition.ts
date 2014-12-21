@@ -10,7 +10,7 @@
             private _pieceDropHandlerFactory: () => IPieceDropHandler) {
         }
 
-        public createPiece(pieceId: string): IPiece {
+        public createPiece(pieceId: string): Piece {
             return new Piece(
                 pieceId,
                 this.id,

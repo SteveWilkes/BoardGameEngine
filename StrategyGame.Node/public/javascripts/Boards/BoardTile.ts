@@ -7,7 +7,7 @@
         }
 
         public isGameTile = true;
-        public piece: Pieces.IPiece;
+        public piece: Pieces.Piece;
         public isDark: boolean;
         public isPotentialDestination: boolean;
 
@@ -15,7 +15,7 @@
             return this.piece !== undefined;
         }
 
-        public add(piece: Pieces.IPiece): void {
+        public add(piece: Pieces.Piece): void {
             if (this.isOccupied()) {
                 this.piece.pieceDropHandler.handleDrop(piece);
             } else {
@@ -27,7 +27,7 @@
             }
         }
 
-        public replacePieceWith(newPiece: Pieces.IPiece): void {
+        public replacePieceWith(newPiece: Pieces.Piece): void {
             this.clear();
             this.add(newPiece);
         }

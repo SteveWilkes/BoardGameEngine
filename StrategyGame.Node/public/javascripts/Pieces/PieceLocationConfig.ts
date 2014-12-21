@@ -9,6 +9,6 @@
     }
 
     export class PieceLocationConfig {
-        constructor(public tileCoordinates: TypeScript.Coordinates, public piece: IPiece) { }
+        constructor(public tileCoordinates: TypeScript.Coordinates, public piece: Piece) { }
     }
 } 

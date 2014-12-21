@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string): IPiece;
+        createPiece(pieceDefinitionId: string): Piece;
     }
 
     export var pieceFactory = "$pieceFactory";
@@ -47,7 +47,7 @@
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string): IPiece {
+        public createPiece(definitionId: string): Piece {
             var pieceId = this._nextPieceId++;
             return this._definitions[definitionId].createPiece("piece-" + pieceId);
         }

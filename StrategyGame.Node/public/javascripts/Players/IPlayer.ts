@@ -24,7 +24,7 @@
         public isLocal: boolean;
 
         public takeTurn(): void {
-            var movablePieces = new TypeScript.Dictionary<Pieces.IPiece, Array<Pieces.IPieceLocation>>();
+            var movablePieces = new TypeScript.Dictionary<Pieces.Piece, Array<Pieces.IPieceLocation>>();
             for (var i = 0; i < this.Team.pieces.length; i++) {
                 var piece = this.Team.pieces[i];
                 var validPieceDestinations = piece.movementProfile.getValidDestinations(piece.location);

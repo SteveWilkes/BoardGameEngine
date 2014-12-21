@@ -1,11 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceDestinationFilter {
-        filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void;
+        filter(potentialDestinations: Array<IPieceLocation>, movingPiece: Piece): void;
     }
 
     export class OnlyDroppableLocationsPieceDestinationFilter implements IPieceDestinationFilter {
-        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void {
+        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: Piece): void {
             for (var i = (potentialDestinations.length - 1); i >= 0; i--) {
                 if (potentialDestinations[i].isOccupied() &&
                     !potentialDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
@@ -16,7 +16,7 @@
     }
 
     export class OnlyOccupiedLocationsPieceDestinationFilter implements IPieceDestinationFilter {
-        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void {
+        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: Piece): void {
             for (var i = (potentialDestinations.length - 1); i >= 0; i--) {
                 if (!potentialDestinations[i].isOccupied() ||
                     !potentialDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
