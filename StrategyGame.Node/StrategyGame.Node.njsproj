@@ -57,6 +57,7 @@
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />

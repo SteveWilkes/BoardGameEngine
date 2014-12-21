@@ -35,14 +35,7 @@
                         this.classList.add("drag");
                     } else if (e.preventDefault) {
                         e.preventDefault();
-                        if (typeof document.createEvent === "function") {
-                            var evt = document.createEvent("HTMLEvents");
-                            evt.initEvent("dragend", false, true);
-                            this.dispatchEvent(evt);
-                        } else {
-                            this.fireEvent("ondragend");
-                        }
-
+                        angular.element(this).raiseEvent("dragend");
                     }
                     return false;
                 },

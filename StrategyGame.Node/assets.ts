@@ -5,6 +5,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
 
     assets.addCss("/public/stylesheets/site.styl");
 
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
