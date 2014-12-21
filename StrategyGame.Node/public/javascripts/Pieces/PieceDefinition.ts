@@ -6,7 +6,7 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _movementProfile: RelatedLocationCalculator,
+            private _movementProfile: PieceMovementProfile,
             private _pieceDropHandlerFactory: () => IPieceDropHandler,
             private _attackProfile: PieceAttackProfile) {
         }

@@ -27,7 +27,7 @@
             var movablePieces = new TypeScript.Dictionary<Pieces.Piece, Array<Pieces.IPieceLocation>>();
             for (var i = 0; i < this.Team.pieces.length; i++) {
                 var piece = this.Team.pieces[i];
-                var validPieceDestinations = piece.movementProfile.calculateLocations(piece.location);
+                var validPieceDestinations = piece.movementProfile.getDestinations(piece.location);
                 if (validPieceDestinations.length > 0) {
                     movablePieces.add(piece, validPieceDestinations);
                 }

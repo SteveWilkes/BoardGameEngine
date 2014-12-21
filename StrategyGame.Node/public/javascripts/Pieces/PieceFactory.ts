@@ -17,18 +17,18 @@
         [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
-    var anyOccupiedDirectionMovementProfile = new RelatedLocationCalculator(
+    var anyOccupiedLocationCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new OnlyOccupiedLocationsValidator()]);
 
-    var anyDroppableDirectionMovementProfile = new RelatedLocationCalculator(
+    var anyDroppableLocationCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new OnlyDroppableLocationsValidator()]);
 
     var nullAttackProfile = new PieceAttackProfile([]);
 
     var examplePieceAttackProfile = new PieceAttackProfile(
-        [new PieceAttack(anyOccupiedDirectionMovementProfile, 10)]);
+        [new PieceAttack(anyOccupiedLocationCalculator, 10)]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -40,14 +40,14 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    anyOccupiedDirectionMovementProfile,
+                    new PieceMovementProfile([anyOccupiedLocationCalculator]),
                     () => new AttachTargetPieceToDroppedPieceDropHandler(["2"]),
                     nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
-                    anyDroppableDirectionMovementProfile,
+                    new PieceMovementProfile([anyDroppableLocationCalculator]),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(["1"]),
                     examplePieceAttackProfile)
             };

@@ -11,7 +11,7 @@
             }
 
             private _pieceSelected(origin: IPieceLocation): boolean {
-                var validDestinations = origin.piece.movementProfile.calculateLocations(origin);
+                var validDestinations = origin.piece.movementProfile.getDestinations(origin);
                 this._currentPieceMovement = new PieceMovementTracker(origin, validDestinations);
 
                 return true;

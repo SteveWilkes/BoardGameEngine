@@ -27,6 +27,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardTypeRegistry.js");
     assets.addJs("/public/javascripts/Pieces/PieceMovement.js");
     assets.addJs("/public/javascripts/EventSet.js");
+    assets.addJs("/public/javascripts/Pieces/PieceMovementProfile.js");
     assets.addJs("/public/javascripts/Pieces/PieceMovementTracker.js");
     assets.addJs("/public/javascripts/Pieces/PieceMovementMonitor.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");

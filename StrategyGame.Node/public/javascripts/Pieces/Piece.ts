@@ -5,7 +5,7 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public movementProfile: RelatedLocationCalculator,
+            public movementProfile: PieceMovementProfile,
             public pieceDropHandler: IPieceDropHandler,
             public attackProfile: PieceAttackProfile) {
 

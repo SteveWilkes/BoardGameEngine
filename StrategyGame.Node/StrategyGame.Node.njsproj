@@ -62,6 +62,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceAttackProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
