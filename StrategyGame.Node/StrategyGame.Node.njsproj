@@ -58,8 +58,10 @@
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceAttack.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceAttackProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementCalculator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
@@ -69,11 +71,11 @@
     <TypeScriptCompile Include="public\javascripts\Status\History.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\IGameAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceMoveAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\IPieceDestinationFilter.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocationValidator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceDropHandler.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementProfile.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\RelatedLocationCalculator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Piece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />

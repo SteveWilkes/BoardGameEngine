@@ -6,8 +6,9 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _movementProfile: PieceMovementProfile,
-            private _pieceDropHandlerFactory: () => IPieceDropHandler) {
+            private _movementProfile: RelatedLocationCalculator,
+            private _pieceDropHandlerFactory: () => IPieceDropHandler,
+            private _attackProfile: PieceAttackProfile) {
         }
 
         public createPiece(pieceId: string): Piece {
@@ -16,7 +17,8 @@
                 this.id,
                 this.imageSource,
                 this._movementProfile,
-                this._pieceDropHandlerFactory());
+                this._pieceDropHandlerFactory(),
+                this._attackProfile);
         }
     }
 }

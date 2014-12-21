@@ -6,24 +6,29 @@
 
     export var pieceFactory = "$pieceFactory";
 
-    var anyDirectionOneSpaceDestinationFactories = [
-        [new PieceMovementCalculator("up", 1)],
-        [new PieceMovementCalculator("upRight", 1)],
-        [new PieceMovementCalculator("right", 1)],
-        [new PieceMovementCalculator("downRight", 1)],
-        [new PieceMovementCalculator("down", 1)],
-        [new PieceMovementCalculator("downLeft", 1)],
-        [new PieceMovementCalculator("left", 1)],
-        [new PieceMovementCalculator("upLeft", 1)]
+    var oneSpaceInAnyDirectionCalculators = [
+        [new TypeScript.CoordinateTranslator("up", 1)],
+        [new TypeScript.CoordinateTranslator("upRight", 1)],
+        [new TypeScript.CoordinateTranslator("right", 1)],
+        [new TypeScript.CoordinateTranslator("downRight", 1)],
+        [new TypeScript.CoordinateTranslator("down", 1)],
+        [new TypeScript.CoordinateTranslator("downLeft", 1)],
+        [new TypeScript.CoordinateTranslator("left", 1)],
+        [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
-    var anyOccupiedDirectionMovementProfile = new PieceMovementProfile(
-        anyDirectionOneSpaceDestinationFactories,
-        [new OnlyOccupiedLocationsPieceDestinationFilter()]);
+    var anyOccupiedDirectionMovementProfile = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new OnlyOccupiedLocationsValidator()]);
 
-    var anyDroppableDirectionMovementProfile = new PieceMovementProfile(
-        anyDirectionOneSpaceDestinationFactories,
-        [new OnlyDroppableLocationsPieceDestinationFilter()]);
+    var anyDroppableDirectionMovementProfile = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new OnlyDroppableLocationsValidator()]);
+
+    var nullAttackProfile = new PieceAttackProfile([]);
+
+    var examplePieceAttackProfile = new PieceAttackProfile(
+        [new PieceAttack(anyOccupiedDirectionMovementProfile, 10)]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -36,13 +41,15 @@
                     "Bomb",
                     "/images/pieces/Bomb.png",
                     anyOccupiedDirectionMovementProfile,
-                    () => new AttachTargetPieceToDroppedPieceDropHandler(["2"])),
+                    () => new AttachTargetPieceToDroppedPieceDropHandler(["2"]),
+                    nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
                     anyDroppableDirectionMovementProfile,
-                    () => new AttachDroppedPieceToTargetPieceDropHandler(["1"]))
+                    () => new AttachDroppedPieceToTargetPieceDropHandler(["1"]),
+                    examplePieceAttackProfile)
             };
             this._nextPieceId = 1;
         }

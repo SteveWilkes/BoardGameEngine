@@ -1,9 +1,9 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.TypeScript {
 
-    export class PieceMovementCalculator {
+    export class CoordinateTranslator {
         constructor(private _directionFunctionName: string, private _distance: number) { }
 
-        public applyMovement(startingPoint: TypeScript.Coordinates): TypeScript.Coordinates {
+        public translate(startingPoint: Coordinates): Coordinates {
             return startingPoint[this._directionFunctionName](this._distance);
         }
     }

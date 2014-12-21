@@ -10,6 +10,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.ScrollToBottom.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
@@ -32,9 +33,10 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
     assets.addJs("/public/javascripts/Status/History.js");
     assets.addJs("/public/javascripts/Status/StatusData.js");
-    assets.addJs("/public/javascripts/Pieces/IPieceDestinationFilter.js");
-    assets.addJs("/public/javascripts/Pieces/PieceMovementCalculator.js");
-    assets.addJs("/public/javascripts/Pieces/PieceMovementProfile.js");
+    assets.addJs("/public/javascripts/Pieces/IPieceLocationValidator.js");
+    assets.addJs("/public/javascripts/Pieces/RelatedLocationCalculator.js");
+    assets.addJs("/public/javascripts/Pieces/PieceAttack.js");
+    assets.addJs("/public/javascripts/Pieces/PieceAttackProfile.js");
     assets.addJs("/public/javascripts/Pieces/IPieceDropHandler.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");

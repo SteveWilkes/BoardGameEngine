@@ -5,8 +5,9 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public movementProfile: PieceMovementProfile,
-            public pieceDropHandler: IPieceDropHandler) {
+            public movementProfile: RelatedLocationCalculator,
+            public pieceDropHandler: IPieceDropHandler,
+            public attackProfile: PieceAttackProfile) {
 
             this.pieceDropHandler.setTarget(this);
         }
