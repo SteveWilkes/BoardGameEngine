@@ -80,7 +80,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementTracker.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMover.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementMonitor.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\StatusData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationConfig.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Team.ts" />

@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export module PieceMover {
+    export module PieceMovementMonitor {
 
         class Implementation {
             private _currentPieceMovement: PieceMovementTracker;

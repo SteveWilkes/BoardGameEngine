@@ -9,7 +9,7 @@
         constructor(public type: BoardType, private _teams: Array<Teams.Team>, events: EventSet) {
             this._createTiles(events);
             this._positionTeams();
-            Pieces.PieceMover.create(events);
+            Pieces.PieceMovementMonitor.create(events);
         }
 
         private _createTiles(events: EventSet): void {
