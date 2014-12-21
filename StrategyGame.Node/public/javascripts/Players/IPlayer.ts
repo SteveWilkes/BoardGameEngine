@@ -14,7 +14,7 @@
         }
     }
 
-    export class AiPlayerProxy extends PlayerBase implements IPlayer {
+    export class RemotePlayerProxy extends PlayerBase implements IPlayer {
         constructor(public id: string, private _events: EventSet) {
             super();
 
@@ -41,7 +41,7 @@
         }
     }
 
-    export class HumanPlayer extends PlayerBase implements IPlayer {
+    export class LocalHumanPlayer extends PlayerBase implements IPlayer {
         constructor(public id: string, public isLocal: boolean) {
             super();
         }

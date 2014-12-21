@@ -20,10 +20,10 @@
             var displayDataService = new Boards.BoardDisplayDataService(this._$windowService);
             var displayManager = new Boards.BoardDisplayManager(boardSizeDefaults, displayDataService, events);
 
-            var player1 = new Players.HumanPlayer("Human", true);
+            var player1 = new Players.LocalHumanPlayer("Human", true);
             var team1 = this._$teamFactory.createTeam(player1, boardType.id);
 
-            var player2 = new Players.AiPlayerProxy("CPU", events);
+            var player2 = new Players.RemotePlayerProxy("CPU", events);
             var team2 = this._$teamFactory.createTeam(player2, boardType.id);
 
             var teams = [team1, team2];
