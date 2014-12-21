@@ -72,7 +72,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceDropHandler.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\IPieceMovementProfile.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Piece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />
