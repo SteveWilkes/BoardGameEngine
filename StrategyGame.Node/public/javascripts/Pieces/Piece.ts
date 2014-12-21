@@ -6,7 +6,7 @@
         imageSource: string;
         location: IPieceLocation;
         attachedPiece: IPiece;
-        movementProfile: IPieceMovementProfile;
+        movementProfile: PieceMovementProfile;
         pieceDropHandler: IPieceDropHandler;
     }
 
@@ -16,7 +16,7 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public movementProfile: IPieceMovementProfile,
+            public movementProfile: PieceMovementProfile,
             public pieceDropHandler: IPieceDropHandler) {
 
             this.pieceDropHandler.setTarget(this);

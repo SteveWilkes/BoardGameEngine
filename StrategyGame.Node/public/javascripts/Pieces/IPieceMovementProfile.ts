@@ -1,49 +1,45 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export interface IPieceMovementProfile {
-        setLocations(locations: IPieceLocationDictionary): void;
-        getValidDestinations(origin: IPieceLocation): Array<IPieceLocation>;
+    export class PotentialMovementSegment {
+        constructor(private _directionFunctionName: string, private _distance: number) { }
+
+        public applyMovementSegment(startingPoint: TypeScript.Coordinates): TypeScript.Coordinates {
+            return startingPoint[this._directionFunctionName](this._distance);
+        }
     }
 
-    export class OnlyValidDestinationsMovementProfile {
-        protected locations: IPieceLocationDictionary;
+    export class PieceMovementProfile {
+        private _locations: IPieceLocationDictionary;
+
+        constructor(
+            private _potentialDestinationFactories: Array<Array<PotentialMovementSegment>>,
+            private _destinationFilters: Array<IPieceDestinationFilter>) {
+        }
 
         public setLocations(locations: IPieceLocationDictionary): void {
-            this.locations = locations;
-        }
-
-        protected filterToOnlyValid(possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation> {
-            var validDestinations = new Array<IPieceLocation>();
-            for (var i = 0; i < possibleDestinations.length; i++) {
-                if (possibleDestinations[i] !== undefined) {
-                    validDestinations.push(possibleDestinations[i]);
-                }
-            }
-            return validDestinations;
-        }
-    }
-
-    export class AnyDirectionMovementProfile
-        extends OnlyValidDestinationsMovementProfile
-        implements IPieceMovementProfile {
-
-        constructor(private _allowedDistance: number, private _movementFilters: Array<IPieceDestinationFilter>) {
-            super();
+            this._locations = locations;
         }
 
         public getValidDestinations(origin: IPieceLocation): Array<IPieceLocation> {
-            var destinations = this.filterToOnlyValid([
-                this.locations[origin.coordinates.left(this._allowedDistance).signature],
-                this.locations[origin.coordinates.upLeft(this._allowedDistance).signature],
-                this.locations[origin.coordinates.up(this._allowedDistance).signature],
-                this.locations[origin.coordinates.upRight(this._allowedDistance).signature],
-                this.locations[origin.coordinates.right(this._allowedDistance).signature],
-                this.locations[origin.coordinates.downRight(this._allowedDistance).signature],
-                this.locations[origin.coordinates.down(this._allowedDistance).signature],
-                this.locations[origin.coordinates.downLeft(this._allowedDistance).signature]
-            ]);
-            for (var i = 0; i < this._movementFilters.length; i++) {
-                destinations = this._movementFilters[i].filter(origin.piece, destinations);
+            var destinations = this._getDestinations(origin);
+            for (var i = 0; i < this._destinationFilters.length; i++) {
+                this._destinationFilters[i].filter(destinations, origin.piece);
+            }
+            return destinations;
+        }
+
+        private _getDestinations(origin: IPieceLocation): Array<IPieceLocation> {
+            var destinations = new Array<IPieceLocation>();
+            for (var i = 0; i < this._potentialDestinationFactories.length; i++) {
+                var potentialDestinationFactory = this._potentialDestinationFactories[i];
+                var destinationCoordinates = origin.coordinates;
+                for (var j = 0; j < potentialDestinationFactory.length; j++) {
+                    destinationCoordinates = potentialDestinationFactory[j].applyMovementSegment(destinationCoordinates);
+                }
+                var destination = this._locations[destinationCoordinates.signature];
+                if (destination !== undefined) {
+                    destinations.push(destination);
+                }
             }
             return destinations;
         }

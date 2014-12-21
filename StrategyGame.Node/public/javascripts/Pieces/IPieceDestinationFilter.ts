@@ -1,32 +1,28 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceDestinationFilter {
-        filter(movingPiece: IPiece, possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation>;
+        filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void;
     }
 
     export class OnlyDroppableLocationsPieceDestinationFilter implements IPieceDestinationFilter {
-        public filter(movingPiece: IPiece, possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation> {
-            var droppableDestinations = new Array<IPieceLocation>();
-            for (var i = 0; i < possibleDestinations.length; i++) {
-                if (!possibleDestinations[i].isOccupied() ||
-                    possibleDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
-                    droppableDestinations.push(possibleDestinations[i]);
+        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void {
+            for (var i = (potentialDestinations.length - 1); i >= 0; i--) {
+                if (potentialDestinations[i].isOccupied() &&
+                    !potentialDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
+                    potentialDestinations.splice(i, 1);
                 }
             }
-            return droppableDestinations;
         }
     }
 
     export class OnlyOccupiedLocationsPieceDestinationFilter implements IPieceDestinationFilter {
-        public filter(movingPiece: IPiece, possibleDestinations: Array<IPieceLocation>): Array<IPieceLocation> {
-            var occupiedDestinations = new Array<IPieceLocation>();
-            for (var i = 0; i < possibleDestinations.length; i++) {
-                if (possibleDestinations[i].isOccupied() &&
-                    possibleDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
-                    occupiedDestinations.push(possibleDestinations[i]);
+        public filter(potentialDestinations: Array<IPieceLocation>, movingPiece: IPiece): void {
+            for (var i = (potentialDestinations.length - 1); i >= 0; i--) {
+                if (!potentialDestinations[i].isOccupied() ||
+                    !potentialDestinations[i].piece.pieceDropHandler.canDrop(movingPiece)) {
+                    potentialDestinations.splice(i, 1);
                 }
             }
-            return occupiedDestinations;
         }
     }
 }
