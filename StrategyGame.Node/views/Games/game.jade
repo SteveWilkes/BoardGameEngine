@@ -1,4 +1,4 @@
-﻿extends layout
+﻿extends ../layout
 
 block content
     
@@ -8,5 +8,5 @@ block content
         .heading
             h3(data-ng-bind="game.status.whosTurn()") Initialising...
         .body
-            include gameHistory
+            include history
             
