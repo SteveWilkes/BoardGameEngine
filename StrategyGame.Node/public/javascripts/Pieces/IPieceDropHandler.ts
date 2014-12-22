@@ -2,21 +2,14 @@
 
     export interface IPieceDropHandler {
         setTarget(targetPiece: Piece): void;
-        canDrop(droppingPiece: Piece): boolean;
         handleDrop(droppedPiece: Piece): void;
     }
 
     export class PieceDropHandlerBase {
         protected targetPiece: Piece;
 
-        constructor(private _droppablePieceDefinitionIds: Array<string>) { }
-
         public setTarget(targetPiece: Piece): void {
             this.targetPiece = targetPiece;
-        }
-
-        public canDrop(droppingPiece: Piece): boolean {
-            return this._droppablePieceDefinitionIds.indexOf(droppingPiece.definitionId) > -1;
         }
     }
 

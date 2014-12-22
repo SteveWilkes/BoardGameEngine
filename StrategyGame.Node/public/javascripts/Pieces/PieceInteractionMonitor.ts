@@ -1,25 +1,26 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export module PieceMovementMonitor {
+    export module PieceInteractionMonitor {
 
         class Implementation {
-            private _currentPieceMovement: PieceMovementTracker;
+            private _currentPieceMovement: PieceInteraction;
 
             constructor(events: EventSet) {
-                events.pieceSelected.subscribe((origin: IPieceLocation) => this._pieceSelected(origin));
+                events.pieceSelected.subscribe((location: IPieceLocation) => this._pieceSelected(location));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
-            private _pieceSelected(origin: IPieceLocation): boolean {
-                var validDestinations = origin.piece.movementProfile.getDestinations(origin);
-                this._currentPieceMovement = new PieceMovementTracker(origin, validDestinations);
+            private _pieceSelected(location: IPieceLocation): boolean {
+                var validDestinations = location.piece.movementProfile.getDestinations(location);
+                var validTargets = location.piece.attackProfile.getTargetsByAttack(location);
+                this._currentPieceMovement = new PieceInteraction(location, validDestinations, validTargets);
 
                 return true;
             }
 
             private _pieceDeselected(location: IPieceLocation): boolean {
                 if (this._currentPieceMovement !== undefined) {
-                    this._currentPieceMovement.complete(location);
+                    this._currentPieceMovement.completeMovement(location);
                     this._currentPieceMovement = undefined;
                 }
                 return true;

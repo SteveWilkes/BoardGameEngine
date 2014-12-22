@@ -34,7 +34,7 @@
                 }
                 this.setCurrentTeam(currentTeamIndex);
 
-                movement.whenEventCompletes(() => this.currentTeam.owner.takeTurn());
+                movement.whenEventCompletes(() => this.currentTeam.owner.takeTurn(this.currentTeam));
             }
             return true;
         }

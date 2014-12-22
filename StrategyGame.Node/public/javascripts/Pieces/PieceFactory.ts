@@ -17,18 +17,22 @@
         [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
-    var anyOccupiedLocationCalculator = new RelatedLocationCalculator(
+    var bombDestinationCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
-        [new OnlyOccupiedLocationsValidator()]);
+        [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])])]);
 
-    var anyDroppableLocationCalculator = new RelatedLocationCalculator(
+    var examplePieceDestinationCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
-        [new OnlyDroppableLocationsValidator()]);
+        [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])])]);
 
     var nullAttackProfile = new PieceAttackProfile([]);
 
     var examplePieceAttackProfile = new PieceAttackProfile(
-        [new PieceAttack(anyOccupiedLocationCalculator, 10)]);
+        [new PieceAttack(
+            new RelatedLocationCalculator(
+                oneSpaceInAnyDirectionCalculators,
+                [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["2"])])]),
+            10)]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -40,15 +44,15 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    new PieceMovementProfile([anyOccupiedLocationCalculator]),
-                    () => new AttachTargetPieceToDroppedPieceDropHandler(["2"]),
+                    new PieceMovementProfile([bombDestinationCalculator]),
+                    () => new AttachTargetPieceToDroppedPieceDropHandler(),
                     nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
-                    new PieceMovementProfile([anyDroppableLocationCalculator]),
-                    () => new AttachDroppedPieceToTargetPieceDropHandler(["1"]),
+                    new PieceMovementProfile([examplePieceDestinationCalculator]),
+                    () => new AttachDroppedPieceToTargetPieceDropHandler(),
                     examplePieceAttackProfile)
             };
             this._nextPieceId = 1;

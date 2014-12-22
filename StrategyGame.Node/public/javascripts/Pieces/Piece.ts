@@ -12,6 +12,7 @@
             this.pieceDropHandler.setTarget(this);
         }
 
+        public team: IPieceOwner;
         public location: IPieceLocation;
         public attachedPiece: Piece;
     }

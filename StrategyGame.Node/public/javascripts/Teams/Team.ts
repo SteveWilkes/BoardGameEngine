@@ -1,21 +1,19 @@
 ﻿module AgileObjects.StrategyGame.Game.Teams {
     import Pieces = StrategyGame.Game.Pieces;
 
-    export class Team {
+    export class Team implements Pieces.IPieceOwner {
         constructor(
             public name: string,
-            public initialPieceLocations: Array<Pieces.PieceLocationConfig>,
-            public owner: ITeamOwner) {
-            
-            this.pieces = new Array<Pieces.Piece>();
+            public piecesByInitialLocation: TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>) {
 
-            for (var i = 0; i < initialPieceLocations.length; i++) {
-                this.pieces.push(initialPieceLocations[i].piece);
+            this.pieces = this.piecesByInitialLocation.values;
+
+            for (var i = 0; i < this.pieces.length; i++) {
+                this.pieces[i].team = this;
             }
-
-            owner.add(this);
         }
 
+        public owner: ITeamOwner;
         public pieces: Array<Pieces.Piece>;
 
         public owns(piece: Pieces.Piece): boolean {

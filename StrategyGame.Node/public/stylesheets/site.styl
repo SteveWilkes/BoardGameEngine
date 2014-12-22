@@ -23,6 +23,10 @@ div#board
 	min-width 300px
 	overflow hidden
 	margin 0 auto
+	-webkit-transform perspective(500px) rotateX(20deg)
+	-moz-transform perspective(500px) rotateX(20deg)
+	-ms-transform perspective(500px) rotateX(20deg)
+	-o-transform perspective(500px) rotateX(20deg)
 	transform perspective(500px) rotateX(20deg)
 
 div.board-tile
@@ -38,6 +42,9 @@ div.available
 
 div.board-destination-tile
 	border #8CBF26
+
+div.board-target-tile
+	border #E51400
 
 img.piece
 	position absolute

@@ -17,7 +17,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/App.js");
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");
-    assets.addJs("/public/javascripts/Pieces/PieceLocationConfig.js");
+    assets.addJs("/public/javascripts/Pieces/PieceLocationConfigData.js");
     assets.addJs("/public/javascripts/Players/IPlayer.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
     assets.addJs("/public/javascripts/Boards/BoardPosition.js");
@@ -28,8 +28,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/PieceMovement.js");
     assets.addJs("/public/javascripts/EventSet.js");
     assets.addJs("/public/javascripts/Pieces/PieceMovementProfile.js");
-    assets.addJs("/public/javascripts/Pieces/PieceMovementTracker.js");
-    assets.addJs("/public/javascripts/Pieces/PieceMovementMonitor.js");
+    assets.addJs("/public/javascripts/Pieces/PieceInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
     assets.addJs("/public/javascripts/Status/History.js");

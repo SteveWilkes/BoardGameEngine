@@ -9,7 +9,7 @@ block board
             div(data-ng-repeat="tile in row track by $index")
                 .board-tile(
                   data-ng-style="{ width: game.displayManager.tileSize, height: game.displayManager.tileSize }"
-                  data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'light-tile': !tile.isDark, 'board-destination-tile': tile.isPotentialDestination }")
+                  data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'light-tile': !tile.isDark, 'board-destination-tile': tile.isPotentialDestination, 'board-target-tile': tile.potentialAttack }")
                     .max-size(
                       data-ng-if="tile.isGameTile"
                       data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceDeselected'")

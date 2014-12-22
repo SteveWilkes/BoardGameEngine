@@ -10,6 +10,7 @@
         public piece: Pieces.Piece;
         public isDark: boolean;
         public isPotentialDestination: boolean;
+        public potentialAttack: Pieces.PieceAttack;
 
         public isOccupied(): boolean {
             return this.piece !== undefined;

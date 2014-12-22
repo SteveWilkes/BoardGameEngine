@@ -12,27 +12,26 @@
     export class TeamFactory implements ITeamFactory {
         constructor(private _$pieceFactory: Pieces.IPieceFactory) { }
 
-        public createTeam(player: Players.IPlayer, boardTypeId: string): Teams.Team {
-            var pieceLocationConfigs = this._getPieceLocationConfigs();
+        public createTeam(owner: ITeamOwner, boardTypeId: string): Teams.Team {
+            var piecesByLocation = this._getPiecesByLocation();
 
-            var team = new Teams.Team(player.id + " Team", pieceLocationConfigs, player);
+            var team = new Teams.Team(owner.id + " Team", piecesByLocation);
 
             return team;
         }
 
-        private _getPieceLocationConfigs(): Array<Pieces.PieceLocationConfig> {
+        private _getPiecesByLocation(): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
             var configData = this._getPieceLocationConfigData();
-            var locationConfigs = new Array<Pieces.PieceLocationConfig>();
+            var piecesByLocation = new TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>();
 
             for (var i = 0; i < configData.length; i++) {
                 var data = configData[i];
-                locationConfigs.push(
-                    new Pieces.PieceLocationConfig(
-                        Ts.coordinatesRegistry.get(data.row, data.column),
-                        this._$pieceFactory.createPiece(data.pieceDefinitionId)));
+                var pieceLocation = Ts.coordinatesRegistry.get(data.row, data.column);
+                var piece = this._$pieceFactory.createPiece(data.pieceDefinitionId);
+                piecesByLocation.add(pieceLocation, piece);
             }
 
-            return locationConfigs;
+            return piecesByLocation;
         }
 
         private _getPieceLocationConfigData(): Array<Pieces.PieceLocationConfigData> {

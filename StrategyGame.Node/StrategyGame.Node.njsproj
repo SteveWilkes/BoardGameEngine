@@ -58,6 +58,8 @@
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceAttack.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceAttackProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovement.ts" />
@@ -80,10 +82,10 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Piece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementTracker.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceMovementMonitor.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceInteraction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceInteractionMonitor.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\StatusData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationConfig.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationConfigData.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Team.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\ITeamOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />

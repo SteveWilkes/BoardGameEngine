@@ -9,7 +9,7 @@
         constructor(public type: BoardType, private _teams: Array<Teams.Team>, events: EventSet) {
             this._createTiles(events);
             this._positionTeams();
-            Pieces.PieceMovementMonitor.create(events);
+            Pieces.PieceInteractionMonitor.create(events);
         }
 
         private _createTiles(events: EventSet): void {
@@ -32,6 +32,7 @@
             for (var i = 0; i < this._teams.length; i++) {
                 for (var j = 0; j < this._teams[i].pieces.length; j++) {
                     this._teams[i].pieces[j].movementProfile.setLocations(this._tilesByCoordinates);
+                    this._teams[i].pieces[j].attackProfile.setLocations(this._tilesByCoordinates);
                 }
             }
         }
@@ -39,14 +40,14 @@
         private _positionTeams(): void {
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
             for (var i = 0; i < this._teams.length; i++) {
-                var pieceLocations = this._teams[i].initialPieceLocations;
+                var piecesByLocation = this._teams[i].piecesByInitialLocation;
                 var position = this.type.getNextBoardPosition(i, this._teams.length);
                 this._boardPositionsByTeam.add(this._teams[i], position);
-                for (var j = 0; j < pieceLocations.length; j++) {
-                    var pieceLocation = pieceLocations[j];
-                    var translatedCoordinates = position.translate(pieceLocation.tileCoordinates);
+                for (var j = 0; j < piecesByLocation.count; j++) {
+                    var pieceLocation = piecesByLocation.keys[j];
+                    var translatedCoordinates = position.translate(pieceLocation);
                     var tile = this._tilesByCoordinates[translatedCoordinates.signature];
-                    tile.add(pieceLocation.piece);
+                    tile.add(piecesByLocation.get(pieceLocation));
                 }
             }
         }
