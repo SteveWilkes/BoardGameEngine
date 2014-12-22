@@ -1,0 +1,8 @@
+﻿h4 Game History
+.body-content(data-scrolltobottom)
+    .history
+        div(data-ng-hide="game.status.history.actions.length")
+            span.no-moves [No moves yet]
+        div(data-ng-repeat="action in game.status.history.actions")
+            span.history-item-number(data-ng-bind="($index + 1) + '. '")
+            span(data-ng-bind="action.description")

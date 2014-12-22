@@ -111,7 +111,8 @@
     <Content Include="public\stylesheets\site.styl" />
     <Content Include="README.md" />
     <Content Include="views\board.jade" />
-    <Content Include="views\index.jade" />
+    <Content Include="views\gameHistory.jade" />
+    <Content Include="views\game.jade" />
     <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
