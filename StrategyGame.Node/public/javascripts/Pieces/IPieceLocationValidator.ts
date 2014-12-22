@@ -28,7 +28,7 @@
                 ? this._sameTeamDroppablePieceDefinitionIds
                 : this._otherTeamDroppablePieceDefinitionIds;
 
-            return allowedPieceDefinitionIds.indexOf(subjectPiece.definitionId) > -1;
+            return allowedPieceDefinitionIds.indexOf(potentialLocation.piece.definitionId) > -1;
         }
     }
 
@@ -43,8 +43,6 @@
                 }
             }
             return false;
-            // 1. OnlyDroppableLocationsValidator: Unoccupied || [IsDroppable = Droppable PieceDefinitionId + Same team]
-            // 2. OnlyOccupiedLocationsValidator : Occupied + [IsDroppable = Droppable PieceDefinitionId + Same team]
         }
     }
 

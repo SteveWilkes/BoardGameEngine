@@ -17,22 +17,21 @@
         [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
-    var bombDestinationCalculator = new RelatedLocationCalculator(
+    var bombDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])])]);
 
-    var examplePieceDestinationCalculator = new RelatedLocationCalculator(
+    var examplePieceDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])])]);
 
     var nullAttackProfile = new PieceAttackProfile([]);
 
-    var examplePieceAttackProfile = new PieceAttackProfile(
-        [new PieceAttack(
-            new RelatedLocationCalculator(
-                oneSpaceInAnyDirectionCalculators,
-                [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["2"])])]),
-            10)]);
+    var examplePieceAttack = new PieceAttack(
+        new RelatedLocationCalculator(
+            oneSpaceInAnyDirectionCalculators,
+            [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["2"])])]),
+        10);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -44,16 +43,16 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    new PieceMovementProfile([bombDestinationCalculator]),
+                    new PieceMovementProfile([bombDestinationsCalculator]),
                     () => new AttachTargetPieceToDroppedPieceDropHandler(),
                     nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
-                    new PieceMovementProfile([examplePieceDestinationCalculator]),
+                    new PieceMovementProfile([examplePieceDestinationsCalculator]),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(),
-                    examplePieceAttackProfile)
+                    new PieceAttackProfile([examplePieceAttack]))
             };
             this._nextPieceId = 1;
         }
