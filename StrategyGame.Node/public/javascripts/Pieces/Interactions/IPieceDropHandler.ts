@@ -13,23 +13,24 @@
         }
     }
 
+    /** Handles a Piece being attached to another Piece onto which it is dropped. */
     export class AttachDroppedPieceToTargetPieceDropHandler
         extends PieceDropHandlerBase
         implements IPieceDropHandler {
 
         public handleDrop(droppedPiece: Piece): void {
-            this.targetPiece.attachedPiece = droppedPiece;
-            droppedPiece.location = this.targetPiece.location;
+            this.targetPiece.add(droppedPiece);
         }
     }
 
+    /** Handles a Piece being attached to another Piece which is dropped onto it. */
     export class AttachTargetPieceToDroppedPieceDropHandler
         extends PieceDropHandlerBase
         implements IPieceDropHandler {
 
         public handleDrop(droppedPiece: Piece): void {
-            droppedPiece.attachedPiece = this.targetPiece;
-            this.targetPiece.location.replacePieceWith(droppedPiece);
+            droppedPiece.setLocation(this.targetPiece.location);
+            droppedPiece.add(this.targetPiece);
         }
     }
 }

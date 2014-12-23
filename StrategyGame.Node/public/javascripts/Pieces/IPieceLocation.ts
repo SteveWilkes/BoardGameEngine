@@ -7,7 +7,6 @@
         isOccupied(): boolean;
         add(piece: Piece): void;
         piece: Piece;
-        replacePieceWith(newPiece: Piece): void;
         movePieceTo(destination: IPieceLocation): void;
         isPotentialDestination: boolean;
         potentialAttack: PieceAttack;
