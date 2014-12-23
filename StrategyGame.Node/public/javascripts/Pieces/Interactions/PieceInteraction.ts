@@ -35,7 +35,7 @@
             }
             for (i = 0; i < this._attackTargets.keys.length; i++) {
                 var attack = this._attackTargets.keys[i];
-                var attackLocations = this._attackTargets.get(attack);
+                var attackLocations = this._attackTargets.values[i];
                 for (var j = 0; j < attackLocations.length; j++) {
                     attackLocations[j].potentialAttack = switchOn ? attack : null;
                 }

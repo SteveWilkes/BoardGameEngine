@@ -10,5 +10,6 @@
         movePieceTo(destination: IPieceLocation): void;
         isPotentialDestination: boolean;
         potentialAttack: PieceAttack;
+        wasPartOfLastMove: boolean;
     }
 } 

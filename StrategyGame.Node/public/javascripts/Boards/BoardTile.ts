@@ -11,6 +11,7 @@
         public isDark: boolean;
         public isPotentialDestination: boolean;
         public potentialAttack: Pieces.PieceAttack;
+        public wasPartOfLastMove: boolean;
 
         public isOccupied(): boolean {
             return this.piece !== undefined;
@@ -32,9 +33,5 @@
 
             this._events.pieceMoved.publish(new Pieces.PieceMovement(this, destination));
         }
-
-        //public clear(): void {
-        //    this.piece = undefined;
-        //}
     }
 }

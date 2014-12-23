@@ -8,9 +8,15 @@
         }
 
         public actions: Array<IGameAction>;
+        public lastMove: Pieces.PieceMovement;
 
         private _recordPieceMovement(movement: Pieces.PieceMovement): boolean {
-            this.actions.push(new PieceMoveAction(movement));
+            if (this.lastMove !== undefined) {
+                this.lastMove.setWasPartOfLastMove(false);
+            }
+            this.lastMove = movement;
+            movement.setWasPartOfLastMove(true);
+            this.actions.push(new PieceMoveAction(this.lastMove));
             return true;
         }
     }

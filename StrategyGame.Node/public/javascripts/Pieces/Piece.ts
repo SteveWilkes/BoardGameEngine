@@ -28,6 +28,7 @@
         public piece: Piece;
         public isPotentialDestination: boolean;
         public potentialAttack: PieceAttack;
+        public wasPartOfLastMove: boolean;
 
         public isOccupied(): boolean {
             return this.attachedPiece !== undefined;
