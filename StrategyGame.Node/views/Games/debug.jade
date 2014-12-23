@@ -15,7 +15,8 @@
         div(data-ng-repeat="player in game.players")
             div(data-ng-repeat="team in player.teams")
                 div(data-ng-repeat="piece in team.pieces")
+                    .identifier(data-ng-bind="piece.id")
                     .info
                         span T {{piece.definitionId}}
                         span(data-ng-bind="(piece.location ? 'L ' + piece.location.coordinates.signature : 'L NULL')")
-                        span(data-ng-bind="(location.piece === piece) ? 'P ok' : piece.location.piece.definitionId")
+                        span(data-ng-bind="(piece.location.piece === piece) ? 'P ok' : piece.location.piece.definitionId")

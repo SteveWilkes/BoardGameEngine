@@ -59,7 +59,7 @@
 
         public createPiece(definitionId: string): Piece {
             var pieceId = this._nextPieceId++;
-            return this._definitions[definitionId].createPiece("piece-" + pieceId);
+            return this._definitions[definitionId].createPiece("p-" + pieceId);
         }
     }
 
