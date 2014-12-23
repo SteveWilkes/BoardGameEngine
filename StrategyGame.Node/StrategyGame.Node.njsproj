@@ -53,6 +53,7 @@
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
     <TypeScriptCompile Include="public\javascripts\EventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />

@@ -8,9 +8,10 @@
         game: Game;
     }
 
+    Angular.Directives.addDraggable(game);
+    Angular.Directives.addDraggableDroppable(game);
+    Angular.Directives.addDroppable(game);
     Angular.Directives.addScrollToBottom(game);
     Angular.Directives.addSizeToContainer(game);
-    Angular.Directives.addDraggable(game);
-    Angular.Directives.addDroppable(game);
-    Angular.Directives.addDraggableDroppable(game);
+    Angular.Directives.addTabs(game);
 }
