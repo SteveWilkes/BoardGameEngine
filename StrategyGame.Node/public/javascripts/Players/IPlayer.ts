@@ -2,13 +2,20 @@
     import Pieces = StrategyGame.Game.Pieces;
     import Teams = StrategyGame.Game.Teams;
 
-    export interface IPlayer extends Teams.ITeamOwner { }
+    export interface IPlayer extends Teams.ITeamOwner {
+        teams: Array<Teams.Team>;
+    }
 
     export class PlayerBase implements IPlayer {
-        constructor(public id: string, public isLocal: boolean) { }
+        constructor(public id: string, public isLocal: boolean) {
+            this.teams = new Array<Teams.Team>();
+        }
+
+        public teams: Array<Teams.Team>;
 
         public add(team: Teams.Team): void {
             team.owner = this;
+            this.teams.push(team);
         }
 
         public takeTurn(team: Teams.Team): void { }

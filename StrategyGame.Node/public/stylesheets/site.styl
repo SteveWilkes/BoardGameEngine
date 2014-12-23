@@ -72,12 +72,15 @@ div#game-status
 		background-color #3A3145
 		padding .4em .5em
 
-		h3, h4
+		h3, h4, h5
 			font bold 18pt Segoe UI Light, Calibri, sans-serif
 			margin 0
 
 		h4
 			font-size 13pt
+
+		h5
+			font-size 11pt
 
 	.body
 		padding 0
@@ -104,6 +107,26 @@ div#game-status
 					span.no-moves
 						font-size 90%
 						margin-left .5em
+
+			.debug
+				div
+					overflow auto
+					float left
+					clear left
+				h5
+					clear left
+					margin .1em 0
+
+				div.coords
+					width 2.2em
+					margin-left .3em
+
+				div.info
+					clear none
+
+					span
+						float left
+						margin-right .6em
 
 .tabsContainer
 	overflow hidden

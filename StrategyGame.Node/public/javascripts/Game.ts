@@ -3,6 +3,7 @@
     export class Game {
         constructor(
             public displayManager: Boards.BoardDisplayManager,
+            public players: Array<Players.IPlayer>,
             public board: Boards.Board,
             turnManager: Status.TurnManager,
             public events: EventSet) {

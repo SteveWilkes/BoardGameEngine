@@ -29,12 +29,13 @@
             player2.add(team2);
 
             var teams = [team1, team2];
+            var players = [player1, player2];
 
             var board = new Boards.Board(boardType, teams, events);
 
             var turnManager = new Status.TurnManager(board, teams, 0, events);
 
-            var game = new Game(displayManager, board, turnManager, events);
+            var game = new Game(displayManager, players, board, turnManager, events);
 
             return game;
         }
