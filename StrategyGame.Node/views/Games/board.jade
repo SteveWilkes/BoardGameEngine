@@ -28,7 +28,7 @@
                   data-ng-style="{ width: game.displayManager.pieceWidth, height: game.displayManager.pieceHeight }")
                 img.attachedPiece(
                   id="{{tile.piece.attachedPiece.id}}"
-                  data-ng-if="tile.isOccupied() && tile.piece.attachedPiece"
+                  data-ng-if="tile.piece.isOccupied()"
                   data-draggable data-subject="game.events" data-item="tile.piece.attachedPiece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
