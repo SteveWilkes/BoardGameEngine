@@ -11,14 +11,15 @@
             private _attackProfile: PieceAttackProfile) {
         }
 
-        public createPiece(pieceId: string): Piece {
+        public createPiece(pieceId: string, events: EventSet): Piece {
             return new Piece(
                 pieceId,
                 this.id,
                 this.imageSource,
                 this._movementProfile,
                 this._pieceDropHandlerFactory(),
-                this._attackProfile);
+                this._attackProfile,
+                events);
         }
     }
 }

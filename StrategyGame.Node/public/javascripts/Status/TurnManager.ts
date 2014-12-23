@@ -9,7 +9,7 @@
             startingTeamIndex: number,
             events: EventSet) {
 
-            events.pieceMoving.subscribe(origin => this._validatePieceIsFromCurrentTeam(origin));
+            events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
             events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
 
             this.setCurrentTeam(startingTeamIndex);
@@ -19,10 +19,10 @@
 
         public currentTeam: Teams.Team;
 
-        private _validatePieceIsFromCurrentTeam(origin: Pieces.IPieceLocation): boolean {
-            this._currentOrigin = origin;
+        private _validatePieceIsFromCurrentTeam(piece: Pieces.Piece): boolean {
+            this._currentOrigin = piece.location;
 
-            return this.currentTeam.owner.isLocal && this.currentTeam.owns(origin.piece);
+            return this.currentTeam.owner.isLocal && this.currentTeam.owns(piece);
         }
 
         private _handlePieceMovement(movement: Pieces.PieceMovement): boolean {

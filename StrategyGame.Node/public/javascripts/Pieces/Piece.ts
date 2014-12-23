@@ -1,13 +1,15 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export class Piece implements IPieceLocation {
+    export class Piece extends PieceLocationBase {
         constructor(
             public id: string,
             public definitionId: string,
             public imageSource: string,
             public movementProfile: PieceMovementProfile,
             public pieceDropHandler: IPieceDropHandler,
-            public attackProfile: PieceAttackProfile) {
+            public attackProfile: PieceAttackProfile,
+            events: EventSet) {
+            super(events);
 
             this.pieceDropHandler.setTarget(this);
         }
@@ -24,16 +26,6 @@
 
         // #region IPieceLocation Members
 
-        public coordinates: TypeScript.Coordinates;
-        public piece: Piece;
-        public isPotentialDestination: boolean;
-        public potentialAttack: PieceAttack;
-        public wasPartOfLastMove: boolean;
-
-        public isOccupied(): boolean {
-            return this.attachedPiece !== undefined;
-        }
-
         public add(piece: Piece): void {
             if (this.isOccupied()) {
 
@@ -43,7 +35,14 @@
             }
         }
 
-        public movePieceTo(destination: IPieceLocation): void {
+        public movePieceTo(destination: Pieces.IPieceLocation): void {
+            super.movePieceTo(destination);
+
+            this.attachedPiece = undefined;
+        }
+
+        public setPotentialDestination(switchOn: boolean): void {
+            this.location.setPotentialDestination(switchOn);
         }
 
         // #endregion

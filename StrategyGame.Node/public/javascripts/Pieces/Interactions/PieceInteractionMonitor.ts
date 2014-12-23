@@ -6,14 +6,14 @@
             private _currentPieceMovement: PieceInteraction;
 
             constructor(events: EventSet) {
-                events.pieceSelected.subscribe((location: IPieceLocation) => this._pieceSelected(location));
+                events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
-            private _pieceSelected(location: IPieceLocation): boolean {
-                var validDestinations = location.piece.movementProfile.getDestinations(location);
-                var validTargets = location.piece.attackProfile.getTargetsByAttack(location);
-                this._currentPieceMovement = new PieceInteraction(location, validDestinations, validTargets);
+            private _pieceSelected(piece: Piece): boolean {
+                var validDestinations = piece.movementProfile.getDestinations(piece.location);
+                var validTargets = piece.attackProfile.getTargetsByAttack(piece.location);
+                this._currentPieceMovement = new PieceInteraction(piece.location, validDestinations, validTargets);
 
                 return true;
             }

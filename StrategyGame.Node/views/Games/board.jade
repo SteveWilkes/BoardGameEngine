@@ -6,14 +6,14 @@
         div(data-ng-repeat="tile in row track by $index")
             .board-tile(
               data-ng-style="{ width: game.displayManager.tileSize, height: game.displayManager.tileSize }"
-              data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'light-tile': !tile.isDark, 'board-destination-tile': tile.isPotentialDestination, 'board-target-tile': tile.potentialAttack, 'board-recent-tile': tile.wasPartOfLastMove }")
+              data-ng-class="{ 'available': tile.isGameTile, 'placeholder': !tile.isGameTile, 'dark-tile': tile.isDark, 'light-tile': !tile.isDark, 'board-destination-tile': tile.isPotentialDestination, 'board-target-tile': tile.potentialAttack, 'board-recent-tile': tile.wasPartOfLastMove && !tile.potentialAttack }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
                   data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceDeselected'")
                 img.piece(
                   id="{{tile.piece.id}}"
                   data-ng-if="tile.isOccupied()"
-                  data-draggabledroppable data-subject="game.events" data-item="tile"
+                  data-draggabledroppable data-subject="game.events" data-item="tile.piece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"
@@ -24,7 +24,7 @@
                 img.attachedPiece(
                   id="{{tile.piece.attachedPiece.id}}"
                   data-ng-if="tile.isOccupied() && tile.piece.attachedPiece"
-                  data-draggable data-subject="game.events" data-item="tile"
+                  data-draggable data-subject="game.events" data-item="tile.piece.attachedPiece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"

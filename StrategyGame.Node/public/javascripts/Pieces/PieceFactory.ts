@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string): Piece;
+        createPiece(pieceDefinitionId: string, events: EventSet): Piece;
     }
 
     export var pieceFactory = "$pieceFactory";
@@ -21,9 +21,19 @@
         oneSpaceInAnyDirectionCalculators,
         [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])])]);
 
+    var bombLocationTranslator = (boardTile: IPieceLocation) => [boardTile.piece];
+
     var examplePieceDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])])]);
+
+    var examplePieceLocationTranslator = (boardTile: IPieceLocation) => {
+        var locations = [boardTile];
+        if (boardTile.isOccupied() && (boardTile.piece.definitionId === "1")) {
+            locations.push(boardTile.piece);
+        }
+        return locations;
+    };
 
     var nullAttackProfile = new PieceAttackProfile([]);
 
@@ -43,23 +53,23 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    new PieceMovementProfile([bombDestinationsCalculator]),
+                    new PieceMovementProfile([bombDestinationsCalculator], bombLocationTranslator),
                     () => new AttachTargetPieceToDroppedPieceDropHandler(),
                     nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/Example.png",
-                    new PieceMovementProfile([examplePieceDestinationsCalculator]),
+                    new PieceMovementProfile([examplePieceDestinationsCalculator], examplePieceLocationTranslator),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(),
                     new PieceAttackProfile([examplePieceAttack]))
             };
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string): Piece {
+        public createPiece(definitionId: string, events: EventSet): Piece {
             var pieceId = this._nextPieceId++;
-            return this._definitions[definitionId].createPiece("p-" + pieceId);
+            return this._definitions[definitionId].createPiece("p-" + pieceId, events);
         }
     }
 

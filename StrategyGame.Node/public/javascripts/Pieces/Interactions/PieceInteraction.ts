@@ -31,7 +31,7 @@
         private _setLocationStates(switchOn: boolean): void {
             var i;
             for (i = 0; i < this._movementDestinations.length; i++) {
-                this._movementDestinations[i].isPotentialDestination = switchOn;
+                this._movementDestinations[i].setPotentialDestination(switchOn);
             }
             for (i = 0; i < this._attackTargets.keys.length; i++) {
                 var attack = this._attackTargets.keys[i];
