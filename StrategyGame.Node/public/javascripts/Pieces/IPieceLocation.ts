@@ -5,7 +5,9 @@
     export interface IPieceLocation {
         coordinates: TypeScript.Coordinates;
         isOccupied(): boolean;
+        isSelected(newValue?: boolean): boolean;
         add(piece: Piece): void;
+        contains(location: IPieceLocation): boolean;
         piece: Piece;
         movePieceTo(destination: IPieceLocation): void;
         setPotentialDestination(switchOn: boolean): void;
@@ -14,6 +16,8 @@
     }
 
     export class PieceLocationBase implements IPieceLocation {
+        private _isSelected: boolean;
+
         constructor(private _events: EventSet) { }
 
         public coordinates: TypeScript.Coordinates;
@@ -25,7 +29,17 @@
             return this.piece !== undefined;
         }
 
+        public isSelected(newValue?: boolean): boolean {
+            if (newValue !== undefined) { this._isSelected = newValue; }
+            return this._isSelected;
+        }
+
         public add(piece: Piece): void { }
+
+        public contains(location: IPieceLocation): boolean {
+            if (location === this) { return true; }
+            return this.isOccupied() && this.piece.contains(location);
+        }
 
         public movePieceTo(destination: Pieces.IPieceLocation): void {
             var piece = this.piece;

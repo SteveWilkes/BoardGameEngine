@@ -1,9 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    enum InteractionState {
-        On,
-        Off
-    }
+    enum InteractionState { On, Off }
 
     export class PieceInteraction {
         private _origin: IPieceLocation;
@@ -22,24 +19,31 @@
         }
 
         public handlePieceMovement(): void {
-            // The Piece is moving, so we know it's not going to be an attack:
+            // The Piece is moving, so no need to keep highlighting attack locations:
             this._setLocationStates(InteractionState.On, InteractionState.Off);
         }
 
-        public completeMovement(destination: IPieceLocation): boolean {
+        public complete(location: IPieceLocation): boolean {
             if (this._moveResult !== undefined) { return this._moveResult; }
 
             this._moveResult = false;
 
-            if (destination === this._origin) {
+            if (this._origin.contains(location)) {
+                var attackState;
+                if (this._attackTargets.count > 0) {
+                    attackState = this._origin.isSelected() ? InteractionState.Off : InteractionState.On;
+                    this._origin.isSelected(attackState === InteractionState.On);
+                } else {
+                    attackState = InteractionState.Off;
+                }
+                this._setLocationStates(InteractionState.Off, attackState);
                 this._moveResult = true;
             }
-            else if (this._movementDestinations.indexOf(destination) > -1) {
-                this._origin.movePieceTo(destination);
+            else if (this._movementDestinations.indexOf(location) > -1) {
+                this._origin.movePieceTo(location);
+                this._setLocationStates(InteractionState.Off, InteractionState.Off);
                 this._moveResult = true;
             }
-
-            this._setLocationStates(InteractionState.Off, InteractionState.Off);
 
             return this._moveResult;
         }
@@ -54,7 +58,7 @@
             }
 
             if (this._currentAttackState !== attackState) {
-                for (i = 0; i < this._attackTargets.keys.length; i++) {
+                for (i = 0; i < this._attackTargets.count; i++) {
                     var attack = this._attackTargets.keys[i];
                     var attackLocations = this._attackTargets.values[i];
                     for (var j = 0; j < attackLocations.length; j++) {

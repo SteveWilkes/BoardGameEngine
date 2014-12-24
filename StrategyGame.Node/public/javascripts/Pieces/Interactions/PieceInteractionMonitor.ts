@@ -24,7 +24,7 @@
 
             private _pieceDeselected(location: IPieceLocation): boolean {
                 if (this._currentPieceInteraction !== undefined) {
-                    this._currentPieceInteraction.completeMovement(location);
+                    this._currentPieceInteraction.complete(location);
                     this._currentPieceInteraction = undefined;
                 }
                 return true;
