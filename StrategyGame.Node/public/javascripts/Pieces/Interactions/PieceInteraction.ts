@@ -10,7 +10,7 @@
         private _currentMovementState: InteractionState;
         private _currentAttackState: InteractionState;
 
-        constructor(piece: Piece) {
+        constructor(piece: Piece, private _currentTeam: IPieceOwner) {
             this._origin = piece.location;
             this._movementDestinations = piece.movementProfile.getDestinations(piece.location);
             this._attackTargets = piece.attackProfile.getTargetsByAttack(piece.location);
@@ -31,7 +31,8 @@
             if (this._origin.contains(location)) {
                 var attackState;
                 if (this._attackTargets.count > 0) {
-                    attackState = this._origin.isSelected() ? InteractionState.Off : InteractionState.On;
+                    attackState = !this._currentTeam.owns(this._origin.piece) || this._origin.isSelected()
+                    ? InteractionState.Off : InteractionState.On;
                     this._origin.isSelected(attackState === InteractionState.On);
                 } else {
                     attackState = InteractionState.Off;

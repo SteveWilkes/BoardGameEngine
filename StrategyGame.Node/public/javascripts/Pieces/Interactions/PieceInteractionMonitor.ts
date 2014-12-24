@@ -3,17 +3,23 @@
     export module PieceInteractionMonitor {
 
         class Implementation {
+            private _currentTeam: IPieceOwner;
             private _currentPieceInteraction: PieceInteraction;
 
             constructor(events: EventSet) {
+                events.turnStarted.subscribe((team: IPieceOwner) => this._turnStarted(team));
                 events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
                 events.pieceMoving.subscribe((piece: Piece) => this._pieceMoving(piece));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
-            private _pieceSelected(piece: Piece): boolean {
-                this._currentPieceInteraction = new PieceInteraction(piece);
+            private _turnStarted(team: IPieceOwner): boolean {
+                this._currentTeam = team;
+                return true;
+            }
 
+            private _pieceSelected(piece: Piece): boolean {
+                this._currentPieceInteraction = new PieceInteraction(piece, this._currentTeam);
                 return true;
             }
 

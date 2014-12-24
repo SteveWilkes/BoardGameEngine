@@ -7,14 +7,16 @@
             board: Boards.Board,
             private _teams: Array<Teams.Team>,
             startingTeamIndex: number,
-            events: EventSet) {
+            private _events: EventSet) {
 
-            events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
-            events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
+            this._events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
+            this._events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
 
             this.setCurrentTeam(startingTeamIndex);
 
             board.orientTo(this.currentTeam);
+
+            this._events.turnStarted.publish(this.currentTeam);
         }
 
         public currentTeam: Teams.Team;
@@ -34,7 +36,10 @@
                 }
                 this.setCurrentTeam(currentTeamIndex);
 
-                movement.whenEventCompletes(() => this.currentTeam.owner.takeTurn(this.currentTeam));
+                movement.whenEventCompletes(() => {
+                    this._events.turnStarted.publish(this.currentTeam);
+                    this.currentTeam.owner.takeTurn(this.currentTeam);
+                });
             }
             return true;
         }
