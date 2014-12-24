@@ -2,12 +2,14 @@
 
 block content
     
-    include board
+    div(data-ng-controller="GameController")
 
-    #game-status
-        .heading
-            h3(data-ng-bind="game.status.whosTurn()") Initialising...
-        .body(data-tabs)
-            include history
-            include debug
+        include board
+
+        #game-status
+            .heading
+                h3(data-ng-bind="game.status.whosTurn()") Initialising...
+            .body(data-tabs)
+                include history
+                include debug
             
