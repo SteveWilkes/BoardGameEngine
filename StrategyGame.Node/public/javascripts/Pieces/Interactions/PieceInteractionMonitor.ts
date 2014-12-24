@@ -3,25 +3,29 @@
     export module PieceInteractionMonitor {
 
         class Implementation {
-            private _currentPieceMovement: PieceInteraction;
+            private _currentPieceInteraction: PieceInteraction;
 
             constructor(events: EventSet) {
                 events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
+                events.pieceMoving.subscribe((piece: Piece) => this._pieceMoving(piece));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
             private _pieceSelected(piece: Piece): boolean {
-                var validDestinations = piece.movementProfile.getDestinations(piece.location);
-                var validTargets = piece.attackProfile.getTargetsByAttack(piece.location);
-                this._currentPieceMovement = new PieceInteraction(piece.location, validDestinations, validTargets);
+                this._currentPieceInteraction = new PieceInteraction(piece);
 
                 return true;
             }
 
+            private _pieceMoving(piece: Piece): boolean {
+                this._currentPieceInteraction.handlePieceMovement();
+                return true;
+            }
+
             private _pieceDeselected(location: IPieceLocation): boolean {
-                if (this._currentPieceMovement !== undefined) {
-                    this._currentPieceMovement.completeMovement(location);
-                    this._currentPieceMovement = undefined;
+                if (this._currentPieceInteraction !== undefined) {
+                    this._currentPieceInteraction.completeMovement(location);
+                    this._currentPieceInteraction = undefined;
                 }
                 return true;
             }
