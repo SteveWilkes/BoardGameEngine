@@ -62,7 +62,7 @@
                     var attack = this._attackTargets.keys[i];
                     var attackLocations = this._attackTargets.values[i];
                     for (var j = 0; j < attackLocations.length; j++) {
-                        attackLocations[j].potentialAttack = (attackState === InteractionState.On) ? attack : null;
+                        attackLocations[j].potentialAttack = (attackState === InteractionState.On) ? attack : undefined;
                     }
                 }
                 this._currentAttackState = attackState;
