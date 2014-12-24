@@ -146,6 +146,6 @@
     }
 
     export function addDraggableDroppable(angularModule: ng.IModule): void {
-        angularModule.directive("draggabledroppable", () => { return draggableDroppable; });
+        angularModule.directive("draggableDroppable", () => { return draggableDroppable; });
     }
 }
