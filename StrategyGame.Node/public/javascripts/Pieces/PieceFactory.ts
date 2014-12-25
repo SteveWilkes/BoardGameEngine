@@ -59,7 +59,7 @@
                 "2": new PieceDefinition(
                     "2",
                     "Example",
-                    "/images/pieces/Example.png",
+                    "/images/pieces/HumanHeavy.png",
                     new PieceMovementProfile([examplePieceDestinationsCalculator], examplePieceLocationTranslator),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(),
                     new PieceAttackProfile([examplePieceAttack]))
