@@ -41,6 +41,7 @@
     <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayDataService.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\BoardFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardOrientationTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardPosition.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardRowConfig.ts" />

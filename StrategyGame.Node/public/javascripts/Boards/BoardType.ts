@@ -3,6 +3,7 @@
     export class BoardType {
         constructor(
             public id: string,
+            public name: string,
             private _availablePositions: Array<BoardPosition>,
             private _rowConfigs: Array<BoardRowConfig>,
             public orientationTranslator: BoardOrientationTranslator) {

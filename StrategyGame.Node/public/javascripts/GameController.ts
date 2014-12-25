@@ -3,7 +3,7 @@
 
     class GameController {
         constructor($gameFactory: IGameFactory, $scope: IGameScope) {
-            $scope.game = $gameFactory.createNewGame(Boards.boardTypeRegistry.diamond);
+            $scope.game = $gameFactory.createNewGame("1");
         }
     }
 
