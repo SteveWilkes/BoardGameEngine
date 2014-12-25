@@ -2,7 +2,7 @@
     import Ts = TypeScript;
 
     export interface IBoardFactory {
-        createBoard(boardTypeId: string, teams: Array<Teams.Team>, events: EventSet): Board;
+        createBoard(boardTypeId: string, numberOfTeams: number, events: EventSet): Board;
     }
 
     export var boardFactory = "$boardFactory";
@@ -10,9 +10,9 @@
     class BoardFactory implements IBoardFactory {
         constructor(private _$boardTypeRegistry: IBoardTypeRegistry) { }
 
-        public createBoard(boardTypeId: string, teams: Array<Teams.Team>, events: EventSet): Board {
+        public createBoard(boardTypeId: string, numberOfTeams: number, events: EventSet): Board {
             var boardType = this._$boardTypeRegistry.getBoardType(boardTypeId);
-            var board = new Boards.Board(boardType, teams, events);
+            var board = new Boards.Board(boardType, numberOfTeams, events);
 
             return board;
         }

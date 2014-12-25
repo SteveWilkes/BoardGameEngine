@@ -5,7 +5,7 @@
     import Teams = StrategyGame.Game.Teams;
 
     export interface IGameFactory {
-        createNewGame(boardTypeId: string): Game;
+        createNewGame(boardTypeId: string, numberOfTeams: number): Game;
     }
 
     export var gameFactory = "$gameFactory";
@@ -16,12 +16,16 @@
             private _$teamFactory: Teams.ITeamFactory,
             private _$boardFactory: Boards.IBoardFactory) { }
 
-        public createNewGame(boardTypeId: string): Game {
+        public createNewGame(boardTypeId: string, numberOfTeams: number): Game {
             var events = new EventSet();
 
             var boardSizeDefaults = new Boards.BoardSizeDefaults(950, 50, 80, 2);
             var displayDataService = new Boards.BoardDisplayDataService(this._$windowService);
             var displayManager = new Boards.BoardDisplayManager(boardSizeDefaults, displayDataService, events);
+
+            var board = this._$boardFactory.createBoard(boardTypeId, numberOfTeams, events);
+
+            var game = new Game(displayManager, board, events);
 
             var player1 = new Players.LocalHumanPlayer("Human");
             var team1 = this._$teamFactory.createTeam(player1, boardTypeId, 1, events);
@@ -31,14 +35,10 @@
             var team2 = this._$teamFactory.createTeam(player2, boardTypeId, 2, events);
             player2.add(team2);
 
-            var teams = [team1, team2];
-            var players = [player1, player2];
+            game.addTeam(team1);
+            game.addTeam(team2);
 
-            var board = this._$boardFactory.createBoard(boardTypeId, teams, events);
-
-            var turnManager = new Status.TurnManager(board, teams, 0, events);
-
-            var game = new Game(displayManager, players, board, turnManager, events);
+            events.gameStarted.publish(team1);
 
             return game;
         }

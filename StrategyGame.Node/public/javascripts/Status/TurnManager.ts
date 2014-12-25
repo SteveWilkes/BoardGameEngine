@@ -1,25 +1,30 @@
 ﻿module AgileObjects.StrategyGame.Game.Status {
 
     export class TurnManager {
+        private _teams: Array<Teams.Team>;
         private _currentOrigin: Pieces.IPieceLocation;
 
-        constructor(
-            board: Boards.Board,
-            private _teams: Array<Teams.Team>,
-            startingTeamIndex: number,
-            private _events: EventSet) {
-
+        constructor(private _events: EventSet) {
+            this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
+            this._events.teamAdded.subscribe(team => this._registerTeam(team));
             this._events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
             this._events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
 
-            this.setCurrentTeam(startingTeamIndex);
-
-            board.orientTo(this.currentTeam);
-
-            this._events.turnStarted.publish(this.currentTeam);
+            this._teams = new Array<Teams.Team>();
         }
 
         public currentTeam: Teams.Team;
+
+        private _setStartingTeam(team: Teams.Team): boolean {
+            this.setCurrentTeam(this._teams.indexOf(team));
+
+            return this._turnStarted();
+        }
+
+        private _registerTeam(team: Teams.Team): boolean {
+            this._teams.push(team);
+            return true;
+        }
 
         private _validatePieceIsFromCurrentTeam(piece: Pieces.Piece): boolean {
             this._currentOrigin = piece.location;
@@ -37,8 +42,9 @@
                 this.setCurrentTeam(currentTeamIndex);
 
                 movement.whenEventCompletes(() => {
-                    this._events.turnStarted.publish(this.currentTeam);
-                    this.currentTeam.owner.takeTurn(this.currentTeam);
+                    if (this._turnStarted()) {
+                        this.currentTeam.owner.takeTurn(this.currentTeam);
+                    }
                 });
             }
             return true;
@@ -46,6 +52,10 @@
 
         private setCurrentTeam(teamIndex: number) {
             this.currentTeam = this._teams[teamIndex];
+        }
+
+        private _turnStarted(): boolean {
+            return this._events.turnStarted.publish(this.currentTeam);
         }
     }
 } 

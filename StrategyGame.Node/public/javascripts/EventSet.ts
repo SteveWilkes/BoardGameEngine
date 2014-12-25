@@ -3,6 +3,10 @@
     export class EventSet {
         public containerResized = new TypeScript.EventHub<Boards.Board>();
 
+        public playerAdded = new TypeScript.EventHub<Players.IPlayer>();
+        public teamAdded = new TypeScript.EventHub<Teams.Team>();
+
+        public gameStarted = new TypeScript.EventHub<Teams.Team>();
         public turnStarted = new TypeScript.EventHub<Teams.Team>();
         public pieceSelected = new TypeScript.EventHub<Pieces.Piece>();
         public pieceMoving = new TypeScript.EventHub<Pieces.Piece>();
