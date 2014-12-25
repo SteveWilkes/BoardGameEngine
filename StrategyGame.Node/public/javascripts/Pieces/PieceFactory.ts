@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string, events: EventSet): Piece;
+        createPiece(teamNumber: number, pieceDefinitionId: string, events: EventSet): Piece;
     }
 
     export var pieceFactory = "$pieceFactory";
@@ -52,14 +52,14 @@
                 "1": new PieceDefinition(
                     "1",
                     "Bomb",
-                    "/images/pieces/Bomb.png",
+                    "/images/pieces/Bomb",
                     new PieceMovementProfile([bombDestinationsCalculator], bombLocationTranslator),
                     () => new AttachTargetPieceToDroppedPieceDropHandler(),
                     nullAttackProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
-                    "/images/pieces/HumanHeavy.png",
+                    "/images/pieces/HumanHeavy",
                     new PieceMovementProfile([examplePieceDestinationsCalculator], examplePieceLocationTranslator),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(),
                     new PieceAttackProfile([examplePieceAttack]))
@@ -67,9 +67,9 @@
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string, events: EventSet): Piece {
+        public createPiece(teamNumber: number, definitionId: string, events: EventSet): Piece {
             var pieceId = this._nextPieceId++;
-            return this._definitions[definitionId].createPiece("p-" + pieceId, events);
+            return this._definitions[definitionId].createPiece(teamNumber, "p-" + pieceId, events);
         }
     }
 

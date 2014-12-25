@@ -5,17 +5,17 @@
         constructor(
             public id: string,
             public name: string,
-            public imageSource: string,
+            public imagePath: string,
             private _movementProfile: PieceMovementProfile,
             private _pieceDropHandlerFactory: () => IPieceDropHandler,
             private _attackProfile: PieceAttackProfile) {
         }
 
-        public createPiece(pieceId: string, events: EventSet): Piece {
+        public createPiece(teamNumber: number, pieceId: string, events: EventSet): Piece {
             return new Piece(
                 pieceId,
                 this.id,
-                this.imageSource,
+                this.imagePath + teamNumber + ".png",
                 this._movementProfile,
                 this._pieceDropHandlerFactory(),
                 this._attackProfile,
