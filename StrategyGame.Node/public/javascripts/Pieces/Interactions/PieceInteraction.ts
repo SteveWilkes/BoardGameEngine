@@ -15,12 +15,12 @@
             this._movementDestinations = piece.movementProfile.getDestinations(piece.location);
             this._attackTargets = piece.attackProfile.getTargetsByAttack(piece.location);
 
-            this._setLocationStates(InteractionState.On, InteractionState.On);
+            this._setInteractionStates(InteractionState.On, InteractionState.On);
         }
 
         public handlePieceMovement(): void {
             // The Piece is moving, so no need to keep highlighting attack locations:
-            this._setLocationStates(InteractionState.On, InteractionState.Off);
+            this._setInteractionStates(InteractionState.On, InteractionState.Off);
         }
 
         public complete(location: IPieceLocation): boolean {
@@ -29,27 +29,27 @@
             this._moveResult = false;
 
             if (this._origin.contains(location)) {
-                var attackState;
-                if (this._attackTargets.count > 0) {
-                    attackState = !this._currentTeam.owns(this._origin.piece) || this._origin.isSelected()
+                var interactionState;
+                if ((this._movementDestinations.length > 0) || (this._attackTargets.count > 0)) {
+                    interactionState = !this._currentTeam.owns(this._origin.piece) || this._origin.isSelected()
                     ? InteractionState.Off : InteractionState.On;
-                    this._origin.isSelected(attackState === InteractionState.On);
+                    this._origin.isSelected(interactionState === InteractionState.On);
                 } else {
-                    attackState = InteractionState.Off;
+                    interactionState = InteractionState.Off;
                 }
-                this._setLocationStates(InteractionState.Off, attackState);
+                this._setInteractionStates(interactionState, interactionState);
                 this._moveResult = true;
             }
             else if (this._movementDestinations.indexOf(location) > -1) {
                 this._origin.movePieceTo(location);
-                this._setLocationStates(InteractionState.Off, InteractionState.Off);
+                this._setInteractionStates(InteractionState.Off, InteractionState.Off);
                 this._moveResult = true;
             }
 
             return this._moveResult;
         }
 
-        private _setLocationStates(movementState: InteractionState, attackState: InteractionState): void {
+        private _setInteractionStates(movementState: InteractionState, attackState: InteractionState): void {
             var i;
             if (this._currentMovementState !== movementState) {
                 for (i = 0; i < this._movementDestinations.length; i++) {
