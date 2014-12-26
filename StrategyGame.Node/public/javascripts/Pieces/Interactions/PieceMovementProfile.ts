@@ -3,7 +3,7 @@
     export class PieceMovementProfile {
         constructor(
             private _destinationCalculators: Array<RelatedLocationCalculator>,
-            private _locationTranslator?: (location: IPieceLocation) => Array<IPieceLocation>) { }
+            private _locationAdapter?: (location: IPieceLocation) => Array<IPieceLocation>) { }
 
         public setLocations(allLocations): void {
             for (var i = 0; i < this._destinationCalculators.length; i++) {
@@ -15,13 +15,13 @@
             var destinations = new Array<IPieceLocation>();
             for (var i = 0; i < this._destinationCalculators.length; i++) {
                 var possibleDestinations = this._destinationCalculators[i].calculateLocations(origin);
-                if (this._locationTranslator !== undefined) {
-                    var allTranslatedDestinations = new Array<IPieceLocation>();
+                if (this._locationAdapter !== undefined) {
+                    var allAdaptedDestinations = new Array<IPieceLocation>();
                     for (var j = 0; j < possibleDestinations.length; j++) {
-                        var translatedDestinations = this._locationTranslator(possibleDestinations[j]);
-                        allTranslatedDestinations = allTranslatedDestinations.concat(translatedDestinations);
+                        var adaptedDestinations = this._locationAdapter(possibleDestinations[j]);
+                        allAdaptedDestinations = allAdaptedDestinations.concat(adaptedDestinations);
                     }
-                    possibleDestinations = allTranslatedDestinations;
+                    possibleDestinations = allAdaptedDestinations;
                 }
                 destinations = destinations.concat(possibleDestinations);
             }

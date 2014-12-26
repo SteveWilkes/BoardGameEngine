@@ -23,13 +23,15 @@
 
     var bombLocationTranslator = (boardTile: IPieceLocation) => [boardTile.piece];
 
-    var examplePieceDestinationsCalculator = new RelatedLocationCalculator(
-        oneSpaceInAnyDirectionCalculators,
-        [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])])]);
+    var humanHeavyDroppablePieceDefinitionIds = ["1"];
 
-    var examplePieceLocationTranslator = (boardTile: IPieceLocation) => {
+    var humanHeavyDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(humanHeavyDroppablePieceDefinitionIds, [])])]);
+
+    var humanHeavyLocationAdapter = (boardTile: IPieceLocation) => {
         var locations = [boardTile];
-        if (boardTile.isOccupied() && (boardTile.piece.definitionId === "1")) {
+        if (boardTile.isOccupied() && (humanHeavyDroppablePieceDefinitionIds.indexOf(boardTile.piece.definitionId) !== -1)) {
             locations.push(boardTile.piece);
         }
         return locations;
@@ -60,7 +62,7 @@
                     "2",
                     "Example",
                     "/images/pieces/HumanHeavy.png",
-                    new PieceMovementProfile([examplePieceDestinationsCalculator], examplePieceLocationTranslator),
+                    new PieceMovementProfile([humanHeavyDestinationsCalculator], humanHeavyLocationAdapter),
                     () => new AttachDroppedPieceToTargetPieceDropHandler(),
                     new PieceAttackProfile([examplePieceAttack]))
             };
