@@ -7,6 +7,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
 
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Extensions.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");

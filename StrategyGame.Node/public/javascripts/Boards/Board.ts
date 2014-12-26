@@ -42,6 +42,8 @@
                 tile.add(team.piecesByInitialLocation.get(pieceLocation));
             }
 
+            team.setNumber(this._boardPositionsByTeam.count);
+
             this._registerTiles(team);
 
             return true;

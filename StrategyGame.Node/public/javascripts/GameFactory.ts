@@ -28,11 +28,11 @@
             var game = new Game(displayManager, board, events);
 
             var player1 = new Players.LocalHumanPlayer("Human");
-            var team1 = this._$teamFactory.createTeam(player1, boardTypeId, 1, events);
+            var team1 = this._$teamFactory.createTeam(player1, boardTypeId, events);
             player1.add(team1);
 
             var player2 = new Players.RemotePlayerProxy("CPU", events);
-            var team2 = this._$teamFactory.createTeam(player2, boardTypeId, 2, events);
+            var team2 = this._$teamFactory.createTeam(player2, boardTypeId, events);
             player2.add(team2);
 
             game.addTeam(team1);
