@@ -17,33 +17,65 @@
         [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
-    var bombDestinationsCalculator = new RelatedLocationCalculator(
-        oneSpaceInAnyDirectionCalculators,
-        [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])])]);
+    // Bomb Attachment
 
-    var bombLocationTranslator = (boardTile: IPieceLocation) => [boardTile.piece];
+    var bombAttachDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])]);
+
+    var bombAttachmentCalculator = new PieceInteractionCalculator(
+        InteractionType.Move,
+        [bombAttachDestinationsCalculator],
+        (s, d) => new MovePieceToDestinationPieceInteraction(s, d));
+
+    var bombInteractionProfile = new PieceInteractionProfile([bombAttachmentCalculator]);
+
+    // Human Heavy Movement
+
+    var humanHeavyMoveDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new IsUnoccupiedLocationValidator()]);
+
+    var humanHeavyMovementCalculator = new PieceInteractionCalculator(
+        InteractionType.Move,
+        [humanHeavyMoveDestinationsCalculator],
+        (s, d) => new MovePieceToDestinationInteraction(s, d));
+
+    // Human Heavy Attachment
 
     var humanHeavyDroppablePieceDefinitionIds = ["1"];
 
-    var humanHeavyDestinationsCalculator = new RelatedLocationCalculator(
-        oneSpaceInAnyDirectionCalculators,
-        [new CompositeAnyPieceLocationValidator([new IsUnoccupiedLocationValidator(), new IsDroppableLocationValidator(humanHeavyDroppablePieceDefinitionIds, [])])]);
-
     var humanHeavyLocationAdapter = (boardTile: IPieceLocation) => {
         var locations = [boardTile];
-        if (boardTile.isOccupied() && (humanHeavyDroppablePieceDefinitionIds.indexOf(boardTile.piece.definitionId) !== -1)) {
+        if ((humanHeavyDroppablePieceDefinitionIds.indexOf(boardTile.piece.definitionId) !== -1)) {
             locations.push(boardTile.piece);
         }
         return locations;
     };
 
-    var nullAttackProfile = new PieceAttackProfile([]);
+    var humanHeavyAttachDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(humanHeavyDroppablePieceDefinitionIds, [])],
+        humanHeavyLocationAdapter);
 
-    var examplePieceAttack = new PieceAttack(
-        new RelatedLocationCalculator(
-            oneSpaceInAnyDirectionCalculators,
-            [new CompositeAllPieceLocationValidator([new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["2"])])]),
-        10);
+    var humanHeavyAttachmentCalculator = new PieceInteractionCalculator(
+        InteractionType.Move,
+        [humanHeavyAttachDestinationsCalculator],
+        (s, d) => new AddDestinationPieceToPieceInteraction(s, d));
+
+    // Human Heavy Attack
+
+    var humanHeavyAttackDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
+
+    var humanHeavyAttackCalculator = new PieceInteractionCalculator(
+        InteractionType.Attack,
+        [humanHeavyAttackDestinationsCalculator],
+        (s, d) => new AttackDestinationPieceInteraction(s, d));
+
+    var humanHeavyInteractionProfile = new PieceInteractionProfile(
+        [humanHeavyMovementCalculator, humanHeavyAttachmentCalculator, humanHeavyAttackCalculator]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -55,16 +87,12 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    new PieceMovementProfile([bombDestinationsCalculator], bombLocationTranslator),
-                    () => new AttachTargetPieceToDroppedPieceDropHandler(),
-                    nullAttackProfile),
+                    bombInteractionProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/HumanHeavy.png",
-                    new PieceMovementProfile([humanHeavyDestinationsCalculator], humanHeavyLocationAdapter),
-                    () => new AttachDroppedPieceToTargetPieceDropHandler(),
-                    new PieceAttackProfile([examplePieceAttack]))
+                    humanHeavyInteractionProfile)
             };
             this._nextPieceId = 1;
         }

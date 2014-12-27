@@ -6,9 +6,7 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _movementProfile: PieceMovementProfile,
-            private _pieceDropHandlerFactory: () => IPieceDropHandler,
-            private _attackProfile: PieceAttackProfile) {
+            private _interactionProfile: PieceInteractionProfile) {
         }
 
         public createPiece(pieceId: string, events: EventSet): Piece {
@@ -16,9 +14,7 @@
                 pieceId,
                 this.id,
                 this.imageSource,
-                this._movementProfile,
-                this._pieceDropHandlerFactory(),
-                this._attackProfile,
+                this._interactionProfile,
                 events);
         }
     }

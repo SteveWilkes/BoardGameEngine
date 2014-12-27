@@ -4,12 +4,12 @@
 
         class Implementation {
             private _currentTeam: IPieceOwner;
-            private _currentPieceInteraction: PieceInteraction;
+            private _currentOrigin: IPieceLocation;
+            private _currentPotentialInteractions: Array<IPieceInteraction>;
 
             constructor(events: EventSet) {
                 events.turnStarted.subscribe((team: IPieceOwner) => this._turnStarted(team));
                 events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
-                events.pieceMoving.subscribe((piece: Piece) => this._pieceMoving(piece));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
             }
 
@@ -19,19 +19,33 @@
             }
 
             private _pieceSelected(piece: Piece): boolean {
-                this._currentPieceInteraction = new PieceInteraction(piece, this._currentTeam);
+                this._currentOrigin = piece.location;
+                this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
+                for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
+                    var interaction = this._currentPotentialInteractions[i];
+                    interaction.location.potentialInteraction(interaction);
+                }
                 return true;
             }
 
-            private _pieceMoving(piece: Piece): boolean {
-                this._currentPieceInteraction.handlePieceMovement();
-                return true;
-            }
-
-            private _pieceDeselected(location: IPieceLocation): boolean {
-                if (this._currentPieceInteraction !== undefined) {
-                    this._currentPieceInteraction.complete(location);
-                    this._currentPieceInteraction = undefined;
+            private _pieceDeselected(destination: IPieceLocation): boolean {
+                if (this._currentPotentialInteractions !== undefined) {
+                    if (this._currentTeam.owns(this._currentOrigin.piece) && this._currentOrigin.contains(destination)) {
+                        if (this._currentOrigin.isSelected()) {
+                            this._currentOrigin.isSelected(false);
+                        } else {
+                            this._currentOrigin.isSelected(true);
+                            return true;
+                        }
+                    }
+                    for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
+                        var location = this._currentPotentialInteractions[i].location;
+                        if (location.contains(destination)) {
+                            location.potentialInteraction().complete();
+                        }
+                        location.potentialInteraction(NullPotentialInteraction.instance);
+                    }
+                    this._currentPotentialInteractions = undefined;
                 }
                 return true;
             }

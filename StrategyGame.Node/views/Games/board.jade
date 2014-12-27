@@ -9,9 +9,9 @@
               data-ng-class="{\
                 'available': tile.isGameTile, 'placeholder': !tile.isGameTile,\
                 'dark-tile': tile.isDark, 'light-tile': !tile.isDark,\
-                'board-destination-tile': tile.isPotentialDestination,\
-                'board-target-tile': tile.potentialAttack !== undefined,\
-                'board-recent-tile': tile.wasPartOfLastMove && !tile.isPotentialDestination && (tile.potentialAttack === undefined) }")
+                'board-destination-tile': tile.isPotentialDestination(),\
+                'board-target-tile': tile.isPotentialAttackTarget(),\
+                'board-recent-tile': tile.wasPartOfLastMove && (tile.potentialInteraction().type === undefined) }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
                   data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceDeselected'")

@@ -3,7 +3,7 @@
     import Teams = StrategyGame.Game.Teams;
 
     export class Board {
-        private _tilesByCoordinates: TypeScript.IStringDictionary<Pieces.IPieceLocation>;
+        private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
         constructor(public type: BoardType, private _numberOfTeams: number, events: EventSet) {
@@ -11,6 +11,7 @@
 
             this._createTiles(events);
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
+
             Pieces.PieceInteractionMonitor.create(events);
         }
 
@@ -51,8 +52,7 @@
 
         private _registerTiles(team: Teams.Team): void {
             for (var j = 0; j < team.pieces.length; j++) {
-                team.pieces[j].movementProfile.setLocations(this._tilesByCoordinates);
-                team.pieces[j].attackProfile.setLocations(this._tilesByCoordinates);
+                team.pieces[j].interactionProfile.setLocations(this._tilesByCoordinates);
             }
         }
 

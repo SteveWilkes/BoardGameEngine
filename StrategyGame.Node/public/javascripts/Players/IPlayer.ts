@@ -29,20 +29,33 @@
         public takeTurn(team: Teams.Team): void {
             super.takeTurn(team);
 
-            var movablePieces = new TypeScript.Dictionary<Pieces.Piece, Array<Pieces.IPieceLocation>>();
+            var allPotentialInteractions = new Array<Pieces.IPieceInteraction>();
             for (var i = 0; i < team.pieces.length; i++) {
                 var piece = team.pieces[i];
-                var validPieceDestinations = piece.movementProfile.getDestinations(piece.location);
-                if (validPieceDestinations.length > 0) {
-                    movablePieces.add(piece, validPieceDestinations);
-                }
+                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
+                allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
             }
-            var pieceToMoveIndex = Math.floor(Math.random() * (movablePieces.count - 1));
-            var pieceToMove = movablePieces.keys[pieceToMoveIndex];
-            var pieceDestinations = movablePieces.get(pieceToMove);
-            var pieceDestinationIndex = Math.floor(Math.random() * (pieceDestinations.length - 1));
-            var pieceDestination = pieceDestinations[pieceDestinationIndex];
-            pieceToMove.location.movePieceTo(pieceDestination);
+            var pieceMovement = Pieces.NullPotentialInteraction.instance;
+            var pieceAttack = Pieces.NullPotentialInteraction.instance;
+            while (pieceMovement.type !== Pieces.InteractionType.Move) {
+                var interaction = this._getRandomInteraction(allPotentialInteractions);
+                if (interaction.type === Pieces.InteractionType.Attack) {
+                    pieceAttack = interaction;
+                    continue;
+                }
+                pieceMovement = interaction;
+                break;
+            }
+
+            pieceAttack.complete();
+            pieceMovement.complete();
+        }
+
+        private _getRandomInteraction(allPotentialInteractions: Array<Pieces.IPieceInteraction>): Pieces.IPieceInteraction {
+            var interactionIndex = Math.floor(Math.random() * (allPotentialInteractions.length - 1));
+            var interaction = allPotentialInteractions[interactionIndex];
+
+            return interaction;
         }
     }
 

@@ -11,18 +11,17 @@
 
         public isGameTile = true;
         public isDark: boolean;
-        public isPotentialDestination: boolean;
 
         public add(piece: Pieces.Piece): void {
-            if (this.isOccupied()) {
-                this.piece.pieceDropHandler.handleDrop(piece);
-            } else {
-                piece.setLocation(this);
-            }
+            piece.setLocation(this);
         }
 
-        public setPotentialDestination(switchOn: boolean): void {
-            this.isPotentialDestination = switchOn;
+        public isPotentialDestination(): boolean {
+            return this.potentialInteraction().type === Pieces.InteractionType.Move;
+        }
+
+        public isPotentialAttackTarget(): boolean {
+            return this.potentialInteraction().type === Pieces.InteractionType.Attack;
         }
     }
 }

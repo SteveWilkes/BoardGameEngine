@@ -5,13 +5,9 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public movementProfile: PieceMovementProfile,
-            public pieceDropHandler: IPieceDropHandler,
-            public attackProfile: PieceAttackProfile,
+            public interactionProfile: PieceInteractionProfile,
             events: EventSet) {
             super(events);
-
-            this.pieceDropHandler.setTarget(this);
         }
 
         public team: IPieceOwner;
@@ -44,10 +40,6 @@
             super.movePieceTo(destination);
 
             this.attachedPiece = undefined;
-        }
-
-        public setPotentialDestination(switchOn: boolean): void {
-            this.location.setPotentialDestination(switchOn);
         }
 
         // #endregion

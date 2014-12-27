@@ -31,8 +31,12 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardTypeRegistry.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovement.js");
     assets.addJs("/public/javascripts/EventSet.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovementProfile.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/AddDestinationPieceToPieceInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationPieceInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/AttackDestinationPieceInteraction.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionCalculator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
@@ -41,12 +45,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsOccupiedLocationValidator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsUnoccupiedLocationValidator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsDroppableLocationValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/CompositeAllPieceLocationValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/CompositeAnyPieceLocationValidator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceAttack.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceAttackProfile.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/IPieceDropHandler.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");
     assets.addJs("/public/javascripts/Pieces/PieceFactory.js");
