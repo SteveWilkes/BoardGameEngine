@@ -19,6 +19,9 @@
             }
 
             private _pieceSelected(piece: Piece): boolean {
+                if ((this._currentOrigin !== undefined) && (this._currentOrigin.piece !== piece)) {
+                    this._pieceDeselected(this._currentOrigin.piece);
+                }
                 this._currentOrigin = piece.location;
                 this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
                 for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
