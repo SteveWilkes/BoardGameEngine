@@ -43,20 +43,9 @@
 
     // Human Heavy Attachment
 
-    var humanHeavyDroppablePieceDefinitionIds = ["1"];
-
-    var humanHeavyLocationAdapter = (boardTile: IPieceLocation) => {
-        var locations = [boardTile];
-        if ((humanHeavyDroppablePieceDefinitionIds.indexOf(boardTile.piece.definitionId) !== -1)) {
-            locations.push(boardTile.piece);
-        }
-        return locations;
-    };
-
     var humanHeavyAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(humanHeavyDroppablePieceDefinitionIds, [])],
-        humanHeavyLocationAdapter);
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
 
     var humanHeavyAttachmentCalculator = new PieceInteractionCalculator(
         InteractionType.Move,

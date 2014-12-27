@@ -5,8 +5,7 @@
 
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _locationValidators: Array<IPieceLocationValidator>,
-            private _locationAdapter?: (location: IPieceLocation) => Array<IPieceLocation>) {
+            private _locationValidators: Array<IPieceLocationValidator>) {
         }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
@@ -32,12 +31,7 @@
                     }
                 }
                 if (!allValidatorsValid) { continue; }
-                if (this._locationAdapter === undefined) {
-                    locations.push(location);
-                    continue;
-                }
-                var adaptedLocations = this._locationAdapter(location);
-                locations = locations.concat(adaptedLocations);
+                locations.push(location);
             }
             return locations;
         }
