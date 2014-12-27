@@ -31,6 +31,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardTypeRegistry.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovement.js");
     assets.addJs("/public/javascripts/EventSet.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/AddDestinationPieceToPieceInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationPieceInteraction.js");

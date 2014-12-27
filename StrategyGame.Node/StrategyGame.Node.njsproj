@@ -68,6 +68,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationPieceInteraction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\NullPotentialInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionCalculator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionConstructorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
