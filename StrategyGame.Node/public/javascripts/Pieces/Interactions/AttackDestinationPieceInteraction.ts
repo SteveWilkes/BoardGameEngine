@@ -6,7 +6,7 @@
         public type = InteractionType.Attack;
 
         public complete(): void {
-            // TODO: _startingLocation.piece.attack(destination.piece);
+            this.location.piece.applyDamage(35);
         }
     }
 }

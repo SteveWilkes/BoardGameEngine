@@ -25,5 +25,9 @@
         public owns(piece: Pieces.Piece): boolean {
             return this.pieces.indexOf(piece) > -1;
         }
+
+        public pieceTaken(takenPiece: Pieces.Piece): void {
+            this.pieces.splice(this.pieces.indexOf(takenPiece), 1);
+        }
     }
 } 

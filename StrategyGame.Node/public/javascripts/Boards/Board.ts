@@ -13,6 +13,7 @@
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
 
             Pieces.PieceInteractionMonitor.create(events);
+            Pieces.TakenPieceLocation.create(events);
         }
 
         private _createTiles(events: EventSet): void {
