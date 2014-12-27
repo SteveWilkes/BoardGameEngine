@@ -2,6 +2,7 @@
 
     export class Game {
         constructor(
+            public id: string,
             public displayManager: Boards.BoardDisplayManager,
             public board: Boards.Board,
             public events: EventSet) {

@@ -14,7 +14,8 @@
         constructor(
             private _$windowService: ng.IWindowService,
             private _$teamFactory: Teams.ITeamFactory,
-            private _$boardFactory: Boards.IBoardFactory) { }
+            private _$boardFactory: Boards.IBoardFactory,
+            private _$idGenerator: Angular.Services.IIdGenerator) { }
 
         public createNewGame(boardTypeId: string, numberOfTeams: number): Game {
             var events = new EventSet();
@@ -25,7 +26,8 @@
 
             var board = this._$boardFactory.createBoard(boardTypeId, numberOfTeams, events);
 
-            var game = new Game(displayManager, board, events);
+            var gameId = this._$idGenerator.getId();
+            var game = new Game(gameId, displayManager, board, events);
 
             var player1 = new Players.LocalHumanPlayer("Human");
             var team1 = this._$teamFactory.createTeam(player1, boardTypeId, events);
@@ -46,5 +48,10 @@
 
     angular
         .module(strategyGameApp)
-        .service(gameFactory, ["$window", Teams.teamFactory, Boards.boardFactory, GameFactory]);
+        .service(gameFactory, [
+            "$window",
+            Teams.teamFactory,
+            Boards.boardFactory,
+            Angular.Services.idGenerator,
+            GameFactory]);
 } 

@@ -14,4 +14,6 @@
     Angular.Directives.addScrollToBottom(game);
     Angular.Directives.addSizeToContainer(game);
     Angular.Directives.addTabs(game);
+
+    Angular.Services.addIdGenerator(game);
 }
