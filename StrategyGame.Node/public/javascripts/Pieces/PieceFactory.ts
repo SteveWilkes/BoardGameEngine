@@ -26,7 +26,7 @@
     var bombAttachmentCalculator = new PieceInteractionCalculator(
         InteractionType.Move,
         [bombAttachDestinationsCalculator],
-        (s, d) => new MovePieceToDestinationPieceInteraction(s, d));
+        PieceInteractionConstructorRegistry.get("m3"));
 
     var bombInteractionProfile = new PieceInteractionProfile([bombAttachmentCalculator]);
 
@@ -39,7 +39,7 @@
     var humanHeavyMovementCalculator = new PieceInteractionCalculator(
         InteractionType.Move,
         [humanHeavyMoveDestinationsCalculator],
-        (s, d) => new MovePieceToDestinationInteraction(s, d));
+        PieceInteractionConstructorRegistry.get("m2"));
 
     // Human Heavy Attachment
 
@@ -50,7 +50,7 @@
     var humanHeavyAttachmentCalculator = new PieceInteractionCalculator(
         InteractionType.Move,
         [humanHeavyAttachDestinationsCalculator],
-        (s, d) => new AddDestinationPieceToPieceInteraction(s, d));
+        PieceInteractionConstructorRegistry.get("m1"));
 
     // Human Heavy Attack
 
@@ -61,7 +61,7 @@
     var humanHeavyAttackCalculator = new PieceInteractionCalculator(
         InteractionType.Attack,
         [humanHeavyAttackDestinationsCalculator],
-        (s, d) => new AttackDestinationPieceInteraction(s, d));
+        PieceInteractionConstructorRegistry.get("a1"));
 
     var humanHeavyInteractionProfile = new PieceInteractionProfile(
         [humanHeavyMovementCalculator, humanHeavyAttachmentCalculator, humanHeavyAttackCalculator]);

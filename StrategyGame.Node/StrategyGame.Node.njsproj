@@ -69,6 +69,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionCalculator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionConstructorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsDroppableLocationValidator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsOccupiedLocationValidator.ts" />
