@@ -32,6 +32,7 @@
             var allPotentialInteractions = new Array<Pieces.IPieceInteraction>();
             for (var i = 0; i < team.pieces.length; i++) {
                 var piece = team.pieces[i];
+                if (piece.hasBeenTaken()) { continue; }
                 var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
                 allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
             }

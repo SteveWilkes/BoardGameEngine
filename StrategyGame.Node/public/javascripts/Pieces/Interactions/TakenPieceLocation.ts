@@ -17,7 +17,6 @@
             }
 
             private _pieceTaken(takenPiece: Piece): boolean {
-                takenPiece.team.pieceTaken(takenPiece);
                 takenPiece.location.movePieceTo(this);
                 return true;
             }

@@ -34,9 +34,13 @@
         public applyDamage(damage: number): void {
             this.health -= damage;
 
-            if (this.health <= 0) {
+            if (this.hasBeenTaken()) {
                 this._eventsLocal.pieceTaken.publish(this);
             }
+        }
+
+        public hasBeenTaken(): boolean {
+            return this.health <= 0;
         }
 
         // #region IPieceLocation Members
