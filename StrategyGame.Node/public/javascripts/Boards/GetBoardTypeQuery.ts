@@ -4,7 +4,7 @@
     export var getBoardTypeQuery = "$getBoardTypeQuery";
 
     class GetBoardTypeQuery implements Ts.IGetQuery<BoardType> {
-        public get(boardTypeId: string): BoardType {
+        public execute(boardTypeId: string): BoardType {
             // TODO: Retrieve BoardType from a data store and cache:
             return new BoardType(
                 "1",

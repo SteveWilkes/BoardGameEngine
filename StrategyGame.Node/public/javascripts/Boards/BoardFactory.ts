@@ -11,7 +11,7 @@
         constructor(private _getBoardTypeQuery: Ts.IGetQuery<BoardType>) { }
 
         public createBoard(boardTypeId: string, numberOfTeams: number, events: EventSet): Board {
-            var boardType = this._getBoardTypeQuery.get(boardTypeId);
+            var boardType = this._getBoardTypeQuery.execute(boardTypeId);
             var board = new Boards.Board(boardType, numberOfTeams, events);
 
             return board;

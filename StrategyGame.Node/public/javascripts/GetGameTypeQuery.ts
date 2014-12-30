@@ -3,7 +3,7 @@
     export var getGameTypeQuery = "$getGameTypeQuery";
 
     class GetGameTypeQuery implements TypeScript.IGetQuery<GameType> {
-        public get(gameTypeId: string): GameType {
+        public execute(gameTypeId: string): GameType {
             // TODO: Retrieve GameType from a data store and cache:
             return new GameType("1", "1");;
         }

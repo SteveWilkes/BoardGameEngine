@@ -21,7 +21,7 @@
         public createNewGame(gameTypeId: string, numberOfTeams: number): Game {
             var events = new EventSet();
 
-            var gameType = this._getGameTypeQuery.get(gameTypeId);
+            var gameType = this._getGameTypeQuery.execute(gameTypeId);
 
             var displayDataService = new Boards.BoardDisplayDataService(this._$windowService);
             var displayManager = new Boards.BoardDisplayManager(displayDataService, events);
