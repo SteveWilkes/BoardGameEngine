@@ -49,7 +49,7 @@
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTile.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardType.ts" />
-    <TypeScriptCompile Include="public\javascripts\Boards\BoardTypeRegistry.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />

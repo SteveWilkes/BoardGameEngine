@@ -1,15 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game.Boards {
     import Ts = TypeScript;
 
-    export interface IBoardTypeRegistry {
-        getBoardType(boardTypeId: string): BoardType;
-    }
+    export var getBoardTypeQuery = "$getBoardTypeQuery";
 
-    export var boardTypeRegistry = "$boardTypeRegistry";
-
-    class BoardTypeRegistry implements IBoardTypeRegistry {
-        public getBoardType(boardTypeId: string): BoardType {
-            // TODO: Load BoardType using a Query + cache
+    class GetBoardTypeQuery implements Ts.IGetQuery<BoardType> {
+        public get(boardTypeId: string): BoardType {
+            // TODO: Retrieve BoardType from a data store and cache:
             return new BoardType(
                 "1",
                 "diamond",
@@ -36,5 +32,5 @@
 
     angular
         .module(strategyGameApp)
-        .service(boardTypeRegistry, [BoardTypeRegistry]);
+        .service(getBoardTypeQuery, [GetBoardTypeQuery]);
 }

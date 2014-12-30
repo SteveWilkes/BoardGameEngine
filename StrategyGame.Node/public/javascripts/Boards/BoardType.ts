@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game.Boards {
 
-    export class BoardType {
+    export class BoardType implements TypeScript.IEntity<string> {
         constructor(
             public id: string,
             public name: string,

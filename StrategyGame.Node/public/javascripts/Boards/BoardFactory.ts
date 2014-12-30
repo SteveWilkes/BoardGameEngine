@@ -8,10 +8,10 @@
     export var boardFactory = "$boardFactory";
 
     class BoardFactory implements IBoardFactory {
-        constructor(private _$boardTypeRegistry: IBoardTypeRegistry) { }
+        constructor(private _getBoardTypeQuery: Ts.IGetQuery<BoardType>) { }
 
         public createBoard(boardTypeId: string, numberOfTeams: number, events: EventSet): Board {
-            var boardType = this._$boardTypeRegistry.getBoardType(boardTypeId);
+            var boardType = this._getBoardTypeQuery.get(boardTypeId);
             var board = new Boards.Board(boardType, numberOfTeams, events);
 
             return board;
@@ -20,5 +20,5 @@
 
     angular
         .module(strategyGameApp)
-        .service(boardFactory, [boardTypeRegistry, BoardFactory]);
+        .service(boardFactory, [getBoardTypeQuery, BoardFactory]);
 }
