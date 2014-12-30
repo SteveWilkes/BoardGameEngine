@@ -2,7 +2,7 @@
 
     export class BoardDisplayManager {
         /** Initialises a new instance of the BoardDisplayManager class. */
-        constructor(private _defaults: BoardSizeDefaults, private _boardDisplayDataService: BoardDisplayDataService, events: EventSet) {
+        constructor(private _boardDisplayDataService: BoardDisplayDataService, events: EventSet) {
             events.containerResized.subscribe((board: Board) => this.resize(board));
         }
 
@@ -28,10 +28,10 @@
             this.boardTopOffset = this._calculateBoardTopOffset(boardDisplayData);
             this.boardSize = Math.max(this._calculateBoardSize(boardDisplayData), boardDisplayData.minWidth);
             var tileOuterSize = Math.floor(this.boardSize / board.type.gridSize);
-            this.tileSize = tileOuterSize - (this._defaults.tileBorderWidth * 2);
-            var resizeFactor = this.boardSize / this._defaults.boardSize;
-            this.pieceWidth = Math.floor(this._defaults.pieceWidth * resizeFactor);
-            this.pieceHeight = Math.floor(this._defaults.pieceHeight * resizeFactor);
+            this.tileSize = tileOuterSize - (BoardSizeDefaults.instance.tileBorderWidth * 2);
+            var resizeFactor = this.boardSize / BoardSizeDefaults.instance.boardSize;
+            this.pieceWidth = Math.floor(BoardSizeDefaults.instance.pieceWidth * resizeFactor);
+            this.pieceHeight = Math.floor(BoardSizeDefaults.instance.pieceHeight * resizeFactor);
 
             return true;
         }

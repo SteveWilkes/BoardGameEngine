@@ -59,10 +59,13 @@
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\GetGameTypeQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\GameType.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.IdGenerator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Extensions.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IGetQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AddDestinationPieceToPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AttackDestinationPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteraction.ts" />

@@ -57,6 +57,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
     assets.addJs("/public/javascripts/Boards/BoardFactory.js");
+    assets.addJs("/public/javascripts/GameType.js");
+    assets.addJs("/public/javascripts/GetGameTypeQuery.js");
     assets.addJs("/public/javascripts/Game.js");
     assets.addJs("/public/javascripts/GameFactory.js");
     assets.addJs("/public/javascripts/GameController.js");
