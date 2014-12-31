@@ -1,6 +1,6 @@
 ﻿#board.ng-cloak(
   data-ng-cloak=""
-  data-size-to-container data-subject="game.events" resize="'containerResized'" data-item="game.board"
+  data-size-to-container data-subject="globalEvents" resize="'containerResized'" data-item="game.board"
   data-ng-style="{ 'margin-top': game.displayManager.boardTopOffset, width: game.displayManager.boardSize }")
     div(data-ng-repeat="row in game.board.rows")
         div(data-ng-repeat="tile in row track by $index")

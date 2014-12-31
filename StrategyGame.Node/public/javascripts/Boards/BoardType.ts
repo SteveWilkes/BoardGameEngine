@@ -20,7 +20,7 @@
 
         public gridSize: number;
 
-        public createRows(events: EventSet): Array<Array<BoardTile>> {
+        public createRows(events: GameEventSet): Array<Array<BoardTile>> {
             var rows = new Array<Array<BoardTile>>();
             for (var rowNumber = this._rowConfigs.length; rowNumber > 0; rowNumber--) {
                 rows.push(this._rowConfigs[rowNumber - 1].createRow(rowNumber, events));

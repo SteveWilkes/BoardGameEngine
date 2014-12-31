@@ -28,9 +28,10 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardRowConfig.js");
     assets.addJs("/public/javascripts/Boards/BoardOrientationTranslator.js");
     assets.addJs("/public/javascripts/Boards/BoardType.js");
-    assets.addJs("/public/javascripts/Boards/BoardTypeRegistry.js");
+    assets.addJs("/public/javascripts/Boards/GetBoardTypeQuery.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovement.js");
-    assets.addJs("/public/javascripts/EventSet.js");
+    assets.addJs("/public/javascripts/GlobalEventSet.js");
+    assets.addJs("/public/javascripts/GameEventSet.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/AddDestinationPieceToPieceInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationInteraction.js");
@@ -41,6 +42,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/TakenPieceLocation.js");
+    assets.addJs("/public/javascripts/Status/TurnDefinition.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
     assets.addJs("/public/javascripts/Status/History.js");
@@ -56,7 +58,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Teams/TeamFactory.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
-    assets.addJs("/public/javascripts/Boards/BoardFactory.js");
     assets.addJs("/public/javascripts/GameType.js");
     assets.addJs("/public/javascripts/GetGameTypeQuery.js");
     assets.addJs("/public/javascripts/Game.js");

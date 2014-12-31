@@ -4,7 +4,7 @@
         private _teams: Array<Teams.Team>;
         private _currentOrigin: Pieces.IPieceLocation;
 
-        constructor(private _events: EventSet) {
+        constructor(private _events: GameEventSet) {
             this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
             this._events.teamAdded.subscribe(team => this._registerTeam(team));
             this._events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));

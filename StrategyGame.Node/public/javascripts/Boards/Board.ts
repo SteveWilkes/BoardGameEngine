@@ -6,17 +6,21 @@
         private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
-        constructor(public type: BoardType, private _numberOfTeams: number, events: EventSet) {
+        constructor(
+            public type: BoardType,
+            pieceInteractionRegulator: Pieces.IPieceInteractionRegulator,
+            private _numberOfTeams: number,
+            events: GameEventSet) {
             events.teamAdded.subscribe(team => this._addTeam(team));
 
             this._createTiles(events);
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
 
-            Pieces.PieceInteractionMonitor.create(events);
+            Pieces.PieceInteractionMonitor.create(pieceInteractionRegulator, events);
             Pieces.TakenPieceLocation.create(events);
         }
 
-        private _createTiles(events: EventSet): void {
+        private _createTiles(events: GameEventSet): void {
             this.rows = this.type.createRows(events);
             this._tilesByCoordinates = {};
             for (var rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {

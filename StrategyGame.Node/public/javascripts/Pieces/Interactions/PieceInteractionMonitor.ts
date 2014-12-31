@@ -2,12 +2,12 @@
 
     export module PieceInteractionMonitor {
 
-        class Implementation {
+        class PieceInteractionMonitor {
             private _currentTeam: IPieceOwner;
             private _currentOrigin: IPieceLocation;
             private _currentPotentialInteractions: Array<IPieceInteraction>;
 
-            constructor(events: EventSet) {
+            constructor(private _interactionRegulator: IPieceInteractionRegulator, events: GameEventSet) {
                 events.turnStarted.subscribe((team: IPieceOwner) => this._turnStarted(team));
                 events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
                 events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
@@ -54,9 +54,13 @@
             }
         }
 
-        export function create(events: EventSet): void {
+        export function create(interactionRegulator: IPieceInteractionRegulator, events: GameEventSet): void {
             // ReSharper disable once WrongExpressionStatement
-            new Implementation(events);
+            new PieceInteractionMonitor(interactionRegulator, events);
         }
+    }
+
+    export interface IPieceInteractionRegulator {
+        interactionTypeIsAvailable(type: InteractionType): boolean;
     }
 }

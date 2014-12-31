@@ -5,38 +5,36 @@
     import Teams = StrategyGame.Game.Teams;
 
     export interface IGameFactory {
-        createNewGame(boardTypeId: string, numberOfTeams: number): Game;
+        createNewGame(displayManager: Boards.BoardDisplayManager, boardTypeId: string, numberOfTeams: number): Game;
     }
 
-    export var gameFactory = "$gameFactory";
+    export var $gameFactory = "$gameFactory";
 
     class GameFactory implements IGameFactory {
         constructor(
-            private _$windowService: ng.IWindowService,
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
-            private _$boardFactory: Boards.IBoardFactory,
-            private _$teamFactory: Teams.ITeamFactory,
-            private _$idGenerator: Angular.Services.IIdGenerator) { }
+            private _teamFactory: Teams.ITeamFactory,
+            private _idGenerator: Angular.Services.IIdGenerator) { }
 
-        public createNewGame(gameTypeId: string, numberOfTeams: number): Game {
-            var events = new EventSet();
+        public createNewGame(
+            displayManager: Boards.BoardDisplayManager,
+            gameTypeId: string,
+            numberOfTeams: number): Game {
+            var events = new GameEventSet();
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId);
 
-            var displayDataService = new Boards.BoardDisplayDataService(this._$windowService);
-            var displayManager = new Boards.BoardDisplayManager(displayDataService, events);
+            var board = new Boards.Board(gameType.boardType, gameType.interactionRegulator, numberOfTeams, events);
 
-            var board = this._$boardFactory.createBoard(gameType.boardTypeId, numberOfTeams, events);
-
-            var gameId = this._$idGenerator.getId();
-            var game = new Game(gameId, displayManager, board, events);
+            var gameId = this._idGenerator.getId();
+            var game = new Game(gameId, gameType, displayManager, board, events);
 
             var player1 = new Players.LocalHumanPlayer("Human");
-            var team1 = this._$teamFactory.createTeam(player1, gameType.id, events);
+            var team1 = this._teamFactory.createTeam(player1, gameType.id, events);
             player1.add(team1);
 
             var player2 = new Players.RemotePlayerProxy("CPU", events);
-            var team2 = this._$teamFactory.createTeam(player2, gameType.id, events);
+            var team2 = this._teamFactory.createTeam(player2, gameType.id, events);
             player2.add(team2);
 
             game.addTeam(team1);
@@ -50,11 +48,9 @@
 
     angular
         .module(strategyGameApp)
-        .service(gameFactory, [
-            "$window",
-            getGameTypeQuery,
-            Boards.boardFactory,
-            Teams.teamFactory,
-            Angular.Services.idGenerator,
+        .service($gameFactory, [
+            $getGameTypeQuery,
+            Teams.$teamFactory,
+            Angular.Services.$idGenerator,
             GameFactory]);
 } 

@@ -4,7 +4,7 @@
         getId(length?: number): string;
     }
 
-    export var idGenerator = "$idGenerator";
+    export var $idGenerator = "$idGenerator";
 
     class IdGenerator implements IIdGenerator {
         public getId(length = 20): string {
@@ -21,6 +21,6 @@
     }
 
     export function addIdGenerator(angularModule: ng.IModule) {
-        angularModule.service(idGenerator, [IdGenerator]);
+        angularModule.service($idGenerator, [IdGenerator]);
     }
 }

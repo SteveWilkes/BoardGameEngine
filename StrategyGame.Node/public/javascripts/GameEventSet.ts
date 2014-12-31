@@ -1,8 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class EventSet {
-        public containerResized = new TypeScript.EventHub<Boards.Board>();
-
+    export class GameEventSet {
         public playerAdded = new TypeScript.EventHub<Players.IPlayer>();
         public teamAdded = new TypeScript.EventHub<Teams.Team>();
 

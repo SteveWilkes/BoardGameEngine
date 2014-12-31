@@ -2,7 +2,7 @@
     import Pieces = StrategyGame.Game.Pieces;
 
     export class BoardTile extends Pieces.PieceLocationBase {
-        constructor(coordinates: TypeScript.Coordinates, events: EventSet) {
+        constructor(coordinates: TypeScript.Coordinates, events: GameEventSet) {
             super(events);
 
             this.coordinates = coordinates;

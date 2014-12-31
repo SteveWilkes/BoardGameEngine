@@ -41,7 +41,6 @@
     <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayDataService.ts" />
-    <TypeScriptCompile Include="public\javascripts\Boards\BoardFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardOrientationTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardPosition.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardRowConfig.ts" />
@@ -55,7 +54,8 @@
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
-    <TypeScriptCompile Include="public\javascripts\EventSet.ts" />
+    <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
+    <TypeScriptCompile Include="public\javascripts\GameEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
@@ -83,6 +83,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />

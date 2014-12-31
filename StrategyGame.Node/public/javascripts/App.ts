@@ -5,6 +5,7 @@
     var game = angular.module(strategyGameApp, []);
 
     export interface IGameScope extends ng.IScope {
+        globalEvents: GlobalEventSet;
         game: Game;
     }
 

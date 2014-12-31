@@ -4,7 +4,7 @@
         class TakenPieceLocation implements IPieceLocation {
             private _takenPiecesByTeam: TypeScript.Dictionary<IPieceOwner, Array<Piece>>;
 
-            constructor(events: EventSet) {
+            constructor(events: GameEventSet) {
                 events.teamAdded.subscribe(team => this._teamAdded(team));
                 events.pieceTaken.subscribe(takenPiece => this._pieceTaken(takenPiece));
 
@@ -48,7 +48,7 @@
             public movePieceTo(): void { }
         }
 
-        export var create = (events: EventSet) => {
+        export var create = (events: GameEventSet) => {
             // ReSharper disable once WrongExpressionStatement
             new TakenPieceLocation(events);
         };

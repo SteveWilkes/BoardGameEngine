@@ -22,7 +22,7 @@
     }
 
     export class RemotePlayerProxy extends PlayerBase implements IPlayer {
-        constructor(id: string, private _events: EventSet) {
+        constructor(id: string, private _events: GameEventSet) {
             super(id, false);
         }
 

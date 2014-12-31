@@ -1,7 +1,10 @@
 ﻿module AgileObjects.StrategyGame.Game.Status {
 
     export class StatusData {
-        constructor(private _turnManager: TurnManager, events: EventSet) {
+        private _turnManager: TurnManager;
+
+        constructor(events: GameEventSet) {
+            this._turnManager = new Status.TurnManager(events);
             this.history = new History(events);
         }
 

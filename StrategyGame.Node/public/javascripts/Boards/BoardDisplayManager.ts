@@ -2,8 +2,8 @@
 
     export class BoardDisplayManager {
         /** Initialises a new instance of the BoardDisplayManager class. */
-        constructor(private _boardDisplayDataService: BoardDisplayDataService, events: EventSet) {
-            events.containerResized.subscribe((board: Board) => this.resize(board));
+        constructor(private _boardDisplayDataService: BoardDisplayDataService) {
+            GlobalEventSet.instance.containerResized.subscribe((board: Board) => this.resize(board));
         }
 
         /** Gets the number of pixels from the top of the window at which the board will be placed. */

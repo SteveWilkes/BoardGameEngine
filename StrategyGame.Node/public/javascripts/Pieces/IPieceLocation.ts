@@ -18,7 +18,7 @@
         private _potentialInteraction: IPieceInteraction;
         private _isSelected: boolean;
 
-        constructor(private _events: EventSet) {
+        constructor(private _events: GameEventSet) {
             this._potentialInteraction = NullPotentialInteraction.instance;
         }
 

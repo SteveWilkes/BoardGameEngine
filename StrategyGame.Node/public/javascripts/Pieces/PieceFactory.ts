@@ -1,10 +1,10 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string, events: EventSet): Piece;
+        createPiece(pieceDefinitionId: string, events: GameEventSet): Piece;
     }
 
-    export var pieceFactory = "$pieceFactory";
+    export var $pieceFactory = "$pieceFactory";
 
     var oneSpaceInAnyDirectionCalculators = [
         [new TypeScript.CoordinateTranslator("up", 1)],
@@ -86,7 +86,7 @@
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string, events: EventSet): Piece {
+        public createPiece(definitionId: string, events: GameEventSet): Piece {
             var pieceId = this._nextPieceId++;
             return this._definitions[definitionId].createPiece("p-" + pieceId, events);
         }
@@ -94,5 +94,5 @@
 
     angular
         .module(strategyGameApp)
-        .service(pieceFactory, PieceFactory);
+        .service($pieceFactory, PieceFactory);
 }

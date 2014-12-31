@@ -9,7 +9,7 @@
             private _interactionProfile: PieceInteractionProfile) {
         }
 
-        public createPiece(pieceId: string, events: EventSet): Piece {
+        public createPiece(pieceId: string, events: GameEventSet): Piece {
             return new Piece(
                 pieceId,
                 this.id,

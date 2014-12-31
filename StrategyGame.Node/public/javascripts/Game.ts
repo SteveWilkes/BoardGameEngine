@@ -3,13 +3,13 @@
     export class Game {
         constructor(
             public id: string,
+            public type: GameType,
             public displayManager: Boards.BoardDisplayManager,
             public board: Boards.Board,
-            public events: EventSet) {
+            public events: GameEventSet) {
 
             this.players = new Array<Players.IPlayer>();
-            var turnManager = new Status.TurnManager(events);
-            this.status = new Status.StatusData(turnManager, this.events);
+            this.status = new Status.StatusData(this.events);
             this.displayManager.resize(this.board);
         }
 

@@ -6,7 +6,7 @@
         constructor(private _tileConfigs: Array<boolean>) {
         }
 
-        public createRow(rowNumber: number, events: EventSet): Array<BoardTile> {
+        public createRow(rowNumber: number, events: GameEventSet): Array<BoardTile> {
             var row = new Array<BoardTile>();
             for (var columnNumber = 1; columnNumber < this._tileConfigs.length + 1; ++columnNumber) {
                 if (!this._tileConfigs[columnNumber - 1]) {
