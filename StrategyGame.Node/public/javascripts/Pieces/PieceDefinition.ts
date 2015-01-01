@@ -6,7 +6,7 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _interactionProfile: PieceInteractionProfile) {
+            private _interactionProfileFactory: (events: GameEventSet) => PieceInteractionProfile) {
         }
 
         public createPiece(pieceId: string, events: GameEventSet): Piece {
@@ -14,7 +14,7 @@
                 pieceId,
                 this.id,
                 this.imageSource,
-                this._interactionProfile,
+                this._interactionProfileFactory(events),
                 events);
         }
     }

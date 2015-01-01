@@ -2,13 +2,13 @@
 
     export class TurnManager {
         private _teams: Array<Teams.Team>;
-        private _currentOrigin: Pieces.IPieceLocation;
+        private _turnHasEnded: boolean;
 
         constructor(private _events: GameEventSet) {
             this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
             this._events.teamAdded.subscribe(team => this._registerTeam(team));
             this._events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
-            this._events.pieceMoved.subscribe(movement => this._handlePieceMovement(movement));
+            this._events.turnEnded.subscribe((team, eventData) => this._turnEnded(eventData));
 
             this._teams = new Array<Teams.Team>();
         }
@@ -26,14 +26,13 @@
             return true;
         }
 
+        // TODO: Move this check elsewhere:
         private _validatePieceIsFromCurrentTeam(piece: Pieces.Piece): boolean {
-            this._currentOrigin = piece.location;
-
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(piece);
         }
 
-        private _handlePieceMovement(movement: Pieces.PieceMovement): boolean {
-            if (movement.destination !== this._currentOrigin) {
+        private _turnEnded(eventData: TypeScript.EventCallbackSet): boolean {
+            if (this._turnHasEnded === false) {
                 var currentTeamIndex = this._teams.indexOf(this.currentTeam);
                 ++currentTeamIndex;
                 if (currentTeamIndex === this._teams.length) {
@@ -41,11 +40,13 @@
                 }
                 this.setCurrentTeam(currentTeamIndex);
 
-                movement.whenEventCompletes(() => {
+                eventData.whenEventCompletes(() => {
                     if (this._turnStarted()) {
                         this.currentTeam.owner.takeTurn(this.currentTeam);
                     }
                 });
+
+                this._turnHasEnded = true;
             }
             return true;
         }
@@ -55,6 +56,7 @@
         }
 
         private _turnStarted(): boolean {
+            this._turnHasEnded = false;
             return this._events.turnStarted.publish(this.currentTeam);
         }
     }

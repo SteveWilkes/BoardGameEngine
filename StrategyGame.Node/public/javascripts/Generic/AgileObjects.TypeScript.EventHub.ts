@@ -1,38 +1,30 @@
 ﻿module AgileObjects.TypeScript {
 
     export class EventHub<TData> {
-        private _subscribers: Array<(eventData: TData) => boolean>;
+        private _subscribers: Array<(eventData: TData, completionCallbacks: EventCallbackSet) => boolean>;
 
         constructor() {
-            this._subscribers = new Array<(eventData: TData) => boolean>();
+            this._subscribers = new Array<(eventData: TData, completionCallbacks: EventCallbackSet) => boolean>();
         }
 
-        public subscribe(callback: (eventData: TData) => boolean): EventHub<TData> {
+        public subscribe(callback: (eventData: TData, completionCallbacks?: EventCallbackSet) => boolean): EventHub<TData> {
             this._subscribers.push(callback);
             return this;
         }
 
         public publish(eventData: TData): boolean {
+            var callbackSet = new EventCallbackSet();
             for (var i = 0; i < this._subscribers.length; i++) {
-                if (this._subscribers[i](eventData) === false) {
+                if (this._subscribers[i](eventData, callbackSet) === false) {
                     return false;
                 }
             }
-            var eventCallbackSet = <IEventCallbackSet><Object>eventData;
-            if (typeof eventCallbackSet.executeAll === "function") {
-                eventCallbackSet.executeAll();
-            }
+            callbackSet.executeAll();
             return true;
         }
     }
 
-    export interface IEventCallbackSet {
-        whenEventCompletes(callbackToExecute: () => void): void;
-
-        executeAll(): void;
-    }
-
-    export class EventCallbackSetBase implements IEventCallbackSet {
+    export class EventCallbackSet {
         private _callbacks: Array<() => void>;
 
         constructor() {

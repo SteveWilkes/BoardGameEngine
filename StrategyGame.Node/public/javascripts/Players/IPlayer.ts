@@ -33,7 +33,7 @@
             for (var i = 0; i < team.pieces.length; i++) {
                 var piece = team.pieces[i];
                 if (piece.hasBeenTaken()) { continue; }
-                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
+                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, [Pieces.InteractionType.Attack, Pieces.InteractionType.Move]);
                 allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
             }
             var pieceMovement = Pieces.NullPotentialInteraction.instance;

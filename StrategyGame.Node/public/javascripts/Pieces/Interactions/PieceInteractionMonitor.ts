@@ -23,7 +23,8 @@
                     this._pieceDeselected(this._currentOrigin.piece);
                 }
                 this._currentOrigin = piece.location;
-                this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece);
+                var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions();
+                this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
                 for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
                     var interaction = this._currentPotentialInteractions[i];
                     interaction.location.potentialInteraction(interaction);
@@ -61,6 +62,6 @@
     }
 
     export interface IPieceInteractionRegulator {
-        interactionTypeIsAvailable(type: InteractionType): boolean;
+        getCurrentlySupportedInteractions(): Array<InteractionType>;
     }
 }

@@ -4,7 +4,8 @@
         constructor(
             public type: InteractionType,
             private _locationCalculators: Array<RelatedLocationCalculator>,
-            private _interaction: IPieceInteractionConstructor) { }
+            private _interaction: IPieceInteractionConstructor,
+            private _events: GameEventSet) { }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
             for (var i = 0; i < this._locationCalculators.length; i++) {
@@ -17,7 +18,7 @@
             for (var i = 0; i < this._locationCalculators.length; i++) {
                 var interactionLocations = this._locationCalculators[i].calculateLocations(startingLocation);
                 for (var j = 0; j < interactionLocations.length; j++) {
-                    var interaction = new this._interaction(startingLocation, interactionLocations[j]);
+                    var interaction = new this._interaction(startingLocation, interactionLocations[j], this._events);
                     interactions.push(interaction);
                 }
             }

@@ -9,10 +9,12 @@
             }
         }
 
-        public getPotentialInteractions(piece: Piece): Array<IPieceInteraction> {
+        public getPotentialInteractions(piece: Piece, types: Array<InteractionType>): Array<IPieceInteraction> {
             var allInteractions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._interactionCalculators.length; i++) {
-                var interactions = this._interactionCalculators[i].getPotentialInteractions(piece.location);
+                var interactionCalculator = this._interactionCalculators[i];
+                if (types.indexOf(interactionCalculator.type) === -1) { continue; }
+                var interactions = interactionCalculator.getPotentialInteractions(piece.location);
                 allInteractions = allInteractions.concat(interactions);
             }
             return allInteractions;

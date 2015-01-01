@@ -23,12 +23,12 @@
         oneSpaceInAnyDirectionCalculators,
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["2"], [])]);
 
-    var bombAttachmentCalculator = new PieceInteractionCalculator(
-        InteractionType.Move,
-        [bombAttachDestinationsCalculator],
-        PieceInteractionConstructorRegistry.get("m3"));
-
-    var bombInteractionProfile = new PieceInteractionProfile([bombAttachmentCalculator]);
+    var bombInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+        new PieceInteractionCalculator(
+            InteractionType.Move,
+            [bombAttachDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("m3"),
+            events)]);
 
     // Human Heavy Movement
 
@@ -36,21 +36,11 @@
         oneSpaceInAnyDirectionCalculators,
         [new IsUnoccupiedLocationValidator()]);
 
-    var humanHeavyMovementCalculator = new PieceInteractionCalculator(
-        InteractionType.Move,
-        [humanHeavyMoveDestinationsCalculator],
-        PieceInteractionConstructorRegistry.get("m2"));
-
     // Human Heavy Attachment
 
     var humanHeavyAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
-
-    var humanHeavyAttachmentCalculator = new PieceInteractionCalculator(
-        InteractionType.Move,
-        [humanHeavyAttachDestinationsCalculator],
-        PieceInteractionConstructorRegistry.get("m1"));
 
     // Human Heavy Attack
 
@@ -58,13 +48,22 @@
         oneSpaceInAnyDirectionCalculators,
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
-    var humanHeavyAttackCalculator = new PieceInteractionCalculator(
-        InteractionType.Attack,
-        [humanHeavyAttackDestinationsCalculator],
-        PieceInteractionConstructorRegistry.get("a1"));
-
-    var humanHeavyInteractionProfile = new PieceInteractionProfile(
-        [humanHeavyMovementCalculator, humanHeavyAttachmentCalculator, humanHeavyAttackCalculator]);
+    var humanHeavyInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+        new PieceInteractionCalculator(
+            InteractionType.Move,
+            [humanHeavyMoveDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("m2"),
+            events),
+        new PieceInteractionCalculator(
+            InteractionType.Move,
+            [humanHeavyAttachDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("m1"),
+            events),
+        new PieceInteractionCalculator(
+            InteractionType.Attack,
+            [humanHeavyAttackDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("a1"),
+            events)]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -76,12 +75,12 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    bombInteractionProfile),
+                    bombInteractionProfileFactory),
                 "2": new PieceDefinition(
                     "2",
                     "Example",
                     "/images/pieces/HumanHeavy.png",
-                    humanHeavyInteractionProfile)
+                    humanHeavyInteractionProfileFactory)
             };
             this._nextPieceId = 1;
         }

@@ -22,7 +22,7 @@
             numberOfTeams: number): Game {
             var events = new GameEventSet();
 
-            var gameType = this._getGameTypeQuery.execute(gameTypeId);
+            var gameType = this._getGameTypeQuery.execute(gameTypeId, events);
 
             var board = new Boards.Board(gameType.boardType, gameType.interactionRegulator, numberOfTeams, events);
 
