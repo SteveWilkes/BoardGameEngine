@@ -23,7 +23,7 @@
                     this._pieceDeselected(this._currentOrigin.piece);
                 }
                 this._currentOrigin = piece.location;
-                var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions();
+                var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions(piece.team);
                 this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
                 for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
                     var interaction = this._currentPotentialInteractions[i];
@@ -59,9 +59,5 @@
             // ReSharper disable once WrongExpressionStatement
             new PieceInteractionMonitor(interactionRegulator, events);
         }
-    }
-
-    export interface IPieceInteractionRegulator {
-        getCurrentlySupportedInteractions(): Array<InteractionType>;
     }
 }
