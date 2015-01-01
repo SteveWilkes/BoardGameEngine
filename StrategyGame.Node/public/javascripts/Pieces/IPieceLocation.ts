@@ -35,7 +35,9 @@
             return this._isSelected;
         }
 
-        public add(piece: Piece): void { }
+        public add(piece: Piece): void {
+            throw new Error("Abstract PieceLocationBase.add method not implemented");
+        }
 
         public contains(location: IPieceLocation): boolean {
             if (location === this) { return true; }
