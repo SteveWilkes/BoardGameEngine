@@ -21,7 +21,7 @@
                 return true;
             }
 
-            public coordinates = <TypeScript.Coordinates>{ signature: "Taken piece dump" };
+            public coordinates = <TypeScript.Coordinates>{ signature: "Taken pieces" };
             public piece;
             public potentialInteraction;
             public wasPartOfLastMove;
@@ -30,6 +30,7 @@
             public isSelected(): boolean { return false; }
 
             public add(takenPiece: Piece): void {
+                takenPiece.setLocation(this);
                 this._takenPiecesByTeam.get(takenPiece.team).push(takenPiece);
             }
 

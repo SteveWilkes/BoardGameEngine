@@ -19,9 +19,7 @@
             }
 
             private _pieceSelected(piece: Piece): boolean {
-                if ((this._currentOrigin !== undefined) && (this._currentOrigin.piece !== piece)) {
-                    this._pieceDeselected(this._currentOrigin.piece);
-                }
+                if (this._handleNonOriginPieceSelected(piece)) { return true; }
                 this._currentOrigin = piece.location;
                 var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions(piece.team);
                 this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
@@ -32,26 +30,52 @@
                 return true;
             }
 
+            private _handleNonOriginPieceSelected(selectedPiece: Piece): boolean {
+                if (this._currentOrigin === undefined) { return false; }
+                if (this._currentOrigin.piece === selectedPiece) { return false; }
+
+                if (this._currentTeam.owns(selectedPiece)) {
+                    this._handlePieceDeselection(this._currentOrigin.piece);
+                    return false;
+                }
+
+                // A piece on a different team has been selected:
+                return this._handlePieceDeselection(selectedPiece);
+            }
+
             private _pieceDeselected(destination: IPieceLocation): boolean {
+                this._handlePieceDeselection(destination);
+                return true;
+            }
+
+            private _handlePieceDeselection(destination: IPieceLocation): boolean {
                 if (this._currentPotentialInteractions !== undefined) {
                     if (this._currentTeam.owns(this._currentOrigin.piece) && this._currentOrigin.contains(destination)) {
-                        if (this._currentOrigin.isSelected()) {
-                            this._currentOrigin.isSelected(false);
-                        } else {
+                        if (!this._currentOrigin.isSelected()) {
                             this._currentOrigin.isSelected(true);
                             return true;
                         }
+
+                        this._currentOrigin.isSelected(false);
                     }
-                    for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
-                        var location = this._currentPotentialInteractions[i].location;
-                        if (location.contains(destination)) {
-                            location.potentialInteraction().complete();
-                        }
-                        location.potentialInteraction(NullPotentialInteraction.instance);
-                    }
-                    this._currentPotentialInteractions = undefined;
+
+                    return this._completeCurrentInteractions(destination);
                 }
                 return true;
+            }
+
+            private _completeCurrentInteractions(destination: IPieceLocation) {
+                var interactionsCompleted = false;
+                for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
+                    var location = this._currentPotentialInteractions[i].location;
+                    if (location.contains(destination)) {
+                        location.potentialInteraction().complete();
+                        interactionsCompleted = true;
+                    }
+                    location.potentialInteraction(NullPotentialInteraction.instance);
+                }
+                this._currentPotentialInteractions = undefined;
+                return interactionsCompleted;
             }
         }
 
