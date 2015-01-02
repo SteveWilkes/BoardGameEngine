@@ -29,15 +29,15 @@
 
             if (this._currentTurnInteractions.length === 0) {
                 eventData.whenEventCompletes(() => {
-                    this._events.turnEnded.publish(piece.team);
+                    this._events.turnEnded.publish(piece.owner);
                 });
             }
 
             return true;
         }
 
-        public getCurrentlySupportedInteractions(forTeam: Pieces.IPieceOwner): Array<Pieces.InteractionType> {
-            return (forTeam === this._currentTeam) ? this._currentTurnInteractions : this._turnInteractions;
+        public getCurrentlySupportedInteractions(forPiece: Pieces.Piece): Array<Pieces.InteractionType> {
+            return (forPiece.owner === this._currentTeam) ? this._currentTurnInteractions : this._turnInteractions;
         }
     }
 } 

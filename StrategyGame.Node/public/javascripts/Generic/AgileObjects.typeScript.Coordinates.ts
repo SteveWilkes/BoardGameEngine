@@ -5,6 +5,8 @@
     }
 
     export class Coordinates {
+        static EMPTY = new Coordinates(-1, -1, "Empty");
+
         constructor(public row: number, public column: number, public signature: string = getSignature(row, column)) {
             this.isEvenRow = this.row % 2 === 0;
             this.isEvenColumn = this.column % 2 === 0;

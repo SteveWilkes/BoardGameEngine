@@ -21,7 +21,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationConfigData.js");
-    assets.addJs("/public/javascripts/Pieces/IPieceLocation.js");
+    assets.addJs("/public/javascripts/Pieces/NullPieceLocation.js");
+    assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
     assets.addJs("/public/javascripts/Players/IPlayer.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
     assets.addJs("/public/javascripts/Boards/BoardPosition.js");

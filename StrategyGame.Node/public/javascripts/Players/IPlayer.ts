@@ -36,8 +36,8 @@
                 var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, [Pieces.InteractionType.Attack, Pieces.InteractionType.Move]);
                 allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
             }
-            var pieceMovement = Pieces.NullPotentialInteraction.instance;
-            var pieceAttack = Pieces.NullPotentialInteraction.instance;
+            var pieceMovement = Pieces.NullPotentialInteraction.INSTANCE;
+            var pieceAttack = Pieces.NullPotentialInteraction.INSTANCE;
             while (pieceMovement.type !== Pieces.InteractionType.Move) {
                 var interaction = this._getRandomInteraction(allPotentialInteractions);
                 if (interaction.type === Pieces.InteractionType.Attack) {

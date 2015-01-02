@@ -21,7 +21,7 @@
             private _pieceSelected(piece: Piece): boolean {
                 if (this._handleNonOriginPieceSelected(piece)) { return true; }
                 this._currentOrigin = piece.location;
-                var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions(piece.team);
+                var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions(piece);
                 this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
                 for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
                     var interaction = this._currentPotentialInteractions[i];
@@ -72,7 +72,7 @@
                         location.potentialInteraction().complete();
                         interactionsCompleted = true;
                     }
-                    location.potentialInteraction(NullPotentialInteraction.instance);
+                    location.potentialInteraction(NullPotentialInteraction.INSTANCE);
                 }
                 this._currentPotentialInteractions = undefined;
                 return interactionsCompleted;

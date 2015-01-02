@@ -40,6 +40,11 @@
 
             return new TryGetResult(value);
         }
+
+        public set(key: TKey, value: TValue): void {
+            var keyIndex = this.keys.indexOf(key);
+            this.values[keyIndex] = value;
+        }
     }
 
     export class TryGetResult<TValue> {
