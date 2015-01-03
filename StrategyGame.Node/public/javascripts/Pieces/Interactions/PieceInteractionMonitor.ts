@@ -8,12 +8,12 @@
             private _currentPotentialInteractions: Array<IPieceInteraction>;
 
             constructor(private _interactionRegulator: IPieceInteractionRegulator, events: GameEventSet) {
-                events.turnStarted.subscribe((team: IPieceOwner) => this._turnStarted(team));
-                events.pieceSelected.subscribe((piece: Piece) => this._pieceSelected(piece));
-                events.pieceDeselected.subscribe((location: IPieceLocation) => this._pieceDeselected(location));
+                events.turnStarted.subscribe(team => this._registerTeam(team));
+                events.pieceSelected.subscribe(piece => this._pieceSelected(piece));
+                events.pieceDeselected.subscribe(location => this._pieceDeselected(location));
             }
 
-            private _turnStarted(team: IPieceOwner): boolean {
+            private _registerTeam(team: IPieceOwner): boolean {
                 this._currentTeam = team;
                 return true;
             }
