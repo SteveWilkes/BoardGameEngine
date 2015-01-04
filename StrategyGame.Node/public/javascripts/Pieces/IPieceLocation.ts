@@ -10,7 +10,7 @@
         contains(location: IPieceLocation): boolean;
         piece: Piece;
         movePieceTo(destination: IPieceLocation): void;
-        potentialInteraction(interaction?: IPieceInteraction): IPieceInteraction;
+        potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction>;
         wasPartOfLastMove: boolean;
     }
 } 

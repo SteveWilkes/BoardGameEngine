@@ -5,6 +5,6 @@
     export interface IPieceInteraction {
         type: InteractionType;
         location: IPieceLocation;
-        complete();
+        complete(): void;
     }
 }

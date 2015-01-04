@@ -7,7 +7,7 @@
         constructor(private _events: GameEventSet) {
             this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
             this._events.teamAdded.subscribe(team => this._registerTeam(team));
-            this._events.pieceMoving.subscribe(piece => this._validatePieceIsFromCurrentTeam(piece));
+            this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
             this._events.turnEnded.subscribe((team, eventData) => this._turnEnded(eventData));
 
             this._teams = new Array<Teams.Team>();
@@ -26,8 +26,7 @@
             return true;
         }
 
-        // TODO: Move this check elsewhere:
-        private _validatePieceIsFromCurrentTeam(piece: Pieces.Piece): boolean {
+        private _verifyPieceIsMovable(piece: Pieces.Piece): boolean {
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(piece);
         }
 

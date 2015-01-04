@@ -29,7 +29,7 @@
 
             if (this._currentTurnInteractions.length === 0) {
                 eventData.whenEventCompletes(() => {
-                    this._events.turnEnded.publish(piece.owner);
+                    this._events.turnEnded.publish(piece.team);
                 });
             }
 
@@ -37,7 +37,7 @@
         }
 
         public getCurrentlySupportedInteractions(forPiece: Pieces.Piece): Array<Pieces.InteractionType> {
-            return (forPiece.owner === this._currentTeam) ? this._currentTurnInteractions : this._turnInteractions;
+            return (forPiece.team === this._currentTeam) ? this._currentTurnInteractions : this._turnInteractions;
         }
     }
 } 

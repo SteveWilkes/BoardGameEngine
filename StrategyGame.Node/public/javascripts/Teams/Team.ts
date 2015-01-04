@@ -16,6 +16,8 @@
         public owner: ITeamOwner;
         public pieces: Array<Pieces.Piece>;
 
+        public isLocal(): boolean { return this.owner.isLocal; }
+
         public setNumber(teamNumber: number): void {
             for (var i = 0; i < this.pieces.length; i++) {
                 this.pieces[i].setTeamNumber(teamNumber);

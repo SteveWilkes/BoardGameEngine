@@ -12,6 +12,7 @@
 
     class GameFactory implements IGameFactory {
         constructor(
+            private _timeoutService: ng.ITimeoutService,
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
             private _teamFactory: Teams.ITeamFactory,
             private _idGenerator: Angular.Services.IIdGenerator) { }
@@ -24,7 +25,8 @@
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId, events);
 
-            var board = new Boards.Board(gameType.boardType, gameType.interactionRegulator, numberOfTeams, events);
+            var interactionMonitor = new Pieces.PieceInteractionMonitor(this._timeoutService, gameType.interactionRegulator, events);
+            var board = new Boards.Board(gameType.boardType, interactionMonitor, numberOfTeams, events);
 
             var gameId = this._idGenerator.getId();
             var game = new Game(gameId, gameType, displayManager, board, events);
@@ -49,6 +51,7 @@
     angular
         .module(strategyGameApp)
         .service($gameFactory, [
+            "$timeout",
             $getGameTypeQuery,
             Teams.$teamFactory,
             Angular.Services.$idGenerator,

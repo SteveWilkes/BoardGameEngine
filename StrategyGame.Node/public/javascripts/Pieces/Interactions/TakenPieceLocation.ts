@@ -23,7 +23,7 @@
 
             public coordinates = <TypeScript.Coordinates>{ signature: "Taken pieces" };
             public piece;
-            public potentialInteraction;
+            public potentialInteractions;
             public wasPartOfLastMove;
 
             public isOccupied(): boolean { return false; }

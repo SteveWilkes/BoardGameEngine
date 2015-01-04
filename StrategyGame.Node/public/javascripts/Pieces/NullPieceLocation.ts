@@ -1,6 +1,9 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export module NullPieceLocation {
+
+        var noInteractions = new Array<IPieceInteraction>(0);
+
         class NullPieceLocation implements IPieceLocation {
             piece: Piece;
             owner: IPieceOwner;
@@ -13,8 +16,8 @@
             contains(location: IPieceLocation): boolean { return false; }
             movePieceTo(destination: IPieceLocation): void { }
 
-            potentialInteraction(interaction?: IPieceInteraction): IPieceInteraction {
-                return NullPotentialInteraction.INSTANCE;
+            potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
+                return noInteractions;
             }
         }
 

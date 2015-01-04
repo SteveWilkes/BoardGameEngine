@@ -17,11 +17,21 @@
         }
 
         public isPotentialDestination(): boolean {
-            return this.potentialInteraction().type === Pieces.InteractionType.Move;
+            return this._hasPotentialInteractionOfType(Pieces.InteractionType.Move);
         }
 
         public isPotentialAttackTarget(): boolean {
-            return this.potentialInteraction().type === Pieces.InteractionType.Attack;
+            return this._hasPotentialInteractionOfType(Pieces.InteractionType.Attack);
+        }
+
+        private _hasPotentialInteractionOfType(type: Pieces.InteractionType): boolean {
+            var potentialInteractions = this.potentialInteractions();
+            for (var i = 0; i < potentialInteractions.length; i++) {
+                if (potentialInteractions[i].type === type) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

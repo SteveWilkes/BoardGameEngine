@@ -1,16 +1,15 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export class PieceLocationBase implements IPieceLocation {
-        private _potentialInteraction: IPieceInteraction;
+        private _potentialInteractions: Array<IPieceInteraction>;
         private _isSelected: boolean;
 
         constructor(private _events: GameEventSet) {
-            this._potentialInteraction = NullPotentialInteraction.INSTANCE;
+            this._potentialInteractions = new Array<IPieceInteraction>();
         }
 
         public coordinates: TypeScript.Coordinates;
         public piece: Piece;
-        public owner: IPieceOwner;
         public wasPartOfLastMove: boolean;
 
         public isOccupied(): boolean {
@@ -40,11 +39,11 @@
             this._events.pieceMoved.publish(new Pieces.PieceMovement(this, destination));
         }
 
-        public potentialInteraction(interaction?: IPieceInteraction): IPieceInteraction {
-            if (interaction !== undefined) {
-                this._potentialInteraction = interaction;
+        public potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
+            if (interactions !== undefined) {
+                this._potentialInteractions = interactions;
             }
-            return this._potentialInteraction;
+            return this._potentialInteractions;
         }
     }
 } 

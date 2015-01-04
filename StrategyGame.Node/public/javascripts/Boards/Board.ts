@@ -8,7 +8,7 @@
 
         constructor(
             public type: BoardType,
-            pieceInteractionRegulator: Pieces.IPieceInteractionRegulator,
+            pieceInteractionMonitor: Pieces.PieceInteractionMonitor,
             private _numberOfTeams: number,
             events: GameEventSet) {
             events.teamAdded.subscribe(team => this._addTeam(team));
@@ -16,7 +16,7 @@
             this._createTiles(events);
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
 
-            Pieces.PieceInteractionMonitor.create(pieceInteractionRegulator, events);
+            pieceInteractionMonitor.begin();
             Pieces.TakenPieceLocation.create(events);
         }
 

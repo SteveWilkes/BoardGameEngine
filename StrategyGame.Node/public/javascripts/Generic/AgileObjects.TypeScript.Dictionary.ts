@@ -19,11 +19,15 @@
                 throw new Error("Key " + key + " already exists");
             }
 
+            this._doAdd(key, value);
+
+            return this;
+        }
+
+        private _doAdd(key: TKey, value: TValue): void {
             this.keys.push(key);
             this.values.push(value);
             ++this.count;
-
-            return this;
         }
 
         public get(key: TKey): TValue {
@@ -39,6 +43,14 @@
             var value = (keyIndex > -1) ? this.values[keyIndex] : undefined;
 
             return new TryGetResult(value);
+        }
+
+        public getOrAdd(key: TKey, valueFactory: () => TValue): TValue {
+            var getResult = this.tryGet(key);
+            if (getResult.found) { return getResult.value; }
+            var value = valueFactory();
+            this._doAdd(key, value);
+            return value;
         }
 
         public set(key: TKey, value: TValue): void {
