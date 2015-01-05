@@ -30,9 +30,7 @@
                 this._currentTurnInteractions.length);
 
             if (this._currentTurnInteractions.length === 0) {
-                eventData.whenEventCompletes(() => {
-                    this._events.turnEnded.publish(piece.team);
-                });
+                eventData.whenEventCompletes(() => this._events.turnEnded.publish(piece.team));
             }
 
             return true;
