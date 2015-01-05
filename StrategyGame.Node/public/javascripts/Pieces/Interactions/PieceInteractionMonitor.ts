@@ -214,12 +214,20 @@
                 this._populatePotentialInteractionsFrom(this._currentlyChosenPiece);
             }
 
-            this._completeInteractionAt(destination, interaction =>
-                this._pieceDraggedOntoEnemyPieceButNotMoved(interaction.location));
+            var pieceMoveCompleted;
 
-            this._clearCurrentPotentialInteractions();
+            this._completeInteractionAt(destination, interaction => {
+                pieceMoveCompleted = interaction.location.contains(this._currentlyChosenPiece);
+                return this._selectedPieceDraggedOntoEnemyPieceButNotMoved(interaction.location);
+            });
 
-            // Bug: Drag piece onto enemy piece, attack performed but interactions no longer shown
+            // ReSharper disable once ConditionIsAlwaysConst
+            // ReSharper disable once HeuristicallyUnreachableCode
+            if (pieceMoveCompleted) {
+                this._clearCurrentPotentialInteractions();
+            }
+
+            // Bug: CPU gets a turn after one of its Pieces is taken before Human turn has ended
 
             return true;
         }
@@ -242,8 +250,9 @@
             }
         }
 
-        private _pieceDraggedOntoEnemyPieceButNotMoved(destination: IPieceLocation) {
-            return destination.isOccupied() &&
+        private _selectedPieceDraggedOntoEnemyPieceButNotMoved(destination: IPieceLocation) {
+            return (this._currentlySelectedPiece !== undefined) &&
+                destination.isOccupied() &&
                 !this._currentTeam.owns(destination.piece) &&
                 !destination.contains(this._currentlyChosenPiece);
         }
