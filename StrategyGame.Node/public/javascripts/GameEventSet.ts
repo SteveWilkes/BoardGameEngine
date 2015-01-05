@@ -6,6 +6,7 @@
 
         public gameStarted = new TypeScript.EventHub<Teams.Team>();
         public turnStarted = new TypeScript.EventHub<Pieces.IPieceOwner>();
+        public locationSelected = new TypeScript.EventHub<Pieces.IPieceLocation>();
         public pieceSelected = new TypeScript.EventHub<Pieces.Piece>();
         public pieceMoving = new TypeScript.EventHub<Pieces.Piece>();
         public pieceDeselected = new TypeScript.EventHub<Pieces.Piece>();

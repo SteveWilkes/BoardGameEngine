@@ -14,7 +14,8 @@
                 'board-recent-tile': tile.wasPartOfLastMove && (tile.potentialInteractions().length === 0) }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
-                  data-droppable data-subject="game.events" data-item="tile" data-drop="'pieceDeselected'")
+                  data-draggable-droppable data-subject="game.events" data-item="tile" 
+                  data-dragselect="'locationSelected'" data-drop="'pieceDeselected'")
                 img.piece(
                   id="{{tile.piece.id}}"
                   data-ng-if="tile.isOccupied()"

@@ -23,6 +23,7 @@
         public begin() {
             this._events.turnStarted.subscribe(team => this._updateCurrentTeam(team));
             this._events.pieceSelected.subscribe(piece => this._showPotentialInteractionsAfterDelay(piece));
+            this._events.locationSelected.subscribe(location => this._handleLocationSelected(location));
             this._events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
             this._events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
         }
@@ -76,6 +77,7 @@
             this._currentlyHighlightedPiece = undefined;
 
             if (this._currentlySelectedPiece !== undefined) {
+                this._currentlyChosenPiece = this._currentlySelectedPiece;
                 this._showPotentialInteractionsFor(this._currentlySelectedPiece);
             }
         }
@@ -84,6 +86,12 @@
             while (this._currentPotentialInteractions.length > 0) {
                 this._currentPotentialInteractions.shift().location.potentialInteractions(_none);
             }
+        }
+
+        private _handleLocationSelected(location: IPieceLocation): boolean {
+            if (this._currentlySelectedPiece === undefined) { return false; }
+
+            return this._completeMovementInteraction(location, () => false);
         }
 
         private _handleInteractionEnded(location: IPieceLocation): boolean {
@@ -101,10 +109,6 @@
                 }
 
                 return this._handlePieceClick(location);
-            }
-
-            if (!location.isOccupied()) {
-                // TODO: Handle empty BoardTile clicks
             }
 
             return this._handlePieceMove(location);
@@ -189,11 +193,21 @@
                 this._populatePotentialInteractionsFrom(this._currentlyChosenPiece);
             }
 
+            this._completeMovementInteraction(destination, interaction => {
+                return this._selectedPieceDraggedOntoEnemyPieceButNotMoved(interaction.location);
+            });
+
+            return true;
+        }
+
+        private _completeMovementInteraction(
+            destination: IPieceLocation,
+            refreshInteractions: (interaction: IPieceInteraction) => boolean): boolean {
             var pieceMoveCompleted;
 
             this._completeInteractionAt(destination, interaction => {
                 pieceMoveCompleted = interaction.location.contains(this._currentlyChosenPiece);
-                return this._selectedPieceDraggedOntoEnemyPieceButNotMoved(interaction.location);
+                return refreshInteractions(interaction);
             });
 
             // ReSharper disable once ConditionIsAlwaysConst
@@ -202,7 +216,7 @@
                 this._clearCurrentPotentialInteractions();
             }
 
-            return true;
+            return pieceMoveCompleted;
         }
 
         private _completeInteractionAt(
