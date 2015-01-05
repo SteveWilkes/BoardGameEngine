@@ -34,6 +34,8 @@
         public applyDamage(damage: number): void {
             this.health -= damage;
 
+            this._eventsLocal.pieceAttacked.publish(this);
+
             if (this.hasBeenTaken()) {
                 this._eventsLocal.pieceTaken.publish(this);
             }

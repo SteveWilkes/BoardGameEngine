@@ -11,7 +11,6 @@
         public complete(): void {
             // TODO: Implement attacking and movement consistently
             this.location.piece.applyDamage(35);
-            this._events.pieceAttacked.publish(this.location.piece);
         }
     }
 }

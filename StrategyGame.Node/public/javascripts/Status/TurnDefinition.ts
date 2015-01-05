@@ -21,6 +21,8 @@
             piece: Pieces.Piece,
             eventData: TypeScript.EventCallbackSet): boolean {
 
+            if (this._pieceHasBeenMovedToTakenPieceLocation(piece)) { return true; }
+
             var turnMovementIndex = this._currentTurnInteractions.indexOf(completedInteractionType);
 
             this._currentTurnInteractions = this._currentTurnInteractions.slice(
@@ -34,6 +36,10 @@
             }
 
             return true;
+        }
+
+        private _pieceHasBeenMovedToTakenPieceLocation(piece: Pieces.Piece): boolean {
+            return piece.location.coordinates.row === undefined;
         }
 
         public getCurrentlySupportedInteractions(forPiece: Pieces.Piece): Array<Pieces.InteractionType> {

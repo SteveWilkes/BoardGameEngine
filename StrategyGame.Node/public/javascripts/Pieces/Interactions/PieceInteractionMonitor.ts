@@ -227,8 +227,6 @@
                 this._clearCurrentPotentialInteractions();
             }
 
-            // Bug: CPU gets a turn after one of its Pieces is taken before Human turn has ended
-
             return true;
         }
 
