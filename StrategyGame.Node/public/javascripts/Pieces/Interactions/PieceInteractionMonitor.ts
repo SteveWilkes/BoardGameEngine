@@ -4,7 +4,6 @@
 
     export class PieceInteractionMonitor {
         private _currentTeam: IPieceOwner;
-        private _previouslyChosenPiece: Piece;
         private _currentlyChosenPiece: Piece;
         private _currentlyHighlightedPiece: Piece;
         private _pieceHighlightTimeouts: Array<ng.IPromise<any>>;
@@ -35,7 +34,6 @@
 
         private _showPotentialInteractionsAfterDelay(piece: Piece): boolean {
             this._interactionHandled = false;
-            this._previouslyChosenPiece = this._currentlyChosenPiece;
             this._currentlyChosenPiece = piece;
             this._pieceHighlightTimeouts.push(this._timeoutService(() => {
                 if (piece === this._currentlyChosenPiece) {
@@ -192,17 +190,16 @@
         }
 
         private _selectCurrentlyChosenPiece(): void {
-            this._deselectPreviouslyChosenPieceIfRequired();
+            this._deselectCurrentlySelectedPieceIfRequired();
 
             this._currentlySelectedPiece = this._currentlyChosenPiece;
             this._currentlySelectedPiece.location.isSelected(true);
             this._showPotentialInteractionsFor(this._currentlySelectedPiece);
         }
 
-        private _deselectPreviouslyChosenPieceIfRequired(): void {
-            if ((this._previouslyChosenPiece !== undefined) &&
-                this._previouslyChosenPiece.location.isSelected()) {
-                this._deselect(this._previouslyChosenPiece);
+        private _deselectCurrentlySelectedPieceIfRequired(): void {
+            if (this._currentlySelectedPiece !== undefined) {
+                this._deselect(this._currentlySelectedPiece);
             }
         }
 
