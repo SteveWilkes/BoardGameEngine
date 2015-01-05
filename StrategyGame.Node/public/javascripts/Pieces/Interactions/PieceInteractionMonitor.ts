@@ -96,7 +96,6 @@
             if (location.contains(this._currentlyChosenPiece)) {
 
                 if (this._pieceHighlightingIsActive()) {
-                    // The mouse has been released after a piece was highlighted by a held left click:
                     this._cancelPieceHighlighting();
                     return true;
                 }
@@ -122,24 +121,6 @@
         }
 
         private _handlePieceClick(location: IPieceLocation): boolean {
-            // Release from a click:
-            //   If current team:
-            //     If piece owned:
-            //       If selected: <- done
-            //         Hide interactions, deselect
-            //       If not selected:
-            //         Immediately show interactions, select
-            //     If piece not owned:
-            //       Do nothing <- done
-            //   If non-current team
-            //     If piece owned:
-            //       Do nothing <- done
-            //     If piece not owned:
-            //       If attack target:
-            //         Apply attack, refresh interactions <- done
-            //       If not attack target:
-            //         Do nothing <- done
-
             var isPieceOwned = this._currentlyChosenPiece.team.isLocal();
             var isPieceFromCurrentTeam = this._currentTeam.owns(this._currentlyChosenPiece);
 
@@ -204,12 +185,6 @@
         }
 
         private _handlePieceMove(destination: IPieceLocation): boolean {
-            // Release from a drag:
-            //   If potential interaction location:
-            //     Complete interaction, refresh interactions <- done
-            //   If not potential interaction location:
-            //     Cancel drag <- done
-
             if (this._currentPotentialInteractions.length === 0) {
                 this._populatePotentialInteractionsFrom(this._currentlyChosenPiece);
             }
