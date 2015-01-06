@@ -31,10 +31,12 @@
             this.coordinates = location.coordinates;
         }
 
-        public applyDamage(damage: number): void {
-            this.health -= damage;
+        public applyAttackBy(attacker: Piece): void {
+            var attack = new PieceAttack(attacker, this, 35);
 
-            this._eventsLocal.pieceAttacked.publish(this);
+            this.health -= attack.damage;
+
+            this._eventsLocal.pieceAttacked.publish(attack);
 
             if (this.hasBeenTaken()) {
                 this._eventsLocal.pieceTaken.publish(this);

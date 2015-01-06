@@ -3,6 +3,7 @@
     export class History {
         constructor(events: GameEventSet) {
             events.pieceMoved.subscribe(movement => this._recordPieceMovement(movement));
+            events.pieceAttacked.subscribe(attack => this._recordPieceAttack(attack));
 
             this.actions = new Array<IGameAction>();
         }
@@ -17,6 +18,11 @@
             this.lastMove = movement;
             movement.setWasPartOfLastMove(true);
             this.actions.push(new PieceMoveAction(this.lastMove));
+            return true;
+        }
+
+        private _recordPieceAttack(attack: Pieces.PieceAttack): boolean {
+            this.actions.push(new PieceAttackAction(attack));
             return true;
         }
     }

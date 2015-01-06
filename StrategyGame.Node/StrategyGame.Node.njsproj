@@ -75,6 +75,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionCalculator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionConstructorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteractionRegulator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
@@ -86,6 +87,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />

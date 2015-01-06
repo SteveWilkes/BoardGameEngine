@@ -11,7 +11,7 @@
         public pieceMoving = new TypeScript.EventHub<Pieces.Piece>();
         public pieceDeselected = new TypeScript.EventHub<Pieces.Piece>();
         public pieceMoved = new TypeScript.EventHub<Pieces.PieceMovement>();
-        public pieceAttacked = new TypeScript.EventHub<Pieces.Piece>();
+        public pieceAttacked = new TypeScript.EventHub<Pieces.PieceAttack>();
         public pieceTaken = new TypeScript.EventHub<Pieces.Piece>();
         public turnEnded = new TypeScript.EventHub<Pieces.IPieceOwner>();
     }

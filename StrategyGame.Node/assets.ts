@@ -31,6 +31,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardType.js");
     assets.addJs("/public/javascripts/Boards/GetBoardTypeQuery.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovement.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/PieceAttack.js");
     assets.addJs("/public/javascripts/GlobalEventSet.js");
     assets.addJs("/public/javascripts/GameEventSet.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
@@ -46,6 +47,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/TurnDefinition.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
+    assets.addJs("/public/javascripts/Status/PieceAttackAction.js");
     assets.addJs("/public/javascripts/Status/History.js");
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsOccupiedLocationValidator.js");
