@@ -11,7 +11,8 @@
                 'dark-tile': tile.isDark, 'light-tile': !tile.isDark,\
                 'board-destination-tile': tile.isPotentialDestination(),\
                 'board-target-tile': tile.isPotentialAttackTarget(),\
-                'board-recent-tile': tile.wasPartOfLastMove && (tile.potentialInteractions().length === 0) }")
+                'board-movement-tile': tile.wasPartOfLastMove && (tile.potentialInteractions().length === 0),\
+                'board-attack-tile': tile.wasAttacked }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
                   data-draggable-droppable data-subject="game.events" data-item="tile" 
