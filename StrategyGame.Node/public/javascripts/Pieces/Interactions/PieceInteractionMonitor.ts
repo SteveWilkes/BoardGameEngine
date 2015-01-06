@@ -26,6 +26,7 @@
             this._events.locationSelected.subscribe(location => this._handleLocationSelected(location));
             this._events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
             this._events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
+            this._events.turnEnded.subscribe(() => this._deselectCurrentlySelectedPieceIfRequired());
         }
 
         private _updateCurrentTeam(team: IPieceOwner): boolean {
@@ -182,10 +183,11 @@
             this._showPotentialInteractionsFor(this._currentlySelectedPiece);
         }
 
-        private _deselectCurrentlySelectedPieceIfRequired(): void {
+        private _deselectCurrentlySelectedPieceIfRequired(): boolean {
             if (this._currentlySelectedPiece !== undefined) {
-                this._deselect(this._currentlySelectedPiece);
+                this._deselectCurrentlySelectedPiece();
             }
+            return true;
         }
 
         private _handlePieceMove(destination: IPieceLocation): boolean {
