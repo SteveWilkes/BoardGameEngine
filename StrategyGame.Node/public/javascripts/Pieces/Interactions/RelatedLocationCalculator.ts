@@ -12,28 +12,37 @@
             this._allLocations = allLocations;
         }
 
-        public calculateLocations(startingLocation: IPieceLocation): Array<IPieceLocation> {
-            var locations = new Array<IPieceLocation>();
+        public calculatePathsToLocations(startingLocation: IPieceLocation): Array<Array<IPieceLocation>> {
+            var paths = new Array<Array<IPieceLocation>>();
             var j;
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
                 var coordinateTranslators = this._coordinateTranslatorSets[i];
+                var path = new Array<IPieceLocation>(startingLocation);
                 var locationCoordinates = startingLocation.coordinates;
+                var pathInvalid = false;
                 for (j = 0; j < coordinateTranslators.length; j++) {
                     locationCoordinates = coordinateTranslators[j].translate(locationCoordinates);
+                    var location = this._allLocations[locationCoordinates.signature];
+                    if (location === undefined) {
+                        pathInvalid = true;
+                        break;
+                    }
+                    path.push(location);
                 }
-                var location = this._allLocations[locationCoordinates.signature];
-                if (location === undefined) { continue; }
-                var allValidatorsValid = true;
+                if (pathInvalid) { continue; }
+                var destination = path[path.length - 1];
+                var anyValidatorsInvalid = false;
                 for (j = 0; j < this._locationValidators.length; j++) {
-                    if (!this._locationValidators[j].isValid(location, startingLocation.piece)) {
-                        allValidatorsValid = false;
+                    // TODO: Validate entire path?
+                    if (!this._locationValidators[j].isValid(destination, startingLocation.piece)) {
+                        anyValidatorsInvalid = true;
                         break;
                     }
                 }
-                if (!allValidatorsValid) { continue; }
-                locations.push(location);
+                if (anyValidatorsInvalid) { continue; }
+                paths.push(path);
             }
-            return locations;
+            return paths;
         }
     }
 }

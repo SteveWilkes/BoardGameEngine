@@ -17,7 +17,7 @@
             }
 
             private _pieceTaken(takenPiece: Piece): boolean {
-                takenPiece.location.movePieceTo(this);
+                takenPiece.location.movePieceThrough([this]);
                 return true;
             }
 
@@ -46,7 +46,7 @@
                 return false;
             }
 
-            public movePieceTo(): void { }
+            public movePieceThrough(): void { }
         }
 
         export var create = (events: GameEventSet) => {

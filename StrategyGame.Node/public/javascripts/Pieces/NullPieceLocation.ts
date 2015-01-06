@@ -14,7 +14,7 @@
             isSelected(newValue?: boolean): boolean { return false; }
             add(piece: Piece): void { }
             contains(location: IPieceLocation): boolean { return false; }
-            movePieceTo(destination: IPieceLocation): void { }
+            movePieceThrough(path: Array<IPieceLocation>): void { }
 
             potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
                 return noInteractions;

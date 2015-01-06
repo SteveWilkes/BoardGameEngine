@@ -30,13 +30,15 @@
             return this.isOccupied() && this.piece.contains(location);
         }
 
-        public movePieceTo(destination: Pieces.IPieceLocation): void {
+        public movePieceThrough(path: Array<IPieceLocation>): void {
             var piece = this.piece;
             this.piece = undefined;
 
-            destination.add(piece);
+            var movement = new Pieces.PieceMovement(path);
 
-            this._events.pieceMoved.publish(new Pieces.PieceMovement(this, destination));
+            movement.destination.add(piece);
+
+            this._events.pieceMoved.publish(movement);
         }
 
         public potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
