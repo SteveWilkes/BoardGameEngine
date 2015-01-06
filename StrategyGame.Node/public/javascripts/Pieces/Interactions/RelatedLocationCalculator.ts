@@ -5,7 +5,7 @@
 
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _locationValidators: Array<IPieceLocationValidator>) {
+            private _destinationValidators: Array<IPieceLocationValidator>) {
         }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
@@ -32,9 +32,9 @@
                 if (pathInvalid) { continue; }
                 var destination = path[path.length - 1];
                 var anyValidatorsInvalid = false;
-                for (j = 0; j < this._locationValidators.length; j++) {
+                for (j = 0; j < this._destinationValidators.length; j++) {
                     // TODO: Validate entire path?
-                    if (!this._locationValidators[j].isValid(destination, startingLocation.piece)) {
+                    if (!this._destinationValidators[j].isValid(destination, startingLocation.piece)) {
                         anyValidatorsInvalid = true;
                         break;
                     }
