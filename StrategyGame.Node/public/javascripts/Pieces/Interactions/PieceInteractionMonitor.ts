@@ -79,7 +79,7 @@
             this._clearCurrentPotentialInteractions();
             this._currentlyHighlightedPiece = undefined;
 
-            if (this._currentlySelectedPiece !== undefined) {
+            if (this._pieceIsSelected()) {
                 this._currentlyChosenPiece = this._currentlySelectedPiece;
                 this._showPotentialInteractionsFor(this._currentlySelectedPiece);
             }
@@ -138,7 +138,7 @@
                 }
 
                 // You've clicked on one of your Pieces during your turn...
-                if (this._currentlyChosenPiece.location.isSelected()) {
+                if (this._pieceIsSelected()) {
                     this._deselectCurrentlySelectedPiece();
                     return true;
                 }
@@ -186,7 +186,7 @@
         }
 
         private _deselectCurrentlySelectedPieceIfRequired(): boolean {
-            if (this._currentlySelectedPiece !== undefined) {
+            if (this._pieceIsSelected()) {
                 this._deselectCurrentlySelectedPiece();
             }
             return true;
@@ -242,10 +242,14 @@
         }
 
         private _selectedPieceDraggedOntoEnemyPieceButNotMoved(destination: IPieceLocation) {
-            return (this._currentlySelectedPiece !== undefined) &&
+            return this._pieceIsSelected() &&
                 destination.isOccupied() &&
                 !this._currentTeam.owns(destination.piece) &&
                 !destination.contains(this._currentlyChosenPiece);
+        }
+
+        private _pieceIsSelected(): boolean {
+            return this._currentlySelectedPiece !== undefined;
         }
     }
 }
