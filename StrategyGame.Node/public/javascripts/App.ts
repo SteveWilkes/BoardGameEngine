@@ -9,8 +9,7 @@
         game: Game;
     }
 
-    AgileObjects.StrategyGame.addAddClassFromEvent(game);
-
+    Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);
     Angular.Directives.addDraggableDroppable(game);
     Angular.Directives.addDroppable(game);
