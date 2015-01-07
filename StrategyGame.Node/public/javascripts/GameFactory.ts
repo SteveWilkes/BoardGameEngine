@@ -5,7 +5,10 @@
     import Teams = StrategyGame.Game.Teams;
 
     export interface IGameFactory {
-        createNewGame(displayManager: Boards.BoardDisplayManager, boardTypeId: string, numberOfTeams: number): Game;
+        createNewGame(
+            displayManager: Boards.BoardDisplayManager,
+            boardTypeId: string,
+            numberOfTeams: number): Game;
     }
 
     export var $gameFactory = "$gameFactory";
@@ -15,6 +18,7 @@
             private _timeoutService: ng.ITimeoutService,
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
             private _teamFactory: Teams.ITeamFactory,
+            private _eventPropogator: Angular.Services.IEventPropogationService,
             private _idGenerator: Angular.Services.IIdGenerator) { }
 
         public createNewGame(
@@ -22,6 +26,11 @@
             gameTypeId: string,
             numberOfTeams: number): Game {
             var events = new GameEventSet();
+
+            this._eventPropogator.propogate(
+                events.pieceAttacked,
+                "attack",
+                attack => attack.target.coordinates.signature);
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId, events);
 
@@ -54,6 +63,7 @@
             "$timeout",
             $getGameTypeQuery,
             Teams.$teamFactory,
+            Angular.Services.$eventPropogator,
             Angular.Services.$idGenerator,
             GameFactory]);
 } 

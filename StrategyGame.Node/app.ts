@@ -23,7 +23,7 @@ var publicRoot = path.join(__dirname, "public");
 if (!isRelease) {
     var fileSystem = require("fs");
     var stylus = require("stylus");
-    var stylesheets = ["site", "animations"];
+    var stylesheets = ["site", "board-tile-attack-animation"];
     for (var i = 0; i < stylesheets.length; i++) {
         var stylusData = fileSystem.readFileSync(
             path.join(publicRoot, "stylesheets/" + stylesheets[i] + ".styl"),

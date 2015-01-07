@@ -5,6 +5,8 @@
     div(data-ng-repeat="row in game.board.rows")
         div(data-ng-repeat="tile in row track by $index")
             .board-tile(
+              id="{{tile.coordinates.signature}}"
+              data-add-class-from-event
               data-ng-style="{ width: game.displayManager.tileSize, height: game.displayManager.tileSize }"
               data-ng-class="{\
                 'available': tile.isGameTile, 'placeholder': !tile.isGameTile,\

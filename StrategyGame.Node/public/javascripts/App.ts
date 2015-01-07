@@ -9,6 +9,8 @@
         game: Game;
     }
 
+    AgileObjects.StrategyGame.addAddClassFromEvent(game);
+
     Angular.Directives.addDraggable(game);
     Angular.Directives.addDraggableDroppable(game);
     Angular.Directives.addDroppable(game);
@@ -17,4 +19,5 @@
     Angular.Directives.addTabs(game);
 
     Angular.Services.addIdGenerator(game);
+    Angular.Services.addEventPropogation(game);
 }

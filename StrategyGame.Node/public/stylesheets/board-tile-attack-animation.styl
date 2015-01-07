@@ -1,0 +1,132 @@
+﻿@require "/public/stylesheets/site"
+
+$border-default = $tile-border-color
+$border-low = #EEE;
+$border-mid = #F07D72;
+$border-high = $tile-attack-border-color;
+
+.board-tile-attack-animation-add
+  -webkit-animation add 600ms cubic-bezier(0.390, 0.575, 0.565, 1.000)
+  -moz-animation add 600ms cubic-bezier(0.390, 0.575, 0.565, 1.000)
+  -o-animation add 600ms cubic-bezier(0.390, 0.575, 0.565, 1.000)
+  animation add 600ms cubic-bezier(0.390, 0.575, 0.565, 1.000)
+
+@-webkit-keyframes add
+	from
+		border-color $border-default
+	8%
+		border-color $border-mid
+	15%
+		border-color $border-high
+	23%
+		border-color $border-mid
+	30%
+		border-color $border-low
+	38%
+		border-color $border-mid
+	45%
+		border-color $border-high
+	53%
+		border-color $border-mid
+	60%
+		border-color $border-low
+	68%
+		border-color $border-mid
+	75%
+		border-color $border-high
+	83%
+		border-color $border-mid
+	90%
+		border-color $border-low
+	to
+		border-color $border-high
+
+@-moz-keyframes add
+	from
+		border-color $border-default
+	8%
+		border-color $border-mid
+	15%
+		border-color $border-high
+	23%
+		border-color $border-mid
+	30%
+		border-color $border-low
+	38%
+		border-color $border-mid
+	45%
+		border-color $border-high
+	53%
+		border-color $border-mid
+	60%
+		border-color $border-low
+	68%
+		border-color $border-mid
+	75%
+		border-color $border-high
+	83%
+		border-color $border-mid
+	90%
+		border-color $border-low
+	to
+		border-color $border-high
+
+@-o-keyframes add
+	from
+		border-color $border-default
+	8%
+		border-color $border-mid
+	15%
+		border-color $border-high
+	23%
+		border-color $border-mid
+	30%
+		border-color $border-low
+	38%
+		border-color $border-mid
+	45%
+		border-color $border-high
+	53%
+		border-color $border-mid
+	60%
+		border-color $border-low
+	68%
+		border-color $border-mid
+	75%
+		border-color $border-high
+	83%
+		border-color $border-mid
+	90%
+		border-color $border-low
+	to
+		border-color $border-high
+
+@keyframes add
+	from
+		border-color $border-default
+	8%
+		border-color $border-mid
+	15%
+		border-color $border-high
+	23%
+		border-color $border-mid
+	30%
+		border-color $border-low
+	38%
+		border-color $border-mid
+	45%
+		border-color $border-high
+	53%
+		border-color $border-mid
+	60%
+		border-color $border-low
+	68%
+		border-color $border-mid
+	75%
+		border-color $border-high
+	83%
+		border-color $border-mid
+	90%
+		border-color $border-low
+	to
+		border-color $border-high

@@ -4,20 +4,22 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.root = __dirname;
 
     assets.addCss("/public/stylesheets/site.styl");
-    assets.addCss("/public/stylesheets/animations.styl");
+    assets.addCss("/public/stylesheets/board-tile-attack-animation.styl");
 
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGenerator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Extensions.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
-    assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.Tabs.js");
+    assets.addJs("/public/javascripts/Directives/AddClassFromEvent.js");
+    assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.ScrollToBottom.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js");
-    assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
+    assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.Tabs.js");
     assets.addJs("/public/javascripts/App.js");
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");

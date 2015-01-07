@@ -49,11 +49,13 @@
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTile.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardType.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Directives\AddClassFromEvent.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\GameEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
@@ -124,7 +126,7 @@
     <Content Include="public\images\pieces\Example.png" />
     <Content Include="public\javascripts\_references.js" />
     <Content Include="package.json" />
-    <Content Include="public\stylesheets\animations.styl" />
+    <Content Include="public\stylesheets\board-tile-attack-animation.styl" />
     <Content Include="public\stylesheets\site.styl" />
     <Content Include="README.md" />
     <Content Include="views\Games\board.jade" />
