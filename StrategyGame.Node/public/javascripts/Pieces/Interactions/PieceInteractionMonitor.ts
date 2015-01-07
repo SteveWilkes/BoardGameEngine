@@ -29,6 +29,8 @@
             this._events.turnEnded.subscribe(() => this._deselectCurrentlySelectedPieceIfRequired());
         }
 
+        // BUG: highlight a tile, drag to move - next click on the same tile does not select it
+
         private _updateCurrentTeam(team: IPieceOwner): boolean {
             this._currentTeam = team;
             return true;
