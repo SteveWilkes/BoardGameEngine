@@ -63,7 +63,7 @@
     <TypeScriptCompile Include="public\javascripts\GameFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\GameType.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.IdGenerator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.IdGeneration.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Extensions.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />

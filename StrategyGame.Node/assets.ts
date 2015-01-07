@@ -7,7 +7,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addCss("/public/stylesheets/board-tile-attack-animation.styl");
 
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGenerator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Extensions.js");
