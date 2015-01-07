@@ -1,5 +1,14 @@
-﻿border(colour)
+﻿// Variables
+
+$tile-border-color = #DDD
+$tile-attack-border-color = #E51400
+
+// Mixins
+
+border(colour)
 	border 2px solid colour
+
+// Styles
 
 body
 	margin 0
@@ -38,13 +47,13 @@ div.placeholder
 
 div.available
 	position relative
-	border #ddd
+	border $tile-border-color
 
 div.board-destination-tile
 	border #8CBF26
 
 div.board-target-tile
-	border #E51400
+	border $tile-attack-border-color
 
 div.board-movement-tile
 	border #F09609

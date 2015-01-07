@@ -124,6 +124,7 @@
     <Content Include="public\images\pieces\Example.png" />
     <Content Include="public\javascripts\_references.js" />
     <Content Include="package.json" />
+    <Content Include="public\stylesheets\animations.styl" />
     <Content Include="public\stylesheets\site.styl" />
     <Content Include="README.md" />
     <Content Include="views\Games\board.jade" />

@@ -4,6 +4,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.root = __dirname;
 
     assets.addCss("/public/stylesheets/site.styl");
+    assets.addCss("/public/stylesheets/animations.styl");
 
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGenerator.js");

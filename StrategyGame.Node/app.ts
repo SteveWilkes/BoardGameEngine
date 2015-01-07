@@ -22,13 +22,18 @@ var publicRoot = path.join(__dirname, "public");
 
 if (!isRelease) {
     var fileSystem = require("fs");
-    var stylusData = fileSystem.readFileSync(path.join(publicRoot, "stylesheets/site.styl"), { encoding: "UTF8" });
     var stylus = require("stylus");
-    stylus(stylusData)
-        .render((stylusErr: Error, css: string) => {
-            if (stylusErr) { throw stylusErr; }
-            fileSystem.writeFileSync(path.join(publicRoot, "generated/stylesheets/site.css"), css);
-        });
+    var stylesheets = ["site", "animations"];
+    for (var i = 0; i < stylesheets.length; i++) {
+        var stylusData = fileSystem.readFileSync(
+            path.join(publicRoot, "stylesheets/" + stylesheets[i] + ".styl"),
+            { encoding: "UTF8" });
+        stylus(stylusData)
+            .render((stylusErr: Error, css: string) => {
+                if (stylusErr) { throw stylusErr; }
+                fileSystem.writeFileSync(path.join(publicRoot, "generated/stylesheets/" + stylesheets[i] + ".css"), css);
+            });
+    }
     console.log("Stylus CSS updated");
 }
 

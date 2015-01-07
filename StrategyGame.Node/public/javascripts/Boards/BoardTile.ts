@@ -11,7 +11,6 @@
 
         public isGameTile = true;
         public isDark: boolean;
-        public wasAttacked = false;
 
         public add(piece: Pieces.Piece): void {
             piece.setLocation(this);

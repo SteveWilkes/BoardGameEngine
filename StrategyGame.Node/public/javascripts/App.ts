@@ -2,7 +2,7 @@
 
     export var strategyGameApp = "strategyGameApp";
 
-    var game = angular.module(strategyGameApp, []);
+    var game = angular.module(strategyGameApp, ['ngAnimate']);
 
     export interface IGameScope extends ng.IScope {
         globalEvents: GlobalEventSet;
