@@ -1,5 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
+    // TODO: Rename this - it isn't only about dropping
     export class IsDroppableLocationValidator implements IPieceLocationValidator {
         private _allSameTeamPiecesAllowed: boolean;
         private _allOtherTeamPiecesAllowed: boolean;
