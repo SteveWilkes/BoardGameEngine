@@ -11,10 +11,10 @@
             wasPartOfLastMove = false;
 
             isOccupied(): boolean { return false; }
-            isSelected(newValue?: boolean): boolean { return false; }
-            add(piece: Piece): void { }
-            contains(location: IPieceLocation): boolean { return false; }
-            movePieceThrough(path: Array<IPieceLocation>): void { }
+            isSelected(): boolean { return false; }
+            add(): void { }
+            contains(): boolean { return false; }
+            movePieceThrough(): void { }
 
             potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
                 return noInteractions;

@@ -17,6 +17,17 @@
         [new TypeScript.CoordinateTranslator("upLeft", 1)]
     ];
 
+    var twoSpacesInAnyDirectionCalculators = [
+        [new TypeScript.CoordinateTranslator("up", 2)],
+        [new TypeScript.CoordinateTranslator("upRight", 2)],
+        [new TypeScript.CoordinateTranslator("right", 2)],
+        [new TypeScript.CoordinateTranslator("downRight", 2)],
+        [new TypeScript.CoordinateTranslator("down", 2)],
+        [new TypeScript.CoordinateTranslator("downLeft", 2)],
+        [new TypeScript.CoordinateTranslator("left", 2)],
+        [new TypeScript.CoordinateTranslator("upLeft", 2)]
+    ];
+
     // Bomb Attachment
 
     var bombAttachDestinationsCalculator = new RelatedLocationCalculator(
@@ -65,6 +76,41 @@
             PieceInteractionConstructorRegistry.get("a1"),
             events)]);
 
+    // Human Light Movement
+
+    var humanLightMoveDestinationsCalculator = new RelatedLocationCalculator(
+        twoSpacesInAnyDirectionCalculators,
+        [new IsUnoccupiedLocationValidator()]);
+
+    // Human Light Attachment
+
+    var humanLightAttachDestinationsCalculator = new RelatedLocationCalculator(
+        oneSpaceInAnyDirectionCalculators,
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
+
+    // Human Light Attack
+
+    var humanLightAttackDestinationsCalculator = new RelatedLocationCalculator(
+        twoSpacesInAnyDirectionCalculators,
+        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
+
+    var humanLightInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+        new PieceInteractionCalculator(
+            InteractionType.Move,
+            [humanLightMoveDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("m2"),
+            events),
+        new PieceInteractionCalculator(
+            InteractionType.Move,
+            [humanLightAttachDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("m1"),
+            events),
+        new PieceInteractionCalculator(
+            InteractionType.Attack,
+            [humanLightAttackDestinationsCalculator],
+            PieceInteractionConstructorRegistry.get("a1"),
+            events)]);
+
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
         private _nextPieceId: number;
@@ -78,9 +124,14 @@
                     bombInteractionProfileFactory),
                 "2": new PieceDefinition(
                     "2",
-                    "Example",
+                    "Human Heavy",
                     "/images/pieces/HumanHeavy.png",
-                    humanHeavyInteractionProfileFactory)
+                    humanHeavyInteractionProfileFactory),
+                "3": new PieceDefinition(
+                    "3",
+                    "Example",
+                    "/images/pieces/Example.png",
+                    humanLightInteractionProfileFactory)
             };
             this._nextPieceId = 1;
         }

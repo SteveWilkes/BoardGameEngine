@@ -18,16 +18,21 @@
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
                 var coordinateTranslators = this._coordinateTranslatorSets[i];
                 var path = new Array<IPieceLocation>(startingLocation);
-                var locationCoordinates = startingLocation.coordinates;
+                var startingCoordinates = startingLocation.coordinates;
                 var pathInvalid = false;
                 for (j = 0; j < coordinateTranslators.length; j++) {
-                    locationCoordinates = coordinateTranslators[j].translate(locationCoordinates);
-                    var location = this._allLocations[locationCoordinates.signature];
-                    if (location === undefined) {
-                        pathInvalid = true;
-                        break;
+                    var locationCoordinatesPath = coordinateTranslators[j].translate(startingCoordinates);
+                    for (var k = 0; k < locationCoordinatesPath.length; k++) {
+                        var locationCoordinates = locationCoordinatesPath[k];
+                        var location = this._allLocations[locationCoordinates.signature];
+                        if (location === undefined) {
+                            pathInvalid = true;
+                            break;
+                        }
+                        path.push(location);
                     }
-                    path.push(location);
+                    if (pathInvalid) { break; }
+                    startingCoordinates = path[path.length - 1].coordinates;
                 }
                 if (pathInvalid) { continue; }
                 var destination = path[path.length - 1];

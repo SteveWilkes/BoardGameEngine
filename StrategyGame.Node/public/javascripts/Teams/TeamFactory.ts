@@ -41,11 +41,11 @@
                 { row: 2, column: 4, pieceDefinitionId: "2" }, // row 2
                 { row: 2, column: 5, pieceDefinitionId: "2" },
                 { row: 2, column: 6, pieceDefinitionId: "2" },
-                { row: 3, column: 3, pieceDefinitionId: "2" }, // row 3
-                { row: 3, column: 4, pieceDefinitionId: "2" },
-                { row: 3, column: 5, pieceDefinitionId: "2" },
-                { row: 3, column: 6, pieceDefinitionId: "2" },
-                { row: 3, column: 7, pieceDefinitionId: "2" }];
+                { row: 3, column: 3, pieceDefinitionId: "3" }, // row 3
+                { row: 3, column: 4, pieceDefinitionId: "3" },
+                { row: 3, column: 5, pieceDefinitionId: "3" },
+                { row: 3, column: 6, pieceDefinitionId: "3" },
+                { row: 3, column: 7, pieceDefinitionId: "3" }];
         }
     }
 

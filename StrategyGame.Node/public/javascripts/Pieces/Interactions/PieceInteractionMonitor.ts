@@ -58,9 +58,12 @@
             var interactionsByLocation = new TypeScript.Dictionary<IPieceLocation, Array<IPieceInteraction>>();
             var i;
             for (i = 0; i < this._currentPotentialInteractions.length; i++) {
-                interactionsByLocation
-                    .getOrAdd(this._currentPotentialInteractions[i].location, () => new Array<IPieceInteraction>())
-                    .push(this._currentPotentialInteractions[i]);
+                var potentialInteraction = this._currentPotentialInteractions[i];
+                for (var j = 1; j < potentialInteraction.path.length; j++) {
+                    interactionsByLocation
+                        .getOrAdd(potentialInteraction.path[j], () => new Array<IPieceInteraction>())
+                        .push(potentialInteraction);
+                }
             }
 
             for (i = 0; i < interactionsByLocation.count; i++) {
@@ -85,7 +88,10 @@
 
         private _clearCurrentPotentialInteractions(): void {
             while (this._currentPotentialInteractions.length > 0) {
-                this._currentPotentialInteractions.shift().location.potentialInteractions(_none);
+                var potentialInteraction = this._currentPotentialInteractions.shift();
+                for (var i = 0; i < potentialInteraction.path.length; i++) {
+                    potentialInteraction.path[i].potentialInteractions(_none);
+                }
             }
         }
 
@@ -207,8 +213,8 @@
             refreshInteractions: (interaction: IPieceInteraction) => boolean): boolean {
             var pieceMoveCompleted;
 
-            this._completeInteractionAt(destination, interaction => {
-                pieceMoveCompleted = interaction.location.contains(this._currentlyChosenPiece);
+            this._completeInteractionAt(destination, (interaction, location) => {
+                pieceMoveCompleted = location.contains(this._currentlyChosenPiece);
                 return refreshInteractions(interaction);
             });
 
@@ -223,18 +229,20 @@
 
         private _completeInteractionAt(
             location: IPieceLocation,
-            refreshInteractions: (interaction: IPieceInteraction) => boolean): void {
+            refreshInteractions: (interaction: IPieceInteraction, location: IPieceLocation) => boolean): void {
 
             for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
                 var interaction = this._currentPotentialInteractions[i];
-                if (interaction.location.contains(location)) {
-                    interaction.complete();
+                for (var j = 0; j < interaction.path.length; j++) {
+                    if (interaction.path[j].contains(location)) {
+                        interaction.complete();
 
-                    if (refreshInteractions(interaction)) {
-                        this._showPotentialInteractionsFor(this._currentlyChosenPiece);
+                        if (refreshInteractions(interaction, interaction.path[j])) {
+                            this._showPotentialInteractionsFor(this._currentlyChosenPiece);
+                        }
+
+                        return;
                     }
-
-                    return;
                 }
             }
         }
