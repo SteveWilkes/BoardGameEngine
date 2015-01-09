@@ -11,5 +11,7 @@
         public complete(): void {
             this.path[0].movePieceThrough(this.path);
         }
+
+        static isValid = (path: Array<IPieceLocation>) => { return true; }
     }
 }

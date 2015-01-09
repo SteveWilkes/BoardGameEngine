@@ -18,12 +18,8 @@
             for (var i = 0; i < this._locationCalculators.length; i++) {
                 var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation);
                 for (var j = 0; j < interactionPaths.length; j++) {
-                    var interactionPath = interactionPaths[j];
-                    for (var k = 1; k <= interactionPath.length; k++) {
-                        var pathSegment = interactionPath.slice(0, k);
-                        var interaction = new this._interaction(pathSegment, this._events);
-                        interactions.push(interaction);
-                    }
+                    var interaction = new this._interaction(interactionPaths[j], this._events);
+                    interactions.push(interaction);
                 }
             }
             return interactions;

@@ -5,7 +5,8 @@
 
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _pathLocationValidators: Array<IPieceLocationValidator>) {
+            private _pathStepLocationValidators: Array<IPieceLocationValidator>,
+            private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
@@ -13,46 +14,58 @@
         }
 
         public calculateLocationPaths(startingLocation: IPieceLocation): Array<Array<IPieceLocation>> {
-            var paths = new Array<Array<IPieceLocation>>();
-            var j;
+            var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
-                var coordinateTranslators = this._coordinateTranslatorSets[i];
-                var path = new Array<IPieceLocation>(startingLocation);
-                var startingCoordinates = startingLocation.coordinates;
-                var pathInvalid = false;
-                for (j = 0; j < coordinateTranslators.length; j++) {
-                    var locationCoordinatesPath = coordinateTranslators[j].translate(startingCoordinates);
-                    for (var k = 0; k < locationCoordinatesPath.length; k++) {
-                        var locationCoordinates = locationCoordinatesPath[k];
-                        var location = this._allLocations[locationCoordinates.signature];
-                        if (this._pathStepIsInvalid(startingLocation, location)) {
-                            pathInvalid = true;
-                            break;
-                        }
-                        path.push(location);
-                    }
-                    if (pathInvalid) { break; }
-                    startingCoordinates = path[path.length - 1].coordinates;
-                }
-                if (pathInvalid) { continue; }
-                paths.push(path);
+                var paths = this._calculatePaths(startingLocation, this._coordinateTranslatorSets[i]);
+                if (paths.length > 0) { allPaths = allPaths.concat(paths); }
             }
-            return paths;
+            return allPaths;
         }
 
-        private _pathStepIsInvalid(
+        private _calculatePaths(
             startingLocation: IPieceLocation,
-            pathStepLocation: IPieceLocation): boolean {
+            coordinateTranslators: Array<TypeScript.CoordinateTranslator>): Array<Array<IPieceLocation>> {
 
-            if (pathStepLocation === undefined) { return true; }
+            var allPaths = new Array<Array<IPieceLocation>>();
+            var path = new Array<IPieceLocation>(startingLocation);
+            var startingCoordinates = startingLocation.coordinates;
+            for (var i = 0; i < coordinateTranslators.length; i++) {
+                var locationCoordinatesPath = coordinateTranslators[i].translate(startingCoordinates);
+                var pathInvalid = false;
+                for (var j = 0; j < locationCoordinatesPath.length; j++) {
+                    var locationCoordinates = locationCoordinatesPath[j];
+                    var location = this._allLocations[locationCoordinates.signature];
+                    if (location === undefined) {
+                        pathInvalid = true;
+                        break;
+                    }
+                    path.push(location);
+                    if (this._pathIsValid(path, startingLocation)) {
+                        allPaths.push(path.slice(0, path.length));
+                    }
+                }
+                if (pathInvalid) { break; }
+                startingCoordinates = path[path.length - 1].coordinates;
+            }
 
-            for (var i = 0; i < this._pathLocationValidators.length; i++) {
-                if (!this._pathLocationValidators[i].isValid(pathStepLocation, startingLocation.piece)) {
-                    return true;
+            return allPaths;
+        }
+
+        private _pathIsValid(path: Array<IPieceLocation>, startingLocation: IPieceLocation): boolean {
+            for (var i = 1; i < path.length; i++) {
+
+                var validators = (i === (path.length - 1))
+                    ? this._pathDestinationValidators
+                    : this._pathStepLocationValidators;
+
+                for (var j = 0; j < validators.length; j++) {
+                    if (!validators[j].isValid(path[i], startingLocation.piece)) {
+                        return false;
+                    }
                 }
             }
 
-            return false;
+            return true;
         }
     }
 }

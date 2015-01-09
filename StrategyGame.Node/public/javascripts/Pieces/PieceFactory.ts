@@ -32,6 +32,7 @@
 
     var bombAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
+        [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["*"], [])]);
 
     var bombInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
@@ -45,18 +46,21 @@
 
     var humanHeavyMoveDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
+        [],
         [new IsUnoccupiedLocationValidator()]);
 
     // Human Heavy Attachment
 
     var humanHeavyAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
+        [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
 
     // Human Heavy Attack
 
     var humanHeavyAttackDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
+        [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
     var humanHeavyInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
@@ -80,18 +84,21 @@
 
     var humanLightMoveDestinationsCalculator = new RelatedLocationCalculator(
         twoSpacesInAnyDirectionCalculators,
+        [new IsUnoccupiedLocationValidator()],
         [new IsUnoccupiedLocationValidator()]);
 
     // Human Light Attachment
 
     var humanLightAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
+        [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
 
     // Human Light Attack
 
     var humanLightAttackDestinationsCalculator = new RelatedLocationCalculator(
         twoSpacesInAnyDirectionCalculators,
+        [new IsUnoccupiedLocationValidator()],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
     var humanLightInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([

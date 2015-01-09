@@ -61,11 +61,9 @@
             var i;
             for (i = 0; i < this._currentPotentialInteractions.length; i++) {
                 var potentialInteraction = this._currentPotentialInteractions[i];
-                for (var j = 1; j < potentialInteraction.path.length; j++) {
-                    interactionsByLocation
-                        .getOrAdd(potentialInteraction.path[j], () => new Array<IPieceInteraction>())
-                        .push(potentialInteraction);
-                }
+                interactionsByLocation
+                    .getOrAdd(potentialInteraction.location, () => new Array<IPieceInteraction>())
+                    .push(potentialInteraction);
             }
 
             for (i = 0; i < interactionsByLocation.count; i++) {

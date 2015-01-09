@@ -2,6 +2,7 @@
 
     export interface IPieceInteractionConstructor {
         (path: Array<IPieceLocation>, events: GameEventSet): void;
+        isValid(path: Array<IPieceLocation>): boolean;
     }
 
     export module PieceInteractionConstructorRegistry {

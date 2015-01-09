@@ -11,5 +11,7 @@
         public complete(): void {
             this.location.piece.applyAttackBy(this.path[0].piece);
         }
+
+        static isValid = (path: Array<IPieceLocation>) => { return true; }
     }
 }
