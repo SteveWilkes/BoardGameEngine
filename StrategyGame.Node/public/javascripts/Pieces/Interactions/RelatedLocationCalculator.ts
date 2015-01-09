@@ -5,8 +5,7 @@
 
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _pathStepValidators: Array<IPieceLocationValidator>,
-            private _pathDestinationValidators: Array<IPieceLocationValidator>) {
+            private _pathLocationValidators: Array<IPieceLocationValidator>) {
         }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
@@ -50,12 +49,8 @@
 
             if (pathStepLocation === undefined) { return true; }
 
-            var validators = (pathStepIndex === (pathLength - 1))
-                ? this._pathDestinationValidators
-                : this._pathStepValidators;
-
-            for (var i = 0; i < validators.length; i++) {
-                if (!validators[i].isValid(pathStepLocation, startingLocation.piece)) {
+            for (var i = 0; i < this._pathLocationValidators.length; i++) {
+                if (!this._pathLocationValidators[i].isValid(pathStepLocation, startingLocation.piece)) {
                     return true;
                 }
             }
