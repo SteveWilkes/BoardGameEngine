@@ -16,7 +16,7 @@
         public getPotentialInteractions(startingLocation: IPieceLocation): Array<IPieceInteraction> {
             var interactions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._locationCalculators.length; i++) {
-                var interactionPaths = this._locationCalculators[i].calculatePathsToLocations(startingLocation);
+                var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation);
                 for (var j = 0; j < interactionPaths.length; j++) {
                     var interactionPath = interactionPaths[j];
                     for (var k = 1; k <= interactionPath.length; k++) {

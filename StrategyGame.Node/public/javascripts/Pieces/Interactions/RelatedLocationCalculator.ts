@@ -5,14 +5,15 @@
 
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _destinationValidators: Array<IPieceLocationValidator>) {
+            private _pathStepValidators: Array<IPieceLocationValidator>,
+            private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
         public setLocations(allLocations: IPieceLocationDictionary): void {
             this._allLocations = allLocations;
         }
 
-        public calculatePathsToLocations(startingLocation: IPieceLocation): Array<Array<IPieceLocation>> {
+        public calculateLocationPaths(startingLocation: IPieceLocation): Array<Array<IPieceLocation>> {
             var paths = new Array<Array<IPieceLocation>>();
             var j;
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
@@ -22,10 +23,11 @@
                 var pathInvalid = false;
                 for (j = 0; j < coordinateTranslators.length; j++) {
                     var locationCoordinatesPath = coordinateTranslators[j].translate(startingCoordinates);
-                    for (var k = 0; k < locationCoordinatesPath.length; k++) {
+                    var pathLength = locationCoordinatesPath.length;
+                    for (var k = 0; k < pathLength; k++) {
                         var locationCoordinates = locationCoordinatesPath[k];
                         var location = this._allLocations[locationCoordinates.signature];
-                        if (location === undefined) {
+                        if (this._pathStepIsInvalid(startingLocation, location, k, pathLength)) {
                             pathInvalid = true;
                             break;
                         }
@@ -37,9 +39,9 @@
                 if (pathInvalid) { continue; }
                 var destination = path[path.length - 1];
                 var anyValidatorsInvalid = false;
-                for (j = 0; j < this._destinationValidators.length; j++) {
+                for (j = 0; j < this._pathDestinationValidators.length; j++) {
                     // TODO: Validate entire path?
-                    if (!this._destinationValidators[j].isValid(destination, startingLocation.piece)) {
+                    if (!this._pathDestinationValidators[j].isValid(destination, startingLocation.piece)) {
                         anyValidatorsInvalid = true;
                         break;
                     }
@@ -48,6 +50,27 @@
                 paths.push(path);
             }
             return paths;
+        }
+
+        private _pathStepIsInvalid(
+            startingLocation: IPieceLocation,
+            pathStepLocation: IPieceLocation,
+            pathStepIndex: number,
+            pathLength: number): boolean {
+
+            if (pathStepLocation === undefined) { return true; }
+
+            var validators = (pathStepIndex === (pathLength - 1))
+                ? this._pathDestinationValidators
+                : this._pathStepValidators;
+
+            for (var i = 0; i < validators.length; i++) {
+                if (!validators[i].isValid(pathStepLocation, startingLocation.piece)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
