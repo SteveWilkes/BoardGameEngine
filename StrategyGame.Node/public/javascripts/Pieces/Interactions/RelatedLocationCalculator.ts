@@ -22,11 +22,10 @@
                 var pathInvalid = false;
                 for (j = 0; j < coordinateTranslators.length; j++) {
                     var locationCoordinatesPath = coordinateTranslators[j].translate(startingCoordinates);
-                    var pathLength = locationCoordinatesPath.length;
-                    for (var k = 0; k < pathLength; k++) {
+                    for (var k = 0; k < locationCoordinatesPath.length; k++) {
                         var locationCoordinates = locationCoordinatesPath[k];
                         var location = this._allLocations[locationCoordinates.signature];
-                        if (this._pathStepIsInvalid(startingLocation, location, k, pathLength)) {
+                        if (this._pathStepIsInvalid(startingLocation, location)) {
                             pathInvalid = true;
                             break;
                         }
@@ -43,9 +42,7 @@
 
         private _pathStepIsInvalid(
             startingLocation: IPieceLocation,
-            pathStepLocation: IPieceLocation,
-            pathStepIndex: number,
-            pathLength: number): boolean {
+            pathStepLocation: IPieceLocation): boolean {
 
             if (pathStepLocation === undefined) { return true; }
 
