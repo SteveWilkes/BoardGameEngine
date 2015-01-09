@@ -37,16 +37,6 @@
                     startingCoordinates = path[path.length - 1].coordinates;
                 }
                 if (pathInvalid) { continue; }
-                var destination = path[path.length - 1];
-                var anyValidatorsInvalid = false;
-                for (j = 0; j < this._pathDestinationValidators.length; j++) {
-                    // TODO: Validate entire path?
-                    if (!this._pathDestinationValidators[j].isValid(destination, startingLocation.piece)) {
-                        anyValidatorsInvalid = true;
-                        break;
-                    }
-                }
-                if (anyValidatorsInvalid) { continue; }
                 paths.push(path);
             }
             return paths;
