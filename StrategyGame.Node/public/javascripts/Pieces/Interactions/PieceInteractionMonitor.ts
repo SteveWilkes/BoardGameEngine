@@ -34,6 +34,8 @@
             return true;
         }
 
+        // BUG: Highlight piece, drag - next click on piece does not select it
+
         private _showPotentialInteractionsAfterDelay(piece: Piece): boolean {
             this._interactionHandled = false;
             this._currentlyChosenPiece = piece;
