@@ -1,58 +1,101 @@
-﻿import express = require("express");
+﻿import path = require("path");
+import express = require('express');
 import bundleUp = require("bundle-up");
 import routes = require("./routes/index");
 import http = require("http");
-import path = require("path");
+import stylus = require("stylus");
 
-var app = express();
+interface IFileSystem {
+    readFileSync(filename: string, options?: { flag?: string; }): NodeBuffer;
+    writeFileSync(filename: string, data: any, options?: { encoding?: string; mode?: string; flag?: string; }): void;
+}
 
-// all environments
-app.set("port", process.env.PORT || 3000);
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-app.use(express.favicon());
-app.use(express.logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
+module AgileObjects.StrategyGame {
 
-var isRelease = process.env.NODE_ENV === "Release";
-var publicRoot = path.join(__dirname, "public");
+    class NodeApp {
+        private _isReleaseMode: boolean;
+        private _assetsRoot: string;
+        private _publicRoot: string;
+        private _app: express.Express;
 
-if (!isRelease) {
-    var fileSystem = require("fs");
-    var stylus = require("stylus");
-    var stylesheets = ["site", "board-tile-attack-animation"];
-    for (var i = 0; i < stylesheets.length; i++) {
-        var stylusData = fileSystem.readFileSync(
-            path.join(publicRoot, "stylesheets/" + stylesheets[i] + ".styl"),
-            { encoding: "UTF8" });
-        stylus(stylusData)
-            .render((stylusErr: Error, css: string) => {
-                if (stylusErr) { throw stylusErr; }
-                fileSystem.writeFileSync(path.join(publicRoot, "generated/stylesheets/" + stylesheets[i] + ".css"), css);
+        constructor(fileSystem: IFileSystem, stylus: stylus.Stylus) {
+            this._isReleaseMode = process.env.NODE_ENV === "Release";
+            this._assetsRoot = path.join(__dirname, "assets");
+            this._publicRoot = path.join(__dirname, "public");
+
+            this._regenerateStyleSheetsIfRequired(fileSystem, stylus);
+
+            var app = this._createApp();
+
+            this._bundleResources(app);
+            this._setupRouting(app);
+
+            this._app = app;
+        }
+
+        private _regenerateStyleSheetsIfRequired(fileSystem: IFileSystem, stylus: stylus.Stylus): void {
+            if (this._isReleaseMode) { return; }
+
+            var stylesheets = ["site", "board-tile-attack-animation"];
+            for (var i = 0; i < stylesheets.length; i++) {
+                var stylusData = fileSystem.readFileSync(
+                    path.join(this._publicRoot, "stylesheets/" + stylesheets[i] + ".styl"),
+                    { encoding: "UTF8" });
+                stylus(stylusData)
+                    .render((stylusErr: Error, css: string) => {
+                        if (stylusErr) { throw stylusErr; }
+                        fileSystem.writeFileSync(
+                            path.join(this._publicRoot, "generated/stylesheets/" + stylesheets[i] + ".css"),
+                            css);
+                    });
+            }
+            console.log("Stylus CSS updated");
+        }
+
+        private _createApp(): express.Express {
+
+            var app = express();
+
+            // all environments
+            app.set("port", process.env.PORT || 3000);
+            app.set("views", path.join(__dirname, "views"));
+            app.set("view engine", "jade");
+            app.use(express.favicon());
+            app.use(express.logger("dev"));
+            app.use(express.json());
+            app.use(express.urlencoded());
+            app.use(express.methodOverride());
+            app.use(app.router);
+
+            app.use(express.static(this._publicRoot));
+
+            if (!this._isReleaseMode) {
+                app.use(express.errorHandler());
+            }
+
+            return app;
+        }
+
+        private _bundleResources(app: express.Express): void {
+            bundleUp(app, this._assetsRoot, {
+                staticRoot: this._publicRoot,
+                staticUrlRoot: "/",
+                bundle: this._isReleaseMode,
+                minifyCss: this._isReleaseMode,
+                minifyJs: this._isReleaseMode
             });
+        }
+
+        private _setupRouting(app: express.Express): void {
+            app.get("/", routes.index);
+        }
+
+        public start() {
+            http.createServer(this._app).listen(this._app.get("port"), () => {
+                console.log("Server listening on port " + this._app.get("port"));
+            });
+        }
     }
-    console.log("Stylus CSS updated");
+
+    new NodeApp(require("fs"), require("stylus")).start();
 }
-
-bundleUp(app, path.join(__dirname, "assets"), {
-    staticRoot: path.join(__dirname, "public/"),
-    staticUrlRoot: "/",
-    bundle: isRelease,
-    minifyCss: isRelease,
-    minifyJs: isRelease
-});
-
-app.use(express.static(publicRoot));
-
-if (!isRelease) {
-    app.use(express.errorHandler());
-}
-
-app.get("/", routes.index);
-
-http.createServer(app).listen(app.get("port"), () => {
-    console.log("Express server listening on port " + app.get("port"));
-});
