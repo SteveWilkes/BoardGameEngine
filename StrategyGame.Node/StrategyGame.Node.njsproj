@@ -119,6 +119,7 @@
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <Folder Include="Scripts\typings\express\" />
     <Folder Include="Scripts\typings\jquery\" />
     <Folder Include="Scripts\typings\bundle-up\" />
+    <Folder Include="Scripts\typings\socket.io\" />
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
     <Folder Include="views\" />

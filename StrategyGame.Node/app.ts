@@ -2,7 +2,6 @@
 import express = require('express');
 import bundleUp = require("bundle-up");
 import routes = require("./routes/index");
-import http = require("http");
 import stylus = require("stylus");
 
 interface IFileSystem {
@@ -91,8 +90,21 @@ module AgileObjects.StrategyGame {
         }
 
         public start() {
-            http.createServer(this._app).listen(this._app.get("port"), () => {
+
+            var http = require("http").createServer(this._app);
+
+            this._setupGameSockets(http);
+
+            http.listen(this._app.get("port"), () => {
                 console.log("Server listening on port " + this._app.get("port"));
+            });
+        }
+
+        private _setupGameSockets(http: express.Application): void {
+            var io = require("socket.io")(http);
+
+            io.on("connection", (socket) => {
+                console.log("a user connected");
             });
         }
     }

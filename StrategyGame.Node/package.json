@@ -1,16 +1,16 @@
 {
-  "name": "StrategyGame.Node",
-  "version": "0.0.0",
-  "description": "StrategyGame.Node",
-  "main": "app.js",
-  "author": {
-    "name": "Steve Wilkes"
-  },
-  "dependencies": {
-    "bundle-up": "^0.3.5",
-    "express": "^3.4.4",
-    "jade": "*",
-    "socket.io": "^1.2.1",
-    "stylus": "*"
-  }
+    "name": "StrategyGame.Node",
+    "version": "0.0.0",
+    "description": "StrategyGame.Node",
+    "main": "app.js",
+    "author": {
+        "name": "Steve Wilkes"
+    },
+    "dependencies": {
+        "bundle-up": "^0.3.5",
+        "express": "^3.4.4",
+        "jade": "*",
+        "socket.io": "^1.2.1",
+        "stylus": "*"
+    }
 }
