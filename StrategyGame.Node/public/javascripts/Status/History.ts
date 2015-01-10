@@ -12,6 +12,7 @@
         public lastMove: Pieces.PieceMovement;
 
         private _recordPieceMovement(movement: Pieces.PieceMovement): boolean {
+            // BUG: Bomb movements logged as destination -> destination
             if (this.lastMove !== undefined) {
                 this.lastMove.setWasPartOfLastMove(false);
             }
