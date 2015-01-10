@@ -55,7 +55,6 @@ module AgileObjects.StrategyGame {
 
             var app = express();
 
-            // all environments
             app.set("port", process.env.PORT || 3000);
             app.set("views", path.join(__dirname, "views"));
             app.set("view engine", "jade");
@@ -103,8 +102,11 @@ module AgileObjects.StrategyGame {
         private _setupGameSockets(http: express.Application): void {
             var io = require("socket.io")(http);
 
-            io.on("connection", (socket) => {
-                console.log("a user connected");
+            io.on("connection", (socket: SocketIO.Socket) => {
+
+                socket.on("gameStarted", (gameId: string) => {
+                    console.log("Game " + gameId + " started for socket " + socket.id);
+                });
             });
         }
     }

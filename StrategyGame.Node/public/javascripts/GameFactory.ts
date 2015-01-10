@@ -40,6 +40,21 @@
             var gameId = this._idGenerator.getId();
             var game = new Game(gameId, gameType, displayManager, board, events);
 
+            var teams = this._getTeams(gameType, events);
+
+            game.addTeam(teams[0]);
+            game.addTeam(teams[1]);
+
+            events.gameStarted.publish(teams[0]);
+
+            var socket = <SocketIO.Socket>window["io"]();
+
+            socket.emit("gameStarted", gameId);
+
+            return game;
+        }
+
+        private _getTeams(gameType: GameType, events: GameEventSet): Array<Teams.Team> {
             var player1 = new Players.LocalHumanPlayer("Human");
             var team1 = this._teamFactory.createTeam(player1, gameType.id, events);
             player1.add(team1);
@@ -48,12 +63,7 @@
             var team2 = this._teamFactory.createTeam(player2, gameType.id, events);
             player2.add(team2);
 
-            game.addTeam(team1);
-            game.addTeam(team2);
-
-            events.gameStarted.publish(team1);
-
-            return game;
+            return [team1, team2];
         }
     }
 
