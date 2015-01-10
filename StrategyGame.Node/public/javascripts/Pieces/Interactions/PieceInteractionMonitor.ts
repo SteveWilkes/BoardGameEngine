@@ -26,15 +26,13 @@
             this._events.locationSelected.subscribe(location => this._handleLocationSelected(location));
             this._events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
             this._events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
-            this._events.turnEnded.subscribe(() => this._deselectCurrentlySelectedPieceIfRequired());
+            this._events.turnEnded.subscribe(() => this._clearCurrentPieces());
         }
 
         private _updateCurrentTeam(team: IPieceOwner): boolean {
             this._currentTeam = team;
             return true;
         }
-
-        // BUG: Highlight piece, drag - next click on piece does not select it
 
         private _showPotentialInteractionsAfterDelay(piece: Piece): boolean {
             this._interactionHandled = false;
@@ -189,11 +187,10 @@
             this._showPotentialInteractionsFor(this._currentlySelectedPiece);
         }
 
-        private _deselectCurrentlySelectedPieceIfRequired(): boolean {
+        private _deselectCurrentlySelectedPieceIfRequired(): void {
             if (this._pieceIsSelected()) {
                 this._deselectCurrentlySelectedPiece();
             }
-            return true;
         }
 
         private _handlePieceMove(destination: IPieceLocation): boolean {
@@ -256,6 +253,14 @@
 
         private _pieceIsSelected(): boolean {
             return this._currentlySelectedPiece !== undefined;
+        }
+
+        private _clearCurrentPieces(): boolean {
+            if (this._pieceHighlightingIsActive()) {
+                this._currentlyHighlightedPiece = undefined;
+            }
+            this._deselectCurrentlySelectedPieceIfRequired();
+            return true;
         }
     }
 }
