@@ -14,6 +14,15 @@
                 this._socket.emit("gameStarted", game.id);
                 return true;
             });
+
+            game.events.pieceMoved.subscribe(movement => {
+                var movementPath = new Array<string>(movement.path.length);
+                for (var i = 0; i < movement.path.length; i++) {
+                    movementPath[i] = movement.path[i].coordinates.signature;
+                }
+                this._socket.emit("pieceMoved", movementPath);
+                return true;
+            });
         }
     }
 
