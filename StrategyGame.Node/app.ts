@@ -100,9 +100,9 @@ module AgileObjects.StrategyGame {
         }
 
         private _setupGameSockets(http: express.Application): void {
-            var io = require("socket.io")(http);
+            var io = <SocketIO.Server>require("socket.io")(http);
 
-            io.on("connection", (socket: SocketIO.Socket) => {
+            io.on("connection", socket => {
 
                 socket.on("gameStarted", (gameId: string) => {
                     console.log("Game " + gameId + " started for socket " + socket.id);
