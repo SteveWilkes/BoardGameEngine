@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\GameEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
@@ -89,6 +90,8 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\GameCoordinator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\IGameCoordinationSubject.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
@@ -163,6 +166,9 @@
     <Folder Include="Scripts\typings\stylus\" />
     <Folder Include="views\" />
     <Folder Include="views\Games\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="public\javascripts\Generic\BtFord.Angular.Socket.io.js" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">

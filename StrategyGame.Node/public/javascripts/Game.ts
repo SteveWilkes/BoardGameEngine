@@ -1,10 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class Game {
+    export class Game implements Status.IGameCoordinationSubject {
         constructor(
             public id: string,
             public type: GameType,
             public displayManager: Boards.BoardDisplayManager,
+            private _gameCoordinator: Status.IGameCoordinator,
             public board: Boards.Board,
             public events: GameEventSet) {
 
@@ -25,6 +26,13 @@
             }
 
             this.events.teamAdded.publish(team);
+        }
+
+        public start() {
+            this._gameCoordinator.monitor(this);
+
+            var startingTeam = this.players[0].teams[0];
+            this.events.gameStarted.publish(startingTeam);
         }
     }
 }

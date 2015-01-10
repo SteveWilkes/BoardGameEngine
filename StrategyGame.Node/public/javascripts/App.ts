@@ -2,7 +2,7 @@
 
     export var strategyGameApp = "strategyGameApp";
 
-    var game = angular.module(strategyGameApp, ['ngAnimate']);
+    var game = angular.module(strategyGameApp, ["ngAnimate", "btford.socket-io"]);
 
     export interface IGameScope extends ng.IScope {
         globalEvents: GlobalEventSet;
@@ -19,4 +19,5 @@
 
     Angular.Services.addIdGenerator(game);
     Angular.Services.addEventPropogation(game);
+    Angular.Services.addSockets(game);
 }

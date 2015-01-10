@@ -6,9 +6,13 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addCss("/public/stylesheets/site.styl");
     assets.addCss("/public/stylesheets/board-tile-attack-animation.styl");
 
+    // https://github.com/btford/angular-socket-io
+    assets.addJs("/public/javascripts/Generic/BtFord.Angular.Socket.io.js");
+
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.Sockets.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Extensions.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
@@ -47,6 +51,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/TakenPieceLocation.js");
+    assets.addJs("/public/javascripts/Status/GameCoordinator.js");
     assets.addJs("/public/javascripts/Status/TurnDefinition.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");

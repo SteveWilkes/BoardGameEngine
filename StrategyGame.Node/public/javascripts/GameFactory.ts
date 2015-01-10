@@ -18,6 +18,7 @@
             private _timeoutService: ng.ITimeoutService,
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
             private _teamFactory: Teams.ITeamFactory,
+            private _gameCoordinator: Status.IGameCoordinator,
             private _eventPropogator: Angular.Services.IEventPropogationService,
             private _idGenerator: Angular.Services.IIdGenerator) { }
 
@@ -38,18 +39,14 @@
             var board = new Boards.Board(gameType.boardType, interactionMonitor, numberOfTeams, events);
 
             var gameId = this._idGenerator.getId();
-            var game = new Game(gameId, gameType, displayManager, board, events);
+            var game = new Game(gameId, gameType, displayManager, this._gameCoordinator, board, events);
 
             var teams = this._getTeams(gameType, events);
 
             game.addTeam(teams[0]);
             game.addTeam(teams[1]);
 
-            events.gameStarted.publish(teams[0]);
-
-            var socket = <SocketIO.Socket>window["io"]();
-
-            socket.emit("gameStarted", gameId);
+            game.start();
 
             return game;
         }
@@ -73,6 +70,7 @@
             "$timeout",
             $getGameTypeQuery,
             Teams.$teamFactory,
+            Status.$gameCoordinator,
             Angular.Services.$eventPropogator,
             Angular.Services.$idGenerator,
             GameFactory]);
