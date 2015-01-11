@@ -117,6 +117,11 @@
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
+    <TypeScriptCompile Include="Scripts\startup\CssGenerator.ts" />
+    <TypeScriptCompile Include="Scripts\startup\Bootstrap.ts" />
+    <TypeScriptCompile Include="Scripts\startup\ResourceBundler.ts" />
+    <TypeScriptCompile Include="Scripts\startup\Router.ts" />
+    <TypeScriptCompile Include="Scripts\startup\SocketManager.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bundle-up\bundle-up.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
@@ -156,6 +161,7 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="Scripts\" />
+    <Folder Include="Scripts\startup\" />
     <Folder Include="Scripts\typings\" />
     <Folder Include="Scripts\typings\angular\" />
     <Folder Include="Scripts\typings\express\" />
