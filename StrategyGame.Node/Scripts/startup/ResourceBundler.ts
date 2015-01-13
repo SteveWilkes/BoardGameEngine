@@ -13,6 +13,4 @@ class ResourceBundler implements bs.IBootstrapper {
     }
 }
 
-var factory = () => { return new ResourceBundler(); };
-
-export = factory;
+export = ResourceBundler;

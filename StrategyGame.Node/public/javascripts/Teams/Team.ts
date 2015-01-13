@@ -3,6 +3,7 @@
 
     export class Team implements Pieces.IPieceOwner {
         constructor(
+            public id: string,
             public name: string,
             public piecesByInitialLocation: TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>) {
 

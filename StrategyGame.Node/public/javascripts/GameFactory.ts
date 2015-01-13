@@ -70,7 +70,7 @@
             "$timeout",
             $getGameTypeQuery,
             Teams.$teamFactory,
-            Status.$gameCoordinator,
+            Status.$clientGameCoordinator,
             Angular.Services.$eventPropogator,
             Angular.Services.$idGenerator,
             GameFactory]);

@@ -1,6 +1,6 @@
 ﻿declare module "stylus" {
     // Merged declaration, e is both a callable function and a namespace
-    function s(stylusData?: NodeBuffer): s.Stylus;
+    function s(stylusData?: string): s.Stylus;
 
     module s {
         interface Stylus {

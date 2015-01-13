@@ -4,14 +4,19 @@
         monitor(game: IGameCoordinationSubject): void;
     }
 
-    export var $gameCoordinator = "$gameCoordinator";
+    export var $clientGameCoordinator = "$clientGameCoordinator";
 
-    class GameCoordinator implements IGameCoordinator {
+    class ClientGameCoordinator implements IGameCoordinator {
         constructor(private _socket: SocketIO.Socket) { }
 
         public monitor(game: IGameCoordinationSubject): void {
             game.events.gameStarted.subscribe(() => {
                 this._socket.emit("gameStarted", game.id);
+                return true;
+            });
+
+            game.events.turnStarted.subscribe(team => {
+                this._socket.emit("turnStarted", team.id);
                 return true;
             });
 
@@ -28,7 +33,7 @@
 
     angular
         .module(strategyGameApp)
-        .service($gameCoordinator, [
+        .service($clientGameCoordinator, [
             Angular.Services.$socketFactory,
-            GameCoordinator]);
+            ClientGameCoordinator]);
 }

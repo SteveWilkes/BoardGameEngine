@@ -51,7 +51,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/TakenPieceLocation.js");
-    assets.addJs("/public/javascripts/Status/GameCoordinator.js");
+    assets.addJs("/public/javascripts/Status/ClientGameCoordinator.js");
     assets.addJs("/public/javascripts/Status/TurnDefinition.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/PieceMoveAction.js");

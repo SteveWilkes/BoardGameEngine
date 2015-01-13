@@ -13,6 +13,10 @@
 
         public teams: Array<Teams.Team>;
 
+        public getNextTeamId(): string {
+            return this.teams.length.toString();
+        }
+
         public add(team: Teams.Team): void {
             team.owner = this;
             this.teams.push(team);

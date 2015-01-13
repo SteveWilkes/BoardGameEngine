@@ -39,6 +39,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="assets.ts" />
+    <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayDataService.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardOrientationTranslator.ts" />
@@ -90,7 +91,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\GameCoordinator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\IGameCoordinationSubject.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
@@ -117,11 +118,16 @@
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
-    <TypeScriptCompile Include="Scripts\startup\CssGenerator.ts" />
-    <TypeScriptCompile Include="Scripts\startup\Bootstrap.ts" />
-    <TypeScriptCompile Include="Scripts\startup\ResourceBundler.ts" />
-    <TypeScriptCompile Include="Scripts\startup\Router.ts" />
-    <TypeScriptCompile Include="Scripts\startup\SocketManager.ts" />
+    <TypeScriptCompile Include="Scripts\Game\CpuPlayer.ts" />
+    <TypeScriptCompile Include="Scripts\Game\ServerGameCoordinator.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.InternalModuleLoader.ts" />
+    <TypeScriptCompile Include="Scripts\Startup\CssGenerator.ts" />
+    <TypeScriptCompile Include="Scripts\Startup\Bootstrap.ts" />
+    <TypeScriptCompile Include="Scripts\Startup\ResourceBundler.ts" />
+    <TypeScriptCompile Include="Scripts\Startup\Router.ts" />
+    <TypeScriptCompile Include="Scripts\Startup\CommunicationManager.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bundle-up\bundle-up.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
@@ -161,7 +167,9 @@
     <Folder Include="public\stylesheets\" />
     <Folder Include="routes\" />
     <Folder Include="Scripts\" />
-    <Folder Include="Scripts\startup\" />
+    <Folder Include="Scripts\Game\" />
+    <Folder Include="Scripts\Generic\" />
+    <Folder Include="Scripts\Startup\" />
     <Folder Include="Scripts\typings\" />
     <Folder Include="Scripts\typings\angular\" />
     <Folder Include="Scripts\typings\express\" />

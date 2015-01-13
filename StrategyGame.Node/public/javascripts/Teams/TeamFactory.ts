@@ -15,7 +15,9 @@
         public createTeam(owner: ITeamOwner, gameTypeId: string, events: GameEventSet): Teams.Team {
             var piecesByLocation = this._getPiecesByLocation(events);
 
-            var team = new Teams.Team(owner.id + " Team", piecesByLocation);
+            var teamId = owner.getNextTeamId();
+            var teamName = owner.id + " Team";
+            var team = new Teams.Team(teamId, teamName, piecesByLocation);
 
             return team;
         }
