@@ -6,7 +6,7 @@ var fileManager = new fileManagerCtor(require("path"), require("fs"), require("t
 import moduleLoaderCtor = require("./Scripts/Generic/AgileObjects.Node.InternalModuleLoader");
 var moduleLoader = new moduleLoaderCtor(fileManager, require).forNamespace("AgileObjects.StrategyGame.Game");
 
-var serverGameCoordinator = moduleLoader
+var serverGameCoordinatorCtor = moduleLoader
     .load<new (socket: SocketIO.Socket) => Game.ServerGameCoordinator>("ServerGameCoordinator");
 
 import socketFactory = require("socket.io");
@@ -20,7 +20,7 @@ import resourceBundler = require("./Scripts/Startup/ResourceBundler");
 
 var bootstrappers = [
     new cssGenerator(fileManager, stylus),
-    new communicationManager(socketFactory, socket => new serverGameCoordinator(socket)),
+    new communicationManager(socketFactory, socket => new serverGameCoordinatorCtor(socket)),
     new router(routes),
     new resourceBundler()
 ];
@@ -28,9 +28,6 @@ var bootstrappers = [
 import nodeAppCtor = require("./NodeApp");
 import http = require("http");
 
-var nodeApp = new nodeAppCtor(
-    fileManager,
-    app => http.createServer(app),
-    bootstrappers);
+var nodeApp = new nodeAppCtor(fileManager, app => http.createServer(app), bootstrappers);
 
 nodeApp.start();
