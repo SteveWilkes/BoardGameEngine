@@ -1,11 +1,10 @@
 ﻿import Game = AgileObjects.StrategyGame.Game;
 
 import fileManagerCtor = require("./Scripts/Generic/AgileObjects.Node.FileManager");
-var fileManager = new fileManagerCtor(require("path"), require("fs"), require("temp"), require.main.filename);
+var fileManager = new fileManagerCtor(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
 import moduleLoaderCtor = require("./Scripts/Generic/AgileObjects.Node.InternalModuleLoader");
-var moduleLoader = new moduleLoaderCtor(fileManager, require);
-moduleLoader.setNamespace("AgileObjects.StrategyGame.Game");
+var moduleLoader = new moduleLoaderCtor(fileManager, require).forNamespace("AgileObjects.StrategyGame.Game");
 
 var serverGameCoordinator = moduleLoader
     .load<new (socket: SocketIO.Socket) => Game.ServerGameCoordinator>("ServerGameCoordinator");

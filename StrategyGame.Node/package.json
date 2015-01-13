@@ -11,6 +11,7 @@
         "express": "^3.4.4",
         "jade": "*",
         "socket.io": "^1.2.1",
-        "stylus": "*"
+        "stylus": "*",
+        "temp": "^0.8.1"
     }
 }

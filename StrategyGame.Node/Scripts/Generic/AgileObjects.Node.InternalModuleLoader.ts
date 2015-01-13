@@ -29,8 +29,9 @@ class InternalModuleLoader {
         return (dotIndex > -1) ? fileName.substring(0, dotIndex) : fileName;
     }
 
-    public setNamespace(namespace: string): void {
+    public forNamespace(namespace: string): InternalModuleLoader {
         this._namespace = namespace;
+        return this;
     }
 
     public load<TResult>(moduleName: string, namespace?: string): TResult {
@@ -44,7 +45,7 @@ class InternalModuleLoader {
         return <TResult>loadedModule;
     }
 
-    private _getScriptWithExport(namespace: string, moduleName: string) {
+    private _getScriptWithExport(namespace: string, moduleName: string): string {
         var modulePath = this._getSourceFilePathOrThrow(moduleName);
         var moduleScript = this._fileManager.readAllText(modulePath);
         var exportPath = this._getExportPath(namespace, moduleName);
@@ -55,19 +56,18 @@ class InternalModuleLoader {
         return moduleScript;
     }
 
-    private _getSourceFilePathOrThrow(path: string) {
+    private _getSourceFilePathOrThrow(moduleName: string): string {
         var filesPathsByFileName = this._getFilePathsByFileName();
-        var sourceFileName = this._removeFileExtensionFrom(path);
-        var sourceFilePath = filesPathsByFileName[sourceFileName];
+        var sourceFilePath = filesPathsByFileName[moduleName];
 
         if (sourceFilePath !== undefined) {
             return sourceFilePath;
         }
 
-        throw new Error("Unable to find source file '" + path + "'");
+        throw new Error("Unable to find source for module '" + moduleName + "'");
     }
 
-    private _getExportPath(namespace: string, moduleName: string) {
+    private _getExportPath(namespace: string, moduleName: string): string {
         var pathSegments = new Array<string>(moduleName);
 
         if (namespace !== undefined) {
