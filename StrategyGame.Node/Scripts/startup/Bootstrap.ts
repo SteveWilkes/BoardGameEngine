@@ -1,20 +1,20 @@
 ﻿import http = require("http");
 import express = require("express");
+import Ts = AgileObjects.TypeScript;
 
 export class SystemInfo {
-    constructor(
-        public isReleaseMode: boolean,
-        public publicRoot: string,
-        public assetsRoot: string,
-        public server: http.Server,
-        public app: express.Express) {
+    private _rootDirectory: string;
 
-        this.port = app.get("port");
+    constructor(private _fileManager: Ts.IFileManager, public isReleaseMode: boolean) {
+        this._rootDirectory = this._fileManager.getAppRootDirectory();
     }
 
-    public port: string;
+    public getPath(relativePath: string) {
+        return this._fileManager.joinPaths(this._rootDirectory, relativePath);
+    }
 }
 
 export interface IBootstrapper {
-    setup(info: SystemInfo): void;
+    appCreated(info: SystemInfo, app: express.Express): void;
+    serverCreated(info: SystemInfo, server: http.Server): void;
 }

@@ -1,33 +1,43 @@
 ﻿import Game = AgileObjects.StrategyGame.Game;
+import Angular = AgileObjects.Angular;
+import Node = AgileObjects.Node;
 
-import fileManagerCtor = require("./Scripts/Generic/AgileObjects.Node.FileManager");
-var fileManager = new fileManagerCtor(require("path"), require("fs"), require("temp").track(), require.main.filename);
+import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
+var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
-import moduleLoaderCtor = require("./Scripts/Generic/AgileObjects.Node.InternalModuleLoader");
-var moduleLoader = new moduleLoaderCtor(fileManager, require).forNamespace("AgileObjects.StrategyGame.Game");
+import ModuleLoader = require("./Scripts/Generic/AgileObjects.Node.InternalModuleLoader");
+var moduleLoader = new ModuleLoader(fileManager, require);
 
-var serverGameCoordinatorCtor = moduleLoader
-    .load<new (socket: SocketIO.Socket) => Game.ServerGameCoordinator>("ServerGameCoordinator");
+var ServerGameCoordinator = moduleLoader.load<new () => Game.ServerGameCoordinator>(
+    "ServerGameCoordinator",
+    "AgileObjects.StrategyGame.Game");
+
+var RandomStringGenerator = moduleLoader
+    .load<new () => Angular.Services.IIdGenerator>("AgileObjects.TypeScript.RandomStringGenerator");
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");
 import stylus = require("stylus");
+import express = require("express");
+var sessionStore: Node.ISessionStore = new express.session["MemoryStore"]();
 
-import cssGenerator = require("./Scripts/Startup/CssGenerator");
-import communicationManager = require("./Scripts/Startup/CommunicationManager");
-import router = require("./Scripts/Startup/Router");
-import resourceBundler = require("./Scripts/Startup/ResourceBundler");
+import CssGenerator = require("./Scripts/Startup/CssGenerator");
+import Router = require("./Scripts/Startup/Router");
+import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
+import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
+import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
 var bootstrappers = [
-    new cssGenerator(fileManager, stylus),
-    new communicationManager(socketFactory, socket => new serverGameCoordinatorCtor(socket)),
-    new router(routes),
-    new resourceBundler()
+    new CssGenerator(fileManager, stylus),
+    new Router(routes),
+    new ResourceBundler(),
+    new SessionWrapper(express, new RandomStringGenerator(), sessionStore),
+    new CommunicationManager(socketFactory(), sessionStore, new ServerGameCoordinator())
 ];
 
-import nodeAppCtor = require("./NodeApp");
+import NodeApp = require("./NodeApp");
 import http = require("http");
 
-var nodeApp = new nodeAppCtor(fileManager, app => http.createServer(app), bootstrappers);
+var nodeApp = new NodeApp(fileManager, app => http.createServer(app), bootstrappers);
 
 nodeApp.start();

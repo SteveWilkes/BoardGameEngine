@@ -9,16 +9,17 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     // https://github.com/btford/angular-socket-io
     assets.addJs("/public/javascripts/Generic/BtFord.Angular.Socket.io.js");
 
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.Sockets.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.RandomStringGenerator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Extensions.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.Sockets.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.AddClassOnEvent.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.ScrollToBottom.js");

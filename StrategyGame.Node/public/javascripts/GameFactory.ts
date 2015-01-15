@@ -38,7 +38,7 @@
             var interactionMonitor = new Pieces.PieceInteractionMonitor(this._timeoutService, gameType.interactionRegulator, events);
             var board = new Boards.Board(gameType.boardType, interactionMonitor, numberOfTeams, events);
 
-            var gameId = this._idGenerator.getId();
+            var gameId = this._idGenerator.generate();
             var game = new Game(gameId, gameType, displayManager, this._gameCoordinator, board, events);
 
             var teams = this._getTeams(gameType, events);

@@ -35,7 +35,7 @@ declare module SocketIO {
         onconnection(socket: any): Server;
         of(nsp: string): Namespace;
         emit(name: string, ...args: any[]): Socket;
-        use(fn: Function): Namespace;
+        use(middleware: (socket: Socket, next: (err?: Error) => void) => void): Namespace;
 
         on(event: 'connection', listener: (socket: Socket) => void): any;
         on(event: 'connect', listener: (socket: Socket) => void): any;
