@@ -1,10 +1,11 @@
 ﻿import http = require("http");
 import express = require("express");
+import IExpressModule = require("../Generic/AgileObjects.Node.IExpressModule");
 import bs = require("Bootstrap");
 
 class SessionWrapper implements bs.IBootstrapper {
     constructor(
-        private _express: AgileObjects.Node.IExpressModule,
+        private _express: IExpressModule,
         private _randomStringGenerator: AgileObjects.Angular.Services.IIdGenerator,
         private _sessionStore: AgileObjects.Node.ISessionStore) { }
 

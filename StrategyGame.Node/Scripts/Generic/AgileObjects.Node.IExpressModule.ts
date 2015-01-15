@@ -1,10 +1,8 @@
-﻿module AgileObjects.Node {
-    export interface IExpressHandler {
-        (req: any, res: any, next?: Function): void;
-    }
+﻿import express = require("express")
 
-    export interface IExpressModule {
-        cookieParser(secret?: string): IExpressHandler;
-        session(options?: any): IExpressHandler;
-    }
+interface IExpressModule {
+    cookieParser(secret?: string): express.Handler;
+    session(options?: any): express.Handler;
 }
+
+export = IExpressModule;

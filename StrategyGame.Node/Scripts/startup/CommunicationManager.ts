@@ -1,6 +1,5 @@
 ﻿import bs = require("Bootstrap");
 import express = require("express");
-import IExpressMiddleware = require("../Generic/AgileObjects.Node.IExpressMiddleware");
 import http = require("http");
 import Game = AgileObjects.StrategyGame.Game;
 import Node = AgileObjects.Node;
@@ -35,7 +34,7 @@ class CommunicationManager implements bs.IBootstrapper {
     }
 
     private _parseSignedCookies(socket: SocketIO.Socket, next: (err?: Error) => void): void {
-        var cookieParser: IExpressMiddleware = this._app["cookieParser"];
+        var cookieParser: express.Handler = this._app["cookieParser"];
 
         cookieParser(socket.request, null, err => {
             if (err == null) {

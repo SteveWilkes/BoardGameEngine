@@ -127,7 +127,6 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.InternalModuleLoader.ts" />
-    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.IExpressMiddleware.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CssGenerator.ts" />
     <TypeScriptCompile Include="Scripts\Startup\Bootstrap.ts" />
     <TypeScriptCompile Include="Scripts\Startup\BundleUpResourceBundler.ts" />
