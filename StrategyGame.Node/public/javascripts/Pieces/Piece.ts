@@ -31,16 +31,13 @@
             this.coordinates = location.coordinates;
         }
 
-        public applyAttackBy(attacker: Piece): void {
-            var attack = new PieceAttack(attacker, this, 35);
+        public applyAttackBy(attacker: Piece): number {
+            // TODO: Calculate damage:
+            var damage = 35;
 
-            this.health -= attack.damage;
+            this.health -= damage;
 
-            this._eventsLocal.pieceAttacked.publish(attack);
-
-            if (this.hasBeenTaken()) {
-                this._eventsLocal.pieceTaken.publish(this);
-            }
+            return damage;
         }
 
         public hasBeenTaken(): boolean {
