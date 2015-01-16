@@ -58,8 +58,8 @@
             }
         }
 
-        public movePieceThrough(path: Array<IPieceLocation>): void {
-            super.movePieceThrough(path);
+        public movePieceTo(destination: IPieceLocation): void {
+            super.movePieceTo(destination);
 
             this.attachedPiece = undefined;
         }

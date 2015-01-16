@@ -14,7 +14,7 @@
             isSelected(): boolean { return false; }
             add(): void { }
             contains(): boolean { return false; }
-            movePieceThrough(): void { }
+            movePieceTo(): void { }
 
             potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
                 return noInteractions;

@@ -30,11 +30,10 @@
             return this.isOccupied() && this.piece.contains(location);
         }
 
-        public movePieceThrough(path: Array<IPieceLocation>): void {
+        public movePieceTo(destination: IPieceLocation): void {
             var piece = this.piece;
             this.piece = undefined;
 
-            var destination = path[path.length - 1];
             destination.add(piece);
         }
 

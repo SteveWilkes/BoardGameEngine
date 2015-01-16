@@ -9,7 +9,7 @@
         add(piece: Piece): void;
         contains(location: IPieceLocation): boolean;
         piece: Piece;
-        movePieceThrough(path: Array<IPieceLocation>): void;
+        movePieceTo(destination: IPieceLocation): void;
         potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction>;
         wasPartOfLastMove: boolean;
     }
