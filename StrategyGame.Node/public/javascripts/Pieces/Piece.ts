@@ -1,17 +1,13 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export class Piece extends PieceLocationBase {
-        private _eventsLocal: GameEventSet;
-
         constructor(
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public interactionProfile: PieceInteractionProfile,
-            events: GameEventSet) {
+            public interactionProfile: PieceInteractionProfile) {
             super();
 
-            this._eventsLocal = events;
             this.health = 100;
         }
 

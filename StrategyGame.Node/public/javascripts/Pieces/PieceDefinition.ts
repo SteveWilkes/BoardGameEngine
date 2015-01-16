@@ -14,8 +14,7 @@
                 pieceId,
                 this.id,
                 this.imageSource,
-                this._interactionProfileFactory(events),
-                events);
+                this._interactionProfileFactory(events));
         }
     }
 }
