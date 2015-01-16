@@ -81,6 +81,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionConstructorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteractionRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />

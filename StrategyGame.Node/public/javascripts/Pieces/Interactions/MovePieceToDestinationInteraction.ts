@@ -1,12 +1,9 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export class MovePieceToDestinationInteraction implements IPieceInteraction {
-        constructor(public path: Array<IPieceLocation>) {
-            this.location = this.path[this.path.length - 1];
+    export class MovePieceToDestinationInteraction extends PieceMovementInteractionBase {
+        constructor(path: Array<IPieceLocation>) {
+            super(path);
         }
-
-        public type = InteractionType.Move;
-        public location: IPieceLocation;
 
         public complete(): void {
             this.path[0].movePieceThrough(this.path);
