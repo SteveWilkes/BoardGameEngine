@@ -34,11 +34,8 @@
             var piece = this.piece;
             this.piece = undefined;
 
-            var movement = new Pieces.PieceMovement(path);
-
-            movement.destination.add(piece);
-
-            this._events.pieceMoved.publish(movement);
+            var destination = path[path.length - 1];
+            destination.add(piece);
         }
 
         public potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {

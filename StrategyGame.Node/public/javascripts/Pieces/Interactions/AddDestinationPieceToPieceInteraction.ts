@@ -1,13 +1,13 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export class AddDestinationPieceToPieceInteraction extends PieceMovementInteractionBase {
-        constructor(path: Array<IPieceLocation>) {
-            super(path);
+        constructor(path: Array<IPieceLocation>, events: GameEventSet) {
+            super(path, events);
         }
 
         public isValid: boolean;
 
-        public complete(): void {
+        protected performMovement(): void {
             this.path[0].piece.add(this.location.piece);
             this.path[0].movePieceThrough(this.path);
         }
