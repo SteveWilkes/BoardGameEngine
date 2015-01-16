@@ -3,10 +3,9 @@
     var placeholderTile = <BoardTile>{ isGameTile: false };
 
     export class BoardRowConfig {
-        constructor(private _tileConfigs: Array<boolean>) {
-        }
+        constructor(private _tileConfigs: Array<boolean>) { }
 
-        public createRow(rowNumber: number, events: GameEventSet): Array<BoardTile> {
+        public createRow(rowNumber: number): Array<BoardTile> {
             var row = new Array<BoardTile>();
             for (var columnNumber = 1; columnNumber < this._tileConfigs.length + 1; ++columnNumber) {
                 if (!this._tileConfigs[columnNumber - 1]) {
@@ -14,7 +13,7 @@
                     continue;
                 }
                 var coordinates = TypeScript.coordinatesRegistry.get(rowNumber, columnNumber);
-                var tile = new BoardTile(coordinates, events);
+                var tile = new BoardTile(coordinates);
                 row.push(tile);
             }
             return row;

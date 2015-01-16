@@ -2,8 +2,8 @@
     import Pieces = StrategyGame.Game.Pieces;
 
     export class BoardTile extends Pieces.PieceLocationBase {
-        constructor(coordinates: TypeScript.Coordinates, events: GameEventSet) {
-            super(events);
+        constructor(coordinates: TypeScript.Coordinates) {
+            super();
 
             this.coordinates = coordinates;
             this.isDark = (coordinates.isEvenRow && coordinates.isEvenColumn) || (!coordinates.isEvenRow && !coordinates.isEvenColumn);

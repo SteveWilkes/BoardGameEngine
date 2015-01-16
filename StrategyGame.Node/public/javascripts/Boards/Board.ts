@@ -13,15 +13,15 @@
             events: GameEventSet) {
             events.teamAdded.subscribe(team => this._addTeam(team));
 
-            this._createTiles(events);
+            this._createTiles();
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
 
             pieceInteractionMonitor.begin();
             Pieces.TakenPieceLocation.create(events);
         }
 
-        private _createTiles(events: GameEventSet): void {
-            this.rows = this.type.createRows(events);
+        private _createTiles(): void {
+            this.rows = this.type.createRows();
             this._tilesByCoordinates = {};
             for (var rowIndex = 0; rowIndex < this.rows.length; rowIndex++) {
                 var row = this.rows[rowIndex];

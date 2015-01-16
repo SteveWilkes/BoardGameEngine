@@ -4,7 +4,7 @@
         private _potentialInteractions: Array<IPieceInteraction>;
         private _isSelected: boolean;
 
-        constructor(private _events: GameEventSet) {
+        constructor() {
             this._potentialInteractions = new Array<IPieceInteraction>();
         }
 

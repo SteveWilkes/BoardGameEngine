@@ -9,7 +9,7 @@
             public imageSource: string,
             public interactionProfile: PieceInteractionProfile,
             events: GameEventSet) {
-            super(events);
+            super();
 
             this._eventsLocal = events;
             this.health = 100;
