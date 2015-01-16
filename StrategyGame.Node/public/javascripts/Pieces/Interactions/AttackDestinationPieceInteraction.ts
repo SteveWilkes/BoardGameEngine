@@ -1,12 +1,9 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
-    export class AttackDestinationPieceInteraction implements IPieceInteraction {
+    export class AttackDestinationPieceInteraction extends PieceInteractionBase {
         constructor(public path: Array<IPieceLocation>, private _events: GameEventSet) {
-            this.location = this.path[this.path.length - 1];
+            super(path, InteractionType.Attack);
         }
-
-        public type = InteractionType.Attack;
-        public location: IPieceLocation;
 
         public complete(): void {
             var attacker = this.path[0].piece;
