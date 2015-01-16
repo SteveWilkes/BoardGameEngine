@@ -8,7 +8,5 @@
         protected performMovement(): void {
             this.path[0].movePieceTo(this.location.piece);
         }
-
-        static isValid = (path: Array<IPieceLocation>) => { return true; }
     }
 }

@@ -21,7 +21,5 @@
                 this._events.pieceTaken.publish(target);
             }
         }
-
-        static isValid = (path: Array<IPieceLocation>) => { return true; }
     }
 }
