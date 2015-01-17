@@ -1,13 +1,13 @@
 ﻿#board.ng-cloak(
   data-ng-cloak=""
   data-size-to-container data-subject="globalEvents" resize="'containerResized'" data-item="game.board"
-  data-ng-style="{ 'margin-top': game.displayManager.boardTopOffset, width: game.displayManager.boardSize }")
+  data-ng-style="{ 'margin-top': displayManager.boardTopOffset, width: displayManager.boardSize }")
     div(data-ng-repeat="row in game.board.rows")
         div(data-ng-repeat="tile in row track by $index")
             .board-tile(
               id="{{tile.coordinates.signature}}"
               data-add-class-on-event data-eventname="'attack'" data-classname="'board-tile-attack-animation'"
-              data-ng-style="{ width: game.displayManager.tileSize, height: game.displayManager.tileSize }"
+              data-ng-style="{ width: displayManager.tileSize, height: displayManager.tileSize }"
               data-ng-class="{\
                 'available': tile.isGameTile, 'placeholder': !tile.isGameTile,\
                 'dark-tile': tile.isDark, 'light-tile': !tile.isDark,\
@@ -28,7 +28,7 @@
                   data-dragdeselect="'pieceDeselected'"
                   data-drop="'pieceDeselected'"
                   data-ng-src="{{tile.piece.imageSource}}"
-                  data-ng-style="{ width: game.displayManager.pieceWidth, height: game.displayManager.pieceHeight }")
+                  data-ng-style="{ width: displayManager.pieceWidth, height: displayManager.pieceHeight }")
                 img.attachedPiece(
                   id="{{tile.piece.attachedPiece.id}}"
                   data-ng-if="tile.piece.isOccupied()"
@@ -38,4 +38,4 @@
                   data-dragend="'pieceDeselected'"
                   data-dragdeselect="'pieceDeselected'"
                   data-ng-src="{{tile.piece.attachedPiece.imageSource}}"
-                  data-ng-style="{ width: game.displayManager.pieceWidth, height: game.displayManager.pieceHeight }")
+                  data-ng-style="{ width: displayManager.pieceWidth, height: displayManager.pieceHeight }")

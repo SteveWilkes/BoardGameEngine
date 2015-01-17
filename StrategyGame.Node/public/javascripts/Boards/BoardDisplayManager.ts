@@ -1,8 +1,14 @@
 ﻿module AgileObjects.StrategyGame.Game.Boards {
 
+    export var $boardDisplayManager = "$boardDisplayManager";
+
     export class BoardDisplayManager {
+        private _boardDisplayDataService: BoardDisplayDataService;
+
         /** Initialises a new instance of the BoardDisplayManager class. */
-        constructor(private _boardDisplayDataService: BoardDisplayDataService) {
+        constructor(windowService: ng.IWindowService) {
+            this._boardDisplayDataService = new Boards.BoardDisplayDataService(windowService);
+
             GlobalEventSet.instance.containerResized.subscribe((board: Board) => this.resize(board));
         }
 
@@ -27,6 +33,7 @@
             var boardDisplayData = this._boardDisplayDataService.getData();
             this.boardTopOffset = this._calculateBoardTopOffset(boardDisplayData);
             this.boardSize = Math.max(this._calculateBoardSize(boardDisplayData), boardDisplayData.minWidth);
+            // ReSharper disable once QualifiedExpressionMaybeNull
             var tileOuterSize = Math.floor(this.boardSize / board.type.gridSize);
             this.tileSize = tileOuterSize - (BoardSizeDefaults.instance.tileBorderWidth * 2);
             var resizeFactor = this.boardSize / BoardSizeDefaults.instance.boardSize;
@@ -60,4 +67,8 @@
             return boardSize;
         }
     }
+
+    angular
+        .module(strategyGameApp)
+        .service($boardDisplayManager, ["$window", BoardDisplayManager]);
 }

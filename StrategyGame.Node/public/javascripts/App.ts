@@ -6,6 +6,7 @@
 
     export interface IGameScope extends ng.IScope {
         globalEvents: GlobalEventSet;
+        displayManager: Boards.BoardDisplayManager;
         game: Game;
     }
 

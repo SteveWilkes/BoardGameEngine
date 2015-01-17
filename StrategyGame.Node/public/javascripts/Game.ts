@@ -4,14 +4,12 @@
         constructor(
             public id: string,
             public type: GameType,
-            public displayManager: Boards.BoardDisplayManager,
             private _gameCoordinator: Status.IGameCoordinator,
             public board: Boards.Board,
             public events: GameEventSet) {
 
             this.players = new Array<Players.IPlayer>();
             this.status = new Status.StatusData(this.events);
-            this.displayManager.resize(this.board);
         }
 
         public players: Array<Players.IPlayer>;

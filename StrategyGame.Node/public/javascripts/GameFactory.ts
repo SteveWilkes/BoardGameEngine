@@ -6,7 +6,6 @@
 
     export interface IGameFactory {
         createNewGame(
-            displayManager: Boards.BoardDisplayManager,
             boardTypeId: string,
             numberOfTeams: number): Game;
     }
@@ -23,7 +22,6 @@
             private _idGenerator: Angular.Services.IIdGenerator) { }
 
         public createNewGame(
-            displayManager: Boards.BoardDisplayManager,
             gameTypeId: string,
             numberOfTeams: number): Game {
             var events = new GameEventSet();
@@ -39,7 +37,7 @@
             var board = new Boards.Board(gameType.boardType, interactionMonitor, numberOfTeams, events);
 
             var gameId = this._idGenerator.generate();
-            var game = new Game(gameId, gameType, displayManager, this._gameCoordinator, board, events);
+            var game = new Game(gameId, gameType, this._gameCoordinator, board, events);
 
             var teams = this._getTeams(gameType, events);
 
