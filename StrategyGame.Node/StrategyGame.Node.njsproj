@@ -144,8 +144,16 @@
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="public\images\pieces\Bomb.png" />
-    <Content Include="public\images\pieces\Example.png" />
+    <Content Include="public\images\pieces\Bomb1.png" />
+    <Content Include="public\images\pieces\Bomb2.png" />
+    <Content Include="public\images\pieces\Bomb3.png" />
+    <Content Include="public\images\pieces\Bomb4.png" />
+    <Content Include="public\images\pieces\Example1.png" />
+    <Content Include="public\images\pieces\Example2.png" />
+    <Content Include="public\images\pieces\HumanHeavy1.png" />
+    <Content Include="public\images\pieces\HumanHeavy2.png" />
+    <Content Include="public\images\pieces\HumanHeavy3.png" />
+    <Content Include="public\images\pieces\HumanHeavy4.png" />
     <Content Include="public\javascripts\_references.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\board-tile-attack-animation.styl" />
