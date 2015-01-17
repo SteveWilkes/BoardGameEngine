@@ -38,7 +38,9 @@
             var board = new Boards.Board(gameType.boardType, numberOfTeams, events);
 
             var gameId = this._idGenerator.generate();
-            var game = new Game(gameId, gameType, this._gameCoordinator, board, events);
+            var game = new Game(gameId, gameType, board, events);
+
+            this._gameCoordinator.monitor(game);
 
             var teams = this._getTeams(gameType, events);
 

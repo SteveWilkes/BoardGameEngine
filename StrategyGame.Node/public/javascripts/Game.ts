@@ -4,7 +4,6 @@
         constructor(
             public id: string,
             public type: GameType,
-            private _gameCoordinator: Status.IGameCoordinator,
             public board: Boards.Board,
             public events: GameEventSet) {
 
@@ -27,8 +26,6 @@
         }
 
         public start() {
-            this._gameCoordinator.monitor(this);
-
             var startingTeam = this.players[0].teams[0];
             this.events.gameStarted.publish(startingTeam);
         }
