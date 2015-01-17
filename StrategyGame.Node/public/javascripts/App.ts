@@ -4,12 +4,6 @@
 
     var game = angular.module(strategyGameApp, ["ngAnimate", "btford.socket-io"]);
 
-    export interface IGameScope extends ng.IScope {
-        globalEvents: GlobalEventSet;
-        displayManager: Boards.BoardDisplayManager;
-        game: Game;
-    }
-
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);
     Angular.Directives.addDraggableDroppable(game);

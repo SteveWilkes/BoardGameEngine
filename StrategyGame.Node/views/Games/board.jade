@@ -1,13 +1,13 @@
 ﻿#board.ng-cloak(
   data-ng-cloak=""
-  data-size-to-container data-subject="globalEvents" resize="'containerResized'" data-item="game.board"
-  data-ng-style="{ 'margin-top': displayManager.boardTopOffset, width: displayManager.boardSize }")
-    div(data-ng-repeat="row in game.board.rows")
+  data-size-to-container data-subject="gameCtrl.globalEvents" resize="'containerResized'" data-item="gameCtrl.game.board"
+  data-ng-style="{ 'margin-top': gameCtrl.displayManager.boardTopOffset, width: gameCtrl.displayManager.boardSize }")
+    div(data-ng-repeat="row in gameCtrl.game.board.rows")
         div(data-ng-repeat="tile in row track by $index")
             .board-tile(
               id="{{tile.coordinates.signature}}"
               data-add-class-on-event data-eventname="'attack'" data-classname="'board-tile-attack-animation'"
-              data-ng-style="{ width: displayManager.tileSize, height: displayManager.tileSize }"
+              data-ng-style="{ width: gameCtrl.displayManager.tileSize, height: gameCtrl.displayManager.tileSize }"
               data-ng-class="{\
                 'available': tile.isGameTile, 'placeholder': !tile.isGameTile,\
                 'dark-tile': tile.isDark, 'light-tile': !tile.isDark,\
@@ -16,26 +16,26 @@
                 'board-movement-tile': tile.wasPartOfLastMove && (tile.potentialInteractions().length === 0) }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
-                  data-draggable-droppable data-subject="game.events" data-item="tile" 
+                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile" 
                   data-dragselect="'locationSelected'" data-drop="'pieceDeselected'")
                 img.piece(
                   id="{{tile.piece.id}}"
                   data-ng-if="tile.isOccupied()"
-                  data-draggable-droppable data-subject="game.events" data-item="tile.piece"
+                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile.piece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"
                   data-dragdeselect="'pieceDeselected'"
                   data-drop="'pieceDeselected'"
                   data-ng-src="{{tile.piece.imageSource}}"
-                  data-ng-style="{ width: displayManager.pieceWidth, height: displayManager.pieceHeight }")
+                  data-ng-style="{ width: gameCtrl.displayManager.pieceWidth, height: gameCtrl.displayManager.pieceHeight }")
                 img.attachedPiece(
                   id="{{tile.piece.attachedPiece.id}}"
                   data-ng-if="tile.piece.isOccupied()"
-                  data-draggable data-subject="game.events" data-item="tile.piece.attachedPiece"
+                  data-draggable data-subject="gameCtrl.game.events" data-item="tile.piece.attachedPiece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"
                   data-dragdeselect="'pieceDeselected'"
                   data-ng-src="{{tile.piece.attachedPiece.imageSource}}"
-                  data-ng-style="{ width: displayManager.pieceWidth, height: displayManager.pieceHeight }")
+                  data-ng-style="{ width: gameCtrl.displayManager.pieceWidth, height: gameCtrl.displayManager.pieceHeight }")

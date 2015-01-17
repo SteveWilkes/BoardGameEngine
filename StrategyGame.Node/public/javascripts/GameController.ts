@@ -3,24 +3,25 @@
 
     class GameController {
         constructor(
-            private _displayManager: Boards.BoardDisplayManager,
-            private _gameFactory: IGameFactory,
-            private _scope: IGameScope) {
+            public displayManager: Boards.BoardDisplayManager,
+            private _gameFactory: IGameFactory) {
 
-            this._scope.globalEvents = GlobalEventSet.instance;
-            this._scope.displayManager = this._displayManager;
+            this.globalEvents = GlobalEventSet.instance;
 
             this._newGame("1");
         }
 
-        private _newGame(gameTypeId: string): void {
-            this._scope.game = this._gameFactory.createNewGame(gameTypeId, 2);
+        public globalEvents: GlobalEventSet;
+        public game: Game;
 
-            this._displayManager.resize(this._scope.game.board);
+        private _newGame(gameTypeId: string): void {
+            this.game = this._gameFactory.createNewGame(gameTypeId, 2);
+
+            this.displayManager.resize(this.game.board);
         }
     }
 
     angular
         .module(strategyGameApp)
-        .controller("GameController", [Boards.$boardDisplayManager, $gameFactory, "$scope", GameController]);
+        .controller("GameController", [Boards.$boardDisplayManager, $gameFactory, GameController]);
 }
