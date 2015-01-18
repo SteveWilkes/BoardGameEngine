@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
+    <TypeScriptCompile Include="public\javascripts\GameFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />

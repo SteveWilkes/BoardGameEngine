@@ -4,7 +4,7 @@
     class GameController {
         constructor(
             public displayManager: Boards.BoardDisplayManager,
-            private _gameFactory: IGameFactory,
+            private _gameFactory: GameFactory,
             private _teamFactory: Teams.ITeamFactory,
             private _gameUiComponentSet: Ui.IGameUiComponent) {
 

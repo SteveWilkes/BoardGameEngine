@@ -1,16 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
     import Boards = StrategyGame.Game.Boards;
-    import Players = StrategyGame.Game.Players;
-    import Status = StrategyGame.Game.Status;
-    import Teams = StrategyGame.Game.Teams;
 
-    export interface IGameFactory {
-        createNewGame(boardTypeId: string): Game;
-    }
-
-    export var $gameFactory = "$gameFactory";
-
-    class GameFactory implements IGameFactory {
+    export class GameFactory {
         constructor(
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
             private _idGenerator: Angular.Services.IIdGenerator) { }
@@ -28,11 +19,4 @@
             return game;
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($gameFactory, [
-            $getGameTypeQuery,
-            Angular.Services.$idGenerator,
-            GameFactory]);
 } 
