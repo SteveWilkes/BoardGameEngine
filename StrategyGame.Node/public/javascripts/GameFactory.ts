@@ -13,7 +13,6 @@
     class GameFactory implements IGameFactory {
         constructor(
             private _getGameTypeQuery: TypeScript.IGetQuery<GameType>,
-            private _gameCoordinator: Status.IGameCoordinator,
             private _idGenerator: Angular.Services.IIdGenerator) { }
 
         public createNewGame(gameTypeId: string): Game {
@@ -26,8 +25,6 @@
             var gameId = this._idGenerator.generate();
             var game = new Game(gameId, gameType, board, events);
 
-            this._gameCoordinator.monitor(game);
-
             return game;
         }
     }
@@ -36,7 +33,6 @@
         .module(strategyGameApp)
         .service($gameFactory, [
             $getGameTypeQuery,
-            Status.$clientGameCoordinator,
             Angular.Services.$idGenerator,
             GameFactory]);
 } 

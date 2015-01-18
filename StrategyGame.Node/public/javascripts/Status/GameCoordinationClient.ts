@@ -1,15 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Game.Status {
 
-    export interface IGameCoordinator {
-        monitor(game: IGameCoordinationSubject): void;
-    }
+    export var $gameCoordinationClient = "$gameCoordinationClient";
 
-    export var $clientGameCoordinator = "$clientGameCoordinator";
-
-    class ClientGameCoordinator implements IGameCoordinator {
+    class GameCoordinationClient implements Ui.IGameUiComponent {
         constructor(private _socket: SocketIO.Socket) { }
 
-        public monitor(game: IGameCoordinationSubject): void {
+        public gameCreated(game: IGameCoordinationSubject): void {
             game.events.gameStarted.subscribe(() => {
                 this._socket.emit("gameStarted", game.id);
                 return true;
@@ -33,7 +29,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($clientGameCoordinator, [
-            Angular.Services.$socketFactory,
-            ClientGameCoordinator]);
+        .service($gameCoordinationClient, [Angular.Services.$socketFactory, GameCoordinationClient]);
 }

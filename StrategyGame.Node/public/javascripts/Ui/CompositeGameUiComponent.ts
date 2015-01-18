@@ -9,10 +9,15 @@
     class CompositeGameUiComponent implements IGameUiComponent {
         private _components: Array<IGameUiComponent>;
 
-        constructor(pieceInteractionMonitorService: IGameUiComponent, gameEventPropogator: IGameUiComponent) {
+        constructor(
+            pieceInteractionMonitorService: IGameUiComponent,
+            gameEventPropogator: IGameUiComponent,
+            gameCoordinationClient: IGameUiComponent) {
+
             this._components = new Array<IGameUiComponent>(
+                pieceInteractionMonitorService,
                 gameEventPropogator,
-                pieceInteractionMonitorService);
+                gameCoordinationClient);
         }
 
         public gameCreated(game: Game): void {
@@ -27,5 +32,6 @@
         .service($gameUiComponentSet, [
             Pieces.$pieceInteractionMonitorService,
             $gameEventPropogator,
+            Status.$gameCoordinationClient,
             CompositeGameUiComponent]);
 }
