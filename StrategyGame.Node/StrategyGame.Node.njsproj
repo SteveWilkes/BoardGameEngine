@@ -119,6 +119,8 @@
     <TypeScriptCompile Include="public\javascripts\Teams\Team.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\ITeamOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Ui\GameEventPropogator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
     <TypeScriptCompile Include="Scripts\Game\CpuPlayer.ts" />
@@ -173,6 +175,7 @@
     <Folder Include="public\javascripts\Boards\" />
     <Folder Include="public\javascripts\Directives\" />
     <Folder Include="public\javascripts\Generic\" />
+    <Folder Include="public\javascripts\Ui\" />
     <Folder Include="public\javascripts\Pieces\Interactions\" />
     <Folder Include="public\javascripts\Pieces\Interactions\Validation\" />
     <Folder Include="public\javascripts\Players\" />

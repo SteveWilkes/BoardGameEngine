@@ -2,7 +2,7 @@
 
     var _none = new Array<IPieceInteraction>(0);
 
-    export class PieceInteractionMonitor {
+    class PieceInteractionMonitor {
         private _currentTeam: IPieceOwner;
         private _currentlyChosenPiece: Piece;
         private _currentlyHighlightedPiece: Piece;
@@ -11,22 +11,20 @@
         private _currentPotentialInteractions: Array<IPieceInteraction>;
         private _interactionHandled: boolean;
 
-        constructor(
-            private _timeoutService: ng.ITimeoutService,
-            private _interactionRegulator: IPieceInteractionRegulator,
-            private _events: GameEventSet) {
+        constructor(private _timeoutService: ng.ITimeoutService, private _game: Game) {
+            this._subscribeToGameEvents();
 
             this._pieceHighlightTimeouts = new Array<ng.IPromise<any>>();
             this._currentPotentialInteractions = _none;
         }
 
-        public begin() {
-            this._events.turnStarted.subscribe(team => this._updateCurrentTeam(team));
-            this._events.pieceSelected.subscribe(piece => this._showPotentialInteractionsAfterDelay(piece));
-            this._events.locationSelected.subscribe(location => this._handleLocationSelected(location));
-            this._events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
-            this._events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
-            this._events.turnEnded.subscribe(() => this._clearCurrentPieces());
+        private _subscribeToGameEvents(): void {
+            this._game.events.turnStarted.subscribe(team => this._updateCurrentTeam(team));
+            this._game.events.pieceSelected.subscribe(piece => this._showPotentialInteractionsAfterDelay(piece));
+            this._game.events.locationSelected.subscribe(location => this._handleLocationSelected(location));
+            this._game.events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
+            this._game.events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
+            this._game.events.turnEnded.subscribe(() => this._clearCurrentPieces());
         }
 
         private _updateCurrentTeam(team: IPieceOwner): boolean {
@@ -70,7 +68,7 @@
         }
 
         private _populatePotentialInteractionsFrom(piece: Piece): void {
-            var supportedInteractionTypes = this._interactionRegulator.getCurrentlySupportedInteractions(piece);
+            var supportedInteractionTypes = this._game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
             this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
         }
 
@@ -263,4 +261,19 @@
             return true;
         }
     }
+
+    export var $pieceInteractionMonitorService = "$pieceInteractionMonitorService";
+
+    class PieceInteractionMonitorService implements Ui.IGameUiComponent {
+        constructor(private _timeoutService: ng.ITimeoutService) { }
+
+        public gameCreated(game: Game): void {
+            // ReSharper disable once WrongExpressionStatement
+            new PieceInteractionMonitor(this._timeoutService, game);
+        }
+    }
+
+    angular
+        .module(strategyGameApp)
+        .service($pieceInteractionMonitorService, ["$timeout", PieceInteractionMonitorService]);
 }

@@ -5,7 +5,7 @@
         constructor(
             public displayManager: Boards.BoardDisplayManager,
             private _gameFactory: IGameFactory,
-            private _eventPropogator: Angular.Services.IEventPropogationService) {
+            private _gameUiComponentSet: Ui.IGameUiComponent) {
 
             this.globalEvents = GlobalEventSet.instance;
 
@@ -18,11 +18,7 @@
         private _newGame(gameTypeId: string): void {
             this.game = this._gameFactory.createNewGame(gameTypeId, 2);
 
-            this._eventPropogator.propogate(
-                this.game.events.pieceAttacked,
-                "attack",
-                attack => attack.target.coordinates.signature);
-
+            this._gameUiComponentSet.gameCreated(this.game);
             this.displayManager.resize(this.game.board);
         }
     }
@@ -32,6 +28,6 @@
         .controller("GameController", [
             Boards.$boardDisplayManager,
             $gameFactory,
-            Angular.Services.$eventPropogator,
+            Ui.$gameUiComponentSet,
             GameController]);
 }
