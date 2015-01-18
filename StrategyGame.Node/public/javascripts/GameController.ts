@@ -4,6 +4,7 @@
     class GameController {
         constructor(
             public displayManager: Boards.BoardDisplayManager,
+            private _idGenerator: Angular.Services.IIdGenerator,
             private _gameFactory: GameFactory,
             private _teamFactory: Teams.ITeamFactory,
             private _gameUiComponentSet: Ui.IGameUiComponent) {
@@ -29,7 +30,8 @@
         public game: Game;
 
         public newGame(gameTypeId: string): void {
-            this.game = this._gameFactory.createNewGame(gameTypeId);
+            var gameId = this._idGenerator.generate();
+            this.game = this._gameFactory.createNewGame(gameId, gameTypeId);
 
             this._gameUiComponentSet.gameCreated(this.game);
             this.displayManager.resize(this.game.board);
@@ -40,6 +42,7 @@
         .module(strategyGameApp)
         .controller("GameController", [
             Boards.$boardDisplayManager,
+            Angular.Services.$idGenerator,
             $gameFactory,
             Teams.$teamFactory,
             Ui.$gameUiComponentSet,

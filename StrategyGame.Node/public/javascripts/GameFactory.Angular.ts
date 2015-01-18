@@ -5,8 +5,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($gameFactory, [
-            $getGameTypeQuery,
-            Angular.Services.$idGenerator,
-            GameFactory]);
+        .service($gameFactory, [$getGameTypeQuery, GameFactory]);
 } 
