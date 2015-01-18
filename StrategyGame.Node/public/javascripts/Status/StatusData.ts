@@ -10,12 +10,18 @@
 
         public history: History;
 
+        public getCurrentTeam(): Teams.Team {
+            return this._turnManager.currentTeam;
+        }
+
         public whosTurn(): string {
-            if (this._turnManager.currentTeam.owner.isLocal) {
+            var currentTeam = this.getCurrentTeam();
+
+            if (currentTeam.owner.isLocal) {
                 return "Your turn!";
             }
 
-            return this._turnManager.currentTeam.name + "'s turn";
+            return currentTeam.name + "'s turn";
         }
     }
 }

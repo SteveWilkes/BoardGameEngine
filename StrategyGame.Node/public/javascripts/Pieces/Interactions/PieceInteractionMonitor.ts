@@ -3,7 +3,6 @@
     var _none = new Array<IPieceInteraction>(0);
 
     class PieceInteractionMonitor {
-        private _currentTeam: IPieceOwner;
         private _currentlyChosenPiece: Piece;
         private _currentlyHighlightedPiece: Piece;
         private _pieceHighlightTimeouts: Array<ng.IPromise<any>>;
@@ -19,17 +18,11 @@
         }
 
         private _subscribeToGameEvents(): void {
-            this._game.events.turnStarted.subscribe(team => this._updateCurrentTeam(team));
             this._game.events.pieceSelected.subscribe(piece => this._showPotentialInteractionsAfterDelay(piece));
             this._game.events.locationSelected.subscribe(location => this._handleLocationSelected(location));
             this._game.events.pieceMoving.subscribe(piece => this._showPotentialInteractionsImmediately(piece));
             this._game.events.pieceDeselected.subscribe(location => this._handleInteractionEnded(location));
             this._game.events.turnEnded.subscribe(() => this._clearCurrentPieces());
-        }
-
-        private _updateCurrentTeam(team: IPieceOwner): boolean {
-            this._currentTeam = team;
-            return true;
         }
 
         private _showPotentialInteractionsAfterDelay(piece: Piece): boolean {
@@ -129,7 +122,7 @@
 
         private _handlePieceClick(location: IPieceLocation): boolean {
             var isPieceOwned = this._currentlyChosenPiece.team.isLocal();
-            var isPieceFromCurrentTeam = this._currentTeam.owns(this._currentlyChosenPiece);
+            var isPieceFromCurrentTeam = this._game.status.getCurrentTeam().owns(this._currentlyChosenPiece);
 
             if (isPieceFromCurrentTeam) {
                 if (!isPieceOwned) {
@@ -245,7 +238,7 @@
         private _selectedPieceDraggedOntoEnemyPieceButNotMoved(destination: IPieceLocation) {
             return this._pieceIsSelected() &&
                 destination.isOccupied() &&
-                !this._currentTeam.owns(destination.piece) &&
+                !this._game.status.getCurrentTeam().owns(destination.piece) &&
                 !destination.contains(this._currentlyChosenPiece);
         }
 
