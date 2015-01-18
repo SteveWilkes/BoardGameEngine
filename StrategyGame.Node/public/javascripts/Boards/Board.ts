@@ -6,10 +6,7 @@
         private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
-        constructor(
-            public type: BoardType,
-            private _numberOfTeams: number,
-            events: GameEventSet) {
+        constructor(public type: BoardType, events: GameEventSet) {
             events.teamAdded.subscribe(team => this._addTeam(team));
 
             this._createTiles();
@@ -40,7 +37,7 @@
 
         private _addTeam(team: Teams.Team): boolean {
             var teams = this._boardPositionsByTeam.keys;
-            var position = this.type.getNextBoardPosition(teams.length, this._numberOfTeams);
+            var position = this.type.getNextBoardPosition(teams.length);
             this._boardPositionsByTeam.add(team, position);
 
             for (var j = 0; j < team.piecesByInitialLocation.count; j++) {

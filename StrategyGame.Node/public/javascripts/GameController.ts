@@ -16,7 +16,7 @@
         public game: Game;
 
         private _newGame(gameTypeId: string): void {
-            this.game = this._gameFactory.createNewGame(gameTypeId, 2);
+            this.game = this._gameFactory.createNewGame(gameTypeId);
 
             this._gameUiComponentSet.gameCreated(this.game);
             this.displayManager.resize(this.game.board);

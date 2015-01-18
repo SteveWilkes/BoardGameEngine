@@ -28,10 +28,8 @@
             return rows;
         }
 
-        public getNextBoardPosition(teamIndex: number, totalNumberOfTeams: number): BoardPosition {
-            var positionIndex = teamIndex * (this._availablePositions.length / totalNumberOfTeams);
-
-            return this._availablePositions[positionIndex];
+        public getNextBoardPosition(teamIndex: number): BoardPosition {
+            return this._availablePositions[teamIndex];
         }
     }
 }

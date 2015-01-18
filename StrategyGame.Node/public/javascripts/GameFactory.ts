@@ -5,9 +5,7 @@
     import Teams = StrategyGame.Game.Teams;
 
     export interface IGameFactory {
-        createNewGame(
-            boardTypeId: string,
-            numberOfTeams: number): Game;
+        createNewGame(boardTypeId: string): Game;
     }
 
     export var $gameFactory = "$gameFactory";
@@ -19,14 +17,12 @@
             private _gameCoordinator: Status.IGameCoordinator,
             private _idGenerator: Angular.Services.IIdGenerator) { }
 
-        public createNewGame(
-            gameTypeId: string,
-            numberOfTeams: number): Game {
+        public createNewGame(gameTypeId: string): Game {
             var events = new GameEventSet();
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId, events);
 
-            var board = new Boards.Board(gameType.boardType, numberOfTeams, events);
+            var board = new Boards.Board(gameType.boardType, events);
 
             var gameId = this._idGenerator.generate();
             var game = new Game(gameId, gameType, board, events);

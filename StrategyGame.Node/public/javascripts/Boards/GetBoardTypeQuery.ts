@@ -10,9 +10,9 @@
                 "1",
                 "diamond",
                 [
-                    new BoardPosition("North", (c: Ts.Coordinates) => c),
+                    new BoardPosition("South", (c: Ts.Coordinates) => c),
+                    new BoardPosition("North", (c: Ts.Coordinates, gridSize: number) => Ts.coordinatesRegistry.get(gridSize - (c.row - 1), c.column), true),
                     new BoardPosition("East", (c: Ts.Coordinates) => c),
-                    new BoardPosition("South", (c: Ts.Coordinates, gridSize: number) => Ts.coordinatesRegistry.get(gridSize - (c.row - 1), c.column), true),
                     new BoardPosition("West", (c: Ts.Coordinates) => c)
                 ],
                 [
