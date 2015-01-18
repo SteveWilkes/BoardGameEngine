@@ -33,7 +33,7 @@
 
             this._gameCoordinator.monitor(game);
 
-            var teams = this._getTeams(gameType, events);
+            var teams = this._getTeams(game);
 
             game.addTeam(teams[0]);
             game.addTeam(teams[1]);
@@ -43,13 +43,13 @@
             return game;
         }
 
-        private _getTeams(gameType: GameType, events: GameEventSet): Array<Teams.Team> {
+        private _getTeams(game: Game): Array<Teams.Team> {
             var player1 = new Players.LocalHumanPlayer("Human");
-            var team1 = this._teamFactory.createTeam(player1, gameType.id, events);
+            var team1 = this._teamFactory.createTeam(player1, game.type.id);
             player1.add(team1);
 
-            var player2 = new Players.RemotePlayerProxy("CPU", events);
-            var team2 = this._teamFactory.createTeam(player2, gameType.id, events);
+            var player2 = new Players.RemotePlayerProxy("CPU", game);
+            var team2 = this._teamFactory.createTeam(player2, game.type.id);
             player2.add(team2);
 
             return [team1, team2];

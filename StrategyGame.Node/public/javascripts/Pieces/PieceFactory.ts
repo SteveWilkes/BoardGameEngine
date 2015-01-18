@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string, events: GameEventSet): Piece;
+        createPiece(pieceDefinitionId: string): Piece;
     }
 
     export var $pieceFactory = "$pieceFactory";
@@ -35,12 +35,11 @@
         [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["*"], [])]);
 
-    var bombInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+    var bombInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
             InteractionType.Move,
             [bombAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m3"),
-            events)]);
+            PieceInteractionConstructorRegistry.get("m3"))]);
 
     // Human Heavy Movement
 
@@ -63,22 +62,19 @@
         [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
-    var humanHeavyInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+    var humanHeavyInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanHeavyMoveDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m2"),
-            events),
+            PieceInteractionConstructorRegistry.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanHeavyAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m1"),
-            events),
+            PieceInteractionConstructorRegistry.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
             [humanHeavyAttackDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("a1"),
-            events)]);
+            PieceInteractionConstructorRegistry.get("a1"))]);
 
     // Human Light Movement
 
@@ -101,22 +97,19 @@
         [new IsUnoccupiedLocationValidator()],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
-    var humanLightInteractionProfileFactory = (events: GameEventSet) => new PieceInteractionProfile([
+    var humanLightInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanLightMoveDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m2"),
-            events),
+            PieceInteractionConstructorRegistry.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanLightAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m1"),
-            events),
+            PieceInteractionConstructorRegistry.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
             [humanLightAttackDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("a1"),
-            events)]);
+            PieceInteractionConstructorRegistry.get("a1"))]);
 
     class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
@@ -128,24 +121,24 @@
                     "1",
                     "Bomb",
                     "/images/pieces/Bomb.png",
-                    bombInteractionProfileFactory),
+                    bombInteractionProfile),
                 "2": new PieceDefinition(
                     "2",
                     "Human Heavy",
                     "/images/pieces/HumanHeavy.png",
-                    humanHeavyInteractionProfileFactory),
+                    humanHeavyInteractionProfile),
                 "3": new PieceDefinition(
                     "3",
                     "Example",
                     "/images/pieces/Example.png",
-                    humanLightInteractionProfileFactory)
+                    humanLightInteractionProfile)
             };
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string, events: GameEventSet): Piece {
+        public createPiece(definitionId: string): Piece {
             var pieceId = this._nextPieceId++;
-            return this._definitions[definitionId].createPiece("p-" + pieceId, events);
+            return this._definitions[definitionId].createPiece("p-" + pieceId);
         }
     }
 

@@ -4,7 +4,7 @@
     import Ts = TypeScript;
 
     export interface ITeamFactory {
-        createTeam(player: Players.IPlayer, gameTypeId: string, events: GameEventSet): Teams.Team;
+        createTeam(player: Players.IPlayer, gameTypeId: string): Teams.Team;
     }
 
     export var $teamFactory = "$teamFactory";
@@ -12,8 +12,8 @@
     export class TeamFactory implements ITeamFactory {
         constructor(private _pieceFactory: Pieces.IPieceFactory) { }
 
-        public createTeam(owner: ITeamOwner, gameTypeId: string, events: GameEventSet): Teams.Team {
-            var piecesByLocation = this._getPiecesByLocation(events);
+        public createTeam(owner: ITeamOwner, gameTypeId: string): Teams.Team {
+            var piecesByLocation = this._getPiecesByLocation();
 
             var teamId = owner.getNextTeamId();
             var teamName = owner.id + " Team";
@@ -22,14 +22,14 @@
             return team;
         }
 
-        private _getPiecesByLocation(events: GameEventSet): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
+        private _getPiecesByLocation(): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
             var configData = this._getPieceLocationConfigData();
             var piecesByLocation = new TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>();
 
             for (var i = 0; i < configData.length; i++) {
                 var data = configData[i];
                 var pieceLocation = Ts.coordinatesRegistry.get(data.row, data.column);
-                var piece = this._pieceFactory.createPiece(data.pieceDefinitionId, events);
+                var piece = this._pieceFactory.createPiece(data.pieceDefinitionId);
                 piecesByLocation.add(pieceLocation, piece);
             }
 

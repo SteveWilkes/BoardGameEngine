@@ -3,18 +3,13 @@
     export class PieceInteractionProfile {
         constructor(private _interactionCalculators: Array<PieceInteractionCalculator>) { }
 
-        public setLocations(allLocations: IPieceLocationDictionary): void {
-            for (var i = 0; i < this._interactionCalculators.length; i++) {
-                this._interactionCalculators[i].setLocations(allLocations);
-            }
-        }
-
-        public getPotentialInteractions(piece: Piece, types: Array<InteractionType>): Array<IPieceInteraction> {
+        public getPotentialInteractions(piece: Piece, game: Game): Array<IPieceInteraction> {
+            var supportedTypes = game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
             var allInteractions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._interactionCalculators.length; i++) {
                 var interactionCalculator = this._interactionCalculators[i];
-                if (types.indexOf(interactionCalculator.type) === -1) { continue; }
-                var interactions = interactionCalculator.getPotentialInteractions(piece.location);
+                if (supportedTypes.indexOf(interactionCalculator.type) === -1) { continue; }
+                var interactions = interactionCalculator.getPotentialInteractions(piece.location, game);
                 allInteractions = allInteractions.concat(interactions);
             }
             return allInteractions;

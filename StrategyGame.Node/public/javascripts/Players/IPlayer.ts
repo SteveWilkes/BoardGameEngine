@@ -26,7 +26,7 @@
     }
 
     export class RemotePlayerProxy extends PlayerBase implements IPlayer {
-        constructor(id: string, private _events: GameEventSet) {
+        constructor(id: string, private _game: Game) {
             super(id, false);
         }
 
@@ -37,7 +37,7 @@
             for (var i = 0; i < team.pieces.length; i++) {
                 var piece = team.pieces[i];
                 if (piece.hasBeenTaken()) { continue; }
-                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, [Pieces.InteractionType.Attack, Pieces.InteractionType.Move]);
+                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, this._game);
                 allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
             }
             var pieceMovement = Pieces.NullPotentialInteraction.INSTANCE;

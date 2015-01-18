@@ -1,22 +1,17 @@
 ﻿module AgileObjects.StrategyGame.Game.Pieces {
 
     export class RelatedLocationCalculator {
-        private _allLocations: IPieceLocationDictionary;
-
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
             private _pathStepLocationValidators: Array<IPieceLocationValidator>,
             private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
-        public setLocations(allLocations: IPieceLocationDictionary): void {
-            this._allLocations = allLocations;
-        }
-
-        public calculateLocationPaths(startingLocation: IPieceLocation): Array<Array<IPieceLocation>> {
+        public calculateLocationPaths(startingLocation: IPieceLocation, game: Game): Array<Array<IPieceLocation>> {
+            var allLocations = game.board.getTiles();
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
-                var paths = this._calculatePaths(startingLocation, this._coordinateTranslatorSets[i]);
+                var paths = this._calculatePaths(startingLocation, allLocations, this._coordinateTranslatorSets[i]);
                 if (paths.length > 0) { allPaths = allPaths.concat(paths); }
             }
             return allPaths;
@@ -24,6 +19,7 @@
 
         private _calculatePaths(
             startingLocation: IPieceLocation,
+            allLocations: IPieceLocationDictionary,
             coordinateTranslators: Array<TypeScript.CoordinateTranslator>): Array<Array<IPieceLocation>> {
 
             var allPaths = new Array<Array<IPieceLocation>>();
@@ -34,7 +30,7 @@
                 var pathInvalid = false;
                 for (var j = 0; j < locationCoordinatesPath.length; j++) {
                     var locationCoordinates = locationCoordinatesPath[j];
-                    var location = this._allLocations[locationCoordinates.signature];
+                    var location = allLocations[locationCoordinates.signature];
                     if (location === undefined) {
                         pathInvalid = true;
                         break;

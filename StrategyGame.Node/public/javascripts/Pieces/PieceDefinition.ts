@@ -6,15 +6,15 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _interactionProfileFactory: (events: GameEventSet) => PieceInteractionProfile) {
+            private _interactionProfile: PieceInteractionProfile) {
         }
 
-        public createPiece(pieceId: string, events: GameEventSet): Piece {
+        public createPiece(pieceId: string): Piece {
             return new Piece(
                 pieceId,
                 this.id,
                 this.imageSource,
-                this._interactionProfileFactory(events));
+                this._interactionProfile);
         }
     }
 }

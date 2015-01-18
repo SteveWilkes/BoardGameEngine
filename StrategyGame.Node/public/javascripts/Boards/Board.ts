@@ -34,6 +34,10 @@
 
         public rows: Array<Array<BoardTile>>;
 
+        public getTiles(): Pieces.IPieceLocationDictionary {
+            return this._tilesByCoordinates;
+        }
+
         private _addTeam(team: Teams.Team): boolean {
             var teams = this._boardPositionsByTeam.keys;
             var position = this.type.getNextBoardPosition(teams.length, this._numberOfTeams);
@@ -48,15 +52,7 @@
 
             team.setNumber(this._boardPositionsByTeam.count);
 
-            this._registerTiles(team);
-
             return true;
-        }
-
-        private _registerTiles(team: Teams.Team): void {
-            for (var j = 0; j < team.pieces.length; j++) {
-                team.pieces[j].interactionProfile.setLocations(this._tilesByCoordinates);
-            }
         }
 
         public orientTo(team: Teams.Team): void {

@@ -61,8 +61,7 @@
         }
 
         private _populatePotentialInteractionsFrom(piece: Piece): void {
-            var supportedInteractionTypes = this._game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
-            this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, supportedInteractionTypes);
+            this._currentPotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, this._game);
         }
 
         private _cancelPieceHighlighting(): void {
