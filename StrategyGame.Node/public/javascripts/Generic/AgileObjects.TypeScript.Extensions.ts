@@ -1,6 +1,7 @@
 ﻿interface String {
     splice(insertionIndex: number, substringToInsert: string, charactersToRemove?: number): string;
     replaceAll(substringToReplace: string, replacement: string): string;
+    startsWith(substring: string): boolean;
     endsWith(substring: string): boolean;
 }
 
@@ -21,6 +22,11 @@ module AgileObjects.TypeScript {
                 substringToReplace.length);
         }
         return _this;
+    }
+
+    String.prototype.startsWith = function (substring: string) {
+        var _this = <string>this;
+        return _this.substring(0, substring.length) === substring;
     }
 
     String.prototype.endsWith = function (substring: string) {

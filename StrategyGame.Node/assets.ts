@@ -31,6 +31,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/App.js");
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");
+    assets.addJs("/public/javascripts/Boards/BoardDisplayManager.Angular.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationConfigData.js");
     assets.addJs("/public/javascripts/Pieces/NullPieceLocation.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
@@ -76,8 +77,10 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");
     assets.addJs("/public/javascripts/Pieces/PieceFactory.js");
+    assets.addJs("/public/javascripts/Pieces/PieceFactory.Angular.js");
     assets.addJs("/public/javascripts/Teams/Team.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.js");
+    assets.addJs("/public/javascripts/Teams/TeamFactory.Angular.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayData.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Board.js");

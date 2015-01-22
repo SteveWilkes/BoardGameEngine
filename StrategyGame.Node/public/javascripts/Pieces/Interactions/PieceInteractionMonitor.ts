@@ -2,6 +2,7 @@
 
     var _none = new Array<IPieceInteraction>(0);
 
+    "ClientOnly";
     class PieceInteractionMonitor {
         private _currentlyChosenPiece: Piece;
         private _currentlyHighlightedPiece: Piece;

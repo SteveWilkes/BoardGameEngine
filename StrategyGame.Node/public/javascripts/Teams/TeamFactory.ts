@@ -7,8 +7,6 @@
         createTeam(player: Players.IPlayer, gameTypeId: string): Teams.Team;
     }
 
-    export var $teamFactory = "$teamFactory";
-
     export class TeamFactory implements ITeamFactory {
         constructor(private _pieceFactory: Pieces.IPieceFactory) { }
 
@@ -50,8 +48,4 @@
                 { row: 3, column: 7, pieceDefinitionId: "3" }];
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($teamFactory, [Pieces.$pieceFactory, TeamFactory]);
 }

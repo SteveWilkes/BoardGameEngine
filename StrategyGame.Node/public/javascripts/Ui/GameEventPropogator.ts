@@ -2,6 +2,7 @@
 
     export var $gameEventPropogator = "$gameEventPropogator";
 
+    "ClientOnly";
     class GameEventPropogator implements IGameUiComponent {
         constructor(private _eventPropogator: Angular.Services.IEventPropogationService) { }
 

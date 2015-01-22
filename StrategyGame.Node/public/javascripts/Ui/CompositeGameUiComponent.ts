@@ -6,6 +6,7 @@
 
     export var $gameUiComponentSet = "$gameUiComponentSet";
 
+    "ClientOnly";
     class CompositeGameUiComponent implements IGameUiComponent {
         private _components: Array<IGameUiComponent>;
 

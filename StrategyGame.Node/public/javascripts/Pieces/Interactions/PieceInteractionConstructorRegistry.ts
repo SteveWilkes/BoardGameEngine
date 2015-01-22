@@ -5,15 +5,20 @@
     }
 
     export module PieceInteractionConstructorRegistry {
-        var interactions = {
-            "m1": AddDestinationPieceToPieceInteraction,
-            "m2": MovePieceToDestinationInteraction,
-            "m3": MovePieceToDestinationPieceInteraction,
-            "a1": AttackDestinationPieceInteraction,
-        };
+        class PieceInteractionConstructorRegistry {
+            private _interactions = {
+                "m1": AddDestinationPieceToPieceInteraction,
+                "m2": MovePieceToDestinationInteraction,
+                "m3": MovePieceToDestinationPieceInteraction,
+                "a1": AttackDestinationPieceInteraction,
+            };
 
-        export var get = (pieceInteractionId: string): IPieceInteractionConstructor => {
-            return interactions[pieceInteractionId];
-        };
+            public get = (pieceInteractionId: string): IPieceInteractionConstructor => {
+                return this._interactions[pieceInteractionId];
+            };
+
+        }
+
+        export var INSTANCE = new PieceInteractionConstructorRegistry();
     }
 }

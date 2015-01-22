@@ -1,6 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game {
     import Boards = StrategyGame.Game.Boards;
 
+    "ClientOnly";
     class GameController {
         constructor(
             public displayManager: Boards.BoardDisplayManager,

@@ -61,16 +61,18 @@ class Import {
 }
 
 class ImportUsage {
-    constructor(public usage) { }
+    constructor(public usage: string) { }
 
     public classData: ClassData;
 }
 
 var memberCharactersOnly = new RegExp("[^a-zA-Z0-9\\._]+", "g");
+var staticImport = "(?:var ([A-Z]{1}[a-zA-Z0-9_]+))? ?= ?((?:[A-Z]{1}[a-zA-Z0-9_]+\\.)+[A-Z]{1}[a-zA-Z0-9_]+);";
+var baseClassReference = "\\}\\)\\(([a-zA-Z0-9_\\.]+)\\);";
 
 class ImportFinder extends RegexClassFinderBase {
     constructor() {
-        super("var [A-Z]{1}[a-zA-Z0-9_]+ ?= ?((?:[A-Z]{1}[a-zA-Z0-9_]+\\.)+[A-Z]{1}[a-zA-Z0-9_]+);");
+        super(staticImport + "|" + baseClassReference);
     }
 
     static INSTANCE = new ImportFinder();
@@ -81,20 +83,25 @@ class ImportFinder extends RegexClassFinderBase {
 
         for (var importedSymbolPath in importMatches) {
             var importMatch = importMatches[importedSymbolPath];
-            var importVariableName = importMatch[0].split(" ")[1];
+            var importVariableName = importMatch[1];
             if (importVariableName === className) { continue; }
-            var importPath = importMatch[1];
-            var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(]{1}[^\\(;,]+[\\(;,]{1})", "g");
+            var importPath = importMatch[2];
             var importUsages = new Array<ImportUsage>();
-            var loggedImportUsages = new Array<string>();
-            var match: RegExpExecArray;
-            while (match = importUsageFinder.exec(classScript)) {
-                var importUsage = match[2];
-                if ((match[1] === "new ") || (loggedImportUsages.indexOf(importUsage) !== -1)) {
-                    continue;
+            if (importVariableName === undefined) {
+                importPath = importPath || importMatch[3];
+                importUsages.push(new ImportUsage(importPath));
+            } else {
+                var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(]{1}[^\\(;,]+[\\(;,]{1})", "g");
+                var loggedImportUsages = new Array<string>();
+                var match: RegExpExecArray;
+                while (match = importUsageFinder.exec(classScript)) {
+                    var importUsage = match[2];
+                    if ((match[1] === "new ") || (loggedImportUsages.indexOf(importUsage) !== -1)) {
+                        continue;
+                    }
+                    loggedImportUsages.push(importUsage);
+                    importUsages.push(new ImportUsage(importUsage.replace(memberCharactersOnly, "")));
                 }
-                loggedImportUsages.push(importUsage);
-                importUsages.push(new ImportUsage(importUsage.replace(memberCharactersOnly, "")));
             }
             imports.push(new Import(importMatch[0], importVariableName, importPath, importUsages));
         }
@@ -108,8 +115,9 @@ class ImportFinder extends RegexClassFinderBase {
 // #region ClassData
 
 var namespaceSegmentMatcher = new RegExp("^[ \\t]*var ([A-Z]{1}[a-zA-Z0-9_]+);[^\\(]+^[ \\t]*\\(function ?\\(_?\\1\\) ?\\{", "gm");
-var classNameMatcher = new RegExp("var ([A-Z]{1}[a-zA-Z0-9_]+) ?= ?\\(function ?\\((?:_super)?\\)");
-var enumNameMatcher = new RegExp("\\(function ?\\(([A-Z]{1}[a-zA-Z0-9_]+)\\) ?\\{[^ \\t]+[ \\t]*\\1\\[\\1\\[");
+var classNamePattern = "var ([A-Z]{1}[a-zA-Z0-9_]+) ?= ?\\(function ?\\((?:_super)?\\)";
+var enumNamePattern = "\\(function ?\\(([A-Z]{1}[a-zA-Z0-9_]+)\\) ?\\{[^ \\t]+[ \\t]*\\1\\[\\1\\[";
+var classNameMatcher = new RegExp(classNamePattern + "|" + enumNamePattern);
 
 class ClassData {
     constructor(
@@ -124,6 +132,8 @@ class ClassData {
     }
 
     static from(classScript: string): ClassData {
+        if (classScript.indexOf("\"ClientOnly\"") !== -1) { return null; }
+
         var namespaceSegments = new Array<string>();
         var match: RegExpExecArray, lastMatchIndex = 0;
         while (match = namespaceSegmentMatcher.exec(classScript)) {
@@ -134,7 +144,7 @@ class ClassData {
         if (namespaceSegments.length === 0) { return null; }
 
         var remainingScript = classScript.substring(lastMatchIndex);
-        var classNameMatch = classNameMatcher.exec(remainingScript) || enumNameMatcher.exec(remainingScript);
+        var classNameMatch = classNameMatcher.exec(remainingScript);
 
         if (classNameMatch == null) { return null; }
 
@@ -164,6 +174,10 @@ class ClassData {
             dependencies.push(this.instantiations[i].classData);
         }
         for (i = 0; i < this.imports.length; i++) {
+            if (this.imports[i].classData !== undefined) {
+                dependencies.push(this.imports[i].classData);
+                continue;
+            }
             for (var j = 0; j < this.imports[i].usages.length; j++) {
                 if (this.imports[i].usages[j].classData !== undefined) {
                     dependencies.push(this.imports[i].usages[j].classData);
@@ -178,59 +192,35 @@ class ClassData {
 
 // #endregion
 
-var rootNamespaceDeclarationFinder = new RegExp("^var [A-Z]{1}[a-zA-Z0-9_]+;$", "gm");
+var rootNamespaceDeclarationFinder = new RegExp("^var ([A-Z]{1}[a-zA-Z0-9_]+);$", "gm");
 
 class InternalModuleLoaderBase {
-    private _classDataByClassName: Ts.IStringDictionary<ClassData>;
-    private _loadedClassesByName: Ts.IStringDictionary<Object>;
+    private _convertedSourceFilePath: string;
 
-    constructor(private _fileManager: Ts.IFileManager, private _classLoader: (classSourceFilePath: string) => any) {
-        this._loadedClassesByName = {};
-    }
+    constructor(private _fileManager: Ts.IFileManager, private _classLoader: (classSourceFilePath: string) => any) { }
 
-    public load<TResult>(className: string): TResult {
-        if (this._loadedClassesByName[className] !== undefined) {
-            return <TResult>this._loadedClassesByName[className];
-        }
+    public load(...namespaces: Array<string>): any {
+        var allClassDataByClassName = this._getAllClassData();
 
-        var classData = this._getClassDataOrThrow(className);
-
-        return <TResult>this._loadClassFrom(classData);
-    }
-
-    private _getClassDataOrThrow(targetClassName: string): ClassData {
-        var classData = this._getClassDataFor(targetClassName);
-
-        if (classData.length === 0) {
-            throw new Error("Unable to find source for class '" + targetClassName + "'");
-        }
-
-        if (classData.length > 1) {
-            throw new Error("Multiple sources found for class '" + targetClassName + "': " + classData.join(", "));
-        }
-
-        return classData[0];
-    }
-
-    private _getClassDataFor(targetClassName: string): Array<ClassData> {
-        this._cacheClassDataIfRequired();
-
-        var matchingClassData = new Array<ClassData>();
-        var upperCaseTargetClassName = targetClassName.toUpperCase();
-        for (var className in this._classDataByClassName) {
-            var classFullName = "." + this._classDataByClassName[className].fullName.toUpperCase();
-            if (classFullName.endsWith("." + upperCaseTargetClassName)) {
-                matchingClassData.push(this._classDataByClassName[className]);
+        var allClasses = new Array<ClassData>();
+        for (var className in allClassDataByClassName) {
+            var classData = allClassDataByClassName[className];
+            if (this._include(classData, namespaces)) {
+                this._getAllRequiredClasses(allClasses, classData);
+                if (allClasses.indexOf(classData) === -1) {
+                    allClasses.push(classData);
+                }
             }
         }
 
-        return matchingClassData;
+        this._convertedSourceFilePath = this._createSourceFile(allClasses);
+        var loadedModule = this._classLoader(this._convertedSourceFilePath);
+
+        return loadedModule;
     }
 
-    private _cacheClassDataIfRequired(): void {
-        if (this._classDataByClassName !== undefined) { return; }
-
-        this._classDataByClassName = {};
+    private _getAllClassData(): Ts.IStringDictionary<ClassData> {
+        var classDataByClassName: Ts.IStringDictionary<ClassData> = {};
 
         var rootDirectory = this._fileManager.getAppRootDirectory();
         var filter = { extension: ".js", exclude: ["node_modules"] };
@@ -244,24 +234,26 @@ class InternalModuleLoaderBase {
             if (classData == null) { continue; }
 
             allClassNames.push(classData.name);
-            this._classDataByClassName[classData.fullName.toUpperCase()] = classData;
+            classDataByClassName[classData.fullName.toUpperCase()] = classData;
         }
 
-        for (var className in this._classDataByClassName) {
-            this._mapDependenciesFor(this._classDataByClassName[className]);
+        for (var className in classDataByClassName) {
+            this._mapDependenciesFor(classDataByClassName[className], classDataByClassName);
         }
+
+        return classDataByClassName;
     }
 
-    private _mapDependenciesFor(classData: ClassData): void {
+    private _mapDependenciesFor(classData: ClassData, classDataByClassName: Ts.IStringDictionary<ClassData>): void {
         var i;
         for (i = 0; i < classData.instantiations.length; i++) {
-            var instantiatedClassData = this._getClassDataOrThrow(classData.instantiations[i].className);
+            var instantiatedClassData = this._getClassDataOrThrow(classData.instantiations[i].className, classDataByClassName);
             classData.instantiations[i].classData = instantiatedClassData;
         }
         for (i = 0; i < classData.imports.length; i++) {
             var importItem = classData.imports[i];
             var finalImportPathSegment = importItem.path.substring(importItem.path.lastIndexOf(".") + 1);
-            var importClassData = this._getClassDataFor(finalImportPathSegment);
+            var importClassData = this._getClassDataFor(finalImportPathSegment, classDataByClassName);
             if (importClassData.length === 1) {
                 importItem.classData = importClassData[0];
                 continue;
@@ -272,7 +264,7 @@ class InternalModuleLoaderBase {
                 // The final segment is a method, constant, static member or class name
                 // Previous segments could be class, member or namespace names
                 for (var k = 0; k < usageSegments.length; k++) {
-                    importClassData = this._getClassDataFor(usageSegments[k]);
+                    importClassData = this._getClassDataFor(usageSegments[k], classDataByClassName);
                     if (importClassData.length === 1) {
                         importUsage.classData = importClassData[0];
                         break;
@@ -282,37 +274,52 @@ class InternalModuleLoaderBase {
         }
     }
 
-    private _loadClassFrom(classData: ClassData): Object {
-        this._createSourceFileFor(classData);
+    private _getClassDataOrThrow(targetClassName: string, classDataByClassName: Ts.IStringDictionary<ClassData>): ClassData {
+        var classData = this._getClassDataFor(targetClassName, classDataByClassName);
 
-        var loadedModule = this._loadedClassesByName[classData.name] = this._classLoader(classData.classTempFilePath);
-
-        return loadedModule;
-    }
-
-    private _createSourceFileFor(classData: ClassData): void {
-        if (!classData.convertedScript) {
-            classData.convertedScript = "";
-            var allRequiredClasses = this._getAllRequiredClasses(new Array<ClassData>(), classData);
-            for (var i = 0; i < allRequiredClasses.length; i++) {
-                classData.convertedScript += "\r\n\r\n" + allRequiredClasses[i].script;
-            }
-            classData.convertedScript += "\r\n\r\n" + classData.script;
-            this.convertInternalModuleSource(classData);
+        if (classData.length === 0) {
+            throw new Error("Unable to find source for class '" + targetClassName + "'");
         }
 
-        this._removeDuplicateRootNamespaceDeclarations(classData);
+        if (classData.length > 1) {
+            throw new Error("Multiple sources found for class '" + targetClassName + "': " + classData.join(", "));
+        }
 
-        classData.classTempFilePath = this._fileManager.getPathToTempFile(".js");
-        this._fileManager.writeAllText(classData.classTempFilePath, classData.convertedScript);
+        return classData[0];
+    }
+
+    private _getClassDataFor(targetClassName: string, classDataByClassName: Ts.IStringDictionary<ClassData>): Array<ClassData> {
+        var matchingClassData = new Array<ClassData>();
+        var upperCaseTargetClassName = targetClassName.toUpperCase();
+        for (var className in classDataByClassName) {
+            var classFullName = "." + classDataByClassName[className].fullName.toUpperCase();
+            if (classFullName.endsWith("." + upperCaseTargetClassName)) {
+                matchingClassData.push(classDataByClassName[className]);
+            }
+        }
+
+        return matchingClassData;
+    }
+
+    private _include(classData: ClassData, namespaces: Array<string>) {
+        if (namespaces.length === 0) {
+            return true;
+        }
+
+        for (var i = 0; i < namespaces.length; i++) {
+            if (classData.fullName.startsWith(namespaces[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private _getAllRequiredClasses(allClasses: Array<ClassData>, classData: ClassData): Array<ClassData> {
         var dependencies = classData.getDependencies();
         for (var i = 0; i < dependencies.length; i++) {
             var dependency = dependencies[i];
-            this._getAllRequiredClasses(allClasses, dependency);
             if (allClasses.indexOf(dependency) === -1) {
+                this._getAllRequiredClasses(allClasses, dependency);
                 allClasses.push(dependency);
             }
         }
@@ -320,37 +327,41 @@ class InternalModuleLoaderBase {
         return allClasses;
     }
 
-    protected convertInternalModuleSource(classData: ClassData) {
-        throw new Error("Abstract convertInternalModuleSource() not implemented");
+    private _createSourceFile(allClasses: Array<ClassData>): string {
+        var script = "";
+        for (var i = 0; i < allClasses.length; i++) {
+            script += allClasses[i].script + "\r\n\r\n";
+        }
+
+        script = this._removeDuplicateRootNamespaceDeclarations(script);
+        var convertedScript = this.convertInternalModuleSource(script);
+
+        var tempFilePath = this._fileManager.getPathToTempFile(".js");
+        this._fileManager.writeAllText(tempFilePath, convertedScript);
+
+        return tempFilePath;
     }
 
-    private _removeDuplicateRootNamespaceDeclarations(classData: ClassData): void {
+    private _removeDuplicateRootNamespaceDeclarations(script: string): string {
         var declarationIndexes = new Array<number>(), declarationLength = 0;
         var match: RegExpExecArray;
-        while (match = rootNamespaceDeclarationFinder.exec(classData.convertedScript)) {
+        while (match = rootNamespaceDeclarationFinder.exec(script)) {
             declarationLength = match[0].length;
             declarationIndexes.push(rootNamespaceDeclarationFinder.lastIndex - declarationLength);
         }
         for (var i = declarationIndexes.length - 1; i > 0; i--) {
-            classData.convertedScript = classData.convertedScript.splice(declarationIndexes[i], "", declarationLength);
+            script = script.splice(declarationIndexes[i], "", declarationLength);
         }
+        return script;
     }
 
-    public CleanUpConvertedSourceFiles(): void {
-        for (var className in this._classDataByClassName) {
-            this._cleanUpTempSourceFiles(this._classDataByClassName[className]);
-        }
+    protected convertInternalModuleSource(script: string): string {
+        throw new Error("Abstract convertInternalModuleSource() not implemented");
     }
 
-    private _cleanUpTempSourceFiles(classData: ClassData): void {
-        var dependencies = classData.getDependencies();
-        for (var i = 0; i < dependencies.length; i++) {
-            this._cleanUpTempSourceFiles(dependencies[i]);
-        }
-
-        if (classData.classTempFilePath !== undefined) {
-            this._fileManager.deleteFile(classData.classTempFilePath);
-            classData.classTempFilePath = undefined;
+    public CleanUpConvertedSourceFile(): void {
+        if (this._convertedSourceFilePath !== undefined) {
+            this._fileManager.deleteFile(this._convertedSourceFilePath);
         }
     }
 }
@@ -360,10 +371,11 @@ class NodeInternalModuleLoader extends InternalModuleLoaderBase {
         super(fileManager, nodeRequire);
     }
 
-    protected convertInternalModuleSource(classData: ClassData) {
+    protected convertInternalModuleSource(script: string): string {
         //this._processInstantiations(classData);
         //this._processImports(classData);
-        this._addExportAssignment(classData);
+        var convertedScript = this._addExportAssignment(script);
+        return convertedScript;
     }
 
     private _processInstantiations(classData: ClassData): void {
@@ -422,10 +434,11 @@ class NodeInternalModuleLoader extends InternalModuleLoaderBase {
         };
     }
 
-    private _addExportAssignment(classData: ClassData): void {
-        var exportAssignment = "\r\nmodule.exports = " + classData.fullName + ";";
-        var scriptEndIndex = classData.convertedScript.lastIndexOf(";") + 1;
-        classData.convertedScript = classData.convertedScript.splice(scriptEndIndex, exportAssignment);
+    private _addExportAssignment(script: string): string {
+        var rootNamespaceMatch = rootNamespaceDeclarationFinder.exec(script);
+        var exportAssignment = "\r\nmodule.exports = " + rootNamespaceMatch[1] + ";";
+        var scriptEndIndex = script.lastIndexOf(";") + 1;
+        return script.splice(scriptEndIndex, exportAssignment);
     }
 }
 

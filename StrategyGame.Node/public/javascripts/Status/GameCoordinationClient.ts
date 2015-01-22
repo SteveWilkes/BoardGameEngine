@@ -2,6 +2,7 @@
 
     export var $gameCoordinationClient = "$gameCoordinationClient";
 
+    "ClientOnly";
     class GameCoordinationClient implements Ui.IGameUiComponent {
         constructor(private _socket: SocketIO.Socket) { }
 

@@ -9,20 +9,22 @@ var fileManager = new FileManager(require("path"), require("fs"), require("temp"
 import moduleLoaders = require("./Scripts/Generic/AgileObjects.TypeScript.InternalModuleLoaders");
 var moduleLoader = moduleLoaders.forNode(fileManager, require);
 
-var RandomStringGenerator = moduleLoader
-    .load<new () => Angular.Services.IIdGenerator>("AgileObjects.TypeScript.RandomStringGenerator");
+var Ao = moduleLoader.load("AgileObjects.TypeScript", "AgileObjects.StrategyGame.Game");
 
-var GetBoardTypeQuery = moduleLoader
-    .load<new () => Ts.IGetQuery<Game.Boards.BoardType>>("GetBoardTypeQuery");
+var RandomStringGenerator: new () => Angular.Services.IIdGenerator =
+    Ao.TypeScript.RandomStringGenerator;
 
-var GetGameTypeQuery = moduleLoader
-    .load<new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.GameType>>("GetGameTypeQuery");
+var GetBoardTypeQuery: new () => Ts.IGetQuery<Game.Boards.BoardType> =
+    Ao.StrategyGame.Game.Boards.GetBoardTypeQuery;
 
-var GameFactory = moduleLoader
-    .load<new (getGameTypeQuery: Ts.IGetQuery<Game.GameType>) => Game.GameFactory>("GameFactory");
+var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.GameType> =
+    Ao.StrategyGame.Game.GetGameTypeQuery;
 
-var ServerGameCoordinator = moduleLoader
-    .load<new (gameFactory: Game.GameFactory) => Game.ServerGameCoordinator>("ServerGameCoordinator");
+var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.GameType>) => Game.GameFactory =
+    Ao.StrategyGame.Game.GameFactory;
+
+var ServerGameCoordinator: new (gameFactory: Game.GameFactory) => Game.ServerGameCoordinator =
+    Ao.StrategyGame.Game.ServerGameCoordinator;
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");
@@ -52,12 +54,12 @@ import http = require("http");
 var nodeApp = new NodeApp(fileManager, app => http.createServer(app), bootstrappers);
 
 nodeApp.start();
-
+/*
 process.stdin.resume();//so the program will not close instantly
 
 function exitHandler(err) {
     if (moduleLoader) {
-        moduleLoader.CleanUpConvertedSourceFiles();
+        //moduleLoader.CleanUpConvertedSourceFile();
     }
     if (err) {
         console.log(err.stack);
@@ -73,4 +75,4 @@ process.on('exit', exitHandler.bind(null));
 process.on('SIGINT', exitHandler.bind(null));
 
 //catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null));
+process.on('uncaughtException', exitHandler.bind(null));*/

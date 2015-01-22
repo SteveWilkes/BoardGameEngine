@@ -4,8 +4,6 @@
         createPiece(pieceDefinitionId: string): Piece;
     }
 
-    export var $pieceFactory = "$pieceFactory";
-
     var oneSpaceInAnyDirectionCalculators = [
         [new TypeScript.CoordinateTranslator("up", 1)],
         [new TypeScript.CoordinateTranslator("upRight", 1)],
@@ -39,7 +37,7 @@
         new PieceInteractionCalculator(
             InteractionType.Move,
             [bombAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m3"))]);
+            PieceInteractionConstructorRegistry.INSTANCE.get("m3"))]);
 
     // Human Heavy Movement
 
@@ -66,15 +64,15 @@
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanHeavyMoveDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m2")),
+            PieceInteractionConstructorRegistry.INSTANCE.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanHeavyAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m1")),
+            PieceInteractionConstructorRegistry.INSTANCE.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
             [humanHeavyAttackDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("a1"))]);
+            PieceInteractionConstructorRegistry.INSTANCE.get("a1"))]);
 
     // Human Light Movement
 
@@ -101,17 +99,17 @@
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanLightMoveDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m2")),
+            PieceInteractionConstructorRegistry.INSTANCE.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
             [humanLightAttachDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("m1")),
+            PieceInteractionConstructorRegistry.INSTANCE.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
             [humanLightAttackDestinationsCalculator],
-            PieceInteractionConstructorRegistry.get("a1"))]);
+            PieceInteractionConstructorRegistry.INSTANCE.get("a1"))]);
 
-    class PieceFactory implements IPieceFactory {
+    export class PieceFactory implements IPieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
         private _nextPieceId: number;
 
@@ -141,8 +139,4 @@
             return this._definitions[definitionId].createPiece("p-" + pieceId);
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($pieceFactory, PieceFactory);
 }

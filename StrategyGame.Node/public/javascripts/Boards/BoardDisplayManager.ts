@@ -1,7 +1,5 @@
 ﻿module AgileObjects.StrategyGame.Game.Boards {
 
-    export var $boardDisplayManager = "$boardDisplayManager";
-
     export class BoardDisplayManager {
         private _boardDisplayDataService: BoardDisplayDataService;
 
@@ -67,8 +65,4 @@
             return boardSize;
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($boardDisplayManager, ["$window", BoardDisplayManager]);
 }
