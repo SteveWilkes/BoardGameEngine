@@ -161,7 +161,6 @@ class ClassData {
     public namespace: string;
     public fullName: string;
     public convertedScript: string;
-    public classTempFilePath: string;
 
     public hasNamespaceSegmentNamed(name: string) {
         return this.namespaceSegments.indexOf(name) > -1;
@@ -372,69 +371,6 @@ class NodeInternalModuleLoader extends InternalModuleLoaderBase {
     }
 
     protected convertInternalModuleSource(script: string): string {
-        //this._processInstantiations(classData);
-        //this._processImports(classData);
-        var convertedScript = this._addExportAssignment(script);
-        return convertedScript;
-    }
-
-    private _processInstantiations(classData: ClassData): void {
-        for (var i = 0; i < classData.instantiations.length; i++) {
-            var instantiation = classData.instantiations[i];
-            var requireOp = this._insertRequireFor(instantiation.classData, classData);
-            classData.script = classData.script.replaceAll("new " + instantiation.classReference, "new " + requireOp.variableName);
-        }
-    }
-
-    private _processImports(classData: ClassData) {
-        for (var i = 0; i < classData.imports.length; i++) {
-            var importItem = classData.imports[i];
-            if (importItem.classData !== undefined) {
-                this._replaceClassImport(importItem, classData);
-                continue;
-            }
-            classData.script = classData.script.replace(importItem.importStatement, "");
-            for (var j = 0; j < importItem.usages.length; j++) {
-                var importUsage = importItem.usages[j];
-                var requireOp = this._insertRequireFor(importUsage.classData, classData);
-                var usageToReplace: string;
-                if (importUsage.classData.fullName.endsWith(importUsage.usage)) {
-                    // Usage of a class from a namespace import
-                    usageToReplace = importUsage.usage;
-                } else {
-                    usageToReplace = importUsage.usage.substring(0, importUsage.usage.lastIndexOf("."));
-                }
-                classData.script = classData.script.replaceAll(usageToReplace, requireOp.variableName);
-            }
-        }
-    }
-
-    private _replaceClassImport(importItem: Import, importingClassData: ClassData) {
-        var requireOp = this._getRequireCall(importItem.classData, importingClassData);
-        importingClassData.script = importingClassData.script.replace(importItem.importStatement, requireOp.call);
-    }
-
-    private _insertRequireFor(requiredClassData: ClassData, dependentClassData: ClassData) {
-        var requireOp = this._getRequireCall(requiredClassData, dependentClassData);
-        dependentClassData.script = requireOp.call + "\r\n" + dependentClassData.script;
-        return requireOp;
-    }
-
-    private _getRequireCall(requiredClassData: ClassData, dependentClassData: ClassData) {
-        var variableName = requiredClassData.name;
-        if (dependentClassData.hasNamespaceSegmentNamed(requiredClassData.name)) {
-            variableName = "_" + variableName;
-        }
-
-        var filePath = requiredClassData.classTempFilePath.replaceAll("\\", "/");
-
-        return {
-            variableName: variableName,
-            call: "var " + variableName + " = require(\"" + filePath + "\");"
-        };
-    }
-
-    private _addExportAssignment(script: string): string {
         var rootNamespaceMatch = rootNamespaceDeclarationFinder.exec(script);
         var exportAssignment = "\r\nmodule.exports = " + rootNamespaceMatch[1] + ";";
         var scriptEndIndex = script.lastIndexOf(";") + 1;
