@@ -1,9 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Game.Boards {
     import Ts = TypeScript;
 
-    export var $getBoardTypeQuery = "$getBoardTypeQuery";
-
-    class GetBoardTypeQuery implements Ts.IGetQuery<BoardType> {
+    export class GetBoardTypeQuery implements Ts.IGetQuery<BoardType> {
         public execute(boardTypeId: string): BoardType {
             // TODO: Retrieve BoardType from a data store and cache:
             return new BoardType(
@@ -29,8 +27,4 @@
                 new BoardOrientationTranslator());
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($getBoardTypeQuery, [GetBoardTypeQuery]);
 }

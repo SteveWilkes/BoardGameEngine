@@ -19,5 +19,6 @@
         getAllFilePaths(path: string, filter?: IFilesFilter): Array<string>;
         readAllText(filePath: string, fileEncoding?: string): string;
         writeAllText(filePath: string, fileContents: string): void;
+        deleteFile(filePath: string): void;
     }
 }

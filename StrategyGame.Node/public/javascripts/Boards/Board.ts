@@ -56,19 +56,6 @@
             var subjectTeamPosition = this._boardPositionsByTeam.get(team);
             if (this.type.orientationTranslator.focusPositionIs(subjectTeamPosition)) { return; }
             // TODO: Orientation translation; re-arrange the BoardTiles so that the given Team is moved to the focus position
-            /*
-            var piecesByCoordinates = new AgileObjects.TypeScript.Dictionary<Coordinates, Piece>();
-            var tileCoordinates: string, tile: BoardTile;
-            for (tileCoordinates in this._tilesByCoordinates) {
-                tile = this._tilesByCoordinates[tileCoordinates];
-                var translatedCoordinates = this.type.orientationTranslator.translate(tile.coordinates, subjectTeamPosition);
-                piecesByCoordinates.add(translatedCoordinates, tile.piece);
-            }
-            for (tileCoordinates in this._tilesByCoordinates) {
-                tile = this._tilesByCoordinates[tileCoordinates];
-                var pieceGetResult = piecesByCoordinates.tryGet(tile.coordinates);
-                pieceGetResult.found ? tile.add(pieceGetResult.value) : tile.clear();
-            }*/
         }
     }
 }

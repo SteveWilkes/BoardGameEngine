@@ -15,6 +15,10 @@ class FileManager implements Ts.IFileManager {
         return this._appRootDirectory;
     }
 
+    public fileExists(path: string): boolean {
+        return this._fs.existsSync(path);
+    }
+
     public getFileName(path: string): string {
         return this._path.basename(path);
     }
@@ -76,6 +80,24 @@ class FileManager implements Ts.IFileManager {
 
     public writeAllText(filePath: string, fileContents: string): void {
         this._fs.writeFileSync(filePath, fileContents);
+    }
+
+    public deleteFile(filePath: string): void {
+        if (this.fileExists(filePath)) {
+            this._tryDeleteFile(filePath);
+        }
+    }
+
+    private _tryDeleteFile(filePath: string, attempt = 1) {
+        try {
+            this._fs.unlinkSync(filePath);
+        } catch (err) {
+            if (attempt < 3) {
+                this._tryDeleteFile(filePath, ++attempt);
+                return;
+            }
+            throw err;
+        }
     }
 }
 

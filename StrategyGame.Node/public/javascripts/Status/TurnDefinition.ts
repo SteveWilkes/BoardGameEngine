@@ -1,15 +1,13 @@
 ﻿module AgileObjects.StrategyGame.Game.Status {
 
-    import It = Pieces.InteractionType;
-
     export class TurnDefinition implements Pieces.IPieceInteractionRegulator {
         private _currentTeam: Pieces.IPieceOwner;
         private _currentTurnInteractions: Array<Pieces.InteractionType>;
 
         constructor(private _turnInteractions: Array<Pieces.InteractionType>, private _events: GameEventSet) {
             this._events.turnStarted.subscribe(team => this._turnStarted(team));
-            this._events.pieceMoved.subscribe((movement, eventData) => this._adjustRemainingTurnInteractions(It.Move, movement.destination.piece, eventData));
-            this._events.pieceAttacked.subscribe((attack, eventData) => this._adjustRemainingTurnInteractions(It.Attack, attack.target, eventData));
+            this._events.pieceMoved.subscribe((movement, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.Move, movement.destination.piece, eventData));
+            this._events.pieceAttacked.subscribe((attack, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.Attack, attack.target, eventData));
         }
 
         private _turnStarted(team: Pieces.IPieceOwner): boolean {

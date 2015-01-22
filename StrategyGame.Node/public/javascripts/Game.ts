@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export class Game implements Status.IGameCoordinationSubject {
+    export class Game {
         constructor(
             public id: string,
             public type: GameType,

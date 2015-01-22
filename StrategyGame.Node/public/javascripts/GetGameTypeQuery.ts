@@ -1,8 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Game {
 
-    export var $getGameTypeQuery = "$getGameTypeQuery";
-
-    class GetGameTypeQuery implements TypeScript.IGetQuery<GameType> {
+    export class GetGameTypeQuery implements TypeScript.IGetQuery<GameType> {
         constructor(private _getBoardTypeQuery: TypeScript.IGetQuery<Boards.BoardType>) { }
 
         public execute(gameTypeId: string, events: GameEventSet): GameType {
@@ -14,8 +12,4 @@
             return new GameType("1", boardType, turnDefinition);
         }
     }
-
-    angular
-        .module(strategyGameApp)
-        .service($getGameTypeQuery, [Boards.$getBoardTypeQuery, GetGameTypeQuery]);
 }

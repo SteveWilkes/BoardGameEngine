@@ -41,6 +41,7 @@
     <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Board.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayData.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayDataService.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardOrientationTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardPosition.ts" />
@@ -49,6 +50,7 @@
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTile.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardType.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.AddClassOnEvent.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
@@ -59,7 +61,11 @@
     <TypeScriptCompile Include="public\javascripts\GameFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesRegistry.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.TryGetResult.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />
+    <TypeScriptCompile Include="public\javascripts\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\GameEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Game.ts" />
@@ -74,6 +80,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IGetQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AddDestinationPieceToPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AttackDestinationPieceInteraction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\InteractionType.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\MovePieceToDestinationPieceInteraction.ts" />
@@ -94,9 +101,11 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\LocalHumanPlayer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\RemotePlayerProxy.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\PlayerBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\IGameCoordinationSubject.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
@@ -131,7 +140,7 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionSocket.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
-    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.InternalModuleLoader.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaders.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CssGenerator.ts" />
     <TypeScriptCompile Include="Scripts\Startup\Bootstrap.ts" />
     <TypeScriptCompile Include="Scripts\Startup\BundleUpResourceBundler.ts" />
@@ -188,6 +197,7 @@
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\Game\" />
     <Folder Include="Scripts\Generic\" />
+    <Folder Include="Scripts\_Tests\" />
     <Folder Include="Scripts\Startup\" />
     <Folder Include="Scripts\typings\" />
     <Folder Include="Scripts\typings\angular\" />
