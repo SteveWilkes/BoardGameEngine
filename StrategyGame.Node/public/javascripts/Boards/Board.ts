@@ -6,13 +6,10 @@
         private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
-        constructor(public type: BoardType, events: Games.GameEventSet) {
-            events.teamAdded.subscribe(team => this._addTeam(team));
-
-            this._createTiles();
+        constructor(public type: BoardType, private _events: Games.GameEventSet) {
             this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
 
-            Pieces.TakenPieceLocation.create(events);
+            this._createTiles();
         }
 
         private _createTiles(): void {
@@ -27,6 +24,8 @@
                     }
                 }
             }
+
+            Pieces.TakenPieceLocation.create(this._events);
         }
 
         public rows: Array<Array<BoardTile>>;
@@ -35,7 +34,7 @@
             return this._tilesByCoordinates;
         }
 
-        private _addTeam(team: Teams.Team): boolean {
+        public add(team: Teams.Team): void {
             var teams = this._boardPositionsByTeam.keys;
             var position = this.type.getNextBoardPosition(teams.length);
             this._boardPositionsByTeam.add(team, position);
@@ -49,7 +48,7 @@
 
             team.setNumber(this._boardPositionsByTeam.count);
 
-            return true;
+            this._events.teamAdded.publish(team);
         }
 
         public orientTo(team: Teams.Team): void {

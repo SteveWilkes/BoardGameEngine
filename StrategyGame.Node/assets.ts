@@ -90,5 +90,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Games/Game.js");
     assets.addJs("/public/javascripts/Games/GameFactory.js");
     assets.addJs("/public/javascripts/Games/GameFactory.Angular.js");
+    assets.addJs("/public/javascripts/Games/GameService.js");
+    assets.addJs("/public/javascripts/Games/GameService.Angular.js");
     assets.addJs("/public/javascripts/Games/GameController.js");
 }

@@ -72,6 +72,8 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameService.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameService.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameType.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />

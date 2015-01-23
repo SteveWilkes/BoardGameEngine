@@ -17,6 +17,8 @@
             var teamName = owner.id + " Team";
             var team = new Teams.Team(teamId, teamName, piecesByLocation);
 
+            owner.add(team);
+
             return team;
         }
 

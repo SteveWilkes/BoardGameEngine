@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Games {
 
     export class GameEventSet {
-        public playerAdded = new TypeScript.EventHub<Players.IPlayer>();
+        public playerJoined = new TypeScript.EventHub<Players.IPlayer>();
         public teamAdded = new TypeScript.EventHub<Teams.Team>();
 
         public gameStarted = new TypeScript.EventHub<Teams.Team>();
