@@ -260,7 +260,7 @@
     class PieceInteractionMonitorService implements Ui.IGameUiComponent {
         constructor(private _timeoutService: ng.ITimeoutService) { }
 
-        public gameCreated(game: Games.Game): void {
+        public initialise(game: Games.Game): void {
             // ReSharper disable once WrongExpressionStatement
             new PieceInteractionMonitor(this._timeoutService, game);
         }

@@ -6,7 +6,7 @@
     class GameEventPropogator implements IGameUiComponent {
         constructor(private _eventPropogator: Angular.Services.IEventPropogationService) { }
 
-        public gameCreated(game: Games.Game): void {
+        public initialise(game: Games.Game): void {
             this._eventPropogator.propogate(
                 game.events.pieceAttacked,
                 "attack",

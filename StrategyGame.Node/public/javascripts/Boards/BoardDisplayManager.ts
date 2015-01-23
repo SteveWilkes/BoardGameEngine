@@ -1,7 +1,7 @@
 ﻿module AgileObjects.StrategyGame.Boards {
 
     "ClientOnly";
-    export class BoardDisplayManager {
+    export class BoardDisplayManager implements Ui.IGameUiComponent {
         private _boardDisplayDataService: BoardDisplayDataService;
 
         /** Initialises a new instance of the BoardDisplayManager class. */
@@ -25,6 +25,10 @@
 
         /** Gets the height of a piece image in pixels. */
         public pieceHeight: number;
+
+        public initialise(game: Games.Game): void {
+            this.resize(game.board);
+        }
 
         /** Scales the board and all pieces to the current window size. */
         public resize(board: Board): boolean {

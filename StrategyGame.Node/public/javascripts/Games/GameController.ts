@@ -19,8 +19,7 @@
         public startDefaultGame(gameTypeId: string): void {
             this.game = this._gameService.startDefaultGame("1");
 
-            this._gameUiComponentSet.gameCreated(this.game);
-            this.displayManager.resize(this.game.board);
+            this._gameUiComponentSet.initialise(this.game);
         }
     }
 

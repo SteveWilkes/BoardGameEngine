@@ -6,7 +6,7 @@
     class GameCoordinationClient implements Ui.IGameUiComponent {
         constructor(private _socket: SocketIO.Socket) { }
 
-        public gameCreated(game: Games.Game): void {
+        public initialise(game: Games.Game): void {
             game.events.gameStarted.subscribe(() => {
                 this._socket.emit("gameStarted", game.id, game.type.id);
                 return true;
