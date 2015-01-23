@@ -11,11 +11,11 @@ class RegexClassFinderBase {
         this._regex = new RegExp(regexPattern, "g");
     }
 
-    protected getMatches(className: string, classScript: string): Ts.IStringDictionary<RegExpExecArray> {
+    protected getMatches(classData: ClassData): Ts.IStringDictionary<RegExpExecArray> {
         var matches: Ts.IStringDictionary<RegExpExecArray> = {};
         var match: RegExpExecArray;
-        var foundClassNames = new Array<string>("Array", "RegExp", "Error", className);
-        while (match = this._regex.exec(classScript)) {
+        var foundClassNames = new Array<string>("Array", "RegExp", "Error", classData.name);
+        while (match = this._regex.exec(classData.script)) {
             var foundClassName = match[1];
             if (foundClassNames.indexOf(foundClassName) === -1) {
                 matches[foundClassName] = match;
@@ -28,8 +28,6 @@ class RegexClassFinderBase {
 
 class Instantiation {
     constructor(public className, public classReference) { }
-
-    public classData: ClassData;
 }
 
 class InstantiationFinder extends RegexClassFinderBase {
@@ -37,8 +35,8 @@ class InstantiationFinder extends RegexClassFinderBase {
         super("[=\\b]?new (_?[A-Z]{1}[a-zA-Z0-9_\\.]+)\\(");
     }
 
-    public getInstantiations(className: string, classScript: string): Array<Instantiation> {
-        var instantiationMatches = super.getMatches(className, classScript);
+    public getInstantiations(classData: ClassData): Array<Instantiation> {
+        var instantiationMatches = super.getMatches(classData);
         var instantiations = new Array<Instantiation>();
         for (var classReference in instantiationMatches) {
             var instantiatedClassName = classReference.substring(classReference.lastIndexOf(".") + 1);
@@ -55,18 +53,10 @@ class Import {
         public importStatement: string,
         public variableName: string,
         public path: string,
-        public usages: Array<ImportUsage>) { }
-
-    public classData: ClassData;
+        public usages: Array<string>) { }
 }
 
-class ImportUsage {
-    constructor(public usage: string) { }
-
-    public classData: ClassData;
-}
-
-var memberCharactersOnly = new RegExp("[^a-zA-Z0-9\\._]+", "g");
+var nonMemberCharacters = new RegExp("[^a-zA-Z0-9\\._]+", "g");
 var staticImport = "(?:var ([A-Z]{1}[a-zA-Z0-9_]+))? ?= ?((?:[A-Z]{1}[a-zA-Z0-9_]+\\.)+[A-Z]{1}[a-zA-Z0-9_]+);";
 var baseClassReference = "\\}\\)\\(([a-zA-Z0-9_\\.]+)\\);";
 
@@ -77,30 +67,30 @@ class ImportFinder extends RegexClassFinderBase {
 
     static INSTANCE = new ImportFinder();
 
-    public getImports(className: string, classScript: string): Array<Import> {
-        var importMatches = super.getMatches(className, classScript);
+    public getImports(classData: ClassData): Array<Import> {
+        var importMatches = super.getMatches(classData);
         var imports = new Array<Import>();
 
         for (var importedSymbolPath in importMatches) {
             var importMatch = importMatches[importedSymbolPath];
             var importVariableName = importMatch[1];
-            if (importVariableName === className) { continue; }
+            if (importVariableName === classData.name) { continue; }
             var importPath = importMatch[2];
-            var importUsages = new Array<ImportUsage>();
+            var importUsages = new Array<string>();
             if (importVariableName === undefined) {
                 importPath = importPath || importMatch[3];
-                importUsages.push(new ImportUsage(importPath));
+                importUsages.push(importPath);
             } else {
                 var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(]{1}[^\\(;,]+[\\(;,]{1})", "g");
                 var loggedImportUsages = new Array<string>();
                 var match: RegExpExecArray;
-                while (match = importUsageFinder.exec(classScript)) {
+                while (match = importUsageFinder.exec(classData.script)) {
                     var importUsage = match[2];
                     if ((match[1] === "new ") || (loggedImportUsages.indexOf(importUsage) !== -1)) {
                         continue;
                     }
                     loggedImportUsages.push(importUsage);
-                    importUsages.push(new ImportUsage(importUsage.replace(memberCharactersOnly, "")));
+                    importUsages.push(importUsage.replace(nonMemberCharacters, ""));
                 }
             }
             imports.push(new Import(importMatch[0], importVariableName, importPath, importUsages));
@@ -120,14 +110,7 @@ var enumNamePattern = "\\(function ?\\(([A-Z]{1}[a-zA-Z0-9_]+)\\) ?\\{[^ \\t]+[ 
 var classNameMatcher = new RegExp(classNamePattern + "|" + enumNamePattern);
 
 class ClassData {
-    constructor(
-        public name: string,
-        public namespaceSegments: Array<string>,
-        public script: string,
-        public instantiations: Array<Instantiation>,
-        public imports: Array<Import>) {
-
-        this.namespace = this.namespaceSegments.join(".");
+    constructor(public name: string, public namespace: string, public script: string) {
         this.fullName = this.namespace + "." + this.name;
     }
 
@@ -150,43 +133,12 @@ class ClassData {
 
         var className = classNameMatch[1];
 
-        return new ClassData(
-            className,
-            namespaceSegments,
-            classScript,
-            InstantiationFinder.INSTANCE.getInstantiations(className, classScript),
-            ImportFinder.INSTANCE.getImports(className, classScript));
+        return new ClassData(className, namespaceSegments.join("."), classScript);
     }
 
-    public namespace: string;
     public fullName: string;
+    public dependencies: Array<ClassData>;
     public convertedScript: string;
-
-    public hasNamespaceSegmentNamed(name: string) {
-        return this.namespaceSegments.indexOf(name) > -1;
-    }
-
-    public getDependencies(): Array<ClassData> {
-        var dependencies = new Array<ClassData>();
-        var i;
-        for (i = 0; i < this.instantiations.length; i++) {
-            dependencies.push(this.instantiations[i].classData);
-        }
-        for (i = 0; i < this.imports.length; i++) {
-            if (this.imports[i].classData !== undefined) {
-                dependencies.push(this.imports[i].classData);
-                continue;
-            }
-            for (var j = 0; j < this.imports[i].usages.length; j++) {
-                if (this.imports[i].usages[j].classData !== undefined) {
-                    dependencies.push(this.imports[i].usages[j].classData);
-                }
-            }
-        }
-
-        return dependencies;
-    }
-
 }
 
 // #endregion
@@ -207,7 +159,7 @@ class InternalModuleLoaderBase {
     }
 
     public createSourceFile(sourceFilePath: string, namespaces: Array<string>): void {
-        var allClassDataByClassName = this._getAllClassData();
+        var allClassDataByClassName = this._getAllClassData(sourceFilePath);
 
         var allClasses = new Array<ClassData>();
         for (var className in allClassDataByClassName) {
@@ -223,13 +175,13 @@ class InternalModuleLoaderBase {
         this._createSourceFile(allClasses, sourceFilePath);
     }
 
-    private _getAllClassData(): Ts.IStringDictionary<ClassData> {
+    private _getAllClassData(sourceFilePath: string): Ts.IStringDictionary<ClassData> {
         var classDataByClassName: Ts.IStringDictionary<ClassData> = {};
 
         var rootDirectory = this._fileManager.getAppRootDirectory();
-        var filter = { extension: ".js", exclude: ["node_modules"] };
+        var targetFileName = this._fileManager.getFileName(sourceFilePath);
+        var filter = { extension: ".js", exclude: ["node_modules", targetFileName] };
         var allFilePaths = this._fileManager.getAllFilePaths(rootDirectory, filter);
-        var allClassNames = new Array<string>();
 
         for (var i = 0; i < allFilePaths.length; i++) {
             var classScript = this._fileManager.readAllText(allFilePaths[i]);
@@ -237,7 +189,6 @@ class InternalModuleLoaderBase {
 
             if (classData == null) { continue; }
 
-            allClassNames.push(classData.name);
             classDataByClassName[classData.fullName.toUpperCase()] = classData;
         }
 
@@ -249,28 +200,30 @@ class InternalModuleLoaderBase {
     }
 
     private _mapDependenciesFor(classData: ClassData, classDataByClassName: Ts.IStringDictionary<ClassData>): void {
+        classData.dependencies = new Array<ClassData>();
+        var instantiations = InstantiationFinder.INSTANCE.getInstantiations(classData);
         var i;
-        for (i = 0; i < classData.instantiations.length; i++) {
-            var instantiatedClassData = this._getClassDataOrThrow(classData.instantiations[i].className, classDataByClassName);
-            classData.instantiations[i].classData = instantiatedClassData;
+        for (i = 0; i < instantiations.length; i++) {
+            var instantiatedClassData = this._getClassDataOrThrow(instantiations[i].className, classDataByClassName);
+            classData.dependencies.push(instantiatedClassData);
         }
-        for (i = 0; i < classData.imports.length; i++) {
-            var importItem = classData.imports[i];
+        var imports = ImportFinder.INSTANCE.getImports(classData);
+        for (i = 0; i < imports.length; i++) {
+            var importItem = imports[i];
             var finalImportPathSegment = importItem.path.substring(importItem.path.lastIndexOf(".") + 1);
             var importClassData = this._getClassDataFor(finalImportPathSegment, classDataByClassName);
             if (importClassData.length === 1) {
-                importItem.classData = importClassData[0];
+                classData.dependencies.push(importClassData[0]);
                 continue;
             }
             for (var j = 0; j < importItem.usages.length; j++) {
-                var importUsage = importItem.usages[j];
-                var usageSegments = importUsage.usage.split(".");
+                var usageSegments = importItem.usages[j].split(".");
                 // The final segment is a method, constant, static member or class name
                 // Previous segments could be class, member or namespace names
                 for (var k = 0; k < usageSegments.length; k++) {
                     importClassData = this._getClassDataFor(usageSegments[k], classDataByClassName);
                     if (importClassData.length === 1) {
-                        importUsage.classData = importClassData[0];
+                        classData.dependencies.push(importClassData[0]);
                         break;
                     }
                 }
@@ -319,9 +272,8 @@ class InternalModuleLoaderBase {
     }
 
     private _getAllRequiredClasses(allClasses: Array<ClassData>, classData: ClassData): Array<ClassData> {
-        var dependencies = classData.getDependencies();
-        for (var i = 0; i < dependencies.length; i++) {
-            var dependency = dependencies[i];
+        for (var i = 0; i < classData.dependencies.length; i++) {
+            var dependency = classData.dependencies[i];
             if (allClasses.indexOf(dependency) === -1) {
                 this._getAllRequiredClasses(allClasses, dependency);
                 allClasses.push(dependency);
@@ -334,12 +286,14 @@ class InternalModuleLoaderBase {
     private _createSourceFile(allClasses: Array<ClassData>, sourceFilePath: string): void {
         var script = "";
         for (var i = 0; i < allClasses.length; i++) {
+            console.log(allClasses[i].name + ": \t" + allClasses[i].script.length);
             script += allClasses[i].script + "\r\n\r\n";
         }
 
         script = this._removeDuplicateRootNamespaceDeclarations(script);
         var convertedScript = this.convertInternalModuleSource(script);
 
+        this._fileManager.deleteFile(sourceFilePath);
         this._fileManager.writeAllText(sourceFilePath, convertedScript);
     }
 

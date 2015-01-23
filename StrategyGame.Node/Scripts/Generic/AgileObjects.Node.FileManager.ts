@@ -45,7 +45,7 @@ class FileManager implements Ts.IFileManager {
             var fullPath = this.joinPaths(path, allPaths[i]);
             var pathInfo = this.getPathInfo(fullPath);
             if (pathInfo.isFile()) {
-                if (this._fileFilterIsSatisfied(fullPath, filter)) {
+                if (this._fileFilterIsSatisfied(this.getFileName(fullPath), filter)) {
                     paths.push(fullPath);
                 }
                 continue;
