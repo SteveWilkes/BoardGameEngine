@@ -1,7 +1,7 @@
 ﻿import Ts = AgileObjects.TypeScript;
 import Node = AgileObjects.Node;
 import Angular = AgileObjects.Angular;
-import Game = AgileObjects.StrategyGame.Game;
+import Game = AgileObjects.StrategyGame;
 
 import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
 var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
@@ -12,16 +12,16 @@ var RandomStringGenerator: new () => Angular.Services.IIdGenerator =
     Ao.TypeScript.RandomStringGenerator;
 
 var GetBoardTypeQuery: new () => Ts.IGetQuery<Game.Boards.BoardType> =
-    Ao.StrategyGame.Game.Boards.GetBoardTypeQuery;
+    Ao.StrategyGame.Boards.GetBoardTypeQuery;
 
-var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.GameType> =
-    Ao.StrategyGame.Game.GetGameTypeQuery;
+var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.Games.GameType> =
+    Ao.StrategyGame.Games.GetGameTypeQuery;
 
-var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.GameType>) => Game.GameFactory =
-    Ao.StrategyGame.Game.GameFactory;
+var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.Games.GameType>) => Game.Games.GameFactory =
+    Ao.StrategyGame.Games.GameFactory;
 
-var ServerGameCoordinator: new (gameFactory: Game.GameFactory) => Game.ServerGameCoordinator =
-    Ao.StrategyGame.Game.ServerGameCoordinator;
+var ServerGameCoordinator: new (gameFactory: Game.Games.GameFactory) => Game.Games.ServerGameCoordinator =
+    Ao.StrategyGame.Games.ServerGameCoordinator;
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");

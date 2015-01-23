@@ -1,5 +1,5 @@
-﻿module AgileObjects.StrategyGame.Game {
-    import Boards = StrategyGame.Game.Boards;
+﻿module AgileObjects.StrategyGame.Games {
+    import Boards = StrategyGame.Boards;
 
     "ClientOnly";
     class GameController {
@@ -28,7 +28,7 @@
         }
 
         public globalEvents: GlobalEventSet;
-        public game: Game;
+        public game: Games.Game;
 
         public newGame(gameTypeId: string): void {
             var gameId = this._idGenerator.generate();

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
     export var $boardDisplayManager = "$boardDisplayManager";
 

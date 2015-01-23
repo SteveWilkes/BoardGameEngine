@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class PieceInteractionBase implements IPieceInteraction {
         constructor(public path: Array<IPieceLocation>, public type: InteractionType) {

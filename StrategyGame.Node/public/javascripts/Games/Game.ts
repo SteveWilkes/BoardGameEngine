@@ -1,9 +1,9 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Games {
 
     export class Game {
         constructor(
             public id: string,
-            public type: GameType,
+            public type: Games.GameType,
             public board: Boards.Board,
             public events: GameEventSet) {
 

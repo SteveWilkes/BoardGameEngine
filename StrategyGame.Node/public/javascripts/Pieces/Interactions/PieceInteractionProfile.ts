@@ -1,9 +1,9 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class PieceInteractionProfile {
         constructor(private _interactionCalculators: Array<PieceInteractionCalculator>) { }
 
-        public getPotentialInteractions(piece: Piece, game: Game): Array<IPieceInteraction> {
+        public getPotentialInteractions(piece: Piece, game: Games.Game): Array<IPieceInteraction> {
             var supportedTypes = game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
             var allInteractions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._interactionCalculators.length; i++) {

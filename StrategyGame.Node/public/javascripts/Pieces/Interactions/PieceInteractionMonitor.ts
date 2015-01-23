@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     var _none = new Array<IPieceInteraction>(0);
 
@@ -11,7 +11,7 @@
         private _currentPotentialInteractions: Array<IPieceInteraction>;
         private _interactionHandled: boolean;
 
-        constructor(private _timeoutService: ng.ITimeoutService, private _game: Game) {
+        constructor(private _timeoutService: ng.ITimeoutService, private _game: Games.Game) {
             this._subscribeToGameEvents();
 
             this._pieceHighlightTimeouts = new Array<ng.IPromise<any>>();
@@ -260,7 +260,7 @@
     class PieceInteractionMonitorService implements Ui.IGameUiComponent {
         constructor(private _timeoutService: ng.ITimeoutService) { }
 
-        public gameCreated(game: Game): void {
+        public gameCreated(game: Games.Game): void {
             // ReSharper disable once WrongExpressionStatement
             new PieceInteractionMonitor(this._timeoutService, game);
         }

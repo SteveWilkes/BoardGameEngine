@@ -1,10 +1,10 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export module TakenPieceLocation {
         class TakenPieceLocation implements IPieceLocation {
             private _takenPiecesByTeam: TypeScript.Dictionary<IPieceOwner, Array<Piece>>;
 
-            constructor(events: GameEventSet) {
+            constructor(events: Games.GameEventSet) {
                 events.teamAdded.subscribe(team => this._teamAdded(team));
                 events.pieceTaken.subscribe(takenPiece => this._pieceTaken(takenPiece));
 
@@ -49,7 +49,7 @@
             public movePieceTo(): void { }
         }
 
-        export var create = (events: GameEventSet) => {
+        export var create = (events: Games.GameEventSet) => {
             // ReSharper disable once WrongExpressionStatement
             new TakenPieceLocation(events);
         };

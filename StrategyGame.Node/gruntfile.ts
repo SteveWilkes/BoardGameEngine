@@ -14,7 +14,7 @@
 
         moduleLoader.createSourceFile(
             "./InternalModules.js",
-            ["AgileObjects.TypeScript", "AgileObjects.StrategyGame.Game"]);
+            ["AgileObjects.TypeScript", "AgileObjects.StrategyGame"]);
 
         grunt.log.writeln("Internal TypeScript modules compiled.");
     });

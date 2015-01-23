@@ -1,8 +1,9 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
     // Elements 0 -> 5 in the trasform matrix are for perspective:
     var rotationRadiansIndex = 6;
 
+    "ClientOnly";
     export class BoardDisplayDataService {
         constructor(private _$windowService: ng.IWindowService) { }
 

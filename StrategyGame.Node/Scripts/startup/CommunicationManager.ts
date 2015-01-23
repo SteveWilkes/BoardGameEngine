@@ -1,7 +1,7 @@
 ﻿import bs = require("Bootstrap");
 import express = require("express");
 import http = require("http");
-import Game = AgileObjects.StrategyGame.Game;
+import Games = AgileObjects.StrategyGame.Games;
 import Node = AgileObjects.Node;
 
 class CommunicationManager implements bs.IBootstrapper {
@@ -10,7 +10,7 @@ class CommunicationManager implements bs.IBootstrapper {
     constructor(
         private _socketServer: SocketIO.Server,
         private _sessionStore: Node.ISessionStore,
-        private _serverGameCoordinator: Game.ServerGameCoordinator) { }
+        private _serverGameCoordinator: Games.ServerGameCoordinator) { }
 
     public appCreated(info: bs.SystemInfo, app: express.Express): void {
         this._app = app;

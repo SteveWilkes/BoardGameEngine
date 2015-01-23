@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class AttackDestinationPieceInteraction extends PieceInteractionBase {
-        constructor(public path: Array<IPieceLocation>, private _events: GameEventSet) {
+        constructor(public path: Array<IPieceLocation>, private _events: Games.GameEventSet) {
             super(path, InteractionType.Attack);
         }
 

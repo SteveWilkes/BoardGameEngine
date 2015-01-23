@@ -1,5 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Teams {
-    import Pieces = StrategyGame.Game.Pieces;
+﻿module AgileObjects.StrategyGame.Teams {
 
     export class Team implements Pieces.IPieceOwner {
         constructor(

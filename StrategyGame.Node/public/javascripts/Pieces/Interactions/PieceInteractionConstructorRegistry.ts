@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export interface IPieceInteractionConstructor {
-        (path: Array<IPieceLocation>, events: GameEventSet): void;
+        (path: Array<IPieceLocation>, events: Games.GameEventSet): void;
     }
 
     export module PieceInteractionConstructorRegistry {

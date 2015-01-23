@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     // TODO: Rename this - it isn't only about dropping
     export class IsDroppableLocationValidator implements IPieceLocationValidator {

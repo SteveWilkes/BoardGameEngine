@@ -1,5 +1,5 @@
-﻿module AgileObjects.StrategyGame.Game.Players {
-    import Teams = StrategyGame.Game.Teams;
+﻿module AgileObjects.StrategyGame.Players {
+    import Teams = StrategyGame.Teams;
 
     export interface IPlayer extends Teams.ITeamOwner {
         teams: Array<Teams.Team>;

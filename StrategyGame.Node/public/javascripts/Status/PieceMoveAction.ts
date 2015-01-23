@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Status {
+﻿module AgileObjects.StrategyGame.Status {
 
     export class PieceMoveAction implements IGameAction {
         constructor(movement: Pieces.PieceMovement) {

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game {
+﻿module AgileObjects.StrategyGame.Games {
 
     export class ServerGameCoordinator {
         constructor(private _gameFactory: GameFactory) { }

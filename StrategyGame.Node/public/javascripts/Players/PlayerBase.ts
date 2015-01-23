@@ -1,5 +1,5 @@
-﻿module AgileObjects.StrategyGame.Game.Players {
-    import Teams = StrategyGame.Game.Teams;
+﻿module AgileObjects.StrategyGame.Players {
+    import Teams = StrategyGame.Teams;
 
     export class PlayerBase implements IPlayer {
         constructor(public id: string, public isLocal: boolean) {

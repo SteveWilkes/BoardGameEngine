@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export interface IPieceLocationDictionary extends TypeScript.IStringDictionary<IPieceLocation> { }
 

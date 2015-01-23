@@ -1,10 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
     export class BoardOrientationTranslator {
         private _focusPosition: BoardPosition;
-
-        constructor() {
-        }
 
         public setFocusPosition(focusPosition: BoardPosition): void {
             this._focusPosition = focusPosition;

@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class MovePieceToDestinationPieceInteraction extends PieceMovementInteractionBase {
-        constructor(path: Array<IPieceLocation>, events: GameEventSet) {
+        constructor(path: Array<IPieceLocation>, events: Games.GameEventSet) {
             super(path, events);
         }
 

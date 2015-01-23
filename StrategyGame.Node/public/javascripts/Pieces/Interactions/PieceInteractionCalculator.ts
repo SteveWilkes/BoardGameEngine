@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class PieceInteractionCalculator {
         constructor(
@@ -6,7 +6,7 @@
             private _locationCalculators: Array<RelatedLocationCalculator>,
             private _interaction: IPieceInteractionConstructor) { }
 
-        public getPotentialInteractions(startingLocation: IPieceLocation, game: Game): Array<IPieceInteraction> {
+        public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
             var interactions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._locationCalculators.length; i++) {
                 var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation, game);

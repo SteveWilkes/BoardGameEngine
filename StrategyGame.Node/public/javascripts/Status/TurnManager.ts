@@ -1,10 +1,10 @@
-﻿module AgileObjects.StrategyGame.Game.Status {
+﻿module AgileObjects.StrategyGame.Status {
 
     export class TurnManager {
         private _teams: Array<Teams.Team>;
         private _turnHasEnded: boolean;
 
-        constructor(private _events: GameEventSet) {
+        constructor(private _events: Games.GameEventSet) {
             this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
             this._events.teamAdded.subscribe(team => this._registerTeam(team));
             this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));

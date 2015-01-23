@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Status {
+﻿module AgileObjects.StrategyGame.Status {
 
     export class History {
-        constructor(events: GameEventSet) {
+        constructor(events: Games.GameEventSet) {
             events.pieceMoved.subscribe(movement => this._recordPieceMovement(movement));
             events.pieceAttacked.subscribe(attack => this._recordPieceAttack(attack));
 

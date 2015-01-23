@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
     export class BoardSizeDefaults {
-        static instance = new BoardSizeDefaults(950, 50, 80, 2);
+        static INSTANCE = new BoardSizeDefaults(950, 50, 80, 2);
 
         constructor(
             public boardSize: number,

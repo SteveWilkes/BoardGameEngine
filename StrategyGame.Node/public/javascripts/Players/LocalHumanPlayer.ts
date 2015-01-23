@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Players {
+﻿module AgileObjects.StrategyGame.Players {
 
     export class LocalHumanPlayer extends PlayerBase implements IPlayer {
         constructor(id: string) {

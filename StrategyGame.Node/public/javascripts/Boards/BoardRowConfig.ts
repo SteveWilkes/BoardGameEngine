@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
     import Ts = TypeScript;
 
     var placeholderTile = <BoardTile>{ isGameTile: false };

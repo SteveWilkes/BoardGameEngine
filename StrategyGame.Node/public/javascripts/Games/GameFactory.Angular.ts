@@ -1,5 +1,5 @@
-﻿module AgileObjects.StrategyGame.Game {
-    import Boards = StrategyGame.Game.Boards;
+﻿module AgileObjects.StrategyGame.Games {
+    import Boards = StrategyGame.Boards;
 
     export var $gameFactory = "$gameFactory";
 

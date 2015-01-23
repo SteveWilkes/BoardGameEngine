@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Status {
+﻿module AgileObjects.StrategyGame.Status {
 
     export interface IGameAction {
         description: string;

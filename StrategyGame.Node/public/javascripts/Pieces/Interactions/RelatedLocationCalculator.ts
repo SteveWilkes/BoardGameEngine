@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Pieces {
+﻿module AgileObjects.StrategyGame.Pieces {
 
     export class RelatedLocationCalculator {
         constructor(
@@ -7,7 +7,7 @@
             private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
-        public calculateLocationPaths(startingLocation: IPieceLocation, game: Game): Array<Array<IPieceLocation>> {
+        public calculateLocationPaths(startingLocation: IPieceLocation, game: Games.Game): Array<Array<IPieceLocation>> {
             var allLocations = game.board.getTiles();
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {

@@ -1,5 +1,6 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
+    "ClientOnly";
     export class BoardDisplayManager {
         private _boardDisplayDataService: BoardDisplayDataService;
 
@@ -33,10 +34,10 @@
             this.boardSize = Math.max(this._calculateBoardSize(boardDisplayData), boardDisplayData.minWidth);
             // ReSharper disable once QualifiedExpressionMaybeNull
             var tileOuterSize = Math.floor(this.boardSize / board.type.gridSize);
-            this.tileSize = tileOuterSize - (BoardSizeDefaults.instance.tileBorderWidth * 2);
-            var resizeFactor = this.boardSize / BoardSizeDefaults.instance.boardSize;
-            this.pieceWidth = Math.floor(BoardSizeDefaults.instance.pieceWidth * resizeFactor);
-            this.pieceHeight = Math.floor(BoardSizeDefaults.instance.pieceHeight * resizeFactor);
+            this.tileSize = tileOuterSize - (BoardSizeDefaults.INSTANCE.tileBorderWidth * 2);
+            var resizeFactor = this.boardSize / BoardSizeDefaults.INSTANCE.boardSize;
+            this.pieceWidth = Math.floor(BoardSizeDefaults.INSTANCE.pieceWidth * resizeFactor);
+            this.pieceHeight = Math.floor(BoardSizeDefaults.INSTANCE.pieceHeight * resizeFactor);
 
             return true;
         }

@@ -1,7 +1,7 @@
-﻿module AgileObjects.StrategyGame.Game.Ui {
+﻿module AgileObjects.StrategyGame.Ui {
 
     export interface IGameUiComponent {
-        gameCreated(game: Game): void;
+        gameCreated(game: Games.Game): void;
     }
 
     export var $gameUiComponentSet = "$gameUiComponentSet";
@@ -21,7 +21,7 @@
                 gameCoordinationClient);
         }
 
-        public gameCreated(game: Game): void {
+        public gameCreated(game: Games.Game): void {
             for (var i = 0; i < this._components.length; i++) {
                 this._components[i].gameCreated(game);
             }

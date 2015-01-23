@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Ui {
+﻿module AgileObjects.StrategyGame.Ui {
 
     export var $gameEventPropogator = "$gameEventPropogator";
 
@@ -6,7 +6,7 @@
     class GameEventPropogator implements IGameUiComponent {
         constructor(private _eventPropogator: Angular.Services.IEventPropogationService) { }
 
-        public gameCreated(game: Game): void {
+        public gameCreated(game: Games.Game): void {
             this._eventPropogator.propogate(
                 game.events.pieceAttacked,
                 "attack",

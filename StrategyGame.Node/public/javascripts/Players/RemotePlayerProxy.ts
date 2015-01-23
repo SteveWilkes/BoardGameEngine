@@ -1,9 +1,9 @@
-﻿module AgileObjects.StrategyGame.Game.Players {
-    import Pieces = StrategyGame.Game.Pieces;
-    import Teams = StrategyGame.Game.Teams;
+﻿module AgileObjects.StrategyGame.Players {
+    import Pieces = StrategyGame.Pieces;
+    import Teams = StrategyGame.Teams;
 
     export class RemotePlayerProxy extends PlayerBase implements IPlayer {
-        constructor(id: string, private _game: Game) {
+        constructor(id: string, private _game: Games.Game) {
             super(id, false);
         }
 

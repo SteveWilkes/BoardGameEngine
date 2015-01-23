@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
+﻿module AgileObjects.StrategyGame.Boards {
 
     export class BoardPosition {
         private _gridSize: number;

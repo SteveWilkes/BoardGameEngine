@@ -1,12 +1,12 @@
-﻿module AgileObjects.StrategyGame.Game.Boards {
-    import Pieces = StrategyGame.Game.Pieces;
-    import Teams = StrategyGame.Game.Teams;
+﻿module AgileObjects.StrategyGame.Boards {
+    import Pieces = StrategyGame.Pieces;
+    import Teams = StrategyGame.Teams;
 
     export class Board {
         private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
         private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
 
-        constructor(public type: BoardType, events: GameEventSet) {
+        constructor(public type: BoardType, events: Games.GameEventSet) {
             events.teamAdded.subscribe(team => this._addTeam(team));
 
             this._createTiles();
