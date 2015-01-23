@@ -8,7 +8,7 @@
 
         public initialise(game: Games.Game): void {
             game.events.gameStarted.subscribe(() => {
-                this._socket.emit("gameStarted", game.id, game.type.id);
+                this._socket.emit("gameStarted", new GameData(game.id, game.type.id));
                 return true;
             });
 

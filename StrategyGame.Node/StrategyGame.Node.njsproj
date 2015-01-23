@@ -118,6 +118,7 @@
     <TypeScriptCompile Include="public\javascripts\Players\PlayerBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />

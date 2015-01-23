@@ -5,7 +5,7 @@
         private _turnHasEnded: boolean;
 
         constructor(private _events: Games.GameEventSet) {
-            this._events.gameStarted.subscribe(team => this._setStartingTeam(team));
+            this._events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
             this._events.teamAdded.subscribe(team => this._registerTeam(team));
             this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
             this._events.turnEnded.subscribe((team, eventData) => this._turnEnded(eventData));
@@ -15,10 +15,12 @@
 
         public currentTeam: Teams.Team;
 
-        private _setStartingTeam(team: Teams.Team): boolean {
+        private _setStartingTeam(team: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
             this.setCurrentTeam(this._teams.indexOf(team));
 
-            return this._turnStarted();
+            eventData.whenEventCompletes(() => this._turnStarted());
+
+            return true;
         }
 
         private _registerTeam(team: Teams.Team): boolean {

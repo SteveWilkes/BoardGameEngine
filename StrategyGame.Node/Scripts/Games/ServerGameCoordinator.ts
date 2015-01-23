@@ -4,9 +4,9 @@
         constructor(private _gameFactory: GameFactory) { }
 
         public setup(socket: Node.ISessionSocket): void {
-            socket.on("gameStarted", (gameId: string, gameTypeId: string) => {
-                socket.session.game = this._gameFactory.createNewGame(gameId, gameTypeId);
-                console.log("Session Game " + gameId + " created");
+            socket.on("gameStarted", (gameData: Status.GameData) => {
+                socket.session.game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
+                console.log("Session Game " + gameData.gameId + " created");
             });
 
             socket.on("pieceMoved", (movementCoordinates: Array<string>) => {

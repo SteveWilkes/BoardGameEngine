@@ -6,7 +6,7 @@
             private _gameFactory: GameFactory,
             private _teamFactory: Teams.ITeamFactory) { }
 
-        public startDefaultGame(gameTypeId: string): Game {
+        public createDefaultGame(gameTypeId: string): Game {
             var gameId = this._idGenerator.generate();
             var game = this._gameFactory.createNewGame(gameId, gameTypeId);
 
@@ -22,8 +22,6 @@
 
             var team2 = this._teamFactory.createTeam(player2, game.type.id);
             game.board.add(team2);
-
-            game.start();
 
             return game;
         }
