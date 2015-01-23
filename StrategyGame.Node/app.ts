@@ -6,10 +6,7 @@ import Game = AgileObjects.StrategyGame.Game;
 import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
 var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
-import moduleLoaders = require("./Scripts/Generic/AgileObjects.TypeScript.InternalModuleLoaders");
-var moduleLoader = moduleLoaders.forNode(fileManager, require);
-
-var Ao = moduleLoader.load("AgileObjects.TypeScript", "AgileObjects.StrategyGame.Game");
+var Ao = require("./InternalModules");
 
 var RandomStringGenerator: new () => Angular.Services.IIdGenerator =
     Ao.TypeScript.RandomStringGenerator;

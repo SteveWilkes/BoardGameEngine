@@ -199,6 +199,14 @@ class InternalModuleLoaderBase {
     constructor(private _fileManager: Ts.IFileManager, private _classLoader: (classSourceFilePath: string) => any) { }
 
     public load(...namespaces: Array<string>): any {
+        this._convertedSourceFilePath = this._fileManager.getPathToTempFile(".js");
+        this.createSourceFile(this._convertedSourceFilePath, namespaces);
+        var loadedModule = this._classLoader(this._convertedSourceFilePath);
+
+        return loadedModule;
+    }
+
+    public createSourceFile(sourceFilePath: string, namespaces: Array<string>): void {
         var allClassDataByClassName = this._getAllClassData();
 
         var allClasses = new Array<ClassData>();
@@ -212,10 +220,7 @@ class InternalModuleLoaderBase {
             }
         }
 
-        this._convertedSourceFilePath = this._createSourceFile(allClasses);
-        var loadedModule = this._classLoader(this._convertedSourceFilePath);
-
-        return loadedModule;
+        this._createSourceFile(allClasses, sourceFilePath);
     }
 
     private _getAllClassData(): Ts.IStringDictionary<ClassData> {
@@ -326,7 +331,7 @@ class InternalModuleLoaderBase {
         return allClasses;
     }
 
-    private _createSourceFile(allClasses: Array<ClassData>): string {
+    private _createSourceFile(allClasses: Array<ClassData>, sourceFilePath: string): void {
         var script = "";
         for (var i = 0; i < allClasses.length; i++) {
             script += allClasses[i].script + "\r\n\r\n";
@@ -335,10 +340,7 @@ class InternalModuleLoaderBase {
         script = this._removeDuplicateRootNamespaceDeclarations(script);
         var convertedScript = this.convertInternalModuleSource(script);
 
-        var tempFilePath = this._fileManager.getPathToTempFile(".js");
-        this._fileManager.writeAllText(tempFilePath, convertedScript);
-
-        return tempFilePath;
+        this._fileManager.writeAllText(sourceFilePath, convertedScript);
     }
 
     private _removeDuplicateRootNamespaceDeclarations(script: string): string {

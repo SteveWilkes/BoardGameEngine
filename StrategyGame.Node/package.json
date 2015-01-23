@@ -9,6 +9,7 @@
   "dependencies": {
     "bundle-up": "^0.3.5",
     "express": "^3.4.4",
+    "grunt": "^0.4.5",
     "jade": "*",
     "socket.io": "^1.2.1",
     "stylus": "*",
