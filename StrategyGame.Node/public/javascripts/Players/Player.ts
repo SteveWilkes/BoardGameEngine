@@ -9,7 +9,7 @@
         public teams: Array<Teams.Team>;
 
         public getNextTeamId(): string {
-            return this.teams.length.toString();
+            return this.id + "*" + this.teams.length.toString();
         }
 
         public add(team: Teams.Team): void {

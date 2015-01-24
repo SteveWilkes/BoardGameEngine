@@ -146,7 +146,7 @@
     <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
-    <TypeScriptCompile Include="Scripts\Players\CpuPlayer.ts" />
+    <TypeScriptCompile Include="Scripts\Players\CpuPlayerAi.ts" />
     <TypeScriptCompile Include="Scripts\Games\ServerGameCoordinator.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionStore.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.IExpressModule.ts" />

@@ -7,11 +7,15 @@
             public board: Boards.Board,
             public events: GameEventSet) {
 
+            this.events.teamAdded.subscribe(team => this.teams.push(team) > 0);
+
             this.players = new Array<Players.IPlayer>();
+            this.teams = new Array<Teams.Team>();
             this.status = new Status.StatusData(this.events);
         }
 
         public players: Array<Players.IPlayer>;
+        public teams: Array<Teams.Team>;
         public status: Status.StatusData;
 
         public add(player: Players.IPlayer): void {

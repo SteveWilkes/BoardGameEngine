@@ -2,13 +2,12 @@
 
     export class TurnManager {
         private _teams: Array<Teams.Team>;
-        private _turnHasEnded: boolean;
 
         constructor(private _events: Games.GameEventSet) {
             this._events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
-            this._events.teamAdded.subscribe(team => this._registerTeam(team));
+            this._events.teamAdded.subscribe(team => this._teams.push(team) > 0);
             this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
-            this._events.turnEnded.subscribe((team, eventData) => this._turnEnded(eventData));
+            this._events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
 
             this._teams = new Array<Teams.Team>();
         }
@@ -16,15 +15,10 @@
         public currentTeam: Teams.Team;
 
         private _setStartingTeam(team: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
-            this.setCurrentTeam(this._teams.indexOf(team));
+            this.setCurrentTeam(team);
 
             eventData.whenEventCompletes(() => this._turnStarted());
 
-            return true;
-        }
-
-        private _registerTeam(team: Teams.Team): boolean {
-            this._teams.push(team);
             return true;
         }
 
@@ -32,32 +26,19 @@
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(piece);
         }
 
-        private _turnEnded(eventData: TypeScript.EventCallbackSet): boolean {
-            if (this._turnHasEnded === false) {
-                var currentTeamIndex = this._teams.indexOf(this.currentTeam);
-                ++currentTeamIndex;
-                if (currentTeamIndex === this._teams.length) {
-                    currentTeamIndex = 0;
-                }
-                this.setCurrentTeam(currentTeamIndex);
+        private _turnValidated(nextTeam: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
+            this.setCurrentTeam(nextTeam);
 
-                eventData.whenEventCompletes(() => {
-                    if (this._turnStarted()) {
-                        this.currentTeam.owner.takeTurn(this.currentTeam);
-                    }
-                });
+            eventData.whenEventCompletes(() => this._turnStarted());
 
-                this._turnHasEnded = true;
-            }
             return true;
         }
 
-        private setCurrentTeam(teamIndex: number) {
-            this.currentTeam = this._teams[teamIndex];
+        private setCurrentTeam(team: Teams.Team) {
+            this.currentTeam = team;
         }
 
         private _turnStarted(): boolean {
-            this._turnHasEnded = false;
             return this._events.turnStarted.publish(this.currentTeam);
         }
     }

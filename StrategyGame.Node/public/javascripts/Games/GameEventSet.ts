@@ -13,6 +13,7 @@
         public pieceMoved = new TypeScript.EventHub<Pieces.PieceMovement>();
         public pieceAttacked = new TypeScript.EventHub<Pieces.PieceAttack>();
         public pieceTaken = new TypeScript.EventHub<Pieces.Piece>();
+        public turnValidated = new TypeScript.EventHub<Teams.Team>();
         public turnEnded = new TypeScript.EventHub<Pieces.IPieceOwner>();
     }
 } 

@@ -1,8 +1,13 @@
 ﻿module AgileObjects.StrategyGame.Pieces {
 
     export class PieceMovementInteractionBase extends PieceInteractionBase {
-        constructor(public path: Array<IPieceLocation>, private _events: Games.GameEventSet) {
-            super(path, InteractionType.Move);
+        constructor(
+            id: string,
+            piece: Piece,
+            path: Array<IPieceLocation>,
+            private _events: Games.GameEventSet) {
+
+            super(id, piece, path, InteractionType.Move);
         }
 
         public complete(): void {

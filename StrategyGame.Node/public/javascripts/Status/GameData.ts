@@ -8,10 +8,12 @@
 
             for (var i = 0; i < game.players.length; i++) {
                 var player = game.players[i];
-                this.playerData[i] = player.id + "*" + (player.isHuman ? "1" : "0");
-                for (var j = 0; j < player.teams.length; j++) {
-                    this.playerData[i] += "*" + player.teams[j].id;
-                }
+                this.playerData[i] =
+                player.id +
+                "*" +
+                (player.isHuman ? "1" : "0") +
+                "*" +
+                player.teams.length;
             }
         }
 
