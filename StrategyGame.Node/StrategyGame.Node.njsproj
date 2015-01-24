@@ -113,9 +113,8 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
-    <TypeScriptCompile Include="public\javascripts\Players\LocalHumanPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\RemotePlayerProxy.ts" />
-    <TypeScriptCompile Include="public\javascripts\Players\PlayerBase.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />

@@ -1,8 +1,8 @@
 ﻿module AgileObjects.StrategyGame.Players {
     import Teams = StrategyGame.Teams;
 
-    export class PlayerBase implements IPlayer {
-        constructor(public id: string, public isLocal: boolean) {
+    export class Player implements IPlayer {
+        constructor(public id: string, public isHuman: boolean, public isLocal: boolean = false) {
             this.teams = new Array<Teams.Team>();
         }
 

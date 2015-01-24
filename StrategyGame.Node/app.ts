@@ -3,6 +3,8 @@ import Node = AgileObjects.Node;
 import Angular = AgileObjects.Angular;
 import Game = AgileObjects.StrategyGame;
 
+require("./public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
+
 import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
 var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
@@ -20,7 +22,15 @@ var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType
 var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.Games.GameType>) => Game.Games.GameFactory =
     Ao.StrategyGame.Games.GameFactory;
 
-var ServerGameCoordinator: new (gameFactory: Game.Games.GameFactory) => Game.Games.ServerGameCoordinator =
+var PieceFactory: new () => Game.Pieces.PieceFactory =
+    Ao.StrategyGame.Pieces.PieceFactory;
+
+var TeamFactory: new (pieceFactory: Game.Pieces.PieceFactory) => Game.Teams.TeamFactory =
+    Ao.StrategyGame.Teams.TeamFactory;
+
+var ServerGameCoordinator:
+    new (gameFactory: Game.Games.GameFactory, teamFactory: Game.Teams.TeamFactory) =>
+    Game.Games.ServerGameCoordinator =
     Ao.StrategyGame.Games.ServerGameCoordinator;
 
 import socketFactory = require("socket.io");
@@ -35,7 +45,9 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-var serverGameCoordinator = new ServerGameCoordinator(new GameFactory(new GetGameTypeQuery(new GetBoardTypeQuery())));
+var serverGameCoordinator = new ServerGameCoordinator(
+    new GameFactory(new GetGameTypeQuery(new GetBoardTypeQuery())),
+    new TeamFactory(new PieceFactory()));
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),

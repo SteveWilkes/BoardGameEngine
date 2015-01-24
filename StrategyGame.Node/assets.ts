@@ -35,7 +35,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/PieceLocationConfigData.js");
     assets.addJs("/public/javascripts/Pieces/NullPieceLocation.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
-    assets.addJs("/public/javascripts/Players/PlayerBase.js");
+    assets.addJs("/public/javascripts/Players/Player.js");
     assets.addJs("/public/javascripts/Players/RemotePlayerProxy.js");
     assets.addJs("/public/javascripts/Players/LocalHumanPlayer.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");

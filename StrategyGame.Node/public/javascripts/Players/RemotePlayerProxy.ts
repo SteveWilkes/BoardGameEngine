@@ -2,7 +2,7 @@
     import Pieces = StrategyGame.Pieces;
     import Teams = StrategyGame.Teams;
 
-    export class RemotePlayerProxy extends PlayerBase implements IPlayer {
+    export class RemotePlayerProxy extends Player implements IPlayer {
         constructor(id: string, private _game: Games.Game) {
             super(id, false);
         }

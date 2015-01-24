@@ -11,7 +11,7 @@
             var game = this._gameFactory.createNewGame(gameId, gameTypeId);
 
             // TODO: Get default game setup from game.type
-            var player1 = new Players.LocalHumanPlayer("Human");
+            var player1 = new Players.Player("Human", true, true);
             game.add(player1);
 
             var player2 = new Players.RemotePlayerProxy("CPU", game);
