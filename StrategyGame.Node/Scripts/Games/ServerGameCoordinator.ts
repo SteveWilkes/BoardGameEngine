@@ -31,12 +31,7 @@
                 if (currentTeam.owner.isHuman) { return; }
 
                 var cpuTurnInteractions = this._cpuPlayerAi.getNextTurn(currentTeam, game);
-                var cpuTurnData = new Array<string>(cpuTurnInteractions.length);
-                for (var i = 0; i < cpuTurnInteractions.length; i++) {
-                    var interaction = cpuTurnInteractions[i];
-                    cpuTurnData[i] = interaction.piece.id + "*" + interaction.id;
-                }
-                socket.emit("turnTaken", cpuTurnData);
+                socket.emit("turnTaken", new Status.TurnData(cpuTurnInteractions));
             });
 
             socket.on("turnEnded", (teamId: string) => {

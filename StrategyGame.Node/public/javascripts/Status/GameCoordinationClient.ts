@@ -34,17 +34,17 @@
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });
 
-            this._socket.on("turnTaken", (turnData: Array<string>) => {
+            this._socket.on("turnTaken", (turnData: Status.TurnData) => {
                 var currentTeam = game.status.getCurrentTeam();
-                for (var i = 0; i < turnData.length; i++) {
-                    var interactionData = turnData[i].split("*");
+                for (var i = 0; i < turnData.interactionData.length; i++) {
+                    var interaction = turnData.interactionData[i];
                     for (var j = 0; j < currentTeam.pieces.length; j++) {
                         var piece = currentTeam.pieces[j];
-                        if (piece.id === interactionData[0]) {
+                        if (piece.id === interaction.pieceId) {
                             var potentialInteractions =
                                 piece.interactionProfile.getPotentialInteractions(piece, game);
                             for (var k = 0; k < potentialInteractions.length; k++) {
-                                if (potentialInteractions[k].id === interactionData[1]) {
+                                if (potentialInteractions[k].id === interaction.interactionId) {
                                     potentialInteractions[k].complete();
                                     break;
                                 }

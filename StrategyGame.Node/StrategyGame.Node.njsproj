@@ -118,7 +118,9 @@
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
