@@ -18,11 +18,10 @@
             });
 
             game.events.pieceMoved.subscribe(movement => {
-                var movementPath = new Array<string>(movement.path.length);
-                for (var i = 0; i < movement.path.length; i++) {
-                    movementPath[i] = movement.path[i].coordinates.signature;
-                }
-                this._socket.emit("pieceMoved", movementPath);
+                this._socket.emit(
+                    "pieceMoved",
+                    movement.origin.coordinates.signature,
+                    movement.destination.coordinates.signature);
                 return true;
             });
         }
