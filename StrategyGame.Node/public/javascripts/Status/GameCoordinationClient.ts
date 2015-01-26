@@ -23,18 +23,12 @@
             });
 
             game.events.pieceMoved.subscribe(movement => {
-                this._socket.emit(
-                    "pieceMoved",
-                    movement.origin.coordinates.signature,
-                    movement.destination.coordinates.signature);
+                this._socket.emit("pieceMoved", movement.piece.id, movement.interactionId);
                 return true;
             });
 
             game.events.pieceAttacked.subscribe(attack => {
-                this._socket.emit(
-                    "pieceAttacked",
-                    attack.attacker.id,
-                    attack.interactionId);
+                this._socket.emit("pieceAttacked", attack.attacker.id, attack.interactionId);
                 return true;
             });
 
@@ -42,7 +36,7 @@
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });
 
-            this._socket.on("turnTaken", (turnData: Status.TurnData) => {
+            this._socket.on("turnEnded", (turnData: Status.TurnData) => {
                 var currentTeamPieces = game.status.getCurrentTeam().getPieces();
                 for (var i = 0; i < turnData.interactionData.length; i++) {
                     var turnInteraction = turnData.interactionData[i];

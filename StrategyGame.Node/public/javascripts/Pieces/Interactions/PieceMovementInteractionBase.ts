@@ -13,7 +13,7 @@
         public complete(): void {
             this.performMovement();
 
-            var movement = new PieceMovement(this.path);
+            var movement = new PieceMovement(this.id, this.piece, this.path);
 
             this._events.pieceMoved.publish(movement);
         }

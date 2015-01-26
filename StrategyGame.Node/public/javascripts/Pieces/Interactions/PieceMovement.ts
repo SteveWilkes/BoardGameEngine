@@ -1,7 +1,11 @@
 ﻿module AgileObjects.StrategyGame.Pieces {
 
     export class PieceMovement {
-        constructor(public path: Array<IPieceLocation>) {
+        constructor(
+            public interactionId,
+            public piece: Piece,
+            public path: Array<IPieceLocation>) {
+
             this.origin = this.path[0];
             this.destination = this.path[this.path.length - 1];
         }

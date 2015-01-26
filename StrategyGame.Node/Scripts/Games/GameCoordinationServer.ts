@@ -13,28 +13,14 @@
                 console.log("Game " + socket.session.game.id + " created");
             });
 
-            socket.on("pieceMoved", (originCoordinates: string, destinationCoordinates: string) => {
-                var game: Game = socket.session.game;
-                var boardTiles = game.board.getTiles();
-                var origin = boardTiles[originCoordinates];
-                var destination = boardTiles[destinationCoordinates];
-                origin.movePieceTo(destination.piece || destination);
-                console.log("Game " + game.id + ": piece moved from " + originCoordinates + " to " + destinationCoordinates);
+            socket.on("pieceMoved", (pieceId: string, interactionId: string) => {
+                this._handleInteractionCompleted(pieceId, interactionId, socket);
+                console.log("Game " + socket.session.game.id + ": piece " + pieceId + "moved!");
             });
 
             socket.on("pieceAttacked", (attackerId: string, interactionId: string) => {
-                var game: Game = socket.session.game;
-                var currentTeamPieces = game.status.getCurrentTeam().getPieces();
-                if (!currentTeamPieces.hasOwnProperty(attackerId)) {
-                    // Out of sync
-                }
-                var attacker = currentTeamPieces[attackerId];
-                var potentialInteractions = attacker.interactionProfile.getPotentialInteractions(attacker, game);
-                if (!potentialInteractions.hasOwnProperty(interactionId)) {
-                    // Out of sync
-                }
-                potentialInteractions[interactionId].complete();
-                console.log("Game " + game.id + ": piece " + attackerId + " attacks!");
+                this._handleInteractionCompleted(attackerId, interactionId, socket);
+                console.log("Game " + socket.session.game.id + ": piece " + attackerId + " attacks!");
 
             });
 
@@ -47,7 +33,7 @@
                 if (currentTeam.owner.isHuman) { return; }
 
                 var cpuTurnInteractions = this._cpuPlayerAi.getNextTurn(currentTeam, game);
-                socket.emit("turnTaken", new Status.TurnData(cpuTurnInteractions));
+                socket.emit("turnEnded", new Status.TurnData(cpuTurnInteractions));
             });
 
             socket.on("turnEnded", (teamId: string) => {
@@ -75,11 +61,25 @@
             }
 
             // TODO: Get rid of casting:
-            game.events.turnEnded.subscribe(t => this._handleTurnEnded(<Teams.Team>t, game, socket));
+            //game.events.turnEnded.subscribe(t => this._handleTurnEnded(<Teams.Team>t, game, socket));
 
             game.start();
 
             return game;
+        }
+
+        private _handleInteractionCompleted(pieceId: string, interactionId: string, socket: Node.ISessionSocket): void {
+            var game: Game = socket.session.game;
+            var currentTeamPieces = game.status.getCurrentTeam().getPieces();
+            if (!currentTeamPieces.hasOwnProperty(pieceId)) {
+                // Out of sync
+            }
+            var piece = currentTeamPieces[pieceId];
+            var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            if (!potentialInteractions.hasOwnProperty(interactionId)) {
+                // Out of sync
+            }
+            potentialInteractions[interactionId].complete();
         }
 
         private _handleTurnEnded(
