@@ -118,7 +118,6 @@
     <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\PieceAttackAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
@@ -127,8 +126,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Dictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\History.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\IGameAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\PieceMoveAction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IGameAction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceLocationValidator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />

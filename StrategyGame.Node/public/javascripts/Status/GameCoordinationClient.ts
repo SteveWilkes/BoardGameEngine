@@ -18,17 +18,18 @@
             });
 
             game.events.turnEnded.subscribe(team => {
-                this._socket.emit("turnEnded", team.id);
-                return true;
-            });
-
-            game.events.pieceMoved.subscribe(movement => {
-                this._socket.emit("pieceMoved", movement.piece.id, movement.interactionId);
-                return true;
-            });
-
-            game.events.pieceAttacked.subscribe(attack => {
-                this._socket.emit("pieceAttacked", attack.attacker.id, attack.interactionId);
+                var turnActions = new Array<Pieces.IGameAction>();
+                if (team.isLocal()) {
+                    var actions = game.status.history.actions;
+                    for (var i = actions.length - 1; i >= 0; i--) {
+                        if (actions[i].piece.team === team) {
+                            turnActions.unshift(actions[i]);
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                this._socket.emit("turnEnded", Status.TurnData.forActions(turnActions));
                 return true;
             });
 

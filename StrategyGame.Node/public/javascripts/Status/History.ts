@@ -5,10 +5,10 @@
             events.pieceMoved.subscribe(movement => this._recordPieceMovement(movement));
             events.pieceAttacked.subscribe(attack => this._recordPieceAttack(attack));
 
-            this.actions = new Array<IGameAction>();
+            this.actions = new Array<Pieces.IGameAction>();
         }
 
-        public actions: Array<IGameAction>;
+        public actions: Array<Pieces.IGameAction>;
         public lastMove: Pieces.PieceMovement;
 
         private _recordPieceMovement(movement: Pieces.PieceMovement): boolean {
@@ -18,12 +18,12 @@
             }
             this.lastMove = movement;
             movement.setWasPartOfLastMove(true);
-            this.actions.push(new PieceMoveAction(this.lastMove));
+            this.actions.push(movement);
             return true;
         }
 
         private _recordPieceAttack(attack: Pieces.PieceAttack): boolean {
-            this.actions.push(new PieceAttackAction(attack));
+            this.actions.push(attack);
             return true;
         }
     }

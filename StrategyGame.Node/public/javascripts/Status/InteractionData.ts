@@ -1,12 +1,14 @@
 ﻿module AgileObjects.StrategyGame.Status {
 
     export class InteractionData {
-        constructor(interaction: Pieces.IPieceInteraction) {
-            this.pieceId = interaction.piece.id;
-            this.interactionId = interaction.id;
+        constructor(public pieceId: string, public interactionId: string) { }
+
+        static forInteraction(interaction: Pieces.IPieceInteraction) {
+            return new InteractionData(interaction.piece.id, interaction.id);
         }
 
-        public pieceId: string;
-        public interactionId: string;
+        static forAction(action: Pieces.IGameAction) {
+            return new InteractionData(action.piece.id, action.interactionId);
+        }
     }
 }

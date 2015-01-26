@@ -9,19 +9,8 @@
 
         public setup(socket: Node.ISessionSocket): void {
             socket.on("gameStarted", (gameData: Status.GameData) => {
-                socket.session.game = this._createServerSideGameRepresentation(gameData, socket);
+                socket.session.game = this._createServerSideGameRepresentation(gameData);
                 console.log("Game " + socket.session.game.id + " created");
-            });
-
-            socket.on("pieceMoved", (pieceId: string, interactionId: string) => {
-                this._handleInteractionCompleted(pieceId, interactionId, socket);
-                console.log("Game " + socket.session.game.id + ": piece " + pieceId + "moved!");
-            });
-
-            socket.on("pieceAttacked", (attackerId: string, interactionId: string) => {
-                this._handleInteractionCompleted(attackerId, interactionId, socket);
-                console.log("Game " + socket.session.game.id + ": piece " + attackerId + " attacks!");
-
             });
 
             socket.on("turnStarted", (teamId: string) => {
@@ -33,20 +22,20 @@
                 if (currentTeam.owner.isHuman) { return; }
 
                 var cpuTurnInteractions = this._cpuPlayerAi.getNextTurn(currentTeam, game);
-                socket.emit("turnEnded", new Status.TurnData(cpuTurnInteractions));
+                var turnData = Status.TurnData.forInteractions(cpuTurnInteractions);
+                this._applyTurn(turnData, socket);
+                socket.emit("turnEnded", turnData);
             });
 
-            socket.on("turnEnded", (teamId: string) => {
-                var game: Game = socket.session.game;
-                var currentTeam = game.status.getCurrentTeam();
-                if (currentTeam.id !== teamId) {
-                    // Out of sync
+            socket.on("turnEnded", (turnData: Status.TurnData) => {
+                if (socket.session.game.status.getCurrentTeam().owner.isHuman) {
+                    this._applyTurn(turnData, socket);
                 }
-                this._handleTurnEnded(currentTeam, game, socket);
+                this._handleTurnEnded(socket);
             });
         }
 
-        private _createServerSideGameRepresentation(gameData: Status.GameData, socket: SocketIO.Socket): Game {
+        private _createServerSideGameRepresentation(gameData: Status.GameData): Game {
             var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
 
             for (var i = 0; i < gameData.playerData.length; i++) {
@@ -60,12 +49,16 @@
                 }
             }
 
-            // TODO: Get rid of casting:
-            //game.events.turnEnded.subscribe(t => this._handleTurnEnded(<Teams.Team>t, game, socket));
-
             game.start();
 
             return game;
+        }
+
+        private _applyTurn(turnData: Status.TurnData, socket: Node.ISessionSocket): void {
+            for (var i = 0; i < turnData.interactionData.length; i++) {
+                var turnInteraction = turnData.interactionData[i];
+                this._handleInteractionCompleted(turnInteraction.pieceId, turnInteraction.interactionId, socket);
+            }
         }
 
         private _handleInteractionCompleted(pieceId: string, interactionId: string, socket: Node.ISessionSocket): void {
@@ -80,13 +73,12 @@
                 // Out of sync
             }
             potentialInteractions[interactionId].complete();
+            console.log("Interaction synchronised");
         }
 
-        private _handleTurnEnded(
-            currentTeam: Teams.Team,
-            game: Games.Game,
-            socket: SocketIO.Socket): boolean {
-
+        private _handleTurnEnded(socket: Node.ISessionSocket): boolean {
+            var game: Game = socket.session.game;
+            var currentTeam = game.status.getCurrentTeam();
             var currentTeamIndex = game.teams.indexOf(currentTeam);
             var nextTeamIndex = currentTeamIndex + 1;
             if (nextTeamIndex === game.teams.length) {
