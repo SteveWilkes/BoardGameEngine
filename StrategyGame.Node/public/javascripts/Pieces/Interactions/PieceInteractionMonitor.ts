@@ -63,7 +63,7 @@
 
         private _populatePotentialInteractionsFrom(piece: Piece): void {
             var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, this._game);
-            this._currentPotentialInteractions.clear();
+            this._currentPotentialInteractions = new Array<IPieceInteraction>();
             for (var interactionId in potentialInteractions) {
                 this._currentPotentialInteractions.push(potentialInteractions[interactionId]);
             }
