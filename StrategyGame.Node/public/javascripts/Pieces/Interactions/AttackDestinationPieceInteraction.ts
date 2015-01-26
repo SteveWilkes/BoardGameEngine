@@ -15,7 +15,7 @@
             var target = this.location.piece;
             var damage = target.applyAttackBy(attacker);
 
-            var attack = new PieceAttack(attacker, target, damage);
+            var attack = new PieceAttack(this.id, attacker, target, damage);
 
             this._events.pieceAttacked.publish(attack);
 

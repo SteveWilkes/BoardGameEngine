@@ -30,6 +30,14 @@
                 return true;
             });
 
+            game.events.pieceAttacked.subscribe(attack => {
+                this._socket.emit(
+                    "pieceAttacked",
+                    attack.attacker.id,
+                    attack.interactionId);
+                return true;
+            });
+
             this._socket.on("turnValidated", (nextTeamIndex: number) => {
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });
