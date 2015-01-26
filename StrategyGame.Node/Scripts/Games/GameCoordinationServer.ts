@@ -30,14 +30,11 @@
                 }
                 var attacker = currentTeamPieces[attackerId];
                 var potentialInteractions = attacker.interactionProfile.getPotentialInteractions(attacker, game);
-                // TODO: Make interactions indexable by id
-                for (var j = 0; j < potentialInteractions.length; j++) {
-                    if (potentialInteractions[j].id === interactionId) {
-                        potentialInteractions[j].complete();
-                        console.log("Game " + game.id + ": piece " + attackerId + " attacks!");
-                        return;
-                    }
+                if (!potentialInteractions.hasOwnProperty(interactionId)) {
+                    // Out of sync
                 }
+                potentialInteractions[interactionId].complete();
+                console.log("Game " + game.id + ": piece " + attackerId + " attacks!");
 
             });
 

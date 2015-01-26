@@ -52,12 +52,10 @@
                     var piece = currentTeamPieces[turnInteraction.pieceId];
                     var potentialInteractions =
                         piece.interactionProfile.getPotentialInteractions(piece, game);
-                    for (var k = 0; k < potentialInteractions.length; k++) {
-                        if (potentialInteractions[k].id === turnInteraction.interactionId) {
-                            potentialInteractions[k].complete();
-                            break;
-                        }
+                    if (!potentialInteractions.hasOwnProperty(turnInteraction.interactionId)) {
+                        // Out of sync
                     }
+                    potentialInteractions[turnInteraction.interactionId].complete();
                 }
             });
         }

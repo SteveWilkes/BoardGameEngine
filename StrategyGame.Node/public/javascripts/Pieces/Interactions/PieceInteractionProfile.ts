@@ -1,16 +1,19 @@
 ﻿module AgileObjects.StrategyGame.Pieces {
+    import Ts = TypeScript;
 
     export class PieceInteractionProfile {
         constructor(private _interactionCalculators: Array<PieceInteractionCalculator>) { }
 
-        public getPotentialInteractions(piece: Piece, game: Games.Game): Array<IPieceInteraction> {
+        public getPotentialInteractions(piece: Piece, game: Games.Game): Ts.IStringDictionary<IPieceInteraction> {
             var supportedTypes = game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
-            var allInteractions = new Array<IPieceInteraction>();
+            var allInteractions: Ts.IStringDictionary<IPieceInteraction> = {};
             for (var i = 0; i < this._interactionCalculators.length; i++) {
                 var interactionCalculator = this._interactionCalculators[i];
                 if (supportedTypes.indexOf(interactionCalculator.type) === -1) { continue; }
                 var interactions = interactionCalculator.getPotentialInteractions(piece.location, game);
-                allInteractions = allInteractions.concat(interactions);
+                for (var j = 0; j < interactions.length; j++) {
+                    allInteractions[interactions[j].id] = interactions[j];
+                }
             }
             return allInteractions;
         }

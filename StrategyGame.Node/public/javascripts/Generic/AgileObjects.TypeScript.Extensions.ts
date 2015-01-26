@@ -5,6 +5,10 @@
     endsWith(substring: string): boolean;
 }
 
+interface Array<T> {
+    clear(): void;
+}
+
 module AgileObjects.TypeScript {
 
     String.prototype.splice = function (insertionIndex, substringToInsert, charactersToRemove = 0) {
@@ -32,5 +36,12 @@ module AgileObjects.TypeScript {
     String.prototype.endsWith = function (substring: string) {
         var _this = <string>this;
         return _this.substring(_this.length - substring.length) === substring;
+    }
+
+    Array.prototype.clear = function () {
+        var _this = <Array<any>>this;
+        while (_this.length > 0) {
+            _this.pop();
+        }
     }
 } 

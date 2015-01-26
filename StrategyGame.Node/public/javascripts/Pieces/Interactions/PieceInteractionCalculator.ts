@@ -12,7 +12,7 @@
                 var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation, game);
                 for (var j = 0; j < interactionPaths.length; j++) {
                     interactions.push(new this._interaction(
-                        this.type + "," + i + "," + j,
+                        startingLocation.piece.id + "," + this.type + "," + i + "," + j,
                         startingLocation.piece,
                         interactionPaths[j],
                         game.events));
