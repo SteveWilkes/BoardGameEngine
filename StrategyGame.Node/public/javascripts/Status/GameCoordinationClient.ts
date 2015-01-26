@@ -43,20 +43,18 @@
             });
 
             this._socket.on("turnTaken", (turnData: Status.TurnData) => {
-                var currentTeam = game.status.getCurrentTeam();
+                var currentTeamPieces = game.status.getCurrentTeam().getPieces();
                 for (var i = 0; i < turnData.interactionData.length; i++) {
-                    var interaction = turnData.interactionData[i];
-                    for (var j = 0; j < currentTeam.pieces.length; j++) {
-                        var piece = currentTeam.pieces[j];
-                        if (piece.id === interaction.pieceId) {
-                            var potentialInteractions =
-                                piece.interactionProfile.getPotentialInteractions(piece, game);
-                            for (var k = 0; k < potentialInteractions.length; k++) {
-                                if (potentialInteractions[k].id === interaction.interactionId) {
-                                    potentialInteractions[k].complete();
-                                    break;
-                                }
-                            }
+                    var turnInteraction = turnData.interactionData[i];
+                    if (!currentTeamPieces.hasOwnProperty(turnInteraction.pieceId)) {
+                        // Out of sync
+                    }
+                    var piece = currentTeamPieces[turnInteraction.pieceId];
+                    var potentialInteractions =
+                        piece.interactionProfile.getPotentialInteractions(piece, game);
+                    for (var k = 0; k < potentialInteractions.length; k++) {
+                        if (potentialInteractions[k].id === turnInteraction.interactionId) {
+                            potentialInteractions[k].complete();
                             break;
                         }
                     }

@@ -1,31 +1,43 @@
 ﻿module AgileObjects.StrategyGame.Teams {
 
     export class Team implements Pieces.IPieceOwner {
+        private _piecesById: TypeScript.IStringDictionary<Pieces.Piece>;
+
         constructor(
             public id: string,
             public name: string,
-            public piecesByInitialLocation: TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>) {
+            private _piecesByInitialLocation: TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>) {
 
-            this.pieces = this.piecesByInitialLocation.values;
-
-            for (var i = 0; i < this.pieces.length; i++) {
-                this.pieces[i].team = this;
+            this._piecesById = {};
+            for (var i = 0; i < this._piecesByInitialLocation.count; i++) {
+                var piece = this._piecesByInitialLocation.values[i];
+                piece.team = this;
+                this._piecesById[piece.id] = piece;
             }
         }
 
         public owner: ITeamOwner;
-        public pieces: Array<Pieces.Piece>;
 
+        public getPieces(): TypeScript.IStringDictionary<Pieces.Piece> {
+            return this._piecesById;
+        }
+
+        public getInitialLocationOf(piece: Pieces.Piece): TypeScript.Coordinates {
+            var pieceIndex = this._piecesByInitialLocation.values.indexOf(piece);
+            return this._piecesByInitialLocation.keys[pieceIndex];
+        }
+
+        // TODO: Remove
         public isLocal(): boolean { return this.owner.isLocal; }
 
         public setNumber(teamNumber: number): void {
-            for (var i = 0; i < this.pieces.length; i++) {
-                this.pieces[i].setTeamNumber(teamNumber);
+            for (var i = 0; i < this._piecesByInitialLocation.count; i++) {
+                this._piecesByInitialLocation.values[i].setTeamNumber(teamNumber);
             }
         }
 
         public owns(piece: Pieces.Piece): boolean {
-            return this.pieces.indexOf(piece) > -1;
+            return this._piecesByInitialLocation.values.indexOf(piece) > -1;
         }
     }
 } 

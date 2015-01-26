@@ -35,15 +35,16 @@
         }
 
         public add(team: Teams.Team): void {
-            var teams = this._boardPositionsByTeam.keys;
-            var position = this.type.getNextBoardPosition(teams.length);
+            var position = this.type.getNextBoardPosition(this._boardPositionsByTeam.count);
             this._boardPositionsByTeam.add(team, position);
 
-            for (var j = 0; j < team.piecesByInitialLocation.count; j++) {
-                var pieceLocation = team.piecesByInitialLocation.keys[j];
+            var pieces = team.getPieces();
+            for (var pieceId in pieces) {
+                var piece = pieces[pieceId];
+                var pieceLocation = team.getInitialLocationOf(piece);
                 var translatedCoordinates = position.translate(pieceLocation);
                 var tile = this._tilesByCoordinates[translatedCoordinates.signature];
-                tile.add(team.piecesByInitialLocation.get(pieceLocation));
+                tile.add(piece);
             }
 
             team.setNumber(this._boardPositionsByTeam.count);

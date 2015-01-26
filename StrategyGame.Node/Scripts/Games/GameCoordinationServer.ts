@@ -24,24 +24,21 @@
 
             socket.on("pieceAttacked", (attackerId: string, interactionId: string) => {
                 var game: Game = socket.session.game;
-                var currentTeam = game.status.getCurrentTeam();
-                for (var i = 0; i < currentTeam.pieces.length; i++) {
-                    var piece = currentTeam.pieces[i];
-                    // TODO: Make pieces indexable by id
-                    if (piece.id === attackerId) {
-                        var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
-                        // TODO: Make interactions indexable by id
-                        for (var j = 0; j < potentialInteractions.length; j++) {
-                            if (potentialInteractions[j].id === interactionId) {
-                                potentialInteractions[j].complete();
-                                console.log("Game " + game.id + ": piece " + attackerId + " attacks!");
-                                return;
-                            }
-                        }
-                        // Out of sync
+                var currentTeamPieces = game.status.getCurrentTeam().getPieces();
+                if (!currentTeamPieces.hasOwnProperty(attackerId)) {
+                    // Out of sync
+                }
+                var attacker = currentTeamPieces[attackerId];
+                var potentialInteractions = attacker.interactionProfile.getPotentialInteractions(attacker, game);
+                // TODO: Make interactions indexable by id
+                for (var j = 0; j < potentialInteractions.length; j++) {
+                    if (potentialInteractions[j].id === interactionId) {
+                        potentialInteractions[j].complete();
+                        console.log("Game " + game.id + ": piece " + attackerId + " attacks!");
+                        return;
                     }
                 }
-                // Out of sync
+
             });
 
             socket.on("turnStarted", (teamId: string) => {

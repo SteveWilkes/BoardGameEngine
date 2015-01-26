@@ -21,8 +21,9 @@
 
         private _getAllPotentialInteractions(team: Teams.Team, game: Games.Game) {
             var allPotentialInteractions = new Array<Pieces.IPieceInteraction>();
-            for (var i = 0; i < team.pieces.length; i++) {
-                var piece = team.pieces[i];
+            var pieces = team.getPieces();
+            for (var pieceId in pieces) {
+                var piece = pieces[pieceId];
                 if (piece.hasBeenTaken()) { continue; }
                 var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
                 allPotentialInteractions = allPotentialInteractions.concat(potentialInteractions);
