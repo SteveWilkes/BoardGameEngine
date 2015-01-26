@@ -14,7 +14,7 @@
             var player1 = new Players.Player("Human", true, true);
             game.add(player1);
 
-            var player2 = new Players.RemotePlayerProxy("CPU", game);
+            var player2 = new Players.Player("CPU", false);
             game.add(player2);
 
             var team1 = this._teamFactory.createTeam(player1, game.type.id);
