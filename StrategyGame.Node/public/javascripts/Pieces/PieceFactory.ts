@@ -39,74 +39,74 @@
             [bombAttachDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("m3"))]);
 
-    // Human Heavy Movement
+    // Human Soldier Movement
 
-    var humanHeavyMoveDestinationsCalculator = new RelatedLocationCalculator(
+    var humanSoldierMoveDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
         [new IsUnoccupiedLocationValidator()]);
 
-    // Human Heavy Attachment
+    // Human Soldier Attachment
 
-    var humanHeavyAttachDestinationsCalculator = new RelatedLocationCalculator(
+    var humanSoldierAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
 
-    // Human Heavy Attack
+    // Human Soldier Attack
 
-    var humanHeavyAttackDestinationsCalculator = new RelatedLocationCalculator(
+    var humanSoldierAttackDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
-    var humanHeavyInteractionProfile = new PieceInteractionProfile([
+    var humanSoldierInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
             InteractionType.Move,
-            [humanHeavyMoveDestinationsCalculator],
+            [humanSoldierMoveDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
-            [humanHeavyAttachDestinationsCalculator],
+            [humanSoldierAttachDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
-            [humanHeavyAttackDestinationsCalculator],
+            [humanSoldierAttackDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("a1"))]);
 
-    // Human Light Movement
+    // Human Ninja Movement
 
-    var humanLightMoveDestinationsCalculator = new RelatedLocationCalculator(
+    var humanNinjaMoveDestinationsCalculator = new RelatedLocationCalculator(
         twoSpacesInAnyDirectionCalculators,
         [new IsUnoccupiedLocationValidator()],
         [new IsUnoccupiedLocationValidator()]);
 
-    // Human Light Attachment
+    // Human Ninja Attachment
 
-    var humanLightAttachDestinationsCalculator = new RelatedLocationCalculator(
+    var humanNinjaAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
 
-    // Human Light Attack
+    // Human Ninja Attack
 
-    var humanLightAttackDestinationsCalculator = new RelatedLocationCalculator(
+    var humanNinjaAttackDestinationsCalculator = new RelatedLocationCalculator(
         twoSpacesInAnyDirectionCalculators,
         [new IsUnoccupiedLocationValidator()],
         [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
 
-    var humanLightInteractionProfile = new PieceInteractionProfile([
+    var humanNinjaInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
             InteractionType.Move,
-            [humanLightMoveDestinationsCalculator],
+            [humanNinjaMoveDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("m2")),
         new PieceInteractionCalculator(
             InteractionType.Move,
-            [humanLightAttachDestinationsCalculator],
+            [humanNinjaAttachDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("m1")),
         new PieceInteractionCalculator(
             InteractionType.Attack,
-            [humanLightAttackDestinationsCalculator],
+            [humanNinjaAttackDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("a1"))]);
 
     export class PieceFactory implements IPieceFactory {
@@ -122,14 +122,14 @@
                     bombInteractionProfile),
                 "2": new PieceDefinition(
                     "2",
-                    "Human Heavy",
-                    "/images/pieces/HumanHeavy.png",
-                    humanHeavyInteractionProfile),
+                    "Human Soldier",
+                    "/images/pieces/Soldier.png",
+                    humanSoldierInteractionProfile),
                 "3": new PieceDefinition(
                     "3",
                     "Example",
-                    "/images/pieces/Example.png",
-                    humanLightInteractionProfile)
+                    "/images/pieces/Ninja.png",
+                    humanNinjaInteractionProfile)
             };
             this._nextPieceId = 1;
         }

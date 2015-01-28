@@ -174,10 +174,12 @@
     <Content Include="public\images\pieces\Bomb4.png" />
     <Content Include="public\images\pieces\Example1.png" />
     <Content Include="public\images\pieces\Example2.png" />
-    <Content Include="public\images\pieces\HumanHeavy1.png" />
-    <Content Include="public\images\pieces\HumanHeavy2.png" />
-    <Content Include="public\images\pieces\HumanHeavy3.png" />
-    <Content Include="public\images\pieces\HumanHeavy4.png" />
+    <Content Include="public\images\pieces\Soldier1.png" />
+    <Content Include="public\images\pieces\Soldier2.png" />
+    <Content Include="public\images\pieces\Soldier3.png" />
+    <Content Include="public\images\pieces\Soldier4.png" />
+    <Content Include="public\images\pieces\Ninja1.png" />
+    <Content Include="public\images\pieces\Ninja2.png" />
     <Content Include="public\javascripts\_references.js" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\board-tile-attack-animation.styl" />
