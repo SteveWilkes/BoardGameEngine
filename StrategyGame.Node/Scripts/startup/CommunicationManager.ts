@@ -10,7 +10,7 @@ class CommunicationManager implements bs.IBootstrapper {
     constructor(
         private _socketServer: SocketIO.Server,
         private _sessionStore: Node.ISessionStore,
-        private _serverGameCoordinator: Games.GameCoordinationServer) { }
+        private _serverGameCoordinator: Games.ServerGameCoordinator) { }
 
     public appCreated(info: bs.SystemInfo, app: express.Express): void {
         this._app = app;

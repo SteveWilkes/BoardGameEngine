@@ -1,6 +1,6 @@
 ﻿module AgileObjects.StrategyGame.Games {
 
-    export class GameCoordinationServer {
+    export class ServerGameCoordinator {
         private _cpuPlayerAi: Players.CpuPlayerAi;
 
         constructor(private _gameFactory: GameFactory, private _teamFactory: Teams.TeamFactory) {

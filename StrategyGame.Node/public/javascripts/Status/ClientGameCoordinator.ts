@@ -1,9 +1,9 @@
 ﻿module AgileObjects.StrategyGame.Status {
 
-    export var $gameCoordinationClient = "$gameCoordinationClient";
+    export var $clientGameCoordinator = "$clientGameCoordinator";
 
     "ClientOnly";
-    class GameCoordinationClient implements Ui.IGameUiComponent {
+    class ClientGameCoordinator implements Ui.IGameUiComponent {
         constructor(private _socket: SocketIO.Socket) { }
 
         public initialise(game: Games.Game): void {
@@ -58,5 +58,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($gameCoordinationClient, [Angular.Services.$socketFactory, GameCoordinationClient]);
+        .service($clientGameCoordinator, [Angular.Services.$socketFactory, ClientGameCoordinator]);
 }

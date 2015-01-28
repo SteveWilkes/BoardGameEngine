@@ -28,10 +28,9 @@ var PieceFactory: new () => Game.Pieces.PieceFactory =
 var TeamFactory: new (pieceFactory: Game.Pieces.PieceFactory) => Game.Teams.TeamFactory =
     Ao.StrategyGame.Teams.TeamFactory;
 
-var GameCoordinationServer:
-    new (gameFactory: Game.Games.GameFactory, teamFactory: Game.Teams.TeamFactory) =>
-    Game.Games.GameCoordinationServer =
-    Ao.StrategyGame.Games.GameCoordinationServer;
+var ServerGameCoordinator:
+    new (gameFactory: Game.Games.GameFactory, teamFactory: Game.Teams.TeamFactory) => Game.Games.ServerGameCoordinator =
+    Ao.StrategyGame.Games.ServerGameCoordinator;
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");
@@ -45,7 +44,7 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-var serverGameCoordinator = new GameCoordinationServer(
+var serverGameCoordinator = new ServerGameCoordinator(
     new GameFactory(new GetGameTypeQuery(new GetBoardTypeQuery())),
     new TeamFactory(new PieceFactory()));
 

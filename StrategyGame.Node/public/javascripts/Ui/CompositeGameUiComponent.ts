@@ -35,7 +35,7 @@
         .service($gameUiComponentSet, [
             Pieces.$pieceInteractionMonitorService,
             $gameEventPropogator,
-            Status.$gameCoordinationClient,
+            Status.$clientGameCoordinator,
             Boards.$boardDisplayManager,
             CompositeGameUiComponent]);
 }

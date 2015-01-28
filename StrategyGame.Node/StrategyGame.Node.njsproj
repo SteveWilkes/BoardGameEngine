@@ -115,7 +115,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\GameCoordinationClient.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnData.ts" />
@@ -146,7 +146,7 @@
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
     <TypeScriptCompile Include="Scripts\Players\CpuPlayerAi.ts" />
-    <TypeScriptCompile Include="Scripts\Games\GameCoordinationServer.ts" />
+    <TypeScriptCompile Include="Scripts\Games\ServerGameCoordinator.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionStore.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.IExpressModule.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionSocket.ts" />
