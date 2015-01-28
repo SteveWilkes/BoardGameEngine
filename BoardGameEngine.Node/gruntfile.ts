@@ -6,11 +6,11 @@
         var fs = require("fs");
         var temp = require("temp");
         var FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
-        var moduleLoaders = require("./Scripts/Generic/AgileObjects.TypeScript.InternalModuleLoaders");
+        var NodeModuleLoader = require("./Scripts/Generic/AgileObjects.Node.InternalModuleLoader");
 
         var rootFileName = path.resolve("./app.js");
         var fileManager = new FileManager(path, fs, temp.track(), rootFileName);
-        var moduleLoader = moduleLoaders.forNode(fileManager, require);
+        var moduleLoader = new NodeModuleLoader(fileManager, require);
 
         moduleLoader.createSourceFile(
             "./InternalModules.js",

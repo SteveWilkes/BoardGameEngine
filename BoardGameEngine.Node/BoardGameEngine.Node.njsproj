@@ -145,6 +145,7 @@
     <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.InternalModuleLoader.ts" />
     <TypeScriptCompile Include="Scripts\Players\CpuPlayerAi.ts" />
     <TypeScriptCompile Include="Scripts\Games\ServerGameCoordinator.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionStore.ts" />
@@ -152,7 +153,7 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionSocket.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
-    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaders.ts" />
+    <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaderBase.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CssGenerator.ts" />
     <TypeScriptCompile Include="Scripts\Startup\Bootstrap.ts" />
     <TypeScriptCompile Include="Scripts\Startup\BundleUpResourceBundler.ts" />

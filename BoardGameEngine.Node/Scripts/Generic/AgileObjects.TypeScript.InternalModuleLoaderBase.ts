@@ -319,25 +319,10 @@ class InternalModuleLoaderBase {
             this._fileManager.deleteFile(this._convertedSourceFilePath);
         }
     }
-}
 
-class NodeInternalModuleLoader extends InternalModuleLoaderBase {
-    constructor(fileManager: Ts.IFileManager, nodeRequire: (classSourceFilePath: string) => any) {
-        super(fileManager, nodeRequire);
-    }
-
-    protected convertInternalModuleSource(script: string): string {
-        var rootNamespaceMatch = rootNamespaceDeclarationFinder.exec(script);
-        var exportAssignment = "\r\nmodule.exports = " + rootNamespaceMatch[1] + ";";
-        var scriptEndIndex = script.lastIndexOf(";") + 1;
-        return script.splice(scriptEndIndex, exportAssignment);
+    protected getRootNamespaceDeclarationMatch(script: string): RegExpExecArray {
+        return rootNamespaceDeclarationFinder.exec(script);
     }
 }
 
-var loaders = {
-    forNode: (fileManager: Ts.IFileManager, nodeRequire: (classSourceFilePath: string) => any) => {
-        return new NodeInternalModuleLoader(fileManager, nodeRequire);
-    }
-}
-
-export = loaders;
+export = InternalModuleLoaderBase;
