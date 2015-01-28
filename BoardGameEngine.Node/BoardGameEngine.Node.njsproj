@@ -118,6 +118,7 @@
     <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\PlayerData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />

@@ -4,21 +4,15 @@
         constructor(game: Games.Game) {
             this.gameId = game.id;
             this.gameTypeId = game.type.id;
-            this.playerData = new Array<string>();
+            this.playerData = new Array<PlayerData>(game.players.length);
 
             for (var i = 0; i < game.players.length; i++) {
-                var player = game.players[i];
-                this.playerData[i] =
-                player.id +
-                "*" +
-                (player.isHuman ? "1" : "0") +
-                "*" +
-                player.teams.length;
+                this.playerData[i] = new PlayerData(game.players[i]);
             }
         }
 
         public gameId: string;
         public gameTypeId: string;
-        public playerData: Array<string>;
+        public playerData: Array<PlayerData>;
     }
 }

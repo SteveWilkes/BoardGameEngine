@@ -39,11 +39,10 @@
             var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
 
             for (var i = 0; i < gameData.playerData.length; i++) {
-                var data = gameData.playerData[i].split("*");
-                var player = new Players.Player(data[0], data[1] === "1");
+                var playerData = gameData.playerData[i];
+                var player = new Players.Player(playerData.id, playerData.isHuman);
                 game.add(player);
-                var numberOfTeams = parseInt(data[2]);
-                for (var j = 0; j < numberOfTeams; j++) {
+                for (var j = 0; j < playerData.numberOfTeams; j++) {
                     var team = this._teamFactory.createTeam(j + 1, player, gameData.gameTypeId);
                     game.board.add(team);
                 }
