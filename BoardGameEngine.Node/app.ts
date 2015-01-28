@@ -14,23 +14,23 @@ var RandomStringGenerator: new () => Angular.Services.IIdGenerator =
     Ao.TypeScript.RandomStringGenerator;
 
 var GetBoardTypeQuery: new () => Ts.IGetQuery<Game.Boards.BoardType> =
-    Ao.StrategyGame.Boards.GetBoardTypeQuery;
+    Ao.BoardGameEngine.Boards.GetBoardTypeQuery;
 
 var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.Games.GameType> =
-    Ao.StrategyGame.Games.GetGameTypeQuery;
+    Ao.BoardGameEngine.Games.GetGameTypeQuery;
 
 var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.Games.GameType>) => Game.Games.GameFactory =
-    Ao.StrategyGame.Games.GameFactory;
+    Ao.BoardGameEngine.Games.GameFactory;
 
 var PieceFactory: new () => Game.Pieces.PieceFactory =
-    Ao.StrategyGame.Pieces.PieceFactory;
+    Ao.BoardGameEngine.Pieces.PieceFactory;
 
 var TeamFactory: new (pieceFactory: Game.Pieces.PieceFactory) => Game.Teams.TeamFactory =
-    Ao.StrategyGame.Teams.TeamFactory;
+    Ao.BoardGameEngine.Teams.TeamFactory;
 
 var ServerGameCoordinator:
     new (gameFactory: Game.Games.GameFactory, teamFactory: Game.Teams.TeamFactory) => Game.Games.ServerGameCoordinator =
-    Ao.StrategyGame.Games.ServerGameCoordinator;
+    Ao.BoardGameEngine.Games.ServerGameCoordinator;
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");

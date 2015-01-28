@@ -1,3 +1,0 @@
-﻿# StrategyGame.Node
-
-

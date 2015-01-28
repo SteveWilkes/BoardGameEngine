@@ -1,7 +1,7 @@
 {
-  "name": "StrategyGame.Node",
+  "name": "BoardGameEngine.Node",
   "version": "0.0.0",
-  "description": "StrategyGame.Node",
+  "description": "BoardGameEngine.Node",
   "main": "app.js",
   "author": {
     "name": "Steve Wilkes"

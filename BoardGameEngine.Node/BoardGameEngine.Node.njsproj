@@ -213,7 +213,6 @@
     <Folder Include="Scripts\Generic\" />
     <Folder Include="Scripts\Games\" />
     <Folder Include="Scripts\Players\" />
-    <Folder Include="Scripts\_Tests\" />
     <Folder Include="Scripts\Startup\" />
     <Folder Include="Scripts\typings\" />
     <Folder Include="Scripts\typings\angular\" />
