@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export class PieceLocationBase implements IPieceLocation {
         private _potentialInteractions: Array<IPieceInteraction>;

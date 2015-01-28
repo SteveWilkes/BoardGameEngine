@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Teams {
+﻿module AgileObjects.BoardGameEngine.Teams {
 
     export class Team implements Pieces.IPieceOwner {
         private _piecesById: TypeScript.IStringDictionary<Pieces.Piece>;

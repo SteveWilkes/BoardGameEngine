@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Boards {
+﻿module AgileObjects.BoardGameEngine.Boards {
 
     "ClientOnly";
     export class BoardDisplayData {

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export class IsUnoccupiedLocationValidator implements IPieceLocationValidator {
         public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {

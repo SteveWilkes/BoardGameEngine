@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     var _none = new Array<IPieceInteraction>(0);
 

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
     import Ts = TypeScript;
 
     export class PieceInteractionProfile {

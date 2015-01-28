@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export interface IPieceInteractionConstructor {
         (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet): void;

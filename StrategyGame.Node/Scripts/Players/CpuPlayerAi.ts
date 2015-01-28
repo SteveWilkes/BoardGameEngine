@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Players {
+﻿module AgileObjects.BoardGameEngine.Players {
 
     export class CpuPlayerAi {
         public getNextTurn(team: Teams.Team, game: Games.Game): Array<Pieces.IPieceInteraction> {

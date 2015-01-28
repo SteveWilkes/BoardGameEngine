@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Status {
+﻿module AgileObjects.BoardGameEngine.Status {
 
     export class TurnData {
         constructor(public interactionData: Array<InteractionData>) { }

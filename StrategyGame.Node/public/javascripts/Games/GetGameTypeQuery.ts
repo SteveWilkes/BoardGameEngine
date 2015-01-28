@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Games {
+﻿module AgileObjects.BoardGameEngine.Games {
 
     export class GetGameTypeQuery implements TypeScript.IGetQuery<GameType> {
         constructor(private _getBoardTypeQuery: TypeScript.IGetQuery<Boards.BoardType>) { }

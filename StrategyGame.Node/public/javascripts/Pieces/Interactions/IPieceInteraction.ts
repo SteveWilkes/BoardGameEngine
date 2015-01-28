@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Pieces {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export interface IPieceInteraction extends TypeScript.IEntity<string> {
         type: InteractionType;

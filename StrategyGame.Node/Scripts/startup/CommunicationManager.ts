@@ -1,7 +1,7 @@
 ﻿import bs = require("Bootstrap");
 import express = require("express");
 import http = require("http");
-import Games = AgileObjects.StrategyGame.Games;
+import Games = AgileObjects.BoardGameEngine.Games;
 import Node = AgileObjects.Node;
 
 class CommunicationManager implements bs.IBootstrapper {

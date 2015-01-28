@@ -1,6 +1,6 @@
-﻿module AgileObjects.StrategyGame.Boards {
-    import Pieces = StrategyGame.Pieces;
-    import Teams = StrategyGame.Teams;
+﻿module AgileObjects.BoardGameEngine.Boards {
+    import Pieces = BoardGameEngine.Pieces;
+    import Teams = BoardGameEngine.Teams;
 
     export class Board {
         private _tilesByCoordinates: Pieces.IPieceLocationDictionary;

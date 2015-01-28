@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Ui {
+﻿module AgileObjects.BoardGameEngine.Ui {
 
     export var $gameEventPropogator = "$gameEventPropogator";
 

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame {
+﻿module AgileObjects.BoardGameEngine {
 
     export var strategyGameApp = "strategyGameApp";
 

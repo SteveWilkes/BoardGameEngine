@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Status {
+﻿module AgileObjects.BoardGameEngine.Status {
 
     export class History {
         constructor(events: Games.GameEventSet) {

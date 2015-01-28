@@ -1,8 +1,8 @@
-﻿module AgileObjects.StrategyGame.Teams {
+﻿module AgileObjects.BoardGameEngine.Teams {
 
     export var $teamFactory = "$teamFactory";
 
     angular
         .module(strategyGameApp)
-        .service($teamFactory, [StrategyGame.Pieces.$pieceFactory, TeamFactory]);
+        .service($teamFactory, [BoardGameEngine.Pieces.$pieceFactory, TeamFactory]);
 }

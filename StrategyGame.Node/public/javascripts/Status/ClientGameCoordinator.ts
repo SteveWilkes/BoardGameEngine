@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Status {
+﻿module AgileObjects.BoardGameEngine.Status {
 
     export var $clientGameCoordinator = "$clientGameCoordinator";
 

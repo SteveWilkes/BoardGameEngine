@@ -1,7 +1,7 @@
 ﻿import Ts = AgileObjects.TypeScript;
 import Node = AgileObjects.Node;
 import Angular = AgileObjects.Angular;
-import Game = AgileObjects.StrategyGame;
+import Game = AgileObjects.BoardGameEngine;
 
 require("./public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
 

@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Boards {
+﻿module AgileObjects.BoardGameEngine.Boards {
 
     // Elements 0 -> 5 in the trasform matrix are for perspective:
     var rotationRadiansIndex = 6;

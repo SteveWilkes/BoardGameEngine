@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Boards {
+﻿module AgileObjects.BoardGameEngine.Boards {
     import Ts = TypeScript;
 
     export class GetBoardTypeQuery implements Ts.IGetQuery<BoardType> {

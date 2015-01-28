@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Status {
+﻿module AgileObjects.BoardGameEngine.Status {
 
     export class TurnManager {
         private _teams: Array<Teams.Team>;

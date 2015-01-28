@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame {
+﻿module AgileObjects.BoardGameEngine {
 
     export class GlobalEventSet {
         static instance = new GlobalEventSet();

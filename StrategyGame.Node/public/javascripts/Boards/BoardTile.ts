@@ -1,5 +1,5 @@
-﻿module AgileObjects.StrategyGame.Boards {
-    import Pieces = StrategyGame.Pieces;
+﻿module AgileObjects.BoardGameEngine.Boards {
+    import Pieces = BoardGameEngine.Pieces;
 
     export class BoardTile extends Pieces.PieceLocationBase {
         constructor(coordinates: TypeScript.Coordinates) {

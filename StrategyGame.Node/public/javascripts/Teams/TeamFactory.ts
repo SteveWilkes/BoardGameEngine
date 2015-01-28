@@ -1,6 +1,6 @@
-﻿module AgileObjects.StrategyGame.Teams {
-    import Pieces = StrategyGame.Pieces;
-    import Players = StrategyGame.Players;
+﻿module AgileObjects.BoardGameEngine.Teams {
+    import Pieces = BoardGameEngine.Pieces;
+    import Players = BoardGameEngine.Players;
     import Ts = TypeScript;
 
     export interface ITeamFactory {

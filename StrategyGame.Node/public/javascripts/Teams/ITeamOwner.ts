@@ -1,4 +1,4 @@
-﻿module AgileObjects.StrategyGame.Teams {
+﻿module AgileObjects.BoardGameEngine.Teams {
     
     export interface ITeamOwner extends TypeScript.IEntity<string> {
         isLocal: boolean;
