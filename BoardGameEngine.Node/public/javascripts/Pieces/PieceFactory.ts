@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string): Piece;
+        createPiece(pieceDefinitionId: string, teamNumber: number): Piece;
     }
 
     var oneSpaceInAnyDirectionCalculators = [
@@ -134,9 +134,9 @@
             this._nextPieceId = 1;
         }
 
-        public createPiece(definitionId: string): Piece {
+        public createPiece(definitionId: string, teamNumber: number): Piece {
             var pieceId = this._nextPieceId++;
-            return this._definitions[definitionId].createPiece("p-" + pieceId);
+            return this._definitions[definitionId].createPiece("p-" + pieceId, teamNumber);
         }
     }
 }

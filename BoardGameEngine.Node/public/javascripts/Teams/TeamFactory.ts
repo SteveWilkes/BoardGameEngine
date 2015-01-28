@@ -4,14 +4,14 @@
     import Ts = TypeScript;
 
     export interface ITeamFactory {
-        createTeam(player: Players.IPlayer, gameTypeId: string): Teams.Team;
+        createTeam(teamNumber: number, player: Players.IPlayer, gameTypeId: string): Teams.Team;
     }
 
     export class TeamFactory implements ITeamFactory {
         constructor(private _pieceFactory: Pieces.IPieceFactory) { }
 
-        public createTeam(owner: ITeamOwner, gameTypeId: string): Teams.Team {
-            var piecesByLocation = this._getPiecesByLocation();
+        public createTeam(teamNumber: number, owner: ITeamOwner, gameTypeId: string): Teams.Team {
+            var piecesByLocation = this._getPiecesByLocation(teamNumber);
 
             var teamId = owner.getNextTeamId();
             var teamName = owner.id + " Team";
@@ -22,14 +22,14 @@
             return team;
         }
 
-        private _getPiecesByLocation(): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
+        private _getPiecesByLocation(teamNumber: number): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
             var configData = this._getPieceLocationConfigData();
             var piecesByLocation = new TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>();
 
             for (var i = 0; i < configData.length; i++) {
                 var data = configData[i];
                 var pieceLocation = Ts.coordinatesRegistry.get(data.row, data.column);
-                var piece = this._pieceFactory.createPiece(data.pieceDefinitionId);
+                var piece = this._pieceFactory.createPiece(data.pieceDefinitionId, teamNumber);
                 piecesByLocation.add(pieceLocation, piece);
             }
 

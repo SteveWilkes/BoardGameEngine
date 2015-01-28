@@ -30,12 +30,6 @@
         // TODO: Remove
         public isLocal(): boolean { return this.owner.isLocal; }
 
-        public setNumber(teamNumber: number): void {
-            for (var i = 0; i < this._piecesByInitialLocation.count; i++) {
-                this._piecesByInitialLocation.values[i].setTeamNumber(teamNumber);
-            }
-        }
-
         public owns(piece: Pieces.Piece): boolean {
             return this._piecesByInitialLocation.values.indexOf(piece) > -1;
         }

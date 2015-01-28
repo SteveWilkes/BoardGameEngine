@@ -16,11 +16,6 @@
         public health: number;
         public attachedPiece: Piece;
 
-        public setTeamNumber(teamNumber: number): void {
-            var imageExtensionIndex = this.imageSource.lastIndexOf(".");
-            this.imageSource = this.imageSource.splice(imageExtensionIndex, teamNumber.toString());
-        }
-
         public setLocation(location: IPieceLocation): void {
             this.location = location;
             location.piece = this;

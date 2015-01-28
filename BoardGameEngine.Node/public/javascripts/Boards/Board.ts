@@ -47,8 +47,6 @@
                 tile.add(piece);
             }
 
-            team.setNumber(this._boardPositionsByTeam.count);
-
             this._events.teamAdded.publish(team);
         }
 

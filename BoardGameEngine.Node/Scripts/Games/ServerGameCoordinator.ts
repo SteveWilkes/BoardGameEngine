@@ -44,7 +44,7 @@
                 game.add(player);
                 var numberOfTeams = parseInt(data[2]);
                 for (var j = 0; j < numberOfTeams; j++) {
-                    var team = this._teamFactory.createTeam(player, gameData.gameTypeId);
+                    var team = this._teamFactory.createTeam(j + 1, player, gameData.gameTypeId);
                     game.board.add(team);
                 }
             }
