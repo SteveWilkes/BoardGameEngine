@@ -31,7 +31,7 @@
     var bombAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["*"], [])]);
+        [new IsOccupiedLocationValidator(), new OccupiedLocationEvaluator(["*"], [])]);
 
     var bombInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
@@ -51,14 +51,14 @@
     var humanSoldierAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
+        [new IsOccupiedLocationValidator(), new OccupiedLocationEvaluator(["1"], [])]);
 
     // Human Soldier Attack
 
     var humanSoldierAttackDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
+        [new IsOccupiedLocationValidator(), new OccupiedLocationEvaluator([], ["*"])]);
 
     var humanSoldierInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(
@@ -86,14 +86,14 @@
     var humanNinjaAttachDestinationsCalculator = new RelatedLocationCalculator(
         oneSpaceInAnyDirectionCalculators,
         [],
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator(["1"], [])]);
+        [new IsOccupiedLocationValidator(), new OccupiedLocationEvaluator(["1"], [])]);
 
     // Human Ninja Attack
 
     var humanNinjaAttackDestinationsCalculator = new RelatedLocationCalculator(
         twoSpacesInAnyDirectionCalculators,
         [new IsUnoccupiedLocationValidator()],
-        [new IsOccupiedLocationValidator(), new IsDroppableLocationValidator([], ["*"])]);
+        [new IsOccupiedLocationValidator(), new OccupiedLocationEvaluator([], ["*"])]);
 
     var humanNinjaInteractionProfile = new PieceInteractionProfile([
         new PieceInteractionCalculator(

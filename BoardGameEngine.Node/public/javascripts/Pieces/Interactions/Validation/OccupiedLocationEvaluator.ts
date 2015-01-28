@@ -1,7 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    // TODO: Rename this - it isn't only about dropping
-    export class IsDroppableLocationValidator implements IPieceLocationValidator {
+    export class OccupiedLocationEvaluator implements IPieceLocationValidator {
         private _allSameTeamPiecesAllowed: boolean;
         private _allOtherTeamPiecesAllowed: boolean;
 

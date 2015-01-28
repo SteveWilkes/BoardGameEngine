@@ -107,7 +107,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsDroppableLocationValidator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\OccupiedLocationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsOccupiedLocationValidator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsUnoccupiedLocationValidator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovement.ts" />
