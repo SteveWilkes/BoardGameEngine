@@ -1,36 +1,14 @@
-﻿import Ts = AgileObjects.TypeScript;
-import Node = AgileObjects.Node;
+﻿import Node = AgileObjects.Node;
 import Angular = AgileObjects.Angular;
-import Game = AgileObjects.BoardGameEngine;
 
 require("./public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
 
 import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
 var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
-var Ao = require("./InternalModules");
-
-var RandomStringGenerator: new () => Angular.Services.IIdGenerator =
-    Ao.TypeScript.RandomStringGenerator;
-
-var GetBoardTypeQuery: new () => Ts.IGetQuery<Game.Boards.BoardType> =
-    Ao.BoardGameEngine.Boards.GetBoardTypeQuery;
-
-var GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<Game.Boards.BoardType>) => Ts.IGetQuery<Game.Games.GameType> =
-    Ao.BoardGameEngine.Games.GetGameTypeQuery;
-
-var GameFactory: new (getGameTypeQuery: Ts.IGetQuery<Game.Games.GameType>) => Game.Games.GameFactory =
-    Ao.BoardGameEngine.Games.GameFactory;
-
-var PieceFactory: new () => Game.Pieces.PieceFactory =
-    Ao.BoardGameEngine.Pieces.PieceFactory;
-
-var TeamFactory: new (pieceFactory: Game.Pieces.PieceFactory) => Game.Teams.TeamFactory =
-    Ao.BoardGameEngine.Teams.TeamFactory;
-
-var ServerGameCoordinator:
-    new (gameFactory: Game.Games.GameFactory, teamFactory: Game.Teams.TeamFactory) => Game.Games.ServerGameCoordinator =
-    Ao.BoardGameEngine.Games.ServerGameCoordinator;
+var Ao: AgileObjectsNs = require("./InternalModules");
+var Game = Ao.BoardGameEngine;
+var Ts = Ao.TypeScript;
 
 import socketFactory = require("socket.io");
 import routes = require("./routes/index");
@@ -44,15 +22,21 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-var serverGameCoordinator = new ServerGameCoordinator(
-    new GameFactory(new GetGameTypeQuery(new GetBoardTypeQuery())),
-    new TeamFactory(new PieceFactory()));
+var serverGameCoordinator = new Game.Games.ServerGameCoordinator(
+    new Game.Games.GameFactory(
+        new Game.Games.GetGameTypeQuery(
+            new Game.Boards.GetBoardTypeQuery())),
+    new Game.Teams.TeamFactory(
+        new Game.Pieces.PieceFactory()));
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),
     new Router(routes),
     new ResourceBundler(),
-    new SessionWrapper(express, new RandomStringGenerator(), sessionStore),
+    new SessionWrapper(
+        express,
+        new Ts.RandomStringGenerator(),
+        sessionStore),
     new CommunicationManager(socketFactory(), sessionStore, serverGameCoordinator)
 ];
 

@@ -161,13 +161,19 @@
     <TypeScriptCompile Include="Scripts\Startup\Router.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CommunicationManager.ts" />
     <TypeScriptCompile Include="Scripts\Startup\SessionWrapper.ts" />
+    <TypeScriptCompile Include="Scripts\typings\BoardGameEngine.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bundle-up\bundle-up.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.PieceMovement.spec.ts">
+      <SubType>Code</SubType>
+      <TestFramework>ExportRunner</TestFramework>
+    </TypeScriptCompile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="public\images\pieces\Bomb1.png" />
@@ -194,6 +200,8 @@
     <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\typings\jasmine\" />
+    <Folder Include="Tests\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\images\pieces\" />
@@ -224,6 +232,7 @@
     <Folder Include="Scripts\typings\socket.io\" />
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
+    <Folder Include="Tests\UnitTests\" />
     <Folder Include="views\" />
     <Folder Include="views\Games\" />
   </ItemGroup>
