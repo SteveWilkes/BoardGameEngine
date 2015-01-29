@@ -28,8 +28,13 @@ describe("Game", () => {
             expect(lShapeFromBottomLeft[2][3].coordinates.signature).toBe("2x3"); // second space right
         });
 
-        it("Should move a piece", () => {
+        it("Should move a piece to an empty tile", () => {
             var game = createTestGame();
+            var destinationTile = game.board.getTiles()["2x1"];
+
+            expect(destinationTile).not.toBeNull();
+            expect(destinationTile.isOccupied()).toBeFalsy();
+
             var piece = game.teams[0].getPieces()["test"];
 
             expect(piece.location).not.toBeNull();
@@ -45,7 +50,8 @@ describe("Game", () => {
                 break;
             }
 
-            expect(piece.location.coordinates.signature).toBe("2x1");
+            expect(piece.location).toBe(destinationTile);
+            expect(destinationTile.isOccupied()).toBeTruthy();
         });
 
         function createTestGame() {
