@@ -13,11 +13,8 @@
         public createTeam(teamNumber: number, owner: ITeamOwner, gameTypeId: string): Teams.Team {
             var piecesByLocation = this._getPiecesByLocation(teamNumber);
 
-            var teamId = owner.getNextTeamId();
             var teamName = owner.id + " Team";
-            var team = new Teams.Team(teamId, teamName, piecesByLocation);
-
-            owner.add(team);
+            var team = new Teams.Team(owner, teamName, piecesByLocation);
 
             return team;
         }

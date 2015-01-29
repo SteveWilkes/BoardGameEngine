@@ -4,19 +4,22 @@
         private _piecesById: TypeScript.IStringDictionary<Pieces.Piece>;
 
         constructor(
-            public id: string,
+            public owner: ITeamOwner,
             public name: string,
             private _piecesByInitialLocation: TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>) {
 
+            this.id = owner.getNextTeamId();
             this._piecesById = {};
             for (var i = 0; i < this._piecesByInitialLocation.count; i++) {
                 var piece = this._piecesByInitialLocation.values[i];
                 piece.team = this;
                 this._piecesById[piece.id] = piece;
             }
+
+            owner.add(this);
         }
 
-        public owner: ITeamOwner;
+        public id: string;
 
         public getPieces(): TypeScript.IStringDictionary<Pieces.Piece> {
             return this._piecesById;

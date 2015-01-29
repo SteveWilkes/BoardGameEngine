@@ -6,8 +6,8 @@ require("./public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
 import FileManager = require("./Scripts/Generic/AgileObjects.Node.FileManager");
 var fileManager = new FileManager(require("path"), require("fs"), require("temp").track(), require.main.filename);
 
-var Ao: AgileObjectsNs = require("./InternalModules");
-var Game = Ao.BoardGameEngine;
+var Ao: Typings.AgileObjectsNs = require("./InternalModules");
+var Bge = Ao.BoardGameEngine;
 var Ts = Ao.TypeScript;
 
 import socketFactory = require("socket.io");
@@ -22,12 +22,12 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-var serverGameCoordinator = new Game.Games.ServerGameCoordinator(
-    new Game.Games.GameFactory(
-        new Game.Games.GetGameTypeQuery(
-            new Game.Boards.GetBoardTypeQuery())),
-    new Game.Teams.TeamFactory(
-        new Game.Pieces.PieceFactory()));
+var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
+    new Bge.Games.GameFactory(
+        new Bge.Games.GetGameTypeQuery(
+            new Bge.Boards.GetBoardTypeQuery())),
+    new Bge.Teams.TeamFactory(
+        new Bge.Pieces.PieceFactory()));
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),

@@ -24,15 +24,15 @@
         }
 
         public upLeft(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(-1, -1, distance);
+            return this._getCoordinatePath(1, -1, distance);
         }
 
         public up(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(-1, 0, distance);
+            return this._getCoordinatePath(1, 0, distance);
         }
 
         public upRight(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(-1, 1, distance);
+            return this._getCoordinatePath(1, 1, distance);
         }
 
         public right(distance: number): Array<Coordinates> {
@@ -40,15 +40,15 @@
         }
 
         public downRight(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(1, 1, distance);
+            return this._getCoordinatePath(-1, 1, distance);
         }
 
         public down(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(1, 0, distance);
+            return this._getCoordinatePath(-1, 0, distance);
         }
 
         public downLeft(distance: number): Array<Coordinates> {
-            return this._getCoordinatePath(1, -1, distance);
+            return this._getCoordinatePath(-1, -1, distance);
         }
 
         private _getCoordinatePath(

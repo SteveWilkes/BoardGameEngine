@@ -13,7 +13,6 @@
         }
 
         public add(team: Teams.Team): void {
-            team.owner = this;
             this.teams.push(team);
         }
 

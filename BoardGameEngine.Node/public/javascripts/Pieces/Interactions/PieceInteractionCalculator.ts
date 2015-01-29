@@ -4,7 +4,7 @@
         constructor(
             public type: InteractionType,
             private _locationCalculators: Array<RelatedLocationCalculator>,
-            private _interaction: IPieceInteractionConstructor) { }
+            private _interaction: new (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet) => IPieceInteraction) { }
 
         public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
             var interactions = new Array<IPieceInteraction>();
