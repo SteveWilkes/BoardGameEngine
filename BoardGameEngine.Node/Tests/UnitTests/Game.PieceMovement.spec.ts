@@ -9,21 +9,6 @@ var TsNs = Ao.TypeScript;
 describe("Game", () => {
     describe("Piece movement", () => {
 
-        it("Should calculate a straight coordinate path", () => {
-            var game = createTestGame();
-            var tiles = game.board.getTiles();
-            var bottomLeftTile = tiles["1x1"];
-
-            var twoSpacesUp = new TsNs.CoordinateTranslator("up", 2);
-            var twoSpacesUpFromBottomLeft = twoSpacesUp.getPath(bottomLeftTile.coordinates);
-
-            expect(twoSpacesUpFromBottomLeft).not.toBeNull();
-            expect(twoSpacesUpFromBottomLeft.length).toBe(2);
-            expect(twoSpacesUpFromBottomLeft[0]).not.toBe(bottomLeftTile);
-            expect(twoSpacesUpFromBottomLeft[0].signature).toBe("2x1");
-            expect(twoSpacesUpFromBottomLeft[1].signature).toBe("3x1");
-        });
-
         it("Should calculate an L-shape location path", () => {
             var game = createTestGame();
             var tiles = game.board.getTiles();

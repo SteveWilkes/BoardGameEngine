@@ -1,1 +1,1 @@
-jasmine-node --color Tests/UnitTests
+jasmine-node --color --verbose Tests/UnitTests
