@@ -26,7 +26,7 @@
             var path = new Array<IPieceLocation>(startingLocation);
             var startingCoordinates = startingLocation.coordinates;
             for (var i = 0; i < coordinateTranslators.length; i++) {
-                var locationCoordinatesPath = coordinateTranslators[i].translate(startingCoordinates);
+                var locationCoordinatesPath = coordinateTranslators[i].getPath(startingCoordinates);
                 var pathInvalid = false;
                 for (var j = 0; j < locationCoordinatesPath.length; j++) {
                     var locationCoordinates = locationCoordinatesPath[j];

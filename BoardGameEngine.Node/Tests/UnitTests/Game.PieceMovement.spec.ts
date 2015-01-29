@@ -9,19 +9,38 @@ var TsNs = Ao.TypeScript;
 describe("Game", () => {
     describe("Piece movement", () => {
 
-        it("Should translate location coordinates", () => {
+        it("Should calculate a straight coordinate path", () => {
             var game = createTestGame();
             var tiles = game.board.getTiles();
             var bottomLeftTile = tiles["1x1"];
 
             var twoSpacesUp = new TsNs.CoordinateTranslator("up", 2);
-            var twoSpacesUpFromBottomLeft = twoSpacesUp.translate(bottomLeftTile.coordinates);
+            var twoSpacesUpFromBottomLeft = twoSpacesUp.getPath(bottomLeftTile.coordinates);
 
             expect(twoSpacesUpFromBottomLeft).not.toBeNull();
             expect(twoSpacesUpFromBottomLeft.length).toBe(2);
             expect(twoSpacesUpFromBottomLeft[0]).not.toBe(bottomLeftTile);
             expect(twoSpacesUpFromBottomLeft[0].signature).toBe("2x1");
             expect(twoSpacesUpFromBottomLeft[1].signature).toBe("3x1");
+        });
+
+        it("Should calculate an L-shape location path", () => {
+            var game = createTestGame();
+            var tiles = game.board.getTiles();
+            var bottomLeftTile = tiles["1x1"];
+
+            var oneSpaceUp = new TsNs.CoordinateTranslator("up", 1);
+            var twoSpacesRight = new TsNs.CoordinateTranslator("right", 2);
+            var lShapeLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp, twoSpacesRight]], [], []);
+            var lShapeFromBottomLeft = lShapeLocationCalculator.calculateLocationPaths(bottomLeftTile, game);
+
+            expect(lShapeFromBottomLeft).not.toBeNull();
+            expect(lShapeFromBottomLeft.length).toBe(3); // Arrays are returned for each path or sub-path
+            expect(lShapeFromBottomLeft[2].length).toBe(4);
+            expect(lShapeFromBottomLeft[2][0].coordinates.signature).toBe("1x1"); // starting point, then
+            expect(lShapeFromBottomLeft[2][1].coordinates.signature).toBe("2x1"); // one space up, then
+            expect(lShapeFromBottomLeft[2][2].coordinates.signature).toBe("2x2"); // first space right, then
+            expect(lShapeFromBottomLeft[2][3].coordinates.signature).toBe("2x3"); // second space right
         });
 
         it("Should move a piece", () => {
