@@ -1,6 +1,8 @@
 ﻿module AgileObjects.TypeScript {
 
     export class CoordinatesRegistry {
+        static INSTANCE = new CoordinatesRegistry();
+
         private _coordinates: TypeScript.IStringDictionary<Coordinates>;
 
         constructor() {
@@ -16,6 +18,4 @@
             return coordinates;
         }
     }
-
-    export var coordinatesRegistry = new CoordinatesRegistry();
 }

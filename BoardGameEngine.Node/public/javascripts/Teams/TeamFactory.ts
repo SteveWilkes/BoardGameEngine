@@ -25,7 +25,7 @@
 
             for (var i = 0; i < configData.length; i++) {
                 var data = configData[i];
-                var pieceLocation = Ts.coordinatesRegistry.get(data.row, data.column);
+                var pieceLocation = Ts.CoordinatesRegistry.INSTANCE.get(data.row, data.column);
                 var piece = this._pieceFactory.createPiece(data.pieceDefinitionId, teamNumber);
                 piecesByLocation.add(pieceLocation, piece);
             }
