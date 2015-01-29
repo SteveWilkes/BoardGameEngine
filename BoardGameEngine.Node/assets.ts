@@ -18,6 +18,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");

@@ -5,12 +5,13 @@ require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
+var gameBuilder = require("./Game.GameBuilder");
 
 describe("Game", () => {
     describe("Piece movement", () => {
 
         it("Should calculate an L-shape location path", () => {
-            var game = createTestGame();
+            var game = gameBuilder.createDefaultGame();
             var tiles = game.board.getTiles();
             var bottomLeftTile = tiles["1x1"];
 
@@ -29,7 +30,7 @@ describe("Game", () => {
         });
 
         it("Should move a piece to an empty tile", () => {
-            var game = createTestGame();
+            var game = gameBuilder.createDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];
 
             expect(destinationTile).not.toBeNull();
@@ -53,38 +54,5 @@ describe("Game", () => {
             expect(piece.location).toBe(destinationTile);
             expect(destinationTile.isOccupied()).toBeTruthy();
         });
-
-        function createTestGame() {
-            var boardBottomPosition = new Bge.Boards.BoardPosition("bottom", coordinates => coordinates, true);
-            var threeTileRow = new Bge.Boards.BoardRowConfig([true, true, true]);
-            var boardType = new Bge.Boards.BoardType("test", "test", [boardBottomPosition], [threeTileRow, threeTileRow, threeTileRow], new Bge.Boards.BoardOrientationTranslator());
-            var allInteractionsAlwaysAvailable = { getCurrentlySupportedInteractions() { return [move, attack]; } };
-            var gameType = new Bge.Games.GameType("test", boardType, allInteractionsAlwaysAvailable);
-            var gameEvents = new Bge.Games.GameEventSet();
-            var board = new Bge.Boards.Board(boardType, gameEvents);
-
-            expect(board.rows.length).toBe(3);
-            expect(Object.keys(board.getTiles()).length).toBe(9);
-
-            var game = new Bge.Games.Game("test", gameType, board, gameEvents);
-
-            var player = new Bge.Players.Player("test", true, true);
-
-            game.add(player);
-
-            var oneSpaceUp = new TsNs.CoordinateTranslator("up", 1);
-            var pieceMovementLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp]], [], []);
-            var pieceMovementCalculator = new Bge.Pieces.PieceInteractionCalculator(move, [pieceMovementLocationCalculator], Bge.Pieces.MovePieceToDestinationInteraction);
-            var pieceInteractionProfile = new Bge.Pieces.PieceInteractionProfile([pieceMovementCalculator]);
-            var piece = new Bge.Pieces.Piece("test", "1", "test.gif", pieceInteractionProfile);
-            var piecesByInitialLocation = new TsNs.Dictionary<AgileObjects.TypeScript.Coordinates, AgileObjects.BoardGameEngine.Pieces.Piece>()
-                .add(new TsNs.Coordinates(1, 1), piece);
-
-            var team = new Bge.Teams.Team(player, "test", piecesByInitialLocation);
-
-            board.add(team);
-
-            return game;
-        }
     });
 })

@@ -9,6 +9,7 @@
     interface TypeScript {
         Coordinates: new (row: number, column: number, signature?: string) => Ts.Coordinates;
         CoordinateTranslator: new (directionFunctionName: string, distance: number) => Ts.CoordinateTranslator;
+        CoordinateTranslatorRegistry: typeof Ts.CoordinateTranslatorRegistry;
         CoordinatesRegistry: typeof Ts.CoordinatesRegistry;
         Dictionary: new <TKey, TValue>() => Ts.Dictionary<TKey, TValue>;
         RandomStringGenerator: new () => Ts.RandomStringGenerator;

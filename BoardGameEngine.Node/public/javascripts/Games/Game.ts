@@ -9,16 +9,16 @@
 
             this.events.teamAdded.subscribe(team => this.teams.push(team) > 0);
 
-            this.players = new Array<Players.IPlayer>();
+            this.players = new Array<Players.Player>();
             this.teams = new Array<Teams.Team>();
             this.status = new Status.StatusData(this.events);
         }
 
-        public players: Array<Players.IPlayer>;
+        public players: Array<Players.Player>;
         public teams: Array<Teams.Team>;
         public status: Status.StatusData;
 
-        public add(player: Players.IPlayer): void {
+        public add(player: Players.Player): void {
             if (this.players.indexOf(player) === -1) {
                 this.players.push(player);
 

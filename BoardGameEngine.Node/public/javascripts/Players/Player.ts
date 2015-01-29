@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Players {
     import Teams = BoardGameEngine.Teams;
 
-    export class Player implements IPlayer {
+    export class Player {
         constructor(public id: string, public isHuman: boolean, public isLocal: boolean = false) {
             this.teams = new Array<Teams.Team>();
         }

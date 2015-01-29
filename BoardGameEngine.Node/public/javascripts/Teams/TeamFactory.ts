@@ -1,10 +1,8 @@
 ﻿module AgileObjects.BoardGameEngine.Teams {
-    import Pieces = BoardGameEngine.Pieces;
-    import Players = BoardGameEngine.Players;
     import Ts = TypeScript;
 
     export interface ITeamFactory {
-        createTeam(teamNumber: number, player: Players.IPlayer, gameTypeId: string): Teams.Team;
+        createTeam(teamNumber: number, player: Players.Player, gameTypeId: string): Teams.Team;
     }
 
     export class TeamFactory implements ITeamFactory {

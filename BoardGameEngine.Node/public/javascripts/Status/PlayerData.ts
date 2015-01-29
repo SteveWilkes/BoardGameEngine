@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Status {
 
     export class PlayerData {
-        constructor(player: Players.IPlayer) {
+        constructor(player: Players.Player) {
             this.id = player.id;
             this.isHuman = player.isHuman;
             this.numberOfTeams = player.teams.length;

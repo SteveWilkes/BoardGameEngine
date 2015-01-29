@@ -80,6 +80,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesRegistry.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslatorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.TryGetResult.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />
@@ -114,7 +115,6 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
-    <TypeScriptCompile Include="public\javascripts\Players\IPlayer.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
@@ -170,6 +170,7 @@
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.GameBuilder.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.PieceMovement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
