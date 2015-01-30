@@ -176,6 +176,7 @@
       <TestFramework>ExportRunner</TestFramework>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Coordinates.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\typings\GameBuilder.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="public\images\pieces\Bomb1.png" />
@@ -235,6 +236,7 @@
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
     <Folder Include="Tests\UnitTests\" />
+    <Folder Include="Tests\UnitTests\typings\" />
     <Folder Include="views\" />
     <Folder Include="views\Games\" />
   </ItemGroup>

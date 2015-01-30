@@ -1,17 +1,19 @@
-﻿var move = AgileObjects.BoardGameEngine.Pieces.InteractionType.Move;
+﻿import Ut = AgileObjects.BoardGameEngine.Tests.UnitTests;
+
+var move = AgileObjects.BoardGameEngine.Pieces.InteractionType.Move;
 var attack = AgileObjects.BoardGameEngine.Pieces.InteractionType.Attack;
 
 require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
-var gameBuilder = require("./Game.GameBuilder");
+var gameBuilder: Ut.GameBuilderService = require("./Game.GameBuilder");
 
 describe("Game", () => {
     describe("Piece movement", () => {
 
         it("Should calculate an L-shape location path", () => {
-            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createDefaultGame();
+            var game = gameBuilder.createDefaultGame();
             var tiles = game.board.getTiles();
             var bottomLeftTile = tiles["1x1"];
 
@@ -30,7 +32,7 @@ describe("Game", () => {
         });
 
         it("Should calculate up-down-left-right movement interactions", () => {
-            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createGame(gc => gc
+            var game = gameBuilder.createGame(gc => gc
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
