@@ -25,8 +25,8 @@ describe("Game", () => {
             expect(lShapeFromBottomLeft[2].length).toBe(4);
             expect(lShapeFromBottomLeft[2][0].coordinates.signature).toBe("1x1"); // starting point, then
             expect(lShapeFromBottomLeft[2][1].coordinates.signature).toBe("2x1"); // one space up, then
-            expect(lShapeFromBottomLeft[2][2].coordinates.signature).toBe("2x2"); // first space right, then
-            expect(lShapeFromBottomLeft[2][3].coordinates.signature).toBe("2x3"); // second space right
+            expect(lShapeFromBottomLeft[2][2].coordinates.signature).toBe("2x2"); // one space right, then
+            expect(lShapeFromBottomLeft[2][3].coordinates.signature).toBe("2x3"); // another space right
         });
 
         it("Should move a piece to an empty tile", () => {
@@ -36,7 +36,7 @@ describe("Game", () => {
             expect(destinationTile).not.toBeNull();
             expect(destinationTile.isOccupied()).toBeFalsy();
 
-            var piece = game.teams[0].getPieces()["test"];
+            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
 
             expect(piece.location).not.toBeNull();
             expect(piece.location.coordinates.signature).toBe("1x1");
@@ -44,15 +44,27 @@ describe("Game", () => {
             var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
             expect(piecePotentialInteractions).not.toBeNull();
-            expect(Object.keys(piecePotentialInteractions).length).toBe(1);
 
+            var moveUpOneSpaceInteraction = Bge.Pieces.NullPotentialInteraction.INSTANCE;
             for (var interactionId in piecePotentialInteractions) {
-                piecePotentialInteractions[interactionId].complete();
-                break;
+                if (piecePotentialInteractions[interactionId].location.coordinates.signature === "2x1") {
+                    moveUpOneSpaceInteraction = piecePotentialInteractions[interactionId];
+                    break;
+                }
             }
+
+            expect(moveUpOneSpaceInteraction).not.toBe(Bge.Pieces.NullPotentialInteraction.INSTANCE);
+
+            moveUpOneSpaceInteraction.complete();
 
             expect(piece.location).toBe(destinationTile);
             expect(destinationTile.isOccupied()).toBeTruthy();
         });
+
+        function getFirst<T>(item: Object): T {
+            for (var propertyName in item) {
+                return <T>item[propertyName];
+            }
+        }
     });
 })

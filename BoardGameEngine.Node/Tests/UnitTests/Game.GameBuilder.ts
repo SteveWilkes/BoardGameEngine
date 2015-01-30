@@ -2,6 +2,7 @@
 import G = AgileObjects.BoardGameEngine.Games;
 import P = AgileObjects.BoardGameEngine.Pieces;
 import Pl = AgileObjects.BoardGameEngine.Players;
+import T = AgileObjects.BoardGameEngine.Teams;
 import Ts = AgileObjects.TypeScript;
 
 var move = AgileObjects.BoardGameEngine.Pieces.InteractionType.Move;
@@ -12,19 +13,141 @@ var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 
+class PieceConfiguration {
+    constructor(public pieceDefinitionId: string) {
+        this.locationCalculators = new Array<P.RelatedLocationCalculator>();
+        this.interactionCalculators = new Array<P.PieceInteractionCalculator>();
+    }
+
+    public interactionType: P.InteractionType;
+    public locationCalculators: Array<P.RelatedLocationCalculator>;
+    public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
+    public interactionCalculators: Array<P.PieceInteractionCalculator>;
+
+    public createInteractionCalculator(): void {
+        this.interactionCalculators.push(
+            new Bge.Pieces.PieceInteractionCalculator(
+                this.interactionType,
+                this.locationCalculators,
+                this.interaction));
+    }
+}
+
+class PieceConfigurator {
+    private _configuration: PieceConfiguration;
+
+    constructor(pieceDefinitionId: string) {
+        this._configuration = new PieceConfiguration(pieceDefinitionId);
+    }
+
+    public withUdlrMovementBy(distance: number): PieceConfigurator {
+        this._configuration.interactionType = move;
+        this._configuration.interaction = Bge.Pieces.MovePieceToDestinationInteraction;
+
+        var up = new TsNs.CoordinateTranslator("up", distance);
+        var down = new TsNs.CoordinateTranslator("down", distance);
+        var left = new TsNs.CoordinateTranslator("left", distance);
+        var right = new TsNs.CoordinateTranslator("right", distance);
+
+        this._configuration.locationCalculators.push(
+            new Bge.Pieces.RelatedLocationCalculator([[up, down, left, right]], [], []));
+
+        return this;
+    }
+
+    public and(): PieceConfigurator {
+        this._configuration.createInteractionCalculator();
+        return this;
+    }
+
+    public getConfiguration(): PieceConfiguration {
+        this._configuration.createInteractionCalculator();
+        return this._configuration;
+    }
+}
+
+class PieceBuilder {
+    static INSTANCE = new PieceBuilder();
+
+    private _idGenerator: Ts.RandomStringGenerator;
+
+    constructor() {
+        this._idGenerator = new TsNs.RandomStringGenerator();
+    }
+
+    public createPiece(configuration: PieceConfiguration): P.Piece {
+        var pieceInteractionProfile = new Bge.Pieces.PieceInteractionProfile(configuration.interactionCalculators);
+        var pieceId = this._idGenerator.generate(6);
+        return new Bge.Pieces.Piece(pieceId, configuration.pieceDefinitionId, "test.gif", pieceInteractionProfile);
+    }
+}
+
+class TeamConfiguration {
+    constructor(public teamOwner: Pl.Player) {
+        this.piecesByInitialLocation = new TsNs.Dictionary<Ts.Coordinates, P.Piece>();
+    }
+
+    public piecesByInitialLocation: Ts.Dictionary<Ts.Coordinates, P.Piece>;
+}
+
+class TeamConfigurator {
+    private _configuration: TeamConfiguration;
+
+    constructor(teamOwner: Pl.Player) {
+        this._configuration = new TeamConfiguration(teamOwner);
+    }
+
+    public withAPieceAt(coordinateSignatures: Array<string>, config: (configurator: PieceConfigurator) => void): TeamConfigurator {
+        var configurator = new PieceConfigurator(this.getPieceDefinitionId());
+        config(configurator);
+        var piece = PieceBuilder.INSTANCE.createPiece(configurator.getConfiguration());
+        for (var i = 0; i < coordinateSignatures.length; i++) {
+            var rowAndColumn = coordinateSignatures[i].split("x");
+            var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(parseInt(rowAndColumn[0]), parseInt(rowAndColumn[1]));
+            this._configuration.piecesByInitialLocation.add(coordinates, piece);
+        }
+        return this;
+    }
+
+    public getPieceDefinitionId(): string {
+        var allPieces = this._configuration.piecesByInitialLocation.values;
+        if (allPieces.length === 0) { return "1"; }
+        var latestPiece = allPieces[allPieces.length - 1];
+        var latestDefinitionId = parseInt(latestPiece.definitionId);
+        return (latestDefinitionId + 1).toString();
+    }
+
+    public getConfiguration(): TeamConfiguration {
+        return this._configuration;
+    }
+}
+
+class TeamBuilder {
+    static INSTANCE = new TeamBuilder();
+
+    public createTeam(configuration: TeamConfiguration): T.Team {
+        return new Bge.Teams.Team(
+            configuration.teamOwner,
+            configuration.teamOwner.id + "-Team" + configuration.teamOwner.teams.length + 1,
+            configuration.piecesByInitialLocation);
+    }
+}
+
 class GameConfiguration {
     constructor() {
         this.boardRowConfigs = new Array<B.BoardRowConfig>();
         this.boardPositions = new Array<B.BoardPosition>();
         this.players = new Array<Pl.Player>();
+        this.teams = new Array<T.Team>();
     }
 
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
+    public teams: Array<T.Team>;
 
     public addPlayer(isHuman: boolean, isLocal: boolean) {
-        var player = new Bge.Players.Player("player " + this.players.length + 1, isHuman, isLocal);
+        var player = new Bge.Players.Player("Player" + this.players.length + 1, isHuman, isLocal);
         this.players.push(player);
     }
 }
@@ -63,8 +186,26 @@ class GameConfigurator {
 
     // #endregion
 
-    public withAHumanPlayer(isLocal: boolean): GameConfigurator {
-        this._configuration.addPlayer(true, isLocal);
+    // #region Players
+
+    public withAHumanPlayerLocally(): GameConfigurator {
+        this._configuration.addPlayer(true, true);
+        return this;
+    }
+
+    public withAHumanPlayerRemotely(): GameConfigurator {
+        this._configuration.addPlayer(true, false);
+        return this;
+    }
+
+    // #endregion
+
+    public withATeamForPlayer(playerNumber: number, config: (configurator: TeamConfigurator) => void): GameConfigurator {
+        var teamOwner = this._configuration.players[playerNumber - 1];
+        var configurator = new TeamConfigurator(teamOwner);
+        config(configurator);
+        var team = TeamBuilder.INSTANCE.createTeam(configurator.getConfiguration());
+        this._configuration.teams.push(team);
         return this;
     }
 
@@ -74,8 +215,10 @@ class GameConfigurator {
 }
 
 class GameBuilder {
-    constructor(configurator: GameConfigurator) {
-        var configuration = configurator.getConfiguration();
+    static INSTANCE = new GameBuilder();
+
+    public createGame(configuration: GameConfiguration): G.Game {
+
         var boardType = this._getBoardType(configuration);
 
         var allInteractionsAlwaysAvailable = { getCurrentlySupportedInteractions() { return [move, attack]; } };
@@ -83,23 +226,12 @@ class GameBuilder {
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
-        this.game = new Bge.Games.Game("test", gameType, board, gameEvents);
+        var game = new Bge.Games.Game("test", gameType, board, gameEvents);
 
-        var player = new Bge.Players.Player("test", true, true);
+        this._addPlayers(game, configuration);
+        this._addTeams(game, configuration);
 
-        this._addPlayers(configuration);
-
-        var oneSpaceUp = new TsNs.CoordinateTranslator("up", 1);
-        var pieceMovementLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp]], [], []);
-        var pieceMovementCalculator = new Bge.Pieces.PieceInteractionCalculator(move, [pieceMovementLocationCalculator], Bge.Pieces.MovePieceToDestinationInteraction);
-        var pieceInteractionProfile = new Bge.Pieces.PieceInteractionProfile([pieceMovementCalculator]);
-        var piece = new Bge.Pieces.Piece("test", "1", "test.gif", pieceInteractionProfile);
-        var piecesByInitialLocation = new TsNs.Dictionary<AgileObjects.TypeScript.Coordinates, AgileObjects.BoardGameEngine.Pieces.Piece>()
-            .add(new TsNs.Coordinates(1, 1), piece);
-
-        var team = new Bge.Teams.Team(player, "test", piecesByInitialLocation);
-
-        board.add(team);
+        return game;
     }
 
     private _getBoardType(configuration: GameConfiguration) {
@@ -111,25 +243,36 @@ class GameBuilder {
             new Bge.Boards.BoardOrientationTranslator());
     }
 
-    private _addPlayers(configuration: GameConfiguration) {
+    private _addPlayers(game: G.Game, configuration: GameConfiguration) {
         for (var i = 0; i < configuration.players.length; i++) {
-            this.game.add(configuration.players[i]);
+            game.add(configuration.players[i]);
         }
     }
 
-    public game: G.Game;
+    private _addTeams(game: G.Game, configuration: GameConfiguration) {
+        for (var i = 0; i < configuration.teams.length; i++) {
+            game.board.add(configuration.teams[i]);
+        }
+    }
 }
 
 // ReSharper disable once UnusedLocals
 var gameBuilder = {
-    createGame: (configuration: GameConfigurator) => { return new GameBuilder(configuration).game; },
+    createGame: (config: (configurator: GameConfigurator) => void) => {
+        var configurator = new GameConfigurator();
+        config(configurator);
+        return GameBuilder.INSTANCE.createGame(configurator.getConfiguration());
+    },
     createDefaultGame: function () {
-        return this.createGame(new GameConfigurator()
+        return this.createGame((gc: GameConfigurator) => gc
             .withASquareBoardOfSize(3)
             .withBoardPosition("South", coordinates => coordinates, true)
             .withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false)
-            .withAHumanPlayer(true)
-            .withAHumanPlayer(false));
+            .withAHumanPlayerLocally()
+            .withAHumanPlayerRemotely()
+            .withATeamForPlayer(1, tc => tc
+                .withAPieceAt(["1x1,1x2,1x3"], pc => pc
+                    .withUdlrMovementBy(1))));
     }
 };
 
