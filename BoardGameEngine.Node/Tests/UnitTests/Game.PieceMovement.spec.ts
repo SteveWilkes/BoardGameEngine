@@ -37,9 +37,11 @@ describe("Game", () => {
             expect(destinationTile.isOccupied()).toBeFalsy();
 
             var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var originTile = piece.location;
 
-            expect(piece.location).not.toBeNull();
-            expect(piece.location.coordinates.signature).toBe("1x1");
+            expect(originTile).not.toBeNull();
+            expect(originTile.coordinates.signature).toBe("1x1");
+            expect(originTile.isOccupied()).toBeTruthy();
 
             var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
@@ -59,6 +61,7 @@ describe("Game", () => {
 
             expect(piece.location).toBe(destinationTile);
             expect(destinationTile.isOccupied()).toBeTruthy();
+            expect(originTile.isOccupied()).toBeFalsy();
         });
 
         function getFirst<T>(item: Object): T {
