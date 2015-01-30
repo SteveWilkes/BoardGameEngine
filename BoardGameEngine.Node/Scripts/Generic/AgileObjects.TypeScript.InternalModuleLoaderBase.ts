@@ -286,7 +286,6 @@ class InternalModuleLoaderBase {
     private _createSourceFile(allClasses: Array<ClassData>, sourceFilePath: string): void {
         var script = "";
         for (var i = 0; i < allClasses.length; i++) {
-            console.log(allClasses[i].name + ": \t" + allClasses[i].script.length);
             script += allClasses[i].script + "\r\n\r\n";
         }
 

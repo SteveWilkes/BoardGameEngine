@@ -29,7 +29,32 @@ describe("Game", () => {
             expect(lShapeFromBottomLeft[2][3].coordinates.signature).toBe("2x3"); // another space right
         });
 
-        it("Should move a piece to an empty tile", () => {
+        it("Should calculate up-down-left-right movement interactions", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withA3x3NorthSouthBoard()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1"], pc => pc
+                        .withUdlrMovementBy(2))));
+
+            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+
+            expect(numberOfInteractions).toBe(4);
+
+            var interactionLocations = new Array<string>();
+            for (var interactionId in piecePotentialInteractions) {
+                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
+            }
+
+            expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("1x2")).not.toBe(-1);
+            expect(interactionLocations.indexOf("1x3")).not.toBe(-1);
+        });
+
+        it("Should move a piece one space to an empty tile", () => {
             var game = gameBuilder.createDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];
 
@@ -68,6 +93,7 @@ describe("Game", () => {
             for (var propertyName in item) {
                 return <T>item[propertyName];
             }
+            throw new Error("No properties available");
         }
     });
 })

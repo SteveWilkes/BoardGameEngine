@@ -44,13 +44,13 @@ class PieceConfigurator {
         this._configuration.interactionType = move;
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationInteraction;
 
-        var up = new TsNs.CoordinateTranslator("up", distance);
-        var down = new TsNs.CoordinateTranslator("down", distance);
-        var left = new TsNs.CoordinateTranslator("left", distance);
-        var right = new TsNs.CoordinateTranslator("right", distance);
+        var up = [new TsNs.CoordinateTranslator("up", distance)];
+        var down = [new TsNs.CoordinateTranslator("down", distance)];
+        var left = [new TsNs.CoordinateTranslator("left", distance)];
+        var right = [new TsNs.CoordinateTranslator("right", distance)];
 
         this._configuration.locationCalculators.push(
-            new Bge.Pieces.RelatedLocationCalculator([[up, down, left, right]], [], []));
+            new Bge.Pieces.RelatedLocationCalculator([up, down, left, right], [], []));
 
         return this;
     }
@@ -161,6 +161,13 @@ class GameConfigurator {
 
     // #region Board
 
+    public withA3x3NorthSouthBoard(): GameConfigurator {
+        this.withASquareBoardOfSize(3);
+        this.withBoardPosition("South", coordinates => coordinates, true);
+        this.withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false);
+        return this;
+    }
+
     public withASquareBoardOfSize(size: number): GameConfigurator {
         for (var i = 0; i < size; i++) {
             var tileConfigs = new Array<boolean>(size);
@@ -188,6 +195,12 @@ class GameConfigurator {
 
     // #region Players
 
+    public withHumanLocalAndRemotePlayers(): GameConfigurator {
+        this.withAHumanPlayerLocally();
+        this.withAHumanPlayerRemotely();
+        return this;
+    }
+
     public withAHumanPlayerLocally(): GameConfigurator {
         this._configuration.addPlayer(true, true);
         return this;
@@ -200,6 +213,8 @@ class GameConfigurator {
 
     // #endregion
 
+    // #region Teams
+
     public withATeamForPlayer(playerNumber: number, config: (configurator: TeamConfigurator) => void): GameConfigurator {
         var teamOwner = this._configuration.players[playerNumber - 1];
         var configurator = new TeamConfigurator(teamOwner);
@@ -208,6 +223,8 @@ class GameConfigurator {
         this._configuration.teams.push(team);
         return this;
     }
+
+    // #endregion
 
     public getConfiguration(): GameConfiguration {
         return this._configuration;
@@ -265,13 +282,10 @@ var gameBuilder = {
     },
     createDefaultGame: function () {
         return this.createGame((gc: GameConfigurator) => gc
-            .withASquareBoardOfSize(3)
-            .withBoardPosition("South", coordinates => coordinates, true)
-            .withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false)
-            .withAHumanPlayerLocally()
-            .withAHumanPlayerRemotely()
+            .withA3x3NorthSouthBoard()
+            .withHumanLocalAndRemotePlayers()
             .withATeamForPlayer(1, tc => tc
-                .withAPieceAt(["1x1,1x2,1x3"], pc => pc
+                .withAPieceAt(["1x1"], pc => pc
                     .withUdlrMovementBy(1))));
     }
 };
