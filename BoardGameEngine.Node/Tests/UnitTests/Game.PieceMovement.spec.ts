@@ -11,7 +11,7 @@ describe("Game", () => {
     describe("Piece movement", () => {
 
         it("Should calculate an L-shape location path", () => {
-            var game = gameBuilder.createDefaultGame();
+            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createDefaultGame();
             var tiles = game.board.getTiles();
             var bottomLeftTile = tiles["1x1"];
 
@@ -30,7 +30,7 @@ describe("Game", () => {
         });
 
         it("Should calculate up-down-left-right movement interactions", () => {
-            var game = gameBuilder.createGame(gc => gc
+            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createGame(gc => gc
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
@@ -55,7 +55,7 @@ describe("Game", () => {
         });
 
         it("Should move a piece one space to an empty tile", () => {
-            var game = gameBuilder.createDefaultGame();
+            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];
 
             expect(destinationTile).not.toBeNull();
