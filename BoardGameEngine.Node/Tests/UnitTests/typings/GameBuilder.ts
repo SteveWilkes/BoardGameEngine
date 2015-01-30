@@ -1,21 +1,21 @@
 ﻿module AgileObjects.BoardGameEngine.Tests.UnitTests {
 
-    export interface PieceConfigurator {
-        withUdlrMovementBy(distance: number): PieceConfigurator;
+    export interface IPieceConfigurator {
+        withUdlrMovementBy(distance: number): IPieceConfigurator;
     }
 
-    export interface TeamConfigurator {
-        withAPieceAt(coordinateSignatures: Array<string>, config: (configurator: PieceConfigurator) => void): TeamConfigurator;
+    export interface ITeamConfigurator {
+        withAPieceAt(coordinateSignatures: Array<string>, config: (configurator: IPieceConfigurator) => void): ITeamConfigurator;
     }
 
-    export interface GameConfigurator {
-        withA3x3NorthSouthBoard(): GameConfigurator;
-        withHumanLocalAndRemotePlayers(): GameConfigurator;
-        withATeamForPlayer(playerNumber: number, config: (configurator: TeamConfigurator) => void): GameConfigurator;
+    export interface IGameConfigurator {
+        withA3x3NorthSouthBoard(): IGameConfigurator;
+        withHumanLocalAndRemotePlayers(): IGameConfigurator;
+        withATeamForPlayer(playerNumber: number, config: (configurator: ITeamConfigurator) => void): IGameConfigurator;
     }
 
-    export interface GameBuilderService {
-        createGame(config: (configurator: GameConfigurator) => void): Games.Game;
+    export interface IGameBuilderService {
+        createGame(config: (configurator: IGameConfigurator) => void): Games.Game;
         createDefaultGame(): Games.Game;
     }
 }
