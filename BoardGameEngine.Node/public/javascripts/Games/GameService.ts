@@ -4,7 +4,7 @@
         constructor(
             private _idGenerator: Angular.Services.IIdGenerator,
             private _gameFactory: GameFactory,
-            private _teamFactory: Teams.ITeamFactory) { }
+            private _teamFactory: Teams.TeamFactory) { }
 
         public createDefaultGame(gameTypeId: string): Game {
             var gameId = this._idGenerator.generate();

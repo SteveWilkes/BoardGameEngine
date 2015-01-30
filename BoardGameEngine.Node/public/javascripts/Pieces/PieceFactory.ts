@@ -1,9 +1,5 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export interface IPieceFactory {
-        createPiece(pieceDefinitionId: string, teamNumber: number): Piece;
-    }
-
     var oneSpaceInAnyDirectionCalculators = [
         [new TypeScript.CoordinateTranslator("up", 1)],
         [new TypeScript.CoordinateTranslator("upRight", 1)],
@@ -109,7 +105,7 @@
             [humanNinjaAttackDestinationsCalculator],
             PieceInteractionConstructorRegistry.INSTANCE.get("a1"))]);
 
-    export class PieceFactory implements IPieceFactory {
+    export class PieceFactory {
         private _definitions: TypeScript.IStringDictionary<PieceDefinition>;
         private _nextPieceId: number;
 

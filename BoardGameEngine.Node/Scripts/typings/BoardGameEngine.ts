@@ -28,10 +28,10 @@
         GameEventSet: new () => G.GameEventSet;
         GameFactory: new (getGameTypeQuery: Ts.IGetQuery<G.GameType>) => G.GameFactory;
         Game: new (id: string, type: G.GameType, board: B.Board, events: G.GameEventSet) => G.Game;
-        GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: Bge.Teams.ITeamFactory) => G.GameService;
+        GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.GameService;
         GameType: new (id: string, boardType: B.BoardType, interactionRegulator: P.IPieceInteractionRegulator) => G.GameType;
         GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>) => G.GetGameTypeQuery;
-        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.ITeamFactory) => G.ServerGameCoordinator;
+        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.ServerGameCoordinator;
     }
 
     interface Pieces {

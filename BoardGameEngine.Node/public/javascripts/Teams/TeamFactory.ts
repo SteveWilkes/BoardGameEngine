@@ -1,12 +1,8 @@
 ﻿module AgileObjects.BoardGameEngine.Teams {
     import Ts = TypeScript;
 
-    export interface ITeamFactory {
-        createTeam(teamNumber: number, player: Players.Player, gameTypeId: string): Teams.Team;
-    }
-
-    export class TeamFactory implements ITeamFactory {
-        constructor(private _pieceFactory: Pieces.IPieceFactory) { }
+    export class TeamFactory {
+        constructor(private _pieceFactory: Pieces.PieceFactory) { }
 
         public createTeam(teamNumber: number, owner: ITeamOwner, gameTypeId: string): Teams.Team {
             var piecesByLocation = this._getPiecesByLocation(teamNumber);
