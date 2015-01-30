@@ -15,21 +15,33 @@ var TsNs = Ao.TypeScript;
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
-        this.locationCalculators = new Array<P.RelatedLocationCalculator>();
+        this.setMemberArrays();
         this.interactionCalculators = new Array<P.PieceInteractionCalculator>();
     }
 
     public interactionType: P.InteractionType;
-    public locationCalculators: Array<P.RelatedLocationCalculator>;
+    public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
+    public pathStepLocationValidators: Array<P.IPieceLocationValidator>;
+    public pathDestinationValidators: Array<P.IPieceLocationValidator>;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {
+        var relatedLocationCalculator = new Bge.Pieces.RelatedLocationCalculator(
+            this.coordinateTranslatorSets,
+            this.pathStepLocationValidators,
+            this.pathDestinationValidators);
+
         this.interactionCalculators.push(
-            new Bge.Pieces.PieceInteractionCalculator(
-                this.interactionType,
-                this.locationCalculators,
-                this.interaction));
+            new Bge.Pieces.PieceInteractionCalculator(this.interactionType, [relatedLocationCalculator], this.interaction));
+
+        this.setMemberArrays();
+    }
+
+    private setMemberArrays() {
+        this.coordinateTranslatorSets = new Array<Array<Ts.CoordinateTranslator>>();
+        this.pathStepLocationValidators = new Array<P.IPieceLocationValidator>();
+        this.pathDestinationValidators = new Array<P.IPieceLocationValidator>();
     }
 }
 
@@ -49,9 +61,23 @@ class PieceConfigurator {
         var left = [new TsNs.CoordinateTranslator("left", distance)];
         var right = [new TsNs.CoordinateTranslator("right", distance)];
 
-        this._configuration.locationCalculators.push(
-            new Bge.Pieces.RelatedLocationCalculator([up, down, left, right], [], []));
+        this._configuration.coordinateTranslatorSets.push(up, down, left, right);
 
+        return this;
+    }
+
+    public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
+        return this._addValidators(validators, this._configuration.pathStepLocationValidators);
+    }
+
+    public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
+        return this._addValidators(validators, this._configuration.pathDestinationValidators);
+    }
+
+    private _addValidators(validators: Array<new () => P.IPieceLocationValidator>, configurationArray: Array<P.IPieceLocationValidator>) {
+        for (var i = 0; i < validators.length; i++) {
+            configurationArray.push(new validators[i]());
+        }
         return this;
     }
 
@@ -100,10 +126,11 @@ class TeamConfigurator {
     public withAPieceAt(coordinateSignatures: Array<string>, config: (configurator: PieceConfigurator) => void): TeamConfigurator {
         var configurator = new PieceConfigurator(this.getPieceDefinitionId());
         config(configurator);
-        var piece = PieceBuilder.INSTANCE.createPiece(configurator.getConfiguration());
+        var configuration = configurator.getConfiguration();
         for (var i = 0; i < coordinateSignatures.length; i++) {
             var rowAndColumn = coordinateSignatures[i].split("x");
             var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(parseInt(rowAndColumn[0]), parseInt(rowAndColumn[1]));
+            var piece = PieceBuilder.INSTANCE.createPiece(configuration);
             this._configuration.piecesByInitialLocation.add(coordinates, piece);
         }
         return this;

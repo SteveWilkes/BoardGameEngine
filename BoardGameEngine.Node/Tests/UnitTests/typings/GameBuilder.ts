@@ -2,6 +2,9 @@
 
     export interface IPieceConfigurator {
         withUdlrMovementBy(distance: number): IPieceConfigurator;
+        withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
+        withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
+        and(): IPieceConfigurator;
     }
 
     export interface ITeamConfigurator {

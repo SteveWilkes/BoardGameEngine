@@ -56,7 +56,69 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("1x3")).not.toBe(-1);
         });
 
-        it("Should move a piece one space to an empty tile", () => {
+        it("Should exclude movement interactions with an invalid path step", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withA3x3NorthSouthBoard()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
+                        .withUdlrMovementBy(2)
+                        .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+
+            var pieces = new Array<AgileObjects.BoardGameEngine.Pieces.Piece>();
+            var piecesById = game.teams[0].getPieces();
+            for (var pieceId in piecesById) {
+                pieces.push(piecesById[pieceId]);
+            }
+
+            expect(pieces.length).toBe(3);
+
+            var piece = pieces[0];
+            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+
+            expect(numberOfInteractions).toBe(3);
+
+            var interactionLocations = new Array<string>();
+            for (var interactionId in piecePotentialInteractions) {
+                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
+            }
+
+            // We're using a step unoccupied validator and no destination validator, 
+            // so only the move 1x1 -> 1x3 should be invalid:
+            expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("1x2")).not.toBe(-1);
+            expect(interactionLocations.indexOf("1x3")).toBe(-1);
+        });
+
+        it("Should exclude movement interactions with an invalid destination", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withA3x3NorthSouthBoard()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
+                        .withUdlrMovementBy(2)
+                        .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+
+            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+
+            expect(numberOfInteractions).toBe(2);
+
+            var interactionLocations = new Array<string>();
+            for (var interactionId in piecePotentialInteractions) {
+                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
+            }
+
+            expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("1x2")).toBe(-1);
+            expect(interactionLocations.indexOf("1x3")).toBe(-1);
+        });
+
+        it("Should move a piece to an empty tile", () => {
             var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];
 

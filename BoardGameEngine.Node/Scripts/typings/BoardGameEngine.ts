@@ -35,6 +35,7 @@
     }
 
     interface Pieces {
+        IsUnoccupiedLocationValidator: new () => P.IsUnoccupiedLocationValidator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
