@@ -1,4 +1,6 @@
-﻿require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
+﻿import IPieceInteraction = AgileObjects.BoardGameEngine.Pieces.IPieceInteraction;
+
+require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
@@ -35,16 +37,13 @@ describe("Game", () => {
                         .withUdlrMovementBy(2))));
 
             var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
-            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
-            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
-            expect(numberOfInteractions).toBe(4);
+            var interactionLocations = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter.location.coordinates.signature)
+                .toArray();
 
-            var interactionLocations = new Array<string>();
-            for (var interactionId in piecePotentialInteractions) {
-                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
-            }
-
+            expect(interactionLocations.length).toBe(4);
             expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("1x2")).not.toBe(-1);
@@ -63,16 +62,13 @@ describe("Game", () => {
                         .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
 
             var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
-            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
-            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
-            expect(numberOfInteractions).toBe(99);
+            var interactionLocations = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter.location.coordinates.signature)
+                .toArray();
 
-            var interactionLocations = new Array<string>();
-            for (var interactionId in piecePotentialInteractions) {
-                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
-            }
-
+            expect(interactionLocations.length).toBe(99);
             expect(interactionLocations.indexOf("100x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("50x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
@@ -87,24 +83,17 @@ describe("Game", () => {
                         .withUdlrMovementBy(2)
                         .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
 
-            var pieces = new Array<AgileObjects.BoardGameEngine.Pieces.Piece>();
-            var piecesById = game.teams[0].getPieces();
-            for (var pieceId in piecesById) {
-                pieces.push(piecesById[pieceId]);
-            }
-
+            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: AgileObjects.BoardGameEngine.Pieces.Piece) => p).toArray();
             expect(pieces.length).toBe(3);
 
             var piece = pieces[0];
-            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
-            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
-            expect(numberOfInteractions).toBe(3);
+            var interactionLocations = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter.location.coordinates.signature)
+                .toArray();
 
-            var interactionLocations = new Array<string>();
-            for (var interactionId in piecePotentialInteractions) {
-                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
-            }
+            expect(interactionLocations.length).toBe(3);
 
             // We're using a step unoccupied validator and no destination validator, 
             // so only the move 1x1 -> 1x3 should be invalid:
@@ -124,16 +113,13 @@ describe("Game", () => {
                         .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
 
             var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
-            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
-            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
-            expect(numberOfInteractions).toBe(2);
+            var interactionLocations = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter.location.coordinates.signature)
+                .toArray();
 
-            var interactionLocations = new Array<string>();
-            for (var interactionId in piecePotentialInteractions) {
-                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
-            }
-
+            expect(interactionLocations.length).toBe(2);
             expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("1x2")).toBe(-1);
@@ -154,19 +140,16 @@ describe("Game", () => {
             expect(originTile.coordinates.signature).toBe("1x1");
             expect(originTile.isOccupied()).toBeTruthy();
 
-            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
-            expect(piecePotentialInteractions).not.toBeNull();
+            expect(pieceInteractions).not.toBeNull();
 
-            var moveUpOneSpaceInteraction = Bge.Pieces.NullPotentialInteraction.INSTANCE;
-            for (var interactionId in piecePotentialInteractions) {
-                if (piecePotentialInteractions[interactionId].location.coordinates.signature === "2x1") {
-                    moveUpOneSpaceInteraction = piecePotentialInteractions[interactionId];
-                    break;
-                }
-            }
+            var moveUpOneSpaceInteraction = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter)
+                .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "2x1")
+                .firstOrDefault();
 
-            expect(moveUpOneSpaceInteraction).not.toBe(Bge.Pieces.NullPotentialInteraction.INSTANCE);
+            expect(moveUpOneSpaceInteraction).not.toBeNull();
 
             moveUpOneSpaceInteraction.complete();
 

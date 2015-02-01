@@ -1,7 +1,7 @@
 ﻿module AgileObjects.TypeScript {
 
     export class Joq {
-        static first<TResult>(seed: Object) {
+        static first<TResult>(seed: Object): TResult {
             return new JoqIterator(seed, (propertyValue: TResult) => propertyValue).first();
         }
 

@@ -20,7 +20,7 @@
             return this;
         }
 
-        public first() {
+        public first(): TResult {
             var result = ignore;
 
             this._iterate(propertyValue => {
@@ -33,7 +33,19 @@
             throw new Error("No properties to iterate");
         }
 
-        public toArray() {
+        public firstOrDefault(defaultValue?: TResult): TResult {
+            var result = null;
+
+            this._iterate(propertyValue => {
+                result = propertyValue;
+                return false;
+            });
+
+            // ReSharper disable once ConditionIsAlwaysConst
+            return result || defaultValue || null;
+        }
+
+        public toArray(): Array<TResult> {
             var results = new Array<TResult>();
             this._iterate((propertyValue, propertyName) => {
                 var result = this._handler(propertyValue, propertyName);

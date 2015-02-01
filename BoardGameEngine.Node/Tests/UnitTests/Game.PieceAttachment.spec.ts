@@ -15,9 +15,29 @@ describe("Game", () => {
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
                     .withAPieceAt(["1x1"], pc => pc
-                        .withUdlrMovementBy(1))
+                        .withUdlrMovementBy(1)
+                        .withUdlrAttachmentTo(["2"]))
                     .withAPieceAt(["1x2"], pc => pc
-                        .withUdlrAttachmentTo(["1"]))));
+                        .withUdlrMovementBy(1))));
+
+            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: AgileObjects.BoardGameEngine.Pieces.Piece) => p).toArray();
+            expect(pieces.length).toBe(2);
+
+            var piece = pieces[0];
+            var startingLocation = piece.location;
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+
+            var attachmentInteraction = TsNs.Joq
+                .select(pieceInteractions, (inter: IPieceInteraction) => inter)
+                .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "1x2")
+                .firstOrDefault();
+
+            expect(attachmentInteraction).not.toBeNull();
+
+            attachmentInteraction.complete();
+
+            expect(piece.location).toBe(pieces[1]);
+            expect(startingLocation.isOccupied()).toBeFalsy();
         });
     });
 });
