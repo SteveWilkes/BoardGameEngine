@@ -1,8 +1,5 @@
 ﻿import Ut = AgileObjects.BoardGameEngine.Tests.UnitTests;
 
-var move = AgileObjects.BoardGameEngine.Pieces.InteractionType.Move;
-var attack = AgileObjects.BoardGameEngine.Pieces.InteractionType.Attack;
-
 require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
