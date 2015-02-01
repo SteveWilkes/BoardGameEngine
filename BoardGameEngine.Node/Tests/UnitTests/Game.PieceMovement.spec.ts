@@ -20,7 +20,7 @@ describe("Game", () => {
             var oneSpaceUp = new TsNs.CoordinateTranslator("up", 1);
             var twoSpacesRight = new TsNs.CoordinateTranslator("right", 2);
             var lShapeLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp, twoSpacesRight]], [], []);
-            var lShapeFromBottomLeft = lShapeLocationCalculator.calculateLocationPaths(bottomLeftTile, game);
+            var lShapeFromBottomLeft = lShapeLocationCalculator.calculateLocationPaths(bottomLeftTile, tiles);
 
             expect(lShapeFromBottomLeft).not.toBeNull();
             expect(lShapeFromBottomLeft.length).toBe(3); // Arrays are returned for each path or sub-path
@@ -54,6 +54,33 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("1x2")).not.toBe(-1);
             expect(interactionLocations.indexOf("1x3")).not.toBe(-1);
+        });
+
+        it("Should calculate an infinite movement path", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withASquareBoardOfSize(100)
+                .withNorthSouthBoardPositions()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1", "1x2"], pc => pc
+                        .withUdlrInfiniteMovement()
+                        .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator)
+                        .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+
+            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
+
+            expect(numberOfInteractions).toBe(99);
+
+            var interactionLocations = new Array<string>();
+            for (var interactionId in piecePotentialInteractions) {
+                interactionLocations.push(piecePotentialInteractions[interactionId].location.coordinates.signature);
+            }
+
+            expect(interactionLocations.indexOf("100x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("50x1")).not.toBe(-1);
+            expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
         });
 
         it("Should exclude movement interactions with an invalid path step", () => {

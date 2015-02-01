@@ -2,6 +2,7 @@
 
     export interface IPieceConfigurator {
         withUdlrMovementBy(distance: number): IPieceConfigurator;
+        withUdlrInfiniteMovement(): IPieceConfigurator;
         withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
         withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
         and(): IPieceConfigurator;
@@ -13,6 +14,8 @@
 
     export interface IGameConfigurator {
         withA3x3NorthSouthBoard(): IGameConfigurator;
+        withASquareBoardOfSize(size: number): IGameConfigurator;
+        withNorthSouthBoardPositions(): IGameConfigurator;
         withHumanLocalAndRemotePlayers(): IGameConfigurator;
         withATeamForPlayer(playerNumber: number, config: (configurator: ITeamConfigurator) => void): IGameConfigurator;
     }

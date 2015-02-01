@@ -52,6 +52,10 @@ class PieceConfigurator {
         this._configuration = new PieceConfiguration(pieceDefinitionId);
     }
 
+    public withUdlrInfiniteMovement(): PieceConfigurator {
+        return this.withUdlrMovementBy(0);
+    }
+
     public withUdlrMovementBy(distance: number): PieceConfigurator {
         this._configuration.interactionType = move;
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationInteraction;
@@ -190,8 +194,7 @@ class GameConfigurator {
 
     public withA3x3NorthSouthBoard(): GameConfigurator {
         this.withASquareBoardOfSize(3);
-        this.withBoardPosition("South", coordinates => coordinates, true);
-        this.withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false);
+        this.withNorthSouthBoardPositions();
         return this;
     }
 
@@ -204,6 +207,12 @@ class GameConfigurator {
             this._configuration.boardRowConfigs.push(new Bge.Boards.BoardRowConfig(tileConfigs));
         }
 
+        return this;
+    }
+
+    public withNorthSouthBoardPositions(): GameConfigurator {
+        this.withBoardPosition("South", coordinates => coordinates, true);
+        this.withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false);
         return this;
     }
 

@@ -7,10 +7,14 @@
             private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
-        public calculateLocationPaths(startingLocation: IPieceLocation, allLocations: IPieceLocationDictionary): Array<Array<IPieceLocation>> {
+        public calculateLocationPaths(
+            startingLocation: IPieceLocation,
+            allLocations: IPieceLocationDictionary,
+            gridSize?: number): Array<Array<IPieceLocation>> {
+
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
-                var paths = this._calculatePaths(startingLocation, allLocations, this._coordinateTranslatorSets[i]);
+                var paths = this._calculatePaths(startingLocation, allLocations, gridSize, this._coordinateTranslatorSets[i]);
                 if (paths.length > 0) { allPaths = allPaths.concat(paths); }
             }
             return allPaths;
@@ -19,22 +23,22 @@
         private _calculatePaths(
             startingLocation: IPieceLocation,
             allLocations: IPieceLocationDictionary,
+            gridSize: number,
             coordinateTranslators: Array<TypeScript.CoordinateTranslator>): Array<Array<IPieceLocation>> {
 
             var allPaths = new Array<Array<IPieceLocation>>();
             var path = new Array<IPieceLocation>(startingLocation);
             var startingCoordinates = startingLocation.coordinates;
             for (var i = 0; i < coordinateTranslators.length; i++) {
-                var locationCoordinatesPath = coordinateTranslators[i].getPath(startingCoordinates);
+                var locationCoordinatesPath = coordinateTranslators[i].getPath(startingCoordinates, gridSize);
                 var pathInvalid = false;
                 for (var j = 0; j < locationCoordinatesPath.length; j++) {
                     var locationCoordinates = locationCoordinatesPath[j];
-                    var location = allLocations[locationCoordinates.signature];
-                    if (location === undefined) {
+                    if (!allLocations.hasOwnProperty(locationCoordinates.signature)) {
                         pathInvalid = true;
                         break;
                     }
-                    path.push(location);
+                    path.push(allLocations[locationCoordinates.signature]);
                     if (this._pathIsValid(path, startingLocation)) {
                         allPaths.push(path.slice(0, path.length));
                     }

@@ -10,7 +10,9 @@
             var allLocations = game.board.getTiles();
             var interactions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._locationCalculators.length; i++) {
-                var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation, allLocations);
+                var interactionPaths = this._locationCalculators[i]
+                    .calculateLocationPaths(startingLocation, allLocations, game.board.type.gridSize);
+
                 for (var j = 0; j < interactionPaths.length; j++) {
                     interactions.push(new this._interaction(
                         startingLocation.piece.id + "," + this.type + "," + i + "," + j,
