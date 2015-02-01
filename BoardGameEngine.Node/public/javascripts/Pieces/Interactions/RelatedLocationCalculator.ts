@@ -7,8 +7,7 @@
             private _pathDestinationValidators: Array<IPieceLocationValidator>) {
         }
 
-        public calculateLocationPaths(startingLocation: IPieceLocation, game: Games.Game): Array<Array<IPieceLocation>> {
-            var allLocations = game.board.getTiles();
+        public calculateLocationPaths(startingLocation: IPieceLocation, allLocations: IPieceLocationDictionary): Array<Array<IPieceLocation>> {
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
                 var paths = this._calculatePaths(startingLocation, allLocations, this._coordinateTranslatorSets[i]);

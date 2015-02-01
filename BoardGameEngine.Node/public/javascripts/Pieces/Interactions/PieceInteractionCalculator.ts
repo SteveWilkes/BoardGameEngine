@@ -7,9 +7,10 @@
             private _interaction: new (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet) => IPieceInteraction) { }
 
         public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
+            var allLocations = game.board.getTiles();
             var interactions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._locationCalculators.length; i++) {
-                var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation, game);
+                var interactionPaths = this._locationCalculators[i].calculateLocationPaths(startingLocation, allLocations);
                 for (var j = 0; j < interactionPaths.length; j++) {
                     interactions.push(new this._interaction(
                         startingLocation.piece.id + "," + this.type + "," + i + "," + j,

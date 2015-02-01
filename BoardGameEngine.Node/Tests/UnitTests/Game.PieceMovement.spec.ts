@@ -119,7 +119,7 @@ describe("Game", () => {
         });
 
         it("Should move a piece to an empty tile", () => {
-            var game: AgileObjects.BoardGameEngine.Games.Game = gameBuilder.createDefaultGame();
+            var game = gameBuilder.createDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];
 
             expect(destinationTile).not.toBeNull();
