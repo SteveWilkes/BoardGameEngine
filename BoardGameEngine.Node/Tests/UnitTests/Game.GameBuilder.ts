@@ -60,6 +60,21 @@ class PieceConfigurator {
         this._configuration.interactionType = move;
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationInteraction;
 
+        return this._withUdlrTranslators(distance);
+    }
+
+    public withUdlrAttachmentTo(pieceDefinitionIds: Array<string>, distance?: number): PieceConfigurator {
+        this._configuration.interactionType = move;
+        this._configuration.interaction = Bge.Pieces.MovePieceToDestinationPieceInteraction;
+
+        this._addValidators(
+            [() => new Bge.Pieces.OccupiedLocationEvaluator(pieceDefinitionIds, [])],
+            this._configuration.pathDestinationValidators);
+
+        return this._withUdlrTranslators(distance || 1);
+    }
+
+    private _withUdlrTranslators(distance: number): PieceConfigurator {
         var up = [new TsNs.CoordinateTranslator("up", distance)];
         var down = [new TsNs.CoordinateTranslator("down", distance)];
         var left = [new TsNs.CoordinateTranslator("left", distance)];
@@ -71,16 +86,20 @@ class PieceConfigurator {
     }
 
     public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
-        return this._addValidators(validators, this._configuration.pathStepLocationValidators);
+        return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathStepLocationValidators);
     }
 
     public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
-        return this._addValidators(validators, this._configuration.pathDestinationValidators);
+        return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathDestinationValidators);
     }
 
-    private _addValidators(validators: Array<new () => P.IPieceLocationValidator>, configurationArray: Array<P.IPieceLocationValidator>) {
+    private _constructorsToFactories(constructors: Array<new () => P.IPieceLocationValidator>) {
+        return TsNs.Joq.select(constructors, v => () => <P.IPieceLocationValidator>new v()).toArray();
+    }
+
+    private _addValidators(validators: Array<() => P.IPieceLocationValidator>, configurationArray: Array<P.IPieceLocationValidator>) {
         for (var i = 0; i < validators.length; i++) {
-            configurationArray.push(new validators[i]());
+            configurationArray.push(validators[i]());
         }
         return this;
     }

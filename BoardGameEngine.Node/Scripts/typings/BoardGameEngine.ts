@@ -12,6 +12,7 @@
         CoordinateTranslatorRegistry: typeof Ts.CoordinateTranslatorRegistry;
         CoordinatesRegistry: typeof Ts.CoordinatesRegistry;
         Dictionary: new <TKey, TValue>() => Ts.Dictionary<TKey, TValue>;
+        Joq: typeof Ts.Joq;
         RandomStringGenerator: new () => Ts.RandomStringGenerator;
     }
 
@@ -37,7 +38,9 @@
     interface Pieces {
         IsUnoccupiedLocationValidator: new () => P.IsUnoccupiedLocationValidator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
+        MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
+        OccupiedLocationEvaluator: new (sameTeamDroppablePieceDefinitionIds: Array<string>, otherTeamDroppablePieceDefinitionIds: Array<string>) => P.OccupiedLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
         PieceFactory: new () => P.PieceFactory;
         PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction) => P.PieceInteractionCalculator;

@@ -1,6 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Tests.UnitTests {
 
     export interface IPieceConfigurator {
+        withUdlrAttachmentTo(pieceDefinitionIds: Array<string>, distance?: number): IPieceConfigurator;
         withUdlrMovementBy(distance: number): IPieceConfigurator;
         withUdlrInfiniteMovement(): IPieceConfigurator;
         withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;

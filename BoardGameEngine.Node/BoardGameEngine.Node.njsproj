@@ -84,6 +84,8 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.TryGetResult.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.Iterator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.IdGeneration.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
@@ -171,6 +173,7 @@
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.GameBuilder.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.PieceAttachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.PieceMovement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
@@ -203,6 +206,7 @@
     <Content Include="views\layout.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />

@@ -1,6 +1,4 @@
-﻿import Ut = AgileObjects.BoardGameEngine.Tests.UnitTests;
-
-require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
+﻿require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
@@ -36,7 +34,7 @@ describe("Game", () => {
                     .withAPieceAt(["1x1"], pc => pc
                         .withUdlrMovementBy(2))));
 
-            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
             var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
             var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
 
@@ -64,7 +62,7 @@ describe("Game", () => {
                         .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator)
                         .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
 
-            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
             var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
             var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
 
@@ -125,7 +123,7 @@ describe("Game", () => {
                         .withUdlrMovementBy(2)
                         .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
 
-            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
             var piecePotentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
             var numberOfInteractions = Object.keys(piecePotentialInteractions).length;
 
@@ -149,7 +147,7 @@ describe("Game", () => {
             expect(destinationTile).not.toBeNull();
             expect(destinationTile.isOccupied()).toBeFalsy();
 
-            var piece = getFirst<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
             var originTile = piece.location;
 
             expect(originTile).not.toBeNull();
@@ -176,12 +174,5 @@ describe("Game", () => {
             expect(destinationTile.isOccupied()).toBeTruthy();
             expect(originTile.isOccupied()).toBeFalsy();
         });
-
-        function getFirst<T>(item: Object): T {
-            for (var propertyName in item) {
-                return <T>item[propertyName];
-            }
-            throw new Error("No properties available");
-        }
     });
 })
