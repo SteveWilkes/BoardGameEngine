@@ -13,6 +13,8 @@
         }
 
         public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {
+            if (!potentialLocation.isOccupied()) { return false; }
+
             var isSameTeam = potentialLocation.piece.team === subjectPiece.team;
 
             if ((isSameTeam && this._allSameTeamPiecesAllowed) ||

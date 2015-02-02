@@ -68,10 +68,7 @@ class PieceConfigurator {
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationPieceInteraction;
 
         this._addValidators(
-            [
-                () => new Bge.Pieces.IsOccupiedLocationValidator(),
-                () => new Bge.Pieces.OccupiedLocationEvaluator(pieceDefinitionIds, [])
-            ],
+            [() => new Bge.Pieces.OccupiedLocationEvaluator(pieceDefinitionIds, [])],
             this._configuration.pathDestinationValidators);
 
         return this._withUdlrTranslators(distance || 1);
