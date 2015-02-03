@@ -57,7 +57,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/MovePieceToDestinationPieceInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/AttackDestinationPieceInteraction.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionConstructorRegistry.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
@@ -81,6 +80,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");
+    assets.addJs("/public/javascripts/Pieces/PieceDefinitionMapper.js");
     assets.addJs("/public/javascripts/Pieces/PieceFactory.js");
     assets.addJs("/public/javascripts/Pieces/PieceFactory.Angular.js");
     assets.addJs("/public/javascripts/Teams/Team.js");

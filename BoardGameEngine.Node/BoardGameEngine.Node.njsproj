@@ -30,7 +30,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <NodejsPort>3000</NodejsPort>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
@@ -101,12 +101,12 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\NullPotentialInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionCalculator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionConstructorRegistry.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteractionRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinitionMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
