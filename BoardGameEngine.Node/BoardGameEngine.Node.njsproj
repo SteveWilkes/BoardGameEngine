@@ -30,7 +30,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <NodejsPort>3000</NodejsPort>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
@@ -75,6 +75,8 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameService.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameService.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameType.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
@@ -107,7 +109,6 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinitionMapper.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\OccupiedLocationEvaluator.ts" />
@@ -122,7 +123,7 @@
     <TypeScriptCompile Include="public\javascripts\Status\InteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\PlayerData.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\TurnDefinition.ts" />
+    <TypeScriptCompile Include="public\javascripts\Status\TurnRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
@@ -136,14 +137,14 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\RelatedLocationCalculator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Piece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinition.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionMonitor.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\StatusData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationConfigData.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceConfigData.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\Team.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\ITeamOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
+    <TypeScriptCompile Include="public\javascripts\Teams\ITeamConfigData.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\GameEventPropogator.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
     <TypeScriptCompile Include="routes\index.ts" />

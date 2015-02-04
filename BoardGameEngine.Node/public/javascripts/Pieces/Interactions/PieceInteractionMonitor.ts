@@ -126,7 +126,7 @@
 
         private _handlePieceClick(location: IPieceLocation): boolean {
             var isPieceOwned = this._currentlyChosenPiece.team.isLocal();
-            var isPieceFromCurrentTeam = this._game.status.getCurrentTeam().owns(this._currentlyChosenPiece);
+            var isPieceFromCurrentTeam = this._game.status.turnManager.currentTeam.owns(this._currentlyChosenPiece);
 
             if (isPieceFromCurrentTeam) {
                 if (!isPieceOwned) {
@@ -205,8 +205,8 @@
             refreshInteractions: (interaction: IPieceInteraction) => boolean): boolean {
             var pieceMoveCompleted;
 
-            this._completeInteractionAt(destination, (interaction, location) => {
-                pieceMoveCompleted = location.contains(this._currentlyChosenPiece);
+            this._completeInteractionAt(destination, interaction => {
+                pieceMoveCompleted = interaction.location.contains(this._currentlyChosenPiece);
                 return refreshInteractions(interaction);
             });
 
@@ -221,20 +221,18 @@
 
         private _completeInteractionAt(
             location: IPieceLocation,
-            refreshInteractions: (interaction: IPieceInteraction, location: IPieceLocation) => boolean): void {
+            refreshInteractions: (interaction: IPieceInteraction) => boolean): void {
 
             for (var i = 0; i < this._currentPotentialInteractions.length; i++) {
                 var interaction = this._currentPotentialInteractions[i];
-                for (var j = 0; j < interaction.path.length; j++) {
-                    if (interaction.path[j].contains(location)) {
-                        interaction.complete();
+                if (interaction.location.contains(location)) {
+                    interaction.complete();
 
-                        if (refreshInteractions(interaction, interaction.path[j])) {
-                            this._showPotentialInteractionsFor(this._currentlyChosenPiece);
-                        }
-
-                        return;
+                    if (refreshInteractions(interaction)) {
+                        this._showPotentialInteractionsFor(this._currentlyChosenPiece);
                     }
+
+                    return;
                 }
             }
         }
@@ -242,7 +240,7 @@
         private _selectedPieceDraggedOntoEnemyPieceButNotMoved(destination: IPieceLocation) {
             return this._pieceIsSelected() &&
                 destination.isOccupied() &&
-                !this._game.status.getCurrentTeam().owns(destination.piece) &&
+                !this._game.status.turnManager.currentTeam.owns(destination.piece) &&
                 !destination.contains(this._currentlyChosenPiece);
         }
 

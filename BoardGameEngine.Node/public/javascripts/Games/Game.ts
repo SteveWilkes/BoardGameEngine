@@ -11,7 +11,7 @@
 
             this.players = new Array<Players.Player>();
             this.teams = new Array<Teams.Team>();
-            this.status = new Status.StatusData(this.events);
+            this.status = new Status.StatusData(this.type.turnInteractions, this.events);
         }
 
         public players: Array<Players.Player>;

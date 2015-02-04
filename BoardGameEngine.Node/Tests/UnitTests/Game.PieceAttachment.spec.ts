@@ -40,7 +40,7 @@ describe("Game", () => {
         });
 
         it("Should attach one piece to another", () => {
-            var game = gameBuilder.createGame(gc => gc
+            var game = gameBuilder.startGame(gc => gc
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc

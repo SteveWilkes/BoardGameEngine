@@ -33,12 +33,10 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.Angular.js");
-    assets.addJs("/public/javascripts/Pieces/PieceLocationConfigData.js");
+    assets.addJs("/public/javascripts/Pieces/PieceConfigData.js");
     assets.addJs("/public/javascripts/Pieces/NullPieceLocation.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
     assets.addJs("/public/javascripts/Players/Player.js");
-    assets.addJs("/public/javascripts/Players/RemotePlayerProxy.js");
-    assets.addJs("/public/javascripts/Players/LocalHumanPlayer.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
     assets.addJs("/public/javascripts/Boards/BoardPosition.js");
     assets.addJs("/public/javascripts/Boards/BoardRowConfig.js");
@@ -66,10 +64,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/PlayerData.js");
     assets.addJs("/public/javascripts/Status/GameData.js");
     assets.addJs("/public/javascripts/Status/ClientGameCoordinator.js");
-    assets.addJs("/public/javascripts/Status/TurnDefinition.js");
+    assets.addJs("/public/javascripts/Status/TurnRegulator.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
-    assets.addJs("/public/javascripts/Status/PieceMoveAction.js");
-    assets.addJs("/public/javascripts/Status/PieceAttackAction.js");
     assets.addJs("/public/javascripts/Status/History.js");
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Ui/GameEventPropogator.js");
@@ -81,8 +77,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinitionMapper.js");
-    assets.addJs("/public/javascripts/Pieces/PieceFactory.js");
-    assets.addJs("/public/javascripts/Pieces/PieceFactory.Angular.js");
     assets.addJs("/public/javascripts/Teams/Team.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.Angular.js");
@@ -90,6 +84,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
     assets.addJs("/public/javascripts/Games/GameType.js");
+    assets.addJs("/public/javascripts/Games/GameTypeMapper.js");
+    assets.addJs("/public/javascripts/Games/GameTypeMapper.Angular.js");
     assets.addJs("/public/javascripts/Games/GetGameTypeQuery.js");
     assets.addJs("/public/javascripts/Games/GetGameTypeQuery.Angular.js");
     assets.addJs("/public/javascripts/Games/Game.js");

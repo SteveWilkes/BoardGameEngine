@@ -14,10 +14,18 @@
                     .calculateLocationPaths(startingLocation, allLocations, game.board.type.gridSize);
 
                 for (var j = 0; j < interactionPaths.length; j++) {
+                    var interactionPath = interactionPaths[j];
+                    var interactionLocation = interactionPath[interactionPath.length - 1];
+
+                    var interactionId =
+                        startingLocation.piece.id + "," +
+                        this.type + "," +
+                        interactionLocation.coordinates.signature;
+
                     interactions.push(new this._interaction(
-                        startingLocation.piece.id + "," + this.type + "," + i + "," + j,
+                        interactionId,
                         startingLocation.piece,
-                        interactionPaths[j],
+                        interactionPath,
                         game.events));
                 }
             }

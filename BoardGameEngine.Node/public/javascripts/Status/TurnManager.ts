@@ -3,16 +3,18 @@
     export class TurnManager {
         private _teams: Array<Teams.Team>;
 
-        constructor(private _events: Games.GameEventSet) {
+        constructor(turnInteractions: Array<Pieces.InteractionType>, private _events: Games.GameEventSet) {
             this._events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
             this._events.teamAdded.subscribe(team => this._teams.push(team) > 0);
             this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
             this._events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
 
+            this.regulator = new TurnRegulator(turnInteractions, this._events);
             this._teams = new Array<Teams.Team>();
         }
 
         public currentTeam: Teams.Team;
+        public regulator: Pieces.IPieceInteractionRegulator;
 
         private _setStartingTeam(team: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
             this.setCurrentTeam(team);

@@ -1,21 +1,16 @@
 ﻿module AgileObjects.BoardGameEngine.Status {
 
     export class StatusData {
-        private _turnManager: TurnManager;
-
-        constructor(events: Games.GameEventSet) {
-            this._turnManager = new Status.TurnManager(events);
+        constructor(turnInteractions: Array<Pieces.InteractionType>, events: Games.GameEventSet) {
+            this.turnManager = new Status.TurnManager(turnInteractions, events);
             this.history = new History(events);
         }
 
         public history: History;
-
-        public getCurrentTeam(): Teams.Team {
-            return this._turnManager.currentTeam;
-        }
+        public turnManager: TurnManager;
 
         public whosTurn(): string {
-            var currentTeam = this.getCurrentTeam();
+            var currentTeam = this.turnManager.currentTeam;
 
             if (currentTeam.owner.isLocal) {
                 return "Your turn!";

@@ -15,7 +15,7 @@
 
             socket.on("turnStarted", (teamId: string) => {
                 var game: Game = socket.session.game;
-                var currentTeam = game.status.getCurrentTeam();
+                var currentTeam = game.status.turnManager.currentTeam;
                 if (currentTeam.id !== teamId) {
                     // Out of sync
                 }
@@ -28,7 +28,7 @@
             });
 
             socket.on("turnEnded", (turnData: Status.TurnData) => {
-                if (socket.session.game.status.getCurrentTeam().owner.isHuman) {
+                if (socket.session.game.status.turnManager.currentTeam.owner.isHuman) {
                     this._applyTurn(turnData, socket);
                 }
                 this._handleTurnEnded(socket);
@@ -38,13 +38,16 @@
         private _createServerSideGameRepresentation(gameData: Status.GameData): Game {
             var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
 
+            var teamNumber = 1;
             for (var i = 0; i < gameData.playerData.length; i++) {
                 var playerData = gameData.playerData[i];
                 var player = new Players.Player(playerData.id, playerData.isHuman);
                 game.add(player);
                 for (var j = 0; j < playerData.numberOfTeams; j++) {
-                    var team = this._teamFactory.createTeam(j + 1, player, gameData.gameTypeId);
+                    var team = this._teamFactory.createTeamFor(player, teamNumber, game.type);
                     game.board.add(team);
+
+                    ++teamNumber;
                 }
             }
 
@@ -62,7 +65,7 @@
 
         private _handleInteractionCompleted(pieceId: string, interactionId: string, socket: Node.ISessionSocket): void {
             var game: Game = socket.session.game;
-            var currentTeamPieces = game.status.getCurrentTeam().getPieces();
+            var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
             if (!currentTeamPieces.hasOwnProperty(pieceId)) {
                 // Out of sync
             }
@@ -77,7 +80,7 @@
 
         private _handleTurnEnded(socket: Node.ISessionSocket): boolean {
             var game: Game = socket.session.game;
-            var currentTeam = game.status.getCurrentTeam();
+            var currentTeam = game.status.turnManager.currentTeam;
             var currentTeamIndex = game.teams.indexOf(currentTeam);
             var nextTeamIndex = currentTeamIndex + 1;
             if (nextTeamIndex === game.teams.length) {

@@ -25,9 +25,9 @@ import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
     new Bge.Games.GameFactory(
         new Bge.Games.GetGameTypeQuery(
-            new Bge.Boards.GetBoardTypeQuery())),
-    new Bge.Teams.TeamFactory(
-        new Bge.Pieces.PieceFactory()));
+            new Bge.Games.GameTypeMapper(
+                new Bge.Boards.GetBoardTypeQuery()))),
+    new Bge.Teams.TeamFactory());
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),

@@ -2,10 +2,8 @@
     import Ts = TypeScript;
 
     export class TeamFactory {
-        constructor(private _pieceFactory: Pieces.PieceFactory) { }
-
-        public createTeam(teamNumber: number, owner: ITeamOwner, gameTypeId: string): Teams.Team {
-            var piecesByLocation = this._getPiecesByLocation(teamNumber);
+        public createTeamFor(owner: ITeamOwner, teamNumber: number, teamConfigData: ITeamConfigData): Teams.Team {
+            var piecesByLocation = this._getPiecesByLocation(teamNumber, teamConfigData);
 
             var teamName = owner.id + " Team";
             var team = new Teams.Team(owner, teamName, piecesByLocation);
@@ -13,32 +11,18 @@
             return team;
         }
 
-        private _getPiecesByLocation(teamNumber: number): TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece> {
-            var configData = this._getPieceLocationConfigData();
+        private _getPiecesByLocation(teamNumber: number, teamConfigData: ITeamConfigData): Ts.Dictionary<Ts.Coordinates, Pieces.Piece> {
             var piecesByLocation = new TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>();
 
-            for (var i = 0; i < configData.length; i++) {
-                var data = configData[i];
-                var pieceLocation = Ts.CoordinatesRegistry.INSTANCE.get(data.row, data.column);
-                var piece = this._pieceFactory.createPiece(data.pieceDefinitionId, teamNumber);
-                piecesByLocation.add(pieceLocation, piece);
+            for (var i = 0; i < teamConfigData.pieceConfigData.length; i++) {
+                var pieceConfigData = teamConfigData.pieceConfigData[i];
+                var pieceDefinition = teamConfigData.pieceDefinitions[pieceConfigData.pieceDefinitionId];
+                var pieceId = teamNumber + "-" + (i + 1);
+                var piece = pieceDefinition.createPiece(pieceId, teamNumber);
+                piecesByLocation.add(pieceConfigData.pieceLocation, piece);
             }
 
             return piecesByLocation;
-        }
-
-        private _getPieceLocationConfigData(): Array<Pieces.PieceLocationConfigData> {
-            // TODO: Retrieve specific to GameType:
-            return [
-                { row: 1, column: 5, pieceDefinitionId: "1" }, // bomb
-                { row: 2, column: 4, pieceDefinitionId: "2" }, // row 2
-                { row: 2, column: 5, pieceDefinitionId: "2" },
-                { row: 2, column: 6, pieceDefinitionId: "2" },
-                { row: 3, column: 3, pieceDefinitionId: "3" }, // row 3
-                { row: 3, column: 4, pieceDefinitionId: "3" },
-                { row: 3, column: 5, pieceDefinitionId: "3" },
-                { row: 3, column: 6, pieceDefinitionId: "3" },
-                { row: 3, column: 7, pieceDefinitionId: "3" }];
         }
     }
 }

@@ -30,8 +30,9 @@
         GameFactory: new (getGameTypeQuery: Ts.IGetQuery<G.GameType>) => G.GameFactory;
         Game: new (id: string, type: G.GameType, board: B.Board, events: G.GameEventSet) => G.Game;
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.GameService;
-        GameType: new (id: string, boardType: B.BoardType, interactionRegulator: P.IPieceInteractionRegulator) => G.GameType;
-        GetGameTypeQuery: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>) => G.GetGameTypeQuery;
+        GameType: new (id: string, boardType: B.BoardType, turnInteractions: Array<P.InteractionType>, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>) => G.GameType;
+        GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
+        GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>) => G.GameTypeMapper;
         ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.ServerGameCoordinator;
     }
 
@@ -43,7 +44,6 @@
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         OccupiedLocationEvaluator: new (sameTeamDroppablePieceDefinitionIds: Array<string>, otherTeamDroppablePieceDefinitionIds: Array<string>) => P.OccupiedLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
-        PieceFactory: new () => P.PieceFactory;
         PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationValidators: Array<P.IPieceLocationValidator>, pathDestinationValidators: Array<P.IPieceLocationValidator>) => P.RelatedLocationCalculator;
@@ -55,7 +55,7 @@
 
     interface Teams {
         Team: new (owner: Bge.Teams.ITeamOwner, name: string, piecesByInitialLocation: Ts.Dictionary<Ts.Coordinates, P.Piece>) => Bge.Teams.Team;
-        TeamFactory: new (pieceFactory: Bge.Pieces.PieceFactory) => Bge.Teams.TeamFactory;
+        TeamFactory: new () => Bge.Teams.TeamFactory;
     }
 
     interface BoardGameEngine {

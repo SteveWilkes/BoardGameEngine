@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Status {
 
-    export class TurnDefinition implements Pieces.IPieceInteractionRegulator {
+    export class TurnRegulator implements Pieces.IPieceInteractionRegulator {
         private _currentTeam: Pieces.IPieceOwner;
         private _currentTurnInteractions: Array<Pieces.InteractionType>;
 

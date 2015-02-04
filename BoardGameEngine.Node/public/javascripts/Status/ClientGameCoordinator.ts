@@ -38,7 +38,7 @@
             });
 
             this._socket.on("turnEnded", (turnData: Status.TurnData) => {
-                var currentTeamPieces = game.status.getCurrentTeam().getPieces();
+                var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
                 for (var i = 0; i < turnData.interactionData.length; i++) {
                     var turnInteraction = turnData.interactionData[i];
                     if (!currentTeamPieces.hasOwnProperty(turnInteraction.pieceId)) {

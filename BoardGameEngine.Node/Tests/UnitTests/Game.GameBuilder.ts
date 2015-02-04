@@ -293,8 +293,7 @@ class GameBuilder {
 
         var boardType = this._getBoardType(configuration);
 
-        var allInteractionsAlwaysAvailable = { getCurrentlySupportedInteractions() { return [move, attack]; } };
-        var gameType = new Bge.Games.GameType("test", boardType, allInteractionsAlwaysAvailable);
+        var gameType = new Bge.Games.GameType("test", boardType, [move, attack], null, null);
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
@@ -302,6 +301,8 @@ class GameBuilder {
 
         this._addPlayers(game, configuration);
         this._addTeams(game, configuration);
+
+        game.start();
 
         return game;
     }
@@ -342,6 +343,16 @@ var gameBuilder = {
             .withATeamForPlayer(1, tc => tc
                 .withAPieceAt(["1x1"], pc => pc
                     .withUdlrMovementBy(1))));
+    },
+    startGame: function (config: (configurator: GameConfigurator) => void) {
+        var game: G.Game = this.createGame(config);
+        game.start();
+        return game;
+    },
+    startDefaultGame: function () {
+        var game: G.Game = this.createDefaultGame();
+        game.start();
+        return game;
     }
 };
 

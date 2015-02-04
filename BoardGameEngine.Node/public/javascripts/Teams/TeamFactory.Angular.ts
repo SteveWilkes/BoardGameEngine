@@ -4,5 +4,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($teamFactory, [BoardGameEngine.Pieces.$pieceFactory, TeamFactory]);
+        .service($teamFactory, TeamFactory);
 }

@@ -5,7 +5,7 @@
         constructor(private _interactionCalculators: Array<PieceInteractionCalculator>) { }
 
         public getPotentialInteractions(piece: Piece, game: Games.Game): Ts.IStringDictionary<IPieceInteraction> {
-            var supportedTypes = game.type.interactionRegulator.getCurrentlySupportedInteractions(piece);
+            var supportedTypes = game.status.turnManager.regulator.getCurrentlySupportedInteractions(piece);
             var allInteractions: Ts.IStringDictionary<IPieceInteraction> = {};
             for (var i = 0; i < this._interactionCalculators.length; i++) {
                 var interactionCalculator = this._interactionCalculators[i];

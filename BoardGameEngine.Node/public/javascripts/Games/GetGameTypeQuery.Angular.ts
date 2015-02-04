@@ -4,5 +4,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($getGameTypeQuery, [Boards.$getBoardTypeQuery, GetGameTypeQuery]);
+        .service($getGameTypeQuery, [$gameTypeMapper, GetGameTypeQuery]);
 }
