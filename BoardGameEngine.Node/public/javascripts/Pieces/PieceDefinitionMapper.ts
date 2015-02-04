@@ -8,6 +8,8 @@
         dl: "downLeft", dr: "downRight", d: "down"
     };
 
+    var _coordinateTranslatorsBySignature = {};
+
     var _pieceInteractionConstructorsById = {
         "m1": AddDestinationPieceToPieceInteraction,
         "m2": MovePieceToDestinationInteraction,
@@ -98,12 +100,19 @@
             return coordinateTranslatorSet;
         }
 
-        private _mapCoordinateTranslator(coordinateTranslatorData: string): Ts.CoordinateTranslator {
-            var coordinateTranslatorDataItems = coordinateTranslatorData.split("-");
+        private _mapCoordinateTranslator(signature: string): Ts.CoordinateTranslator {
+            if (!_coordinateTranslatorsBySignature.hasOwnProperty(signature)) {
+                var coordinateTranslatorDataItems = signature.split("-");
 
-            return new Ts.CoordinateTranslator(
-                _coordinateTranslatorDirectionsByInitial[coordinateTranslatorDataItems[0]],
-                parseInt(coordinateTranslatorDataItems[1]));
+                var translatorInitial = coordinateTranslatorDataItems[0];
+                var distance = parseInt(coordinateTranslatorDataItems[1]);
+
+                _coordinateTranslatorsBySignature[signature] = new Ts.CoordinateTranslator(
+                    _coordinateTranslatorDirectionsByInitial[translatorInitial],
+                    distance);
+            }
+
+            return _coordinateTranslatorsBySignature[signature];
         }
 
         private _mapLocationValidators(locationValidatorData: string): Array<IPieceLocationValidator> {
