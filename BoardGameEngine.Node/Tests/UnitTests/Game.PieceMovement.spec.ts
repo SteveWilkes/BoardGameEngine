@@ -128,6 +128,20 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("1x3")).toBe(-1);
         });
 
+        it("Should exclude interactions based on validators", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
+                .withA3x3NorthSouthBoard()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
+                        .withUdlrMovementBy(2)
+                        .whereDestinationsMustBeUnoccupied())));
+
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+        });
+
         it("Should move a piece to an empty tile", () => {
             var game = gameBuilder.startDefaultGame();
             var destinationTile = game.board.getTiles()["2x1"];

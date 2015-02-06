@@ -1,12 +1,19 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
+    var _noInteractions = new Array<IPieceInteraction>();
+
     export class PieceInteractionCalculator {
         constructor(
             public type: InteractionType,
             private _locationCalculators: Array<RelatedLocationCalculator>,
-            private _interaction: new (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet) => IPieceInteraction) { }
+            private _interaction: new (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet) => IPieceInteraction,
+            private _availabilityValidator: IPieceLocationValidator) { }
 
         public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
+            if (!this._availabilityValidator.isValid(startingLocation, startingLocation.piece)) {
+                return _noInteractions;
+            }
+
             var allLocations = game.board.getTiles();
             var interactions = new Array<IPieceInteraction>();
             for (var i = 0; i < this._locationCalculators.length; i++) {

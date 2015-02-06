@@ -61,7 +61,8 @@
             return new PieceInteractionCalculator(
                 type,
                 this._mapRelatedLocationCalculators(interactionCalculatorDataItems[2]),
-                _pieceInteractionConstructorsById[interactionTypeId]);
+                _pieceInteractionConstructorsById[interactionTypeId],
+                this._mapLocationValidator(interactionCalculatorDataItems[3]));
         }
 
         private _mapRelatedLocationCalculators(locationCalculatorData: string): Array<RelatedLocationCalculator> {
@@ -127,6 +128,10 @@
         }
 
         private _mapLocationValidator(locationValidatorData: string): IPieceLocationValidator {
+            if (locationValidatorData == null) {
+                return AlwaysValidLocationValidator.INSTANCE;
+            }
+
             var locationValidatorDataItems = locationValidatorData.split("$");
             var locationValidatorId = locationValidatorDataItems[0];
 

@@ -26,7 +26,11 @@ class PieceConfiguration {
             this.pathDestinationValidators);
 
         this.interactionCalculators.push(
-            new Bge.Pieces.PieceInteractionCalculator(this.interactionType, [relatedLocationCalculator], this.interaction));
+            new Bge.Pieces.PieceInteractionCalculator(
+                this.interactionType,
+                [relatedLocationCalculator],
+                this.interaction,
+                Bge.Pieces.AlwaysValidLocationValidator.INSTANCE));
 
         this.setMemberArrays();
     }
