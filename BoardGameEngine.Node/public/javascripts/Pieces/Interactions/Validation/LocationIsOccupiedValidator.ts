@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export class IsOccupiedLocationValidator implements IPieceLocationValidator {
-        static INSTANCE = new IsOccupiedLocationValidator();
+    export class LocationIsOccupiedValidator implements IPieceLocationValidator {
+        static INSTANCE = new LocationIsOccupiedValidator();
 
         public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {
             return potentialLocation.isOccupied();

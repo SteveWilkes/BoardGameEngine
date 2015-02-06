@@ -9,6 +9,7 @@
         withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
         whereDestinationsMustBeUnoccupied(): IPieceConfigurator;
         withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
+        where(availabilityValidator: new () => Pieces.IPieceLocationValidator): IPieceConfigurator;
         and(): IPieceConfigurator;
     }
 

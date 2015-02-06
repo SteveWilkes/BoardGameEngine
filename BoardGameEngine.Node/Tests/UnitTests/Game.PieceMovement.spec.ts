@@ -74,6 +74,24 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
         });
 
+        it("Should exclude interactions based on a validator", () => {
+            var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
+                .withA3x3NorthSouthBoard()
+                .withHumanLocalAndRemotePlayers()
+                .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1"], pc => pc
+                        .withUdlrMovementBy(2)
+                        .whereDestinationsMustBeUnoccupied()
+                        .where(Bge.Pieces.LocationIsUnoccupiedValidator))));
+
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var numberOfInteractions = Object.keys(pieceInteractions).length;
+
+            expect(numberOfInteractions).toBe(0);
+        });
+
         it("Should exclude movement interactions with an invalid path step", () => {
             var game = gameBuilder.createGame(gc => gc
                 .withAttackThenMoveTurnInteractions()
@@ -126,20 +144,6 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("3x1")).not.toBe(-1);
             expect(interactionLocations.indexOf("1x2")).toBe(-1);
             expect(interactionLocations.indexOf("1x3")).toBe(-1);
-        });
-
-        it("Should exclude interactions based on validators", () => {
-            var game = gameBuilder.createGame(gc => gc
-                .withAttackThenMoveTurnInteractions()
-                .withA3x3NorthSouthBoard()
-                .withHumanLocalAndRemotePlayers()
-                .withATeamForPlayer(1, tc => tc
-                    .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
-                        .withUdlrMovementBy(2)
-                        .whereDestinationsMustBeUnoccupied())));
-
-            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
         });
 
         it("Should move a piece to an empty tile", () => {

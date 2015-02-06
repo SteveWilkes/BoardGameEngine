@@ -26,7 +26,7 @@
                 "0~m2~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
                 "@" +
-                "@iu" +
+                "@lu" +
                 "^" +
                 "0~m1~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
@@ -41,17 +41,26 @@
                 "3`Human Ninja`Ninja.png`" +
                 "0~m2~" +
                 "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" +
-                "@iu" +
-                "@iu" +
+                "@lu" +
+                "@lu" +
+                "~" +
+                "pu" + // 2-space movement if unoccupied
+                "^" +
+                "0~m2~" +
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "@" +
+                "@lu" +
+                "~" +
+                "po" + // 1-space movement if occupied
                 "^" +
                 "0~m1~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
-                "@iu" +
+                "@" +
                 "@oe$1+" +
                 "^" +
                 "1~a1~" +
                 "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" +
-                "@iu" +
+                "@lu" +
                 "@oe$+*" +
                 "/" +
             // PieceConfigData

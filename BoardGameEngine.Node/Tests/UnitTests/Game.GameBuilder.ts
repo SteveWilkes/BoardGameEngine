@@ -17,6 +17,7 @@ class PieceConfiguration {
     public pathStepLocationValidators: Array<P.IPieceLocationValidator>;
     public pathDestinationValidators: Array<P.IPieceLocationValidator>;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
+    public availabilityValidator: P.IPieceLocationValidator;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {
@@ -30,7 +31,7 @@ class PieceConfiguration {
                 this.interactionType,
                 [relatedLocationCalculator],
                 this.interaction,
-                Bge.Pieces.AlwaysValidLocationValidator.INSTANCE));
+                this.availabilityValidator || Bge.Pieces.AlwaysValidLocationValidator.INSTANCE));
 
         this.setMemberArrays();
     }
@@ -90,7 +91,7 @@ class PieceConfigurator {
     }
 
     public wherePathStepsMustBeUnoccupied(): PieceConfigurator {
-        return this.withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator);
+        return this.withPathStepsValidatedBy(Bge.Pieces.LocationIsUnoccupiedValidator);
     }
 
     public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
@@ -98,7 +99,7 @@ class PieceConfigurator {
     }
 
     public whereDestinationsMustBeUnoccupied(): PieceConfigurator {
-        return this.withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator);
+        return this.withDestinationsValidatedBy(Bge.Pieces.LocationIsUnoccupiedValidator);
     }
 
     public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
@@ -113,6 +114,11 @@ class PieceConfigurator {
         for (var i = 0; i < validators.length; i++) {
             configurationArray.push(validators[i]());
         }
+        return this;
+    }
+
+    public where(availabilityValidator: new () => P.IPieceLocationValidator): PieceConfigurator {
+        this._configuration.availabilityValidator = new availabilityValidator();
         return this;
     }
 

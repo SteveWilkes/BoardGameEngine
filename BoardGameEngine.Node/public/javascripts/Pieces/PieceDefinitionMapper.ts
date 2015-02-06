@@ -18,8 +18,10 @@
     };
 
     var _locationValidatorFactoriesById = {
-        "iu": () => IsUnoccupiedLocationValidator.INSTANCE,
-        "io": () => IsOccupiedLocationValidator.INSTANCE,
+        "lo": () => LocationIsOccupiedValidator.INSTANCE,
+        "lu": () => LocationIsUnoccupiedValidator.INSTANCE,
+        "po": () => PieceIsOccupiedValidator.INSTANCE,
+        "pu": () => PieceIsUnoccupiedValidator.INSTANCE,
         "oe": (sameTeamIds: string, otherTeamIds: string) => new OccupiedLocationEvaluator(sameTeamIds.split(","), otherTeamIds.split(","))
     };
 
