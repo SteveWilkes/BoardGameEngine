@@ -17,6 +17,8 @@
     }
 
     export interface IGameConfigurator {
+        withAttackThenMoveTurnInteractions(): IGameConfigurator;
+        withTurnInteractions(turnInteractions: Array<P.InteractionType>): IGameConfigurator;
         withA3x3NorthSouthBoard(): IGameConfigurator;
         withASquareBoardOfSize(size: number): IGameConfigurator;
         withNorthSouthBoardPositions(): IGameConfigurator;

@@ -9,6 +9,7 @@ describe("Game", () => {
 
         it("Should exclude attachment targets by piece definition id", () => {
             var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
@@ -39,6 +40,7 @@ describe("Game", () => {
 
         it("Should attach one piece to another", () => {
             var game = gameBuilder.startGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc

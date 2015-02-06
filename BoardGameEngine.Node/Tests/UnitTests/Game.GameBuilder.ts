@@ -1,17 +1,10 @@
-﻿import B = AgileObjects.BoardGameEngine.Boards;
-import G = AgileObjects.BoardGameEngine.Games;
-import P = AgileObjects.BoardGameEngine.Pieces;
-import Pl = AgileObjects.BoardGameEngine.Players;
-import T = AgileObjects.BoardGameEngine.Teams;
-import Ts = AgileObjects.TypeScript;
-
-var move = AgileObjects.BoardGameEngine.Pieces.InteractionType.Move;
-var attack = AgileObjects.BoardGameEngine.Pieces.InteractionType.Attack;
-
-require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
+﻿require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
+
+var move = P.InteractionType.Move;
+var attack = P.InteractionType.Attack;
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
@@ -200,12 +193,14 @@ class TeamBuilder {
 
 class GameConfiguration {
     constructor() {
+        this.turnInteractions = new Array<P.InteractionType>();
         this.boardRowConfigs = new Array<B.BoardRowConfig>();
         this.boardPositions = new Array<B.BoardPosition>();
         this.players = new Array<Pl.Player>();
         this.teams = new Array<T.Team>();
     }
 
+    public turnInteractions: Array<P.InteractionType>;
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
@@ -215,6 +210,7 @@ class GameConfiguration {
         var player = new Bge.Players.Player("Player" + this.players.length + 1, isHuman, isLocal);
         this.players.push(player);
     }
+
 }
 
 class GameConfigurator {
@@ -223,6 +219,19 @@ class GameConfigurator {
     constructor() {
         this._configuration = new GameConfiguration();
     }
+
+    // #region Game Type
+
+    public withAttackThenMoveTurnInteractions(): GameConfigurator {
+        return this.withTurnInteractions([attack, move]);
+    }
+
+    public withTurnInteractions(turnInteractions: Array<P.InteractionType>): GameConfigurator {
+        this._configuration.turnInteractions = turnInteractions;
+        return this;
+    }
+
+    // #endregion
 
     // #region Board
 
@@ -305,10 +314,9 @@ class GameBuilder {
     static INSTANCE = new GameBuilder();
 
     public createGame(configuration: GameConfiguration): G.Game {
-
         var boardType = this._getBoardType(configuration);
 
-        var gameType = new Bge.Games.GameType("test", boardType, [move, attack], null, null);
+        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnInteractions, null, null);
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
@@ -316,8 +324,6 @@ class GameBuilder {
 
         this._addPlayers(game, configuration);
         this._addTeams(game, configuration);
-
-        game.start();
 
         return game;
     }
@@ -353,6 +359,7 @@ var gameBuilder = {
     },
     createDefaultGame: function () {
         return this.createGame((gc: GameConfigurator) => gc
+            .withAttackThenMoveTurnInteractions()
             .withA3x3NorthSouthBoard()
             .withHumanLocalAndRemotePlayers()
             .withATeamForPlayer(1, tc => tc

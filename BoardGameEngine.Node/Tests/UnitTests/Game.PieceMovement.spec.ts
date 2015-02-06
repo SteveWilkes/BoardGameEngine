@@ -28,6 +28,7 @@ describe("Game", () => {
 
         it("Should calculate up-down-left-right movement interactions", () => {
             var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
@@ -50,6 +51,7 @@ describe("Game", () => {
 
         it("Should calculate an infinite movement path", () => {
             var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withASquareBoardOfSize(100)
                 .withNorthSouthBoardPositions()
                 .withHumanLocalAndRemotePlayers()
@@ -74,6 +76,7 @@ describe("Game", () => {
 
         it("Should exclude movement interactions with an invalid path step", () => {
             var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
@@ -103,6 +106,7 @@ describe("Game", () => {
 
         it("Should exclude movement interactions with an invalid destination", () => {
             var game = gameBuilder.createGame(gc => gc
+                .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
                 .withHumanLocalAndRemotePlayers()
                 .withATeamForPlayer(1, tc => tc
