@@ -174,7 +174,9 @@
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.GameBuilder.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.Imports.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.PieceAttachment.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.PieceAttacks.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.PieceMovement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>

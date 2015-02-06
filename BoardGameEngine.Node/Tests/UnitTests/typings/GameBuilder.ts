@@ -4,7 +4,10 @@
         withUdlrAttachmentTo(pieceDefinitionIds: Array<string>, distance?: number): IPieceConfigurator;
         withUdlrMovementBy(distance: number): IPieceConfigurator;
         withUdlrInfiniteMovement(): IPieceConfigurator;
+        withUdlrAttackOver(distance: number): IPieceConfigurator;
+        wherePathStepsMustBeUnoccupied(): IPieceConfigurator;
         withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
+        whereDestinationsMustBeUnoccupied(): IPieceConfigurator;
         withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
         and(): IPieceConfigurator;
     }

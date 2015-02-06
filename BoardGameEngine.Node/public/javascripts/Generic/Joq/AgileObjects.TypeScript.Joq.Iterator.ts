@@ -23,8 +23,8 @@
         public first(): TResult {
             var result = ignore;
 
-            this._iterate(propertyValue => {
-                result = propertyValue;
+            this._iterate((propertyValue, propertyName) => {
+                result = this._handler(propertyValue, propertyName);
                 return false;
             });
 
@@ -36,10 +36,13 @@
         public firstOrDefault(defaultValue?: TResult): TResult {
             var result = null;
 
-            this._iterate(propertyValue => {
-                result = propertyValue;
-                return false;
+            this._iterate((propertyValue, propertyName) => {
+                result = this._handler(propertyValue, propertyName);
+                return (result === ignore);
             });
+
+            // ReSharper disable once ExpressionIsAlwaysConst
+            if (result === ignore) { result = null; }
 
             // ReSharper disable once ConditionIsAlwaysConst
             return result || defaultValue || null;

@@ -1,6 +1,4 @@
-﻿import Ut = AgileObjects.BoardGameEngine.Tests.UnitTests;
-
-require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
+﻿require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
@@ -22,7 +20,7 @@ describe("Game", () => {
                     .withAPieceAt(["1x3"], pc => pc
                         .withUdlrMovementBy(1))));
 
-            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: AgileObjects.BoardGameEngine.Pieces.Piece) => p).toArray();
+            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
             expect(pieces.length).toBe(3);
 
             var piece = pieces[0];
@@ -50,12 +48,13 @@ describe("Game", () => {
                     .withAPieceAt(["1x2"], pc => pc
                         .withUdlrMovementBy(1))));
 
-            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: AgileObjects.BoardGameEngine.Pieces.Piece) => p).toArray();
+            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
             expect(pieces.length).toBe(2);
 
-            var piece = pieces[0];
-            var startingLocation = piece.location;
-            var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var subjectPiece = pieces[0];
+            var targetPiece = pieces[1];
+            var startingLocation = subjectPiece.location;
+            var pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
 
             var attachmentInteraction = TsNs.Joq
                 .select(pieceInteractions, (inter: IPieceInteraction) => inter)
@@ -66,8 +65,9 @@ describe("Game", () => {
 
             attachmentInteraction.complete();
 
-            expect(piece.location).toBe(pieces[1]);
+            expect(subjectPiece.location).toBe(targetPiece);
             expect(startingLocation.isOccupied()).toBeFalsy();
+            expect(targetPiece.isOccupied()).toBeTruthy();
         });
     });
 });

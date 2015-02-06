@@ -1,6 +1,4 @@
-﻿import IPieceInteraction = AgileObjects.BoardGameEngine.Pieces.IPieceInteraction;
-
-require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
+﻿require("../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
 var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
@@ -36,7 +34,7 @@ describe("Game", () => {
                     .withAPieceAt(["1x1"], pc => pc
                         .withUdlrMovementBy(2))));
 
-            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
             var interactionLocations = TsNs.Joq
@@ -58,10 +56,10 @@ describe("Game", () => {
                 .withATeamForPlayer(1, tc => tc
                     .withAPieceAt(["1x1", "1x2"], pc => pc
                         .withUdlrInfiniteMovement()
-                        .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator)
-                        .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+                        .wherePathStepsMustBeUnoccupied()
+                        .whereDestinationsMustBeUnoccupied())));
 
-            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
             var interactionLocations = TsNs.Joq
@@ -81,9 +79,9 @@ describe("Game", () => {
                 .withATeamForPlayer(1, tc => tc
                     .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
                         .withUdlrMovementBy(2)
-                        .withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+                        .wherePathStepsMustBeUnoccupied())));
 
-            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: AgileObjects.BoardGameEngine.Pieces.Piece) => p).toArray();
+            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
             expect(pieces.length).toBe(3);
 
             var piece = pieces[0];
@@ -110,9 +108,9 @@ describe("Game", () => {
                 .withATeamForPlayer(1, tc => tc
                     .withAPieceAt(["1x1", "1x2", "1x3"], pc => pc
                         .withUdlrMovementBy(2)
-                        .withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator))));
+                        .whereDestinationsMustBeUnoccupied())));
 
-            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
             var interactionLocations = TsNs.Joq
@@ -133,7 +131,7 @@ describe("Game", () => {
             expect(destinationTile).not.toBeNull();
             expect(destinationTile.isOccupied()).toBeFalsy();
 
-            var piece = TsNs.Joq.first<AgileObjects.BoardGameEngine.Pieces.Piece>(game.teams[0].getPieces());
+            var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var originTile = piece.location;
 
             expect(originTile).not.toBeNull();

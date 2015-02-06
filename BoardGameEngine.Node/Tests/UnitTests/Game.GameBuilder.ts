@@ -60,7 +60,7 @@ class PieceConfigurator {
         this._configuration.interactionType = move;
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationInteraction;
 
-        return this._withUdlrTranslators(distance);
+        return this._addUdlrTranslators(distance);
     }
 
     public withUdlrAttachmentTo(pieceDefinitionIds: Array<string>, distance?: number): PieceConfigurator {
@@ -71,10 +71,17 @@ class PieceConfigurator {
             [() => new Bge.Pieces.OccupiedLocationEvaluator(pieceDefinitionIds, [])],
             this._configuration.pathDestinationValidators);
 
-        return this._withUdlrTranslators(distance || 1);
+        return this._addUdlrTranslators(distance || 1);
     }
 
-    private _withUdlrTranslators(distance: number): PieceConfigurator {
+    public withUdlrAttackOver(distance: number): PieceConfigurator {
+        this._configuration.interactionType = attack;
+        this._configuration.interaction = Bge.Pieces.AttackDestinationPieceInteraction;
+
+        return this._addUdlrTranslators(distance);
+    }
+
+    private _addUdlrTranslators(distance: number): PieceConfigurator {
         var up = [new TsNs.CoordinateTranslator("up", distance)];
         var down = [new TsNs.CoordinateTranslator("down", distance)];
         var left = [new TsNs.CoordinateTranslator("left", distance)];
@@ -85,8 +92,16 @@ class PieceConfigurator {
         return this;
     }
 
+    public wherePathStepsMustBeUnoccupied(): PieceConfigurator {
+        return this.withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator);
+    }
+
     public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
         return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathStepLocationValidators);
+    }
+
+    public whereDestinationsMustBeUnoccupied(): PieceConfigurator {
+        return this.withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationValidator);
     }
 
     public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {

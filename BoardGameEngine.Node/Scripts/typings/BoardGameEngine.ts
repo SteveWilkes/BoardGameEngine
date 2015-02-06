@@ -37,6 +37,7 @@
     }
 
     interface Pieces {
+        AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
         IsOccupiedLocationValidator: new () => P.IsOccupiedLocationValidator;
         IsUnoccupiedLocationValidator: new () => P.IsUnoccupiedLocationValidator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
