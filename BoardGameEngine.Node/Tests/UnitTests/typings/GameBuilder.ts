@@ -27,9 +27,9 @@
     }
 
     export interface IGameBuilderService {
-        createGame(config: (configurator: IGameConfigurator) => void): Games.Game;
-        createDefaultGame(): Games.Game;
-        startGame(config: (configurator: IGameConfigurator) => void): Games.Game;
-        startDefaultGame(): Games.Game;
+        createGame(config: (configurator: IGameConfigurator) => void): G.Game;
+        createDefaultGame(): G.Game;
+        startGame(config: (configurator: IGameConfigurator) => void): G.Game;
+        startDefaultGame(): G.Game;
     }
 }
