@@ -3,7 +3,7 @@
     export class AlwaysValidLocationEvaluator implements IPieceLocationEvaluator {
         static INSTANCE = new AlwaysValidLocationEvaluator();
 
-        public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {
+        public isValid(subjectPiece: Piece, targetLocation: IPieceLocation): boolean {
             return true;
         }
     }

@@ -58,7 +58,7 @@
                     : this._pathStepLocationValidators;
 
                 for (var j = 0; j < validators.length; j++) {
-                    if (!validators[j].isValid(path[i], startingLocation.piece)) {
+                    if (!validators[j].isValid(startingLocation.piece, path[i])) {
                         return false;
                     }
                 }

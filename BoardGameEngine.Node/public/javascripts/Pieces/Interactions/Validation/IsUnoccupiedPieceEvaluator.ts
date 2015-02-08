@@ -3,7 +3,7 @@
     export class IsUnoccupiedPieceEvaluator implements IPieceLocationEvaluator {
         static INSTANCE = new IsUnoccupiedPieceEvaluator();
 
-        public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {
+        public isValid(subjectPiece: Piece, targetLocation: IPieceLocation): boolean {
             return !subjectPiece.isOccupied();
         }
     }

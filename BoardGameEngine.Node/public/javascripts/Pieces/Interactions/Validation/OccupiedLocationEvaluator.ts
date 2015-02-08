@@ -5,17 +5,17 @@
         private _allOtherTeamPiecesAllowed: boolean;
 
         constructor(
-            private _sameTeamDroppablePieceDefinitionIds: Array<string>,
-            private _otherTeamDroppablePieceDefinitionIds: Array<string>) {
+            private _allowedSameTeamPieceDefinitionIds: Array<string>,
+            private _allowedOtherTeamPieceDefinitionIds: Array<string>) {
 
-            this._allSameTeamPiecesAllowed = this._sameTeamDroppablePieceDefinitionIds.indexOf("*") === 0;
-            this._allOtherTeamPiecesAllowed = this._otherTeamDroppablePieceDefinitionIds.indexOf("*") === 0;
+            this._allSameTeamPiecesAllowed = this._allowedSameTeamPieceDefinitionIds.indexOf("*") === 0;
+            this._allOtherTeamPiecesAllowed = this._allowedOtherTeamPieceDefinitionIds.indexOf("*") === 0;
         }
 
-        public isValid(potentialLocation: IPieceLocation, subjectPiece: Piece): boolean {
-            if (!potentialLocation.isOccupied()) { return false; }
+        public isValid(subjectPiece: Piece, targetLocation: IPieceLocation): boolean {
+            if (!targetLocation.isOccupied()) { return false; }
 
-            var isSameTeam = potentialLocation.piece.team === subjectPiece.team;
+            var isSameTeam = targetLocation.piece.team === subjectPiece.team;
 
             if ((isSameTeam && this._allSameTeamPiecesAllowed) ||
                 (!isSameTeam && this._allOtherTeamPiecesAllowed)) {
@@ -23,10 +23,10 @@
             }
 
             var allowedPieceDefinitionIds = isSameTeam
-                ? this._sameTeamDroppablePieceDefinitionIds
-                : this._otherTeamDroppablePieceDefinitionIds;
+                ? this._allowedSameTeamPieceDefinitionIds
+                : this._allowedOtherTeamPieceDefinitionIds;
 
-            return allowedPieceDefinitionIds.indexOf(potentialLocation.piece.definitionId) > -1;
+            return allowedPieceDefinitionIds.indexOf(targetLocation.piece.definitionId) > -1;
         }
     }
 }
