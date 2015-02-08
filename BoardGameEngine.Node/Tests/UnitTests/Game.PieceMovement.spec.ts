@@ -83,7 +83,7 @@ describe("Game", () => {
                     .withAPieceAt(["1x1"], pc => pc
                         .withUdlrMovementBy(2)
                         .whereDestinationsMustBeUnoccupied()
-                        .where(Bge.Pieces.IsUnoccupiedLocationEvaluator))));
+                        .where(Bge.Pieces.IsSubjectPieceOccupiedEvaluator))));
 
             var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);

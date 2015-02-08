@@ -17,12 +17,17 @@
         "a1": AttackDestinationPieceInteraction
     };
 
-    var _locationValidatorFactoriesById = {
-        "lo": () => IsOccupiedLocationEvaluator.INSTANCE,
-        "lu": () => IsUnoccupiedLocationEvaluator.INSTANCE,
-        "po": () => IsOccupiedPieceEvaluator.INSTANCE,
-        "pu": () => IsUnoccupiedPieceEvaluator.INSTANCE,
-        "oe": (sameTeamIds: string, otherTeamIds: string) => new OccupiedLocationEvaluator(sameTeamIds.split(","), otherTeamIds.split(","))
+    var _locationValidatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => IPieceAndLocationEvaluator> = {
+        "lo": () => IsTargetLocationOccupiedEvaluator.INSTANCE,
+        "lu": () => IsTargetLocationUnoccupiedEvaluator.INSTANCE,
+        "po": () => IsSubjectPieceOccupiedEvaluator.INSTANCE,
+        "pu": () => IsSubjectPieceUnoccupiedEvaluator.INSTANCE,
+        "oe": (sameTeamIds: string, otherTeamIds: string) => new OccupiedTargetLocationEvaluator(sameTeamIds.split(","), otherTeamIds.split(","))
+    };
+
+    var _pieceValidatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => IPieceEvaluator> = {
+        "po": () => IsSubjectPieceOccupiedEvaluator.INSTANCE,
+        "pu": () => IsSubjectPieceUnoccupiedEvaluator.INSTANCE
     };
 
     var _noLocationValidators = new Array<IPieceAndLocationEvaluator>();
@@ -64,7 +69,7 @@
                 type,
                 this._mapRelatedLocationCalculators(interactionCalculatorDataItems[2]),
                 _pieceInteractionConstructorsById[interactionTypeId],
-                this._mapLocationValidator(interactionCalculatorDataItems[3]));
+                this._mapPieceValidator(interactionCalculatorDataItems[3]));
         }
 
         private _mapRelatedLocationCalculators(locationCalculatorData: string): Array<RelatedLocationCalculator> {
@@ -81,8 +86,8 @@
 
             return new RelatedLocationCalculator(
                 this._mapCoordinateTranslatorSets(locationCalculatorDataItems[0]),
-                this._mapLocationValidators(locationCalculatorDataItems[1]),
-                this._mapLocationValidators(locationCalculatorDataItems[2]));
+                this._mapPieceAndLocationValidators(locationCalculatorDataItems[1]),
+                this._mapPieceAndLocationValidators(locationCalculatorDataItems[2]));
         }
 
         private _mapCoordinateTranslatorSets(coordinateTranslatorSetData: string): Array<Array<Ts.CoordinateTranslator>> {
@@ -118,30 +123,41 @@
             return _coordinateTranslatorsBySignature[signature];
         }
 
-        private _mapLocationValidators(locationValidatorData: string): Array<IPieceAndLocationEvaluator> {
+        private _mapPieceAndLocationValidators(locationValidatorData: string): Array<IPieceAndLocationEvaluator> {
             if (locationValidatorData.length === 0) { return _noLocationValidators; }
 
             var locationValidatorDataItems = locationValidatorData.split("|");
             var locationValidators = new Array<IPieceAndLocationEvaluator>(locationValidatorDataItems.length);
             for (var i = 0; i < locationValidatorDataItems.length; i++) {
-                locationValidators[i] = this._mapLocationValidator(locationValidatorDataItems[i]);
+                locationValidators[i] = this._mapPieceAndLocationValidator(locationValidatorDataItems[i]);
             }
             return locationValidators;
         }
 
-        private _mapLocationValidator(locationValidatorData: string): IPieceAndLocationEvaluator {
-            if (locationValidatorData == null) {
-                return AlwaysValidLocationEvaluator.INSTANCE;
+        private _mapPieceAndLocationValidator(validatorData: string): IPieceAndLocationEvaluator {
+            return this._mapValidator(validatorData, _locationValidatorFactoriesById);
+        }
+
+        private _mapPieceValidator(validatorData: string): IPieceEvaluator {
+            return this._mapValidator(validatorData, _pieceValidatorFactoriesById);
+        }
+
+        private _mapValidator<TValidator>(
+            validatorData: string,
+            validatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => TValidator>): TValidator {
+
+            if (validatorData == null) {
+                return <TValidator><Object>AlwaysValidLocationEvaluator.INSTANCE;
             }
 
-            var locationValidatorDataItems = locationValidatorData.split("$");
-            var locationValidatorId = locationValidatorDataItems[0];
+            var validatorDataItems = validatorData.split("$");
+            var validatorId = validatorDataItems[0];
 
-            var locationValidatorConstructorArgs = (locationValidatorDataItems.length > 1)
-                ? locationValidatorDataItems[1].split("+")
+            var validatorConstructorArgs = (validatorDataItems.length > 1)
+                ? validatorDataItems[1].split("+")
                 : _noArguments;
 
-            return _locationValidatorFactoriesById[locationValidatorId].apply(this, locationValidatorConstructorArgs);
+            return validatorFactoriesById[validatorId].apply(this, validatorConstructorArgs);
         }
     }
 }
