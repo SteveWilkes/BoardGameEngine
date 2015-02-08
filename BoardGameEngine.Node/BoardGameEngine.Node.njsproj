@@ -134,7 +134,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\History.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IGameAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceLocationEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceAndLocationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\RelatedLocationCalculator.ts" />

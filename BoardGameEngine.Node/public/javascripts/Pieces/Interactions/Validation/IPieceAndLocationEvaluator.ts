@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export interface IPieceLocationEvaluator {
+    export interface IPieceAndLocationEvaluator {
         isValid(subjectPiece: Piece, targetLocation: IPieceLocation): boolean
     }
 }

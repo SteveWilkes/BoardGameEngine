@@ -25,7 +25,7 @@
         "oe": (sameTeamIds: string, otherTeamIds: string) => new OccupiedLocationEvaluator(sameTeamIds.split(","), otherTeamIds.split(","))
     };
 
-    var _noLocationValidators = new Array<IPieceLocationEvaluator>();
+    var _noLocationValidators = new Array<IPieceAndLocationEvaluator>();
     var _noArguments = new Array<string>();
 
     export class PieceDefinitionMapper {
@@ -118,18 +118,18 @@
             return _coordinateTranslatorsBySignature[signature];
         }
 
-        private _mapLocationValidators(locationValidatorData: string): Array<IPieceLocationEvaluator> {
+        private _mapLocationValidators(locationValidatorData: string): Array<IPieceAndLocationEvaluator> {
             if (locationValidatorData.length === 0) { return _noLocationValidators; }
 
             var locationValidatorDataItems = locationValidatorData.split("|");
-            var locationValidators = new Array<IPieceLocationEvaluator>(locationValidatorDataItems.length);
+            var locationValidators = new Array<IPieceAndLocationEvaluator>(locationValidatorDataItems.length);
             for (var i = 0; i < locationValidatorDataItems.length; i++) {
                 locationValidators[i] = this._mapLocationValidator(locationValidatorDataItems[i]);
             }
             return locationValidators;
         }
 
-        private _mapLocationValidator(locationValidatorData: string): IPieceLocationEvaluator {
+        private _mapLocationValidator(locationValidatorData: string): IPieceAndLocationEvaluator {
             if (locationValidatorData == null) {
                 return AlwaysValidLocationEvaluator.INSTANCE;
             }

@@ -14,10 +14,10 @@ class PieceConfiguration {
 
     public interactionType: P.InteractionType;
     public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
-    public pathStepLocationValidators: Array<P.IPieceLocationEvaluator>;
-    public pathDestinationValidators: Array<P.IPieceLocationEvaluator>;
+    public pathStepLocationValidators: Array<P.IPieceAndLocationEvaluator>;
+    public pathDestinationValidators: Array<P.IPieceAndLocationEvaluator>;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
-    public availabilityValidator: P.IPieceLocationEvaluator;
+    public availabilityValidator: P.IPieceAndLocationEvaluator;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {
@@ -38,8 +38,8 @@ class PieceConfiguration {
 
     private setMemberArrays() {
         this.coordinateTranslatorSets = new Array<Array<Ts.CoordinateTranslator>>();
-        this.pathStepLocationValidators = new Array<P.IPieceLocationEvaluator>();
-        this.pathDestinationValidators = new Array<P.IPieceLocationEvaluator>();
+        this.pathStepLocationValidators = new Array<P.IPieceAndLocationEvaluator>();
+        this.pathDestinationValidators = new Array<P.IPieceAndLocationEvaluator>();
     }
 }
 
@@ -94,7 +94,7 @@ class PieceConfigurator {
         return this.withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationEvaluator);
     }
 
-    public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationEvaluator>): PieceConfigurator {
+    public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceAndLocationEvaluator>): PieceConfigurator {
         return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathStepLocationValidators);
     }
 
@@ -102,22 +102,22 @@ class PieceConfigurator {
         return this.withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationEvaluator);
     }
 
-    public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationEvaluator>): PieceConfigurator {
+    public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceAndLocationEvaluator>): PieceConfigurator {
         return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathDestinationValidators);
     }
 
-    private _constructorsToFactories(constructors: Array<new () => P.IPieceLocationEvaluator>) {
-        return TsNs.Joq.select(constructors, v => () => <P.IPieceLocationEvaluator>new v()).toArray();
+    private _constructorsToFactories(constructors: Array<new () => P.IPieceAndLocationEvaluator>) {
+        return TsNs.Joq.select(constructors, v => () => <P.IPieceAndLocationEvaluator>new v()).toArray();
     }
 
-    private _addValidators(validators: Array<() => P.IPieceLocationEvaluator>, configurationArray: Array<P.IPieceLocationEvaluator>) {
+    private _addValidators(validators: Array<() => P.IPieceAndLocationEvaluator>, configurationArray: Array<P.IPieceAndLocationEvaluator>) {
         for (var i = 0; i < validators.length; i++) {
             configurationArray.push(validators[i]());
         }
         return this;
     }
 
-    public where(availabilityValidator: new () => P.IPieceLocationEvaluator): PieceConfigurator {
+    public where(availabilityValidator: new () => P.IPieceAndLocationEvaluator): PieceConfigurator {
         this._configuration.availabilityValidator = new availabilityValidator();
         return this;
     }
