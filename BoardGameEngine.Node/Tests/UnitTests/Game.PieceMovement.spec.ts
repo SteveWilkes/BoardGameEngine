@@ -74,7 +74,7 @@ describe("Game", () => {
             expect(interactionLocations.indexOf("2x1")).not.toBe(-1);
         });
 
-        it("Should exclude interactions based on a validator", () => {
+        it("Should exclude interactions based on an evaluator", () => {
             var game = gameBuilder.createGame(gc => gc
                 .withAttackThenMoveTurnInteractions()
                 .withA3x3NorthSouthBoard()
@@ -83,7 +83,7 @@ describe("Game", () => {
                     .withAPieceAt(["1x1"], pc => pc
                         .withUdlrMovementBy(2)
                         .whereDestinationsMustBeUnoccupied()
-                        .where(Bge.Pieces.LocationIsUnoccupiedValidator))));
+                        .where(Bge.Pieces.IsUnoccupiedLocationEvaluator))));
 
             var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
             var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);

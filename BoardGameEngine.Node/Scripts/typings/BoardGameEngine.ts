@@ -37,19 +37,19 @@
     }
 
     interface Pieces {
-        AlwaysValidLocationValidator: typeof P.AlwaysValidLocationValidator;
+        AlwaysValidLocationEvaluator: typeof P.AlwaysValidLocationEvaluator;
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
-        IsOccupiedLocationValidator: new () => P.LocationIsOccupiedValidator;
-        LocationIsUnoccupiedValidator: new () => P.LocationIsUnoccupiedValidator;
+        IsOccupiedLocationEvaluator: new () => P.IsOccupiedLocationEvaluator;
+        IsUnoccupiedLocationEvaluator: new () => P.IsUnoccupiedLocationEvaluator;
+        IsUnoccupiedPieceEvaluator: new () => P.IsUnoccupiedPieceEvaluator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         OccupiedLocationEvaluator: new (sameTeamDroppablePieceDefinitionIds: Array<string>, otherTeamDroppablePieceDefinitionIds: Array<string>) => P.OccupiedLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
-        PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityValidator: P.IPieceLocationValidator) => P.PieceInteractionCalculator;
+        PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityValidator: P.IPieceLocationEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
-        PieceIsUnoccupiedValidator: new () => P.PieceIsUnoccupiedValidator;
-        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationValidators: Array<P.IPieceLocationValidator>, pathDestinationValidators: Array<P.IPieceLocationValidator>) => P.RelatedLocationCalculator;
+        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluators: Array<P.IPieceLocationEvaluator>, pathDestinationEvaluators: Array<P.IPieceLocationEvaluator>) => P.RelatedLocationCalculator;
     }
 
     interface Players {

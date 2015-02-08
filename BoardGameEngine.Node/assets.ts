@@ -70,11 +70,11 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Ui/GameEventPropogator.js");
     assets.addJs("/public/javascripts/Ui/CompositeGameUiComponent.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/AlwaysValidLocationValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/LocationIsOccupiedValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/LocationIsUnoccupiedValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/PieceIsOccupiedValidator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/PieceIsUnoccupiedValidator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/AlwaysValidLocationEvaluator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsOccupiedLocationEvaluator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsUnoccupiedLocationEvaluator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsOccupiedPieceEvaluator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsUnoccupiedPieceEvaluator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/Validation/OccupiedLocationEvaluator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");

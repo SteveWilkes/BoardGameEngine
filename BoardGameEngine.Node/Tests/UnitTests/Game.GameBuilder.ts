@@ -14,10 +14,10 @@ class PieceConfiguration {
 
     public interactionType: P.InteractionType;
     public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
-    public pathStepLocationValidators: Array<P.IPieceLocationValidator>;
-    public pathDestinationValidators: Array<P.IPieceLocationValidator>;
+    public pathStepLocationValidators: Array<P.IPieceLocationEvaluator>;
+    public pathDestinationValidators: Array<P.IPieceLocationEvaluator>;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
-    public availabilityValidator: P.IPieceLocationValidator;
+    public availabilityValidator: P.IPieceLocationEvaluator;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {
@@ -31,15 +31,15 @@ class PieceConfiguration {
                 this.interactionType,
                 [relatedLocationCalculator],
                 this.interaction,
-                this.availabilityValidator || Bge.Pieces.AlwaysValidLocationValidator.INSTANCE));
+                this.availabilityValidator || Bge.Pieces.AlwaysValidLocationEvaluator.INSTANCE));
 
         this.setMemberArrays();
     }
 
     private setMemberArrays() {
         this.coordinateTranslatorSets = new Array<Array<Ts.CoordinateTranslator>>();
-        this.pathStepLocationValidators = new Array<P.IPieceLocationValidator>();
-        this.pathDestinationValidators = new Array<P.IPieceLocationValidator>();
+        this.pathStepLocationValidators = new Array<P.IPieceLocationEvaluator>();
+        this.pathDestinationValidators = new Array<P.IPieceLocationEvaluator>();
     }
 }
 
@@ -91,33 +91,33 @@ class PieceConfigurator {
     }
 
     public wherePathStepsMustBeUnoccupied(): PieceConfigurator {
-        return this.withPathStepsValidatedBy(Bge.Pieces.LocationIsUnoccupiedValidator);
+        return this.withPathStepsValidatedBy(Bge.Pieces.IsUnoccupiedLocationEvaluator);
     }
 
-    public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
+    public withPathStepsValidatedBy(...validators: Array<new () => P.IPieceLocationEvaluator>): PieceConfigurator {
         return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathStepLocationValidators);
     }
 
     public whereDestinationsMustBeUnoccupied(): PieceConfigurator {
-        return this.withDestinationsValidatedBy(Bge.Pieces.LocationIsUnoccupiedValidator);
+        return this.withDestinationsValidatedBy(Bge.Pieces.IsUnoccupiedLocationEvaluator);
     }
 
-    public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationValidator>): PieceConfigurator {
+    public withDestinationsValidatedBy(...validators: Array<new () => P.IPieceLocationEvaluator>): PieceConfigurator {
         return this._addValidators(this._constructorsToFactories(validators), this._configuration.pathDestinationValidators);
     }
 
-    private _constructorsToFactories(constructors: Array<new () => P.IPieceLocationValidator>) {
-        return TsNs.Joq.select(constructors, v => () => <P.IPieceLocationValidator>new v()).toArray();
+    private _constructorsToFactories(constructors: Array<new () => P.IPieceLocationEvaluator>) {
+        return TsNs.Joq.select(constructors, v => () => <P.IPieceLocationEvaluator>new v()).toArray();
     }
 
-    private _addValidators(validators: Array<() => P.IPieceLocationValidator>, configurationArray: Array<P.IPieceLocationValidator>) {
+    private _addValidators(validators: Array<() => P.IPieceLocationEvaluator>, configurationArray: Array<P.IPieceLocationEvaluator>) {
         for (var i = 0; i < validators.length; i++) {
             configurationArray.push(validators[i]());
         }
         return this;
     }
 
-    public where(availabilityValidator: new () => P.IPieceLocationValidator): PieceConfigurator {
+    public where(availabilityValidator: new () => P.IPieceLocationEvaluator): PieceConfigurator {
         this._configuration.availabilityValidator = new availabilityValidator();
         return this;
     }

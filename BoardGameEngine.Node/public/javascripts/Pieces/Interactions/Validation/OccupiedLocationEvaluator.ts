@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export class OccupiedLocationEvaluator implements IPieceLocationValidator {
+    export class OccupiedLocationEvaluator implements IPieceLocationEvaluator {
         private _allSameTeamPiecesAllowed: boolean;
         private _allOtherTeamPiecesAllowed: boolean;
 

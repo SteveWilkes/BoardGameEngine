@@ -6,10 +6,10 @@
         withUdlrInfiniteMovement(): IPieceConfigurator;
         withUdlrAttackOver(distance: number): IPieceConfigurator;
         wherePathStepsMustBeUnoccupied(): IPieceConfigurator;
-        withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
+        withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationEvaluator>): IPieceConfigurator;
         whereDestinationsMustBeUnoccupied(): IPieceConfigurator;
-        withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationValidator>): IPieceConfigurator;
-        where(availabilityValidator: new () => Pieces.IPieceLocationValidator): IPieceConfigurator;
+        withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceLocationEvaluator>): IPieceConfigurator;
+        where(availabilityValidator: new () => Pieces.IPieceLocationEvaluator): IPieceConfigurator;
         and(): IPieceConfigurator;
     }
 

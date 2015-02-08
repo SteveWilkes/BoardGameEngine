@@ -30,7 +30,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <NodejsPort>3000</NodejsPort>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
@@ -107,16 +107,16 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\AlwaysValidLocationValidator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\PieceIsOccupiedValidator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\PieceIsUnoccupiedValidator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\AlwaysValidLocationEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsOccupiedPieceEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsUnoccupiedPieceEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinitionMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\OccupiedLocationEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\LocationIsOccupiedValidator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\LocationIsUnoccupiedValidator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsOccupiedLocationEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsUnoccupiedLocationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovement.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
@@ -134,7 +134,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\History.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IGameAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceLocationValidator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceLocationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\RelatedLocationCalculator.ts" />

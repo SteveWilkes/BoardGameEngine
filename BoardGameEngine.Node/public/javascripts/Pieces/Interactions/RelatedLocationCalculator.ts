@@ -3,8 +3,8 @@
     export class RelatedLocationCalculator {
         constructor(
             private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _pathStepLocationValidators: Array<IPieceLocationValidator>,
-            private _pathDestinationValidators: Array<IPieceLocationValidator>) {
+            private _pathStepLocationValidators: Array<IPieceLocationEvaluator>,
+            private _pathDestinationValidators: Array<IPieceLocationEvaluator>) {
         }
 
         public calculateLocationPaths(
