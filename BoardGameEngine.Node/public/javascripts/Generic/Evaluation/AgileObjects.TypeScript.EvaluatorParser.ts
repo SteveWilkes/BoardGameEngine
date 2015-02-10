@@ -5,7 +5,7 @@
         "bme": <T>(methodName: string) => new BooleanMethodEvaluator<T>(methodName)
     };
 
-    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],]{1}");
+    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+]{1}");
 
     export class EvaluatorParser {
         static INSTANCE = new EvaluatorParser();
@@ -13,9 +13,10 @@
         public parse<T>(pattern: string): IEvaluator<T> {
             console.log("pattern = " + pattern);
             var evaluator: IEvaluator<T> = null;
+            var evaluators: Array<IEvaluator<T>> = null;
             var match: RegExpExecArray;
             var evaluatorType = "";
-            var constructorArguments = new Array<any>();
+            var constructorArguments: Array<any> = null;
             var constructorArgument: any = null;
             while (match = _symbolMatcher.exec(pattern)) {
                 console.log("match = " + match[0] + " (" + match.index + ")");
@@ -23,6 +24,7 @@
                     case "{":
                         // start of constructor arguments
                         evaluatorType = pattern.substring(0, match.index);
+                        constructorArguments = new Array<any>();
                         console.log("start of constructor arguments, evaluatorType = " + evaluatorType);
                         break;
                     case "}":
@@ -33,7 +35,13 @@
                             constructorArguments.push(constructorArgument);
                         }
                         console.log("constructorArguments = " + constructorArguments.join(", "));
-                        evaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
+                        var tempEvaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
+                        if (evaluators instanceof Array) {
+                            evaluators.push(tempEvaluator);
+                        } else {
+                            evaluator = tempEvaluator;
+                        }
+                        break;
                     case "[":
                         // start of array
                         console.log("start of array");
@@ -57,6 +65,11 @@
                         ((constructorArgument instanceof Array)
                             ? constructorArgument : constructorArguments).push(value);
                         console.log("element separator");
+                        break;
+                    case "+":
+                        evaluators = new Array<IEvaluator<T>>(evaluator);
+                        evaluator = new CompositeAndEvaluator(evaluators);
+                        console.log("and operator");
                         break;
                 }
                 pattern = pattern.substring(match.index + 1);
