@@ -7,6 +7,24 @@ var gameBuilder: Ut.IGameBuilderService = require("./Game.GameBuilder");
 describe("Game", () => {
     describe("Pieces", () => {
         describe("Evaluation", () => {
+            it("Should evaluate a Piece as Unoccupied", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var subjectPiece = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).first();
+
+                expect(subjectPiece.isOccupied()).toBeFalsy();
+
+                var evaluator = new Bge.Pieces.IsSubjectPieceOccupiedEvaluator();
+
+                expect(evaluator.evaluate(subjectPiece)).toBeFalsy();
+            });
+
             it("Should evaluate a Piece as Occupied", () => {
                 var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
