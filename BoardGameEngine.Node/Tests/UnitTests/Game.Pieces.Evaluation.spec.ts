@@ -104,6 +104,36 @@ describe("Game", () => {
 
                 expect(evaluator.evaluate(targetPiece)).toBeTruthy();
             });
+
+            it("Should evaluate Anded Evaluators", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1)
+                            .withUdlrAttachmentTo(["2"]))
+                        .withAPieceAt(["1x2"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
+
+                var subjectPiece = pieces[0];
+                var targetPiece = pieces[1];
+                var pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
+
+                TsNs.Joq
+                    .select<IPieceInteraction>(pieceInteractions)
+                    .first(inter => inter.location.coordinates.signature === "1x2")
+                    .complete();
+
+                var isPieceTypeOneEvaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["2"]);
+                var isOccupiedEvaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
+                var andedEvaluator = new Bge.Pieces.CompositeAndEvaluator([isPieceTypeOneEvaluator, isOccupiedEvaluator]);
+
+                expect(andedEvaluator.evaluate(targetPiece)).toBeTruthy();
+            });
         });
     });
 });

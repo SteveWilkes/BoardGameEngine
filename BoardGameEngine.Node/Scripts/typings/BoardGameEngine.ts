@@ -40,7 +40,7 @@
         AlwaysValidLocationEvaluator: typeof P.AlwaysValidLocationEvaluator;
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
         BooleanMethodEvaluator: new <T>(methodName: string) => P.BooleanMethodEvaluator<T>;
-        PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => P.PropertyEvaluator<T>;
+        CompositeAndEvaluator: new <T>(evaluators: Array<P.IEvaluator<T>>) => P.CompositeAndEvaluator<T>;
         IsTargetLocationOccupiedEvaluator: new () => P.IsTargetLocationOccupiedEvaluator;
         IsTargetLocationUnoccupiedEvaluator: new () => P.IsTargetLocationUnoccupiedEvaluator;
         IsSubjectPieceOccupiedEvaluator: new () => P.IsSubjectPieceOccupiedEvaluator;
@@ -52,6 +52,7 @@
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
         PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
+        PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => P.PropertyEvaluator<T>;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluators: Array<P.IPieceAndLocationEvaluator>, pathDestinationEvaluators: Array<P.IPieceAndLocationEvaluator>) => P.RelatedLocationCalculator;
     }
 
