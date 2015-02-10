@@ -16,7 +16,7 @@ describe("Game", () => {
                         .withAPieceAt(["1x1"], pc => pc
                             .withUdlrMovementBy(1))));
 
-                var subjectPiece = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).first();
+                var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
 
                 expect(subjectPiece.isOccupied()).toBeFalsy();
 
@@ -37,15 +37,15 @@ describe("Game", () => {
                         .withAPieceAt(["1x2"], pc => pc
                             .withUdlrMovementBy(1))));
 
-                var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
+                var pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
 
                 var subjectPiece = pieces[0];
                 var targetPiece = pieces[1];
                 var pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
 
                 TsNs.Joq
-                    .select(pieceInteractions, (inter: IPieceInteraction) => inter)
-                    .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "1x2")
+                    .select<IPieceInteraction>(pieceInteractions)
+                    .where(inter => inter.location.coordinates.signature === "1x2")
                     .first()
                     .complete();
 

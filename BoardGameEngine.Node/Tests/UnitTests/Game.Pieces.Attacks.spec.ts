@@ -22,19 +22,19 @@ describe("Game", () => {
 
             expect(game.teams.length).toBe(2);
 
-            var team1Pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
+            var team1Pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
             expect(team1Pieces.length).toBe(1);
             var subjectPiece = team1Pieces[0];
             var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
 
-            var team2Pieces = TsNs.Joq.select(game.teams[1].getPieces(), (p: Piece) => p).toArray();
+            var team2Pieces = TsNs.Joq.toArray<Piece>(game.teams[1].getPieces());
             expect(team2Pieces.length).toBe(1);
             var targetPiece = team2Pieces[0];
             var targetPiecePreAttackHealth = targetPiece.health;
 
             var attackInteraction = TsNs.Joq
-                .select(subjectPieceInteractions, (inter: IPieceInteraction) => inter)
-                .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "3x1")
+                .select<IPieceInteraction>(subjectPieceInteractions)
+                .where(inter => inter.location.coordinates.signature === "3x1")
                 .firstOrDefault();
 
             expect(attackInteraction).not.toBeNull();
@@ -67,10 +67,10 @@ describe("Game", () => {
 
             expect(game.teams.length).toBe(2);
 
-            var team1Pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
+            var team1Pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
             var subjectPiece = team1Pieces[0];
 
-            var team2Pieces = TsNs.Joq.select(game.teams[1].getPieces(), (p: Piece) => p).toArray();
+            var team2Pieces = TsNs.Joq.toArray<Piece>(game.teams[1].getPieces());
             var targetPiece = team2Pieces[0];
 
             i = 0;
@@ -79,8 +79,8 @@ describe("Game", () => {
                 var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
 
                 var attackInteraction = TsNs.Joq
-                    .select(subjectPieceInteractions, (inter: IPieceInteraction) => inter)
-                    .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "3x1")
+                    .select<IPieceInteraction>(subjectPieceInteractions)
+                    .where(inter => inter.location.coordinates.signature === "3x1")
                     .firstOrDefault();
 
                 if (attackInteraction == null) { break; }

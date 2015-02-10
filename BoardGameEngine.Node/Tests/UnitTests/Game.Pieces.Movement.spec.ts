@@ -102,7 +102,7 @@ describe("Game", () => {
                         .withUdlrMovementBy(2)
                         .wherePathStepsMustBeUnoccupied())));
 
-            var pieces = TsNs.Joq.select(game.teams[0].getPieces(), (p: Piece) => p).toArray();
+            var pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
             expect(pieces.length).toBe(3);
 
             var piece = pieces[0];
@@ -165,8 +165,8 @@ describe("Game", () => {
             expect(pieceInteractions).not.toBeNull();
 
             var moveUpOneSpaceInteraction = TsNs.Joq
-                .select(pieceInteractions, (inter: IPieceInteraction) => inter)
-                .where((inter: IPieceInteraction) => inter.location.coordinates.signature === "2x1")
+                .select<IPieceInteraction>(pieceInteractions)
+                .where(inter => inter.location.coordinates.signature === "2x1")
                 .firstOrDefault();
 
             expect(moveUpOneSpaceInteraction).not.toBeNull();

@@ -1,21 +1,22 @@
 ﻿module AgileObjects.TypeScript {
     var ignore = null;
 
-    export class JoqIterator<TResult> {
-        constructor(private _seed: any, private _handler: (propertyValue: any, propertyName: string) => TResult) { }
+    export class JoqIterator<TItem, TResult> {
+        constructor(private _seed: any, private _handler: (item: TItem) => TResult) { }
 
-        public select<TNewResult>(projection: (value: TResult) => TNewResult): JoqIterator<TNewResult> {
-            var handler = (propertyValue: any, propertyName: string) => {
-                var result = this._handler(propertyValue, propertyName);
+        public select<TNewResult>(projection: (value: TResult) => TNewResult): JoqIterator<TItem, TNewResult> {
+            var handler = (item: TItem) => {
+                var result = this._handler(item);
                 return projection(result);
             };
             return new JoqIterator(this._seed, handler);
         }
 
-        public where(predicate: (propertyValue: any, propertyName?: string) => boolean): JoqIterator<TResult> {
+        public where(predicate: (item: TResult) => boolean): JoqIterator<TItem, TResult> {
             var handlerSoFar = this._handler;
-            this._handler = (propertyValue: any, propertyName: string) => {
-                return predicate(propertyValue, propertyName) ? handlerSoFar(propertyValue, propertyName) : ignore;
+            this._handler = (item: TItem) => {
+                var result = handlerSoFar(item);
+                return predicate(result) ? result : ignore;
             };
             return this;
         }
@@ -23,8 +24,8 @@
         public first(): TResult {
             var result = ignore;
 
-            this._iterate((propertyValue, propertyName) => {
-                result = this._handler(propertyValue, propertyName);
+            this._iterate((item: TItem) => {
+                result = this._handler(item);
                 return false;
             });
 
@@ -36,8 +37,8 @@
         public firstOrDefault(defaultValue?: TResult): TResult {
             var result = null;
 
-            this._iterate((propertyValue, propertyName) => {
-                result = this._handler(propertyValue, propertyName);
+            this._iterate((item: TItem) => {
+                result = this._handler(item);
                 return (result === ignore);
             });
 
@@ -50,8 +51,8 @@
 
         public toArray(): Array<TResult> {
             var results = new Array<TResult>();
-            this._iterate((propertyValue, propertyName) => {
-                var result = this._handler(propertyValue, propertyName);
+            this._iterate((item: TItem) => {
+                var result = this._handler(item);
                 if (result !== ignore) { results.push(result); }
                 return true;
             });
