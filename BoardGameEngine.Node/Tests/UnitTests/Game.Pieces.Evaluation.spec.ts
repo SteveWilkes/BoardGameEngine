@@ -105,7 +105,7 @@ describe("Game", () => {
                 expect(evaluator.evaluate(targetPiece)).toBeTruthy();
             });
 
-            it("Should evaluate Anded Evaluators", () => {
+            it("Should evaluate Anded Evaluators to True", () => {
                 var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
@@ -133,6 +133,24 @@ describe("Game", () => {
                 var andedEvaluator = new Bge.Pieces.CompositeAndEvaluator([isPieceTypeOneEvaluator, isOccupiedEvaluator]);
 
                 expect(andedEvaluator.evaluate(targetPiece)).toBeTruthy();
+            });
+
+            it("Should evaluate Anded Evaluators to False", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+
+                var isPieceTypeOneEvaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["1"]);
+                var isOccupiedEvaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
+                var andedEvaluator = new Bge.Pieces.CompositeAndEvaluator([isPieceTypeOneEvaluator, isOccupiedEvaluator]);
+
+                expect(andedEvaluator.evaluate(subjectPiece)).toBeFalsy();
             });
         });
     });
