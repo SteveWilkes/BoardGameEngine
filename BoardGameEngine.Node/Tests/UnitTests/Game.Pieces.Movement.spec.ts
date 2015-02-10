@@ -166,8 +166,7 @@ describe("Game", () => {
 
             var moveUpOneSpaceInteraction = TsNs.Joq
                 .select<IPieceInteraction>(pieceInteractions)
-                .where(inter => inter.location.coordinates.signature === "2x1")
-                .firstOrDefault();
+                .firstOrDefault(inter => inter.location.coordinates.signature === "2x1");
 
             expect(moveUpOneSpaceInteraction).not.toBeNull();
 

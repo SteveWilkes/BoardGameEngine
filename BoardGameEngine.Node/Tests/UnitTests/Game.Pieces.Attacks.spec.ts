@@ -34,8 +34,7 @@ describe("Game", () => {
 
             var attackInteraction = TsNs.Joq
                 .select<IPieceInteraction>(subjectPieceInteractions)
-                .where(inter => inter.location.coordinates.signature === "3x1")
-                .firstOrDefault();
+                .firstOrDefault(inter => inter.location.coordinates.signature === "3x1");
 
             expect(attackInteraction).not.toBeNull();
             expect(attackInteraction.location.contains(targetPiece)).toBeTruthy();
@@ -80,8 +79,7 @@ describe("Game", () => {
 
                 var attackInteraction = TsNs.Joq
                     .select<IPieceInteraction>(subjectPieceInteractions)
-                    .where(inter => inter.location.coordinates.signature === "3x1")
-                    .firstOrDefault();
+                    .firstOrDefault(inter => inter.location.coordinates.signature === "3x1");
 
                 if (attackInteraction == null) { break; }
 

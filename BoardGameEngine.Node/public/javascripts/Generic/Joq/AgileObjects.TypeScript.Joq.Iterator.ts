@@ -34,7 +34,18 @@
             throw new Error("No properties to iterate");
         }
 
-        public firstOrDefault(defaultValue?: TResult): TResult {
+        public firstOrDefault(predicate?: (item: TResult) => boolean): TResult;
+        public firstOrDefault(defaultValue?: TResult): TResult;
+        public firstOrDefault(predicate?: any, defaultValue?: TResult): TResult {
+            if ((defaultValue == null) && (typeof predicate !== "function")) {
+                defaultValue = <TResult>predicate;
+                predicate = null;
+            }
+
+            if (typeof predicate === "function") {
+                return new JoqIterator(this._seed, this._handler).where(predicate).firstOrDefault(defaultValue);
+            }
+
             var result = null;
 
             this._iterate((item: TItem) => {

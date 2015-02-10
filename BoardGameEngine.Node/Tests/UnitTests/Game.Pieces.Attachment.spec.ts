@@ -29,8 +29,7 @@ describe("Game", () => {
 
             var attachmentInteraction = TsNs.Joq
                 .select<IPieceInteraction>(pieceInteractions)
-                .where(inter => inter.location.coordinates.signature === "1x2")
-                .firstOrDefault();
+                .firstOrDefault(inter => inter.location.coordinates.signature === "1x2");
 
             // The piece at 1x1 can move to 1x2 but only attaches 
             // to the type of piece at 1x3, so there shouldn't be 
@@ -60,8 +59,7 @@ describe("Game", () => {
 
             var attachmentInteraction = TsNs.Joq
                 .select<IPieceInteraction>(pieceInteractions)
-                .where(inter => inter.location.coordinates.signature === "1x2")
-                .firstOrDefault();
+                .firstOrDefault(inter => inter.location.coordinates.signature === "1x2");
 
             expect(attachmentInteraction).not.toBeNull();
 
