@@ -108,6 +108,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\AlwaysValidLocationEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\NegationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\CompositeOrEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\CompositeAndEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IEvaluator.ts" />

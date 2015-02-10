@@ -48,6 +48,7 @@
         IsSubjectPieceUnoccupiedEvaluator: new () => P.IsSubjectPieceUnoccupiedEvaluator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
+        NegationEvaluator: new <T>(evaluator: P.IEvaluator<T>) => P.NegationEvaluator<T>;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         OccupiedTargetLocationEvaluator: new (allowedSameTeamPieceDefinitionIds: Array<string>, allowedOtherTeamPieceDefinitionIds: Array<string>) => P.OccupiedTargetLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
