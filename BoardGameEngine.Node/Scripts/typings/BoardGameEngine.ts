@@ -10,6 +10,7 @@
         BooleanMethodEvaluator: new <T>(methodName: string) => Ts.Evaluation.BooleanMethodEvaluator<T>;
         CompositeAndEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeAndEvaluator<T>;
         CompositeOrEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeOrEvaluator<T>;
+        EvaluatorParser: typeof Ts.Evaluation.EvaluatorParser;
         NegationEvaluator: new <T>(evaluator: Ts.Evaluation.IEvaluator<T>) => Ts.Evaluation.NegationEvaluator<T>;
         PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => Ts.Evaluation.PropertyEvaluator<T>;
     }
