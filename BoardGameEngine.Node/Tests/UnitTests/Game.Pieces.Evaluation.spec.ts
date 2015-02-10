@@ -152,6 +152,42 @@ describe("Game", () => {
 
                 expect(andedEvaluator.evaluate(subjectPiece)).toBeFalsy();
             });
+
+            it("Should evaluate Ored Evaluators to True", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+
+                var isPieceTypeOneEvaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["1"]);
+                var isOccupiedEvaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
+                var oredEvaluator = new Bge.Pieces.CompositeOrEvaluator([isPieceTypeOneEvaluator, isOccupiedEvaluator]);
+
+                expect(oredEvaluator.evaluate(subjectPiece)).toBeTruthy();
+            });
+
+            it("Should evaluate Ored Evaluators to False", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+
+                var isPieceTypeOneEvaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["2"]);
+                var isOccupiedEvaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
+                var oredEvaluator = new Bge.Pieces.CompositeOrEvaluator([isPieceTypeOneEvaluator, isOccupiedEvaluator]);
+
+                expect(oredEvaluator.evaluate(subjectPiece)).toBeFalsy();
+            });
         });
     });
 });

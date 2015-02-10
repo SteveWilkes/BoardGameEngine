@@ -41,6 +41,7 @@
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
         BooleanMethodEvaluator: new <T>(methodName: string) => P.BooleanMethodEvaluator<T>;
         CompositeAndEvaluator: new <T>(evaluators: Array<P.IEvaluator<T>>) => P.CompositeAndEvaluator<T>;
+        CompositeOrEvaluator: new <T>(evaluators: Array<P.IEvaluator<T>>) => P.CompositeOrEvaluator<T>;
         IsTargetLocationOccupiedEvaluator: new () => P.IsTargetLocationOccupiedEvaluator;
         IsTargetLocationUnoccupiedEvaluator: new () => P.IsTargetLocationUnoccupiedEvaluator;
         IsSubjectPieceOccupiedEvaluator: new () => P.IsSubjectPieceOccupiedEvaluator;
