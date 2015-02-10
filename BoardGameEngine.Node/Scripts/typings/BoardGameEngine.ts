@@ -6,12 +6,21 @@
     import Ts = AgileObjects.TypeScript;
     import Svc = AgileObjects.Angular.Services;
 
+    interface Evaluation {
+        BooleanMethodEvaluator: new <T>(methodName: string) => Ts.Evaluation.BooleanMethodEvaluator<T>;
+        CompositeAndEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeAndEvaluator<T>;
+        CompositeOrEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeOrEvaluator<T>;
+        NegationEvaluator: new <T>(evaluator: Ts.Evaluation.IEvaluator<T>) => Ts.Evaluation.NegationEvaluator<T>;
+        PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => Ts.Evaluation.PropertyEvaluator<T>;
+    }
+
     interface TypeScript {
         Coordinates: new (row: number, column: number, signature?: string) => Ts.Coordinates;
         CoordinateTranslator: new (directionFunctionName: string, distance: number) => Ts.CoordinateTranslator;
         CoordinateTranslatorRegistry: typeof Ts.CoordinateTranslatorRegistry;
         CoordinatesRegistry: typeof Ts.CoordinatesRegistry;
         Dictionary: new <TKey, TValue>() => Ts.Dictionary<TKey, TValue>;
+        Evaluation: Evaluation;
         Joq: typeof Ts.Joq;
         RandomStringGenerator: new () => Ts.RandomStringGenerator;
     }
@@ -39,22 +48,17 @@
     interface Pieces {
         AlwaysValidLocationEvaluator: typeof P.AlwaysValidLocationEvaluator;
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
-        BooleanMethodEvaluator: new <T>(methodName: string) => P.BooleanMethodEvaluator<T>;
-        CompositeAndEvaluator: new <T>(evaluators: Array<P.IEvaluator<T>>) => P.CompositeAndEvaluator<T>;
-        CompositeOrEvaluator: new <T>(evaluators: Array<P.IEvaluator<T>>) => P.CompositeOrEvaluator<T>;
         IsTargetLocationOccupiedEvaluator: new () => P.IsTargetLocationOccupiedEvaluator;
         IsTargetLocationUnoccupiedEvaluator: new () => P.IsTargetLocationUnoccupiedEvaluator;
         IsSubjectPieceOccupiedEvaluator: new () => P.IsSubjectPieceOccupiedEvaluator;
         IsSubjectPieceUnoccupiedEvaluator: new () => P.IsSubjectPieceUnoccupiedEvaluator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
-        NegationEvaluator: new <T>(evaluator: P.IEvaluator<T>) => P.NegationEvaluator<T>;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         OccupiedTargetLocationEvaluator: new (allowedSameTeamPieceDefinitionIds: Array<string>, allowedOtherTeamPieceDefinitionIds: Array<string>) => P.OccupiedTargetLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
         PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
-        PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => P.PropertyEvaluator<T>;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluators: Array<P.IPieceAndLocationEvaluator>, pathDestinationEvaluators: Array<P.IPieceAndLocationEvaluator>) => P.RelatedLocationCalculator;
     }
 

@@ -108,12 +108,12 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\AlwaysValidLocationEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\NegationEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\CompositeOrEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\CompositeAndEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\PropertyEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\BooleanMethodEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.NegationEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.CompositeOrEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.CompositeAndEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.PropertyEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.BooleanMethodEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IPieceEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsSubjectPieceOccupiedEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\Validation\IsSubjectPieceUnoccupiedEvaluator.ts" />
@@ -187,7 +187,7 @@
     <TypeScriptCompile Include="Tests\UnitTests\Game.Imports.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attacks.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Evaluation.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Evaluation.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Movement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
@@ -221,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\javascripts\Generic\Joq\" />
+    <Folder Include="public\javascripts\Generic\Evaluation\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />

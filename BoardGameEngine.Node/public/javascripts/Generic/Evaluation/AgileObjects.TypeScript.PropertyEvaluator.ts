@@ -1,4 +1,5 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.TypeScript.Evaluation {
+
     export class PropertyEvaluator<T> {
         constructor(private _propertyName, private _allowedValues: Array<any>) { }
 

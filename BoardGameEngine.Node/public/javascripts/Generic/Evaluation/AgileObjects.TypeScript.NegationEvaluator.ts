@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.TypeScript.Evaluation {
 
     export class NegationEvaluator<T> implements IEvaluator<T> {
         constructor(private _evaluator: IEvaluator<T>) { }

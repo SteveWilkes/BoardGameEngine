@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.TypeScript.Evaluation {
     export class BooleanMethodEvaluator<T> {
         constructor(private _methodName: string) { }
 

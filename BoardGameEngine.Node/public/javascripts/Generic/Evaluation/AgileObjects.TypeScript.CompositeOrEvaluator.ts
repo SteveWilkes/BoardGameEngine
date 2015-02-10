@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.TypeScript.Evaluation {
 
     export class CompositeOrEvaluator<T> implements IEvaluator<T> {
         constructor(private _evaluators: Array<IEvaluator<T>>) { }
