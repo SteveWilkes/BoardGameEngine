@@ -5,7 +5,7 @@
         "bme": <T>(methodName: string) => new BooleanMethodEvaluator<T>(methodName)
     };
 
-    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+]{1}");
+    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+\\|]{1}");
 
     export class EvaluatorParser {
         static INSTANCE = new EvaluatorParser();
@@ -70,6 +70,11 @@
                         evaluators = new Array<IEvaluator<T>>(evaluator);
                         evaluator = new CompositeAndEvaluator(evaluators);
                         console.log("and operator");
+                        break;
+                    case "|":
+                        evaluators = new Array<IEvaluator<T>>(evaluator);
+                        evaluator = new CompositeOrEvaluator(evaluators);
+                        console.log("or operator");
                         break;
                 }
                 pattern = pattern.substring(match.index + 1);

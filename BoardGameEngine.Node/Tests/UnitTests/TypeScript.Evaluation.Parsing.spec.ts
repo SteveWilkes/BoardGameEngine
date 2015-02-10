@@ -56,5 +56,20 @@ describe("TypeScript", () => {
 
             expect(result).toBeTruthy();
         });
+
+        it("Should parse a CompositeOrEvaluator", () => {
+            var propertyName = "test";
+            var propertyValue = "abc";
+            var methodName = "getValue";
+            var item = {};
+            item[propertyName] = propertyValue;
+            item[methodName] = () => false;
+
+            var pattern = "bme{" + methodName + "}|pe{" + propertyName + ",[" + propertyValue + "]}";
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+            var result = evaluator.evaluate(item);
+
+            expect(result).toBeTruthy();
+        });
     });
 });
