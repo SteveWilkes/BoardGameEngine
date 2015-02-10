@@ -20,7 +20,7 @@ describe("Game", () => {
 
                 expect(subjectPiece.isOccupied()).toBeFalsy();
 
-                var evaluator = new Bge.Pieces.IsSubjectPieceOccupiedEvaluator();
+                var evaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
 
                 expect(evaluator.evaluate(subjectPiece)).toBeFalsy();
             });
@@ -45,14 +45,13 @@ describe("Game", () => {
 
                 TsNs.Joq
                     .select<IPieceInteraction>(pieceInteractions)
-                    .where(inter => inter.location.coordinates.signature === "1x2")
-                    .first()
+                    .first(inter => inter.location.coordinates.signature === "1x2")
                     .complete();
 
                 expect(targetPiece.isOccupied()).toBeTruthy();
                 expect(targetPiece.piece).toBe(subjectPiece);
 
-                var evaluator = new Bge.Pieces.IsSubjectPieceOccupiedEvaluator();
+                var evaluator = new Bge.Pieces.BooleanMethodEvaluator<Piece>("isOccupied");
 
                 expect(evaluator.evaluate(targetPiece)).toBeTruthy();
             });

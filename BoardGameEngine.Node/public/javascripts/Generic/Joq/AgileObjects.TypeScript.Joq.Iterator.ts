@@ -21,7 +21,11 @@
             return this;
         }
 
-        public first(): TResult {
+        public first(predicate?: (item: TResult) => boolean): TResult {
+            if (typeof predicate === "function") {
+                return new JoqIterator(this._seed, this._handler).where(predicate).first();
+            }
+
             var result = ignore;
 
             this._iterate((item: TItem) => {
