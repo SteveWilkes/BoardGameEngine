@@ -181,6 +181,7 @@
     <TypeScriptCompile Include="Tests\UnitTests\Game.Imports.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attacks.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Evaluation.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Movement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
