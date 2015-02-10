@@ -36,7 +36,7 @@ describe("Game", () => {
 
                 var evaluator = new Bge.Pieces.IsSubjectPieceOccupiedEvaluator();
 
-                expect(evaluator.isValid(targetPiece)).toBeTruthy();
+                expect(evaluator.evaluate(targetPiece)).toBeTruthy();
             });
         });
     });

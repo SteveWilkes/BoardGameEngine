@@ -12,7 +12,7 @@
             this._allOtherTeamPiecesAllowed = this._allowedOtherTeamPieceDefinitionIds.indexOf("*") === 0;
         }
 
-        public isValid(subjectPiece: Piece, targetLocation: IPieceLocation): boolean {
+        public evaluate(subjectPiece: Piece, targetLocation: IPieceLocation): boolean {
             if (!targetLocation.isOccupied()) { return false; }
 
             var isSameTeam = targetLocation.piece.team === subjectPiece.team;

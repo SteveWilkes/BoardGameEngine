@@ -10,7 +10,7 @@
             private _availabilityEvaluator: IPieceEvaluator) { }
 
         public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
-            if (!this._availabilityEvaluator.isValid(startingLocation.piece)) {
+            if (!this._availabilityEvaluator.evaluate(startingLocation.piece)) {
                 return _noInteractions;
             }
 
