@@ -4,16 +4,28 @@ var TsNs = Ao.TypeScript;
 
 describe("TypeScript", () => {
     describe("Evaluation", () => {
-        it("Should parse to a property evaluator", () => {
+        it("Should parse a PropertyEvaluator", () => {
             var propertyName = "test";
             var propertyValue = "123";
             var item = {};
             item[propertyName] = propertyValue;
-            var pattern = "pv{" + propertyName + "," + propertyValue + "}";
 
+            var pattern = "pe{" + propertyName + ",[" + propertyValue + "]}";
             var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+            var result = evaluator.evaluate(item);
 
-            expect(evaluator.evaluate(item)).toBeTruthy();
+            expect(result).toBeTruthy();
+        });
+        it("Should parse a BooleanMethodEvaluator", () => {
+            var methodName = "getValue";
+            var item = {};
+            item[methodName] = () => true;
+
+            var pattern = "bme{" + methodName + "}";
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+            var result = evaluator.evaluate(item);
+
+            expect(result).toBeTruthy();
         });
     });
 });

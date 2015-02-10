@@ -86,7 +86,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.TryGetResult.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\EvaluatorParser.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorParser.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.Iterator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
