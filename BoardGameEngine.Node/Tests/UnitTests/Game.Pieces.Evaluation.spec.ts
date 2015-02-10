@@ -24,6 +24,7 @@ describe("Game", () => {
 
                 expect(evaluator.evaluate(subjectPiece)).toBeTruthy();
             });
+
             it("Should evaluate a Piece definitionId array match", () => {
                 var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
@@ -34,12 +35,25 @@ describe("Game", () => {
                             .withUdlrMovementBy(1))));
 
                 var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-
-                expect(subjectPiece.definitionId).toBe("1");
-
                 var evaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["0", "1", "2"]);
 
                 expect(evaluator.evaluate(subjectPiece)).toBeTruthy();
+            });
+
+
+            it("Should evaluate a Piece definitionId mismatch", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var subjectPiece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+                var evaluator = new Bge.Pieces.PropertyEvaluator<Piece>("definitionId", ["2", "4"]);
+
+                expect(evaluator.evaluate(subjectPiece)).toBeFalsy();
             });
 
             it("Should evaluate a Piece as Unoccupied", () => {
