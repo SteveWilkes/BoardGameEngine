@@ -5,7 +5,7 @@
         "bme": <T>(methodName: string) => new BooleanMethodEvaluator<T>(methodName)
     };
 
-    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+\\|]{1}");
+    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+\\|!]{1}");
 
     export class EvaluatorParser {
         static INSTANCE = new EvaluatorParser();
@@ -18,9 +18,14 @@
             var evaluatorType = "";
             var constructorArguments: Array<any> = null;
             var constructorArgument: any = null;
+            var negate = false;
             while (match = _symbolMatcher.exec(pattern)) {
                 console.log("match = " + match[0] + " (" + match.index + ")");
                 switch (match[0]) {
+                    case "!":
+                        negate = true;
+                        console.log("Negation");
+                        break;
                     case "{":
                         // start of constructor arguments
                         evaluatorType = pattern.substring(0, match.index);
@@ -36,6 +41,9 @@
                         }
                         console.log("constructorArguments = " + constructorArguments.join(", "));
                         var tempEvaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
+                        if (negate) {
+                            tempEvaluator = new NegationEvaluator(tempEvaluator);
+                        }
                         if (evaluators instanceof Array) {
                             evaluators.push(tempEvaluator);
                         } else {
