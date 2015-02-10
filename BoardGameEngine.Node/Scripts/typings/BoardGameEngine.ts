@@ -39,9 +39,10 @@
     interface Pieces {
         AlwaysValidLocationEvaluator: typeof P.AlwaysValidLocationEvaluator;
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
+        BooleanMethodEvaluator: new <T>(methodName: string) => P.BooleanMethodEvaluator<T>;
+        PropertyEvaluator: new <T>(propertyName: string, allowedValues: Array<any>) => P.PropertyEvaluator<T>;
         IsTargetLocationOccupiedEvaluator: new () => P.IsTargetLocationOccupiedEvaluator;
         IsTargetLocationUnoccupiedEvaluator: new () => P.IsTargetLocationUnoccupiedEvaluator;
-        BooleanMethodEvaluator: new <T>(methodName: string) => P.BooleanMethodEvaluator<T>;
         IsSubjectPieceOccupiedEvaluator: new () => P.IsSubjectPieceOccupiedEvaluator;
         IsSubjectPieceUnoccupiedEvaluator: new () => P.IsSubjectPieceUnoccupiedEvaluator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
