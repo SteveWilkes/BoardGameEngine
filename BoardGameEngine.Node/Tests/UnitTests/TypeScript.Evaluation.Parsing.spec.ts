@@ -54,6 +54,26 @@ describe("TypeScript", () => {
             expect(result).toBeFalsy();
         });
 
+        it("Should parse a negated Evaluator in a Composite Evaluator", () => {
+            var propertyName = "test";
+            var propertyValue = "abc";
+            var methodName = "getValue";
+            var item = {};
+
+            var pattern = "!bme{" + methodName + "}+pe{" + propertyName + ",[" + propertyValue + "]}";
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+
+            item[propertyName] = "ijefnj";
+            item[methodName] = () => true;
+            expect(evaluator.evaluate(item)).toBeFalsy();
+
+            item[propertyName] = propertyValue;
+            expect(evaluator.evaluate(item)).toBeFalsy();
+
+            item[methodName] = () => false;
+            expect(evaluator.evaluate(item)).toBeTruthy();
+        });
+
         it("Should parse a CompositeAndEvaluator", () => {
             var propertyName = "test";
             var propertyValue = "abc";
