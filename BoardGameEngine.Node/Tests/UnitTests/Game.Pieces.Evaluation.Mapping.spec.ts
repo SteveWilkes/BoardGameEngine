@@ -14,6 +14,14 @@ describe("Game", () => {
 
                     expect(result).toBe("bme(isOccupied)");
                 });
+
+                it("Should map Piece.definitionId", () => {
+                    var source = "p.d=1";
+
+                    var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
+
+                    expect(result).toBe("pe(definitionId,[1])");
+                });
             });
         });
     });
