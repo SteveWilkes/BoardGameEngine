@@ -30,6 +30,20 @@ describe("TypeScript", () => {
             expect(result).toBeTruthy();
         });
 
+        it("Should parse a nested PropertyEvaluator", () => {
+            var propertyName = "test";
+            var propertyValue = "123";
+            var item = {};
+            item[propertyName] = {};
+            item[propertyName][propertyName] = propertyValue;
+
+            var pattern = "pe{" + propertyName + "." + propertyName + ",[" + propertyValue + "]}";
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+            var result = evaluator.evaluate(item);
+
+            expect(result).toBeTruthy();
+        });
+
         it("Should parse a BooleanMethodEvaluator", () => {
             var methodName = "getValue";
             var item = {};

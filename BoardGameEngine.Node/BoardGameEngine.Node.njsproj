@@ -89,6 +89,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorData.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorParser.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.Iterator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
@@ -97,6 +98,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Extensions.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IGetQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\PieceEvaluatorMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AddDestinationPieceToPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AttackDestinationPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\InteractionType.ts" />
@@ -190,6 +192,7 @@
     <TypeScriptCompile Include="Tests\UnitTests\Game.Imports.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attacks.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Evaluation.Mapping.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Evaluation.Parsing.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Evaluation.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Movement.spec.ts">
@@ -226,6 +229,7 @@
   <ItemGroup>
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
+    <Folder Include="public\javascripts\Pieces\Evaluation\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />

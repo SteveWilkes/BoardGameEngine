@@ -1,9 +1,9 @@
 ﻿module AgileObjects.TypeScript.Evaluation {
-    export class BooleanMethodEvaluator<T> {
-        constructor(private _methodName: string) { }
+    var _booleanTrue = [true];
 
-        public evaluate(item: T): boolean {
-            return item[this._methodName]();
+    export class BooleanMethodEvaluator<T> extends EvaluatorBase<T> {
+        constructor(methodName: string) {
+            super(methodName, _booleanTrue);
         }
     }
 }
