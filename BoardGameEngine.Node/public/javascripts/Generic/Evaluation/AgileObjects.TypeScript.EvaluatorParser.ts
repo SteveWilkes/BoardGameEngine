@@ -5,16 +5,17 @@
         "bme": <T>(methodName: string) => new BooleanMethodEvaluator<T>(methodName)
     };
 
-    var _symbolMatcher = new RegExp("[\\{\\}\\[\\],+\\|!]{1}");
+    var _symbolMatcher = new RegExp("[\\(\\)\\{\\}\\[\\],+\\|!]{1}");
+    var _groupMatcher = new RegExp("[\\(\\)]{1}");
 
     export class EvaluatorParser {
         static INSTANCE = new EvaluatorParser();
 
         public parse<T>(pattern: string): IEvaluator<T> {
             console.log("pattern = " + pattern);
-            var evaluator: IEvaluator<T> = null;
+            var evaluator: IEvaluator<T> = null, tempEvaluator: IEvaluator<T> = null;
             var evaluators: Array<IEvaluator<T>> = null;
-            var match: RegExpExecArray;
+            var match: RegExpExecArray, groupMatch: RegExpExecArray;
             var evaluatorType = "";
             var constructorArguments: Array<any> = null;
             var constructorArgument: any = null;
@@ -22,6 +23,37 @@
             while (match = _symbolMatcher.exec(pattern)) {
                 console.log("match = " + match[0] + " (" + match.index + ")");
                 switch (match[0]) {
+                    case "(":
+                        console.log("Start of group");
+                        var numberOfOpenSubGroups = 0, groupEndIndex = 0;
+                        while (groupMatch = _groupMatcher.exec(pattern.substring(1))) {
+                            if (groupMatch[0] === "(") {
+                                ++numberOfOpenSubGroups;
+                            } else {
+                                if (numberOfOpenSubGroups === 0) {
+                                    groupEndIndex = groupMatch.index;
+                                    match = groupMatch;
+                                    break;
+                                } else {
+                                    --numberOfOpenSubGroups;
+                                }
+                            }
+                        }
+                        var groupPattern = pattern.substring(1, groupEndIndex + 1);
+                        tempEvaluator = this.parse<T>(groupPattern);
+                        if (negate) {
+                            tempEvaluator = new NegationEvaluator(tempEvaluator);
+                            negate = false;
+                        }
+                        if (evaluators instanceof Array) {
+                            evaluators.push(tempEvaluator);
+                        } else {
+                            evaluator = tempEvaluator;
+                        }
+                        break;
+                    case ")":
+                        console.log("End of group");
+                        break;
                     case "!":
                         negate = true;
                         console.log("Negation");
@@ -40,9 +72,10 @@
                             constructorArguments.push(constructorArgument);
                         }
                         console.log("constructorArguments = " + constructorArguments.join(", "));
-                        var tempEvaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
+                        tempEvaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
                         if (negate) {
                             tempEvaluator = new NegationEvaluator(tempEvaluator);
+                            negate = false;
                         }
                         if (evaluators instanceof Array) {
                             evaluators.push(tempEvaluator);

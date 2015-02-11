@@ -83,5 +83,54 @@ describe("TypeScript", () => {
 
             expect(result).toBeTruthy();
         });
+
+        it("Should parse a grouped CompositeAndEvaluator", () => {
+            var propertyName = "test";
+            var propertyValue1 = "abc";
+            var propertyValue2 = "xyz";
+            var methodName = "getValue";
+            var item = {};
+            item[methodName] = () => true;
+
+            var pattern =
+                "(pe{" + propertyName + ",[" + propertyValue1 + "]}+bme{" + methodName + "})" +
+                "|" +
+                "pe{" + propertyName + ",[" + propertyValue2 + "]}";
+
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+
+            item[propertyName] = propertyValue1;
+            expect(evaluator.evaluate(item)).toBeTruthy();
+
+            item[propertyName] = propertyValue2;
+            expect(evaluator.evaluate(item)).toBeTruthy();
+
+            item[propertyName] = "hjdfkbj";
+            expect(evaluator.evaluate(item)).toBeFalsy();
+        });
+
+        it("Should parse a grouped CompositeOrEvaluator", () => {
+            var propertyName = "test";
+            var propertyValue1 = "abc";
+            var propertyValue2 = "xyz";
+            var methodName = "getValue";
+            var item = {};
+
+            var pattern =
+                "pe{" + propertyName + ",[" + propertyValue1 + "]}+" +
+                "(bme{" + methodName + "}|pe{" + propertyName + ",[" + propertyValue2 + "]})";
+
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+
+            item[propertyName] = propertyValue1;
+            item[methodName] = () => true;
+            expect(evaluator.evaluate(item)).toBeTruthy();
+
+            item[methodName] = () => false;
+            expect(evaluator.evaluate(item)).toBeFalsy();
+
+            item[propertyName] = propertyValue2;
+            expect(evaluator.evaluate(item)).toBeFalsy();
+        });
     });
 });
