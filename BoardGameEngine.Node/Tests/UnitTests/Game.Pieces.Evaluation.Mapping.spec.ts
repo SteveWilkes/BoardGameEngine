@@ -15,6 +15,14 @@ describe("Game", () => {
                     expect(result).toBe("bme(isOccupied)");
                 });
 
+                it("Should map !Piece.isOccupied", () => {
+                    var source = "!p.io";
+
+                    var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
+
+                    expect(result).toBe("!bme(isOccupied)");
+                });
+
                 it("Should map Piece.piece.isOccupied", () => {
                     var source = "p.p.io";
 
