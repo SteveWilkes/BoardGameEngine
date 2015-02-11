@@ -15,12 +15,28 @@ describe("Game", () => {
                     expect(result).toBe("bme(isOccupied)");
                 });
 
+                it("Should map Piece.piece.isOccupied", () => {
+                    var source = "p.p.io";
+
+                    var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
+
+                    expect(result).toBe("bme(piece.isOccupied)");
+                });
+
                 it("Should map Piece.definitionId", () => {
                     var source = "p.d=1";
 
                     var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
 
                     expect(result).toBe("pe(definitionId,[1])");
+                });
+
+                it("Should map Piece.piece.definitionId", () => {
+                    var source = "p.p.d=1,2,3";
+
+                    var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
+
+                    expect(result).toBe("pe(piece.definitionId,[1,2,3])");
                 });
             });
         });

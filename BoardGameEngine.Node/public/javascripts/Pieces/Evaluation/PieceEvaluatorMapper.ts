@@ -1,8 +1,9 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces.Evaluation {
 
     var replacers = {
-        "bme(isOccupied)": new RegExp("\\bp.io\\b", "g"),
-        "pe(definitionId,[$1])": new RegExp("\\bp.d=([0-9,]+)\\b", "g")
+        "bme($1isOccupied)": new RegExp("\\b(p\\.)?p.io\\b", "g"),
+        "pe($1definitionId,[$2])": new RegExp("\\b(p\\.)?p.d=([0-9,]+)\\b", "g"),
+        "piece.": new RegExp("\\bp\\.", "g")
     };
 
     export class PieceEvaluatorMapper {
