@@ -13,13 +13,11 @@
 
         public parse<T>(pattern: string): IEvaluator<T> {
             console.log("pattern = " + pattern);
-            var evaluator: IEvaluator<T> = null, tempEvaluator: IEvaluator<T> = null;
-            var evaluators: Array<IEvaluator<T>> = null;
-            var match: RegExpExecArray, groupMatch: RegExpExecArray;
+            var evaluatorSet = new EvaluatorSet<T>();
+            var match: RegExpExecArray;
             var evaluatorType = "";
             var constructorArguments: Array<any> = null;
             var constructorArgument: any = null;
-            var negate = false;
             while (match = _symbolMatcher.exec(pattern)) {
                 console.log("match = " + match[0] + " (" + match.index + ")");
                 switch (match[0]) {
@@ -27,22 +25,13 @@
                         console.log("Start of group");
                         match = this._getGroupEndMatch(pattern);
                         var groupPattern = pattern.substring(1, match.index + 1);
-                        tempEvaluator = this.parse<T>(groupPattern);
-                        if (negate) {
-                            tempEvaluator = new NegationEvaluator(tempEvaluator);
-                            negate = false;
-                        }
-                        if (evaluators instanceof Array) {
-                            evaluators.push(tempEvaluator);
-                        } else {
-                            evaluator = tempEvaluator;
-                        }
+                        evaluatorSet.add(this.parse<T>(groupPattern));
                         break;
                     case ")":
                         console.log("End of group");
                         break;
                     case "!":
-                        negate = true;
+                        evaluatorSet.negate = true;
                         console.log("Negation");
                         break;
                     case "{":
@@ -59,16 +48,7 @@
                             constructorArguments.push(constructorArgument);
                         }
                         console.log("constructorArguments = " + constructorArguments.join(", "));
-                        tempEvaluator = _evaluatorFactories[evaluatorType].apply(null, constructorArguments);
-                        if (negate) {
-                            tempEvaluator = new NegationEvaluator(tempEvaluator);
-                            negate = false;
-                        }
-                        if (evaluators instanceof Array) {
-                            evaluators.push(tempEvaluator);
-                        } else {
-                            evaluator = tempEvaluator;
-                        }
+                        evaluatorSet.add(_evaluatorFactories[evaluatorType].apply(null, constructorArguments));
                         break;
                     case "[":
                         // start of array
@@ -95,13 +75,11 @@
                         console.log("element separator");
                         break;
                     case "+":
-                        evaluators = new Array<IEvaluator<T>>(evaluator);
-                        evaluator = new CompositeAndEvaluator(evaluators);
+                        evaluatorSet.setToAnd();
                         console.log("and operator");
                         break;
                     case "|":
-                        evaluators = new Array<IEvaluator<T>>(evaluator);
-                        evaluator = new CompositeOrEvaluator(evaluators);
+                        evaluatorSet.setToOr();
                         console.log("or operator");
                         break;
                 }
@@ -109,9 +87,9 @@
                 console.log("pattern updated to " + pattern);
             }
 
-            if (evaluator !== null) {
+            if (evaluatorSet.evaluator !== null) {
                 console.log("");
-                return evaluator;
+                return evaluatorSet.evaluator;
             }
 
             throw new Error("Unable to parse Evaluator");
@@ -133,6 +111,9 @@
             }
 
             throw new Error("Unable to parse group end match");
+        }
+
+        private _balls<T>(evaluator: IEvaluator<T>, negate: boolean) {
         }
     }
 }
