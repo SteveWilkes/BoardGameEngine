@@ -4,7 +4,8 @@
         static INSTANCE = new PieceEvaluatorMapper();
 
         public map(pattern: string): string {
-            return pattern;
+
+            return pattern.replace("p.io", "bme(isOccupied)");
         }
     }
 }
