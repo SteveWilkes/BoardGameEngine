@@ -63,7 +63,7 @@
                             constructorArgument.push(pattern.substring(0, match.index));
                         }
                         // ReSharper disable once QualifiedExpressionMaybeNull
-                        constructorArguments.push(constructorArgument.slice(0));
+                        constructorArguments.push(constructorArgument);
                         console.log("Added array of length " + constructorArguments[constructorArguments.length - 1].length);
                         constructorArgument = null;
                         break;
