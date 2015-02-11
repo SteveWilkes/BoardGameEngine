@@ -25,21 +25,8 @@
                 switch (match[0]) {
                     case "(":
                         console.log("Start of group");
-                        var numberOfOpenSubGroups = 0, groupEndIndex = 0;
-                        while (groupMatch = _groupMatcher.exec(pattern.substring(1))) {
-                            if (groupMatch[0] === "(") {
-                                ++numberOfOpenSubGroups;
-                            } else {
-                                if (numberOfOpenSubGroups === 0) {
-                                    groupEndIndex = groupMatch.index;
-                                    match = groupMatch;
-                                    break;
-                                } else {
-                                    --numberOfOpenSubGroups;
-                                }
-                            }
-                        }
-                        var groupPattern = pattern.substring(1, groupEndIndex + 1);
+                        match = this._getGroupEndMatch(pattern);
+                        var groupPattern = pattern.substring(1, match.index + 1);
                         tempEvaluator = this.parse<T>(groupPattern);
                         if (negate) {
                             tempEvaluator = new NegationEvaluator(tempEvaluator);
@@ -130,14 +117,22 @@
             throw new Error("Unable to parse Evaluator");
         }
 
-        private _parseEvaluator<T>(segment: string): IEvaluator<T> {
-            var evaluatorData = segment.substring(0, segment.length - 1).split("{");
-            var evaluatorType = evaluatorData[0];
-            var constructorData = evaluatorData[1].split(",");
-            var propertyName = constructorData[0];
-            var allowedValues = constructorData.slice(1);
+        private _getGroupEndMatch(pattern: string): RegExpExecArray {
+            var groupMatch: RegExpExecArray;
+            var numberOfOpenSubGroups = 0;
+            while (groupMatch = _groupMatcher.exec(pattern.substring(1))) {
+                if (groupMatch[0] === "(") {
+                    ++numberOfOpenSubGroups;
+                } else {
+                    if (numberOfOpenSubGroups === 0) {
+                        return groupMatch;
+                    } else {
+                        --numberOfOpenSubGroups;
+                    }
+                }
+            }
 
-            return _evaluatorFactories[evaluatorType].apply(null, [propertyName, allowedValues]);
+            throw new Error("Unable to parse group end match");
         }
     }
 }
