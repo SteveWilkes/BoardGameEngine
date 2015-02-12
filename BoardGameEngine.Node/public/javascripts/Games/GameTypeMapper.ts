@@ -14,8 +14,9 @@
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
                 this._mapTurnInteractions(gameTypeDataItems[2]),
-                this._mapPieceDefinitions(gameTypeDataItems[3]),
-                this._mapPieceConfigDataSet(gameTypeDataItems[4]));
+                new Pieces.PieceDataSet(
+                    this._mapPieceDefinitions(gameTypeDataItems[3]),
+                    this._mapPieceConfigDataSet(gameTypeDataItems[4])));
         }
 
         private _mapTurnInteractions(turnInteractionData: string): Array<Pieces.InteractionType> {

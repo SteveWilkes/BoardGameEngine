@@ -85,6 +85,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");
+    assets.addJs("/public/javascripts/Pieces/PieceDataSet.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinitionMapper.js");
     assets.addJs("/public/javascripts/Teams/Team.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.js");

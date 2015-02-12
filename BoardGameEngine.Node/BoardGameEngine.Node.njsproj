@@ -77,6 +77,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameType.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
@@ -155,7 +156,6 @@
     <TypeScriptCompile Include="public\javascripts\Teams\ITeamOwner.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
-    <TypeScriptCompile Include="public\javascripts\Teams\ITeamConfigData.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\GameEventPropogator.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
     <TypeScriptCompile Include="routes\index.ts" />

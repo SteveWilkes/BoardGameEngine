@@ -44,7 +44,7 @@
                 var player = new Players.Player(playerData.id, playerData.isHuman);
                 game.add(player);
                 for (var j = 0; j < playerData.numberOfTeams; j++) {
-                    var team = this._teamFactory.createTeamFor(player, teamNumber, game.type);
+                    var team = this._teamFactory.createTeamFor(player, teamNumber, game.type.pieceData);
                     game.board.add(team);
 
                     ++teamNumber;

@@ -17,10 +17,10 @@
             var player2 = new Players.Player("CPU", false);
             game.add(player2);
 
-            var team1 = this._teamFactory.createTeamFor(player1, 1, game.type);
+            var team1 = this._teamFactory.createTeamFor(player1, 1, game.type.pieceData);
             game.board.add(team1);
 
-            var team2 = this._teamFactory.createTeamFor(player2, 2, game.type);
+            var team2 = this._teamFactory.createTeamFor(player2, 2, game.type.pieceData);
             game.board.add(team2);
 
             return game;
