@@ -5,9 +5,9 @@
             var allPotentialInteractions = this._getAllPotentialInteractions(team, game);
             var moveInteractions = new Array<Pieces.IPieceInteraction>();
             var interaction = Pieces.NullPotentialInteraction.INSTANCE;
-            while (interaction.type !== Pieces.InteractionType.Move) {
+            while (interaction.type !== Pieces.InteractionType.move) {
                 interaction = this._getRandomInteraction(allPotentialInteractions);
-                if (interaction.type === Pieces.InteractionType.Attack) {
+                if (interaction.type === Pieces.InteractionType.attack) {
                     moveInteractions.push(interaction);
                     allPotentialInteractions = this._getAllPotentialInteractions(team, game);
                     continue;

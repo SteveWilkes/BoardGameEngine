@@ -7,7 +7,7 @@
             path: Array<IPieceLocation>,
             private _events: Games.GameEventSet) {
 
-            super(id, piece, path, InteractionType.Move);
+            super(id, piece, path, InteractionType.move);
         }
 
         public complete(): void {

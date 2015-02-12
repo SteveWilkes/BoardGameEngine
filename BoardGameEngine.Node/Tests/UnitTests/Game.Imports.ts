@@ -7,3 +7,4 @@ import T = AgileObjects.BoardGameEngine.Teams;
 import Ts = AgileObjects.TypeScript;
 import IPieceInteraction = P.IPieceInteraction;
 import Piece = P.Piece;
+import InteractionType = P.InteractionType;

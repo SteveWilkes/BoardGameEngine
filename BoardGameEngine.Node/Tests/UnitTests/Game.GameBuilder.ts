@@ -3,8 +3,8 @@ var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 
-var move = P.InteractionType.Move;
-var attack = P.InteractionType.Attack;
+var move = InteractionType.move;
+var attack = InteractionType.attack;
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
@@ -12,7 +12,7 @@ class PieceConfiguration {
         this.interactionCalculators = new Array<P.PieceInteractionCalculator>();
     }
 
-    public interactionType: P.InteractionType;
+    public interactionType: InteractionType;
     public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
     public pathStepLocationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
     public pathDestinationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
@@ -185,14 +185,14 @@ class TeamBuilder {
 
 class GameConfiguration {
     constructor() {
-        this.turnInteractions = new Array<P.InteractionType>();
+        this.turnInteractions = new Array<InteractionType>();
         this.boardRowConfigs = new Array<B.BoardRowConfig>();
         this.boardPositions = new Array<B.BoardPosition>();
         this.players = new Array<Pl.Player>();
         this.teams = new Array<T.Team>();
     }
 
-    public turnInteractions: Array<P.InteractionType>;
+    public turnInteractions: Array<InteractionType>;
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
@@ -218,7 +218,7 @@ class GameConfigurator {
         return this.withTurnInteractions([attack, move]);
     }
 
-    public withTurnInteractions(turnInteractions: Array<P.InteractionType>): GameConfigurator {
+    public withTurnInteractions(turnInteractions: Array<InteractionType>): GameConfigurator {
         this._configuration.turnInteractions = turnInteractions;
         return this;
     }

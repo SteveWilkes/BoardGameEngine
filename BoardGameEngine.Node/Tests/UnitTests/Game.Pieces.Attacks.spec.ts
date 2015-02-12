@@ -4,7 +4,7 @@ var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 var gameBuilder: Ut.IGameBuilderService = require("./Game.GameBuilder");
 
-var attack = P.InteractionType.Attack;
+var attack = InteractionType.attack;
 
 describe("Game", () => {
     describe("Pieces", () => {
@@ -49,7 +49,7 @@ describe("Game", () => {
                 var numberOfAllowedAttacks = 100;
                 var i;
 
-                var lotsOfAttacks = new Array<P.InteractionType>(numberOfAllowedAttacks);
+                var lotsOfAttacks = new Array<InteractionType>(numberOfAllowedAttacks);
                 for (i = 0; i < numberOfAllowedAttacks; i++) {
                     lotsOfAttacks[i] = attack;
                 }

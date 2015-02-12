@@ -6,8 +6,8 @@
 
         constructor(private _turnInteractions: Array<Pieces.InteractionType>, private _events: Games.GameEventSet) {
             this._events.turnStarted.subscribe(team => this._turnStarted(team));
-            this._events.pieceMoved.subscribe((movement, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.Move, movement.destination.piece, eventData));
-            this._events.pieceAttacked.subscribe((attack, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.Attack, attack.target, eventData));
+            this._events.pieceMoved.subscribe((movement, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.move, movement.destination.piece, eventData));
+            this._events.pieceAttacked.subscribe((attack, eventData) => this._adjustRemainingTurnInteractions(Pieces.InteractionType.attack, attack.target, eventData));
         }
 
         private _turnStarted(team: Pieces.IPieceOwner): boolean {

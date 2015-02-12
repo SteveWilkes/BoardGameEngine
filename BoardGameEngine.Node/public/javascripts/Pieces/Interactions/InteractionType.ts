@@ -1,4 +1,4 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export enum InteractionType { Move, Attack }
+    export enum InteractionType { move, attack }
 }

@@ -69,6 +69,53 @@ describe("Game", () => {
                 expect(startingLocation.isOccupied()).toBeFalsy();
                 expect(targetPiece.isOccupied()).toBeTruthy();
             });
+
+            it("Should pass an attached piece from one piece to another", () => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withTurnInteractions([InteractionType.move, InteractionType.move])
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                        .withAPieceAt(["1x1"], pc => pc
+                            .withUdlrMovementBy(1)
+                            .withUdlrAttachmentTo(["2"]))
+                        .withAPieceAt(["2x1", "2x2"], pc => pc
+                            .withUdlrMovementBy(1))));
+
+                var pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
+
+                var pieceInteractions, attachmentInteraction;
+
+                var subjectPiece = pieces[0];
+                var targetPiece1 = pieces[1];
+                var targetPiece2 = pieces[2];
+
+                pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
+
+                attachmentInteraction = TsNs.Joq
+                    .select<IPieceInteraction>(pieceInteractions)
+                    .firstOrDefault(inter => inter.location.coordinates.signature === "2x1");
+
+                expect(attachmentInteraction.location.piece).toBe(targetPiece1);
+
+                attachmentInteraction.complete();
+
+                expect(subjectPiece.location).toBe(targetPiece1);
+
+                pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
+
+                attachmentInteraction = TsNs.Joq
+                    .select<IPieceInteraction>(pieceInteractions)
+                    .firstOrDefault(inter => inter.location.coordinates.signature === "2x2");
+
+                expect(attachmentInteraction.location.piece).toBe(targetPiece2);
+
+                attachmentInteraction.complete();
+
+                expect(subjectPiece.location).toBe(targetPiece2);
+                expect(targetPiece2.isOccupied()).toBeTruthy();
+                expect(targetPiece1.isOccupied()).toBeFalsy();
+            });
         });
     });
 });
