@@ -84,11 +84,11 @@ describe("Game", () => {
 
                 var pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
 
-                var pieceInteractions, attachmentInteraction;
-
                 var subjectPiece = pieces[0];
                 var targetPiece1 = pieces[1];
                 var targetPiece2 = pieces[2];
+
+                var pieceInteractions, attachmentInteraction;
 
                 pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(subjectPiece, game);
 
