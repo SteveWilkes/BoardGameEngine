@@ -99,14 +99,7 @@ class PieceConfigurator {
     private _addEvaluator(evaluatorSignatureFactory: () => string, evaluatorName: string) {
         var evaluatorSignature = evaluatorSignatureFactory();
         var evaluatorPattern = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(evaluatorSignature);
-        console.log("Mapped pattern " + evaluatorPattern);
-        try {
-            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse<P.IPieceLocation>(evaluatorPattern);
-        } catch (err) {
-            console.log("Errored");
-            throw err;
-        }
-        console.log("");
+        var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse<P.IPieceLocation>(evaluatorPattern);
         this._configuration[evaluatorName] = evaluator;
         return this;
     }
