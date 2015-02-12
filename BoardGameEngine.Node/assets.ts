@@ -19,6 +19,16 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorRegistry.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.AlwaysTrueEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorBase.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.BooleanMethodEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.PropertyEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.NegationEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.CompositeAndEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.CompositeOrEvaluator.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorData.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorSet.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorParser.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
@@ -48,6 +58,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceAttack.js");
     assets.addJs("/public/javascripts/GlobalEventSet.js");
     assets.addJs("/public/javascripts/Games/GameEventSet.js");
+    assets.addJs("/public/javascripts/Pieces/Evaluation/PieceEvaluatorMapper.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionBase.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovementInteractionBase.js");
@@ -70,12 +81,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Ui/GameEventPropogator.js");
     assets.addJs("/public/javascripts/Ui/CompositeGameUiComponent.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/AlwaysValidLocationEvaluator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsTargetLocationOccupiedEvaluator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsTargetLocationUnoccupiedEvaluator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsSubjectPieceOccupiedEvaluator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/IsSubjectPieceUnoccupiedEvaluator.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/Validation/OccupiedTargetLocationEvaluator.js");
+    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionContext.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinition.js");

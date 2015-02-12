@@ -14,7 +14,7 @@ describe("Game", () => {
 
                 var oneSpaceUp = new TsNs.CoordinateTranslator("up", 1);
                 var twoSpacesRight = new TsNs.CoordinateTranslator("right", 2);
-                var lShapeLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp, twoSpacesRight]], [], []);
+                var lShapeLocationCalculator = new Bge.Pieces.RelatedLocationCalculator([[oneSpaceUp, twoSpacesRight]], null, null);
                 var lShapeFromBottomLeft = lShapeLocationCalculator.calculateLocationPaths(bottomLeftTile, tiles);
 
                 expect(lShapeFromBottomLeft).not.toBeNull();
@@ -83,7 +83,7 @@ describe("Game", () => {
                         .withAPieceAt(["1x1"], pc => pc
                             .withUdlrMovementBy(2)
                             .whereDestinationsMustBeUnoccupied()
-                            .where(Bge.Pieces.IsSubjectPieceOccupiedEvaluator))));
+                            .wherePieceMustBeOccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
                 var pieceInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);

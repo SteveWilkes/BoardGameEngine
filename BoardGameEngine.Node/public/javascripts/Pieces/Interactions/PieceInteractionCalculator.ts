@@ -7,7 +7,7 @@
             public type: InteractionType,
             private _locationCalculators: Array<RelatedLocationCalculator>,
             private _interaction: new (id: string, piece: Piece, path: Array<IPieceLocation>, events: Games.GameEventSet) => IPieceInteraction,
-            private _availabilityEvaluator: IPieceEvaluator) { }
+            private _availabilityEvaluator: Evaluation.IPieceEvaluator) { }
 
         public getPotentialInteractions(startingLocation: IPieceLocation, game: Games.Game): Array<IPieceInteraction> {
             if (!this._availabilityEvaluator.evaluate(startingLocation.piece)) {

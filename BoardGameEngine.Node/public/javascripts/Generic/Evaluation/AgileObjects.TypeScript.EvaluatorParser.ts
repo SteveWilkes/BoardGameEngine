@@ -5,8 +5,8 @@
         "bme": <T>(methodName: string) => new BooleanMethodEvaluator<T>(methodName)
     };
 
-    var _symbolMatcher = new RegExp("[\\(\\)\\{\\}\\[\\],+\\|!]{1}");
-    var _groupMatcher = new RegExp("[\\(\\)]{1}");
+    var _symbolMatcher = new RegExp("[\\(\\)\\{\\}\\[\\],+\\|!]");
+    var _groupMatcher = new RegExp("[\\(\\)]");
 
     export class EvaluatorParser {
         static INSTANCE = new EvaluatorParser();

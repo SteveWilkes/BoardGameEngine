@@ -17,22 +17,6 @@
         "a1": AttackDestinationPieceInteraction
     };
 
-    var _locationValidatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => IPieceAndLocationEvaluator> = {
-        "lo": () => IsTargetLocationOccupiedEvaluator.INSTANCE,
-        "lu": () => IsTargetLocationUnoccupiedEvaluator.INSTANCE,
-        "po": () => IsSubjectPieceOccupiedEvaluator.INSTANCE,
-        "pu": () => IsSubjectPieceUnoccupiedEvaluator.INSTANCE,
-        "oe": (sameTeamIds: string, otherTeamIds: string) => new OccupiedTargetLocationEvaluator(sameTeamIds.split(","), otherTeamIds.split(","))
-    };
-
-    var _pieceValidatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => IPieceEvaluator> = {
-        "po": () => IsSubjectPieceOccupiedEvaluator.INSTANCE,
-        "pu": () => IsSubjectPieceUnoccupiedEvaluator.INSTANCE
-    };
-
-    var _noLocationValidators = new Array<IPieceAndLocationEvaluator>();
-    var _noArguments = new Array<string>();
-
     export class PieceDefinitionMapper {
         static INSTANCE = new PieceDefinitionMapper();
 
@@ -69,7 +53,7 @@
                 type,
                 this._mapRelatedLocationCalculators(interactionCalculatorDataItems[2]),
                 _pieceInteractionConstructorsById[interactionTypeId],
-                this._mapPieceValidator(interactionCalculatorDataItems[3]));
+                this._mapEvaluator<Piece>(interactionCalculatorDataItems[3]));
         }
 
         private _mapRelatedLocationCalculators(locationCalculatorData: string): Array<RelatedLocationCalculator> {
@@ -86,8 +70,8 @@
 
             return new RelatedLocationCalculator(
                 this._mapCoordinateTranslatorSets(locationCalculatorDataItems[0]),
-                this._mapPieceAndLocationValidators(locationCalculatorDataItems[1]),
-                this._mapPieceAndLocationValidators(locationCalculatorDataItems[2]));
+                this._mapEvaluator<PieceInteractionContext>(locationCalculatorDataItems[1]),
+                this._mapEvaluator<PieceInteractionContext>(locationCalculatorDataItems[2]));
         }
 
         private _mapCoordinateTranslatorSets(coordinateTranslatorSetData: string): Array<Array<Ts.CoordinateTranslator>> {
@@ -123,41 +107,14 @@
             return _coordinateTranslatorsBySignature[signature];
         }
 
-        private _mapPieceAndLocationValidators(locationValidatorData: string): Array<IPieceAndLocationEvaluator> {
-            if (locationValidatorData.length === 0) { return _noLocationValidators; }
-
-            var locationValidatorDataItems = locationValidatorData.split("|");
-            var locationValidators = new Array<IPieceAndLocationEvaluator>(locationValidatorDataItems.length);
-            for (var i = 0; i < locationValidatorDataItems.length; i++) {
-                locationValidators[i] = this._mapPieceAndLocationValidator(locationValidatorDataItems[i]);
-            }
-            return locationValidators;
-        }
-
-        private _mapPieceAndLocationValidator(validatorData: string): IPieceAndLocationEvaluator {
-            return this._mapValidator(validatorData, _locationValidatorFactoriesById);
-        }
-
-        private _mapPieceValidator(validatorData: string): IPieceEvaluator {
-            return this._mapValidator(validatorData, _pieceValidatorFactoriesById);
-        }
-
-        private _mapValidator<TValidator>(
-            validatorData: string,
-            validatorFactoriesById: Ts.IStringDictionary<(...args: Array<string>) => TValidator>): TValidator {
-
-            if (validatorData == null) {
-                return <TValidator><Object>AlwaysValidLocationEvaluator.INSTANCE;
+        private _mapEvaluator<T>(evaluatorData: string): Ts.Evaluation.IEvaluator<T> {
+            if ((evaluatorData || "").length === 0) {
+                return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }
 
-            var validatorDataItems = validatorData.split("$");
-            var validatorId = validatorDataItems[0];
+            var evaluatorPattern = Evaluation.PieceEvaluatorMapper.INSTANCE.map(evaluatorData);
 
-            var validatorConstructorArgs = (validatorDataItems.length > 1)
-                ? validatorDataItems[1].split("+")
-                : _noArguments;
-
-            return validatorFactoriesById[validatorId].apply(this, validatorConstructorArgs);
+            return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }
     }
 }

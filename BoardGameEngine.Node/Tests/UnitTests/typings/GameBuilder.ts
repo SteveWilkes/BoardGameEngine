@@ -6,10 +6,8 @@
         withUdlrInfiniteMovement(): IPieceConfigurator;
         withUdlrAttackOver(distance: number): IPieceConfigurator;
         wherePathStepsMustBeUnoccupied(): IPieceConfigurator;
-        withPathStepsValidatedBy(...validators: Array<new () => Pieces.IPieceAndLocationEvaluator>): IPieceConfigurator;
         whereDestinationsMustBeUnoccupied(): IPieceConfigurator;
-        withDestinationsValidatedBy(...validators: Array<new () => Pieces.IPieceAndLocationEvaluator>): IPieceConfigurator;
-        where(availabilityValidator: new () => Pieces.IPieceAndLocationEvaluator): IPieceConfigurator;
+        wherePieceMustBeOccupied(): IPieceConfigurator;
         and(): IPieceConfigurator;
     }
 

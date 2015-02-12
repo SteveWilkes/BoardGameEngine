@@ -26,7 +26,6 @@ describe("TypeScript", () => {
             expect(evaluator.evaluate(item)).toBeTruthy();
         });
 
-
         it("Should evaluate a property value to False", () => {
             var propertyName = "test";
             var propertyValue = "123";
@@ -38,10 +37,26 @@ describe("TypeScript", () => {
             expect(evaluator.evaluate(item)).toBeFalsy();
         });
 
+        it("Should evaluate a property value to a derived value", () => {
+            var propertyName1 = "test1";
+            var propertyName2 = "test2";
+            var propertyValue = "iou";
+            var item = {};
+            item[propertyName1] = propertyValue;
+            item[propertyName2] = propertyValue;
+
+            var evaluator = new TsNs.Evaluation.PropertyEvaluator(propertyName1, ["F:" + propertyName2]);
+
+            expect(evaluator.evaluate(item)).toBeTruthy();
+        });
+
         it("Should evaluate a method value to True", () => {
+            var propertyName = "test";
+            var propertyValue = "123";
             var methodName = "getValue";
             var item = {};
-            item[methodName] = () => true;
+            item[propertyName] = propertyValue;
+            item[methodName] = function () { return this[propertyName] === propertyValue; }
 
             var evaluator = new TsNs.Evaluation.BooleanMethodEvaluator(methodName);
 
@@ -49,9 +64,12 @@ describe("TypeScript", () => {
         });
 
         it("Should evaluate a method value to False", () => {
+            var propertyName = "test";
+            var propertyValue = "123";
             var methodName = "getValue";
             var item = {};
-            item[methodName] = () => false;
+            item[propertyName] = "jndlk";
+            item[methodName] = function () { return this[propertyName] === propertyValue; }
 
             var evaluator = new TsNs.Evaluation.BooleanMethodEvaluator(methodName);
 

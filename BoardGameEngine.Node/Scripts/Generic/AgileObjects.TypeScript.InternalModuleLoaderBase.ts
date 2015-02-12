@@ -32,7 +32,7 @@ class Instantiation {
 
 class InstantiationFinder extends RegexClassFinderBase {
     constructor() {
-        super("[=\\b]?new (_?[A-Z]{1}[a-zA-Z0-9_\\.]+)\\(");
+        super("[=\\b]?new (_?[A-Z][a-zA-Z0-9_\\.]+)\\(");
     }
 
     public getInstantiations(classData: ClassData): Array<Instantiation> {
@@ -57,7 +57,7 @@ class Import {
 }
 
 var nonMemberCharacters = new RegExp("[^a-zA-Z0-9\\._]+", "g");
-var staticImport = "(?:var ([A-Z]{1}[a-zA-Z0-9_]+))? ?= ?((?:[A-Z]{1}[a-zA-Z0-9_]+\\.)+[A-Z]{1}[a-zA-Z0-9_]+);";
+var staticImport = "(?:var ([A-Z][a-zA-Z0-9_]+))? ?= ?((?:[A-Z][a-zA-Z0-9_]+\\.)+[A-Z][a-zA-Z0-9_]+);";
 var baseClassReference = "\\}\\)\\(([a-zA-Z0-9_\\.]+)\\);";
 
 class ImportFinder extends RegexClassFinderBase {
@@ -81,7 +81,7 @@ class ImportFinder extends RegexClassFinderBase {
                 importPath = importPath || importMatch[3];
                 importUsages.push(importPath);
             } else {
-                var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(]{1}[^\\(;,]+[\\(;,]{1})", "g");
+                var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(][^\\(;,]+[\\(;,])", "g");
                 var loggedImportUsages = new Array<string>();
                 var match: RegExpExecArray;
                 while (match = importUsageFinder.exec(classData.script)) {
@@ -104,9 +104,9 @@ class ImportFinder extends RegexClassFinderBase {
 
 // #region ClassData
 
-var namespaceSegmentMatcher = new RegExp("^[ \\t]*var ([A-Z]{1}[a-zA-Z0-9_]+);[^\\(]+^[ \\t]*\\(function ?\\(_?\\1\\) ?\\{", "gm");
-var classNamePattern = "var ([A-Z]{1}[a-zA-Z0-9_]+) ?= ?\\(function ?\\((?:_super)?\\)";
-var enumNamePattern = "\\(function ?\\(([A-Z]{1}[a-zA-Z0-9_]+)\\) ?\\{[^ \\t]+[ \\t]*\\1\\[\\1\\[";
+var namespaceSegmentMatcher = new RegExp("^[ \\t]*var ([A-Z][a-zA-Z0-9_]+);[^\\(]+^[ \\t]*\\(function ?\\(_?\\1\\) ?\\{", "gm");
+var classNamePattern = "var ([A-Z][a-zA-Z0-9_]+) ?= ?\\(function ?\\((?:_super)?\\)";
+var enumNamePattern = "\\(function ?\\(([A-Z][a-zA-Z0-9_]+)\\) ?\\{[^ \\t]+[ \\t]*\\1\\[\\1\\[";
 var classNameMatcher = new RegExp(classNamePattern + "|" + enumNamePattern);
 
 class ClassData {
@@ -143,7 +143,7 @@ class ClassData {
 
 // #endregion
 
-var rootNamespaceDeclarationFinder = new RegExp("^var ([A-Z]{1}[a-zA-Z0-9_]+);$", "gm");
+var rootNamespaceDeclarationFinder = new RegExp("^var ([A-Z][a-zA-Z0-9_]+);$", "gm");
 
 class InternalModuleLoaderBase {
     private _convertedSourceFilePath: string;

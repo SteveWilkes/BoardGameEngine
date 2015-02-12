@@ -1,10 +1,18 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
+    import Ts = TypeScript;
+
     export class RelatedLocationCalculator {
         constructor(
-            private _coordinateTranslatorSets: Array<Array<TypeScript.CoordinateTranslator>>,
-            private _pathStepLocationValidators: Array<IPieceAndLocationEvaluator>,
-            private _pathDestinationValidators: Array<IPieceAndLocationEvaluator>) {
+            private _coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>,
+            private _pathStepLocationEvaluator: Evaluation.IPieceInteractionContextEvaluator,
+            private _pathDestinationEvaluator: Evaluation.IPieceInteractionContextEvaluator) {
+            if (this._pathStepLocationEvaluator == null) {
+                this._pathStepLocationEvaluator = Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
+            }
+            if (this._pathDestinationEvaluator == null) {
+                this._pathDestinationEvaluator = Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
+            }
         }
 
         public calculateLocationPaths(
@@ -12,23 +20,24 @@
             allLocations: IPieceLocationDictionary,
             gridSize?: number): Array<Array<IPieceLocation>> {
 
+            var context = new PieceInteractionContext(startingLocation);
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
-                var paths = this._calculatePaths(startingLocation, allLocations, gridSize, this._coordinateTranslatorSets[i]);
+                var paths = this._calculatePaths(context, allLocations, gridSize, this._coordinateTranslatorSets[i]);
                 if (paths.length > 0) { allPaths = allPaths.concat(paths); }
             }
             return allPaths;
         }
 
         private _calculatePaths(
-            startingLocation: IPieceLocation,
+            context: PieceInteractionContext,
             allLocations: IPieceLocationDictionary,
             gridSize: number,
-            coordinateTranslators: Array<TypeScript.CoordinateTranslator>): Array<Array<IPieceLocation>> {
+            coordinateTranslators: Array<Ts.CoordinateTranslator>): Array<Array<IPieceLocation>> {
 
             var allPaths = new Array<Array<IPieceLocation>>();
-            var path = new Array<IPieceLocation>(startingLocation);
-            var startingCoordinates = startingLocation.coordinates;
+            var path = new Array<IPieceLocation>(context.startingLocation);
+            var startingCoordinates = context.startingLocation.coordinates;
             for (var i = 0; i < coordinateTranslators.length; i++) {
                 var locationCoordinatesPath = coordinateTranslators[i].getPath(startingCoordinates, gridSize);
                 var pathInvalid = false;
@@ -39,7 +48,7 @@
                         break;
                     }
                     path.push(allLocations[locationCoordinates.signature]);
-                    if (this._pathIsValid(path, startingLocation)) {
+                    if (this._pathIsValid(path, context)) {
                         allPaths.push(path.slice(0, path.length));
                     }
                 }
@@ -50,18 +59,16 @@
             return allPaths;
         }
 
-        private _pathIsValid(path: Array<IPieceLocation>, startingLocation: IPieceLocation): boolean {
+        private _pathIsValid(path: Array<IPieceLocation>, context: PieceInteractionContext): boolean {
             for (var i = 1; i < path.length; i++) {
 
-                var validators = (i === (path.length - 1))
-                    ? this._pathDestinationValidators
-                    : this._pathStepLocationValidators;
+                var evaluator = (i === (path.length - 1))
+                    ? this._pathDestinationEvaluator
+                    : this._pathStepLocationEvaluator;
 
-                for (var j = 0; j < validators.length; j++) {
-                    if (!validators[j].evaluate(startingLocation.piece, path[i])) {
-                        return false;
-                    }
-                }
+                context.location = path[i];
+
+                if (!evaluator.evaluate(context)) { return false; }
             }
 
             return true;

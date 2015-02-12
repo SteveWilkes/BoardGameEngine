@@ -8,38 +8,32 @@ var attack = P.InteractionType.Attack;
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
-        this.setMemberArrays();
+        this.coordinateTranslatorSets = new Array<Array<Ts.CoordinateTranslator>>();
         this.interactionCalculators = new Array<P.PieceInteractionCalculator>();
     }
 
     public interactionType: P.InteractionType;
     public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
-    public pathStepLocationEvaluators: Array<P.IPieceAndLocationEvaluator>;
-    public pathDestinationEvaluators: Array<P.IPieceAndLocationEvaluator>;
+    public pathStepLocationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
+    public pathDestinationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
-    public availabilityEvaluator: P.IPieceEvaluator;
+    public availabilityEvaluator: P.Evaluation.IPieceEvaluator;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {
         var relatedLocationCalculator = new Bge.Pieces.RelatedLocationCalculator(
             this.coordinateTranslatorSets,
-            this.pathStepLocationEvaluators,
-            this.pathDestinationEvaluators);
+            this.pathStepLocationEvaluator,
+            this.pathDestinationEvaluator);
 
         this.interactionCalculators.push(
             new Bge.Pieces.PieceInteractionCalculator(
                 this.interactionType,
                 [relatedLocationCalculator],
                 this.interaction,
-                this.availabilityEvaluator || Bge.Pieces.AlwaysValidLocationEvaluator.INSTANCE));
+                this.availabilityEvaluator || TsNs.Evaluation.AlwaysTrueEvaluator.INSTANCE));
 
-        this.setMemberArrays();
-    }
-
-    private setMemberArrays() {
         this.coordinateTranslatorSets = new Array<Array<Ts.CoordinateTranslator>>();
-        this.pathStepLocationEvaluators = new Array<P.IPieceAndLocationEvaluator>();
-        this.pathDestinationEvaluators = new Array<P.IPieceAndLocationEvaluator>();
     }
 }
 
@@ -65,9 +59,9 @@ class PieceConfigurator {
         this._configuration.interactionType = move;
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationPieceInteraction;
 
-        this._addEvaluators(
-            [() => new Bge.Pieces.OccupiedTargetLocationEvaluator(pieceDefinitionIds, [])],
-            this._configuration.pathDestinationEvaluators);
+        this._addEvaluator(
+            () => "l.io+l.p.d=" + pieceDefinitionIds.join(","),
+            "pathDestinationEvaluator");
 
         return this._addUdlrTranslators(distance || 1);
     }
@@ -91,34 +85,29 @@ class PieceConfigurator {
     }
 
     public wherePathStepsMustBeUnoccupied(): PieceConfigurator {
-        return this.withPathStepsValidatedBy(Bge.Pieces.IsTargetLocationUnoccupiedEvaluator);
-    }
-
-    public withPathStepsValidatedBy(...Evaluators: Array<new () => P.IPieceAndLocationEvaluator>): PieceConfigurator {
-        return this._addEvaluators(this._constructorsToFactories(Evaluators), this._configuration.pathStepLocationEvaluators);
+        return this._addEvaluator(() => "!l.io", "pathStepLocationEvaluator");
     }
 
     public whereDestinationsMustBeUnoccupied(): PieceConfigurator {
-        return this.withDestinationsValidatedBy(Bge.Pieces.IsTargetLocationUnoccupiedEvaluator);
+        return this._addEvaluator(() => "!l.io", "pathDestinationEvaluator");
     }
 
-    public withDestinationsValidatedBy(...Evaluators: Array<new () => P.IPieceAndLocationEvaluator>): PieceConfigurator {
-        return this._addEvaluators(this._constructorsToFactories(Evaluators), this._configuration.pathDestinationEvaluators);
+    public wherePieceMustBeOccupied(): PieceConfigurator {
+        return this._addEvaluator(() => "io", "availabilityEvaluator");
     }
 
-    private _constructorsToFactories(constructors: Array<new () => P.IPieceAndLocationEvaluator>) {
-        return TsNs.Joq.select(constructors, v => () => <P.IPieceAndLocationEvaluator>new v()).toArray();
-    }
-
-    private _addEvaluators(Evaluators: Array<() => P.IPieceAndLocationEvaluator>, configurationArray: Array<P.IPieceAndLocationEvaluator>) {
-        for (var i = 0; i < Evaluators.length; i++) {
-            configurationArray.push(Evaluators[i]());
+    private _addEvaluator(evaluatorSignatureFactory: () => string, evaluatorName: string) {
+        var evaluatorSignature = evaluatorSignatureFactory();
+        var evaluatorPattern = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(evaluatorSignature);
+        console.log("Mapped pattern " + evaluatorPattern);
+        try {
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse<P.IPieceLocation>(evaluatorPattern);
+        } catch (err) {
+            console.log("Errored");
+            throw err;
         }
-        return this;
-    }
-
-    public where(availabilityEvaluator: new () => P.IPieceEvaluator): PieceConfigurator {
-        this._configuration.availabilityEvaluator = new availabilityEvaluator();
+        console.log("");
+        this._configuration[evaluatorName] = evaluator;
         return this;
     }
 

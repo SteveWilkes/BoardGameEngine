@@ -1,17 +1,20 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces.Evaluation {
 
-    var replacers = {
-        "bme($1isOccupied)": new RegExp("\\b(p\\.)?p.io\\b", "g"),
-        "pe($1definitionId,[$2])": new RegExp("\\b(p\\.)?p.d=([0-9,]+)\\b", "g"),
-        "piece.": new RegExp("\\bp\\.", "g")
+    var matchers: Ts.IStringDictionary<RegExp> = {
+        "bme{$1isOccupied}": new RegExp("\\b((?:[lpt]\\.)*)io\\b", "g"),
+        "pe{$1definitionId,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)d=([0-9,a-z\\.F:]+)\\b", "g"),
+        "pe{$1id,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)id=([0-9,a-z\\.F:]+)\\b", "g"),
+        "piece.": new RegExp("\\bp\\.", "g"),
+        "team.": new RegExp("\\bt\\.", "g"),
+        "location.": new RegExp("\\bl\\.", "g")
     };
 
     export class PieceEvaluatorMapper {
         static INSTANCE = new PieceEvaluatorMapper();
 
         public map(pattern: string): string {
-            for (var replacement in replacers) {
-                var matcher = replacers[replacement];
+            for (var replacement in matchers) {
+                var matcher = matchers[replacement];
                 pattern = pattern.replace(matcher, replacement);
             }
             return pattern;

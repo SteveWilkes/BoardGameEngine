@@ -3,10 +3,12 @@
     import B = Bge.Boards;
     import G = Bge.Games;
     import P = Bge.Pieces;
+    import Ev = P.Evaluation;
     import Ts = AgileObjects.TypeScript;
     import Svc = AgileObjects.Angular.Services;
 
     interface TypeScriptEvaluation {
+        AlwaysTrueEvaluator: typeof Ts.Evaluation.AlwaysTrueEvaluator;
         BooleanMethodEvaluator: new <T>(methodName: string) => Ts.Evaluation.BooleanMethodEvaluator<T>;
         CompositeAndEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeAndEvaluator<T>;
         CompositeOrEvaluator: new <T>(evaluators: Array<Ts.Evaluation.IEvaluator<T>>) => Ts.Evaluation.CompositeOrEvaluator<T>;
@@ -47,25 +49,19 @@
     }
 
     interface PieceEvaluation {
-        PieceEvaluatorMapper: typeof P.Evaluation.PieceEvaluatorMapper;
+        PieceEvaluatorMapper: typeof Ev.PieceEvaluatorMapper;
     }
 
     interface Pieces {
-        AlwaysValidLocationEvaluator: typeof P.AlwaysValidLocationEvaluator;
         AttackDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.AttackDestinationPieceInteraction;
-        IsTargetLocationOccupiedEvaluator: new () => P.IsTargetLocationOccupiedEvaluator;
-        IsTargetLocationUnoccupiedEvaluator: new () => P.IsTargetLocationUnoccupiedEvaluator;
-        IsSubjectPieceOccupiedEvaluator: new () => P.IsSubjectPieceOccupiedEvaluator;
-        IsSubjectPieceUnoccupiedEvaluator: new () => P.IsSubjectPieceUnoccupiedEvaluator;
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
-        OccupiedTargetLocationEvaluator: new (allowedSameTeamPieceDefinitionIds: Array<string>, allowedOtherTeamPieceDefinitionIds: Array<string>) => P.OccupiedTargetLocationEvaluator;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
         Evaluation: PieceEvaluation;
-        PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
+        PieceInteractionCalculator: new (type: P.InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: Ev.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
-        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluators: Array<P.IPieceAndLocationEvaluator>, pathDestinationEvaluators: Array<P.IPieceAndLocationEvaluator>) => P.RelatedLocationCalculator;
+        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: Ev.IPieceInteractionContextEvaluator, pathDestinationEvaluator: Ev.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;
     }
 
     interface Players {
