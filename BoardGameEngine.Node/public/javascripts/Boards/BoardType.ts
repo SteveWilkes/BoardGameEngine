@@ -4,16 +4,16 @@
         constructor(
             public id: string,
             public name: string,
-            private _availablePositions: Array<BoardPosition>,
+            private _positions: Array<BoardPosition>,
             private _rowConfigs: Array<BoardRowConfig>,
             public orientationTranslator: BoardOrientationTranslator) {
 
             this.gridSize = this._rowConfigs.length;
 
-            for (var i = 0; i < this._availablePositions.length; i++) {
-                this._availablePositions[i].setGridSize(this.gridSize);
-                if (this._availablePositions[i].isFocusPosition) {
-                    this.orientationTranslator.setFocusPosition(this._availablePositions[i]);
+            for (var i = 0; i < this._positions.length; i++) {
+                this._positions[i].setGridSize(this.gridSize);
+                if (this._positions[i].isFocusPosition) {
+                    this.orientationTranslator.setFocusPosition(this._positions[i]);
                 }
             }
         }
@@ -29,7 +29,7 @@
         }
 
         public getNextBoardPosition(teamIndex: number): BoardPosition {
-            return this._availablePositions[teamIndex];
+            return this._positions[teamIndex];
         }
     }
 }
