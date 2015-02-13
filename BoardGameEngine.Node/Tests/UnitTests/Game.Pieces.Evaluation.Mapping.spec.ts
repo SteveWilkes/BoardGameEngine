@@ -72,11 +72,11 @@ describe("Game", () => {
                 });
 
                 it("Should map !location.piece.team.id=piece.team.id", () => {
-                    var source = "!l.p.t.id=F:p.t.id";
+                    var source = "!l.p.t.id=D:p.t.id";
 
                     var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
 
-                    expect(result).toBe("!pe{location.piece.team.id,[F:piece.team.id]}");
+                    expect(result).toBe("!pe{location.piece.team.id,[D:piece.team.id]}");
                 });
             });
         });

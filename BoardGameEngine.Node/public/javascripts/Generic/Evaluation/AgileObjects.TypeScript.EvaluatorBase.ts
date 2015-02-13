@@ -4,19 +4,19 @@
 
     export class EvaluatorBase<T> implements IEvaluator<T> {
         private _memberNameParts: Array<string>;
-        private _allowedValuePaths: Array<Array<string>>;
+        private _derivedAllowedValuePaths: Array<Array<string>>;
 
         constructor(memberName: string, private _allowedValues: Array<any>) {
             this._memberNameParts = memberName.split(".");
-            this._allowedValuePaths = new Array<Array<string>>();
+            this._derivedAllowedValuePaths = new Array<Array<string>>();
 
             for (var i = this._allowedValues.length - 1; i >= 0; i--) {
                 var value = this._allowedValues[i];
                 if ((typeof value === "string")) {
                     var stringValue = <string>value;
-                    if (stringValue.startsWith("F:")) {
+                    if (stringValue.startsWith("D:")) {
                         this._allowedValues = this._allowedValues.splice(i, 1);
-                        this._allowedValuePaths.unshift(stringValue.substring(2).split("."));
+                        this._derivedAllowedValuePaths.unshift(stringValue.substring(2).split("."));
                     }
                 }
             }
@@ -27,8 +27,8 @@
 
             if (this._valueIsAllowed(propertyValue)) { return true; }
 
-            for (var i = 0; i < this._allowedValuePaths.length; i++) {
-                var derivedPropertyValue = this._getPropertyValue(item, this._allowedValuePaths[i]);
+            for (var i = 0; i < this._derivedAllowedValuePaths.length; i++) {
+                var derivedPropertyValue = this._getPropertyValue(item, this._derivedAllowedValuePaths[i]);
 
                 if (propertyValue === derivedPropertyValue) { return true; }
             }

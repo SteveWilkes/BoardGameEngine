@@ -2,8 +2,8 @@
 
     var matchers: Ts.IStringDictionary<RegExp> = {
         "bme{$1isOccupied}": new RegExp("\\b((?:[lpt]\\.)*)io\\b", "g"),
-        "pe{$1definitionId,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)d=([0-9,a-z\\.F:]+)\\b", "g"),
-        "pe{$1id,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)id=([0-9,a-z\\.F:]+)\\b", "g"),
+        "pe{$1definitionId,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)d=([0-9,a-z\\.D:]+)\\b", "g"),
+        "pe{$1id,[$2]}": new RegExp("\\b((?:[lpt]\\.)*)id=([0-9,a-z\\.D:]+)\\b", "g"),
         "piece.": new RegExp("\\bp\\.", "g"),
         "team.": new RegExp("\\bt\\.", "g"),
         "location.": new RegExp("\\bl\\.", "g")

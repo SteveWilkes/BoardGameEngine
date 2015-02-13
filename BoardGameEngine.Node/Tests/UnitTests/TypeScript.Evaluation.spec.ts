@@ -45,7 +45,7 @@ describe("TypeScript", () => {
             item[propertyName1] = propertyValue;
             item[propertyName2] = propertyValue;
 
-            var evaluator = new TsNs.Evaluation.PropertyEvaluator(propertyName1, ["F:" + propertyName2]);
+            var evaluator = new TsNs.Evaluation.PropertyEvaluator(propertyName1, ["D:" + propertyName2]);
 
             expect(evaluator.evaluate(item)).toBeTruthy();
         });
