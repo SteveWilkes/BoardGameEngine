@@ -20,7 +20,7 @@
             allLocations: IPieceLocationDictionary,
             gridSize?: number): Array<Array<IPieceLocation>> {
 
-            var context = new PieceInteractionContext(startingLocation);
+            var context = new PieceInteractionData(startingLocation);
             var allPaths = new Array<Array<IPieceLocation>>();
             for (var i = 0; i < this._coordinateTranslatorSets.length; i++) {
                 var paths = this._calculatePaths(context, allLocations, gridSize, this._coordinateTranslatorSets[i]);
@@ -30,7 +30,7 @@
         }
 
         private _calculatePaths(
-            context: PieceInteractionContext,
+            context: PieceInteractionData,
             allLocations: IPieceLocationDictionary,
             gridSize: number,
             coordinateTranslators: Array<Ts.CoordinateTranslator>): Array<Array<IPieceLocation>> {
@@ -59,7 +59,7 @@
             return allPaths;
         }
 
-        private _pathIsValid(path: Array<IPieceLocation>, context: PieceInteractionContext): boolean {
+        private _pathIsValid(path: Array<IPieceLocation>, context: PieceInteractionData): boolean {
             for (var i = 1; i < path.length; i++) {
 
                 var evaluator = (i === (path.length - 1))

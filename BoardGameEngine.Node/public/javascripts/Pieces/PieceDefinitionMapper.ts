@@ -70,8 +70,8 @@
 
             return new RelatedLocationCalculator(
                 this._mapCoordinateTranslatorSets(locationCalculatorDataItems[0]),
-                this._mapEvaluator<PieceInteractionContext>(locationCalculatorDataItems[1]),
-                this._mapEvaluator<PieceInteractionContext>(locationCalculatorDataItems[2]));
+                this._mapEvaluator<PieceInteractionData>(locationCalculatorDataItems[1]),
+                this._mapEvaluator<PieceInteractionData>(locationCalculatorDataItems[2]));
         }
 
         private _mapCoordinateTranslatorSets(coordinateTranslatorSetData: string): Array<Array<Ts.CoordinateTranslator>> {

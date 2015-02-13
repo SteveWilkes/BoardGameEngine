@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export class PieceInteractionContext {
+    export class PieceInteractionData {
         constructor(public startingLocation: IPieceLocation) {
             this.piece = this.startingLocation.piece;
         }

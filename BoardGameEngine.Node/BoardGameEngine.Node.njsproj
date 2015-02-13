@@ -112,7 +112,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionCalculator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteractionRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionContext.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.NegationEvaluator.ts" />
