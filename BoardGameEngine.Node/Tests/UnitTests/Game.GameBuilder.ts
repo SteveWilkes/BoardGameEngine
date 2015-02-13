@@ -60,7 +60,7 @@ class PieceConfigurator {
         this._configuration.interaction = Bge.Pieces.MovePieceToDestinationPieceInteraction;
 
         this._addEvaluator(
-            () => "l.io+l.p.d=" + pieceDefinitionIds.join(","),
+            () => "l.p.d=" + pieceDefinitionIds.join(","),
             "pathDestinationEvaluator");
 
         return this._addUdlrTranslators(distance || 1);
