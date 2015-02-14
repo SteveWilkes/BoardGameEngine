@@ -23,6 +23,7 @@
                 matcher = new RegExp("\\b((?:[" + allSymbols + "]\\.)*)" + memberSymbol + "=?([0-9,a-z\\.D:]+)?\\b", "g");
                 this._symbolMatchersByReplacement[replacement] = matcher;
             }
+
             for (memberSymbol in booleanMethodNamesBySymbol) {
                 replacement = "bme{$1" + booleanMethodNamesBySymbol[memberSymbol] + "}";
                 matcher = new RegExp("\\b((?:[" + allSymbols + "]\\.)*)" + memberSymbol + "\\b", "g");
