@@ -20,6 +20,18 @@ describe("TypeScript", () => {
             expect(evaluator.evaluate({})).toBeFalsy();
         });
 
+        it("Should evaluate a missing complex type property to False", () => {
+            var propertyName1 = "test1";
+            var propertyName2 = "test2";
+            var item = {};
+            item[propertyName1] = {};
+            item[propertyName1][propertyName2] = "hello";
+
+            var evaluator = new TsNs.Evaluation.PropertyEvaluator("blah." + propertyName2, []);
+
+            expect(evaluator.evaluate(item)).toBeFalsy();
+        });
+
         it("Should evaluate a property value exact match", () => {
             var propertyName = "test";
             var propertyValue = "123";

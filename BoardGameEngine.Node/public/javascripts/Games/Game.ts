@@ -7,7 +7,7 @@
             public board: Boards.Board,
             public events: GameEventSet) {
 
-            this.events.teamAdded.subscribe(team => this.teams.push(team) > 0);
+            this.events.teamAdded.subscribe(data => this.teams.push(data.team) > 0);
 
             this.players = new Array<Players.Player>();
             this.teams = new Array<Teams.Team>();

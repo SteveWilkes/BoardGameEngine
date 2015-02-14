@@ -19,6 +19,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorRegistry.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.ValueParser.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.AlwaysTrueEvaluator.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorBase.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.BooleanMethodEvaluator.js");
@@ -93,6 +94,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Teams/TeamFactory.Angular.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayData.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
+    assets.addJs("/public/javascripts/Boards/TeamAdditionData.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
     assets.addJs("/public/javascripts/Games/GameType.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.js");

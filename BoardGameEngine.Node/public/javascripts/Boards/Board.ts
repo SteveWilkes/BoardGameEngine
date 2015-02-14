@@ -47,7 +47,8 @@
                 tile.add(piece);
             }
 
-            this._events.teamAdded.publish(team);
+            var teamAdditionData = new TeamAdditionData(team, position, this._tilesByCoordinates);
+            this._events.teamAdded.publish(teamAdditionData);
         }
 
         public orientTo(team: Teams.Team): void {

@@ -48,6 +48,10 @@
     <TypeScriptCompile Include="assets.ts" />
     <TypeScriptCompile Include="gruntfile.ts" />
     <TypeScriptCompile Include="NodeApp.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Annotations\EntityAnnotationBase.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Annotations\EntityAnnotationManager.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Annotations\IEntityAnnotation.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\Board.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayData.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardDisplayDataService.ts" />
@@ -61,6 +65,7 @@
     <TypeScriptCompile Include="public\javascripts\Boards\BoardType.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Boards\TeamAdditionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.AddClassOnEvent.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
@@ -77,6 +82,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameType.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ValueParser.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorMapperBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
@@ -226,6 +232,7 @@
   <ItemGroup>
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
+    <Folder Include="public\javascripts\Generic\Annotations\" />
     <Folder Include="public\javascripts\Pieces\Evaluation\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />

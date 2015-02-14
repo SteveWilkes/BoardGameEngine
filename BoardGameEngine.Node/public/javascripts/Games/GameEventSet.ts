@@ -2,7 +2,7 @@
 
     export class GameEventSet {
         public playerJoined = new TypeScript.EventHub<Players.Player>();
-        public teamAdded = new TypeScript.EventHub<Teams.Team>();
+        public teamAdded = new TypeScript.EventHub<Boards.TeamAdditionData>();
 
         public gameStarted = new TypeScript.EventHub<Teams.Team>();
         public turnStarted = new TypeScript.EventHub<Pieces.IPieceOwner>();

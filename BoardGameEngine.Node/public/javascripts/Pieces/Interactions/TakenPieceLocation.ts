@@ -5,15 +5,10 @@
             private _takenPiecesByTeam: TypeScript.Dictionary<IPieceOwner, Array<Piece>>;
 
             constructor(events: Games.GameEventSet) {
-                events.teamAdded.subscribe(team => this._teamAdded(team));
+                events.teamAdded.subscribe(data => this._takenPiecesByTeam.add(data.team, new Array<Piece>()).count > 0);
                 events.pieceTaken.subscribe(takenPiece => this._pieceTaken(takenPiece));
 
                 this._takenPiecesByTeam = new TypeScript.Dictionary<IPieceOwner, Array<Piece>>();
-            }
-
-            private _teamAdded(team: Teams.Team): boolean {
-                this._takenPiecesByTeam.add(team, new Array<Piece>());
-                return true;
             }
 
             private _pieceTaken(takenPiece: Piece): boolean {
