@@ -20,6 +20,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.ValueParser.js");
+    assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationBase.js");
+    assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationManager.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.AlwaysTrueEvaluator.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorBase.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.BooleanMethodEvaluator.js");
@@ -50,6 +52,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
     assets.addJs("/public/javascripts/Players/Player.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
+    assets.addJs("/public/javascripts/Boards/BoardTileAnnotation.js");
     assets.addJs("/public/javascripts/Boards/BoardPosition.js");
     assets.addJs("/public/javascripts/Boards/BoardRowConfig.js");
     assets.addJs("/public/javascripts/Boards/BoardOrientationTranslator.js");
@@ -96,6 +99,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/TeamAdditionData.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
+    assets.addJs("/public/javascripts/Games/EntityAnnotationMapper.js");
     assets.addJs("/public/javascripts/Games/GameType.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.Angular.js");

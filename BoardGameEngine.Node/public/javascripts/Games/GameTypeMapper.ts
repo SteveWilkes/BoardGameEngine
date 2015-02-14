@@ -17,7 +17,7 @@
                 new Pieces.PieceDataSet(
                     this._mapPieceDefinitions(gameTypeDataItems[3]),
                     this._mapPieceConfigDataSet(gameTypeDataItems[4])),
-                new Array<Ts.Annotations.IEntityAnnotation>());
+                this._mapEntityAnnotations(gameTypeDataItems[5]));
         }
 
         private _mapTurnInteractions(turnInteractionData: string): Array<Pieces.InteractionType> {
@@ -57,6 +57,15 @@
             var location = Ts.CoordinatesRegistry.INSTANCE.get(row, column);
 
             return new Pieces.PieceConfigData(pieceDefinitionId, location);
+        }
+
+        private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {
+            var annotationDataItems = annotationData.split("`");
+            var annotations = new Array<Ts.Annotations.IEntityAnnotation>(annotationDataItems.length);
+            for (var i = 0; i < annotationDataItems.length; i++) {
+                annotations[i] = EntityAnnotationMapper.INSTANCE.map(annotationDataItems[i]);
+            }
+            return annotations;
         }
     }
 }

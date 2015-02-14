@@ -66,7 +66,8 @@
             // PieceConfigData
                 "1^1^5`2^2^4`2^2^5`2^2^6`3^3^3`3^3^4`3^3^5`3^3^6`3^3^7" +
                 "/" +
-                "";
+            // Annotations
+                "bt^1x5^bttid^bombTileTeamId^t.id";
         }
     }
 }
