@@ -112,7 +112,7 @@
                 return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }
 
-            var evaluatorPattern = Evaluation.PieceEvaluatorMapper.INSTANCE.map(evaluatorData);
+            var evaluatorPattern = Evaluation.PieceEvaluatorMapper.DEFAULT.map(evaluatorData);
 
             return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }
