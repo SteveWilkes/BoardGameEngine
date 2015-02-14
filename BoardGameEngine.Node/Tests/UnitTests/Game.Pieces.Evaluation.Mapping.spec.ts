@@ -47,6 +47,14 @@ describe("Game", () => {
                     expect(result).toBe("bme{location.piece.isOccupied}");
                 });
 
+                it("Should map definitionId", () => {
+                    var source = "d";
+
+                    var result = Bge.Pieces.Evaluation.PieceEvaluatorMapper.INSTANCE.map(source);
+
+                    expect(result).toBe("pe{definitionId,[]}");
+                });
+
                 it("Should map definitionId=1", () => {
                     var source = "d=1";
 

@@ -29,6 +29,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorData.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorSet.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorParser.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorMapperBase.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
