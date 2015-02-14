@@ -4,6 +4,18 @@ var TsNs = Ao.TypeScript;
 
 describe("TypeScript", () => {
     describe("Evaluation", () => {
+        it("Should parse a PropertyEvaluator with zero options", () => {
+            var propertyName = "lalala";
+            var item = {};
+            item[propertyName] = "";
+
+            var pattern = "pe{" + propertyName + ",[]}";
+            var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse(pattern);
+            var result = evaluator.evaluate(item);
+
+            expect(result).toBeTruthy();
+        });
+
         it("Should parse a PropertyEvaluator with a single option", () => {
             var propertyName = "test";
             var propertyValue = "123";
