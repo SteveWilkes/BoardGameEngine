@@ -4,6 +4,22 @@ var TsNs = Ao.TypeScript;
 
 describe("TypeScript", () => {
     describe("Evaluation", () => {
+        it("Should evaluate a defined property to True", () => {
+            var propertyName = "test";
+            var item = {};
+            item[propertyName] = "";
+
+            var evaluator = new TsNs.Evaluation.PropertyEvaluator(propertyName, []);
+
+            expect(evaluator.evaluate(item)).toBeTruthy();
+        });
+
+        it("Should evaluate an undefined property to False", () => {
+            var evaluator = new TsNs.Evaluation.PropertyEvaluator("kjntkgjn", ["hello"]);
+
+            expect(evaluator.evaluate({})).toBeFalsy();
+        });
+
         it("Should evaluate a property value exact match", () => {
             var propertyName = "test";
             var propertyValue = "123";

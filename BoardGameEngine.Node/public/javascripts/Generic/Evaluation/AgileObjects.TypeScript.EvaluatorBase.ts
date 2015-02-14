@@ -55,7 +55,11 @@
         }
 
         private _valueIsAllowed(value: any): boolean {
-            return (value !== _missing) && this._allowedValues.indexOf(value) > -1;
+            if (value === _missing) { return false; }
+
+            if (this._allowedValues.length === 0) { return value !== undefined; }
+
+            return this._allowedValues.indexOf(value) > -1;
         }
     }
 }
