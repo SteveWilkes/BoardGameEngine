@@ -3,15 +3,15 @@
     export class EntityAnnotationBase<TEntity, TEventData> implements IEntityAnnotation {
         constructor(
             public creationEventName: string,
-            public annotationSymbol: string,
-            public annotationName: string,
+            public symbol: string,
+            public name: string,
             private _derivedAnnotationValuePath: Array<string>) {
         }
 
         public apply(eventData: TEventData) {
             var entity = this.getEntity(eventData);
-            var annotationValue = ValueParser.INSTANCE.getPropertyValue(eventData, this._derivedAnnotationValuePath);
-            entity[this.annotationName] = annotationValue;
+            var value = ValueParser.INSTANCE.getPropertyValue(eventData, this._derivedAnnotationValuePath);
+            entity[this.name] = value;
         }
 
         protected getEntity(eventData: TEventData): TEntity {

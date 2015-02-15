@@ -2,8 +2,8 @@
 
     export interface IEntityAnnotation {
         creationEventName: string;
-        annotationSymbol: string;
-        annotationName: string;
+        symbol: string;
+        name: string;
         apply(eventData: any);
     }
 }

@@ -11,16 +11,14 @@
     var _coordinateTranslatorsBySignature = {};
 
     var _pieceInteractionConstructorsById = {
-        "m1": AddDestinationPieceToPieceInteraction,
-        "m2": MovePieceToDestinationInteraction,
-        "m3": MovePieceToDestinationPieceInteraction,
-        "a1": AttackDestinationPieceInteraction
+        "m1": Pieces.AddDestinationPieceToPieceInteraction,
+        "m2": Pieces.MovePieceToDestinationInteraction,
+        "m3": Pieces.MovePieceToDestinationPieceInteraction,
+        "a1": Pieces.AttackDestinationPieceInteraction,
     };
 
-    var evaluatorMapper = new Evaluation.PieceEvaluatorMapper();
-
     export class PieceDefinitionMapper {
-        static INSTANCE = new PieceDefinitionMapper();
+        constructor(private _evaluatorMapper: Ts.Evaluation.IEvaluatorMapper) { }
 
         public map(pieceDefinitionData: string): PieceDefinition {
             var pieceDefinitionDataItems = pieceDefinitionData.split("`");
@@ -114,7 +112,7 @@
                 return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }
 
-            var evaluatorPattern = evaluatorMapper.map(evaluatorData);
+            var evaluatorPattern = this._evaluatorMapper.map(evaluatorData);
 
             return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }

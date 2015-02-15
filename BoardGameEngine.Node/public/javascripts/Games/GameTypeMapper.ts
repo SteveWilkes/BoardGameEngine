@@ -10,14 +10,16 @@
             var gameTypeId = gameTypeDataItems[0];
             var boardTypeId = gameTypeDataItems[1];
 
+            var annotations = this._mapEntityAnnotations(gameTypeDataItems[2]);
+
             return new GameType(
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
-                this._mapTurnInteractions(gameTypeDataItems[2]),
+                this._mapTurnInteractions(gameTypeDataItems[3]),
                 new Pieces.PieceDataSet(
-                    this._mapPieceDefinitions(gameTypeDataItems[3]),
-                    this._mapPieceConfigDataSet(gameTypeDataItems[4])),
-                this._mapEntityAnnotations(gameTypeDataItems[5]));
+                    this._mapPieceDefinitions(gameTypeDataItems[4], annotations),
+                    this._mapPieceConfigDataSet(gameTypeDataItems[5])),
+                annotations);
         }
 
         private _mapTurnInteractions(turnInteractionData: string): Array<Pieces.InteractionType> {
@@ -29,14 +31,30 @@
             return turnInteractions;
         }
 
-        private _mapPieceDefinitions(pieceDefinitionData: string): Ts.IStringDictionary<Pieces.PieceDefinition> {
+        private _mapPieceDefinitions(
+            pieceDefinitionData: string,
+            annotations: Array<Ts.Annotations.IEntityAnnotation>):
+            Ts.IStringDictionary<Pieces.PieceDefinition> {
+
+            var pieceDefinitionMapper = this._getPieceDefinitionMapper(annotations);
             var pieceDefinitionDataItems = pieceDefinitionData.split("_");
             var pieceDefinitions: Ts.IStringDictionary<Pieces.PieceDefinition> = {};
             for (var i = 0; i < pieceDefinitionDataItems.length; i++) {
-                var pieceDefinition = Pieces.PieceDefinitionMapper.INSTANCE.map(pieceDefinitionDataItems[i]);
+                var pieceDefinition = pieceDefinitionMapper.map(pieceDefinitionDataItems[i]);
                 pieceDefinitions[pieceDefinition.id] = pieceDefinition;
             }
             return pieceDefinitions;
+        }
+
+        private _getPieceDefinitionMapper(annotations: Array<Ts.Annotations.IEntityAnnotation>): Pieces.PieceDefinitionMapper {
+            var annotationNamesBySymbol: Ts.IStringDictionary<string> = {};
+            for (var i = 0; i < annotations.length; i++) {
+                annotationNamesBySymbol[annotations[i].symbol] = annotations[i].name;
+            }
+
+            var evaluatorMapper = new Pieces.Evaluation.PieceEvaluatorMapper(annotationNamesBySymbol);
+
+            return new Pieces.PieceDefinitionMapper(evaluatorMapper);
         }
 
         private _mapPieceConfigDataSet(pieceConfigData: string): Array<Pieces.PieceConfigData> {

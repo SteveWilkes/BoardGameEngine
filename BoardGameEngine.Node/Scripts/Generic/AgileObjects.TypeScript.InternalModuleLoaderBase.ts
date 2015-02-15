@@ -5,21 +5,27 @@ require("../../public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
 // #region Dependency Finders
 
 class RegexClassFinderBase {
-    private _regex: RegExp;
+    private _regexes: Array<RegExp>;
 
-    constructor(regexPattern: string) {
-        this._regex = new RegExp(regexPattern, "g");
+    constructor(...regexPatterns: Array<string>) {
+        this._regexes = new Array<RegExp>(regexPatterns.length);
+        for (var i = 0; i < regexPatterns.length; i++) {
+            this._regexes[i] = new RegExp(regexPatterns[i], "g");
+        }
     }
 
     protected getMatches(classData: ClassData): Ts.IStringDictionary<RegExpExecArray> {
         var matches: Ts.IStringDictionary<RegExpExecArray> = {};
         var match: RegExpExecArray;
         var foundClassNames = new Array<string>("Array", "RegExp", "Error", classData.name);
-        while (match = this._regex.exec(classData.script)) {
-            var foundClassName = match[1];
-            if (foundClassNames.indexOf(foundClassName) === -1) {
-                matches[foundClassName] = match;
-                foundClassNames.push(foundClassName);
+        for (var i = 0; i < this._regexes.length; i++) {
+            var regex = this._regexes[i];
+            while (match = regex.exec(classData.script)) {
+                var foundClassName = match[1];
+                if (foundClassNames.indexOf(foundClassName) === -1) {
+                    matches[foundClassName] = match;
+                    foundClassNames.push(foundClassName);
+                }
             }
         }
         return matches;
@@ -59,10 +65,11 @@ class Import {
 var nonMemberCharacters = new RegExp("[^a-zA-Z0-9\\._]+", "g");
 var staticImport = "(?:var ([A-Z][a-zA-Z0-9_]+))? ?= ?((?:[A-Z][a-zA-Z0-9_]+\\.)+[A-Z][a-zA-Z0-9_]+);";
 var baseClassReference = "\\}\\)\\(([a-zA-Z0-9_\\.]+)\\);";
+var registryReference = "\"[a-zA-Z0-9]+\": ([A-Z][a-zA-Z0-9\\.]+)";
 
 class ImportFinder extends RegexClassFinderBase {
     constructor() {
-        super(staticImport + "|" + baseClassReference);
+        super(staticImport, baseClassReference, registryReference);
     }
 
     static INSTANCE = new ImportFinder();
@@ -70,15 +77,20 @@ class ImportFinder extends RegexClassFinderBase {
     public getImports(classData: ClassData): Array<Import> {
         var importMatches = super.getMatches(classData);
         var imports = new Array<Import>();
-
         for (var importedSymbolPath in importMatches) {
             var importMatch = importMatches[importedSymbolPath];
             var importVariableName = importMatch[1];
             if (importVariableName === classData.name) { continue; }
             var importPath = importMatch[2];
+        if (classData.name === "NullPotentialInteraction") {
+            console.log("NullPotentialInteraction, importVariableName = " + importVariableName + ", importPath = " + importPath);
+        }
             var importUsages = new Array<string>();
-            if (importVariableName === undefined) {
-                importPath = importPath || importMatch[3];
+            if (importPath === undefined) {
+                importPath = importVariableName;
+                importVariableName = undefined;
+                importUsages.push(importPath);
+            } else if (importVariableName === undefined) {
                 importUsages.push(importPath);
             } else {
                 var importUsageFinder = new RegExp("\\b(new )?(" + importVariableName + "[\\.\\[\\(][^\\(;,]+[\\(;,])", "g");
