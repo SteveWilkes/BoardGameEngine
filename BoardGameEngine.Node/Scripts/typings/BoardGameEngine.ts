@@ -5,7 +5,13 @@
     import P = Bge.Pieces;
     import Ev = P.Evaluation;
     import Ts = AgileObjects.TypeScript;
+    import TsAn = Ts.Annotations;
+    import TsEv = Ts.Evaluation;
     import Svc = AgileObjects.Angular.Services;
+
+    interface TypeScriptAnnotations {
+        IEntityAnnotationMapper: TsAn.IEntityAnnotationMapper
+    }
 
     interface TypeScriptEvaluation {
         AlwaysTrueEvaluator: typeof Ts.Evaluation.AlwaysTrueEvaluator;
@@ -18,6 +24,7 @@
     }
 
     interface TypeScript {
+        Annotations: TypeScriptAnnotations;
         Coordinates: new (row: number, column: number, signature?: string) => Ts.Coordinates;
         CoordinateTranslator: new (directionFunctionName: string, distance: number) => Ts.CoordinateTranslator;
         CoordinateTranslatorRegistry: typeof Ts.CoordinateTranslatorRegistry;
@@ -38,18 +45,19 @@
     }
 
     interface Games {
+        GameEntityAnnotationMapper: new (evaluatorMapper: TsEv.IEvaluatorMapper) => G.GameEntityAnnotationMapper;
         GameEventSet: new () => G.GameEventSet;
         GameFactory: new (getGameTypeQuery: Ts.IGetQuery<G.GameType>) => G.GameFactory;
         Game: new (id: string, type: G.GameType, board: B.Board, events: G.GameEventSet) => G.Game;
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.GameService;
         GameType: new (id: string, boardType: B.BoardType, turnInteractions: Array<InteractionType>, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>) => G.GameType;
         GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
-        GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>) => G.GameTypeMapper;
+        GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>, annotationMapper: TsAn.IEntityAnnotationMapper) => G.GameTypeMapper;
         ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.ServerGameCoordinator;
     }
 
     interface PieceEvaluation {
-        PieceEvaluatorMapper: typeof Ev.PieceEvaluatorMapper;
+        PieceEvaluatorMapper: new () => Ev.PieceEvaluatorMapper;
     }
 
     interface Pieces {

@@ -1,11 +1,9 @@
-﻿module AgileObjects.BoardGameEngine.Games {
+﻿module AgileObjects.TypeScript.Annotations {
 
-    var annotationsBySymbol: Ts.IStringDictionary<Ts.Annotations.IEntityAnnotationConstructor> = {
-        "bt": Boards.BoardTileAnnotation
-    };
-
-    export class EntityAnnotationMapper {
-        static INSTANCE = new EntityAnnotationMapper();
+    export class EntityAnnotationMapperBase {
+        constructor(
+            private _evaluatorMapper: Evaluation.IEvaluatorMapper,
+            private _annotationsBySymbol: IStringDictionary<IEntityAnnotationConstructor>) { }
 
         public map(annotationData: string): Ts.Annotations.IEntityAnnotation {
             var annotationDataItems = annotationData.split("^");
@@ -15,10 +13,10 @@
             var annotationSymbol = annotationDataItems[2];
             var annotationName = annotationDataItems[3];
             var rawDerivedAnnotationValuePath = annotationDataItems[4];
-            var mappedDerivedAnnotationValuePath = Pieces.Evaluation.PieceEvaluatorMapper.DEFAULT.expand(rawDerivedAnnotationValuePath);
+            var mappedDerivedAnnotationValuePath = this._evaluatorMapper.expand(rawDerivedAnnotationValuePath);
             var derivedAnnotationValuePath = mappedDerivedAnnotationValuePath.split(".");
 
-            var annotation = annotationsBySymbol[annotationType];
+            var annotation = this._annotationsBySymbol[annotationType];
 
             return new annotation(
                 entityIdentifier,

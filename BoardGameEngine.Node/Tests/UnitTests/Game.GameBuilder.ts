@@ -5,6 +5,7 @@ var TsNs = Ao.TypeScript;
 
 var move = InteractionType.move;
 var attack = InteractionType.attack;
+var evaluatorMapper = new Bge.Pieces.Evaluation.PieceEvaluatorMapper();
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
@@ -98,7 +99,7 @@ class PieceConfigurator {
 
     private _addEvaluator(evaluatorSignatureFactory: () => string, evaluatorName: string) {
         var evaluatorSignature = evaluatorSignatureFactory();
-        var evaluatorPattern = Bge.Pieces.Evaluation.PieceEvaluatorMapper.DEFAULT.map(evaluatorSignature);
+        var evaluatorPattern = evaluatorMapper.map(evaluatorSignature);
         var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse<P.IPieceLocation>(evaluatorPattern);
         this._configuration[evaluatorName] = evaluator;
         return this;

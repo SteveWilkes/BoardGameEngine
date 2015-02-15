@@ -49,7 +49,8 @@
     <TypeScriptCompile Include="gruntfile.ts" />
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\EntityAnnotationMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotation.ts" />
@@ -85,7 +86,11 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ValueParser.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotationConstructor.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotationMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationMapperBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorMapperBase.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\PieceEvaluatorMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />

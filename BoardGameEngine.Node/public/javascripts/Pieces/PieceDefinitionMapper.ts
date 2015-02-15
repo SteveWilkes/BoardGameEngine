@@ -17,6 +17,8 @@
         "a1": AttackDestinationPieceInteraction
     };
 
+    var evaluatorMapper = new Evaluation.PieceEvaluatorMapper();
+
     export class PieceDefinitionMapper {
         static INSTANCE = new PieceDefinitionMapper();
 
@@ -112,7 +114,7 @@
                 return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }
 
-            var evaluatorPattern = Evaluation.PieceEvaluatorMapper.DEFAULT.map(evaluatorData);
+            var evaluatorPattern = evaluatorMapper.map(evaluatorData);
 
             return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }

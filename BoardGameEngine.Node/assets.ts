@@ -22,6 +22,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.ValueParser.js");
     assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationBase.js");
     assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationManager.js");
+    assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationMapperBase.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.AlwaysTrueEvaluator.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorBase.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.BooleanMethodEvaluator.js");
@@ -64,6 +65,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/GlobalEventSet.js");
     assets.addJs("/public/javascripts/Games/GameEventSet.js");
     assets.addJs("/public/javascripts/Pieces/Evaluation/PieceEvaluatorMapper.js");
+    assets.addJs("/public/javascripts/Pieces/Evaluation/PieceEvaluatorMapper.Angular.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionBase.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovementInteractionBase.js");
@@ -99,7 +101,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Boards/BoardDisplayDataService.js");
     assets.addJs("/public/javascripts/Boards/TeamAdditionData.js");
     assets.addJs("/public/javascripts/Boards/Board.js");
-    assets.addJs("/public/javascripts/Games/EntityAnnotationMapper.js");
+    assets.addJs("/public/javascripts/Games/GameEntityAnnotationMapper.js");
+    assets.addJs("/public/javascripts/Games/GameEntityAnnotationMapper.Angular.js");
     assets.addJs("/public/javascripts/Games/GameType.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.Angular.js");

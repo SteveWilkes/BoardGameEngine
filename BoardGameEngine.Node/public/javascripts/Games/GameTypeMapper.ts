@@ -1,9 +1,9 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
-    import Ts = TypeScript;
-
     export class GameTypeMapper {
-        constructor(private _getBoardTypeQuery: Ts.IGetQuery<Boards.BoardType>) { }
+        constructor(
+            private _getBoardTypeQuery: Ts.IGetQuery<Boards.BoardType>,
+            private _annotationMapper: Ts.Annotations.IEntityAnnotationMapper) { }
 
         public map(gameTypeData: string): GameType {
             var gameTypeDataItems = gameTypeData.split("/");
@@ -54,7 +54,7 @@
             var pieceDefinitionId = pieceConfigDataItems[0];
             var row = parseInt(pieceConfigDataItems[1]);
             var column = parseInt(pieceConfigDataItems[2]);
-            var location = Ts.CoordinatesRegistry.INSTANCE.get(row, column);
+            var location = TypeScript.CoordinatesRegistry.INSTANCE.get(row, column);
 
             return new Pieces.PieceConfigData(pieceDefinitionId, location);
         }
@@ -63,7 +63,7 @@
             var annotationDataItems = annotationData.split("`");
             var annotations = new Array<Ts.Annotations.IEntityAnnotation>(annotationDataItems.length);
             for (var i = 0; i < annotationDataItems.length; i++) {
-                annotations[i] = EntityAnnotationMapper.INSTANCE.map(annotationDataItems[i]);
+                annotations[i] = this._annotationMapper.map(annotationDataItems[i]);
             }
             return annotations;
         }

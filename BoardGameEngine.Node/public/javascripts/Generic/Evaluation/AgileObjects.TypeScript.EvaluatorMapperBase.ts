@@ -1,6 +1,6 @@
 ﻿module AgileObjects.TypeScript.Evaluation {
 
-    export class EvaluatorMapperBase {
+    export class EvaluatorMapperBase implements IEvaluatorMapper {
         private _symbolMatchersByReplacement: Ts.IStringDictionary<RegExp>;
         private _allSymbolMatchersByReplacement: Ts.IStringDictionary<RegExp>;
 
@@ -38,12 +38,12 @@
             }
         }
 
-        public map(pattern: string): string {
-            return this._map(pattern, this._allSymbolMatchersByReplacement);
-        }
-
         public expand(pattern: string): string {
             return this._map(pattern, this._symbolMatchersByReplacement);
+        }
+
+        public map(pattern: string): string {
+            return this._map(pattern, this._allSymbolMatchersByReplacement);
         }
 
         private _map(pattern: string, matchersByReplacement: Ts.IStringDictionary<RegExp>): string {
