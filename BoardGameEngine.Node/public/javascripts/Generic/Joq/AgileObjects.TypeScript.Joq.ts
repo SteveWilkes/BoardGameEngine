@@ -5,8 +5,13 @@
             return new JoqIterator(seed, (propertyValue: TResult) => propertyValue).first();
         }
 
-        static toArray<TResult>(seed: Object): Array<TResult> {
-            return new JoqIterator(seed, (propertyValue: TResult) => propertyValue).toArray();
+        static toArray<TItem, TResult>(seed: Array<TItem>, handler: (item: TItem) => TResult): Array<TResult>;
+        static toArray<TResult>(seed: Object): Array<TResult>;
+        static toArray<TResult>(seed: any, handler?: (item: any) => TResult): Array<TResult> {
+            if (handler === undefined) {
+                handler = (propertyValue: TResult) => propertyValue;
+            }
+            return new JoqIterator(seed, handler).toArray();
         }
 
         static select<TResult>(seed: Object, projection?: (propertyValue: any, propertyName?: string) => TResult): JoqIterator<any, TResult>;

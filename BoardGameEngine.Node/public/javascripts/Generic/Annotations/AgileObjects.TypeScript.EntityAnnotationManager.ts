@@ -3,15 +3,21 @@
     export module EntityAnnotationManager {
         class EntityAnnotationManager<TEventSet> {
             constructor(eventSet: TEventSet, annotations: Array<IEntityAnnotation>) {
-                for (var eventName in eventSet) {
-                    var eventHub = eventSet[eventName];
-                    var handler = this._createHandler(annotations, eventName);
-                    eventHub.subscribe(handler);
+                var eventNames = new Array<string>();
+                for (var i = 0; i < annotations.length; i++) {
+                    var eventName = annotations[i].creationEventName;
+                    if (eventNames.indexOf(eventName) === -1) {
+                        var eventHub = eventSet[eventName];
+                        var handler = this._createHandler(annotations, eventName);
+                        eventHub.subscribe(handler);
+
+                        eventNames.push(eventName);
+                    }
                 }
             }
 
             private _createHandler(annotations: Array<IEntityAnnotation>, eventName: string) {
-                return (eventData) => {
+                return eventData => {
                     for (var i = 0; i < annotations.length; i++) {
                         if (annotations[i].creationEventName === eventName) {
                             annotations[i].apply(eventData);
