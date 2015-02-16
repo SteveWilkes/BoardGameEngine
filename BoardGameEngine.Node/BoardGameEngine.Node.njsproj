@@ -135,7 +135,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.PropertyEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.BooleanMethodEvaluator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\IPieceEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\NullPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDefinitionMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceLocationBase.ts" />
@@ -157,7 +157,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\History.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IGameAction.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\IPieceInteractionContextEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\IPieceInteractionContextEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Coordinates.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\IPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\RelatedLocationCalculator.ts" />
@@ -240,7 +240,6 @@
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
     <Folder Include="public\javascripts\Generic\Annotations\" />
-    <Folder Include="public\javascripts\Pieces\Evaluation\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />

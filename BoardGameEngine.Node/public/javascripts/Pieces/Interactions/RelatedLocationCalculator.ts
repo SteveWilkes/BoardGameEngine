@@ -5,8 +5,8 @@
     export class RelatedLocationCalculator {
         constructor(
             private _coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>,
-            private _pathStepLocationEvaluator: Evaluation.IPieceInteractionContextEvaluator,
-            private _pathDestinationEvaluator: Evaluation.IPieceInteractionContextEvaluator) {
+            private _pathStepLocationEvaluator: IPieceInteractionContextEvaluator,
+            private _pathDestinationEvaluator: IPieceInteractionContextEvaluator) {
             if (this._pathStepLocationEvaluator == null) {
                 this._pathStepLocationEvaluator = Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }

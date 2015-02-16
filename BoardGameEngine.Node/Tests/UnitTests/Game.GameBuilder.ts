@@ -15,10 +15,10 @@ class PieceConfiguration {
 
     public interactionType: InteractionType;
     public coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>;
-    public pathStepLocationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
-    public pathDestinationEvaluator: P.Evaluation.IPieceInteractionContextEvaluator;
+    public pathStepLocationEvaluator: P.IPieceInteractionContextEvaluator;
+    public pathDestinationEvaluator: P.IPieceInteractionContextEvaluator;
     public interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction;
-    public availabilityEvaluator: P.Evaluation.IPieceEvaluator;
+    public availabilityEvaluator: P.IPieceEvaluator;
     public interactionCalculators: Array<P.PieceInteractionCalculator>;
 
     public createInteractionCalculator(): void {

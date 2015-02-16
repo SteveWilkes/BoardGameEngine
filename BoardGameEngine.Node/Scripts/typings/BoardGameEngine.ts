@@ -3,7 +3,6 @@
     import B = Bge.Boards;
     import G = Bge.Games;
     import P = Bge.Pieces;
-    import Ev = P.Evaluation;
     import Ts = AgileObjects.TypeScript;
     import TsAn = Ts.Annotations;
     import TsEv = Ts.Evaluation;
@@ -63,9 +62,9 @@
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
-        PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: Ev.IPieceEvaluator) => P.PieceInteractionCalculator;
+        PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
-        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: Ev.IPieceInteractionContextEvaluator, pathDestinationEvaluator: Ev.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;
+        RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: P.IPieceInteractionContextEvaluator, pathDestinationEvaluator: P.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;
     }
 
     interface Players {

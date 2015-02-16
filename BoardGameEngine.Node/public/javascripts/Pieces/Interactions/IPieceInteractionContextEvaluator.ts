@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Pieces.Evaluation {
+﻿module AgileObjects.BoardGameEngine.Pieces {
 
     export interface IPieceInteractionContextEvaluator extends Ts.Evaluation.IEvaluator<PieceInteractionData> { }
 }
