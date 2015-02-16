@@ -1,6 +1,6 @@
-﻿module AgileObjects.BoardGameEngine.Pieces.Evaluation {
+﻿module AgileObjects.BoardGameEngine.Games {
 
-    export class PieceEvaluatorMapper extends TypeScript.Evaluation.EvaluatorMapperBase {
+    export class GameEvaluatorMapper extends TypeScript.Evaluation.EvaluatorMapperBase {
         constructor(annotationNamesBySymbol: Ts.IStringDictionary<string>) {
             var propertyNamesBySymbol: Ts.IStringDictionary<string> = { "d": "definitionId", "id": "id" };
             var booleanMethodNamesBySymbol: Ts.IStringDictionary<string> = { "io": "isOccupied" };

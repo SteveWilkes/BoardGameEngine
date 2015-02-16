@@ -3,7 +3,7 @@ var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 
-var evaluatorMapper = new Bge.Pieces.Evaluation.PieceEvaluatorMapper();
+var evaluatorMapper = new Bge.Games.GameEvaluatorMapper();
 
 describe("Game", () => {
     describe("Pieces", () => {

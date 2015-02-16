@@ -28,7 +28,7 @@ var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
             new Bge.Games.GameTypeMapper(
                 new Bge.Boards.GetBoardTypeQuery(),
                 new Bge.Games.GameEntityAnnotationMapper(
-                    new Bge.Pieces.Evaluation.PieceEvaluatorMapper())))),
+                    new Bge.Games.GameEvaluatorMapper())))),
     new Bge.Teams.TeamFactory());
 
 var bootstrappers = [

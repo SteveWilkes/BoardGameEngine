@@ -52,7 +52,7 @@
                 annotationNamesBySymbol[annotations[i].symbol] = annotations[i].name;
             }
 
-            var evaluatorMapper = new Pieces.Evaluation.PieceEvaluatorMapper(annotationNamesBySymbol);
+            var evaluatorMapper = new GameEvaluatorMapper(annotationNamesBySymbol);
 
             return new Pieces.PieceDefinitionMapper(evaluatorMapper);
         }

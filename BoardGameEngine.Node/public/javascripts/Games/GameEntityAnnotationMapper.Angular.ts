@@ -4,7 +4,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($gameEntityAnnotationMapper, [
-            Pieces.Evaluation.$pieceEvaluatorMapper,
-            GameEntityAnnotationMapper]);
+        .service($gameEntityAnnotationMapper, [$gameEvaluatorMapper, GameEntityAnnotationMapper]);
 }

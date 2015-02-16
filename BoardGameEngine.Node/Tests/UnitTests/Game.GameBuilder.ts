@@ -5,7 +5,7 @@ var TsNs = Ao.TypeScript;
 
 var move = InteractionType.move;
 var attack = InteractionType.attack;
-var evaluatorMapper = new Bge.Pieces.Evaluation.PieceEvaluatorMapper();
+var evaluatorMapper = new Bge.Games.GameEvaluatorMapper();
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {

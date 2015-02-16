@@ -90,7 +90,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationMapperBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorMapperBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorMapper.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\PieceEvaluatorMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />
@@ -114,7 +114,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Extensions.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IGetQuery.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Evaluation\PieceEvaluatorMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AddDestinationPieceToPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\AttackDestinationPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\InteractionType.ts" />
