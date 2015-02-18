@@ -11,15 +11,34 @@
             var boardTypeId = gameTypeDataItems[1];
 
             var annotations = this._mapEntityAnnotations(gameTypeDataItems[2]);
+            var evaluatorMapper = this._getEvaluatorMapper(annotations);
 
             return new GameType(
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
                 this._mapTurnInteractions(gameTypeDataItems[3]),
                 new Pieces.PieceDataSet(
-                    this._mapPieceDefinitions(gameTypeDataItems[4], annotations),
+                    this._mapPieceDefinitions(gameTypeDataItems[4], evaluatorMapper),
                     this._mapPieceConfigDataSet(gameTypeDataItems[5])),
                 annotations);
+        }
+
+        private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {
+            var annotationDataItems = annotationData.split("`");
+            var annotations = new Array<Ts.Annotations.IEntityAnnotation>(annotationDataItems.length);
+            for (var i = 0; i < annotationDataItems.length; i++) {
+                annotations[i] = this._annotationMapper.map(annotationDataItems[i]);
+            }
+            return annotations;
+        }
+
+        private _getEvaluatorMapper(annotations: Array<Ts.Annotations.IEntityAnnotation>): Ts.Evaluation.IEvaluatorMapper {
+            var annotationNamesBySymbol: Ts.IStringDictionary<string> = {};
+            for (var i = 0; i < annotations.length; i++) {
+                annotationNamesBySymbol[annotations[i].symbol] = annotations[i].name;
+            }
+
+            return new GameEvaluatorMapper(annotationNamesBySymbol);
         }
 
         private _mapTurnInteractions(turnInteractionData: string): Array<Pieces.InteractionType> {
@@ -33,10 +52,10 @@
 
         private _mapPieceDefinitions(
             pieceDefinitionData: string,
-            annotations: Array<Ts.Annotations.IEntityAnnotation>):
-            Ts.IStringDictionary<Pieces.PieceDefinition> {
+            evaluatorMapper: Ts.Evaluation.IEvaluatorMapper): Ts.IStringDictionary<Pieces.PieceDefinition> {
 
-            var pieceDefinitionMapper = this._getPieceDefinitionMapper(annotations);
+            var pieceDefinitionMapper = new Pieces.PieceDefinitionMapper(evaluatorMapper);
+
             var pieceDefinitionDataItems = pieceDefinitionData.split("_");
             var pieceDefinitions: Ts.IStringDictionary<Pieces.PieceDefinition> = {};
             for (var i = 0; i < pieceDefinitionDataItems.length; i++) {
@@ -44,17 +63,6 @@
                 pieceDefinitions[pieceDefinition.id] = pieceDefinition;
             }
             return pieceDefinitions;
-        }
-
-        private _getPieceDefinitionMapper(annotations: Array<Ts.Annotations.IEntityAnnotation>): Pieces.PieceDefinitionMapper {
-            var annotationNamesBySymbol: Ts.IStringDictionary<string> = {};
-            for (var i = 0; i < annotations.length; i++) {
-                annotationNamesBySymbol[annotations[i].symbol] = annotations[i].name;
-            }
-
-            var evaluatorMapper = new GameEvaluatorMapper(annotationNamesBySymbol);
-
-            return new Pieces.PieceDefinitionMapper(evaluatorMapper);
         }
 
         private _mapPieceConfigDataSet(pieceConfigData: string): Array<Pieces.PieceConfigData> {
@@ -75,15 +83,6 @@
             var location = TypeScript.CoordinatesRegistry.INSTANCE.get(row, column);
 
             return new Pieces.PieceConfigData(pieceDefinitionId, location);
-        }
-
-        private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {
-            var annotationDataItems = annotationData.split("`");
-            var annotations = new Array<Ts.Annotations.IEntityAnnotation>(annotationDataItems.length);
-            for (var i = 0; i < annotationDataItems.length; i++) {
-                annotations[i] = this._annotationMapper.map(annotationDataItems[i]);
-            }
-            return annotations;
         }
     }
 }

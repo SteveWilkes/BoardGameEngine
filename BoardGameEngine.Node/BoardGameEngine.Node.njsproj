@@ -51,6 +51,7 @@
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotation.ts" />
