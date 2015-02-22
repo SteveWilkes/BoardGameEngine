@@ -18,7 +18,7 @@
     };
 
     export class PieceDefinitionMapper {
-        constructor(private _evaluatorMapper: Ts.Evaluation.IEvaluatorMapper) { }
+        constructor(private _patternMapper: Ts.Evaluation.IEvaluatorPatternMapper) { }
 
         public map(pieceDefinitionData: string): PieceDefinition {
             var pieceDefinitionDataItems = pieceDefinitionData.split("`");
@@ -112,7 +112,7 @@
                 return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
             }
 
-            var evaluatorPattern = this._evaluatorMapper.map(evaluatorData);
+            var evaluatorPattern = this._patternMapper.map(evaluatorData);
 
             return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }

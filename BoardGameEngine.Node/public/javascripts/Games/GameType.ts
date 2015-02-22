@@ -6,6 +6,7 @@
             public boardType: Boards.BoardType,
             public turnInteractions: Array<Pieces.InteractionType>,
             public pieceData: Pieces.PieceDataSet,
-            public annotations: Array<Ts.Annotations.IEntityAnnotation>) { }
+            public annotations: Array<Ts.Annotations.IEntityAnnotation>,
+            public eventMappings: Array<Ts.EventMapping>) { }
     }
 }

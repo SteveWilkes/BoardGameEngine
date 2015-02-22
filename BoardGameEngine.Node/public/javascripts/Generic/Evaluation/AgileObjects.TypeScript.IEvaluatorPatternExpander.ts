@@ -1,7 +1,6 @@
 ﻿module AgileObjects.TypeScript.Evaluation {
 
-    export interface IEvaluatorMapper {
+    export interface IEvaluatorPatternExpander {
         expand(pattern: string): string;
-        map(pattern: string): string;
     }
 }

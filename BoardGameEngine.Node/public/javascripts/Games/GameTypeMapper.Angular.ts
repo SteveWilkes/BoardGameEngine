@@ -7,5 +7,6 @@
         .service($gameTypeMapper, [
             Boards.$getBoardTypeQuery,
             $gameEntityAnnotationMapper,
+            $gameEvaluatorPatternMapper,
             GameTypeMapper]);
 }

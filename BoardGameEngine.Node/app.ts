@@ -22,13 +22,15 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
+var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
+
 var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
     new Bge.Games.GameFactory(
         new Bge.Games.GetGameTypeQuery(
             new Bge.Games.GameTypeMapper(
                 new Bge.Boards.GetBoardTypeQuery(),
-                new Bge.Games.GameEntityAnnotationMapper(
-                    new Bge.Games.GameEvaluatorMapper())))),
+                new Bge.Games.GameEntityAnnotationMapper(patternMapper),
+                patternMapper))),
     new Bge.Teams.TeamFactory());
 
 var bootstrappers = [

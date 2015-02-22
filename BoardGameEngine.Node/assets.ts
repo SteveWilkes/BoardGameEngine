@@ -15,6 +15,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Dictionary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventCallbackSet.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventMapping.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesRegistry.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
@@ -33,7 +34,9 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorData.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorSet.js");
     assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorParser.js");
-    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorMapperBase.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EntityData.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorPatternExpanderBase.js");
+    assets.addJs("/public/javascripts/Generic/Evaluation/AgileObjects.TypeScript.EvaluatorPatternMapperBase.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.JQuery.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.IdGeneration.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Services.EventPropogation.js");
@@ -64,8 +67,8 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceAttack.js");
     assets.addJs("/public/javascripts/GlobalEventSet.js");
     assets.addJs("/public/javascripts/Games/GameEventSet.js");
-    assets.addJs("/public/javascripts/Games/GameEvaluatorMapper.js");
-    assets.addJs("/public/javascripts/Games/GameEvaluatorMapper.Angular.js");
+    assets.addJs("/public/javascripts/Games/GameEvaluatorPatternMapper.js");
+    assets.addJs("/public/javascripts/Games/GameEvaluatorPatternMapper.Angular.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionBase.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovementInteractionBase.js");

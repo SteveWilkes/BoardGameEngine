@@ -1,8 +1,8 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
     export class GameEntityAnnotationMapper extends TypeScript.Annotations.EntityAnnotationMapperBase {
-        constructor(evaluatorMapper: Ts.Evaluation.IEvaluatorMapper) {
-            super(evaluatorMapper, {
+        constructor(patternExpander: Ts.Evaluation.IEvaluatorPatternExpander) {
+            super(patternExpander, {
                 "bt": Boards.BoardTileAnnotation
             });
         }

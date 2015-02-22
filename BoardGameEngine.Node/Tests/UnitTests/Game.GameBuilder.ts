@@ -5,7 +5,7 @@ var TsNs = Ao.TypeScript;
 
 var move = InteractionType.move;
 var attack = InteractionType.attack;
-var evaluatorMapper = new Bge.Games.GameEvaluatorMapper();
+var patternMapper = Bge.Games.GameEvaluatorPatternMapper.INSTANCE;
 
 class PieceConfiguration {
     constructor(public pieceDefinitionId: string) {
@@ -99,7 +99,7 @@ class PieceConfigurator {
 
     private _addEvaluator(evaluatorSignatureFactory: () => string, evaluatorName: string) {
         var evaluatorSignature = evaluatorSignatureFactory();
-        var evaluatorPattern = evaluatorMapper.map(evaluatorSignature);
+        var evaluatorPattern = patternMapper.map(evaluatorSignature);
         var evaluator = TsNs.Evaluation.EvaluatorParser.INSTANCE.parse<P.IPieceLocation>(evaluatorPattern);
         this._configuration[evaluatorName] = evaluator;
         return this;
@@ -309,7 +309,7 @@ class GameBuilder {
     public createGame(configuration: GameConfiguration): G.Game {
         var boardType = this._getBoardType(configuration);
 
-        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnInteractions, null, null);
+        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnInteractions, null, null, [], []);
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
