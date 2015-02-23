@@ -88,6 +88,21 @@ describe("Game", () => {
 
                     expect(result).toBe("!pe{location.piece.team.id,[D:piece.team.id]}");
                 });
+
+                it("Should create an extended mapper", () => {
+                    var extendedMapper = patternMapper.with({});
+
+                    expect(extendedMapper).not.toBe(patternMapper);
+                });
+
+                it("Should map piece.team=piece.blahTeam", () => {
+                    var source = "p.t=D:p.bt";
+
+                    var extendedMapper = patternMapper.with({ "bt": "blahTeam" });
+                    var result = extendedMapper.map(source);
+
+                    expect(result).toBe("pe{piece.team,[D:piece.blahTeam]}");
+                });
             });
         });
     });
