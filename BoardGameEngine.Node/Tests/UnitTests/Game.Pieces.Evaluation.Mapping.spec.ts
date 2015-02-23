@@ -95,7 +95,7 @@ describe("Game", () => {
                     expect(extendedMapper).not.toBe(patternMapper);
                 });
 
-                it("Should map piece.team=piece.blahTeam", () => {
+                it("Should map piece.team=D:piece.blahTeam", () => {
                     var source = "p.t=D:p.bt";
 
                     var extendedMapper = patternMapper.with({ "bt": "blahTeam" });

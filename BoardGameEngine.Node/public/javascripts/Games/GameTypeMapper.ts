@@ -109,13 +109,12 @@
 
             var triggeringEventNames = eventMappingDataItems[0].split("_");
             for (var i = 0; i < triggeringEventNames.length; i++) {
-                triggeringEventNames[i] = evaluatorPatternMapper.expand(triggeringEventNames[i] + ".");
-                triggeringEventNames[i] = triggeringEventNames[i].substring(0, triggeringEventNames[i].length - 1);
+                triggeringEventNames[i] = evaluatorPatternMapper.expand(triggeringEventNames[i]);
             }
 
             var triggerEvaluatorPattern = evaluatorPatternMapper.map(eventMappingDataItems[1]);
             var triggerEvaluator = TypeScript.Evaluation.EvaluatorParser.INSTANCE.parse(triggerEvaluatorPattern);
-            var triggeredEventName = evaluatorPatternMapper.expand(eventMappingDataItems[2] + ".");
+            var triggeredEventName = evaluatorPatternMapper.expand(eventMappingDataItems[2]);
             var triggeredEventDataMemberName = evaluatorPatternMapper.expand(eventMappingDataItems[3]);
 
             return new TypeScript.EventMapping(

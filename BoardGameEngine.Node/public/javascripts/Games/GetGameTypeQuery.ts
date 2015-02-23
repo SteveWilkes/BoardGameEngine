@@ -37,24 +37,26 @@
                 "@l.p.d=1+l.p.t=D:p.t" +
                 "^" +
                 "1~a1~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // 1-space attack
                 "@" +
                 "@l.io+!l.p.t=D:p.t" +
+                "~" +
+                "!io" + // ...if unoccupied +
                 "_" + // PieceDefinition 3
                 "3`Human Ninja`Ninja.png`" +
                 "0~m2~" +
-                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" +
+                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // 2-space movement 
                 "@!l.io" +
                 "@!l.io" +
                 "~" +
-                "!io" + // 2-space movement if unoccupied
+                "!io" + // ...if unoccupied
                 "^" +
                 "0~m2~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // 1-space movement
                 "@" +
                 "@!l.io" +
                 "~" +
-                "io" + // 1-space movement if occupied
+                "io" + // ...if occupied
                 "^" +
                 "0~m1~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
@@ -62,15 +64,17 @@
                 "@l.p.d=1+l.p.t=D:p.t" +
                 "^" +
                 "1~a1~" +
-                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" +
+                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // 2-space attack
                 "@!l.io" +
                 "@l.io+!l.p.t=D:p.t" +
+                "~" +
+                "!io" + // ...if unoccupied
                 "/" +
             // PieceConfigData
                 "1^1^5`2^2^4`2^2^5`2^2^6`3^3^3`3^3^4`3^3^5`3^3^6`3^3^7" +
                 "/" +
             // Event Mappings
-                "pmd^p.l.btt+!p.p.t=p.l.btt+p.p.d=1^td^p.l.btt";
+                "pmd^p.l.btt+p.p.d=1+!p.t=D:p.l.btt^td^p.l.btt";
         }
     }
 }
