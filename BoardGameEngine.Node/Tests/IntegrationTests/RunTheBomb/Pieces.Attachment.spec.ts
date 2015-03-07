@@ -21,6 +21,19 @@ describe("RunTheBomb", () => {
                 expect(team1Soldier.isOccupied()).toBeTruthy();
                 expect(team1Soldier.piece).toBe(team1Bomb);
             });
+
+            it("Should collect the bomb with a human soldier", () => {
+                var game = gameHelper.startDefaultGame();
+                var team1Soldier = gameHelper.getPieceAt("2x5", game);
+                var team1Bomb = gameHelper.getPieceAt("1x5", game);
+                var attachmentInteraction = gameHelper.getInteractionAt(team1Bomb, team1Soldier, game);
+
+                attachmentInteraction.complete();
+
+                expect(team1Soldier.isOccupied()).toBeTruthy();
+                expect(team1Bomb.location).toBe(team1Soldier);
+                expect(team1Soldier.location.coordinates.signature).toBe("1x5");
+            });
         });
     });
 });
