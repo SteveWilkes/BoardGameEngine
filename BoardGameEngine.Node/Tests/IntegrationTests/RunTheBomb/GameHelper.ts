@@ -52,6 +52,10 @@ class GameHelper implements It.IGameHelper {
             throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
         }
     }
+
+    public signalTurnStartFor(team: T.Team, game: G.Game): void {
+        game.events.turnValidated.publish(team);
+    }
 }
 
 var gameHelper = new GameHelper();
