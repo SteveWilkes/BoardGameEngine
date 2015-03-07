@@ -22,20 +22,21 @@
         }
 
         public first(predicate?: (item: TResult) => boolean): TResult {
-            if (typeof predicate === "function") {
-                return new JoqIterator(this._seed, this._handler).where(predicate).first();
-            }
-
+            var hasPredicate = typeof predicate === "function";
             var result = ignore;
 
             this._iterate((item: TItem) => {
                 result = this._handler(item);
+                if (hasPredicate) {
+                    if (predicate(result)) { return false; }
+                    return true;
+                }
                 return false;
             });
 
             if (result !== ignore) { return result; }
 
-            throw new Error("No properties to iterate");
+            throw new Error(hasPredicate ? "No matching item found" : "No properties to iterate");
         }
 
         public firstOrDefault(predicate?: (item: TResult) => boolean): TResult;
