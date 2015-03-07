@@ -5,6 +5,5 @@
         isHuman: boolean;
         getNextTeamId(): string;
         add(team: Team): void;
-        takeTurn(team: Team): void;
     }
 }

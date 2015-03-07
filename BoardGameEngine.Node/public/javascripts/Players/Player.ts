@@ -15,7 +15,5 @@
         public add(team: Teams.Team): void {
             this.teams.push(team);
         }
-
-        public takeTurn(team: Teams.Team): void { }
     }
 }
