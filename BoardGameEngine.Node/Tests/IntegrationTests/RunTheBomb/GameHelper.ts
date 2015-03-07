@@ -23,12 +23,16 @@ class GameHelper implements It.IGameHelper {
     }
 
     public getPieceAt(coordinatesSignature: string, game: G.Game): P.Piece {
-        return TsNs.Joq
-            .select<Ts.IStringDictionary<P.Piece>>(game.teams, team => team.getPieces())
-            .select(pieces => TsNs.Joq
-                .select<P.Piece>(pieces)
-                .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
-            .first(p => p !== null);
+        try {
+            return TsNs.Joq
+                .select<Ts.IStringDictionary<P.Piece>>(game.teams, team => team.getPieces())
+                .select(pieces => TsNs.Joq
+                    .select<P.Piece>(pieces)
+                    .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
+                .first(p => p !== null);
+        } catch (e) {
+            throw new Error("No piece found at " + coordinatesSignature);
+        }
     }
 
     public getInteractionAt(coordinatesSignature: string, piece: P.Piece, game: G.Game): P.IPieceInteraction;
@@ -40,9 +44,13 @@ class GameHelper implements It.IGameHelper {
             ? inter => inter.location.coordinates.signature === coordinatesSignatureOrPiece
             : inter => inter.location.contains(coordinatesSignatureOrPiece);
 
-        return TsNs.Joq
-            .select<IPieceInteraction>(bombInteractions)
-            .first(predicate);
+        try {
+            return TsNs.Joq
+                .select<IPieceInteraction>(bombInteractions)
+                .first(predicate);
+        } catch (e) {
+            throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
+        }
     }
 }
 
