@@ -207,6 +207,7 @@
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attacks.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Evaluation.Mapping.spec.ts" />
+    <TypeScriptCompile Include="Tests\IntegrationTests\RunTheBomb\Pieces.Attachment.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.Parsing.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Movement.spec.ts">
@@ -275,9 +276,10 @@
     <Folder Include="Scripts\typings\socket.io\" />
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
+    <Folder Include="Tests\IntegrationTests\" />
     <Folder Include="Tests\UnitTests\" />
     <Folder Include="Tests\UnitTests\Games\" />
-    <Folder Include="Tests\UnitTests\RunTheBomb\" />
+    <Folder Include="Tests\IntegrationTests\RunTheBomb\" />
     <Folder Include="Tests\UnitTests\TypeScript\" />
     <Folder Include="Tests\UnitTests\typings\" />
     <Folder Include="views\" />
