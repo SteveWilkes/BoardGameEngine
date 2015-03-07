@@ -42,20 +42,22 @@
         public firstOrDefault(predicate?: (item: TResult) => boolean): TResult;
         public firstOrDefault(defaultValue?: TResult): TResult;
         public firstOrDefault(predicate?: any, defaultValue?: TResult): TResult {
-            if ((defaultValue == null) && (typeof predicate !== "function")) {
+            var hasPredicate = typeof predicate === "function";
+
+            if ((defaultValue == null) && !hasPredicate) {
                 defaultValue = <TResult>predicate;
                 predicate = null;
-            }
-
-            if (typeof predicate === "function") {
-                return new JoqIterator(this._seed, this._handler).where(predicate).firstOrDefault(defaultValue);
             }
 
             var result = null;
 
             this._iterate((item: TItem) => {
                 result = this._handler(item);
-                return (result === ignore);
+                if (hasPredicate) {
+                    if (predicate(result)) { return false; }
+                    return true;
+                }
+                return false;
             });
 
             // ReSharper disable once ExpressionIsAlwaysConst

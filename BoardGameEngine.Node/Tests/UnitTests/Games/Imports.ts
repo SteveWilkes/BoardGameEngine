@@ -1,4 +1,5 @@
 ﻿import Ut = AgileObjects.BoardGameEngine.Tests.UnitTests;
+import It = AgileObjects.BoardGameEngine.Tests.IntegrationTests;
 import B = AgileObjects.BoardGameEngine.Boards;
 import G = AgileObjects.BoardGameEngine.Games;
 import P = AgileObjects.BoardGameEngine.Pieces;
