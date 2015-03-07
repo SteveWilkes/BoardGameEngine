@@ -202,18 +202,18 @@
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.GameBuilder.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Imports.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attachment.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Attacks.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Evaluation.Mapping.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Evaluation.Parsing.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Evaluation.spec.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\Game.Pieces.Movement.spec.ts">
+    <TypeScriptCompile Include="Tests\UnitTests\Games\GameBuilder.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Games\Imports.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attachment.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attacks.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Evaluation.Mapping.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.Parsing.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Movement.spec.ts">
       <SubType>Code</SubType>
       <TestFramework>ExportRunner</TestFramework>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Tests\UnitTests\TypeScript.Coordinates.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Coordinates.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\typings\GameBuilder.ts" />
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +276,8 @@
     <Folder Include="Scripts\typings\node\" />
     <Folder Include="Scripts\typings\stylus\" />
     <Folder Include="Tests\UnitTests\" />
+    <Folder Include="Tests\UnitTests\Games\" />
+    <Folder Include="Tests\UnitTests\TypeScript\" />
     <Folder Include="Tests\UnitTests\typings\" />
     <Folder Include="views\" />
     <Folder Include="views\Games\" />

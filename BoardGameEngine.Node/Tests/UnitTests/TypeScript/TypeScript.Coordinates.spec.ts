@@ -1,4 +1,4 @@
-﻿var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
+﻿var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var TsNs = Ao.TypeScript;
 
 describe("TypeScript", () => {
