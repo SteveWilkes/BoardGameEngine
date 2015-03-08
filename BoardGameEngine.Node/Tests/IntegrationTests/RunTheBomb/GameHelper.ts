@@ -53,8 +53,9 @@ class GameHelper implements It.IGameHelper {
         }
     }
 
-    public signalTurnStartFor(team: T.Team, game: G.Game): void {
-        game.events.turnValidated.publish(team);
+    public startNextTurn(game: G.Game): void {
+        var nextTeamIndex = (game.status.turnManager.currentTeam === game.teams[0]) ? 1 : 0;
+        game.events.turnValidated.publish(game.teams[nextTeamIndex]);
     }
 }
 

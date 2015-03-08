@@ -44,14 +44,14 @@ describe("RunTheBomb", () => {
                 gameHelper.getInteractionAt(team1Soldier, team1Bomb, game).complete();
 
                 // End team1's turn:
-                gameHelper.signalTurnStartFor(game.teams[1], game);
+                gameHelper.startNextTurn(game);
 
                 // Move team2's bomb to 8x5:
                 var team2Bomb = gameHelper.getPieceAt("9x5", game);
                 gameHelper.getInteractionAt("8x5", team2Bomb, game).complete();
 
                 // End team2's turn:
-                gameHelper.signalTurnStartFor(game.teams[0], game);
+                gameHelper.startNextTurn(game);
 
                 // Move team1's bomb from the soldier to a ninja:
                 var team1Ninja = gameHelper.getPieceAt("3x5", game);
