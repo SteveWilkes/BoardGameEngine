@@ -38,19 +38,31 @@ class GameHelper implements It.IGameHelper {
     public getInteractionAt(coordinatesSignature: string, piece: P.Piece, game: G.Game): P.IPieceInteraction;
     public getInteractionAt(targetPiece: P.Piece, piece: P.Piece, game: G.Game): P.IPieceInteraction;
     public getInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece, game: G.Game): P.IPieceInteraction {
-        var bombInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+        var interaction = this._getInteractionAt(coordinatesSignatureOrPiece, piece, game);
+
+        if (interaction !== null) {
+            return interaction;
+        }
+
+        throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
+    }
+
+    public hasInteractionAt(coordinatesSignature: string, piece: P.Piece, game: G.Game): boolean;
+    public hasInteractionAt(targetPiece: P.Piece, piece: P.Piece, game: G.Game): boolean;
+    public hasInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece, game: G.Game): boolean {
+        return this._getInteractionAt(coordinatesSignatureOrPiece, piece, game) !== null;
+    }
+
+    private _getInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece, game: G.Game) {
+        var interactions = piece.interactionProfile.getPotentialInteractions(piece, game);
 
         var predicate = (typeof coordinatesSignatureOrPiece === "string")
-            ? inter => inter.location.coordinates.signature === coordinatesSignatureOrPiece
-            : inter => inter.location.contains(coordinatesSignatureOrPiece);
+            ? (inter: IPieceInteraction) => inter.location.coordinates.signature === coordinatesSignatureOrPiece
+            : (inter: IPieceInteraction) => inter.location.contains(coordinatesSignatureOrPiece);
 
-        try {
-            return TsNs.Joq
-                .select<IPieceInteraction>(bombInteractions)
-                .first(predicate);
-        } catch (e) {
-            throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
-        }
+        return TsNs.Joq
+            .select<IPieceInteraction>(interactions)
+            .firstOrDefault(predicate);
     }
 
     public startNextTurn(game: G.Game): void {

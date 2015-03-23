@@ -2,33 +2,33 @@
     var ignore = null;
 
     export class JoqIterator<TItem, TResult> {
-        constructor(private _seed: any, private _handler: (item: TItem) => TResult) { }
+        constructor(private _seed: any, private _handler: (item: TItem, index: any) => TResult) { }
 
         public select<TNewResult>(projection: (value: TResult) => TNewResult): JoqIterator<TItem, TNewResult> {
-            var handler = (item: TItem) => {
-                var result = this._handler(item);
+            var handler = (item: TItem, index: any) => {
+                var result = this._handler(item, index);
                 return projection(result);
             };
             return new JoqIterator(this._seed, handler);
         }
 
-        public where(predicate: (item: TResult) => boolean): JoqIterator<TItem, TResult> {
+        public where(predicate: (item: TResult, index?: any) => boolean): JoqIterator<TItem, TResult> {
             var handlerSoFar = this._handler;
-            this._handler = (item: TItem) => {
-                var result = handlerSoFar(item);
-                return predicate(result) ? result : ignore;
+            this._handler = (item: TItem, index: any) => {
+                var result = handlerSoFar(item, index);
+                return predicate(result, index) ? result : ignore;
             };
             return this;
         }
 
-        public first(predicate?: (item: TResult) => boolean): TResult {
+        public first(predicate?: (item: TResult, index?: any) => boolean): TResult {
             var hasPredicate = typeof predicate === "function";
             var result = ignore;
 
-            this._iterate((item: TItem) => {
-                result = this._handler(item);
+            this._iterate((item: TItem, index: any) => {
+                result = this._handler(item, index);
                 if (hasPredicate) {
-                    if (predicate(result)) { return false; }
+                    if (predicate(result, index)) { return false; }
                     return true;
                 }
                 return false;
@@ -39,7 +39,7 @@
             throw new Error(hasPredicate ? "No matching item found" : "No properties to iterate");
         }
 
-        public firstOrDefault(predicate?: (item: TResult) => boolean): TResult;
+        public firstOrDefault(predicate?: (item: TResult, index?: any) => boolean): TResult;
         public firstOrDefault(defaultValue?: TResult): TResult;
         public firstOrDefault(predicate?: any, defaultValue?: TResult): TResult {
             var hasPredicate = typeof predicate === "function";
@@ -51,10 +51,11 @@
 
             var result = null;
 
-            this._iterate((item: TItem) => {
-                result = this._handler(item);
+            this._iterate((item: TItem, index: any) => {
+                result = this._handler(item, index);
                 if (hasPredicate) {
-                    if (predicate(result)) { return false; }
+                    if (predicate(result, index)) { return false; }
+                    result = null;
                     return true;
                 }
                 return false;
@@ -69,21 +70,22 @@
 
         public toArray(): Array<TResult> {
             var results = new Array<TResult>();
-            this._iterate((item: TItem) => {
-                var result = this._handler(item);
+            this._iterate((item: TItem, index: any) => {
+                var result = this._handler(item, index);
                 if (result !== ignore) { results.push(result); }
                 return true;
             });
             return results;
         }
 
-        private _iterate(handler: (value, index) => boolean) {
+        private _iterate(handler: (value: TItem, index: any) => boolean) {
             var continueIteration;
 
             if (this._seed instanceof Array) {
-                var seedLength = this._seed.length;
+                var array = <Array<TItem>>this._seed;
+                var seedLength = array.length;
                 for (var i = 0; i < seedLength; i++) {
-                    continueIteration = handler(this._seed[i], i);
+                    continueIteration = handler(array[i], i);
 
                     if (continueIteration === false) { break; }
                 }
@@ -91,7 +93,7 @@
             }
 
             for (var propertyName in this._seed) {
-                var propertyValue = this._seed[propertyName];
+                var propertyValue = <TItem>this._seed[propertyName];
                 if (typeof propertyValue === "function") { continue; }
 
                 continueIteration = handler(propertyValue, propertyName);
