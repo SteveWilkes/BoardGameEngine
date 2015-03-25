@@ -15,8 +15,8 @@
             var row: number;
             if (typeof rowOrCoordinatesSignature === "string") {
                 var rowAndColumn = rowOrCoordinatesSignature.split("x");
-                row = rowAndColumn[0];
-                column = rowAndColumn[1];
+                row = parseInt(rowAndColumn[0]);
+                column = parseInt(rowAndColumn[1]);
             } else {
                 row = <number>rowOrCoordinatesSignature;
             }
