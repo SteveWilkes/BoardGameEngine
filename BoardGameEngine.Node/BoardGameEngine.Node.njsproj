@@ -204,6 +204,7 @@
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
     <TypeScriptCompile Include="Tests\IntegrationTests\RunTheBomb\GameHelper.ts" />
     <TypeScriptCompile Include="Tests\IntegrationTests\RunTheBomb\Pieces.Movement.spec.ts" />
+    <TypeScriptCompile Include="Tests\GameWrapper.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\GameBuilder.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Imports.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attachment.spec.ts" />

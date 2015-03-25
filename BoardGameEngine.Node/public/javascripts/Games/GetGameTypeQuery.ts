@@ -19,12 +19,12 @@
                 "1^0" +
                 "/" +
             // PieceDefinitions
-                "1`Bomb`Bomb.png`" + // PieceDefinition 1
+                "1`Bomb`Bomb.png`" + // PieceDefinition 1 - Bomb
                 "0~m3~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
                 "@" +
                 "@l.p.d=2,3+l.p.t=D:p.t" +
-                "_" + // PieceDefinition 2
+                "_" + // PieceDefinition 2 - Soldier
                 "2`Human Soldier`Soldier.png`" +
                 "0~m2~" +
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
@@ -42,7 +42,7 @@
                 "@l.io+!l.p.t=D:p.t" +
                 "~" +
                 "!io" + // ...if unoccupied +
-                "_" + // PieceDefinition 3
+                "_" + // PieceDefinition 3 - Ninja
                 "3`Human Ninja`Ninja.png`" +
                 "0~m2~" +
                 "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // 2-space movement 

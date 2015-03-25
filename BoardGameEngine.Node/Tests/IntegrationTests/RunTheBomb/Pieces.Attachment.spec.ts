@@ -9,12 +9,12 @@ describe("RunTheBomb", () => {
         describe("Attachment", () => {
             it("Should attach the bomb to a human soldier", () => {
                 var game = gameHelper.startDefaultGame();
-                var team1Bomb = gameHelper.getPieceAt("1x5", game);
-                var team1Soldier = gameHelper.getPieceAt("2x5", game);
+                var team1Bomb = game.getPieceAt("1x5");
+                var team1Soldier = game.getPieceAt("2x5");
 
                 expect(team1Soldier.isOccupied()).toBeFalsy();
 
-                var attachmentInteraction = gameHelper.getInteractionAt(team1Soldier, team1Bomb, game);
+                var attachmentInteraction = game.getInteractionAt(team1Soldier, team1Bomb);
 
                 attachmentInteraction.complete();
 
@@ -24,9 +24,9 @@ describe("RunTheBomb", () => {
 
             it("Should collect the bomb with a human soldier", () => {
                 var game = gameHelper.startDefaultGame();
-                var team1Soldier = gameHelper.getPieceAt("2x5", game);
-                var team1Bomb = gameHelper.getPieceAt("1x5", game);
-                var attachmentInteraction = gameHelper.getInteractionAt(team1Bomb, team1Soldier, game);
+                var team1Soldier = game.getPieceAt("2x5");
+                var team1Bomb = game.getPieceAt("1x5");
+                var attachmentInteraction = game.getInteractionAt(team1Bomb, team1Soldier);
 
                 attachmentInteraction.complete();
 
@@ -37,25 +37,25 @@ describe("RunTheBomb", () => {
 
             it("Should pass the bomb from a human soldier to a ninja", () => {
                 var game = gameHelper.startDefaultGame();
-                var team1Bomb = gameHelper.getPieceAt("1x5", game);
-                var team1Soldier = gameHelper.getPieceAt("2x5", game);
+                var team1Bomb = game.getPieceAt("1x5");
+                var team1Soldier = game.getPieceAt("2x5");
 
                 // Move team1's bomb to the soldier at 2x5:
-                gameHelper.getInteractionAt(team1Soldier, team1Bomb, game).complete();
+                game.getInteractionAt(team1Soldier, team1Bomb).complete();
 
                 // End team1's turn:
-                gameHelper.startNextTurn(game);
+                game.startNextTurn();
 
                 // Move team2's bomb to 8x5:
-                var team2Bomb = gameHelper.getPieceAt("9x5", game);
-                gameHelper.getInteractionAt("8x5", team2Bomb, game).complete();
+                var team2Bomb = game.getPieceAt("9x5");
+                game.getInteractionAt("8x5", team2Bomb).complete();
 
                 // End team2's turn:
-                gameHelper.startNextTurn(game);
+                game.startNextTurn();
 
                 // Move team1's bomb from the soldier to a ninja:
-                var team1Ninja = gameHelper.getPieceAt("3x5", game);
-                gameHelper.getInteractionAt(team1Ninja, team1Bomb, game).complete();
+                var team1Ninja = game.getPieceAt("3x5");
+                game.getInteractionAt(team1Ninja, team1Bomb).complete();
 
                 expect(team1Soldier.isOccupied()).toBeFalsy();
                 expect(team1Ninja.isOccupied()).toBeTruthy();
