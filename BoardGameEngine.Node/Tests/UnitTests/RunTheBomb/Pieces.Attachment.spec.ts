@@ -2,13 +2,19 @@
 var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
-var gameHelper: It.IGameHelper = require("./GameHelper");
+var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
 
 describe("RunTheBomb", () => {
     describe("Pieces", () => {
         describe("Attachment", () => {
             it("Should attach the bomb to a human soldier", () => {
-                var game = gameHelper.startDefaultGame();
+                var game = gameHelper
+                    .startDefaultGame()
+                    .setupPieces(c => c
+                        .forTeam(1)
+                        .aBombAt("1x5")
+                        .aSoldierAt("2x5"));
+
                 var team1Bomb = game.getPieceAt("1x5");
                 var team1Soldier = game.getPieceAt("2x5");
 
@@ -23,7 +29,13 @@ describe("RunTheBomb", () => {
             });
 
             it("Should collect the bomb with a human soldier", () => {
-                var game = gameHelper.startDefaultGame();
+                var game = gameHelper
+                    .startDefaultGame()
+                    .setupPieces(c => c
+                        .forTeam(1)
+                        .aBombAt("1x5")
+                        .aSoldierAt("2x5"));
+
                 var team1Soldier = game.getPieceAt("2x5");
                 var team1Bomb = game.getPieceAt("1x5");
                 var attachmentInteraction = game.getInteractionAt(team1Bomb, team1Soldier);
@@ -36,7 +48,16 @@ describe("RunTheBomb", () => {
             });
 
             it("Should pass the bomb from a human soldier to a ninja", () => {
-                var game = gameHelper.startDefaultGame();
+                var game = gameHelper
+                    .startDefaultGame()
+                    .setupPieces(c => c
+                        .forTeam(1)
+                        .aBombAt("1x5")
+                        .aSoldierAt("2x5")
+                        .aNinjaAt("3x5")
+                        .forTeam(2)
+                        .aSoldierAt("9x5"));
+
                 var team1Bomb = game.getPieceAt("1x5");
                 var team1Soldier = game.getPieceAt("2x5");
 
@@ -46,9 +67,9 @@ describe("RunTheBomb", () => {
                 // End team1's turn:
                 game.startNextTurn();
 
-                // Move team2's bomb to 8x5:
-                var team2Bomb = game.getPieceAt("9x5");
-                game.getInteractionAt("8x5", team2Bomb).complete();
+                // Move team2's soldier to 8x5:
+                var team2Soldier = game.getPieceAt("9x5");
+                game.getInteractionAt("8x5", team2Soldier).complete();
 
                 // End team2's turn:
                 game.startNextTurn();

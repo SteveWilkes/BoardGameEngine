@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Tests.IntegrationTests {
 
     export interface IGameHelper {
-        startDefaultGame(): G.GameWrapper;
+        startDefaultGame(): G.GameWrapper<G.RunTheBombTeamConfigurator>;
     }
 }

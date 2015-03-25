@@ -52,8 +52,9 @@
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.GameService;
         GameType: new (id: string, boardType: B.BoardType, turnInteractions: Array<InteractionType>, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>, annotations: Array<Ts.Annotations.IEntityAnnotation>, eventMappings: Array<Ts.EventMapping>) => G.GameType;
         GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>, annotationMapper: TsAn.IEntityAnnotationMapper, patternMapper: TsEv.IEvaluatorPatternMapper) => G.GameTypeMapper;
-        GameWrapper: new (game: G.Game) => G.GameWrapper;
+        GameWrapper: new <TTeamConfigurator extends G.ITeamConfigurator>(teamConfigurator: TTeamConfigurator, game: G.Game) => G.GameWrapper<TTeamConfigurator>;
         GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
+        RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
         ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.ServerGameCoordinator;
     }
 
@@ -63,6 +64,7 @@
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
         Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
+        PieceConfigData: new (pieceDefinitionId: string, pieceLocation: Ts.Coordinates) => P.PieceConfigData;
         PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>) => P.PieceInteractionProfile;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: P.IPieceInteractionContextEvaluator, pathDestinationEvaluator: P.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;

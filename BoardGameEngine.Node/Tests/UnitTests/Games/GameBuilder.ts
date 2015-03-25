@@ -152,8 +152,7 @@ class TeamConfigurator {
         config(configurator);
         var configuration = configurator.getConfiguration();
         for (var i = 0; i < coordinateSignatures.length; i++) {
-            var rowAndColumn = coordinateSignatures[i].split("x");
-            var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(parseInt(rowAndColumn[0]), parseInt(rowAndColumn[1]));
+            var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(coordinateSignatures[i]);
             var piece = PieceBuilder.INSTANCE.createPiece(configuration);
             this._configuration.piecesByInitialLocation.add(coordinates, piece);
         }

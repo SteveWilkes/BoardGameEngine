@@ -202,7 +202,8 @@
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
-    <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\GameHelper.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\ITeamConfigurator.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\RunTheBombGameHelper.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Pieces.Movement.spec.ts" />
     <TypeScriptCompile Include="Tests\GameWrapper.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\GameBuilder.ts" />
@@ -211,6 +212,7 @@
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Attacks.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Evaluation.Mapping.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Pieces.Attachment.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\RunTheBombTeamConfigurator.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.Parsing.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\TypeScript\TypeScript.Evaluation.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\Games\Pieces.Movement.spec.ts">

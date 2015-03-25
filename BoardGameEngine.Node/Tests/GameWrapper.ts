@@ -1,8 +1,10 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
     import Ts = TypeScript;
 
-    export class GameWrapper {
-        constructor(private _game: Game) { }
+    export class GameWrapper<TTeamConfigurator extends ITeamConfigurator> {
+        constructor(
+            private _teamConfigurator: TTeamConfigurator,
+            private _game: Game) { }
 
         public getPieceAt(coordinatesSignature: string): P.Piece {
             try {
@@ -50,6 +52,34 @@
         public startNextTurn(): void {
             var nextTeamIndex = (this._game.status.turnManager.currentTeam === this._game.teams[0]) ? 1 : 0;
             this._game.events.turnValidated.publish(this._game.teams[nextTeamIndex]);
+        }
+
+        public setupPieces(configuration: (configurator: TTeamConfigurator) => void): GameWrapper<TTeamConfigurator> {
+            this._clearPieces();
+
+            configuration(this._teamConfigurator);
+
+            this._teamConfigurator.setupTeams();
+
+            return this;
+        }
+
+        private _clearPieces(): GameWrapper<TTeamConfigurator> {
+            var tilesByCoordinates = this._game.board.getTiles();
+
+            for (var coordinatesSignature in tilesByCoordinates) {
+                tilesByCoordinates[coordinatesSignature].piece = undefined;
+            }
+
+            for (var i = 0; i < this._game.teams.length; i++) {
+                var piecesById = this._game.teams[i].getPieces();
+
+                for (var pieceId in piecesById) {
+                    delete piecesById[pieceId];
+                }
+            }
+
+            return this;
         }
     }
 }
