@@ -17,14 +17,14 @@ describe("TypeScript", () => {
             expect(twoSpacesUpFromBottomLeft[1].signature).toBe("3x1");
         });
 
-        it("Should retrieve singleton coordinates from the registry", () => {
-            var rowTwoColumnTwo = TsNs.CoordinatesRegistry.INSTANCE.get(2, 2);
+        it("Should retrieve singleton coordinates from the library", () => {
+            var rowTwoColumnTwo = TsNs.CoordinatesLibrary.INSTANCE.get(2, 2);
 
             expect(rowTwoColumnTwo).not.toBeNull();
             expect(rowTwoColumnTwo.row).toBe(2);
             expect(rowTwoColumnTwo.column).toBe(2);
 
-            var rowTwoColumnTwoAgain = TsNs.CoordinatesRegistry.INSTANCE.get(2, 2);
+            var rowTwoColumnTwoAgain = TsNs.CoordinatesLibrary.INSTANCE.get(2, 2);
 
             expect(rowTwoColumnTwoAgain).toBe(rowTwoColumnTwo);
         });

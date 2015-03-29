@@ -101,8 +101,8 @@
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesRegistry.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslatorRegistry.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesLibrary.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslatorLibrary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.TryGetResult.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.RandomStringGenerator.ts" />

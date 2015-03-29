@@ -26,8 +26,8 @@
         Annotations: TypeScriptAnnotations;
         Coordinates: new (row: number, column: number, signature?: string) => Ts.Coordinates;
         CoordinateTranslator: new (directionFunctionName: string, distance: number) => Ts.CoordinateTranslator;
-        CoordinateTranslatorRegistry: typeof Ts.CoordinateTranslatorRegistry;
-        CoordinatesRegistry: typeof Ts.CoordinatesRegistry;
+        CoordinateTranslatorLibrary: typeof Ts.CoordinateTranslatorLibrary;
+        CoordinatesLibrary: typeof Ts.CoordinatesLibrary;
         Dictionary: new <TKey, TValue>() => Ts.Dictionary<TKey, TValue>;
         Evaluation: TypeScriptEvaluation;
         Joq: typeof Ts.Joq;

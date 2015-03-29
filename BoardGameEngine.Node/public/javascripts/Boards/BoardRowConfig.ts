@@ -13,7 +13,7 @@
                     row.push(placeholderTile);
                     continue;
                 }
-                var coordinates = Ts.CoordinatesRegistry.INSTANCE.get(rowNumber, columnNumber);
+                var coordinates = Ts.CoordinatesLibrary.INSTANCE.get(rowNumber, columnNumber);
                 var tile = new BoardTile(coordinates);
                 row.push(tile);
             }

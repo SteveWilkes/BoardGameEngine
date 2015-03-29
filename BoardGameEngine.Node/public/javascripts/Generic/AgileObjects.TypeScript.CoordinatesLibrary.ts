@@ -1,7 +1,7 @@
 ﻿module AgileObjects.TypeScript {
 
-    export class CoordinatesRegistry {
-        static INSTANCE = new CoordinatesRegistry();
+    export class CoordinatesLibrary {
+        static INSTANCE = new CoordinatesLibrary();
 
         private _coordinates: TypeScript.IStringDictionary<Coordinates>;
 

@@ -17,9 +17,9 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventHub.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.EventMapping.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.Coordinates.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesRegistry.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinatesLibrary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslator.js");
-    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorRegistry.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.CoordinateTranslatorLibrary.js");
     assets.addJs("/public/javascripts/Generic/AgileObjects.TypeScript.ValueParser.js");
     assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationBase.js");
     assets.addJs("/public/javascripts/Generic/Annotations/AgileObjects.TypeScript.EntityAnnotationManager.js");

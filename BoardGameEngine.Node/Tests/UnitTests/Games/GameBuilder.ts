@@ -152,7 +152,7 @@ class TeamConfigurator {
         config(configurator);
         var configuration = configurator.getConfiguration();
         for (var i = 0; i < coordinateSignatures.length; i++) {
-            var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(coordinateSignatures[i]);
+            var coordinates = TsNs.CoordinatesLibrary.INSTANCE.get(coordinateSignatures[i]);
             var piece = PieceBuilder.INSTANCE.createPiece(configuration);
             this._configuration.pieceInitialLocations.add(piece, coordinates);
         }
@@ -247,7 +247,7 @@ class GameConfigurator {
 
     public withNorthSouthBoardPositions(): GameConfigurator {
         this.withBoardPosition("South", coordinates => coordinates, true);
-        this.withBoardPosition("North", TsNs.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, false);
+        this.withBoardPosition("North", TsNs.CoordinateTranslatorLibrary.SOUTH_TO_NORTH, false);
         return this;
     }
 

@@ -46,7 +46,7 @@
                 this._configurations.values[this._configurations.values.length - 1].push(
                     new Pieces.PieceConfigData(
                         pieceDefinitionId,
-                        Ts.CoordinatesRegistry.INSTANCE.get(coordinatesSignatures[i])));
+                        Ts.CoordinatesLibrary.INSTANCE.get(coordinatesSignatures[i])));
             }
 
             return this;

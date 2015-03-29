@@ -9,7 +9,7 @@
                 "diamond",
                 [
                     new BoardPosition("South", (c: Ts.Coordinates) => c),
-                    new BoardPosition("North", Ts.CoordinateTranslatorRegistry.SOUTH_TO_NORTH, true),
+                    new BoardPosition("North", Ts.CoordinateTranslatorLibrary.SOUTH_TO_NORTH, true),
                     new BoardPosition("East", (c: Ts.Coordinates) => c),
                     new BoardPosition("West", (c: Ts.Coordinates) => c)
                 ],

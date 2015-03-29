@@ -84,7 +84,7 @@
             var pieceDefinitionId = pieceConfigDataItems[0];
             var row = parseInt(pieceConfigDataItems[1]);
             var column = parseInt(pieceConfigDataItems[2]);
-            var location = TypeScript.CoordinatesRegistry.INSTANCE.get(row, column);
+            var location = TypeScript.CoordinatesLibrary.INSTANCE.get(row, column);
 
             return new Pieces.PieceConfigData(pieceDefinitionId, location);
         }
