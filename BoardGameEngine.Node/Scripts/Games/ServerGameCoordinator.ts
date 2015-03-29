@@ -70,7 +70,7 @@
                 // Out of sync
             }
             var piece = currentTeamPieces[pieceId];
-            var potentialInteractions = piece.interactionProfile.getPotentialInteractions(piece, game);
+            var potentialInteractions = piece.getPotentialInteractions(game);
             if (!potentialInteractions.hasOwnProperty(interactionId)) {
                 // Out of sync
             }

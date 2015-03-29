@@ -1,11 +1,13 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
+    var interactionProfileLibrary = PieceInteractionProfileLibrary.INSTANCE;
+
     export class Piece extends PieceLocationBase {
         constructor(
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            public interactionProfile: PieceInteractionProfile) {
+            private _interactionProfileId: string) {
             super();
 
             this.health = 100;
@@ -20,6 +22,12 @@
             this.location = location;
             location.piece = this;
             this.coordinates = location.coordinates;
+        }
+
+        public getPotentialInteractions(game: G.Game): Ts.IStringDictionary<IPieceInteraction> {
+            return interactionProfileLibrary
+                .get(this._interactionProfileId)
+                .getPotentialInteractions(this, game);
         }
 
         public applyAttackBy(attacker: Piece): number {

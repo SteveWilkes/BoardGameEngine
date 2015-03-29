@@ -27,11 +27,11 @@
             var name = pieceDefinitionDataItems[1];
             var image = "/images/pieces/" + pieceDefinitionDataItems[2];
 
-            return new PieceDefinition(
-                id,
-                name,
-                image,
-                new PieceInteractionProfile(this._mapInteractionCalculators(pieceDefinitionDataItems[3])));
+            var profileId = Pieces.PieceInteractionProfileLibrary.INSTANCE.getIdOrAdd(
+                pieceDefinitionDataItems[3],
+                signature => new PieceInteractionProfile(this._mapInteractionCalculators(signature)));
+
+            return new PieceDefinition(id, name, image, profileId);
         }
 
         private _mapInteractionCalculators(interactionCalculatorData: string): Array<PieceInteractionCalculator> {

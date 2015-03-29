@@ -126,9 +126,13 @@ class PieceBuilder {
     }
 
     public createPiece(configuration: PieceConfiguration): P.Piece {
-        var pieceInteractionProfile = new Bge.Pieces.PieceInteractionProfile(configuration.interactionCalculators);
         var pieceId = this._idGenerator.generate(6);
-        return new Bge.Pieces.Piece(pieceId, configuration.pieceDefinitionId, "test.gif", pieceInteractionProfile);
+        
+        var interactionProfileId = Bge.Pieces.PieceInteractionProfileLibrary.INSTANCE.getIdOrAdd(
+            pieceId,
+            () => new Bge.Pieces.PieceInteractionProfile(configuration.interactionCalculators));
+
+        return new Bge.Pieces.Piece(pieceId, configuration.pieceDefinitionId, "test.gif", interactionProfileId);
     }
 }
 
