@@ -3,26 +3,26 @@
 
     export class TeamFactory {
         public createTeamFor(owner: ITeamOwner, teamNumber: number, pieceData: Pieces.PieceDataSet): Teams.Team {
-            var piecesByLocation = this._getPiecesByLocation(teamNumber, pieceData);
+            var pieceCoordinates = this._getPieceCoordinates(teamNumber, pieceData);
 
             var teamName = owner.id + " Team";
-            var team = new Teams.Team(owner, teamName, piecesByLocation);
+            var team = new Teams.Team(owner, teamName, pieceCoordinates);
 
             return team;
         }
 
-        private _getPiecesByLocation(teamNumber: number, pieceData: Pieces.PieceDataSet): Ts.Dictionary<Ts.Coordinates, Pieces.Piece> {
-            var piecesByLocation = new TypeScript.Dictionary<TypeScript.Coordinates, Pieces.Piece>();
+        private _getPieceCoordinates(teamNumber: number, pieceData: Pieces.PieceDataSet): Ts.Dictionary<Pieces.Piece, Ts.Coordinates> {
+            var pieceCoordinates = new TypeScript.Dictionary<Pieces.Piece, TypeScript.Coordinates>();
 
             for (var i = 0; i < pieceData.configData.length; i++) {
                 var pieceConfigData = pieceData.configData[i];
                 var pieceDefinition = pieceData.definitions[pieceConfigData.pieceDefinitionId];
                 var pieceId = teamNumber + "-" + (i + 1);
                 var piece = pieceDefinition.createPiece(pieceId, teamNumber);
-                piecesByLocation.add(pieceConfigData.pieceLocation, piece);
+                pieceCoordinates.add(piece, pieceConfigData.pieceLocation);
             }
 
-            return piecesByLocation;
+            return pieceCoordinates;
         }
     }
 }

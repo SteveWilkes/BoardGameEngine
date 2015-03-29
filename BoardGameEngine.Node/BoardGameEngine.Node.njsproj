@@ -203,6 +203,7 @@
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\ITeamConfigurator.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Games.Completion.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\RunTheBombGameHelper.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Pieces.Movement.spec.ts" />
     <TypeScriptCompile Include="Tests\GameWrapper.ts" />

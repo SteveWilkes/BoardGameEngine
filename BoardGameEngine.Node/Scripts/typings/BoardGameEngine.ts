@@ -75,7 +75,7 @@
     }
 
     interface Teams {
-        Team: new (owner: Bge.Teams.ITeamOwner, name: string, piecesByInitialLocation: Ts.Dictionary<Ts.Coordinates, P.Piece>) => Bge.Teams.Team;
+        Team: new (owner: Bge.Teams.ITeamOwner, name: string, piecesByInitialLocation: Ts.Dictionary<P.Piece, Ts.Coordinates>) => Bge.Teams.Team;
         TeamFactory: new () => Bge.Teams.TeamFactory;
     }
 

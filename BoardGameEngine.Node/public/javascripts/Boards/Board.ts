@@ -41,8 +41,8 @@
             var pieces = team.getPieces();
             for (var pieceId in pieces) {
                 var piece = pieces[pieceId];
-                var pieceLocation = team.getInitialLocationOf(piece);
-                var translatedCoordinates = position.translate(pieceLocation);
+                var pieceCoordinates = team.getInitialCoordinatesFor(piece);
+                var translatedCoordinates = position.translate(pieceCoordinates);
                 var tile = this._tilesByCoordinates[translatedCoordinates.signature];
                 tile.add(piece);
             }

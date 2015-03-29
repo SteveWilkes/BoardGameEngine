@@ -2,14 +2,18 @@
     import Ts = TypeScript;
 
     export class GameWrapper<TTeamConfigurator extends ITeamConfigurator> {
-        constructor(
-            private _teamConfigurator: TTeamConfigurator,
-            private _game: Game) { }
+        constructor(private _teamConfigurator: TTeamConfigurator, private _game: Game) {
+            this.teams = this._game.teams;
+            this.events = this._game.events;
+        }
+
+        public teams: Array<T.Team>;
+        public events: G.GameEventSet;
 
         public getPieceAt(coordinatesSignature: string): P.Piece {
             try {
                 return Ts.Joq
-                    .select<Ts.IStringDictionary<P.Piece>>(this._game.teams, team => team.getPieces())
+                    .select<Ts.IStringDictionary<P.Piece>>(this.teams, team => team.getPieces())
                     .select(pieces => Ts.Joq
                         .select<P.Piece>(pieces)
                         .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
@@ -50,8 +54,8 @@
         }
 
         public startNextTurn(): void {
-            var nextTeamIndex = (this._game.status.turnManager.currentTeam === this._game.teams[0]) ? 1 : 0;
-            this._game.events.turnValidated.publish(this._game.teams[nextTeamIndex]);
+            var nextTeamIndex = (this._game.status.turnManager.currentTeam === this.teams[0]) ? 1 : 0;
+            this.events.turnValidated.publish(this.teams[nextTeamIndex]);
         }
 
         public setupPieces(configuration: (configurator: TTeamConfigurator) => void): GameWrapper<TTeamConfigurator> {
@@ -71,8 +75,8 @@
                 tilesByCoordinates[coordinatesSignature].piece = undefined;
             }
 
-            for (var i = 0; i < this._game.teams.length; i++) {
-                var piecesById = this._game.teams[i].getPieces();
+            for (var i = 0; i < this.teams.length; i++) {
+                var piecesById = this.teams[i].getPieces();
 
                 for (var pieceId in piecesById) {
                     delete piecesById[pieceId];

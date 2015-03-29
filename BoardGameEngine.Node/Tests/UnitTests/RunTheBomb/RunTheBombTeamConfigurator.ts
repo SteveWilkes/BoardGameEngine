@@ -15,6 +15,12 @@
             return this;
         }
 
+        public withTheBomb(): RunTheBombTeamConfigurator {
+            var currentConfigDataSet = this._configurations.values[this._configurations.values.length - 1];
+            var mostRecentConfigData = currentConfigDataSet[currentConfigDataSet.length - 1];
+            return this.aBombAt(mostRecentConfigData.pieceLocation.signature);
+        }
+
         public aBombAt(coordinatesSignature: string): RunTheBombTeamConfigurator {
             return this._addPieces("1", [coordinatesSignature]);
         }
@@ -63,8 +69,14 @@
                     var customPiece = customTeamPiecesById[pieceId];
                     teamPiecesById[pieceId] = customPiece;
 
-                    var customPieceLocation = customTeam.getInitialLocationOf(customPiece);
-                    boardTilesByCoordinates[customPieceLocation.signature].add(customPiece);
+                    var customPieceCoordinates = customTeam.getInitialCoordinatesFor(customPiece);
+                    var customPieceLocation = boardTilesByCoordinates[customPieceCoordinates.signature];
+
+                    while (customPieceLocation.isOccupied()) {
+                        customPieceLocation = customPieceLocation.piece;
+                    }
+
+                    customPieceLocation.add(customPiece);
                 }
             }
         }

@@ -134,10 +134,10 @@ class PieceBuilder {
 
 class TeamConfiguration {
     constructor(public teamOwner: Pl.Player) {
-        this.piecesByInitialLocation = new TsNs.Dictionary<Ts.Coordinates, P.Piece>();
+        this.pieceInitialLocations = new TsNs.Dictionary<P.Piece, Ts.Coordinates>();
     }
 
-    public piecesByInitialLocation: Ts.Dictionary<Ts.Coordinates, P.Piece>;
+    public pieceInitialLocations: Ts.Dictionary<P.Piece, Ts.Coordinates>;
 }
 
 class TeamConfigurator {
@@ -154,13 +154,13 @@ class TeamConfigurator {
         for (var i = 0; i < coordinateSignatures.length; i++) {
             var coordinates = TsNs.CoordinatesRegistry.INSTANCE.get(coordinateSignatures[i]);
             var piece = PieceBuilder.INSTANCE.createPiece(configuration);
-            this._configuration.piecesByInitialLocation.add(coordinates, piece);
+            this._configuration.pieceInitialLocations.add(piece, coordinates);
         }
         return this;
     }
 
     public getPieceDefinitionId(): string {
-        var allPieces = this._configuration.piecesByInitialLocation.values;
+        var allPieces = this._configuration.pieceInitialLocations.keys;
         if (allPieces.length === 0) { return "1"; }
         var latestPiece = allPieces[allPieces.length - 1];
         var latestDefinitionId = parseInt(latestPiece.definitionId);
@@ -179,7 +179,7 @@ class TeamBuilder {
         return new Bge.Teams.Team(
             configuration.teamOwner,
             configuration.teamOwner.id + "-Team" + configuration.teamOwner.teams.length + 1,
-            configuration.piecesByInitialLocation);
+            configuration.pieceInitialLocations);
     }
 }
 

@@ -17,9 +17,11 @@ class RunTheBombGameHelper implements It.IGameHelper {
             new Bge.Teams.TeamFactory());
 
         var game = gameService.createDefaultGame("1");
+        var gameWrapper = new Bge.Games.GameWrapper(new Bge.Games.RunTheBombTeamConfigurator(game), game);
+
         game.start();
 
-        return new Bge.Games.GameWrapper(new Bge.Games.RunTheBombTeamConfigurator(game), game);
+        return gameWrapper;
     }
 }
 
