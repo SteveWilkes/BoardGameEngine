@@ -52,29 +52,18 @@ describe("RunTheBomb", () => {
                     .startDefaultGame()
                     .setupPieces(c => c
                         .forTeam(1)
-                        .aBombAt("1x5")
-                        .aSoldierAt("2x5")
-                        .aNinjaAt("3x5")
-                        .forTeam(2)
-                        .aSoldierAt("9x5"));
+                        .aSoldierAt("2x5").withTheBomb()
+                        .aNinjaAt("3x5"));
 
-                var team1Bomb = game.getPieceAt("1x5");
                 var team1Soldier = game.getPieceAt("2x5");
 
-                // Move team1's bomb to the soldier at 2x5:
-                game.getInteractionAt(team1Soldier, team1Bomb).complete();
+                expect(team1Soldier.definitionId).toBe("2");
+                expect(team1Soldier.isOccupied()).toBeTruthy();
 
-                // End team1's turn:
-                game.startNextTurn();
+                var team1Bomb = team1Soldier.piece;
+                expect(team1Bomb.definitionId).toBe("1");
 
-                // Move team2's soldier to 8x5:
-                var team2Soldier = game.getPieceAt("9x5");
-                game.getInteractionAt("8x5", team2Soldier).complete();
-
-                // End team2's turn:
-                game.startNextTurn();
-
-                // Move team1's bomb from the soldier to a ninja:
+                // Move team1's bomb from the soldier to the ninja:
                 var team1Ninja = game.getPieceAt("3x5");
                 game.getInteractionAt(team1Ninja, team1Bomb).complete();
 
