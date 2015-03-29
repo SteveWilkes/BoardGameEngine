@@ -45,10 +45,10 @@
             return new TryGetResult(value);
         }
 
-        public getOrAdd(key: TKey, valueFactory: () => TValue): TValue {
+        public getOrAdd(key: TKey, valueFactory: (k: TKey) => TValue): TValue {
             var getResult = this.tryGet(key);
             if (getResult.found) { return getResult.value; }
-            var value = valueFactory();
+            var value = valueFactory(key);
             this._doAdd(key, value);
             return value;
         }

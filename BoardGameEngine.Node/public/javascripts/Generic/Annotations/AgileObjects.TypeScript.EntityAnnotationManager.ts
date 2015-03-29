@@ -2,26 +2,33 @@
 
     export module EntityAnnotationManager {
         class EntityAnnotationManager<TEventSet> {
-            constructor(eventSet: TEventSet, annotations: Array<IEntityAnnotation>) {
-                var eventNames = new Array<string>();
-                for (var i = 0; i < annotations.length; i++) {
-                    var eventName = annotations[i].creationEventName;
-                    if (eventNames.indexOf(eventName) === -1) {
-                        var eventHub = eventSet[eventName];
-                        var handler = this._createHandler(annotations, eventName);
-                        eventHub.subscribe(handler);
+            private _annotationsByEventName: Ts.Dictionary<string, Array<IEntityAnnotation>>;
 
-                        eventNames.push(eventName);
-                    }
+            constructor(eventSet: TEventSet, annotations: Array<IEntityAnnotation>) {
+                this._annotationsByEventName = new Dictionary<string, Array<IEntityAnnotation>>();
+
+                for (var i = 0; i < annotations.length; i++) {
+                    var annotation = annotations[i];
+                    var eventName = annotation.creationEventName;
+
+                    var eventAnnotations = this._annotationsByEventName
+                        .getOrAdd(eventName, name => {
+                            var eventHub = eventSet[name];
+                            var handler = this._createHandler(name);
+                            eventHub.subscribe(handler);
+
+                            return new Array<IEntityAnnotation>();
+                        });
+
+                    eventAnnotations.push(annotation);
                 }
             }
 
-            private _createHandler(annotations: Array<IEntityAnnotation>, eventName: string) {
+            private _createHandler(eventName: string) {
                 return eventData => {
+                    var annotations = this._annotationsByEventName.get(eventName);
                     for (var i = 0; i < annotations.length; i++) {
-                        if (annotations[i].creationEventName === eventName) {
-                            annotations[i].apply(eventData);
-                        }
+                        annotations[i].apply(eventData);
                     }
                     return true;
                 };
