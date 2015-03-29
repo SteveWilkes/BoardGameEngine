@@ -8,6 +8,7 @@
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId);
 
+            GameCompletionMonitor.create(events);
             this._setupCustomEvents(events, gameType);
 
             var board = new Boards.Board(gameType.boardType, events);
