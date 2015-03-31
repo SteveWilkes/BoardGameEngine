@@ -15,8 +15,8 @@
                 return Ts.Joq
                     .select<Ts.IStringDictionary<P.Piece>>(this.teams, team => team.getPieces())
                     .select(pieces => Ts.Joq
-                        .select<P.Piece>(pieces)
-                        .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
+                    .select<P.Piece>(pieces)
+                    .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
                     .first(p => p !== null);
             } catch (e) {
                 throw new Error("No piece found at " + coordinatesSignature + ": " + e);
@@ -25,7 +25,7 @@
 
         public getInteractionAt(coordinatesSignature: string, piece: P.Piece): P.IPieceInteraction;
         public getInteractionAt(targetPiece: P.Piece, piece: P.Piece): P.IPieceInteraction;
-        public getInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece): P.IPieceInteraction {
+        public getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece): P.IPieceInteraction {
             var interaction = this._getInteractionAt(coordinatesSignatureOrPiece, piece);
 
             if (interaction !== null) {
