@@ -16,5 +16,6 @@
         public turnValidated = new TypeScript.EventHub<Teams.Team>();
         public turnEnded = new TypeScript.EventHub<Pieces.IPieceOwner>();
         public teamDefeated = new TypeScript.EventHub<Teams.Team>();
+        public gameWon = new TypeScript.EventHub<Teams.Team>();
     }
 } 

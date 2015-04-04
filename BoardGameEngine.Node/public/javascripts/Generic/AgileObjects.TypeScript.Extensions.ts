@@ -6,6 +6,7 @@
 }
 
 interface Array<T> {
+    remove(item: T): void;
     clear(): void;
 }
 
@@ -38,7 +39,15 @@ module AgileObjects.TypeScript {
         return _this.substring(_this.length - substring.length) === substring;
     }
 
-    Array.prototype.clear = function () {
+    Array.prototype.remove = function (item: any): void {
+        var _this = <Array<any>>this;
+        var itemIndex = _this.indexOf(item);
+        if (itemIndex !== -1) {
+            _this.splice(itemIndex, 1);
+        }
+    }
+
+    Array.prototype.clear = function (): void {
         var _this = <Array<any>>this;
         while (_this.length > 0) {
             _this.pop();
