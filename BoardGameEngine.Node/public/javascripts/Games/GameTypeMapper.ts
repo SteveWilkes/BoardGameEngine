@@ -26,7 +26,7 @@
         }
 
         private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {
-            var annotationDataItems = annotationData.split("`");
+            var annotationDataItems = annotationData.split("_");
             var annotations = new Array<Ts.Annotations.IEntityAnnotation>(annotationDataItems.length);
             for (var i = 0; i < annotationDataItems.length; i++) {
                 annotations[i] = this._annotationMapper.map(annotationDataItems[i]);
@@ -93,7 +93,7 @@
             eventMappingData: string,
             evaluatorPatternMapper: Ts.Evaluation.IEvaluatorPatternMapper): Array<Ts.EventMapping> {
 
-            var eventMappingDataItems = eventMappingData.split("`");
+            var eventMappingDataItems = eventMappingData.split("_");
             var eventMappings = new Array<Ts.EventMapping>(eventMappingDataItems.length);
             for (var i = 0; i < eventMappingDataItems.length; i++) {
                 eventMappings[i] = this._mapEventMapping(eventMappingDataItems[i], evaluatorPatternMapper);
@@ -105,9 +105,9 @@
             eventMappingData: string,
             evaluatorPatternMapper: Ts.Evaluation.IEvaluatorPatternMapper): Ts.EventMapping {
 
-            var eventMappingDataItems = eventMappingData.split("^");
+            var eventMappingDataItems = eventMappingData.split("`");
 
-            var triggeringEventNames = eventMappingDataItems[0].split("_");
+            var triggeringEventNames = eventMappingDataItems[0].split("^");
             for (var i = 0; i < triggeringEventNames.length; i++) {
                 triggeringEventNames[i] = evaluatorPatternMapper.expand(triggeringEventNames[i]);
             }
@@ -115,13 +115,13 @@
             var triggerEvaluatorPattern = evaluatorPatternMapper.map(eventMappingDataItems[1]);
             var triggerEvaluator = TypeScript.Evaluation.EvaluatorParser.INSTANCE.parse(triggerEvaluatorPattern);
             var triggeredEventName = evaluatorPatternMapper.expand(eventMappingDataItems[2]);
-            var triggeredEventDataMemberName = evaluatorPatternMapper.expand(eventMappingDataItems[3]);
+            var triggeredEventDataPath = evaluatorPatternMapper.expand(eventMappingDataItems[3]);
 
             return new TypeScript.EventMapping(
                 triggeringEventNames,
                 triggerEvaluator,
                 triggeredEventName,
-                triggeredEventDataMemberName);
+                triggeredEventDataPath);
         }
     }
 }

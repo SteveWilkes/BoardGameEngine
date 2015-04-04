@@ -9,12 +9,12 @@
             private _triggeringEventNames: Array<string>,
             private _triggerEvaluator: Evaluation.IEvaluator<any>,
             private _triggeredEventName: string,
-            triggeredEventDataMemberName: string) {
+            triggeredEventDataPath: string) {
 
-            if ((triggeredEventDataMemberName || "").length > 0) {
-                var triggeredEventDataMemberNameParts = triggeredEventDataMemberName.split(".");
+            if ((triggeredEventDataPath || "").length > 0) {
+                var triggeredEventDataPathParts = triggeredEventDataPath.split(".");
                 this._eventDataProcessor = eventData =>
-                    ValueParser.INSTANCE.getPropertyValue(eventData, triggeredEventDataMemberNameParts);
+                    ValueParser.INSTANCE.getPropertyValue(eventData, triggeredEventDataPathParts);
             } else {
                 this._eventDataProcessor = _doNothing;
             }

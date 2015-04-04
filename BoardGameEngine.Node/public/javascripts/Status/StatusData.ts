@@ -18,5 +18,9 @@
 
             return currentTeam.name + "'s turn";
         }
+
+        public isComplete(): boolean {
+            return false;
+        }
     }
 }

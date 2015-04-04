@@ -74,7 +74,7 @@
                 "1^1^5`2^2^4`2^2^5`2^2^6`3^3^3`3^3^4`3^3^5`3^3^6`3^3^7" +
                 "/" +
             // Event Mappings
-                "pmd^p.l.btt+p.p.d=1+!p.t=D:p.l.btt^td^p.l.btt";
+                "pmd`p.l.btt+p.p.d=1+!p.t=D:p.l.btt`td`p.l.btt";
         }
     }
 }

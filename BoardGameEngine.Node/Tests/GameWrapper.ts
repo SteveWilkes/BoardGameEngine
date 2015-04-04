@@ -5,10 +5,12 @@
         constructor(private _teamConfigurator: TTeamConfigurator, private _game: Game) {
             this.teams = this._game.teams;
             this.events = this._game.events;
+            this.status = this._game.status;
         }
 
         public teams: Array<T.Team>;
         public events: G.GameEventSet;
+        public status: Status.StatusData;
 
         public getPieceAt(coordinatesSignature: string): P.Piece {
             try {
