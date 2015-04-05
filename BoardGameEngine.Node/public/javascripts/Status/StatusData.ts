@@ -30,5 +30,9 @@
         public isComplete(): boolean {
             return this._isComplete;
         }
+
+        public isActive(): boolean {
+            return !this._isComplete;
+        }
     }
 }

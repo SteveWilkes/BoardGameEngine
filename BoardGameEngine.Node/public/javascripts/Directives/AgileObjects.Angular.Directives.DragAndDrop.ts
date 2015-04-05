@@ -6,7 +6,8 @@
             dragdeselect: "&", // parent
             dragend: "&", // parent
             subject: "=",
-            item: "="
+            item: "=",
+            active: "="
         },
         link($scope: ng.IScope, element: ng.IAugmentedJQuery) {
             // this gives us the native JS object
@@ -67,7 +68,8 @@
         scope: {
             drop: "&", // parent
             subject: "=",
-            item: "="
+            item: "=",
+            active: "="
         },
         link($scope: ng.IScope, element: ng.IAugmentedJQuery) {
             // again we need the native object

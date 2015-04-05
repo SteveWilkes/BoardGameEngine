@@ -2,6 +2,8 @@
 
     export function evaluate($scope: ng.IScope, functionName: string): boolean {
         return $scope.$apply(($s: ng.IScope) => {
+            if ($s["active"] === false) { return false; }
+
             var func: (item: Object) => boolean;
             if (typeof $s["subject"] === "object") {
                 var subject = <AgileObjects.TypeScript.IStringDictionary<(item: Object) => boolean>>$s["subject"];
