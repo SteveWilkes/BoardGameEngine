@@ -18,7 +18,7 @@
         public withTheBomb(): RunTheBombTeamConfigurator {
             var currentConfigDataSet = this._configurations.values[this._configurations.values.length - 1];
             var mostRecentConfigData = currentConfigDataSet[currentConfigDataSet.length - 1];
-            return this.aBombAt(mostRecentConfigData.pieceLocation.signature);
+            return this.aBombAt(mostRecentConfigData.pieceCoordinates.signature);
         }
 
         public aBombAt(coordinatesSignature: string): RunTheBombTeamConfigurator {

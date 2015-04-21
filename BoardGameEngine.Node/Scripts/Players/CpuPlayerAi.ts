@@ -1,22 +1,15 @@
 ﻿module AgileObjects.BoardGameEngine.Players {
 
     export class CpuPlayerAi {
-        public getNextTurn(team: Teams.Team, game: Games.Game): Array<Pieces.IPieceInteraction> {
+        public getNextInteraction(team: Teams.Team, game: Games.Game): Pieces.IPieceInteraction {
             var allPotentialInteractions = this._getAllPotentialInteractions(team, game);
-            var moveInteractions = new Array<Pieces.IPieceInteraction>();
-            var interaction = Pieces.NullPotentialInteraction.INSTANCE;
-            while (interaction.type !== Pieces.InteractionType.move) {
-                interaction = this._getRandomInteraction(allPotentialInteractions);
-                if (interaction.type === Pieces.InteractionType.attack) {
-                    moveInteractions.push(interaction);
-                    allPotentialInteractions = this._getAllPotentialInteractions(team, game);
-                    continue;
-                }
-                moveInteractions.push(interaction);
-                break;
-            }
 
-            return moveInteractions;
+            if (allPotentialInteractions.length === 0) { return undefined; }
+
+            var interactionIndex = Math.floor(Math.random() * (allPotentialInteractions.length - 1));
+            var interaction = allPotentialInteractions[interactionIndex];
+
+            return interaction;
         }
 
         private _getAllPotentialInteractions(team: Teams.Team, game: Games.Game) {
@@ -31,13 +24,6 @@
                 }
             }
             return allPotentialInteractions;
-        }
-
-        private _getRandomInteraction(allPotentialInteractions: Array<Pieces.IPieceInteraction>): Pieces.IPieceInteraction {
-            var interactionIndex = Math.floor(Math.random() * (allPotentialInteractions.length - 1));
-            var interaction = allPotentialInteractions[interactionIndex];
-
-            return interaction;
         }
     }
 }

@@ -8,26 +8,26 @@
         }
 
         public setup(socket: Node.ISessionSocket): void {
-            socket.on("gameStarted", (gameData: Status.GameData) => {
+            socket.on("gameStarted",(gameData: Status.GameData) => {
                 socket.session.game = this._createServerSideGameRepresentation(gameData);
                 console.log("Game " + socket.session.game.id + " created");
             });
 
-            socket.on("turnStarted", (teamId: string) => {
+            socket.on("turnStarted",(teamId: string) => {
                 var game: Game = socket.session.game;
                 var currentTeam = game.status.turnManager.currentTeam;
                 if (currentTeam.id !== teamId) {
-                    // Out of sync
+                    throw new Error(
+                        "Turn starting out of sync: " +
+                        "expected team " + currentTeam.id + ", got team " + teamId);
                 }
                 if (currentTeam.owner.isHuman) { return; }
 
-                var cpuTurnInteractions = this._cpuPlayerAi.getNextTurn(currentTeam, game);
-                var turnData = Status.TurnData.forInteractions(cpuTurnInteractions);
-                this._applyTurn(turnData, socket);
-                socket.emit("turnEnded", turnData);
+                var cpuTurnData = this._performCpuTurn(currentTeam, game);
+                socket.emit("turnEnded", cpuTurnData);
             });
 
-            socket.on("turnEnded", (turnData: Status.TurnData) => {
+            socket.on("turnEnded",(turnData: Status.TurnData) => {
                 if (socket.session.game.status.turnManager.currentTeam.owner.isHuman) {
                     this._applyTurn(turnData, socket);
                 }
@@ -56,10 +56,25 @@
             return game;
         }
 
+        private _performCpuTurn(currentCpuTeam: Teams.Team, game: Game): Status.TurnData {
+            var cpuTurnInteractions = new Array<IPieceInteraction>();
+
+            while (true) {
+                var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam, game);
+
+                if (nextCpuTurnInteraction === undefined) { break; }
+
+                nextCpuTurnInteraction.complete();
+                cpuTurnInteractions.push(nextCpuTurnInteraction);
+            }
+
+            return Status.TurnData.forInteractions(cpuTurnInteractions);
+        }
+
         private _applyTurn(turnData: Status.TurnData, socket: Node.ISessionSocket): void {
             for (var i = 0; i < turnData.interactionData.length; i++) {
-                var turnInteraction = turnData.interactionData[i];
-                this._handleInteractionCompleted(turnInteraction.pieceId, turnInteraction.interactionId, socket);
+                var turnInteractionData = turnData.interactionData[i];
+                this._handleInteractionCompleted(turnInteractionData.pieceId, turnInteractionData.interactionId, socket);
             }
         }
 
@@ -67,15 +82,21 @@
             var game: Game = socket.session.game;
             var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
             if (!currentTeamPieces.hasOwnProperty(pieceId)) {
-                // Out of sync
+                throw new Error(
+                    "Interaction completion out of sync: " +
+                    "expected pieces for team " + game.status.turnManager.currentTeam + ", " +
+                    "got piece " + pieceId);
             }
             var piece = currentTeamPieces[pieceId];
             var potentialInteractions = piece.getPotentialInteractions(game);
             if (!potentialInteractions.hasOwnProperty(interactionId)) {
-                // Out of sync
+                throw new Error(
+                    "Interaction completion out of sync: " +
+                    "expected interactions for piece " + pieceId + ", " +
+                    "got interaction " + interactionId);
             }
             potentialInteractions[interactionId].complete();
-            console.log("Interaction synchronised");
+            console.log("Interaction synchronised: " + interactionId);
         }
 
         private _handleTurnEnded(socket: Node.ISessionSocket): boolean {

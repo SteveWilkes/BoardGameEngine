@@ -12,17 +12,17 @@
         }
 
         private _getPieceCoordinates(teamNumber: number, pieceData: Pieces.PieceDataSet): Ts.Dictionary<Pieces.Piece, Ts.Coordinates> {
-            var pieceCoordinates = new TypeScript.Dictionary<Pieces.Piece, TypeScript.Coordinates>();
+            var pieceCoordinatesByPiece = new TypeScript.Dictionary<Pieces.Piece, TypeScript.Coordinates>();
 
             for (var i = 0; i < pieceData.configData.length; i++) {
                 var pieceConfigData = pieceData.configData[i];
                 var pieceDefinition = pieceData.definitions[pieceConfigData.pieceDefinitionId];
-                var pieceId = teamNumber + "-" + (i + 1);
+                var pieceId = teamNumber + "-" + pieceConfigData.pieceCoordinates.signature;
                 var piece = pieceDefinition.createPiece(pieceId, teamNumber);
-                pieceCoordinates.add(piece, pieceConfigData.pieceLocation);
+                pieceCoordinatesByPiece.add(piece, pieceConfigData.pieceCoordinates);
             }
 
-            return pieceCoordinates;
+            return pieceCoordinatesByPiece;
         }
     }
 }

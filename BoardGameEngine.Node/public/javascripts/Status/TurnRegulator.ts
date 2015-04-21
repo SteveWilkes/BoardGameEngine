@@ -23,10 +23,10 @@
 
             if (this._pieceHasBeenMovedToTakenPieceLocation(piece)) { return true; }
 
-            var turnMovementIndex = this._currentTurnInteractions.indexOf(completedInteractionType);
+            var turnInteractionIndex = this._currentTurnInteractions.indexOf(completedInteractionType);
 
             this._currentTurnInteractions = this._currentTurnInteractions.slice(
-                turnMovementIndex + 1,
+                turnInteractionIndex + 1,
                 this._currentTurnInteractions.length);
 
             if (this._currentTurnInteractions.length === 0) {

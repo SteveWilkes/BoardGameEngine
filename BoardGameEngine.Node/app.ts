@@ -50,25 +50,3 @@ import http = require("http");
 var nodeApp = new NodeApp(fileManager, app => http.createServer(app), bootstrappers);
 
 nodeApp.start();
-/*
-process.stdin.resume();//so the program will not close instantly
-
-function exitHandler(err) {
-    if (moduleLoader) {
-        //moduleLoader.CleanUpConvertedSourceFile();
-    }
-    if (err) {
-        console.log(err.stack);
-    } else {
-        process.exit();
-    }
-}
-
-//do something when app is closing
-process.on('exit', exitHandler.bind(null));
-
-//catches ctrl+c event
-process.on('SIGINT', exitHandler.bind(null));
-
-//catches uncaught exceptions
-process.on('uncaughtException', exitHandler.bind(null));*/
