@@ -27,6 +27,8 @@
                     var interactionId =
                         startingLocation.piece.id + "," +
                         this.type + "," +
+                        startingLocation.coordinates.signature +
+                        ">" +
                         interactionLocation.coordinates.signature;
 
                     interactions.push(new this._interaction(

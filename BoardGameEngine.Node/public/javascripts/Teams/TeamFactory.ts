@@ -17,7 +17,7 @@
             for (var i = 0; i < pieceData.configData.length; i++) {
                 var pieceConfigData = pieceData.configData[i];
                 var pieceDefinition = pieceData.definitions[pieceConfigData.pieceDefinitionId];
-                var pieceId = teamNumber + "-" + pieceConfigData.pieceCoordinates.signature;
+                var pieceId = teamNumber + "-" + (i + 1);
                 var piece = pieceDefinition.createPiece(pieceId, teamNumber);
                 pieceCoordinatesByPiece.add(piece, pieceConfigData.pieceCoordinates);
             }
