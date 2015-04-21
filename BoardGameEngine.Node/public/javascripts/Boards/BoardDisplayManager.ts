@@ -12,7 +12,7 @@
         }
 
         /** Gets the number of pixels from the top of the window at which the board will be placed. */
-        public boardTopOffset: string;
+        public boardTopOffset: number;
 
         /** Gets the width of the board in pixels. */
         public boardSize: number;
@@ -46,13 +46,13 @@
             return true;
         }
 
-        private _calculateBoardTopOffset(boardDisplayData: BoardDisplayData) {
+        private _calculateBoardTopOffset(boardDisplayData: BoardDisplayData): number {
             if (boardDisplayData.radiansOfRotation === 0) {
-                return Math.floor(boardDisplayData.containerSize * .05) + "px";
+                return Math.floor(boardDisplayData.containerSize * .05);
             }
             var marginPercentage = boardDisplayData.containerSize / 100;
             var margin = Math.floor(marginPercentage * marginPercentage);
-            return -margin + "px";
+            return -margin;
         }
 
         private _calculateBoardSize(boardDisplayData: BoardDisplayData) {

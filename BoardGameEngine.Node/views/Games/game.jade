@@ -12,4 +12,10 @@ block content
             .body(data-tabs)
                 include history
                 include debug
+
+        #game-notification.ng-cloak(
+            data-ng-cloak
+            data-ng-if="gameCtrl.game.status.message"
+            data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }")
+            {{gameCtrl.game.status.message}}
             
