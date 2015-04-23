@@ -44,6 +44,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.ScopeEvaluator.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.AddClassOnEvent.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.DragAndDrop.js");
+    assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.Moveable.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.ScrollToBottom.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.Tabs.js");

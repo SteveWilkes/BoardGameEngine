@@ -13,9 +13,11 @@ block content
                 include history
                 include debug
 
-        #game-notification.ng-cloak(
+        #game-dialog.ng-cloak.dialog(
             data-ng-cloak
-            data-ng-if="gameCtrl.game.status.message"
-            data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }")
-            {{gameCtrl.game.status.message}}
+            data-ng-if="gameCtrl.game.status.isComplete()"
+            data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
+            data-moveable)
+            span Game over!
             
+        #screen-block
