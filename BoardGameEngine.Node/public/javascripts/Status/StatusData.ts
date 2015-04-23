@@ -30,7 +30,7 @@
         }
 
         public isActive(): boolean {
-            return this.message === undefined;
+            return (this.message === undefined) && !this.isComplete();
         }
 
         public isComplete(): boolean {

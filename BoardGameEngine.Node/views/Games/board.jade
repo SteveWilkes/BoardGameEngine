@@ -16,12 +16,12 @@
                 'board-movement-tile': tile.wasPartOfLastMove && (tile.potentialInteractions().length === 0) }")
                 .max-size(
                   data-ng-if="tile.isGameTile"
-                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile" data-active="gameCtrl.game.status.isActive()"
+                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile"
                   data-dragselect="'locationSelected'" data-drop="'pieceDeselected'")
                 img.piece(
                   id="{{tile.piece.id}}"
                   data-ng-if="tile.isOccupied()"
-                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile.piece" data-active="gameCtrl.game.status.isActive()"
+                  data-draggable-droppable data-subject="gameCtrl.game.events" data-item="tile.piece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"
@@ -32,7 +32,7 @@
                 img.attachedPiece(
                   id="{{tile.piece.attachedPiece.id}}"
                   data-ng-if="tile.piece.isOccupied()"
-                  data-draggable data-subject="gameCtrl.game.events" data-item="tile.piece.attachedPiece" data-active="gameCtrl.game.status.isActive()"
+                  data-draggable data-subject="gameCtrl.game.events" data-item="tile.piece.attachedPiece"
                   data-dragselect="'pieceSelected'"
                   data-dragstart="'pieceMoving'"
                   data-dragend="'pieceDeselected'"

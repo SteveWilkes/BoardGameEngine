@@ -20,4 +20,5 @@ block content
             data-moveable)
             span Game over!
             
-        #screen-block
+        #screen-block.ng-cloak(
+            data-ng-if="!gameCtrl.game.status.isActive()")
