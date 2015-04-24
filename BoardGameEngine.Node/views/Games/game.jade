@@ -18,7 +18,8 @@ block content
             data-ng-if="gameCtrl.game.status.isComplete()"
             data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
             data-moveable)
-            span Game over!
+            h3 Game over!
+            span Someone won!
             
         #screen-block.ng-cloak(
             data-ng-if="!gameCtrl.game.status.isActive()")

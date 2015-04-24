@@ -1,14 +1,31 @@
 ﻿module AgileObjects.Angular.Directives {
 
-    function positionToMouse(e: MouseEvent) {
-        var mouseX = e.pageX || window.event.clientX;
-        var mouseY = e.pageY || window.event.clientY;
-        if (!this.hasOwnProperty("moveStartOffsetX")) {
-            this["moveStartOffsetX"] = Math.round(e.offsetX || 0);
-            this["moveStartOffsetY"] = Math.round(e.offsetY || 0);
+    interface IMoveableHtmlElement extends HTMLElement {
+        moveStartOffsetX: number;
+        moveStartOffsetY: number;
+    }
+
+    function getAbsolutelyPositionedContainer(element: HTMLElement): IMoveableHtmlElement {
+        while (element) {
+            var style = element.currentStyle || window.getComputedStyle(element, null);
+            if (style.position === "absolute") {
+                return <IMoveableHtmlElement>element;
+            }
+            element = element.parentElement;
         }
-        this.style.left = (mouseX - this.moveStartOffsetX) + "px";
-        this.style.top = (mouseY - this.moveStartOffsetY) + "px";
+    }
+
+    function positionToMouse(element: IMoveableHtmlElement, e: MouseEvent) {
+        var mouseX = e.clientX || window.event.clientX;
+        var mouseY = e.clientY || window.event.clientY;
+        if (!element.hasOwnProperty("moveStartOffsetX")) {
+            var offsetX = e.offsetX || e.layerX;
+            var offsetY = e.offsetY || e.layerY;
+            element.moveStartOffsetX = ((offsetX > 0) && (offsetX < mouseX)) ? Math.round(offsetX) : 20;
+            element.moveStartOffsetY = ((offsetY > 0) && (offsetY < mouseY)) ? Math.round(offsetY) : 20;
+        }
+        element.style.left = (mouseX - element.moveStartOffsetX) + "px";
+        element.style.top = (mouseY - element.moveStartOffsetY) + "px";
     }
 
     export function addMoveable(angularModule: ng.IModule): void {
@@ -18,27 +35,27 @@
                     link: (scope: ng.IScope, $element: ng.IAugmentedJQuery) => {
                         // this gives us the native JS object
                         var document = $document[0];
-                        var el = $element[0];
+                        var element = getAbsolutelyPositionedContainer($element[0]);
 
-                        el.addEventListener(
+                        element.addEventListener(
                             "mousedown",
-                            (mouseDown: MouseEvent) => {
-                                el.style.marginTop = el.style.marginLeft = "0";
-                                positionToMouse.call(el, mouseDown);
+                            function (mouseDown: MouseEvent) {
+                                this.style.marginTop = this.style.marginLeft = "0";
+                                positionToMouse(this, mouseDown);
                                 document.onmousemove = (mouseMove: MouseEvent) => {
-                                    positionToMouse.call(el, mouseMove);
+                                    positionToMouse(element, mouseMove);
                                     return false;
                                 };
                                 return false;
                             },
                             false);
 
-                        el.addEventListener(
+                        element.addEventListener(
                             "mouseup",
-                            () => {
+                            function () {
                                 document.onmousemove = undefined;
-                                delete el["moveStartOffsetX"];
-                                delete el["moveStartOffsetY"];
+                                delete this.moveStartOffsetX;
+                                delete this.moveStartOffsetY;
                                 return false;
                             },
                             false);
