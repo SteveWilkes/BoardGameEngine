@@ -19,14 +19,14 @@
         public turnManager: TurnManager;
         public message: string;
 
-        public whosTurn(): string {
+        public currentTeam(): string {
             var currentTeam = this.turnManager.currentTeam;
 
             if (currentTeam.owner.isLocal) {
-                return "Your turn!";
+                return "Your team";
             }
 
-            return currentTeam.name + "'s turn";
+            return currentTeam.name;
         }
 
         public isActive(): boolean {

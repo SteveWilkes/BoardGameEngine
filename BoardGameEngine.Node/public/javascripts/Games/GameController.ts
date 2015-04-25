@@ -16,6 +16,10 @@
         public globalEvents: GlobalEventSet;
         public game: Games.Game;
 
+        public startGame(): void {
+            this.startDefaultGame("1");
+        }
+
         public startDefaultGame(gameTypeId: string): void {
             this.game = this._gameService.createDefaultGame("1");
 
@@ -28,8 +32,8 @@
     angular
         .module(strategyGameApp)
         .controller("GameController", [
-            Boards.$boardDisplayManager,
-            $gameService,
-            Ui.$gameUiComponentSet,
-            GameController]);
+        Boards.$boardDisplayManager,
+        $gameService,
+        Ui.$gameUiComponentSet,
+        GameController]);
 }

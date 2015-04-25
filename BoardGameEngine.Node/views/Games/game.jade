@@ -8,18 +8,23 @@ block content
 
         #game-status
             .heading
-                h3(data-ng-bind="gameCtrl.game.status.whosTurn()") Initialising...
+                h3(data-ng-bind="gameCtrl.game.status.currentTeam().withOwnership() + ' turn'") Initialising...
             .body(data-tabs)
                 include history
                 include debug
 
         #game-dialog.ng-cloak.dialog(
-            data-ng-cloak
-            data-ng-if="gameCtrl.game.status.isComplete()"
-            data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
-            data-moveable)
+          data-ng-cloak
+          data-ng-if="gameCtrl.game.status.isComplete()"
+          data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
+          data-moveable)
             h3 Game over!
-            span Someone won!
+            span {{gameCtrl.game.status.currentTeam()}} won!
+            div.button-container 
+                a(
+                  href=""
+                  data-ng-click="gameCtrl.startGame()"
+                  data-moveable-ignore) new game &raquo;
             
         #screen-block.ng-cloak(
-            data-ng-if="!gameCtrl.game.status.isActive()")
+          data-ng-if="!gameCtrl.game.status.isActive()")

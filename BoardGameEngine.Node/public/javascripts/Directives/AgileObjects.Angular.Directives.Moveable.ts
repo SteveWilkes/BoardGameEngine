@@ -28,6 +28,12 @@
         element.style.top = (mouseY - element.moveStartOffsetY) + "px";
     }
 
+    function ignore(mouseEvent: MouseEvent): boolean {
+        var target = <HTMLElement>(mouseEvent.target || mouseEvent.srcElement);
+
+        return angular.element(target).data("moveable-ignore") !== undefined;
+    }
+
     export function addMoveable(angularModule: ng.IModule): void {
         angularModule.directive("moveable", ["$document",
             ($document: ng.IDocumentService) => {
@@ -40,6 +46,8 @@
                         element.addEventListener(
                             "mousedown",
                             function (mouseDown: MouseEvent) {
+                                if (ignore(mouseDown)) { return false; }
+
                                 this.style.marginTop = this.style.marginLeft = "0";
                                 positionToMouse(this, mouseDown);
                                 document.onmousemove = (mouseMove: MouseEvent) => {

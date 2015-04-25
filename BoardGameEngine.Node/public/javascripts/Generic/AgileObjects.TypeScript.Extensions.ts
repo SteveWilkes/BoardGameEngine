@@ -3,6 +3,7 @@
     replaceAll(substringToReplace: string, replacement: string): string;
     startsWith(substring: string): boolean;
     endsWith(substring: string): boolean;
+    withOwnership(): string;
 }
 
 interface Array<T> {
@@ -38,6 +39,11 @@ module AgileObjects.TypeScript {
         var _this = <string>this;
         return _this.substring(_this.length - substring.length) === substring;
     }
+
+    String.prototype.withOwnership = function () {
+        var _this = <string>this;
+        return _this + (_this.endsWith("s") ? "'" : "'s");
+    };
 
     Array.prototype.remove = function (item: any): void {
         var _this = <Array<any>>this;
