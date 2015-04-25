@@ -1,26 +1,27 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export module NullPieceLocation {
+    var noInteractions = new Array<IPieceInteraction>(0);
 
-        var noInteractions = new Array<IPieceInteraction>(0);
+    export class NullPieceLocation implements IPieceLocation {
+        static INSTANCE = new NullPieceLocation();
 
-        class NullPieceLocation implements IPieceLocation {
-            piece: Piece;
-            owner: IPieceOwner;
-            coordinates = TypeScript.Coordinates.EMPTY;
-            wasPartOfLastMove = false;
+        public piece: Piece;
+        public owner: IPieceOwner;
+        public coordinates = TypeScript.Coordinates.EMPTY;
+        public wasPartOfLastMove = false;
 
-            isOccupied(): boolean { return false; }
-            isSelected(): boolean { return false; }
-            add(): void { }
-            contains(): boolean { return false; }
-            movePieceTo(): void { }
+        public isOccupied(): boolean { return false; }
 
-            potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
-                return noInteractions;
-            }
+        public isSelected(): boolean { return false; }
+
+        public add(): void { }
+
+        public contains(): boolean { return false; }
+
+        public movePieceTo(): void { }
+
+        public potentialInteractions(interactions?: Array<IPieceInteraction>): Array<IPieceInteraction> {
+            return noInteractions;
         }
-
-        export var INSTANCE: IPieceLocation = new NullPieceLocation();
     }
 } 
