@@ -28,8 +28,15 @@
             return rows;
         }
 
-        public getNextBoardPosition(teamIndex: number): BoardPosition {
-            return this._positions[teamIndex];
+        public getNextBoardPosition(occupiedPositions: Array<BoardPosition>): BoardPosition {
+            for (var i = 0; i < this._positions.length; i++) {
+                var position = this._positions[i];
+                if (occupiedPositions.indexOf(position) === -1) {
+                    return position;
+                }
+            }
+
+            throw new Error("No Board positions remaining");
         }
     }
 }

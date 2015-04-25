@@ -55,7 +55,16 @@
 
         public set(key: TKey, value: TValue): void {
             var keyIndex = this.keys.indexOf(key);
-            this.values[keyIndex] = value;
+            (keyIndex > -1) ? (this.values[keyIndex] = value) : this._doAdd(key, value);
+        }
+
+        public remove(key: TKey): void {
+            var keyIndex = this.keys.indexOf(key);
+            if (keyIndex > -1) {
+                this.values.splice(keyIndex, 1);
+                this.keys.splice(keyIndex, 1);
+                --this.count;
+            }
         }
     }
 } 

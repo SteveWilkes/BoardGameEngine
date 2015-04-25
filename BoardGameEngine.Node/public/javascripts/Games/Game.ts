@@ -8,6 +8,7 @@
             public events: GameEventSet) {
 
             this.events.teamAdded.subscribe(data => this.teams.push(data.team) > 0);
+            this.events.teamRemoved.subscribe(team => this.teams.remove(team) === void (0));
 
             this.players = new Array<Players.Player>();
             this.teams = new Array<Teams.Team>();

@@ -1,12 +1,12 @@
 ﻿module AgileObjects.BoardGameEngine.Teams {
 
-    export class Team implements Pieces.IPieceOwner {
-        private _piecesById: TypeScript.IStringDictionary<Pieces.Piece>;
+    export class Team implements P.IPieceOwner {
+        private _piecesById: Ts.IStringDictionary<P.Piece>;
 
         constructor(
             public owner: ITeamOwner,
             public name: string,
-            private _pieceInitialCoordinates: TypeScript.Dictionary<Pieces.Piece, TypeScript.Coordinates>) {
+            private _pieceInitialCoordinates: Ts.Dictionary<P.Piece, Ts.Coordinates>) {
 
             this.id = owner.getNextTeamId();
             this._piecesById = {};
@@ -21,19 +21,18 @@
 
         public id: string;
 
-        public getPieces(): TypeScript.IStringDictionary<Pieces.Piece> {
+        public getPieces(): Ts.IStringDictionary<P.Piece> {
             return this._piecesById;
         }
 
-        public getInitialCoordinatesFor(piece: Pieces.Piece): TypeScript.Coordinates {
-            var pieceIndex = this._pieceInitialCoordinates.keys.indexOf(piece);
-            return this._pieceInitialCoordinates.values[pieceIndex];
+        public getInitialCoordinatesFor(piece: P.Piece): Ts.Coordinates {
+            return this._pieceInitialCoordinates.get(piece);
         }
 
         // TODO: Remove
         public isLocal(): boolean { return this.owner.isLocal; }
 
-        public owns(piece: Pieces.Piece): boolean {
+        public owns(piece: P.Piece): boolean {
             return this._pieceInitialCoordinates.keys.indexOf(piece) > -1;
         }
     }

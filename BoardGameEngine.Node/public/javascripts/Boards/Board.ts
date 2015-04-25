@@ -3,11 +3,11 @@
     import Teams = BoardGameEngine.Teams;
 
     export class Board {
-        private _tilesByCoordinates: Pieces.IPieceLocationDictionary;
-        private _boardPositionsByTeam: TypeScript.Dictionary<Teams.Team, BoardPosition>;
+        private _tilesByCoordinates: P.IPieceLocationDictionary;
+        private _boardPositionsByTeam: Ts.Dictionary<T.Team, BoardPosition>;
 
-        constructor(public type: BoardType, private _events: Games.GameEventSet) {
-            this._boardPositionsByTeam = new TypeScript.Dictionary<Teams.Team, BoardPosition>();
+        constructor(public type: BoardType, private _events: G.GameEventSet) {
+            this._boardPositionsByTeam = new TypeScript.Dictionary<T.Team, BoardPosition>();
 
             this._createTiles();
         }
@@ -30,28 +30,38 @@
 
         public rows: Array<Array<BoardTile>>;
 
-        public getTiles(): Pieces.IPieceLocationDictionary {
+        public getTiles(): P.IPieceLocationDictionary {
             return this._tilesByCoordinates;
         }
 
-        public add(team: Teams.Team): void {
-            var position = this.type.getNextBoardPosition(this._boardPositionsByTeam.count);
+        public add(team: T.Team): void {
+            var position = this.type.getNextBoardPosition(this._boardPositionsByTeam.values);
             this._boardPositionsByTeam.add(team, position);
-
             var pieces = team.getPieces();
             for (var pieceId in pieces) {
                 var piece = pieces[pieceId];
                 var pieceCoordinates = team.getInitialCoordinatesFor(piece);
                 var translatedCoordinates = position.translate(pieceCoordinates);
-                var tile = this._tilesByCoordinates[translatedCoordinates.signature];
-                tile.add(piece);
+                var location = this._tilesByCoordinates[translatedCoordinates.signature];
+                while (location.isOccupied()) { location = location.piece; }
+                location.add(piece);
             }
 
             var teamAdditionData = new TeamAdditionData(team, position, this._tilesByCoordinates);
             this._events.teamAdded.publish(teamAdditionData);
         }
 
-        public orientTo(team: Teams.Team): void {
+        public remove(team: T.Team): void {
+            var pieces = team.getPieces();
+            for (var pieceId in pieces) {
+                var piece = pieces[pieceId];
+                piece.setLocation(Pieces.NullPieceLocation.INSTANCE);
+            }
+            this._boardPositionsByTeam.remove(team);
+            this._events.teamRemoved.publish(team);
+        }
+
+        public orientTo(team: T.Team): void {
             var subjectTeamPosition = this._boardPositionsByTeam.get(team);
             if (this.type.orientationTranslator.focusPositionIs(subjectTeamPosition)) { return; }
             // TODO: Orientation translation; re-arrange the BoardTiles so that the given Team is moved to the focus position

@@ -13,12 +13,12 @@
 
                     var eventAnnotations = this._annotationsByEventName
                         .getOrAdd(eventName, name => {
-                            var eventHub = eventSet[name];
-                            var handler = this._createHandler(name);
-                            eventHub.subscribe(handler);
+                        var eventHub = eventSet[name];
+                        var handler = this._createHandler(name);
+                        eventHub.subscribe(handler);
 
-                            return new Array<IEntityAnnotation>();
-                        });
+                        return new Array<IEntityAnnotation>();
+                    });
 
                     eventAnnotations.push(annotation);
                 }

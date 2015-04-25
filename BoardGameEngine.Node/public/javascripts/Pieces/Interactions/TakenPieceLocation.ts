@@ -2,10 +2,11 @@
 
     export module TakenPieceLocation {
         class TakenPieceLocation implements IPieceLocation {
-            private _takenPiecesByTeam: TypeScript.Dictionary<IPieceOwner, Array<Piece>>;
+            private _takenPiecesByTeam: Ts.Dictionary<IPieceOwner, Array<Piece>>;
 
             constructor(events: Games.GameEventSet) {
                 events.teamAdded.subscribe(data => this._takenPiecesByTeam.add(data.team, new Array<Piece>()).count > 0);
+                events.teamRemoved.subscribe(team => this._takenPiecesByTeam.remove(team) === void (0));
                 events.pieceTaken.subscribe(takenPiece => this._pieceTaken(takenPiece));
 
                 this._takenPiecesByTeam = new TypeScript.Dictionary<IPieceOwner, Array<Piece>>();
@@ -16,7 +17,7 @@
                 return true;
             }
 
-            public coordinates = <TypeScript.Coordinates>{ signature: "Taken pieces" };
+            public coordinates = <Ts.Coordinates>{ signature: "Taken pieces" };
             public piece;
             public potentialInteractions;
             public wasPartOfLastMove;
