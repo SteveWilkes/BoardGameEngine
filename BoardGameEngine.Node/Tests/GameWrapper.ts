@@ -25,8 +25,6 @@
             }
         }
 
-        public getInteractionAt(coordinatesSignature: string, piece: P.Piece): P.IPieceInteraction;
-        public getInteractionAt(targetPiece: P.Piece, piece: P.Piece): P.IPieceInteraction;
         public getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece): P.IPieceInteraction {
             var interaction = this._getInteractionAt(coordinatesSignatureOrPiece, piece);
 
@@ -37,9 +35,7 @@
             throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
         }
 
-        public hasInteractionAt(coordinatesSignature: string, piece: P.Piece): boolean;
-        public hasInteractionAt(targetPiece: P.Piece, piece: P.Piece): boolean;
-        public hasInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece): boolean {
+        public hasInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece): boolean {
             return this._getInteractionAt(coordinatesSignatureOrPiece, piece) !== null;
         }
 

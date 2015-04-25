@@ -1,8 +1,4 @@
-﻿require("../../../public/javascripts/generic/AgileObjects.TypeScript.Extensions");
-var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
-var Bge = Ao.BoardGameEngine;
-var TsNs = Ao.TypeScript;
-var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
+﻿var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
 
 describe("RunTheBomb",() => {
     describe("Games",() => {
