@@ -11,17 +11,22 @@
             super();
 
             this.health = 100;
+
+            // Set to zero when the Piece is first added to the Board:
+            this.moveCount = -1; 
         }
 
         public team: IPieceOwner;
         public location: IPieceLocation;
         public health: number;
         public attachedPiece: Piece;
+        public moveCount: number;
 
         public setLocation(location: IPieceLocation): void {
             this.location = location;
             location.piece = this;
             this.coordinates = location.coordinates;
+            ++this.moveCount;
         }
 
         public getPotentialInteractions(game: G.Game): Ts.IStringDictionary<IPieceInteraction> {
