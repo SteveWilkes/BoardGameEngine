@@ -26,12 +26,17 @@
             var id = pieceDefinitionDataItems[0];
             var name = pieceDefinitionDataItems[1];
             var image = "/images/pieces/" + pieceDefinitionDataItems[2];
+            var interactionCalculators = this._mapInteractionCalculators(pieceDefinitionDataItems[3]);
+            var takenPieceProcessors = this._mapTakenPieceProcessors(pieceDefinitionDataItems[4]);
 
-            var profileId = Pieces.PieceInteractionProfileLibrary.INSTANCE.getIdOrAdd(
-                pieceDefinitionDataItems[3],
-                signature => new PieceInteractionProfile(this._mapInteractionCalculators(signature)));
-
-            return new PieceDefinition(id, name, image, profileId);
+            return new PieceDefinition(
+                id,
+                name,
+                image,
+                (piece: Piece) => new PieceInteractionProfile(
+                    piece,
+                    interactionCalculators,
+                    takenPieceProcessors));
         }
 
         private _mapInteractionCalculators(interactionCalculatorData: string): Array<PieceInteractionCalculator> {
@@ -115,6 +120,10 @@
             var evaluatorPattern = this._patternMapper.map(evaluatorData);
 
             return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
+        }
+
+        private _mapTakenPieceProcessors(takenPieceProcessorsData: string): Array<ITakenPieceProcessor> {
+            return [new ReplacePieceWithAttachedPiece()];
         }
     }
 }

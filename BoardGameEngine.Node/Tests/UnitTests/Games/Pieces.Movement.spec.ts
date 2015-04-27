@@ -36,7 +36,7 @@ describe("Game",() => {
                     .withUdlrMovementBy(2))));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -62,7 +62,7 @@ describe("Game",() => {
                     .whereDestinationsMustBeUnoccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -86,7 +86,7 @@ describe("Game",() => {
                     .wherePieceMustBeOccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
                 var numberOfInteractions = Object.keys(pieceInteractions).length;
 
                 expect(numberOfInteractions).toBe(0);
@@ -106,7 +106,7 @@ describe("Game",() => {
                 expect(pieces.length).toBe(3);
 
                 var piece = pieces[0];
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -133,7 +133,7 @@ describe("Game",() => {
                     .whereDestinationsMustBeUnoccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -160,7 +160,7 @@ describe("Game",() => {
                 expect(originTile.coordinates.signature).toBe("1x1");
                 expect(originTile.isOccupied()).toBeTruthy();
 
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 expect(pieceInteractions).not.toBeNull();
 
@@ -186,7 +186,7 @@ describe("Game",() => {
                 expect(piece.moveCount).toBe(0);
 
                 var moveUpOneSpaceInteraction = TsNs.Joq
-                    .select<IPieceInteraction>(piece.getPotentialInteractions(game))
+                    .select<IPieceInteraction>(piece.interactionProfile.getPotentialInteractions(game))
                     .firstOrDefault(inter => inter.location.coordinates.signature === "2x1");
 
                 expect(moveUpOneSpaceInteraction).not.toBeNull();

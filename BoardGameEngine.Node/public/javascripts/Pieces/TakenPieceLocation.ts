@@ -13,7 +13,9 @@
             }
 
             private _pieceTaken(takenPiece: Piece): boolean {
-                takenPiece.location.movePieceTo(this);
+                var originalPieceLocation = takenPiece.location;
+                originalPieceLocation.movePieceTo(this);
+                takenPiece.interactionProfile.handlePieceTaken(originalPieceLocation);
                 return true;
             }
 

@@ -25,7 +25,7 @@ describe("Game", () => {
                 expect(pieces.length).toBe(3);
 
                 var piece = pieces[0];
-                var pieceInteractions = piece.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
 
                 var attachmentInteraction = TsNs.Joq
                     .select<IPieceInteraction>(pieceInteractions)
@@ -55,7 +55,7 @@ describe("Game", () => {
                 var subjectPiece = pieces[0];
                 var targetPiece = pieces[1];
                 var startingLocation = subjectPiece.location;
-                var pieceInteractions = subjectPiece.getPotentialInteractions(game);
+                var pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(game);
 
                 var attachmentInteraction = TsNs.Joq
                     .select<IPieceInteraction>(pieceInteractions)
@@ -90,7 +90,7 @@ describe("Game", () => {
 
                 var pieceInteractions, attachmentInteraction;
 
-                pieceInteractions = subjectPiece.getPotentialInteractions(game);
+                pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(game);
 
                 attachmentInteraction = TsNs.Joq
                     .select<IPieceInteraction>(pieceInteractions)
@@ -102,7 +102,7 @@ describe("Game", () => {
 
                 expect(subjectPiece.location).toBe(targetPiece1);
 
-                pieceInteractions = subjectPiece.getPotentialInteractions(game);
+                pieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(game);
 
                 attachmentInteraction = TsNs.Joq
                     .select<IPieceInteraction>(pieceInteractions)

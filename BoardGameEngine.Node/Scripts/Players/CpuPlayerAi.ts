@@ -18,7 +18,7 @@
             for (var pieceId in pieces) {
                 var piece = pieces[pieceId];
                 if (piece.hasBeenTaken()) { continue; }
-                var potentialInteractions = piece.getPotentialInteractions(game);
+                var potentialInteractions = piece.interactionProfile.getPotentialInteractions(game);
                 for (var interactionId in potentialInteractions) {
                     allPotentialInteractions.push(potentialInteractions[interactionId]);
                 }

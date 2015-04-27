@@ -29,7 +29,7 @@
             return profileId;
         }
 
-        public get(profileId: string) {
+        public get(profileId: string): P.PieceInteractionProfile {
             return this._profilesById[profileId];
         }
     }

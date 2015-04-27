@@ -7,9 +7,10 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            private _interactionProfileId: string) {
+            interactionProfileFactory: (piece: Piece) => PieceInteractionProfile) {
             super();
 
+            this.interactionProfile = interactionProfileFactory(this);
             this.health = 100;
 
             // Set to zero when the Piece is first added to the Board:
@@ -17,8 +18,9 @@
         }
 
         public team: IPieceOwner;
-        public location: IPieceLocation;
+        public interactionProfile: PieceInteractionProfile;
         public health: number;
+        public location: IPieceLocation;
         public attachedPiece: Piece;
         public moveCount: number;
 
@@ -27,12 +29,6 @@
             location.piece = this;
             this.coordinates = location.coordinates;
             ++this.moveCount;
-        }
-
-        public getPotentialInteractions(game: G.Game): Ts.IStringDictionary<IPieceInteraction> {
-            return interactionProfileLibrary
-                .get(this._interactionProfileId)
-                .getPotentialInteractions(this, game);
         }
 
         public applyAttackBy(attacker: Piece): number {

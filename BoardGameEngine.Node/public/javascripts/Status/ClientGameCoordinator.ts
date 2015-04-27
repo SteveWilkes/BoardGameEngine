@@ -45,7 +45,7 @@
                         // Out of sync
                     }
                     var piece = currentTeamPieces[turnInteraction.pieceId];
-                    var potentialInteractions = piece.getPotentialInteractions(game);
+                    var potentialInteractions = piece.interactionProfile.getPotentialInteractions(game);
                     if (!potentialInteractions.hasOwnProperty(turnInteraction.interactionId)) {
                         // Out of sync
                     }

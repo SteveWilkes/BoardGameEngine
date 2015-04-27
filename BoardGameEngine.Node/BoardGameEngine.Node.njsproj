@@ -98,6 +98,8 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternExpander.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ITakenPieceProcessor.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ReplacePieceWithAttachedPiece.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfileLibrary.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
@@ -135,7 +137,7 @@
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceAttack.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceMovementInteractionBase.ts" />
-    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TakenPieceLocation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\TakenPieceLocation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.NegationEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.CompositeOrEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.CompositeAndEvaluator.ts" />
@@ -207,6 +209,7 @@
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\ITeamConfigurator.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Games.Completion.spec.ts" />
+    <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Pieces.Attacks.spec.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\RunTheBombGameHelper.ts" />
     <TypeScriptCompile Include="Tests\UnitTests\RunTheBomb\Pieces.Movement.spec.ts" />
     <TypeScriptCompile Include="Tests\GameWrapper.ts" />

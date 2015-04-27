@@ -6,7 +6,7 @@
             public id: string,
             public name: string,
             public imageSource: string,
-            private _interactionProfileId: string) {
+            private _interactionProfileFactory: (piece: Piece) => PieceInteractionProfile) {
         }
 
         public createPiece(pieceId: string, teamNumber: number): Piece {
@@ -18,7 +18,7 @@
                 pieceId,
                 this.id,
                 imageSource,
-                this._interactionProfileId);
+                this._interactionProfileFactory);
         }
     }
 }

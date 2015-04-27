@@ -88,7 +88,7 @@
                     "got piece " + pieceId);
             }
             var piece = currentTeamPieces[pieceId];
-            var potentialInteractions = piece.getPotentialInteractions(game);
+            var potentialInteractions = piece.interactionProfile.getPotentialInteractions(game);
             if (!potentialInteractions.hasOwnProperty(interactionId)) {
                 throw new Error(
                     "Interaction completion out of sync: " +

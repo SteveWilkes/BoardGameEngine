@@ -39,8 +39,8 @@
             return this._getInteractionAt(coordinatesSignatureOrPiece, piece) !== null;
         }
 
-        private _getInteractionAt(coordinatesSignatureOrPiece: any, piece: P.Piece) {
-            var interactions = piece.getPotentialInteractions(this._game);
+        private _getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece) {
+            var interactions = piece.interactionProfile.getPotentialInteractions(this._game);
 
             var predicate = (typeof coordinatesSignatureOrPiece === "string")
                 ? (inter: IPieceInteraction) => inter.location.coordinates.signature === coordinatesSignatureOrPiece
