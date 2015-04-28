@@ -17,6 +17,12 @@
         "a1": Pieces.AttackDestinationPieceInteraction,
     };
 
+    var _takenPieceProcessorConstructorsById = {
+        "rp": Pieces.ReplacePieceWithAttachedPiece
+    };
+
+    var _noProcessors = new Array<ITakenPieceProcessor>(0);
+
     export class PieceDefinitionMapper {
         constructor(private _patternMapper: Ts.Evaluation.IEvaluatorPatternMapper) { }
 
@@ -123,7 +129,16 @@
         }
 
         private _mapTakenPieceProcessors(takenPieceProcessorsData: string): Array<ITakenPieceProcessor> {
-            return [new ReplacePieceWithAttachedPiece()];
+            if ((takenPieceProcessorsData || "").length === 0) { return _noProcessors; }
+
+            var takenPieceProcessorDataItems = takenPieceProcessorsData.split("^");
+            var takenPieceProcessorSet = new Array<ITakenPieceProcessor>(takenPieceProcessorDataItems.length);
+            for (var i = 0; i < takenPieceProcessorDataItems.length; i++) {
+                var processorId = takenPieceProcessorDataItems[i]
+                var processor = new _takenPieceProcessorConstructorsById[processorId]();
+                takenPieceProcessorSet[i] = processor;
+            }
+            return takenPieceProcessorSet;
         }
     }
 }

@@ -41,7 +41,8 @@
                 "@" +
                 "@l.io+!l.p.t=D:p.t" +
                 "~" +
-                "!io" + // ...if unoccupied +
+                "!io" + // ...if unoccupied
+                "`rp" + // Leave the Bomb on the board when a Solder is taken
                 "_" + // PieceDefinition 3 - Ninja
                 "3`Human Ninja`Ninja.png`" +
                 "0~m2~" +
@@ -69,6 +70,7 @@
                 "@l.io+!l.p.t=D:p.t" +
                 "~" +
                 "!io" + // ...if unoccupied
+                "`rp" + // Leave the Bomb on the board when a Ninja is taken
                 "/" +
             // PieceConfigData
                 "1^1^5`2^2^4`2^2^5`2^2^6`3^3^3`3^3^4`3^3^5`3^3^6`3^3^7" +
