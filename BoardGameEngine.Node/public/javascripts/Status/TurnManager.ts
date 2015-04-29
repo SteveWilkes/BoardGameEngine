@@ -1,9 +1,9 @@
 ﻿module AgileObjects.BoardGameEngine.Status {
 
     export class TurnManager {
-        private _teams: Array<Teams.Team>;
+        private _teams: Array<T.Team>;
 
-        constructor(turnInteractions: Array<Pieces.InteractionType>, private _events: Games.GameEventSet) {
+        constructor(turnInteractions: Array<P.InteractionType>, private _events: G.GameEventSet) {
             this._events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
             this._events.teamAdded.subscribe(data => this._teams.push(data.team) > 0);
             this._events.teamRemoved.subscribe(team => this._teams.remove(team) === void (0));
@@ -11,13 +11,13 @@
             this._events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
 
             this.regulator = new TurnRegulator(turnInteractions, this._events);
-            this._teams = new Array<Teams.Team>();
+            this._teams = new Array<T.Team>();
         }
 
-        public currentTeam: Teams.Team;
-        public regulator: Pieces.IPieceInteractionRegulator;
+        public currentTeam: T.Team;
+        public regulator: P.IPieceInteractionRegulator;
 
-        private _setStartingTeam(team: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
+        private _setStartingTeam(team: T.Team, eventData: Ts.EventCallbackSet): boolean {
             this.setCurrentTeam(team);
 
             eventData.whenEventCompletes(() => this._turnStarted());
@@ -25,11 +25,11 @@
             return true;
         }
 
-        private _verifyPieceIsMovable(piece: Pieces.Piece): boolean {
+        private _verifyPieceIsMovable(piece: P.Piece): boolean {
             return this.currentTeam.owner.isLocal && this.currentTeam.owns(piece);
         }
 
-        private _turnValidated(nextTeam: Teams.Team, eventData: TypeScript.EventCallbackSet): boolean {
+        private _turnValidated(nextTeam: Teams.Team, eventData: Ts.EventCallbackSet): boolean {
             this.setCurrentTeam(nextTeam);
 
             eventData.whenEventCompletes(() => this._turnStarted());

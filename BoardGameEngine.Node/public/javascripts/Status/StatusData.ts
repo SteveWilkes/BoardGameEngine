@@ -3,14 +3,14 @@
     export class StatusData {
         private _isComplete: boolean;
 
-        constructor(turnInteractions: Array<Pieces.InteractionType>, events: Games.GameEventSet) {
+        constructor(turnInteractions: Array<P.InteractionType>, events: G.GameEventSet) {
             events.gameWon.subscribe((winningTeam: T.Team) => {
                 this.message = "Team " + winningTeam.name + " wins - GAME OVER, MAN! ";
                 this._isComplete = true;
                 return true;
             });
 
-            this.turnManager = new Status.TurnManager(turnInteractions, events);
+            this.turnManager = new TurnManager(turnInteractions, events);
             this.history = new History(events);
             this._isComplete = false;
         }
