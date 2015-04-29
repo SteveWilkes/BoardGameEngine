@@ -67,7 +67,6 @@
         PieceConfigData: new (pieceDefinitionId: string, pieceLocation: Ts.Coordinates) => P.PieceConfigData;
         PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionProfile: new (piece: P.Piece, interactionCalculators: Array<P.PieceInteractionCalculator>, takenProcessors: Array<P.ITakenPieceProcessor>) => P.PieceInteractionProfile;
-        PieceInteractionProfileLibrary: typeof P.PieceInteractionProfileLibrary;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: P.IPieceInteractionContextEvaluator, pathDestinationEvaluator: P.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;
     }
 

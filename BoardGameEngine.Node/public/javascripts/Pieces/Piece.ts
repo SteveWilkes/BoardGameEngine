@@ -1,7 +1,5 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    var interactionProfileLibrary = PieceInteractionProfileLibrary.INSTANCE;
-
     export class Piece extends PieceLocationBase {
         constructor(
             public id: string,

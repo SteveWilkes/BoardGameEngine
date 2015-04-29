@@ -79,7 +79,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/Interactions/AttackDestinationPieceInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfile.js");
-    assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionProfileLibrary.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionMonitor.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/ReplacePieceWithAttachedPiece.js");
     assets.addJs("/public/javascripts/Pieces/TakenPieceLocation.js");
