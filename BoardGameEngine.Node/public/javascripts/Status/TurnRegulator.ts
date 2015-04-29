@@ -5,7 +5,7 @@
         private _currentTurnInteractions: Array<P.InteractionType>;
 
         constructor(private _turnInteractions: Array<P.InteractionType>, private _events: Games.GameEventSet) {
-            this._events.turnStarted.subscribe(team => this._turnStarted(team));
+            this._events.turnStarted.subscribe(team => this._turnStarted(team) === void (0));
 
             this._events.pieceMoved.subscribe((movement, eventData) =>
                 this._adjustRemainingTurnInteractions(
@@ -20,10 +20,9 @@
                     eventData) === void (0));
         }
 
-        private _turnStarted(team: P.IPieceOwner): boolean {
+        private _turnStarted(team: P.IPieceOwner): void {
             this._currentTeam = team;
             this._currentTurnInteractions = this._turnInteractions.slice(0);
-            return true;
         }
 
         private _adjustRemainingTurnInteractions(
