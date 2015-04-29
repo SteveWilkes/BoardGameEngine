@@ -3,14 +3,14 @@
     export class TurnManager {
         private _teams: Array<T.Team>;
 
-        constructor(turnInteractions: Array<P.InteractionType>, private _events: G.GameEventSet) {
-            this._events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
-            this._events.teamAdded.subscribe(data => this._teams.push(data.team) > 0);
-            this._events.teamRemoved.subscribe(team => this._teams.remove(team) === void (0));
-            this._events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
-            this._events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
+        constructor(turnInteractions: Array<P.InteractionType>, private _game: G.Game) {
+            this._game.events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
+            this._game.events.teamAdded.subscribe(data => this._teams.push(data.team) > 0);
+            this._game.events.teamRemoved.subscribe(team => this._teams.remove(team) === void (0));
+            this._game.events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
+            this._game.events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
 
-            this.regulator = new TurnRegulator(turnInteractions, this._events);
+            this.regulator = new TurnRegulator(turnInteractions, this._game);
             this._teams = new Array<T.Team>();
         }
 
@@ -42,7 +42,7 @@
         }
 
         private _turnStarted(): boolean {
-            return this._events.turnStarted.publish(this.currentTeam);
+            return this._game.events.turnStarted.publish(this.currentTeam);
         }
     }
 } 

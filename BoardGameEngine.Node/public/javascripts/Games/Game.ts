@@ -3,23 +3,23 @@
     export class Game {
         constructor(
             public id: string,
-            public type: Games.GameType,
-            public board: Boards.Board,
+            public type: GameType,
+            public board: B.Board,
             public events: GameEventSet) {
 
             this.events.teamAdded.subscribe(data => this.teams.push(data.team) > 0);
             this.events.teamRemoved.subscribe(team => this.teams.remove(team) === void (0));
 
-            this.players = new Array<Players.Player>();
-            this.teams = new Array<Teams.Team>();
-            this.status = new Status.StatusData(this.type.turnInteractions, this.events);
+            this.players = new Array<Pl.Player>();
+            this.teams = new Array<T.Team>();
+            this.status = new Status.StatusData(this.type.turnInteractions, this);
         }
 
-        public players: Array<Players.Player>;
-        public teams: Array<Teams.Team>;
+        public players: Array<Pl.Player>;
+        public teams: Array<T.Team>;
         public status: Status.StatusData;
 
-        public add(player: Players.Player): void {
+        public add(player: Pl.Player): void {
             if (this.players.indexOf(player) === -1) {
                 this.players.push(player);
 
