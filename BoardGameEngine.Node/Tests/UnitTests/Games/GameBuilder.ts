@@ -192,14 +192,13 @@ class TeamBuilder {
 
 class GameConfiguration {
     constructor() {
-        this.turnInteractions = new Array<InteractionType>();
         this.boardRowConfigs = new Array<B.BoardRowConfig>();
         this.boardPositions = new Array<B.BoardPosition>();
         this.players = new Array<Pl.Player>();
         this.teams = new Array<T.Team>();
     }
 
-    public turnInteractions: Array<InteractionType>;
+    public turnDefinition: P.TurnDefinition;
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
@@ -225,8 +224,12 @@ class GameConfigurator {
         return this.withTurnInteractions([attack, move]);
     }
 
-    public withTurnInteractions(turnInteractions: Array<InteractionType>): GameConfigurator {
-        this._configuration.turnInteractions = turnInteractions;
+    public withTurnInteractions(turnInteractionTypes: Array<InteractionType>): GameConfigurator {
+        var turnInteractionDefinitions = new Array<P.TurnInteractionDefinition>(turnInteractionTypes.length);
+        for (var i = 0; i < turnInteractionTypes.length; i++) {
+            turnInteractionDefinitions[i] = new Bge.Pieces.TurnInteractionDefinition(turnInteractionTypes[i]);
+        }
+        this._configuration.turnDefinition = new Bge.Pieces.TurnDefinition(turnInteractionDefinitions);
         return this;
     }
 
@@ -315,7 +318,7 @@ class GameBuilder {
     public createGame(configuration: GameConfiguration): G.Game {
         var boardType = this._getBoardType(configuration);
 
-        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnInteractions, null, null, [], []);
+        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnDefinition, null, null, [], []);
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
@@ -362,8 +365,8 @@ var gameBuilder = {
             .withA3x3NorthSouthBoard()
             .withHumanLocalAndRemotePlayers()
             .withATeamForPlayer(1, tc => tc
-                .withAPieceAt(["1x1"], pc => pc
-                    .withUdlrMovementBy(1))));
+            .withAPieceAt(["1x1"], pc => pc
+            .withUdlrMovementBy(1))));
     },
     startGame: function (config: (configurator: GameConfigurator) => void) {
         var game: G.Game = this.createGame(config);

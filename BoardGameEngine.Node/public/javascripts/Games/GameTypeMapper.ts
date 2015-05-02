@@ -17,7 +17,7 @@
             return new GameType(
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
-                this._mapTurnInteractions(gameTypeDataItems[3]),
+                this._mapTurnDefinition(gameTypeDataItems[3]),
                 new Pieces.PieceDataSet(
                     this._mapPieceDefinitions(gameTypeDataItems[4], evaluatorPatternMapper),
                     this._mapPieceConfigDataSet(gameTypeDataItems[5])),
@@ -45,23 +45,24 @@
             return this._patternMapper.with(annotationNamesBySymbol);
         }
 
-        private _mapTurnInteractions(turnInteractionData: string): Array<Pieces.InteractionType> {
-            var turnInteractionDataItems = turnInteractionData.split("^");
-            var turnInteractions = new Array<Pieces.InteractionType>(turnInteractionDataItems.length);
-            for (var i = 0; i < turnInteractionDataItems.length; i++) {
-                turnInteractions[i] = parseInt(turnInteractionDataItems[i]);
+        private _mapTurnDefinition(turnDefinitionData: string): P.TurnDefinition {
+            var turnDefinitionDataItems = turnDefinitionData.split("^");
+            var turnInteractionDefinitions = new Array<P.TurnInteractionDefinition>(turnDefinitionDataItems.length);
+            for (var i = 0; i < turnDefinitionDataItems.length; i++) {
+                var interactionType = parseInt(turnDefinitionDataItems[i]);
+                turnInteractionDefinitions[i] = new Pieces.TurnInteractionDefinition(interactionType);
             }
-            return turnInteractions;
+            return new Pieces.TurnDefinition(turnInteractionDefinitions);
         }
 
         private _mapPieceDefinitions(
             pieceDefinitionData: string,
-            evaluatorPatternMapper: Ts.Evaluation.IEvaluatorPatternMapper): Ts.IStringDictionary<Pieces.PieceDefinition> {
+            evaluatorPatternMapper: Ts.Evaluation.IEvaluatorPatternMapper): Ts.IStringDictionary<P.PieceDefinition> {
 
             var pieceDefinitionMapper = new Pieces.PieceDefinitionMapper(evaluatorPatternMapper);
 
             var pieceDefinitionDataItems = pieceDefinitionData.split("_");
-            var pieceDefinitions: Ts.IStringDictionary<Pieces.PieceDefinition> = {};
+            var pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition> = {};
             for (var i = 0; i < pieceDefinitionDataItems.length; i++) {
                 var pieceDefinition = pieceDefinitionMapper.map(pieceDefinitionDataItems[i]);
                 pieceDefinitions[pieceDefinition.id] = pieceDefinition;
@@ -69,16 +70,16 @@
             return pieceDefinitions;
         }
 
-        private _mapPieceConfigDataSet(pieceConfigData: string): Array<Pieces.PieceConfigData> {
+        private _mapPieceConfigDataSet(pieceConfigData: string): Array<P.PieceConfigData> {
             var pieceConfigDataItems = pieceConfigData.split("`");
-            var pieceConfigs = new Array<Pieces.PieceConfigData>(pieceConfigDataItems.length);
+            var pieceConfigs = new Array<P.PieceConfigData>(pieceConfigDataItems.length);
             for (var i = 0; i < pieceConfigDataItems.length; i++) {
                 pieceConfigs[i] = this._mapPieceConfigData(pieceConfigDataItems[i]);
             }
             return pieceConfigs;
         }
 
-        private _mapPieceConfigData(pieceConfigData: string): Pieces.PieceConfigData {
+        private _mapPieceConfigData(pieceConfigData: string): P.PieceConfigData {
             var pieceConfigDataItems = pieceConfigData.split("^");
 
             var pieceDefinitionId = pieceConfigDataItems[0];

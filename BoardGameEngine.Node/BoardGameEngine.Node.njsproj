@@ -100,6 +100,8 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ITakenPieceProcessor.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ReplacePieceWithAttachedPiece.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TurnDefinition.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\TurnInteractionDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />

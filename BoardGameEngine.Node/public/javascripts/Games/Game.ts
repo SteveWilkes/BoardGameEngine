@@ -12,7 +12,7 @@
 
             this.players = new Array<Pl.Player>();
             this.teams = new Array<T.Team>();
-            this.status = new Status.StatusData(this.type.turnInteractions, this);
+            this.status = new Status.StatusData(this.type.turnDefinition, this);
         }
 
         public players: Array<Pl.Player>;

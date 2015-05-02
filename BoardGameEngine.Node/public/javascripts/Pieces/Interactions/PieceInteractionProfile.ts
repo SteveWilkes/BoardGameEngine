@@ -8,7 +8,7 @@
             private _pieceTakenProcessors: Array<ITakenPieceProcessor>) { }
 
         public getPotentialInteractions(game: Games.Game): Ts.IStringDictionary<IPieceInteraction> {
-            var supportedTypes = game.status.turnManager.regulator.getCurrentlySupportedInteractions(this._piece);
+            var supportedTypes = game.status.turnManager.regulator.getCurrentlySupportedInteractionTypes(this._piece);
             var allInteractions: Ts.IStringDictionary<IPieceInteraction> = {};
             for (var i = 0; i < this._interactionCalculators.length; i++) {
                 var interactionCalculator = this._interactionCalculators[i];
