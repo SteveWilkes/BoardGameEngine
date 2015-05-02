@@ -27,7 +27,7 @@
                 socket.emit("turnEnded", cpuTurnData);
             });
 
-            socket.on("turnEnded",(turnData: Status.TurnData) => {
+            socket.on("turnEnded",(turnData: Interactions.TurnData) => {
                 if (socket.session.game.status.turnManager.currentTeam.owner.isHuman) {
                     this._applyTurn(turnData, socket);
                 }
@@ -56,7 +56,7 @@
             return game;
         }
 
-        private _performCpuTurn(currentCpuTeam: Teams.Team, game: Game): Status.TurnData {
+        private _performCpuTurn(currentCpuTeam: Teams.Team, game: Game): Interactions.TurnData {
             var cpuTurnInteractions = new Array<IPieceInteraction>();
 
             while (true) {
@@ -68,10 +68,10 @@
                 cpuTurnInteractions.push(nextCpuTurnInteraction);
             }
 
-            return Status.TurnData.forInteractions(cpuTurnInteractions);
+            return Interactions.TurnData.forInteractions(cpuTurnInteractions);
         }
 
-        private _applyTurn(turnData: Status.TurnData, socket: Node.ISessionSocket): void {
+        private _applyTurn(turnData: Interactions.TurnData, socket: Node.ISessionSocket): void {
             for (var i = 0; i < turnData.interactionData.length; i++) {
                 var turnInteractionData = turnData.interactionData[i];
                 this._handleInteractionCompleted(turnInteractionData.pieceId, turnInteractionData.interactionId, socket);

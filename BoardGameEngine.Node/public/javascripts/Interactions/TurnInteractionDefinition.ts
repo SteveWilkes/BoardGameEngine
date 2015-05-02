@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.BoardGameEngine.Interactions {
     
     export class TurnInteractionDefinition {
         constructor(

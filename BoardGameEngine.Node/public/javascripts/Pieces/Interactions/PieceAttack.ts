@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export class PieceAttack implements IGameAction {
+    export class PieceAttack implements I.IGameAction {
         constructor(
             public interactionId: string,
             public attacker: Piece,

@@ -1,20 +1,20 @@
-﻿module AgileObjects.BoardGameEngine.Status {
+﻿module AgileObjects.BoardGameEngine.Interactions {
 
-    export class TurnRegulator implements P.IPieceInteractionRegulator {
-        private _currentTurnInteractionTypes: Array<P.InteractionType>;
+    export class TurnRegulator implements IPieceInteractionRegulator {
+        private _currentTurnInteractionTypes: Array<InteractionType>;
 
-        constructor(private _turnDefinition: P.TurnDefinition, private _game: G.Game) {
+        constructor(private _turnDefinition: TurnDefinition, private _game: G.Game) {
             this._game.events.turnStarted.subscribe(team => this._turnStarted(team) === void (0));
 
             this._game.events.pieceMoved.subscribe((movement, eventData) =>
                 this._adjustRemainingTurnInteractions(
-                    P.InteractionType.move,
+                    InteractionType.move,
                     movement.destination.piece,
                     eventData) === void (0));
 
             this._game.events.pieceAttacked.subscribe((attack, eventData) =>
                 this._adjustRemainingTurnInteractions(
-                    P.InteractionType.attack,
+                    InteractionType.attack,
                     attack.target,
                     eventData) === void (0));
         }
@@ -24,7 +24,7 @@
         }
 
         private _adjustRemainingTurnInteractions(
-            completedInteractionType: P.InteractionType,
+            completedInteractionType: InteractionType,
             piece: P.Piece,
             eventData: TypeScript.EventCallbackSet): void {
 
@@ -41,7 +41,7 @@
             }
         }
 
-        public getCurrentlySupportedInteractionTypes(forPiece: P.Piece): Array<P.InteractionType> {
+        public getCurrentlySupportedInteractionTypes(forPiece: P.Piece): Array<InteractionType> {
             return (forPiece.team === this._game.status.turnManager.currentTeam)
                 ? this._currentTurnInteractionTypes
                 : this._turnDefinition.interactionTypes;

@@ -1,8 +1,8 @@
-﻿module AgileObjects.BoardGameEngine.Pieces {
+﻿module AgileObjects.BoardGameEngine.Interactions {
 
     export interface IGameAction {
         interactionId;
-        piece: Pieces.Piece;
+        piece: IPiece;
         description: string;
     }
 }

@@ -45,14 +45,14 @@
             return this._patternMapper.with(annotationNamesBySymbol);
         }
 
-        private _mapTurnDefinition(turnDefinitionData: string): P.TurnDefinition {
+        private _mapTurnDefinition(turnDefinitionData: string): I.TurnDefinition {
             var turnDefinitionDataItems = turnDefinitionData.split("^");
-            var turnInteractionDefinitions = new Array<P.TurnInteractionDefinition>(turnDefinitionDataItems.length);
+            var turnInteractionDefinitions = new Array<I.TurnInteractionDefinition>(turnDefinitionDataItems.length);
             for (var i = 0; i < turnDefinitionDataItems.length; i++) {
                 var interactionType = parseInt(turnDefinitionDataItems[i]);
-                turnInteractionDefinitions[i] = new Pieces.TurnInteractionDefinition(interactionType);
+                turnInteractionDefinitions[i] = new Interactions.TurnInteractionDefinition(interactionType);
             }
-            return new Pieces.TurnDefinition(turnInteractionDefinitions);
+            return new Interactions.TurnDefinition(turnInteractionDefinitions);
         }
 
         private _mapPieceDefinitions(

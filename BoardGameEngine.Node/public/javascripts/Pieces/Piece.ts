@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export class Piece extends PieceLocationBase {
+    export class Piece extends PieceLocationBase implements I.IPiece {
         constructor(
             public id: string,
             public definitionId: string,

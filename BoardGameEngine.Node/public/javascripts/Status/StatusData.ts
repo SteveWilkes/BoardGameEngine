@@ -3,7 +3,7 @@
     export class StatusData {
         private _isComplete: boolean;
 
-        constructor(turnDefinition: P.TurnDefinition, game: G.Game) {
+        constructor(turnDefinition: I.TurnDefinition, game: G.Game) {
             game.events.gameWon.subscribe((winningTeam: T.Team) => {
                 this.message = "Team " + winningTeam.name + " wins - GAME OVER, MAN! ";
                 this._isComplete = true;

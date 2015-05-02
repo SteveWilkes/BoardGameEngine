@@ -198,7 +198,7 @@ class GameConfiguration {
         this.teams = new Array<T.Team>();
     }
 
-    public turnDefinition: P.TurnDefinition;
+    public turnDefinition: I.TurnDefinition;
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
@@ -225,11 +225,11 @@ class GameConfigurator {
     }
 
     public withTurnInteractions(turnInteractionTypes: Array<InteractionType>): GameConfigurator {
-        var turnInteractionDefinitions = new Array<P.TurnInteractionDefinition>(turnInteractionTypes.length);
+        var turnInteractionDefinitions = new Array<I.TurnInteractionDefinition>(turnInteractionTypes.length);
         for (var i = 0; i < turnInteractionTypes.length; i++) {
-            turnInteractionDefinitions[i] = new Bge.Pieces.TurnInteractionDefinition(turnInteractionTypes[i]);
+            turnInteractionDefinitions[i] = new Bge.Interactions.TurnInteractionDefinition(turnInteractionTypes[i]);
         }
-        this._configuration.turnDefinition = new Bge.Pieces.TurnDefinition(turnInteractionDefinitions);
+        this._configuration.turnDefinition = new Bge.Interactions.TurnDefinition(turnInteractionDefinitions);
         return this;
     }
 

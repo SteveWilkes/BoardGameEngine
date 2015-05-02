@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
 
-    export interface IPieceLocationDictionary extends TypeScript.IStringDictionary<IPieceLocation> { }
+    export interface IPieceLocationDictionary extends Ts.IStringDictionary<IPieceLocation> { }
 
     export interface IPieceLocation {
         coordinates: TypeScript.Coordinates;

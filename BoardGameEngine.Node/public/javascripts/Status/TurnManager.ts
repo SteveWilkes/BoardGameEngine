@@ -3,19 +3,19 @@
     export class TurnManager {
         private _teams: Array<T.Team>;
 
-        constructor(turnDefinition: P.TurnDefinition, private _game: G.Game) {
+        constructor(turnDefinition: I.TurnDefinition, private _game: G.Game) {
             this._game.events.gameStarted.subscribe((team, eventData) => this._setStartingTeam(team, eventData));
             this._game.events.teamAdded.subscribe(data => this._teams.push(data.team) > 0);
             this._game.events.teamRemoved.subscribe(team => this._teams.remove(team) === void (0));
             this._game.events.pieceMoving.subscribe(piece => this._verifyPieceIsMovable(piece));
             this._game.events.turnValidated.subscribe((team, eventData) => this._turnValidated(team, eventData));
 
-            this.regulator = new TurnRegulator(turnDefinition, this._game);
+            this.regulator = new Interactions.TurnRegulator(turnDefinition, this._game);
             this._teams = new Array<T.Team>();
         }
 
         public currentTeam: T.Team;
-        public regulator: P.IPieceInteractionRegulator;
+        public regulator: I.IPieceInteractionRegulator;
 
         private _setStartingTeam(team: T.Team, eventData: Ts.EventCallbackSet): boolean {
             this.setCurrentTeam(team);

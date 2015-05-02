@@ -18,7 +18,7 @@
             });
 
             game.events.turnEnded.subscribe(team => {
-                var turnActions = new Array<Pieces.IGameAction>();
+                var turnActions = new Array<I.IGameAction>();
                 if (team.isLocal()) {
                     var actions = game.status.history.actions;
                     for (var i = actions.length - 1; i >= 0; i--) {
@@ -29,15 +29,15 @@
                         }
                     }
                 }
-                this._socket.emit("turnEnded", Status.TurnData.forActions(turnActions));
+                this._socket.emit("turnEnded", Interactions.TurnData.forActions(turnActions));
                 return true;
             });
 
-            this._socket.on("turnValidated", (nextTeamIndex: number) => {
+            this._socket.on("turnValidated",(nextTeamIndex: number) => {
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });
 
-            this._socket.on("turnEnded", (turnData: Status.TurnData) => {
+            this._socket.on("turnEnded",(turnData: I.TurnData) => {
                 var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
                 for (var i = 0; i < turnData.interactionData.length; i++) {
                     var turnInteraction = turnData.interactionData[i];

@@ -5,13 +5,13 @@
             events.pieceMoved.subscribe(movement => this._recordPieceMovement(movement));
             events.pieceAttacked.subscribe(attack => this._recordPieceAttack(attack));
 
-            this.actions = new Array<Pieces.IGameAction>();
+            this.actions = new Array<I.IGameAction>();
         }
 
-        public actions: Array<Pieces.IGameAction>;
+        public actions: Array<I.IGameAction>;
         public lastMove: Pieces.PieceMovement;
 
-        private _recordPieceMovement(movement: Pieces.PieceMovement): boolean {
+        private _recordPieceMovement(movement: P.PieceMovement): boolean {
             // BUG: Bomb movements logged as destination -> destination
             if (this.lastMove !== undefined) {
                 this.lastMove.setWasPartOfLastMove(false);

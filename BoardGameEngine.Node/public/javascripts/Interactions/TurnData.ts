@@ -1,13 +1,13 @@
-﻿module AgileObjects.BoardGameEngine.Status {
+﻿module AgileObjects.BoardGameEngine.Interactions {
 
     export class TurnData {
         constructor(public interactionData: Array<InteractionData>) { }
 
-        static forInteractions(interactions: Array<Pieces.IPieceInteraction>) {
+        static forInteractions(interactions: Array<IPieceInteraction>) {
             return TurnData.for(interactions, InteractionData.forInteraction);
         }
 
-        static forActions(actions: Array<Pieces.IGameAction>) {
+        static forActions(actions: Array<IGameAction>) {
             return TurnData.for(actions, InteractionData.forAction);
         }
 
