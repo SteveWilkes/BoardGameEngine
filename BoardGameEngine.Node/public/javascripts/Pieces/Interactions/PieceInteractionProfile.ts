@@ -1,5 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Pieces {
-    import Ts = TypeScript;
+
+    var _noInteractions = <Ts.IStringDictionary<IPieceInteraction>>{};
 
     export class PieceInteractionProfile {
         constructor(
@@ -7,8 +8,10 @@
             private _interactionCalculators: Array<PieceInteractionCalculator>,
             private _pieceTakenProcessors: Array<ITakenPieceProcessor>) { }
 
-        public getPotentialInteractions(game: Games.Game): Ts.IStringDictionary<IPieceInteraction> {
+        public getPotentialInteractions(game: G.Game): Ts.IStringDictionary<IPieceInteraction> {
             var supportedTypes = game.status.turnManager.regulator.getCurrentlySupportedInteractionTypes(this._piece);
+            if (supportedTypes.length === 0) { return _noInteractions; }
+
             var allInteractions: Ts.IStringDictionary<IPieceInteraction> = {};
             for (var i = 0; i < this._interactionCalculators.length; i++) {
                 var interactionCalculator = this._interactionCalculators[i];

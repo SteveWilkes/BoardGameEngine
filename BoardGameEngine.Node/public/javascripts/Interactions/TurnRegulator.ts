@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Interactions {
 
     export class TurnRegulator implements IPieceInteractionRegulator {
-        private _currentTurnInteractionTypes: Array<InteractionType>;
+        private _previousTurnInteractionIndex: number;
 
         constructor(private _turnDefinition: TurnDefinition, private _game: G.Game) {
             this._game.events.turnStarted.subscribe(team => this._turnStarted(team) === void (0));
@@ -20,7 +20,7 @@
         }
 
         private _turnStarted(team: P.IPieceOwner): void {
-            this._currentTurnInteractionTypes = this._turnDefinition.interactionTypes.slice(0);
+            this._previousTurnInteractionIndex = 0;
         }
 
         private _adjustRemainingTurnInteractions(
@@ -30,21 +30,21 @@
 
             if (piece.hasBeenTaken()) { return; }
 
-            var turnInteractionIndex = this._currentTurnInteractionTypes.indexOf(completedInteractionType);
+            this._previousTurnInteractionIndex = this._turnDefinition.interactionTypes.indexOf(
+                completedInteractionType,
+                this._previousTurnInteractionIndex + 1);
 
-            this._currentTurnInteractionTypes = this._currentTurnInteractionTypes.slice(
-                turnInteractionIndex + 1,
-                this._currentTurnInteractionTypes.length);
-
-            if (this._currentTurnInteractionTypes.length === 0) {
+            if (this._previousTurnInteractionIndex === (this._turnDefinition.interactionTypes.length - 1)) {
                 eventData.whenEventCompletes(() => this._game.events.turnEnded.publish(piece.team));
             }
         }
 
         public getCurrentlySupportedInteractionTypes(forPiece: P.Piece): Array<InteractionType> {
-            return (forPiece.team === this._game.status.turnManager.currentTeam)
-                ? this._currentTurnInteractionTypes
-                : this._turnDefinition.interactionTypes;
+            if (forPiece.team !== this._game.status.turnManager.currentTeam) {
+                return this._turnDefinition.interactionTypes;
+            }
+
+            return this._turnDefinition.interactionTypes.slice(this._previousTurnInteractionIndex);
         }
     }
 } 

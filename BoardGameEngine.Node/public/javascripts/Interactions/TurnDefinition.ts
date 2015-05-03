@@ -6,7 +6,8 @@
             this.interactionTypes = new Array<InteractionType>(this._interactionDefinitions.length);
 
             for (var i = 0; i < this._interactionDefinitions.length; i++) {
-                this.interactionTypes[i] = this._interactionDefinitions[i].interactionType;
+                var definition = this._interactionDefinitions[i];
+                this.interactionTypes[i] = definition.interactionType;
             }
         }
 
