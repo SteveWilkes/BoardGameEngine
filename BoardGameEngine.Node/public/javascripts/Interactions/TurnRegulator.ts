@@ -44,7 +44,8 @@
                 return this._turnDefinition.interactionTypes;
             }
 
-            return this._turnDefinition.interactionTypes.slice(this._previousTurnInteractionIndex);
+            return this._turnDefinition
+                .getAvailableInteractionTypes(this._previousTurnInteractionIndex, this._game);
         }
     }
 } 

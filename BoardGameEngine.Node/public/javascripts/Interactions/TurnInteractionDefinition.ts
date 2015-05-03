@@ -5,5 +5,9 @@
             public interactionType: InteractionType) {
             
         }
+
+        public isAvailable(game: G.Game): boolean {
+            return true;
+        }
     }
 }

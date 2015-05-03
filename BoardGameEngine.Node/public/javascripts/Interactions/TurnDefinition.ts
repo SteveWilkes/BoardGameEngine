@@ -12,5 +12,19 @@
         }
 
         public interactionTypes: Array<InteractionType>;
+
+        public getAvailableInteractionTypes(
+            previousTurnInteractionIndex: number,
+            game: G.Game): Array<InteractionType> {
+
+            var interactionTypes = new Array<InteractionType>();
+            for (var i = previousTurnInteractionIndex; i < this._interactionDefinitions.length; i++) {
+                var definition = this._interactionDefinitions[i];
+                if (definition.isAvailable(game)) {
+                    interactionTypes.push(definition.interactionType);
+                }
+            }
+            return interactionTypes;
+        }
     }
 }
