@@ -19,7 +19,7 @@
         public turnManager: TurnManager;
         public message: string;
 
-        public currentTeam(): string {
+        public getCurrentTeamName(): string {
             var currentTeam = this.turnManager.currentTeam;
 
             if (currentTeam.owner.isLocal) {

@@ -8,7 +8,7 @@ block content
 
         #game-status
             .heading
-                h3(data-ng-bind="gameCtrl.game.status.currentTeam().withOwnership() + ' turn'") Initialising...
+                h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'") Initialising...
             .body(data-tabs)
                 include history
                 include debug
@@ -19,7 +19,7 @@ block content
           data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
           data-moveable)
             h3 Game over!
-            span {{gameCtrl.game.status.currentTeam()}} won!
+            span {{gameCtrl.game.status.getCurrentTeamName()}} won!
             div.button-container 
                 a(
                   href=""
