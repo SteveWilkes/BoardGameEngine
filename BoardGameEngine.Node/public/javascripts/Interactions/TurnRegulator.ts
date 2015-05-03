@@ -32,7 +32,7 @@
 
             this._previousTurnInteractionIndex = this._turnDefinition.interactionTypes.indexOf(
                 completedInteractionType,
-                this._previousTurnInteractionIndex + 1);
+                this._previousTurnInteractionIndex);
 
             if (this._previousTurnInteractionIndex === (this._turnDefinition.interactionTypes.length - 1)) {
                 eventData.whenEventCompletes(() => this._game.events.turnEnded.publish(piece.team));

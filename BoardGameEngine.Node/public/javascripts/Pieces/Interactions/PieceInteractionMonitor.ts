@@ -45,14 +45,17 @@
         }
 
         private _showPotentialInteractionsFor(piece: Piece): void {
+            var potentialInteractions = this._tryGetPotentialInteractionsFor(piece);
+            if (!potentialInteractions) { return; }
+
             this._clearCurrentPotentialInteractions();
-            this._populatePotentialInteractionsFrom(piece);
+            this._populatePotentialInteractionsFrom(<Ts.IStringDictionary<IPieceInteraction>>potentialInteractions);
             var interactionsByLocation = new TypeScript.Dictionary<IPieceLocation, Array<IPieceInteraction>>();
             var i;
             for (i = 0; i < this._currentPotentialInteractions.length; i++) {
                 var potentialInteraction = this._currentPotentialInteractions[i];
                 interactionsByLocation
-                    .getOrAdd(potentialInteraction.location, () => new Array<IPieceInteraction>())
+                    .getOrAdd(potentialInteraction.location,() => new Array<IPieceInteraction>())
                     .push(potentialInteraction);
             }
 
@@ -61,8 +64,13 @@
             }
         }
 
-        private _populatePotentialInteractionsFrom(piece: Piece): void {
+        private _tryGetPotentialInteractionsFor(piece: Piece): Ts.IStringDictionary<IPieceInteraction>|boolean {
             var potentialInteractions = piece.interactionProfile.getPotentialInteractions(this._game);
+            for (var i in potentialInteractions) { return potentialInteractions; }
+            return false;
+        }
+
+        private _populatePotentialInteractionsFrom(potentialInteractions: Ts.IStringDictionary<IPieceInteraction>): void {
             this._currentPotentialInteractions = new Array<IPieceInteraction>();
             for (var interactionId in potentialInteractions) {
                 this._currentPotentialInteractions.push(potentialInteractions[interactionId]);
@@ -91,7 +99,7 @@
         private _handleLocationSelected(location: IPieceLocation): boolean {
             if (this._currentlySelectedPiece === undefined) { return false; }
 
-            return this._completeMovementInteraction(location, () => false);
+            return this._completeMovementInteraction(location,() => false);
         }
 
         private _handleInteractionEnded(location: IPieceLocation): boolean {
@@ -153,7 +161,7 @@
 
             var validEnemyPieceChosen = false;
 
-            this._completeInteractionAt(location, () => {
+            this._completeInteractionAt(location,() => {
                 // You've clicked on an enemy Piece who was a valid attack target:
                 validEnemyPieceChosen = true;
                 this._currentlyChosenPiece = this._currentlySelectedPiece;
@@ -190,7 +198,9 @@
 
         private _handlePieceMove(destination: IPieceLocation): boolean {
             if (this._currentPotentialInteractions.length === 0) {
-                this._populatePotentialInteractionsFrom(this._currentlyChosenPiece);
+                var potentialInteractions = this._tryGetPotentialInteractionsFor(this._currentlyChosenPiece);
+                if (!potentialInteractions) { return false; }
+                this._populatePotentialInteractionsFrom(<Ts.IStringDictionary<IPieceInteraction>>potentialInteractions);
             }
 
             this._completeMovementInteraction(destination, interaction => {
