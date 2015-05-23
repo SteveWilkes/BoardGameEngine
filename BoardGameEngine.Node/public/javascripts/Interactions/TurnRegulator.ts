@@ -30,22 +30,22 @@
 
             if (piece.hasBeenTaken()) { return; }
 
-            this._previousTurnInteractionIndex = this._turnDefinition.interactionTypes.indexOf(
+            this._previousTurnInteractionIndex = this._turnDefinition.interactionSequence.indexOf(
                 completedInteractionType,
                 this._previousTurnInteractionIndex);
 
-            if (this._previousTurnInteractionIndex === (this._turnDefinition.interactionTypes.length - 1)) {
+            if (this._previousTurnInteractionIndex === (this._turnDefinition.interactionSequence.length - 1)) {
                 eventData.whenEventCompletes(() => this._game.events.turnEnded.publish(piece.team));
             }
         }
 
         public getCurrentlySupportedInteractionTypes(forPiece: P.Piece): Array<InteractionType> {
             if (forPiece.team !== this._game.status.turnManager.currentTeam) {
-                return this._turnDefinition.interactionTypes;
+                return this._turnDefinition.interactionSequence;
             }
 
             return this._turnDefinition
-                .getAvailableInteractionTypes(this._previousTurnInteractionIndex, this._game);
+                .getRemainingInteractionSequence(this._previousTurnInteractionIndex, this._game);
         }
     }
 } 
