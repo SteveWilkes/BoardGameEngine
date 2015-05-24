@@ -5,18 +5,14 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
-            interactionProfileFactory: (piece: Piece) => PieceInteractionProfile) {
+            public interactionProfile: PieceInteractionProfile) {
             super();
 
-            this.interactionProfile = interactionProfileFactory(this);
+            this.moveCount = -1; // <- Set to zero when the Piece is first added to the Board
             this.health = 100;
-
-            // Set to zero when the Piece is first added to the Board:
-            this.moveCount = -1; 
         }
 
         public team: IPieceOwner;
-        public interactionProfile: PieceInteractionProfile;
         public health: number;
         public location: IPieceLocation;
         public attachedPiece: Piece;

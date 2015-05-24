@@ -40,7 +40,7 @@
         }
 
         private _getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece) {
-            var interactions = piece.interactionProfile.getPotentialInteractions(this._game);
+            var interactions = piece.interactionProfile.getPotentialInteractions();
 
             var predicate = (typeof coordinatesSignatureOrPiece === "string")
                 ? (inter: IPieceInteraction) => inter.location.coordinates.signature === coordinatesSignatureOrPiece
@@ -57,29 +57,9 @@
         }
 
         public setupPieces(configuration: (configurator: TTeamConfigurator) => void): GameWrapper<TTeamConfigurator> {
-            this._clearPieces();
-
             configuration(this._teamConfigurator);
 
             this._teamConfigurator.setupTeams();
-
-            return this;
-        }
-
-        private _clearPieces(): GameWrapper<TTeamConfigurator> {
-            var tilesByCoordinates = this._game.board.getTiles();
-
-            for (var coordinatesSignature in tilesByCoordinates) {
-                tilesByCoordinates[coordinatesSignature].piece = undefined;
-            }
-
-            for (var i = 0; i < this.teams.length; i++) {
-                var piecesById = this.teams[i].getPieces();
-
-                for (var pieceId in piecesById) {
-                    delete piecesById[pieceId];
-                }
-            }
 
             return this;
         }

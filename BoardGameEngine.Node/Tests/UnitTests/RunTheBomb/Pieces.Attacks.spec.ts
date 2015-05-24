@@ -6,12 +6,12 @@ describe("RunTheBomb",() => {
         describe("Attacks",() => {
             it("Should leave the Bomb on the Board when a carrier is taken",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
                     .forTeam(1)
                     .aSoldierAt("5x5")
                     .forTeam(2)
-                    .aNinjaAt("5x6").withHealth(1).withTheBomb());
+                    .aNinjaAt("5x6").withHealth(1).withTheBomb()));
 
                 var team1Soldier = game.getPieceAt("5x5");
                 var team2Ninja = game.getPieceAt("5x6");

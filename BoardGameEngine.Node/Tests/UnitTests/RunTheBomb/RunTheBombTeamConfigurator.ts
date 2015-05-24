@@ -2,17 +2,16 @@
     import Ts = TypeScript;
 
     export class RunTheBombTeamConfigurator implements G.ITeamConfigurator {
-        private _configurations: Ts.Dictionary<T.Team, Array<P.PieceConfigData>>;
+        private _configurations: Ts.Dictionary<number, Array<P.PieceConfigData>>;
         private _customHealthSettings: Ts.Dictionary<Ts.Coordinates, number>;
 
         constructor(private _game: G.Game) {
-            this._configurations = new Ts.Dictionary<T.Team, Array<P.PieceConfigData>>();
+            this._configurations = new Ts.Dictionary<number, Array<P.PieceConfigData>>();
             this._customHealthSettings = new Ts.Dictionary<Ts.Coordinates, number>();
         }
 
         public forTeam(teamNumber: number): RunTheBombTeamConfigurator {
-            var team = this._game.teams[teamNumber - 1];
-            this._configurations.add(team, new Array<P.PieceConfigData>());
+            this._configurations.add(teamNumber, new Array<P.PieceConfigData>());
 
             return this;
         }
@@ -75,19 +74,19 @@
             var defaultPieceData = this._game.type.pieceData;
             var boardTilesByCoordinates = this._game.board.getTiles();
             for (var i = 0; i < this._configurations.count; i++) {
-                var team = this._configurations.keys[i];
-                var teamNumber = this._game.teams.indexOf(team) + 1;
-                var configData = this._configurations.values[i];
-                var pieceData = new Pieces.PieceDataSet(defaultPieceData.definitions, configData);
-                var customTeam = teamFactory.createTeamFor(team.owner, teamNumber, pieceData);
-                var customTeamPiecesById = customTeam.getPieces();
+                var teamNumber = this._configurations.keys[i];
+                var player = new Players.Player("Player-" + teamNumber, true, true);
+                this._game.add(player);
 
-                this._game.board.remove(team);
+                var configData = this._configurations.values[i];
+                this._game.type.pieceData = new Pieces.PieceDataSet(defaultPieceData.definitions, configData);
+                var customTeam = teamFactory.createTeamFor(player, teamNumber, this._game);
                 this._game.board.add(customTeam);
+
+                var customTeamPiecesById = customTeam.getPieces();
 
                 for (var pieceId in customTeamPiecesById) {
                     var customPiece = customTeamPiecesById[pieceId];
-
                     var customPieceCoordinates = customTeam.getInitialCoordinatesFor(customPiece);
 
                     var customHealthSetting = this._customHealthSettings.tryGet(customPieceCoordinates);

@@ -65,7 +65,7 @@
         }
 
         private _tryGetPotentialInteractionsFor(piece: Piece): Ts.IStringDictionary<IPieceInteraction>|boolean {
-            var potentialInteractions = piece.interactionProfile.getPotentialInteractions(this._game);
+            var potentialInteractions = piece.interactionProfile.getPotentialInteractions();
             for (var i in potentialInteractions) { return potentialInteractions; }
             return false;
         }

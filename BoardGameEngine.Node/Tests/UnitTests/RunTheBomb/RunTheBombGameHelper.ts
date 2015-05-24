@@ -4,20 +4,21 @@ var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 
 class RunTheBombGameHelper implements It.IGameHelper {
-    public startDefaultGame(): G.GameWrapper<G.RunTheBombTeamConfigurator> {
-        var gameService = new Bge.Games.GameService(
-            new TsNs.RandomStringGenerator(),
-            new Bge.Games.GameFactory(
-                new Bge.Games.GetGameTypeQuery(
-                    new Bge.Games.GameTypeMapper(
-                        new Bge.Boards.GetBoardTypeQuery(),
-                        new Bge.Games.GameEntityAnnotationMapper(
-                            new Bge.Games.GameEvaluatorPatternMapper()),
-                        new Bge.Games.GameEvaluatorPatternMapper()))),
-            new Bge.Teams.TeamFactory());
+    public startDefaultGame(configurator: (gameWrapper: G.GameWrapper<G.RunTheBombTeamConfigurator>) => void):
+        G.GameWrapper<G.RunTheBombTeamConfigurator> {
 
-        var game = gameService.createDefaultGame("1");
+        var gameFactory = new Bge.Games.GameFactory(
+            new Bge.Games.GetGameTypeQuery(
+                new Bge.Games.GameTypeMapper(
+                    new Bge.Boards.GetBoardTypeQuery(),
+                    new Bge.Games.GameEntityAnnotationMapper(
+                        new Bge.Games.GameEvaluatorPatternMapper()),
+                    new Bge.Games.GameEvaluatorPatternMapper())));
+
+        var game = gameFactory.createNewGame("rtb", "1");
         var gameWrapper = new Bge.Games.GameWrapper(new Bge.Games.RunTheBombTeamConfigurator(game), game);
+
+        configurator(gameWrapper);
 
         game.start();
 

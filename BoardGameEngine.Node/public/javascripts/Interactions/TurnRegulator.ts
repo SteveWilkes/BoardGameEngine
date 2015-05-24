@@ -39,8 +39,8 @@
             }
         }
 
-        public getCurrentlySupportedInteractionTypes(forPiece: P.Piece): Array<InteractionType> {
-            if (forPiece.team !== this._game.status.turnManager.currentTeam) {
+        public getCurrentlySupportedInteractionTypes(forTeam: P.IPieceOwner): Array<InteractionType> {
+            if (forTeam !== this._game.status.turnManager.currentTeam) {
                 return this._turnDefinition.interactionSequence;
             }
 

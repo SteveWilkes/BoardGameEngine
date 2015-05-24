@@ -1,15 +1,15 @@
 ﻿var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
 
-describe("RunTheBomb", () => {
-    describe("Pieces", () => {
-        describe("Attachment", () => {
-            it("Should attach the bomb to a human soldier", () => {
+describe("RunTheBomb",() => {
+    describe("Pieces",() => {
+        describe("Attachment",() => {
+            it("Should attach the bomb to a human soldier",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
-                        .forTeam(1)
-                        .aBombAt("1x5")
-                        .aSoldierAt("2x5"));
+                    .forTeam(1)
+                    .aBombAt("1x5")
+                    .aSoldierAt("2x5")));
 
                 var team1Bomb = game.getPieceAt("1x5");
                 var team1Soldier = game.getPieceAt("2x5");
@@ -24,13 +24,13 @@ describe("RunTheBomb", () => {
                 expect(team1Soldier.piece).toBe(team1Bomb);
             });
 
-            it("Should collect the bomb with a human soldier", () => {
+            it("Should collect the bomb with a human soldier",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
-                        .forTeam(1)
-                        .aBombAt("1x5")
-                        .aSoldierAt("2x5"));
+                    .forTeam(1)
+                    .aBombAt("1x5")
+                    .aSoldierAt("2x5")));
 
                 var team1Soldier = game.getPieceAt("2x5");
                 var team1Bomb = game.getPieceAt("1x5");
@@ -43,13 +43,13 @@ describe("RunTheBomb", () => {
                 expect(team1Soldier.location.coordinates.signature).toBe("1x5");
             });
 
-            it("Should pass the bomb from a human soldier to a ninja", () => {
+            it("Should pass the bomb from a human soldier to a ninja",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
-                        .forTeam(1)
-                        .aSoldierAt("2x5").withTheBomb()
-                        .aNinjaAt("3x5"));
+                    .forTeam(1)
+                    .aSoldierAt("2x5").withTheBomb()
+                    .aNinjaAt("3x5")));
 
                 var team1Soldier = game.getPieceAt("2x5");
 

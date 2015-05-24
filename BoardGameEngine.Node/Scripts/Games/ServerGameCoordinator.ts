@@ -23,7 +23,7 @@
                 }
                 if (currentTeam.owner.isHuman) { return; }
 
-                var cpuTurnData = this._performCpuTurn(currentTeam, game);
+                var cpuTurnData = this._performCpuTurn(currentTeam);
                 socket.emit("turnEnded", cpuTurnData);
             });
 
@@ -44,7 +44,7 @@
                 var player = new Players.Player(playerData.id, playerData.isHuman);
                 game.add(player);
                 for (var j = 0; j < playerData.numberOfTeams; j++) {
-                    var team = this._teamFactory.createTeamFor(player, teamNumber, game.type.pieceData);
+                    var team = this._teamFactory.createTeamFor(player, teamNumber, game);
                     game.board.add(team);
 
                     ++teamNumber;
@@ -56,11 +56,11 @@
             return game;
         }
 
-        private _performCpuTurn(currentCpuTeam: Teams.Team, game: Game): Interactions.TurnData {
+        private _performCpuTurn(currentCpuTeam: T.Team): Interactions.TurnData {
             var cpuTurnInteractions = new Array<IPieceInteraction>();
 
             while (true) {
-                var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam, game);
+                var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam);
 
                 if (nextCpuTurnInteraction === undefined) { break; }
 
@@ -88,7 +88,7 @@
                     "got piece " + pieceId);
             }
             var piece = currentTeamPieces[pieceId];
-            var potentialInteractions = piece.interactionProfile.getPotentialInteractions(game);
+            var potentialInteractions = piece.interactionProfile.getPotentialInteractions();
             if (!potentialInteractions.hasOwnProperty(interactionId)) {
                 throw new Error(
                     "Interaction completion out of sync: " +

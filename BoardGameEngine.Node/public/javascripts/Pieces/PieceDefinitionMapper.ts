@@ -39,10 +39,11 @@
                 id,
                 name,
                 image,
-                (piece: Piece) => new PieceInteractionProfile(
-                    piece,
+                (pieceId: string, game: G.Game) => new PieceInteractionProfile(
                     interactionCalculators,
-                    takenPieceProcessors));
+                    takenPieceProcessors,
+                    pieceId,
+                    game));
         }
 
         private _mapInteractionCalculators(interactionCalculatorData: string): Array<PieceInteractionCalculator> {

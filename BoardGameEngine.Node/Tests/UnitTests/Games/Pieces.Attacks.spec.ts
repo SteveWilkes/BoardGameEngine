@@ -26,7 +26,7 @@ describe("Game", () => {
                 var team1Pieces = TsNs.Joq.toArray<Piece>(game.teams[0].getPieces());
                 expect(team1Pieces.length).toBe(1);
                 var subjectPiece = team1Pieces[0];
-                var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(game);
+                var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions();
 
                 var team2Pieces = TsNs.Joq.toArray<Piece>(game.teams[1].getPieces());
                 expect(team2Pieces.length).toBe(1);
@@ -76,7 +76,7 @@ describe("Game", () => {
                 i = 0;
 
                 while (true) {
-                    var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions(game);
+                    var subjectPieceInteractions = subjectPiece.interactionProfile.getPotentialInteractions();
 
                     var attackInteraction = TsNs.Joq
                         .select<IPieceInteraction>(subjectPieceInteractions)

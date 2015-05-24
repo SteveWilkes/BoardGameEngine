@@ -51,7 +51,7 @@
         GameWrapper: new <TTeamConfigurator extends G.ITeamConfigurator>(teamConfigurator: TTeamConfigurator, game: G.Game) => G.GameWrapper<TTeamConfigurator>;
         GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
         RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
-        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: Bge.Teams.TeamFactory) => G.ServerGameCoordinator;
+        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.ServerGameCoordinator;
     }
 
     interface Interactions {
@@ -64,15 +64,15 @@
         MovePieceToDestinationInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
-        Piece: new (id: string, definitionId: string, imageSource: string, interactionProfileFactory: (piece: Piece) => P.PieceInteractionProfile) => P.Piece;
+        Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => P.Piece;
         PieceConfigData: new (pieceDefinitionId: string, pieceLocation: Ts.Coordinates) => P.PieceConfigData;
         PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: P.Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
-        PieceInteractionProfile: new (piece: P.Piece, interactionCalculators: Array<P.PieceInteractionCalculator>, takenProcessors: Array<P.ITakenPieceProcessor>) => P.PieceInteractionProfile;
+        PieceInteractionProfile: new (interactionCalculators: Array<P.PieceInteractionCalculator>, takenProcessors: Array<P.ITakenPieceProcessor>, pieceId: string, game: G.Game) => P.PieceInteractionProfile;
         RelatedLocationCalculator: new (coordinateTranslatorSets: Array<Array<Ts.CoordinateTranslator>>, pathStepLocationEvaluator: P.IPieceInteractionContextEvaluator, pathDestinationEvaluator: P.IPieceInteractionContextEvaluator) => P.RelatedLocationCalculator;
     }
 
     interface Players {
-        Player: new (id: string, isHuman: boolean, isLocal?: boolean) => Bge.Players.Player;
+        Player: new (id: string, isHuman: boolean, isLocal?: boolean) => Pl.Player;
     }
 
     interface Teams {

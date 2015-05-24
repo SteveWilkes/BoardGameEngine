@@ -27,7 +27,7 @@ describe("Game",() => {
             });
 
             it("Should calculate up-down-left-right movement interactions",() => {
-                var game = gameBuilder.createGame(gc => gc
+                var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
                     .withHumanLocalAndRemotePlayers()
@@ -36,7 +36,7 @@ describe("Game",() => {
                     .withUdlrMovementBy(2))));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -50,7 +50,7 @@ describe("Game",() => {
             });
 
             it("Should calculate an infinite movement path",() => {
-                var game = gameBuilder.createGame(gc => gc
+                var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withASquareBoardOfSize(100)
                     .withNorthSouthBoardPositions()
@@ -62,7 +62,7 @@ describe("Game",() => {
                     .whereDestinationsMustBeUnoccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -75,7 +75,7 @@ describe("Game",() => {
             });
 
             it("Should exclude interactions based on an evaluator",() => {
-                var game = gameBuilder.createGame(gc => gc
+                var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
                     .withHumanLocalAndRemotePlayers()
@@ -86,14 +86,14 @@ describe("Game",() => {
                     .wherePieceMustBeOccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
                 var numberOfInteractions = Object.keys(pieceInteractions).length;
 
                 expect(numberOfInteractions).toBe(0);
             });
 
             it("Should exclude movement interactions with an invalid path step",() => {
-                var game = gameBuilder.createGame(gc => gc
+                var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
                     .withHumanLocalAndRemotePlayers()
@@ -106,7 +106,7 @@ describe("Game",() => {
                 expect(pieces.length).toBe(3);
 
                 var piece = pieces[0];
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -123,7 +123,7 @@ describe("Game",() => {
             });
 
             it("Should exclude movement interactions with an invalid destination",() => {
-                var game = gameBuilder.createGame(gc => gc
+                var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
                     .withHumanLocalAndRemotePlayers()
@@ -133,7 +133,7 @@ describe("Game",() => {
                     .whereDestinationsMustBeUnoccupied())));
 
                 var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
 
                 var interactionLocations = TsNs.Joq
                     .select(pieceInteractions,(inter: IPieceInteraction) => inter.location.coordinates.signature)
@@ -160,7 +160,7 @@ describe("Game",() => {
                 expect(originTile.coordinates.signature).toBe("1x1");
                 expect(originTile.isOccupied()).toBeTruthy();
 
-                var pieceInteractions = piece.interactionProfile.getPotentialInteractions(game);
+                var pieceInteractions = piece.interactionProfile.getPotentialInteractions();
 
                 expect(pieceInteractions).not.toBeNull();
 
@@ -186,7 +186,7 @@ describe("Game",() => {
                 expect(piece.moveCount).toBe(0);
 
                 var moveUpOneSpaceInteraction = TsNs.Joq
-                    .select<IPieceInteraction>(piece.interactionProfile.getPotentialInteractions(game))
+                    .select<IPieceInteraction>(piece.interactionProfile.getPotentialInteractions())
                     .firstOrDefault(inter => inter.location.coordinates.signature === "2x1");
 
                 expect(moveUpOneSpaceInteraction).not.toBeNull();

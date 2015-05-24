@@ -125,26 +125,29 @@ class PieceBuilder {
         this._idGenerator = new TsNs.RandomStringGenerator();
     }
 
-    public createPiece(configuration: PieceConfiguration): P.Piece {
+    public createPiece(configuration: PieceConfiguration, game: G.Game): P.Piece {
         var pieceId = this._idGenerator.generate(6);
+
+        var interactionProfile = new Bge.Pieces.PieceInteractionProfile(
+            configuration.interactionCalculators,
+            [],
+            pieceId,
+            game);
 
         return new Bge.Pieces.Piece(
             pieceId,
             configuration.pieceDefinitionId,
             "test.gif",
-            piece => new Bge.Pieces.PieceInteractionProfile(
-                piece,
-                configuration.interactionCalculators,
-                []));
+            interactionProfile);
     }
 }
 
 class TeamConfiguration {
     constructor(public teamOwner: Pl.Player) {
-        this.pieceInitialLocations = new TsNs.Dictionary<P.Piece, Ts.Coordinates>();
+        this.pieceInitialLocations = new TsNs.Dictionary<PieceConfiguration, Array<Ts.Coordinates>>();
     }
 
-    public pieceInitialLocations: Ts.Dictionary<P.Piece, Ts.Coordinates>;
+    public pieceInitialLocations: Ts.Dictionary<PieceConfiguration, Array<Ts.Coordinates>>;
 }
 
 class TeamConfigurator {
@@ -159,9 +162,11 @@ class TeamConfigurator {
         config(configurator);
         var configuration = configurator.getConfiguration();
         for (var i = 0; i < coordinateSignatures.length; i++) {
-            var coordinates = TsNs.CoordinatesLibrary.INSTANCE.get(coordinateSignatures[i]);
-            var piece = PieceBuilder.INSTANCE.createPiece(configuration);
-            this._configuration.pieceInitialLocations.add(piece, coordinates);
+            var configurationCoordinates = this._configuration.pieceInitialLocations
+                .getOrAdd(configuration,() => new Array<Ts.Coordinates>());
+
+            configurationCoordinates.push(
+                TsNs.CoordinatesLibrary.INSTANCE.get(coordinateSignatures[i]));
         }
         return this;
     }
@@ -169,8 +174,8 @@ class TeamConfigurator {
     public getPieceDefinitionId(): string {
         var allPieces = this._configuration.pieceInitialLocations.keys;
         if (allPieces.length === 0) { return "1"; }
-        var latestPiece = allPieces[allPieces.length - 1];
-        var latestDefinitionId = parseInt(latestPiece.definitionId);
+        var latestPieceConfiguration = allPieces[allPieces.length - 1];
+        var latestDefinitionId = parseInt(latestPieceConfiguration.pieceDefinitionId);
         return (latestDefinitionId + 1).toString();
     }
 
@@ -182,11 +187,22 @@ class TeamConfigurator {
 class TeamBuilder {
     static INSTANCE = new TeamBuilder();
 
-    public createTeam(configuration: TeamConfiguration): T.Team {
+    public createTeam(configuration: TeamConfiguration, game: G.Game): T.Team {
+        var pieceInitialLocations = new TsNs.Dictionary<P.Piece, Ts.Coordinates>();
+        for (var i = 0; i < configuration.pieceInitialLocations.count; i++) {
+            var pieceConfiguration = configuration.pieceInitialLocations.keys[i];
+            var pieceConfigurationCoordinates = configuration.pieceInitialLocations.values[i];
+
+            for (var j = 0; j < pieceConfigurationCoordinates.length; j++) {
+                var piece = PieceBuilder.INSTANCE.createPiece(pieceConfiguration, game);
+                pieceInitialLocations.add(piece, pieceConfigurationCoordinates[j]);
+            }
+        }
+
         return new Bge.Teams.Team(
             configuration.teamOwner,
             configuration.teamOwner.id + "-Team" + configuration.teamOwner.teams.length + 1,
-            configuration.pieceInitialLocations);
+            pieceInitialLocations);
     }
 }
 
@@ -195,14 +211,14 @@ class GameConfiguration {
         this.boardRowConfigs = new Array<B.BoardRowConfig>();
         this.boardPositions = new Array<B.BoardPosition>();
         this.players = new Array<Pl.Player>();
-        this.teams = new Array<T.Team>();
+        this.teamConfigurations = new Array<TeamConfiguration>();
     }
 
     public turnDefinition: I.TurnDefinition;
     public boardRowConfigs: Array<B.BoardRowConfig>;
     public boardPositions: Array<B.BoardPosition>;
     public players: Array<Pl.Player>;
-    public teams: Array<T.Team>;
+    public teamConfigurations: Array<TeamConfiguration>;
 
     public addPlayer(isHuman: boolean, isLocal: boolean) {
         var player = new Bge.Players.Player("Player" + this.players.length + 1, isHuman, isLocal);
@@ -300,8 +316,7 @@ class GameConfigurator {
         var teamOwner = this._configuration.players[playerNumber - 1];
         var configurator = new TeamConfigurator(teamOwner);
         config(configurator);
-        var team = TeamBuilder.INSTANCE.createTeam(configurator.getConfiguration());
-        this._configuration.teams.push(team);
+        this._configuration.teamConfigurations.push(configurator.getConfiguration());
         return this;
     }
 
@@ -324,8 +339,8 @@ class GameBuilder {
 
         var game = new Bge.Games.Game("test", gameType, board, gameEvents);
 
-        this._addPlayers(game, configuration);
-        this._addTeams(game, configuration);
+        this._addPlayers(configuration, game);
+        this._addTeams(configuration, game);
 
         return game;
     }
@@ -339,15 +354,17 @@ class GameBuilder {
             new Bge.Boards.BoardOrientationTranslator());
     }
 
-    private _addPlayers(game: G.Game, configuration: GameConfiguration) {
+    private _addPlayers(configuration: GameConfiguration, game: G.Game) {
         for (var i = 0; i < configuration.players.length; i++) {
             game.add(configuration.players[i]);
         }
     }
 
-    private _addTeams(game: G.Game, configuration: GameConfiguration) {
-        for (var i = 0; i < configuration.teams.length; i++) {
-            game.board.add(configuration.teams[i]);
+    private _addTeams(configuration: GameConfiguration, game: G.Game) {
+        var teamConfigurations = configuration.teamConfigurations;
+        for (var i = 0; i < teamConfigurations.length; i++) {
+            var team = TeamBuilder.INSTANCE.createTeam(teamConfigurations[i], game);
+            game.board.add(team);
         }
     }
 }

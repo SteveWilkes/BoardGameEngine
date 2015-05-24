@@ -5,36 +5,38 @@ describe("RunTheBomb",() => {
         describe("Completion",() => {
             it("Should defeat a Team when a Bomb moves to a BombTile",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
                     .forTeam(1)
-                    .aSoldierAt("8x5").withTheBomb());
+                    .aSoldierAt("8x5").withTheBomb()
+                    .forTeam(2)
+                    .aSoldierAt("8x4").withTheBomb()));
 
                 var defeatedTeams = new Array<T.Team>();
 
                 game.events.teamDefeated.subscribe(team => defeatedTeams.push(team) > 0);
 
                 var team1Soldier = game.getPieceAt("8x5");
-
+                
                 // Move the Soldier (who has the Bomb) to 9x5 - the 
                 // other team's BombTile
                 game.getInteractionAt("9x5", team1Soldier).complete();
-
+                
                 expect(defeatedTeams.length).toBe(1);
-                expect(defeatedTeams[0]).not.toBe(team1Soldier.team);
-
-                // Team order is reversed because teams have been removed and added:
-                expect(game.teams[0]).not.toBe(team1Soldier.team);
-                expect(game.teams[1]).toBe(team1Soldier.team);
-                expect(defeatedTeams[0]).toBe(game.teams[0]);
+                expect(defeatedTeams[0].id).not.toBe(team1Soldier.team.id);
+                expect(game.teams[1].id).not.toBe(team1Soldier.team.id);
+                expect(game.teams[0].id).toBe(team1Soldier.team.id);
+                expect(defeatedTeams[0].id).toBe(game.teams[1].id);
             });
-
+            
             it("Should complete a Game when only one Team is undefeated",() => {
                 var game = gameHelper
-                    .startDefaultGame()
+                    .startDefaultGame(g => g
                     .setupPieces(c => c
+                    .forTeam(1)
+                    .aSoldierAt("3x5").withTheBomb()
                     .forTeam(2)
-                    .aSoldierAt("2x5").withTheBomb());
+                    .aSoldierAt("2x5").withTheBomb()));
 
                 var team2Soldier = game.getPieceAt("2x5");
 
