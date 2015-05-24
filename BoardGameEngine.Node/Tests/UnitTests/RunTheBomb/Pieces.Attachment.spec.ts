@@ -1,4 +1,6 @@
-﻿var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
+﻿var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
+var Bge = Ao.BoardGameEngine;
+var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
 
 describe("RunTheBomb",() => {
     describe("Pieces",() => {
@@ -16,12 +18,12 @@ describe("RunTheBomb",() => {
 
                 expect(team1Soldier.isOccupied()).toBeFalsy();
 
-                var attachmentInteraction = game.getInteractionAt(team1Soldier, team1Bomb);
+                var attachmentInteraction = team1Bomb.getInteractionAt(team1Soldier);
 
                 attachmentInteraction.complete();
 
                 expect(team1Soldier.isOccupied()).toBeTruthy();
-                expect(team1Soldier.piece).toBe(team1Bomb);
+                expect(team1Soldier.piece.id).toBe(team1Bomb.id);
             });
 
             it("Should collect the bomb with a human soldier",() => {
@@ -34,12 +36,12 @@ describe("RunTheBomb",() => {
 
                 var team1Soldier = game.getPieceAt("2x5");
                 var team1Bomb = game.getPieceAt("1x5");
-                var attachmentInteraction = game.getInteractionAt(team1Bomb, team1Soldier);
+                var attachmentInteraction = team1Soldier.getInteractionAt(team1Bomb);
 
                 attachmentInteraction.complete();
 
                 expect(team1Soldier.isOccupied()).toBeTruthy();
-                expect(team1Bomb.location).toBe(team1Soldier);
+                expect(team1Bomb.location["id"]).toBe(team1Soldier.id);
                 expect(team1Soldier.location.coordinates.signature).toBe("1x5");
             });
 
@@ -56,16 +58,16 @@ describe("RunTheBomb",() => {
                 expect(team1Soldier.definitionId).toBe("2");
                 expect(team1Soldier.isOccupied()).toBeTruthy();
 
-                var team1Bomb = team1Soldier.piece;
+                var team1Bomb = new Bge.Games.PieceWrapper(team1Soldier.piece);
                 expect(team1Bomb.definitionId).toBe("1");
 
                 // Move team1's bomb from the soldier to the ninja:
                 var team1Ninja = game.getPieceAt("3x5");
-                game.getInteractionAt(team1Ninja, team1Bomb).complete();
+                team1Bomb.getInteractionAt(team1Ninja).complete();
 
                 expect(team1Soldier.isOccupied()).toBeFalsy();
                 expect(team1Ninja.isOccupied()).toBeTruthy();
-                expect(team1Bomb.location).toBe(team1Ninja);
+                expect(team1Bomb.location["id"]).toBe(team1Ninja.id);
             });
         });
     });

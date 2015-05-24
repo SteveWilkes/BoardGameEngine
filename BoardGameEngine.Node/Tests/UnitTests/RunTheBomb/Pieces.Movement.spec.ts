@@ -13,10 +13,10 @@ describe("RunTheBomb",() => {
 
                 var team1Ninja = game1.getPieceAt("2x5");
 
-                var canMoveUpOneSpace = game1.hasInteractionAt("3x5", team1Ninja);
+                var canMoveUpOneSpace = team1Ninja.hasInteractionAt("3x5");
                 expect(canMoveUpOneSpace).toBeTruthy();
 
-                var canMoveUpTwoSpaces = game1.hasInteractionAt("4x5", team1Ninja);
+                var canMoveUpTwoSpaces = team1Ninja.hasInteractionAt("4x5");
                 expect(canMoveUpTwoSpaces).toBeTruthy();
 
                 var game2 = gameHelper
@@ -27,10 +27,10 @@ describe("RunTheBomb",() => {
 
                 team1Ninja = game2.getPieceAt("1x5");
 
-                canMoveUpOneSpace = game2.hasInteractionAt("2x5", team1Ninja);
+                canMoveUpOneSpace = team1Ninja.hasInteractionAt("2x5");
                 expect(canMoveUpOneSpace).toBeTruthy();
 
-                canMoveUpTwoSpaces = game2.hasInteractionAt("3x5", team1Ninja);
+                canMoveUpTwoSpaces = team1Ninja.hasInteractionAt("3x5");
                 expect(canMoveUpTwoSpaces).toBeFalsy();
             });
         });

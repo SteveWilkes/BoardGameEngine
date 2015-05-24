@@ -20,7 +20,7 @@ describe("RunTheBomb",() => {
                 
                 // Move the Soldier (who has the Bomb) to 9x5 - the 
                 // other team's BombTile
-                game.getInteractionAt("9x5", team1Soldier).complete();
+                team1Soldier.getInteractionAt("9x5").complete();
                 
                 expect(defeatedTeams.length).toBe(1);
                 expect(defeatedTeams[0].id).not.toBe(team1Soldier.team.id);
@@ -42,7 +42,7 @@ describe("RunTheBomb",() => {
 
                 // Move the Soldier (who has the Bomb) to 1x5 - the 
                 // other team's BombTile
-                game.getInteractionAt("1x5", team2Soldier).complete();
+                team2Soldier.getInteractionAt("1x5").complete();
 
                 expect(game.status.isComplete()).toBeTruthy();
             });

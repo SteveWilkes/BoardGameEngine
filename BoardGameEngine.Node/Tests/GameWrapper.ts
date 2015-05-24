@@ -12,43 +12,19 @@
         public events: G.GameEventSet;
         public status: Status.StatusData;
 
-        public getPieceAt(coordinatesSignature: string): P.Piece {
+        public getPieceAt(coordinatesSignature: string): PieceWrapper {
             try {
-                return Ts.Joq
+                var piece = Ts.Joq
                     .select<Ts.IStringDictionary<P.Piece>>(this.teams, team => team.getPieces())
                     .select(pieces => Ts.Joq
                     .select<P.Piece>(pieces)
                     .firstOrDefault(piece => piece.location.coordinates.signature === coordinatesSignature))
                     .first(p => p !== null);
+
+                return new PieceWrapper(piece);
             } catch (e) {
                 throw new Error("No piece found at " + coordinatesSignature + ": " + e);
             }
-        }
-
-        public getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece): P.IPieceInteraction {
-            var interaction = this._getInteractionAt(coordinatesSignatureOrPiece, piece);
-
-            if (interaction !== null) {
-                return interaction;
-            }
-
-            throw new Error("No interaction found at " + coordinatesSignatureOrPiece);
-        }
-
-        public hasInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece): boolean {
-            return this._getInteractionAt(coordinatesSignatureOrPiece, piece) !== null;
-        }
-
-        private _getInteractionAt(coordinatesSignatureOrPiece: string|P.Piece, piece: P.Piece) {
-            var interactions = piece.interactionProfile.getPotentialInteractions();
-
-            var predicate = (typeof coordinatesSignatureOrPiece === "string")
-                ? (inter: IPieceInteraction) => inter.location.coordinates.signature === coordinatesSignatureOrPiece
-                : (inter: IPieceInteraction) => inter.location.contains(coordinatesSignatureOrPiece);
-
-            return Ts.Joq
-                .select<IPieceInteraction>(interactions)
-                .firstOrDefault(predicate);
         }
 
         public startNextTurn(): void {

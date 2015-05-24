@@ -18,13 +18,13 @@ describe("RunTheBomb",() => {
 
                 expect(team2Ninja.health).toBe(1);
 
-                var canAttackTeam2Ninja = game.hasInteractionAt(team2Ninja, team1Soldier);
+                var canAttackTeam2Ninja = team1Soldier.hasInteractionAt(team2Ninja);
                 expect(canAttackTeam2Ninja).toBeTruthy();
 
                 var team2NinjaTile = team2Ninja.location;
                 var team2Bomb = team2Ninja.piece;
 
-                game.getInteractionAt(team2Ninja, team1Soldier).complete();
+                team1Soldier.getInteractionAt(team2Ninja).complete();
 
                 expect(team2Ninja.hasBeenTaken()).toBeTruthy();
                 expect(team2Bomb.location).toBe(team2NinjaTile);
