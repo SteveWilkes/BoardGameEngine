@@ -1,13 +1,14 @@
 ﻿module AgileObjects.BoardGameEngine.Interactions {
-    
+
     export class TurnInteractionDefinition {
         constructor(
-            public interactionType: InteractionType) {
-            
+            public interactionType: InteractionType,
+            private _availabilityEvaluator: G.IGameEvaluator) {
+            console.log("Created interaction definition, evaluator: " + this._availabilityEvaluator);
         }
 
         public isAvailable(game: G.Game): boolean {
-            return true;
+            return this._availabilityEvaluator.evaluate(game);
         }
     }
 }

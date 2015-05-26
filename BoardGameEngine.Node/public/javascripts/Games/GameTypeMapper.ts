@@ -13,13 +13,14 @@
 
             var annotations = this._mapEntityAnnotations(gameTypeDataItems[2]);
             var evaluatorPatternMapper = this._getEvaluatorPatternMapper(annotations);
+            var evaluatorMapper = new TypeScript.Evaluation.EvaluatorMapper(evaluatorPatternMapper);
 
             return new GameType(
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
-                this._mapTurnDefinition(gameTypeDataItems[3]),
+                this._mapTurnDefinition(gameTypeDataItems[3], evaluatorMapper),
                 new Pieces.PieceDataSet(
-                    this._mapPieceDefinitions(gameTypeDataItems[4], evaluatorPatternMapper),
+                    this._mapPieceDefinitions(gameTypeDataItems[4], evaluatorMapper),
                     this._mapPieceConfigDataSet(gameTypeDataItems[5])),
                 annotations,
                 this._mapEventMappings(gameTypeDataItems[6], evaluatorPatternMapper));
@@ -45,21 +46,28 @@
             return this._patternMapper.with(annotationNamesBySymbol);
         }
 
-        private _mapTurnDefinition(turnDefinitionData: string): I.TurnDefinition {
+        private _mapTurnDefinition(
+            turnDefinitionData: string,
+            evaluatorMapper: Ts.Evaluation.EvaluatorMapper): I.TurnDefinition {
+
             var turnDefinitionDataItems = turnDefinitionData.split("^");
             var turnInteractionDefinitions = new Array<I.TurnInteractionDefinition>(turnDefinitionDataItems.length);
             for (var i = 0; i < turnDefinitionDataItems.length; i++) {
                 var interactionType = parseInt(turnDefinitionDataItems[i]);
-                turnInteractionDefinitions[i] = new Interactions.TurnInteractionDefinition(interactionType);
+                var availabilityEvaluator = evaluatorMapper.map<Game>("");
+
+                turnInteractionDefinitions[i] = new Interactions.TurnInteractionDefinition(
+                    interactionType,
+                    availabilityEvaluator);
             }
             return new Interactions.TurnDefinition(turnInteractionDefinitions);
         }
 
         private _mapPieceDefinitions(
             pieceDefinitionData: string,
-            evaluatorPatternMapper: Ts.Evaluation.IEvaluatorPatternMapper): Ts.IStringDictionary<P.PieceDefinition> {
+            evaluatorMapper: Ts.Evaluation.EvaluatorMapper): Ts.IStringDictionary<P.PieceDefinition> {
 
-            var pieceDefinitionMapper = new Pieces.PieceDefinitionMapper(evaluatorPatternMapper);
+            var pieceDefinitionMapper = new Pieces.PieceDefinitionMapper(evaluatorMapper);
 
             var pieceDefinitionDataItems = pieceDefinitionData.split("_");
             var pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition> = {};

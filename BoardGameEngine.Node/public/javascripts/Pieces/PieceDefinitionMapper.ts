@@ -24,7 +24,7 @@
     var _noProcessors = new Array<ITakenPieceProcessor>(0);
 
     export class PieceDefinitionMapper {
-        constructor(private _patternMapper: Ts.Evaluation.IEvaluatorPatternMapper) { }
+        constructor(private _evaluatorMapper: Ts.Evaluation.EvaluatorMapper) { }
 
         public map(pieceDefinitionData: string): PieceDefinition {
             var pieceDefinitionDataItems = pieceDefinitionData.split("`");
@@ -65,7 +65,7 @@
                 type,
                 this._mapRelatedLocationCalculators(interactionCalculatorDataItems[2]),
                 _pieceInteractionConstructorsById[interactionTypeId],
-                this._mapEvaluator<Piece>(interactionCalculatorDataItems[3]));
+                this._evaluatorMapper.map<Piece>(interactionCalculatorDataItems[3]));
         }
 
         private _mapRelatedLocationCalculators(locationCalculatorData: string): Array<RelatedLocationCalculator> {
@@ -82,8 +82,8 @@
 
             return new RelatedLocationCalculator(
                 this._mapCoordinateTranslatorSets(locationCalculatorDataItems[0]),
-                this._mapEvaluator<PieceInteractionData>(locationCalculatorDataItems[1]),
-                this._mapEvaluator<PieceInteractionData>(locationCalculatorDataItems[2]));
+                this._evaluatorMapper.map<PieceInteractionData>(locationCalculatorDataItems[1]),
+                this._evaluatorMapper.map<PieceInteractionData>(locationCalculatorDataItems[2]));
         }
 
         private _mapCoordinateTranslatorSets(coordinateTranslatorSetData: string): Array<Array<Ts.CoordinateTranslator>> {
@@ -117,16 +117,6 @@
             }
 
             return _coordinateTranslatorsBySignature[signature];
-        }
-
-        private _mapEvaluator<T>(evaluatorData: string): Ts.Evaluation.IEvaluator<T> {
-            if ((evaluatorData || "").length === 0) {
-                return Ts.Evaluation.AlwaysTrueEvaluator.INSTANCE;
-            }
-
-            var evaluatorPattern = this._patternMapper.map(evaluatorData);
-
-            return Ts.Evaluation.EvaluatorParser.INSTANCE.parse(evaluatorPattern);
         }
 
         private _mapTakenPieceProcessors(takenPieceProcessorsData: string): Array<ITakenPieceProcessor> {

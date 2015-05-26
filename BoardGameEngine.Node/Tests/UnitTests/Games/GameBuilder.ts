@@ -243,7 +243,9 @@ class GameConfigurator {
     public withTurnInteractions(turnInteractionTypes: Array<InteractionType>): GameConfigurator {
         var turnInteractionDefinitions = new Array<I.TurnInteractionDefinition>(turnInteractionTypes.length);
         for (var i = 0; i < turnInteractionTypes.length; i++) {
-            turnInteractionDefinitions[i] = new Bge.Interactions.TurnInteractionDefinition(turnInteractionTypes[i]);
+            turnInteractionDefinitions[i] = new Bge.Interactions.TurnInteractionDefinition(
+                turnInteractionTypes[i],
+                TsNs.Evaluation.AlwaysTrueEvaluator.INSTANCE);
         }
         this._configuration.turnDefinition = new Bge.Interactions.TurnDefinition(turnInteractionDefinitions);
         return this;
