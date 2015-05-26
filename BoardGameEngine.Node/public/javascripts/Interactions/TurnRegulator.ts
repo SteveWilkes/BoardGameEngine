@@ -20,7 +20,7 @@
         }
 
         private _turnStarted(team: P.IPieceOwner): void {
-            this._previousTurnInteractionIndex = 0;
+            this._previousTurnInteractionIndex = -1;
         }
 
         private _adjustRemainingTurnInteractions(
@@ -30,10 +30,9 @@
 
             if (piece.hasBeenTaken()) { return; }
 
-            // TODO: Bug - attacks don't increase the interactionIndex for other Pieces
             this._previousTurnInteractionIndex = this._turnDefinition.interactionSequence.indexOf(
                 completedInteractionType,
-                this._previousTurnInteractionIndex);
+                this._previousTurnInteractionIndex + 1);
 
             if (this._previousTurnInteractionIndex === (this._turnDefinition.interactionSequence.length - 1)) {
                 eventData.whenEventCompletes(() => this._game.events.turnEnded.publish(piece.team));
