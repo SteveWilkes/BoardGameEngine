@@ -30,6 +30,7 @@
 
             if (piece.hasBeenTaken()) { return; }
 
+            // TODO: Bug - attacks don't increase the interactionIndex for other Pieces
             this._previousTurnInteractionIndex = this._turnDefinition.interactionSequence.indexOf(
                 completedInteractionType,
                 this._previousTurnInteractionIndex);
