@@ -16,7 +16,7 @@
                 "bt^1x5^btt^bombTileTeam^t" +
                 "/" +
             // Turn Interaction Ids
-                "1^0" +
+                "1_0`" +
                 "/" +
             // PieceDefinitions
                 "1`Bomb`Bomb.png`" + // PieceDefinition 1 - Bomb

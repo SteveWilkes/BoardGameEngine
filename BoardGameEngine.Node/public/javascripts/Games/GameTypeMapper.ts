@@ -50,17 +50,28 @@
             turnDefinitionData: string,
             evaluatorMapper: Ts.Evaluation.EvaluatorMapper): I.TurnDefinition {
 
-            var turnDefinitionDataItems = turnDefinitionData.split("^");
+            var turnDefinitionDataItems = turnDefinitionData.split("_");
             var turnInteractionDefinitions = new Array<I.TurnInteractionDefinition>(turnDefinitionDataItems.length);
             for (var i = 0; i < turnDefinitionDataItems.length; i++) {
-                var interactionType = parseInt(turnDefinitionDataItems[i]);
-                var availabilityEvaluator = evaluatorMapper.map<Game>("");
-
-                turnInteractionDefinitions[i] = new Interactions.TurnInteractionDefinition(
-                    interactionType,
-                    availabilityEvaluator);
+                turnInteractionDefinitions[i] = this._mapTurnInteractionDefinition(
+                    turnDefinitionDataItems[i],
+                    evaluatorMapper);
             }
             return new Interactions.TurnDefinition(turnInteractionDefinitions);
+        }
+
+        private _mapTurnInteractionDefinition(
+            interactionDefinitionData: string,
+            evaluatorMapper: Ts.Evaluation.EvaluatorMapper): I.TurnInteractionDefinition {
+
+            var interactionDefinitionDataItems = interactionDefinitionData.split("`");
+
+            var interactionType = parseInt(interactionDefinitionDataItems[0]);
+            var availabilityEvaluator = evaluatorMapper.map<Game>(interactionDefinitionDataItems[1]);
+
+            return new Interactions.TurnInteractionDefinition(
+                interactionType,
+                availabilityEvaluator);
         }
 
         private _mapPieceDefinitions(
