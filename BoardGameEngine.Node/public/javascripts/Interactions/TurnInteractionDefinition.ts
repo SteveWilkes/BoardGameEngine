@@ -3,11 +3,11 @@
     export class TurnInteractionDefinition {
         constructor(
             public interactionType: InteractionType,
-            private _availabilityEvaluator: G.IGameEvaluator) {
+            private _availabilityEvaluator: IPotentialInteractionsEvaluator) {
         }
 
-        public isAvailable(game: G.Game): boolean {
-            return this._availabilityEvaluator.evaluate(game);
+        public isAvailable(data: PotentialInteractionsData): boolean {
+            return this._availabilityEvaluator.evaluate(data);
         }
     }
 }

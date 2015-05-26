@@ -54,7 +54,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\IGameEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Interactions\IPotentialInteractionsEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationManager.ts" />
@@ -102,6 +102,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPiece.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPieceInteraction.ts" />
+    <TypeScriptCompile Include="public\javascripts\Interactions\PotentialInteractionsData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ITakenPieceProcessor.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ReplacePieceWithAttachedPiece.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnDefinition.ts" />

@@ -17,7 +17,7 @@
 
         public getRemainingInteractionSequence(
             previousTurnInteractionIndex: number,
-            game: G.Game): Array<InteractionType> {
+            data: PotentialInteractionsData): Array<InteractionType> {
 
             if (previousTurnInteractionIndex === (this._interactionDefinitions.length - 1)) {
                 return _noInteractionTypes;
@@ -26,7 +26,7 @@
             var interactionTypes = new Array<InteractionType>();
             for (var i = previousTurnInteractionIndex; i < this._interactionDefinitions.length; i++) {
                 var definition = this._interactionDefinitions[i];
-                if (definition.isAvailable(game)) {
+                if (definition.isAvailable(data)) {
                     interactionTypes.push(definition.interactionType);
                 }
             }

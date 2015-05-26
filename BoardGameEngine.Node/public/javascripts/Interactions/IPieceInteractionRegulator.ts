@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Interactions {
 
     export interface IPieceInteractionRegulator {
-        getCurrentlySupportedInteractionTypes(forTeam: P.IPieceOwner): Array<InteractionType>;
+        getCurrentlySupportedInteractionTypes(forPiece: Piece): Array<InteractionType>;
     }
 }

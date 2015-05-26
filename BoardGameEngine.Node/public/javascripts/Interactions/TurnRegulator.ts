@@ -39,13 +39,15 @@
             }
         }
 
-        public getCurrentlySupportedInteractionTypes(forTeam: P.IPieceOwner): Array<InteractionType> {
-            if (forTeam !== this._game.status.turnManager.currentTeam) {
+        public getCurrentlySupportedInteractionTypes(forPiece: Piece): Array<InteractionType> {
+            if (forPiece.team !== this._game.status.turnManager.currentTeam) {
                 return this._turnDefinition.interactionSequence;
             }
 
+            var data = new Interactions.PotentialInteractionsData(forPiece, this._game);
+
             return this._turnDefinition
-                .getRemainingInteractionSequence(this._previousTurnInteractionIndex, this._game);
+                .getRemainingInteractionSequence(this._previousTurnInteractionIndex, data);
         }
     }
 } 

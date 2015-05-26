@@ -28,7 +28,7 @@
 
         public getPotentialInteractions(): Ts.IStringDictionary<IPieceInteraction> {
             var supportedTypes = this._game.status.turnManager.regulator
-                .getCurrentlySupportedInteractionTypes(this._piece.team);
+                .getCurrentlySupportedInteractionTypes(this._piece);
 
             if (supportedTypes.length === 0) { return _noInteractions; }
 

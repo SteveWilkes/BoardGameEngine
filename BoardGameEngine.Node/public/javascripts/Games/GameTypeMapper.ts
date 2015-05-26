@@ -66,12 +66,9 @@
 
             var interactionDefinitionDataItems = interactionDefinitionData.split("`");
 
-            var interactionType = parseInt(interactionDefinitionDataItems[0]);
-            var availabilityEvaluator = evaluatorMapper.map<Game>(interactionDefinitionDataItems[1]);
-
             return new Interactions.TurnInteractionDefinition(
-                interactionType,
-                availabilityEvaluator);
+                parseInt(interactionDefinitionDataItems[0]),
+                evaluatorMapper.map<I.PotentialInteractionsData>(interactionDefinitionDataItems[1]));
         }
 
         private _mapPieceDefinitions(

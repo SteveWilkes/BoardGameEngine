@@ -57,7 +57,7 @@
 
     interface Interactions {
         TurnDefinition: new (interactionDefinitions: Array<I.TurnInteractionDefinition>) => I.TurnDefinition;
-        TurnInteractionDefinition: new (interactionType: InteractionType, availabilityEvaluator: G.IGameEvaluator) => I.TurnInteractionDefinition;
+        TurnInteractionDefinition: new (interactionType: InteractionType, availabilityEvaluator: I.IPotentialInteractionsEvaluator) => I.TurnInteractionDefinition;
     }
 
     interface Pieces {
