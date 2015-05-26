@@ -26,7 +26,7 @@
         private _adjustRemainingTurnInteractions(
             completedInteractionType: InteractionType,
             piece: P.Piece,
-            eventData: TypeScript.EventCallbackSet): void {
+            eventData: Ts.EventCallbackSet): void {
 
             if (piece.hasBeenTaken()) { return; }
 
