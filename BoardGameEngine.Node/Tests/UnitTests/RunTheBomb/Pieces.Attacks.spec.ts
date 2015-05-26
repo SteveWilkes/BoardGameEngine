@@ -4,6 +4,37 @@ var gameHelper: It.IGameHelper = require("./RunTheBombGameHelper");
 describe("RunTheBomb",() => {
     describe("Pieces",() => {
         describe("Attacks",() => {
+            it("Should only allow one attack per move",() => {
+                var game = gameHelper
+                    .startDefaultGame(g => g
+                    .setupPieces(c => c
+                    .forTeam(1)
+                    .aBombAt("1x5")
+                    .soldiersAt("2x4", "2x5")
+                    .forTeam(2)
+                    .aBombAt("9x5")
+                    .aSoldierAt("3x4")));
+
+                var team1Soldier1 = game.getPieceAt("2x4");
+                var team1Soldier2 = game.getPieceAt("2x5");
+                var team2Soldier = game.getPieceAt("3x4");
+
+                var team1Soldier1CanAttack = team1Soldier1.hasInteractionAt(team2Soldier);
+                expect(team1Soldier1CanAttack).toBeTruthy();
+
+                var team1Soldier2CanAttack = team1Soldier2.hasInteractionAt(team2Soldier);
+                expect(team1Soldier2CanAttack).toBeTruthy();
+
+                // Perform the attack:
+                team1Soldier2.getInteractionAt(team2Soldier).complete();
+
+                var team1Soldier1CanAttack = team1Soldier1.hasInteractionAt(team2Soldier);
+                expect(team1Soldier1CanAttack).toBeFalsy();
+
+                var team1Soldier2CanAttack = team1Soldier2.hasInteractionAt(team2Soldier);
+                expect(team1Soldier2CanAttack).toBeFalsy();
+            });
+
             it("Should leave the Bomb on the Board when a carrier is taken",() => {
                 var game = gameHelper
                     .startDefaultGame(g => g
