@@ -142,6 +142,10 @@
                     return false;
                 }
 
+                if (this._currentlyChosenPieceHasNoInteractions()) {
+                    return false;
+                }
+
                 // You've clicked on one of your Pieces during your turn...
                 if (this._pieceIsSelected()) {
                     this._deselectCurrentlySelectedPiece();
@@ -172,7 +176,7 @@
             return validEnemyPieceChosen;
         }
 
-        private _deselectCurrentlySelectedPiece() {
+        private _deselectCurrentlySelectedPiece(): void {
             this._deselect(this._currentlySelectedPiece);
             this._currentlySelectedPiece = undefined;
         }
@@ -180,6 +184,10 @@
         private _deselect(piece: Piece): void {
             this._clearCurrentPotentialInteractions();
             piece.location.isSelected(false);
+        }
+
+        private _currentlyChosenPieceHasNoInteractions(): boolean {
+            return !!!this._tryGetPotentialInteractionsFor(this._currentlyChosenPiece);
         }
 
         private _selectCurrentlyChosenPiece(): void {
