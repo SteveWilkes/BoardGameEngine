@@ -104,6 +104,7 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\IPieceInteraction.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\PotentialInteractionsData.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ITakenPieceProcessor.ts" />
+    <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionMonitor.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\ReplacePieceWithAttachedPiece.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnInteractionDefinition.ts" />

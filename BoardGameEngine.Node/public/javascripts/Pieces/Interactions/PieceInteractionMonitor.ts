@@ -2,8 +2,7 @@
 
     var _none = new Array<IPieceInteraction>(0);
 
-    "ClientOnly";
-    class PieceInteractionMonitor {
+    export class PieceInteractionMonitor {
         private _currentlyChosenPiece: Piece;
         private _currentlyHighlightedPiece: Piece;
         private _pieceHighlightTimeouts: Array<ng.IPromise<any>>;
@@ -278,19 +277,4 @@
             return true;
         }
     }
-
-    export var $pieceInteractionMonitorService = "$pieceInteractionMonitorService";
-
-    class PieceInteractionMonitorService implements Ui.IGameUiComponent {
-        constructor(private _timeoutService: ng.ITimeoutService) { }
-
-        public initialise(game: Games.Game): void {
-            // ReSharper disable once WrongExpressionStatement
-            new PieceInteractionMonitor(this._timeoutService, game);
-        }
-    }
-
-    angular
-        .module(strategyGameApp)
-        .service($pieceInteractionMonitorService, ["$timeout", PieceInteractionMonitorService]);
 }
