@@ -10,11 +10,15 @@
         private _currentPotentialInteractions: Array<IPieceInteraction>;
         private _interactionHandled: boolean;
 
-        constructor(private _timeoutService: ng.ITimeoutService, private _game: Games.Game) {
+        constructor(private _timeoutService: ng.ITimeoutService, private _game: G.Game) {
             this._subscribeToGameEvents();
 
             this._pieceHighlightTimeouts = new Array<ng.IPromise<any>>();
             this._currentPotentialInteractions = _none;
+        }
+
+        public getHighlightedPiece(): Piece {
+            return this._currentlyHighlightedPiece;
         }
 
         private _subscribeToGameEvents(): void {
