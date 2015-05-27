@@ -39,6 +39,10 @@
         }
 
         private _showPotentialInteractionsImmediately(piece: Piece): boolean {
+            if (this._currentlyChosenPieceHasNoInteractions()) {
+                return false;
+            }
+
             this._clearHighlightTimeouts();
             this._showPotentialInteractionsFor(piece);
             return true;
