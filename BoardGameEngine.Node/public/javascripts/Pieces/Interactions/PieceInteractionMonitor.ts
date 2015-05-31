@@ -17,10 +17,6 @@
             this._currentPotentialInteractions = _none;
         }
 
-        public getHighlightedPiece(): Piece {
-            return this._currentlyHighlightedPiece;
-        }
-
         private _subscribeToGameEvents(): void {
             this._game.events.pieceSelected.subscribe(piece => this._showPotentialInteractionsAfterDelay(piece));
             this._game.events.locationSelected.subscribe(location => this._handleLocationSelected(location));
