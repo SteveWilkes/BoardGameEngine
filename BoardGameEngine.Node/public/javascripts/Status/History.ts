@@ -14,7 +14,6 @@
         public previousAction: I.IGameAction;
 
         private _recordPieceMovement(movement: P.PieceMovement): void {
-            // BUG: Bomb movements logged as destination -> destination
             if (this._previousMovement !== undefined) {
                 this._previousMovement.setWasPartOfLastMove(false);
             }
