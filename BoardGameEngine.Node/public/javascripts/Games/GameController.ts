@@ -21,7 +21,8 @@
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            this.game = this._gameService.createDefaultGame("1");
+            var guestPlayer = new Players.Player("Human", true, true);
+            this.game = this._gameService.createDefaultGame("1", guestPlayer);
 
             this._gameUiComponentSet.initialise(this.game);
 

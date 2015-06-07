@@ -6,21 +6,19 @@
             private _gameFactory: GameFactory,
             private _teamFactory: Teams.TeamFactory) { }
 
-        public createDefaultGame(gameTypeId: string): Game {
+        public createDefaultGame(gameTypeId: string, firstHumanPlayer: Pl.Player): Game {
             var gameId = this._idGenerator.generate();
             var game = this._gameFactory.createNewGame(gameId, gameTypeId);
 
-            for (var i = 0; i < game.type.maximumNumberOfTeams; i++) {
-                var isLocalHumanPlayer = i === 0;
+            game.add(firstHumanPlayer);
 
-                var player = new Players.Player(
-                    isLocalHumanPlayer ? "Human" : "CPU",
-                    isLocalHumanPlayer,
-                    isLocalHumanPlayer);
+            var i;
+            for (i = 1; i < game.type.maximumNumberOfTeams; i++) {
+                game.add(new Players.Player("CPU", false));
+            }
 
-                game.add(player);
-
-                var team = this._teamFactory.createTeamFor(player, game);
+            for (i = 0; i < game.players.length; i++) {
+                var team = this._teamFactory.createTeamFor(game.players[i], game);
                 game.board.add(team);
             }
 

@@ -1,1 +1,1 @@
-jasmine-node --color --verbose Tests/UnitTests/Games/Pieces.InteractionMonitor.spec.js
+jasmine-node --color --verbose Tests/UnitTests/Games/Pieces.Movement.spec.js
