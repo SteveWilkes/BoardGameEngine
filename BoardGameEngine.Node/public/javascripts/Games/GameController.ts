@@ -10,19 +10,19 @@
 
             this.globalEvents = GlobalEventSet.instance;
 
-            this.startDefaultGame("1");
+            this.startGame();
         }
 
         public globalEvents: GlobalEventSet;
         public game: Games.Game;
 
         public startGame(): void {
-            this.startDefaultGame("1");
+            this.startDefaultGame("RunTheBomb");
         }
 
         public startDefaultGame(gameTypeId: string): void {
             var guestPlayer = new Players.Player("Human", true, true);
-            this.game = this._gameService.createDefaultGame("1", guestPlayer);
+            this.game = this._gameService.createDefaultGame(gameTypeId, guestPlayer);
 
             this._gameUiComponentSet.initialise(this.game);
 

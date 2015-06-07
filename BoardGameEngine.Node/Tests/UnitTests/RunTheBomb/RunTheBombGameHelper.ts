@@ -15,7 +15,7 @@ class RunTheBombGameHelper implements It.IGameHelper {
                         new Bge.Games.GameEvaluatorPatternMapper()),
                     new Bge.Games.GameEvaluatorPatternMapper())));
 
-        var game = gameFactory.createNewGame("rtb", "1");
+        var game = gameFactory.createNewGame("rtb", "RunTheBomb");
         var gameWrapper = new Bge.Games.GameWrapper(new Bge.Games.RunTheBombTeamConfigurator(game), game);
 
         configurator(gameWrapper);
