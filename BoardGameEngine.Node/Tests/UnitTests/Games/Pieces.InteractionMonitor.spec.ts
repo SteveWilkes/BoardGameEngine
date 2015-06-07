@@ -47,6 +47,25 @@ describe("Game",() => {
                 expect(moveRightOneTile.length).toBe(1);
             });
 
+            it("Should un-highlight a Piece on held mouse up",() => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["1x1"], pc => pc
+                    .withUdlrMovementBy(1))));
+
+                var monitor = setupInteractionMonitor(game);
+
+                var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+
+                holdMouseDownOn(piece, monitor);
+                mouseUpOn(piece, monitor);
+
+                expect(highlightedPiece(monitor)).toBeUndefined();
+            });
+
             it("Should select a Piece on mouse click",() => {
                 var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
