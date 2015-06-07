@@ -2,7 +2,9 @@
 
     export var strategyGameApp = "strategyGameApp";
 
-    var game = angular.module(strategyGameApp, ["ngAnimate", "btford.socket-io"]);
+    var game = angular
+        .module(strategyGameApp, ["ngAnimate", "btford.socket-io"])
+        .config(($locationProvider: ng.ILocationProvider) => $locationProvider.html5Mode(true));
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);
