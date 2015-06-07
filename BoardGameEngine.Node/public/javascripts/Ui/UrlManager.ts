@@ -7,7 +7,7 @@
         constructor(private _locationService: ng.ILocationService) { }
 
         public initialise(game: G.Game): void {
-            this._locationService.path(game.type.id + "/" + game.id);
+            this._locationService.path(game.type.escapedName + "/" + game.id);
         }
     }
 
