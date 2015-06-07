@@ -335,7 +335,7 @@ class GameBuilder {
     public createGame(configuration: GameConfiguration): G.Game {
         var boardType = this._getBoardType(configuration);
 
-        var gameType = new Bge.Games.GameType("test", boardType, configuration.turnDefinition, null, null, [], []);
+        var gameType = new Bge.Games.GameType("test", boardType, 2, configuration.turnDefinition, null, null, [], []);
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 

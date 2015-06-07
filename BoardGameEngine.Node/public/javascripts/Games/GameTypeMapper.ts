@@ -10,20 +10,22 @@
             var gameTypeDataItems = gameTypeData.split("/");
             var gameTypeId = gameTypeDataItems[0];
             var boardTypeId = gameTypeDataItems[1];
+            var maximumNumberOfTeams = parseInt(gameTypeDataItems[2]);
 
-            var annotations = this._mapEntityAnnotations(gameTypeDataItems[2]);
+            var annotations = this._mapEntityAnnotations(gameTypeDataItems[3]);
             var evaluatorPatternMapper = this._getEvaluatorPatternMapper(annotations);
             var evaluatorMapper = new TypeScript.Evaluation.EvaluatorMapper(evaluatorPatternMapper);
 
             return new GameType(
                 gameTypeId,
                 this._getBoardTypeQuery.execute(boardTypeId),
-                this._mapTurnDefinition(gameTypeDataItems[3], evaluatorMapper),
+                maximumNumberOfTeams,
+                this._mapTurnDefinition(gameTypeDataItems[4], evaluatorMapper),
                 new Pieces.PieceDataSet(
-                    this._mapPieceDefinitions(gameTypeDataItems[4], evaluatorMapper),
-                    this._mapPieceConfigDataSet(gameTypeDataItems[5])),
+                    this._mapPieceDefinitions(gameTypeDataItems[5], evaluatorMapper),
+                    this._mapPieceConfigDataSet(gameTypeDataItems[6])),
                 annotations,
-                this._mapEventMappings(gameTypeDataItems[6], evaluatorPatternMapper));
+                this._mapEventMappings(gameTypeDataItems[7], evaluatorPatternMapper));
         }
 
         private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {

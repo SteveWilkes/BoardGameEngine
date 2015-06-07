@@ -10,18 +10,19 @@
             var gameId = this._idGenerator.generate();
             var game = this._gameFactory.createNewGame(gameId, gameTypeId);
 
-            // TODO: Get default game setup from game.type
-            var player1 = new Players.Player("Human", true, true);
-            game.add(player1);
+            for (var i = 0; i < game.type.maximumNumberOfTeams; i++) {
+                var isLocalHumanPlayer = i === 0;
 
-            var player2 = new Players.Player("CPU", false);
-            game.add(player2);
+                var player = new Players.Player(
+                    isLocalHumanPlayer ? "Human" : "CPU",
+                    isLocalHumanPlayer,
+                    isLocalHumanPlayer);
 
-            var team1 = this._teamFactory.createTeamFor(player1, game);
-            game.board.add(team1);
+                game.add(player);
 
-            var team2 = this._teamFactory.createTeamFor(player2, game);
-            game.board.add(team2);
+                var team = this._teamFactory.createTeamFor(player, game);
+                game.board.add(team);
+            }
 
             return game;
         }
