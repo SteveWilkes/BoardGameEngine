@@ -80,7 +80,7 @@
 
                 var configData = this._configurations.values[i];
                 this._game.type.pieceData = new Pieces.PieceDataSet(defaultPieceData.definitions, configData);
-                var customTeam = teamFactory.createTeamFor(player, teamNumber, this._game);
+                var customTeam = teamFactory.createTeamFor(player, this._game);
                 this._game.board.add(customTeam);
 
                 var customTeamPiecesById = customTeam.getPieces();

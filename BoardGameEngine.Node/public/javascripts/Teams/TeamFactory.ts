@@ -1,8 +1,8 @@
 ﻿module AgileObjects.BoardGameEngine.Teams {
 
     export class TeamFactory {
-        public createTeamFor(owner: ITeamOwner, teamNumber: number, game: G.Game): Team {
-            var pieceCoordinatesByPiece = this._getPieceCoordinatesByPiece(teamNumber, game);
+        public createTeamFor(owner: ITeamOwner, game: G.Game): Team {
+            var pieceCoordinatesByPiece = this._getPieceCoordinatesByPiece(game);
 
             var teamName = owner.id + " Team";
             var team = new Teams.Team(owner, teamName, pieceCoordinatesByPiece);
@@ -10,8 +10,9 @@
             return team;
         }
 
-        private _getPieceCoordinatesByPiece(teamNumber: number, game: G.Game): Ts.Dictionary<P.Piece, Ts.Coordinates> {
+        private _getPieceCoordinatesByPiece(game: G.Game): Ts.Dictionary<P.Piece, Ts.Coordinates> {
             var pieceCoordinatesByPiece = new TypeScript.Dictionary<P.Piece, TypeScript.Coordinates>();
+            var teamNumber = game.teams.length + 1;
 
             for (var i = 0; i < game.type.pieceData.configData.length; i++) {
                 var pieceConfigData = game.type.pieceData.configData[i];
