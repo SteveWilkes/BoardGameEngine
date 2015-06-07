@@ -111,29 +111,6 @@ describe("Game",() => {
                 expect(endLocation.piece).toBeDefined();
                 expect(endLocation.piece.id).toBe(piece.id);
             });
-
-            it("Should move a selected Piece to a clicked location",() => {
-                var game = gameBuilder.startGame(gc => gc
-                    .withAttackThenMoveTurnInteractions()
-                    .withA3x3NorthSouthBoard()
-                    .withHumanLocalAndRemotePlayers()
-                    .withATeamForPlayer(1, tc => tc
-                    .withAPieceAt(["1x1"], pc => pc
-                    .withUdlrMovementBy(1))));
-
-                var monitor = setupInteractionMonitor(game);
-
-                var boardTiles = game.board.getTiles();
-                var piece = boardTiles["1x1"].piece;
-                var endLocation = boardTiles["2x1"];
-
-                mouseClickOn(piece, monitor);
-                console.log("");
-                mouseClickOn(endLocation, monitor);
-
-                expect(endLocation.piece).toBeDefined();
-                expect(endLocation.piece.id).toBe(piece.id);
-            });
         });
     });
 });
@@ -158,30 +135,29 @@ function mouseDrag(piece: Piece, endLocation: P.IPieceLocation, monitor: P.Piece
     mouseUpOn(endLocation, monitor);
 }
 
-function mouseClickOn(pieceOrBoardTile: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
-    mouseDownOn(pieceOrBoardTile, monitor);
-    mouseUpOn(pieceOrBoardTile, monitor);
+function mouseDownOn(piece: Piece, monitor: P.PieceInteractionMonitor) {
+    performMouseActions(piece, timeoutServices.never, monitor, "pieceSelected");
 }
 
-function mouseDownOn(pieceOrBoardTile: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
-    var selectionEventName = (pieceOrBoardTile instanceof Bge.Pieces.Piece)
-        ? "pieceSelected" : "locationSelected"
-
-    performMouseActions(pieceOrBoardTile, timeoutServices.never, monitor, selectionEventName);
+function mouseUpOn(location: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
+    performMouseActions(location, timeoutServices.never, monitor, "pieceDeselected");
 }
 
-function mouseUpOn(pieceOrBoardTile: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
-    performMouseActions(pieceOrBoardTile, timeoutServices.never, monitor, "pieceDeselected");
+function mouseClickOn(piece: Piece, monitor: P.PieceInteractionMonitor) {
+    performMouseActions(piece, timeoutServices.never, monitor, "pieceSelected", "pieceDeselected");
 }
 
 function performMouseActions(
-    pieceOrBoardTile: P.IPieceLocation,
+    location: P.IPieceLocation,
     timeoutService: Function,
     monitor: P.PieceInteractionMonitor,
-    eventName: string) {
-
+    ...eventNames: Array<string>) {
     setTimeoutService(monitor, timeoutService);
-    getGame(monitor).events[eventName].publish(pieceOrBoardTile);
+
+    var events = getGame(monitor).events;
+    for (var i = 0; i < eventNames.length; i++) {
+        events[eventNames[i]].publish(location);
+    }
 }
 
 function setTimeoutService(monitor, timeoutService) {
