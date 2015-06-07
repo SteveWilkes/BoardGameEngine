@@ -3,12 +3,15 @@
 
     "ClientOnly";
     class GameController {
+        private _localPlayer: Pl.Player;
+
         constructor(
             public displayManager: Boards.BoardDisplayManager,
             private _gameService: GameService,
             private _gameUiComponentSet: Ui.IGameUiComponent) {
 
             this.globalEvents = GlobalEventSet.instance;
+            this._localPlayer = new Players.Player("Guest", true, true);
 
             this.startGame();
         }
@@ -21,8 +24,7 @@
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            var guestPlayer = new Players.Player("Human", true, true);
-            this.game = this._gameService.createDefaultGame(gameTypeId, guestPlayer);
+            this.game = this._gameService.createDefaultGame(gameTypeId, this._localPlayer);
 
             this._gameUiComponentSet.initialise(this.game);
 
