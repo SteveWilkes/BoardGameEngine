@@ -35,11 +35,11 @@ describe("Game",() => {
 
                 var monitor = setupInteractionMonitor(game);
 
-                var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+                var boardTiles = game.board.getTiles();
+                var piece = boardTiles["1x1"].piece;
 
                 holdMouseDownOn(piece, monitor);
 
-                var boardTiles = game.board.getTiles();
                 var moveUpOneTile = boardTiles["2x1"].potentialInteractions();
                 expect(moveUpOneTile.length).toBe(1);
 
@@ -76,11 +76,11 @@ describe("Game",() => {
 
                 var monitor = setupInteractionMonitor(game);
 
-                var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+                var boardTiles = game.board.getTiles();
+                var piece = boardTiles["2x1"].piece;
 
                 mouseClickOn(piece, monitor);
 
-                var boardTiles = game.board.getTiles();
                 var moveUpOneTile = boardTiles["3x1"].potentialInteractions();
                 expect(moveUpOneTile.length).toBe(1);
 
@@ -89,6 +89,27 @@ describe("Game",() => {
 
                 var moveDownOneTile = boardTiles["1x2"].potentialInteractions();
                 expect(moveRightOneTile.length).toBe(1);
+            });
+
+            it("Should move a dragged Piece",() => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["2x1"], pc => pc
+                    .withUdlrMovementBy(1))));
+
+                var monitor = setupInteractionMonitor(game);
+
+                var boardTiles = game.board.getTiles();
+                var piece = boardTiles["2x1"].piece;
+                var endLocation = boardTiles["2x2"];
+
+                mouseDrag(piece, endLocation, monitor);
+
+                expect(endLocation.piece).toBeDefined();
+                expect(endLocation.piece.id).toBe(piece.id);
             });
         });
     });
@@ -106,14 +127,37 @@ function setupInteractionMonitor(game: G.Game) {
 }
 
 function holdMouseDownOn(piece: Piece, monitor: P.PieceInteractionMonitor) {
-    setTimeoutService(monitor, timeoutServices.immediate);
-    getGame(monitor).events.pieceSelected.publish(piece);
+    performMouseActions(piece, timeoutServices.immediate, monitor, "pieceSelected");
+}
+
+function mouseDrag(piece: Piece, endLocation: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
+    mouseDownOn(piece, monitor);
+    mouseUpOn(endLocation, monitor);
+}
+
+function mouseDownOn(piece: Piece, monitor: P.PieceInteractionMonitor) {
+    performMouseActions(piece, timeoutServices.never, monitor, "pieceSelected");
+}
+
+function mouseUpOn(location: P.IPieceLocation, monitor: P.PieceInteractionMonitor) {
+    performMouseActions(location, timeoutServices.never, monitor, "pieceDeselected");
 }
 
 function mouseClickOn(piece: Piece, monitor: P.PieceInteractionMonitor) {
-    setTimeoutService(monitor, timeoutServices.never);
-    getGame(monitor).events.pieceSelected.publish(piece);
-    getGame(monitor).events.pieceDeselected.publish(piece);
+    performMouseActions(piece, timeoutServices.never, monitor, "pieceSelected", "pieceDeselected");
+}
+
+function performMouseActions(
+    location: P.IPieceLocation,
+    timeoutService: Function,
+    monitor: P.PieceInteractionMonitor,
+    ...eventNames: Array<string>) {
+    setTimeoutService(monitor, timeoutService);
+
+    var events = getGame(monitor).events;
+    for (var i = 0; i < eventNames.length; i++) {
+        events[eventNames[i]].publish(location);
+    }
 }
 
 function setTimeoutService(monitor, timeoutService) {
