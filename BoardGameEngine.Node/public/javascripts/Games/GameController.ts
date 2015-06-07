@@ -6,17 +6,18 @@
         private _localPlayer: Pl.Player;
 
         constructor(
-            public displayManager: Boards.BoardDisplayManager,
             private _gameService: GameService,
-            private _gameUiComponentSet: Ui.IGameUiComponent) {
+            private _gameUiComponentSet: Ui.CompositeGameUiComponent) {
 
             this.globalEvents = GlobalEventSet.instance;
+            this.displayManager = this._gameUiComponentSet.displayManager;
             this._localPlayer = new Players.Player("Guest", true, true);
 
             this.startGame();
         }
 
         public globalEvents: GlobalEventSet;
+        public displayManager: B.BoardDisplayManager;
         public game: Games.Game;
 
         public startGame(): void {
@@ -35,7 +36,6 @@
     angular
         .module(strategyGameApp)
         .controller("GameController", [
-        Boards.$boardDisplayManager,
         $gameService,
         Ui.$gameUiComponentSet,
         GameController]);

@@ -7,7 +7,7 @@
     export var $gameUiComponentSet = "$gameUiComponentSet";
 
     "ClientOnly";
-    class CompositeGameUiComponent implements IGameUiComponent {
+    export class CompositeGameUiComponent implements IGameUiComponent {
         private _components: Array<IGameUiComponent>;
 
         constructor(
@@ -15,14 +15,14 @@
             pieceInteractionMonitorService: IGameUiComponent,
             gameEventPropogator: IGameUiComponent,
             gameCoordinationClient: IGameUiComponent,
-            boardDisplayManager: IGameUiComponent) {
+            public displayManager: B.BoardDisplayManager) {
 
             this._components = new Array<IGameUiComponent>(
                 urlManager,
                 pieceInteractionMonitorService,
                 gameEventPropogator,
                 gameCoordinationClient,
-                boardDisplayManager);
+                displayManager);
         }
 
         public initialise(game: G.Game): void {
