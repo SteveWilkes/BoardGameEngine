@@ -24,7 +24,7 @@ describe("Game",() => {
                 expect(highlightedPiece(monitor).id).toBe(piece.id);
             });
 
-            it("Should show Potential Interactions for a Piece on held mouse down",() => {
+            it("Should show Potential Interactions for a highlighted Piece",() => {
                 var game = gameBuilder.startGame(gc => gc
                     .withAttackThenMoveTurnInteractions()
                     .withA3x3NorthSouthBoard()
@@ -63,6 +63,32 @@ describe("Game",() => {
                 mouseClickOn(piece, monitor);
 
                 expect(selectedPiece(monitor).id).toBe(piece.id);
+            });
+
+            it("Should show Potential Interactions for a selected Piece",() => {
+                var game = gameBuilder.startGame(gc => gc
+                    .withAttackThenMoveTurnInteractions()
+                    .withA3x3NorthSouthBoard()
+                    .withHumanLocalAndRemotePlayers()
+                    .withATeamForPlayer(1, tc => tc
+                    .withAPieceAt(["2x1"], pc => pc
+                    .withUdlrMovementBy(1))));
+
+                var monitor = setupInteractionMonitor(game);
+
+                var piece = TsNs.Joq.first<Piece>(game.teams[0].getPieces());
+
+                mouseClickOn(piece, monitor);
+
+                var boardTiles = game.board.getTiles();
+                var moveUpOneTile = boardTiles["3x1"].potentialInteractions();
+                expect(moveUpOneTile.length).toBe(1);
+
+                var moveRightOneTile = boardTiles["2x2"].potentialInteractions();
+                expect(moveRightOneTile.length).toBe(1);
+
+                var moveDownOneTile = boardTiles["1x2"].potentialInteractions();
+                expect(moveRightOneTile.length).toBe(1);
             });
         });
     });
