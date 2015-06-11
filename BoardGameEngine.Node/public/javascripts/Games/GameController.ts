@@ -37,6 +37,6 @@
         .module(strategyGameApp)
         .controller("GameController", [
         $gameService,
-        Ui.$gameUiComponentSet,
+        Ui.$clientComponentSet,
         GameController]);
 }
