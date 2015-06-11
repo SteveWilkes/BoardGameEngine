@@ -4,33 +4,39 @@
 
     var useGameRoute = { templateUrl: "Games/game" };
 
-    var configureRouting = (
-        $routeProvider: ng.route.IRouteProvider,
-        $locationProvider: ng.ILocationProvider) => {
+    var configureRouting = ["$routeProvider", "$locationProvider", (
+        routeProvider: ng.route.IRouteProvider,
+        locationProvider: ng.ILocationProvider) => {
 
-        $routeProvider
+        routeProvider
             .when("/", useGameRoute)
             .when("/game/:gameTypeId/:gameId", useGameRoute);
 
-        $locationProvider.html5Mode(true);
-    }
+        locationProvider.html5Mode(true);
+    }];
+
+    var createNoReloadPathMethod = ["$route", "$rootScope", "$location", (
+        routeService: ng.route.IRouteService,
+        rootScope: ng.IRootScopeService,
+        locationService) => {
+
+        var original = locationService.path;
+        locationService["path"] = (path: string, reload?: boolean) => {
+            if (reload === false) {
+                var lastRoute = routeService.current;
+                var un = rootScope.$on('$locationChangeSuccess',() => {
+                    routeService.current = lastRoute;
+                    un();
+                });
+            }
+            return <ng.ILocationService>original.call(locationService, path);
+        };
+    }];
 
     var game = angular
         .module(strategyGameApp, ["ngAnimate", "ngRoute", "btford.socket-io"])
         .config(configureRouting)
-        .run(["$route", "$rootScope", "$location", ($route, $rootScope, $location) => {
-        var original = $location.path;
-        $location.path = (path, reload) => {
-            if (reload === false) {
-                var lastRoute = $route.current;
-                var un = $rootScope.$on('$locationChangeSuccess',() => {
-                    $route.current = lastRoute;
-                    un();
-                });
-            }
-            return original.apply($location, [path]);
-        };
-    }]);
+        .run(createNoReloadPathMethod);
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);

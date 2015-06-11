@@ -9,7 +9,6 @@
             private _locationService: ng.ILocationService) { }
 
         public initialise(game: G.Game): void {
-            //this._routingService.updateParams({ gameTypeId: game.type.id, gameId: game.id });
             if (this._locationService.path() === "/") {
                 this._locationService.path("game/" + game.type.id + "/" + game.id, false);
             }
