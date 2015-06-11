@@ -3,7 +3,7 @@
     export var $urlManager = "$urlManager";
 
     "ClientOnly"
-    export class UrlManager implements IGameUiComponent {
+    export class UrlManager implements IClientComponent {
         constructor(private _locationService: ng.ILocationService) { }
 
         public initialise(game: G.Game): void {

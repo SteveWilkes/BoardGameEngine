@@ -187,7 +187,7 @@
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Teams\TeamFactory.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\GameEventPropogator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Ui\CompositeGameUiComponent.ts" />
+    <TypeScriptCompile Include="public\javascripts\Ui\CompositeClientComponentSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\UrlManager.ts" />
     <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />

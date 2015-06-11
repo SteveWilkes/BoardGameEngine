@@ -1,7 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Boards {
 
     "ClientOnly";
-    export class BoardDisplayManager implements Ui.IGameUiComponent {
+    export class BoardDisplayManager implements Ui.IClientComponent {
         private _boardDisplayDataService: BoardDisplayDataService;
 
         /** Initialises a new instance of the BoardDisplayManager class. */

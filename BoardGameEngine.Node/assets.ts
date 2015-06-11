@@ -98,7 +98,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Status/StatusData.js");
     assets.addJs("/public/javascripts/Ui/GameEventPropogator.js");
     assets.addJs("/public/javascripts/Ui/UrlManager.js");
-    assets.addJs("/public/javascripts/Ui/CompositeGameUiComponent.js");
+    assets.addJs("/public/javascripts/Ui/CompositeClientComponentSet.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionData.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/RelatedLocationCalculator.js");
     assets.addJs("/public/javascripts/Pieces/Piece.js");

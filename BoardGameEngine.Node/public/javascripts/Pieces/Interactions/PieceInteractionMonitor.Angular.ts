@@ -3,7 +3,7 @@
     export var $pieceInteractionMonitorService = "$pieceInteractionMonitorService";
 
     "ClientOnly"
-    class PieceInteractionMonitorService implements Ui.IGameUiComponent {
+    class PieceInteractionMonitorService implements Ui.IClientComponent {
         constructor(private _timeoutService: ng.ITimeoutService) { }
 
         public initialise(game: Games.Game): void {

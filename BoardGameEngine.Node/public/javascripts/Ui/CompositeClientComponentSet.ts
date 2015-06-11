@@ -1,23 +1,23 @@
 ﻿module AgileObjects.BoardGameEngine.Ui {
 
-    export interface IGameUiComponent {
+    export interface IClientComponent {
         initialise(game: G.Game): void;
     }
 
-    export var $gameUiComponentSet = "$gameUiComponentSet";
+    export var $clientComponentSet = "$clientComponentSet";
 
     "ClientOnly";
-    export class CompositeGameUiComponent implements IGameUiComponent {
-        private _components: Array<IGameUiComponent>;
+    export class CompositeClientComponentSet implements IClientComponent {
+        private _components: Array<IClientComponent>;
 
         constructor(
-            urlManager: IGameUiComponent,
-            pieceInteractionMonitorService: IGameUiComponent,
-            gameEventPropogator: IGameUiComponent,
-            gameCoordinationClient: IGameUiComponent,
+            urlManager: IClientComponent,
+            pieceInteractionMonitorService: IClientComponent,
+            gameEventPropogator: IClientComponent,
+            gameCoordinationClient: IClientComponent,
             public displayManager: B.BoardDisplayManager) {
 
-            this._components = new Array<IGameUiComponent>(
+            this._components = new Array<IClientComponent>(
                 urlManager,
                 pieceInteractionMonitorService,
                 gameEventPropogator,
@@ -34,11 +34,11 @@
 
     angular
         .module(strategyGameApp)
-        .service($gameUiComponentSet, [
+        .service($clientComponentSet, [
         $urlManager,
         Pieces.$pieceInteractionMonitorService,
         $gameEventPropogator,
         Status.$clientGameCoordinator,
         Boards.$boardDisplayManager,
-        CompositeGameUiComponent]);
+        CompositeClientComponentSet]);
 }

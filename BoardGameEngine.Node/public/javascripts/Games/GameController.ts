@@ -7,7 +7,7 @@
 
         constructor(
             private _gameService: GameService,
-            private _gameUiComponentSet: Ui.CompositeGameUiComponent) {
+            private _gameUiComponentSet: Ui.CompositeClientComponentSet) {
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._gameUiComponentSet.displayManager;

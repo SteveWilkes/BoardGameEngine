@@ -3,7 +3,7 @@
     export var $clientGameCoordinator = "$clientGameCoordinator";
 
     "ClientOnly";
-    class ClientGameCoordinator implements Ui.IGameUiComponent {
+    class ClientGameCoordinator implements Ui.IClientComponent {
         constructor(private _socket: SocketIO.Socket) { }
 
         public initialise(game: Games.Game): void {
