@@ -2,15 +2,23 @@
 
     export var strategyGameApp = "strategyGameApp";
 
-    var useGameRoute = { templateUrl: "Games/game" };
+    var createGame = { templateUrl: "newGame" };
+
+    var loadGame = {
+        template: "<div data-ng-include src=\"url\"></div>",
+        controller: ($scope, $routeParams) => {
+            $scope.url = "loadGame/" + $routeParams.gameId;
+        }
+    };
 
     var configureRouting = ["$routeProvider", "$locationProvider", (
         routeProvider: ng.route.IRouteProvider,
         locationProvider: ng.ILocationProvider) => {
 
         routeProvider
-            .when("/", useGameRoute)
-            .when("/game/:gameTypeId/:gameId", useGameRoute);
+            .when("/", createGame)
+            .when("/game/:gameId", loadGame)
+            .when("/game/:gameTypeId/:gameId", loadGame);
 
         locationProvider.html5Mode(true);
     }];
