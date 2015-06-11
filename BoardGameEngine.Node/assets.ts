@@ -49,6 +49,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.ScrollToBottom.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.SizeToContainer.js");
     assets.addJs("/public/javascripts/Directives/AgileObjects.Angular.Directives.Tabs.js");
+    assets.addJs("/public/javascripts/Generic/AgileObjects.Angular.Routing.NoReloadPath.js");
     assets.addJs("/public/javascripts/App.js");
     assets.addJs("/public/javascripts/Boards/BoardSizeDefaults.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayManager.js");

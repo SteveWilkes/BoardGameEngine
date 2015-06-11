@@ -54,6 +54,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Routing.NoReloadPath.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPotentialInteractionsEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationBase.ts" />

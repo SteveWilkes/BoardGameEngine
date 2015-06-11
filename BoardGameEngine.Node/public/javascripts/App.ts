@@ -23,28 +23,9 @@
         locationProvider.html5Mode(true);
     }];
 
-    var createNoReloadPathMethod = ["$route", "$rootScope", "$location", (
-        routeService: ng.route.IRouteService,
-        rootScope: ng.IRootScopeService,
-        locationService) => {
-
-        var original = locationService.path;
-        locationService["path"] = (path: string, reload?: boolean) => {
-            if (reload === false) {
-                var lastRoute = routeService.current;
-                var un = rootScope.$on('$locationChangeSuccess',() => {
-                    routeService.current = lastRoute;
-                    un();
-                });
-            }
-            return <ng.ILocationService>original.call(locationService, path);
-        };
-    }];
-
     var game = angular
         .module(strategyGameApp, ["ngAnimate", "ngRoute", "btford.socket-io"])
-        .config(configureRouting)
-        .run(createNoReloadPathMethod);
+        .config(configureRouting);
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);
@@ -58,4 +39,6 @@
     Angular.Services.addIdGenerator(game);
     Angular.Services.addEventPropogation(game);
     Angular.Services.addSockets(game);
+
+    Angular.Routing.addNoReloadPath(game);
 }
