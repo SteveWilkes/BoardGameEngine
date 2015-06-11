@@ -1,30 +1,26 @@
-﻿extends ../layout
+﻿div(data-ng-controller="GameController as gameCtrl")
 
-block content
-    
-    div(data-ng-controller="GameController as gameCtrl")
+    include board
 
-        include board
+    #game-status
+        .heading
+            h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'") Initialising...
+        .body(data-tabs)
+            include history
+            include debug
 
-        #game-status
-            .heading
-                h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'") Initialising...
-            .body(data-tabs)
-                include history
-                include debug
-
-        #game-dialog.ng-cloak.dialog(
-          data-ng-cloak
-          data-ng-if="gameCtrl.game.status.isComplete()"
-          data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
-          data-moveable)
-            h3 Game over!
-            span {{gameCtrl.game.status.getCurrentTeamName()}} won!
-            div.button-container 
-                a(
-                  href=""
-                  data-ng-click="gameCtrl.startGame()"
-                  data-moveable-ignore) new game &raquo;
+    #game-dialog.ng-cloak.dialog(
+        data-ng-cloak
+        data-ng-if="gameCtrl.game.status.isComplete()"
+        data-ng-style="{ 'margin-top': (gameCtrl.displayManager.boardTopOffset - 30) }"
+        data-moveable)
+        h3 Game over!
+        span {{gameCtrl.game.status.getCurrentTeamName()}} won!
+        div.button-container 
+            a(
+                href=""
+                data-ng-click="gameCtrl.startGame()"
+                data-moveable-ignore) new game &raquo;
             
-        #screen-block.ng-cloak(
-          data-ng-if="!gameCtrl.game.status.isActive()")
+    #screen-block.ng-cloak(
+        data-ng-if="!gameCtrl.game.status.isActive()")

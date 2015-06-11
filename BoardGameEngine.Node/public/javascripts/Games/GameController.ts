@@ -7,13 +7,17 @@
 
         constructor(
             private _gameService: GameService,
-            private _gameUiComponentSet: Ui.CompositeClientComponentSet) {
+            private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
             this.globalEvents = GlobalEventSet.instance;
-            this.displayManager = this._gameUiComponentSet.displayManager;
+            this.displayManager = this._clientComponentSet.displayManager;
             this._localPlayer = new Players.Player("Guest", true, true);
 
-            this.startGame();
+            var requestedGameId = this._clientComponentSet.urlManager.gameId();
+
+            if (requestedGameId === undefined) {
+                this.startGame();
+            }
         }
 
         public globalEvents: GlobalEventSet;
@@ -21,13 +25,13 @@
         public game: Games.Game;
 
         public startGame(): void {
-            this.startDefaultGame("RunTheBomb");
+            this.startDefaultGame("run-the-bomb");
         }
 
         public startDefaultGame(gameTypeId: string): void {
             this.game = this._gameService.createDefaultGame(gameTypeId, this._localPlayer);
 
-            this._gameUiComponentSet.initialise(this.game);
+            this._clientComponentSet.initialise(this.game);
 
             this.game.start();
         }

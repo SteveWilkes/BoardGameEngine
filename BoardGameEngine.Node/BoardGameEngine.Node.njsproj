@@ -206,6 +206,7 @@
     <TypeScriptCompile Include="Scripts\Startup\Router.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CommunicationManager.ts" />
     <TypeScriptCompile Include="Scripts\Startup\SessionWrapper.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular\angular.route.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\BoardGameEngine.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\bundle-up\bundle-up.d.ts" />
@@ -264,7 +265,7 @@
     <Content Include="views\Games\debug.jade" />
     <Content Include="views\Games\history.jade" />
     <Content Include="views\Games\game.jade" />
-    <Content Include="views\layout.jade" />
+    <Content Include="views\index.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\javascripts\Generic\Joq\" />

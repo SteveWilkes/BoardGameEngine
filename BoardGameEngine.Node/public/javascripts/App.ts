@@ -2,9 +2,35 @@
 
     export var strategyGameApp = "strategyGameApp";
 
+    var useGameRoute = { templateUrl: "Games/game" };
+
+    var configureRouting = (
+        $routeProvider: ng.route.IRouteProvider,
+        $locationProvider: ng.ILocationProvider) => {
+
+        $routeProvider
+            .when("/", useGameRoute)
+            .when("/game/:gameTypeId/:gameId", useGameRoute);
+
+        $locationProvider.html5Mode(true);
+    }
+
     var game = angular
-        .module(strategyGameApp, ["ngAnimate", "btford.socket-io"])
-        .config(($locationProvider: ng.ILocationProvider) => $locationProvider.html5Mode(true));
+        .module(strategyGameApp, ["ngAnimate", "ngRoute", "btford.socket-io"])
+        .config(configureRouting)
+        .run(["$route", "$rootScope", "$location", ($route, $rootScope, $location) => {
+        var original = $location.path;
+        $location.path = (path, reload) => {
+            if (reload === false) {
+                var lastRoute = $route.current;
+                var un = $rootScope.$on('$locationChangeSuccess',() => {
+                    $route.current = lastRoute;
+                    un();
+                });
+            }
+            return original.apply($location, [path]);
+        };
+    }]);
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);

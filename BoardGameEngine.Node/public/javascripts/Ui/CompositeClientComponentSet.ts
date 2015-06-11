@@ -11,7 +11,7 @@
         private _components: Array<IClientComponent>;
 
         constructor(
-            urlManager: IClientComponent,
+            public urlManager: UrlManager,
             pieceInteractionMonitorService: IClientComponent,
             gameEventPropogator: IClientComponent,
             gameCoordinationClient: IClientComponent,

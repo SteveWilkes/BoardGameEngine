@@ -4,14 +4,23 @@
 
     "ClientOnly"
     export class UrlManager implements IClientComponent {
-        constructor(private _locationService: ng.ILocationService) { }
+        constructor(
+            private _routingService: ng.route.IRouteService,
+            private _locationService: ng.ILocationService) { }
 
         public initialise(game: G.Game): void {
-            this._locationService.path("game/" + game.type.escapedName + "/" + game.id);
+            //this._routingService.updateParams({ gameTypeId: game.type.id, gameId: game.id });
+            if (this._locationService.path() === "/") {
+                this._locationService.path("game/" + game.type.id + "/" + game.id, false);
+            }
+        }
+
+        public gameId(): string {
+            return this._routingService.current.params.gameId;
         }
     }
 
     angular
         .module(strategyGameApp)
-        .service($urlManager, ["$location", UrlManager]);
+        .service($urlManager, ["$route", "$location", UrlManager]);
 }

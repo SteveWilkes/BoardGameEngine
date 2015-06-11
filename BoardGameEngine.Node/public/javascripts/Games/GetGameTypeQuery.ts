@@ -11,7 +11,7 @@
 
         private _getGameTypeData(gameTypeId: string): string {
             // TODO: Retrieve GameType data from a data store and cache:
-            return "RunTheBomb/1/2/" + // GameTypeId / BoardTypeId / Max. number of teams
+            return "run-the-bomb/1/2/" + // GameTypeId / BoardTypeId / Max. number of teams
             // Annotations
                 "bt^1x5^btt^bombTileTeam^t" +
                 "/" +

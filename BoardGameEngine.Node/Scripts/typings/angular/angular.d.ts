@@ -757,7 +757,7 @@ declare module ng {
          *
          * @param path New path
          */
-        path(path: string): ILocationService;
+        path(path: string, reload?: boolean): ILocationService;
 
         port(): number;
         protocol(): string;
@@ -1351,12 +1351,12 @@ declare module ng {
 
     interface IDirectiveLinkFn {
         (
-            scope: IScope,
-            instanceElement: IAugmentedJQuery,
-            instanceAttributes: IAttributes,
-            controller: any,
-            transclude: ITranscludeFunction
-            ): void;
+        scope: IScope,
+        instanceElement: IAugmentedJQuery,
+        instanceAttributes: IAttributes,
+        controller: any,
+        transclude: ITranscludeFunction
+        ): void;
     }
 
     interface IDirectivePrePost {
@@ -1366,10 +1366,10 @@ declare module ng {
 
     interface IDirectiveCompileFn {
         (
-            templateElement: IAugmentedJQuery,
-            templateAttributes: IAttributes,
-            transclude: ITranscludeFunction
-            ): IDirectivePrePost;
+        templateElement: IAugmentedJQuery,
+        templateAttributes: IAttributes,
+        transclude: ITranscludeFunction
+        ): IDirectivePrePost;
     }
 
     interface IDirective {
