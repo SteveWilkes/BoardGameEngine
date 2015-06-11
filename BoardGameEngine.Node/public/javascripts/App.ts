@@ -2,30 +2,8 @@
 
     export var strategyGameApp = "strategyGameApp";
 
-    var createGame = { templateUrl: "newGame" };
-
-    var loadGame = {
-        template: "<div data-ng-include src=\"url\"></div>",
-        controller: ($scope, $routeParams) => {
-            $scope.url = "loadGame/" + $routeParams.gameId;
-        }
-    };
-
-    var configureRouting = ["$routeProvider", "$locationProvider", (
-        routeProvider: ng.route.IRouteProvider,
-        locationProvider: ng.ILocationProvider) => {
-
-        routeProvider
-            .when("/", createGame)
-            .when("/game/:gameId", loadGame)
-            .when("/game/:gameTypeId/:gameId", loadGame);
-
-        locationProvider.html5Mode(true);
-    }];
-
     var game = angular
-        .module(strategyGameApp, ["ngAnimate", "ngRoute", "btford.socket-io"])
-        .config(configureRouting);
+        .module(strategyGameApp, ["ngAnimate", "ngRoute", "btford.socket-io"]);
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);
@@ -39,6 +17,8 @@
     Angular.Services.addIdGenerator(game);
     Angular.Services.addEventPropogation(game);
     Angular.Services.addSockets(game);
+
+    BoardGameEngine.Routing.setup(game);
 
     Angular.Routing.addNoReloadPath(game);
 }
