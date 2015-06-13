@@ -4,17 +4,25 @@
 
     "ClientOnly";
     class ClientGameCoordinator implements Ui.IClientComponent {
-        constructor(private _socket: SocketIO.Socket) { }
+        constructor(private _socket: SocketIO.Socket) {
+            GlobalEventSet.instance.playerJoinRequested.subscribe(request => {
+                return this._socketEmit("playerJoinRequested", request);
+            });
+        }
 
         public initialise(game: Games.Game): void {
+            this._registerClientEventHandlers(game);
+            this._registerServerEventHandlers(game);
+        }
+
+        private _registerClientEventHandlers(game: G.Game) {
+
             game.events.gameStarted.subscribe(() => {
-                this._socket.emit("gameStarted", new GameData(game));
-                return true;
+                return this._socketEmit("gameStarted", new GameData(game));
             });
 
             game.events.turnStarted.subscribe(team => {
-                this._socket.emit("turnStarted", team.id);
-                return true;
+                return this._socketEmit("turnStarted", team.id);
             });
 
             game.events.turnEnded.subscribe(team => {
@@ -29,8 +37,17 @@
                         }
                     }
                 }
-                this._socket.emit("turnEnded", Interactions.TurnData.forActions(turnActions));
-                return true;
+                return this._socketEmit("turnEnded", Interactions.TurnData.forActions(turnActions));
+            });
+        }
+
+        private _socketEmit<TData>(eventName: string, data: TData): boolean {
+            return this._socket.emit(eventName, data) !== undefined;
+        }
+
+        private _registerServerEventHandlers(game: G.Game) {
+            this._socket.on("playerJoinValidated",(gameData: Status.GameData) => {
+
             });
 
             this._socket.on("turnValidated",(nextTeamIndex: number) => {

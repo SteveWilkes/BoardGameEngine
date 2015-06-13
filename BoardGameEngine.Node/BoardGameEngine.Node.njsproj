@@ -161,6 +161,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\PlayerJoinRequest.ts" />
     <TypeScriptCompile Include="public\javascripts\Routing.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />

@@ -15,9 +15,7 @@
 
             var requestedGameId = this._clientComponentSet.urlManager.gameId();
 
-            if (requestedGameId === undefined) {
-                this.startGame();
-            }
+            (requestedGameId !== undefined) ? this.loadGame(requestedGameId) : this.startGame();
         }
 
         public globalEvents: GlobalEventSet;
@@ -34,6 +32,11 @@
             this._clientComponentSet.initialise(this.game);
 
             this.game.start();
+        }
+
+        public loadGame(gameId: string): void {
+            var joinRequest = new Players.PlayerJoinRequest(this._localPlayer.id, gameId);
+            this.globalEvents.playerJoinRequested.publish(joinRequest);
         }
     }
 

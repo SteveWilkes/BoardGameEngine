@@ -1,13 +1,18 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
     export class ServerGameCoordinator {
-        private _cpuPlayerAi: Players.CpuPlayerAi;
+        private _cpuPlayerAi: Pl.CpuPlayerAi;
 
-        constructor(private _gameFactory: GameFactory, private _teamFactory: Teams.TeamFactory) {
+        constructor(private _gameFactory: GameFactory, private _teamFactory: T.TeamFactory) {
             this._cpuPlayerAi = new Players.CpuPlayerAi();
         }
 
         public setup(socket: Node.ISessionSocket): void {
+            socket.on("playerJoinRequested",(request: Pl.PlayerJoinRequest) => {
+                // TODO: Validate join request:
+                socket.emit("playerJoinValidated", new Status.GameData(socket.session.game));
+            });
+
             socket.on("gameStarted",(gameData: Status.GameData) => {
                 socket.session.game = this._createServerSideGameRepresentation(gameData);
                 console.log("Game " + socket.session.game.id + " created");
