@@ -2,29 +2,28 @@
 
     export class ServerGameCoordinator {
         private _cpuPlayerAi: Pl.CpuPlayerAi;
-        private _getGameDataQuery: GetGameDataQuery;
-        private _saveGameCommand: SaveGameCommand;
 
         constructor(
             private _gameFactory: GameFactory,
-            private _teamFactory: T.TeamFactory) {
+            private _teamFactory: T.TeamFactory,
+            private _getGetDataQuery: Ts.IGetQuery<GameData>,
+            private _saveGameCommand: Ts.ICommand<Game>) {
 
             this._cpuPlayerAi = new Players.CpuPlayerAi();
-            this._getGameDataQuery = new Games.GetGameDataQuery();
-            this._saveGameCommand = new Games.SaveGameCommand();
         }
 
         public setup(socket: Node.ISessionSocket): void {
             socket.on("playerJoinRequested",(request: Pl.PlayerJoinRequest) => {
                 // TODO: Validate join request
-                var gameData = this._getGameDataQuery.execute(request.gameId);
+                var gameData = this._getGetDataQuery.execute(request.gameId);
                 socket.emit("playerJoinValidated", gameData);
             });
 
             socket.on("gameStarted",(gameData: GameData) => {
-                socket.session.game = this._createServerSideGameRepresentation(gameData);
-                this._saveGameCommand.execute(socket.session.game);
-                console.log("Game " + socket.session.game.id + " created");
+                var game: Game = this._createServerSideGameRepresentation(gameData);
+                socket.session.game = game;
+                this._saveGameCommand.execute(game);
+                console.log("Game " + game.id + " created");
             });
 
             socket.on("turnStarted",(teamId: string) => {

@@ -54,7 +54,7 @@
         PieceWrapper: new (piece: Piece) => G.PieceWrapper;
         RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
         SaveGameCommand: new () => G.SaveGameCommand;
-        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.ServerGameCoordinator;
+        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory, getGetDataQuery: Ts.IGetQuery<G.GameData>, saveGameCommand: Ts.ICommand<G.Game>) => G.ServerGameCoordinator;
     }
 
     interface Interactions {

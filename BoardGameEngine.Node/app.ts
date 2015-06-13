@@ -31,7 +31,9 @@ var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
                 new Bge.Boards.GetBoardTypeQuery(),
                 new Bge.Games.GameEntityAnnotationMapper(patternMapper),
                 patternMapper))),
-    new Bge.Teams.TeamFactory());
+    new Bge.Teams.TeamFactory(),
+    new Bge.Games.GetGameDataQuery(),
+    new Bge.Games.SaveGameCommand());
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),
