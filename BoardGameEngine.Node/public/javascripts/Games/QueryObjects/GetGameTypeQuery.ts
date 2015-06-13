@@ -1,6 +1,6 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
-    export class GetGameTypeQuery implements TypeScript.IGetQuery<GameType> {
+    export class GetGameTypeQuery implements Ts.IGetQuery<GameType> {
         constructor(private _gameTypeMapper: GameTypeMapper) { }
 
         public execute(gameTypeId: string): Games.GameType {

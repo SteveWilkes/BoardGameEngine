@@ -32,13 +32,14 @@
         }
     }
 
-    angular
-        .module(strategyGameApp)
-        .service($clientComponentSet, [
+    var components = new Array<any>(
         $urlManager,
         Pieces.$pieceInteractionMonitorService,
         $gameEventPropogator,
-        Status.$clientGameCoordinator,
-        Boards.$boardDisplayManager,
-        CompositeClientComponentSet]);
+        Games.$clientGameCoordinator,
+        Boards.$boardDisplayManager);
+
+    angular
+        .module(strategyGameApp)
+        .service($clientComponentSet, components.concat([CompositeClientComponentSet]));
 }

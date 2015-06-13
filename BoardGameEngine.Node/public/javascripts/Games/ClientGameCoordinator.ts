@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Status {
+﻿module AgileObjects.BoardGameEngine.Games {
 
     export var $clientGameCoordinator = "$clientGameCoordinator";
 
@@ -46,7 +46,7 @@
         }
 
         private _registerServerEventHandlers(game: G.Game) {
-            this._socket.on("playerJoinValidated",(gameData: Status.GameData) => {
+            this._socket.on("playerJoinValidated",(gameData: GameData) => {
 
             });
 

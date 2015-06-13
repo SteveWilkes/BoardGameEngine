@@ -2,19 +2,28 @@
 
     export class ServerGameCoordinator {
         private _cpuPlayerAi: Pl.CpuPlayerAi;
+        private _getGameDataQuery: GetGameDataQuery;
+        private _saveGameCommand: SaveGameCommand;
 
-        constructor(private _gameFactory: GameFactory, private _teamFactory: T.TeamFactory) {
+        constructor(
+            private _gameFactory: GameFactory,
+            private _teamFactory: T.TeamFactory) {
+
             this._cpuPlayerAi = new Players.CpuPlayerAi();
+            this._getGameDataQuery = new Games.GetGameDataQuery();
+            this._saveGameCommand = new Games.SaveGameCommand();
         }
 
         public setup(socket: Node.ISessionSocket): void {
             socket.on("playerJoinRequested",(request: Pl.PlayerJoinRequest) => {
-                // TODO: Validate join request:
-                socket.emit("playerJoinValidated", new Status.GameData(socket.session.game));
+                // TODO: Validate join request
+                var gameData = this._getGameDataQuery.execute(request.gameId);
+                socket.emit("playerJoinValidated", gameData);
             });
 
-            socket.on("gameStarted",(gameData: Status.GameData) => {
+            socket.on("gameStarted",(gameData: GameData) => {
                 socket.session.game = this._createServerSideGameRepresentation(gameData);
+                this._saveGameCommand.execute(socket.session.game);
                 console.log("Game " + socket.session.game.id + " created");
             });
 
@@ -32,7 +41,7 @@
                 socket.emit("turnEnded", cpuTurnData);
             });
 
-            socket.on("turnEnded",(turnData: Interactions.TurnData) => {
+            socket.on("turnEnded",(turnData: I.TurnData) => {
                 if (socket.session.game.status.turnManager.currentTeam.owner.isHuman) {
                     this._applyTurn(turnData, socket);
                 }
@@ -40,7 +49,7 @@
             });
         }
 
-        private _createServerSideGameRepresentation(gameData: Status.GameData): Game {
+        private _createServerSideGameRepresentation(gameData: GameData): Game {
             var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
 
             for (var i = 0; i < gameData.playerData.length; i++) {
@@ -58,7 +67,7 @@
             return game;
         }
 
-        private _performCpuTurn(currentCpuTeam: T.Team): Interactions.TurnData {
+        private _performCpuTurn(currentCpuTeam: T.Team): I.TurnData {
             var cpuTurnInteractions = new Array<IPieceInteraction>();
 
             while (true) {
@@ -101,7 +110,7 @@
             console.log("Interaction synchronised: " + interactionId);
         }
 
-        private _handleTurnEnded(socket: Node.ISessionSocket): boolean {
+        private _handleTurnEnded(socket: Node.ISessionSocket): void {
             var game: Game = socket.session.game;
             var currentTeam = game.status.turnManager.currentTeam;
             var currentTeamIndex = game.teams.indexOf(currentTeam);
@@ -111,8 +120,8 @@
             }
             var nextTeam = game.teams[nextTeamIndex];
             game.events.turnValidated.publish(nextTeam);
+            this._saveGameCommand.execute(game);
             socket.emit("turnValidated", nextTeamIndex);
-            return true;
         }
     }
 };

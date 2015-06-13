@@ -50,10 +50,17 @@
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Moveable.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameCompletionMonitor.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
+    <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Games\QueryObjects\SaveGameCommand.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Routing.NoReloadPath.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPotentialInteractionsEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />
@@ -110,8 +117,6 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnInteractionDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.Angular.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesLibrary.ts" />
@@ -163,10 +168,7 @@
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerJoinRequest.ts" />
     <TypeScriptCompile Include="public\javascripts\Routing.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\ClientGameCoordinator.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\GameData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\InteractionData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Status\PlayerData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
@@ -271,10 +273,12 @@
     <Content Include="views\index.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="public\javascripts\Games\QueryObjects\" />
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
     <Folder Include="public\javascripts\Generic\Annotations\" />
     <Folder Include="public\javascripts\Interactions\" />
+    <Folder Include="Scripts\Games\QueryObjects\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />

@@ -59,6 +59,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/NullPieceLocation.js");
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
     assets.addJs("/public/javascripts/Players/Player.js");
+    assets.addJs("/public/javascripts/Players/PlayerData.js");
     assets.addJs("/public/javascripts/Players/PlayerJoinRequest.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
     assets.addJs("/public/javascripts/Boards/BoardTileAnnotation.js");
@@ -91,9 +92,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Interactions/TurnInteractionDefinition.js");
     assets.addJs("/public/javascripts/Interactions/InteractionData.js");
     assets.addJs("/public/javascripts/Interactions/TurnData.js");
-    assets.addJs("/public/javascripts/Status/PlayerData.js");
-    assets.addJs("/public/javascripts/Status/GameData.js");
-    assets.addJs("/public/javascripts/Status/ClientGameCoordinator.js");
+    assets.addJs("/public/javascripts/Games/ClientGameCoordinator.js");
     assets.addJs("/public/javascripts/Interactions/PotentialInteractionsData.js");
     assets.addJs("/public/javascripts/Interactions/TurnRegulator.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
@@ -120,9 +119,10 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Games/GameType.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.js");
     assets.addJs("/public/javascripts/Games/GameTypeMapper.Angular.js");
-    assets.addJs("/public/javascripts/Games/GetGameTypeQuery.js");
-    assets.addJs("/public/javascripts/Games/GetGameTypeQuery.Angular.js");
+    assets.addJs("/public/javascripts/Games/QueryObjects/GetGameTypeQuery.js");
+    assets.addJs("/public/javascripts/Games/QueryObjects/GetGameTypeQuery.Angular.js");
     assets.addJs("/public/javascripts/Games/Game.js");
+    assets.addJs("/public/javascripts/Games/GameData.js");
     assets.addJs("/public/javascripts/Games/GameCompletionMonitor.js");
     assets.addJs("/public/javascripts/Games/GameFactory.js");
     assets.addJs("/public/javascripts/Games/GameFactory.Angular.js");
