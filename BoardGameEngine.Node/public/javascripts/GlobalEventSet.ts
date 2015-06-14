@@ -5,5 +5,6 @@
 
         public containerResized = new TypeScript.EventHub<B.Board>();
         public playerJoinRequested = new TypeScript.EventHub<Pl.PlayerJoinRequest>();
+        public gameLoaded = new TypeScript.EventHub<G.Game>();
     }
 } 

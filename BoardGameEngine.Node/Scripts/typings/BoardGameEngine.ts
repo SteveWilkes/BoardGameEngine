@@ -45,6 +45,7 @@
         GameEvaluatorPatternMapper: typeof G.GameEvaluatorPatternMapper;
         GameEventSet: new () => G.GameEventSet;
         GameFactory: new (getGameTypeQuery: Ts.IGetQuery<G.GameType>) => G.GameFactory;
+        GameMapper: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.GameMapper;
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.GameService;
         GameType: new (id: string, boardType: B.BoardType, maximumNumberOfTeams: number, turnDefinition: I.TurnDefinition, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>, annotations: Array<Ts.Annotations.IEntityAnnotation>, eventMappings: Array<Ts.EventMapping>) => G.GameType;
         GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>, annotationMapper: TsAn.IEntityAnnotationMapper, patternMapper: TsEv.IEvaluatorPatternMapper) => G.GameTypeMapper;
@@ -54,7 +55,7 @@
         PieceWrapper: new (piece: Piece) => G.PieceWrapper;
         RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
         SaveGameCommand: new (fileManager: Ts.IFileManager) => G.SaveGameCommand;
-        ServerGameCoordinator: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory, getGetDataQuery: Ts.IGetQuery<G.GameData>, saveGameCommand: Ts.ICommand<G.Game>) => G.ServerGameCoordinator;
+        ServerGameCoordinator: new (gameMapper: G.GameMapper, getGetDataQuery: Ts.IGetQuery<G.GameData>, saveGameCommand: Ts.ICommand<G.Game>) => G.ServerGameCoordinator;
     }
 
     interface Interactions {

@@ -25,13 +25,14 @@ import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
 
 var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
-    new Bge.Games.GameFactory(
-        new Bge.Games.GetGameTypeQuery(
-            new Bge.Games.GameTypeMapper(
-                new Bge.Boards.GetBoardTypeQuery(),
-                new Bge.Games.GameEntityAnnotationMapper(patternMapper),
-                patternMapper))),
-    new Bge.Teams.TeamFactory(),
+    new Bge.Games.GameMapper(
+        new Bge.Games.GameFactory(
+            new Bge.Games.GetGameTypeQuery(
+                new Bge.Games.GameTypeMapper(
+                    new Bge.Boards.GetBoardTypeQuery(),
+                    new Bge.Games.GameEntityAnnotationMapper(patternMapper),
+                    patternMapper))),
+        new Bge.Teams.TeamFactory()),
     new Bge.Games.GetGameDataQuery(fileManager),
     new Bge.Games.SaveGameCommand(fileManager));
 

@@ -4,8 +4,7 @@
         private _cpuPlayerAi: Pl.CpuPlayerAi;
 
         constructor(
-            private _gameFactory: GameFactory,
-            private _teamFactory: T.TeamFactory,
+            private _gameMapper: GameMapper,
             private _getGetDataQuery: Ts.IGetQuery<GameData>,
             private _saveGameCommand: Ts.ICommand<Game>) {
 
@@ -20,10 +19,10 @@
             });
 
             socket.on("gameStarted",(gameData: GameData) => {
-                var game: Game = this._createServerSideGameRepresentation(gameData);
+                var game = this._createServerSideGameRepresentation(gameData);
                 socket.session.game = game;
                 this._saveGameCommand.execute(game);
-                console.log("Game " + game.id + " created");
+                console.log("Game " + game.id + " created and saved");
             });
 
             socket.on("turnStarted",(teamId: string) => {
@@ -49,17 +48,7 @@
         }
 
         private _createServerSideGameRepresentation(gameData: GameData): Game {
-            var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
-
-            for (var i = 0; i < gameData.playerData.length; i++) {
-                var playerData = gameData.playerData[i];
-                var player = new Players.Player(playerData.id, playerData.isHuman);
-                game.add(player);
-                for (var j = 0; j < playerData.numberOfTeams; j++) {
-                    var team = this._teamFactory.createTeamFor(player, game);
-                    game.board.add(team);
-                }
-            }
+            var game = this._gameMapper.map(gameData);
 
             game.start();
 

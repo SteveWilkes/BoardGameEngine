@@ -4,9 +4,17 @@
 
     "ClientOnly";
     class ClientGameCoordinator implements Ui.IClientComponent {
-        constructor(private _socket: SocketIO.Socket) {
+        constructor(
+            private _socket: SocketIO.Socket,
+            private _gameMapper: G.GameMapper) {
+
             GlobalEventSet.instance.playerJoinRequested.subscribe(request => {
                 return this._socketEmit("playerJoinRequested", request);
+            });
+
+            this._socket.on("playerJoinValidated",(gameData: GameData) => {
+                var game = this._gameMapper.map(gameData);
+                GlobalEventSet.instance.gameLoaded.publish(game);
             });
         }
 
@@ -46,10 +54,6 @@
         }
 
         private _registerServerEventHandlers(game: G.Game) {
-            this._socket.on("playerJoinValidated",(gameData: GameData) => {
-
-            });
-
             this._socket.on("turnValidated",(nextTeamIndex: number) => {
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });
@@ -74,5 +78,5 @@
 
     angular
         .module(strategyGameApp)
-        .service($clientGameCoordinator, [Angular.Services.$socketFactory, ClientGameCoordinator]);
+        .service($clientGameCoordinator, [Angular.Services.$socketFactory, Games.$gameMapper, ClientGameCoordinator]);
 }

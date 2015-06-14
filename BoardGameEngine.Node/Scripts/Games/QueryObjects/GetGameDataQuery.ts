@@ -18,7 +18,7 @@
             var gameDataJson = this._fileManager.readAllText(pathToGameSaveFile);
             var gameData = JSON.parse(gameDataJson);
 
-            return null;
+            return gameData;
         }
     }
 }

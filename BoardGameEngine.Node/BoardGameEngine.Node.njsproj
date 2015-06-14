@@ -53,9 +53,12 @@
     <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameCompletionMonitor.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.Angular.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameEntityAnnotationMapper.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameEntityAnnotationMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameEntityAnnotationMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameEvaluatorPatternMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameEvaluatorPatternMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ICommand.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
@@ -96,8 +99,8 @@
     <TypeScriptCompile Include="public\javascripts\Games\GameService.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameService.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameType.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameTypeMapper.Angular.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameTypeMapper.ts" />
+    <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameTypeMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ValueParser.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotationConstructor.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.IEntityAnnotationMapper.ts" />
@@ -106,7 +109,6 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorPatternExpanderBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.EvaluatorPatternMapperBase.ts" />
-    <TypeScriptCompile Include="public\javascripts\Games\GameEvaluatorPatternMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternExpander.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Evaluation\AgileObjects.TypeScript.IEvaluatorPatternMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPiece.ts" />
@@ -274,6 +276,7 @@
     <Content Include="views\index.jade" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="public\javascripts\Games\Mapping\" />
     <Folder Include="public\javascripts\Games\QueryObjects\" />
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
