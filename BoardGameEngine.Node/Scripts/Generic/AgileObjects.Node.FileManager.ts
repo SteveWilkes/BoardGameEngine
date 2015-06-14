@@ -79,7 +79,12 @@ class FileManager implements Ts.IFileManager {
     }
 
     public writeAllText(filePath: string, fileContents: string): void {
-        this._fs.writeFileSync(filePath, fileContents);
+        if (this.fileExists(filePath)) {
+            this._fs.writeFileSync(filePath, fileContents);
+        } else {
+            var writeStream = this._fs.createWriteStream(filePath);
+            writeStream.end(fileContents);
+        }
     }
 
     public deleteFile(filePath: string): void {
