@@ -59,6 +59,7 @@
     }
 
     interface Interactions {
+        InteractionId: new (pieceId: string, type: InteractionType, startingPoint: string, interactionPoint: string) => I.InteractionId;
         TurnDefinition: new (interactionDefinitions: Array<I.TurnInteractionDefinition>) => I.TurnDefinition;
         TurnInteractionDefinition: new (interactionType: InteractionType, availabilityEvaluator: I.IPotentialInteractionsEvaluator) => I.TurnInteractionDefinition;
     }

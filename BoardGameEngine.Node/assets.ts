@@ -75,6 +75,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Games/GameEventSet.js");
     assets.addJs("/public/javascripts/Games/Mapping/GameEvaluatorPatternMapper.js");
     assets.addJs("/public/javascripts/Games/Mapping/GameEvaluatorPatternMapper.Angular.js");
+    assets.addJs("/public/javascripts/Interactions/InteractionId.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/NullPotentialInteraction.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceInteractionBase.js");
     assets.addJs("/public/javascripts/Pieces/Interactions/PieceMovementInteractionBase.js");

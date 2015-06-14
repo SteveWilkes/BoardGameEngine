@@ -24,15 +24,14 @@
                     var interactionPath = interactionPaths[j];
                     var interactionLocation = interactionPath[interactionPath.length - 1];
 
-                    var interactionId =
-                        startingLocation.piece.id + "," +
-                        this.type + "," +
-                        startingLocation.coordinates.signature +
-                        ">" +
-                        interactionLocation.coordinates.signature;
+                    var interactionId = new Interactions.InteractionId(
+                        startingLocation.piece.id,
+                        this.type,
+                        startingLocation.coordinates.signature,
+                        interactionLocation.coordinates.signature);
 
                     interactions.push(new this._interaction(
-                        interactionId,
+                        interactionId.signature,
                         startingLocation.piece,
                         interactionPath,
                         game.events));

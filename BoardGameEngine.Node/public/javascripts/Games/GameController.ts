@@ -9,7 +9,7 @@
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
-            GlobalEventSet.instance.gameLoaded.subscribe(game => this._startGame(game) === void (0));
+            GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._clientComponentSet.displayManager;
@@ -29,8 +29,9 @@
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            var game = this._gameService.createDefaultGame(gameTypeId, this._localPlayer);
-            this._startGame(game);
+            this.game = this._gameService.createDefaultGame(gameTypeId, this._localPlayer);
+            this._clientComponentSet.initialise(this.game);
+            this.game.start();
         }
 
         public loadGame(gameId: string): void {
@@ -38,10 +39,9 @@
             this.globalEvents.playerJoinRequested.publish(joinRequest);
         }
 
-        private _startGame(game: Game): void {
+        private _handleGameLoaded(game: G.Game): void {
             this.game = game;
             this._clientComponentSet.initialise(this.game);
-            this.game.start();
         }
     }
 

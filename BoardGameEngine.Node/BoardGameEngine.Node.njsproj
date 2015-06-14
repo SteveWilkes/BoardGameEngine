@@ -60,6 +60,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ICommand.ts" />
+    <TypeScriptCompile Include="public\javascripts\Interactions\InteractionId.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />

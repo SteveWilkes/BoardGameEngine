@@ -22,5 +22,10 @@
             callbackSet.executeAll();
             return true;
         }
+
+        public unsubscribe(callback: (eventData: TData, completionCallbacks?: EventCallbackSet) => boolean): EventHub<TData> {
+            this._subscribers.remove(callback);
+            return this;
+        }
     }
 }
