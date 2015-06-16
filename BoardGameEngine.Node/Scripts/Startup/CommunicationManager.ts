@@ -10,7 +10,7 @@ class CommunicationManager implements bs.IBootstrapper {
     constructor(
         private _socketServer: SocketIO.Server,
         private _sessionStore: Node.ISessionStore,
-        private _serverGameCoordinator: Games.ServerGameCoordinator) { }
+        private _socketEventHandlers: Array<Node.ISessionSocketEventHandler>) { }
 
     public appCreated(info: bs.SystemInfo, app: express.Express): void {
         this._app = app;
@@ -24,7 +24,9 @@ class CommunicationManager implements bs.IBootstrapper {
         socketServer.on(
             "connection",
             socket => {
-                this._serverGameCoordinator.setup(<Node.ISessionSocket>socket);
+                for (var i = 0; i < this._socketEventHandlers.length; i++) {
+                    this._socketEventHandlers[i].setup(<Node.ISessionSocket>socket);
+                }
             });
     }
 
@@ -56,7 +58,7 @@ class CommunicationManager implements bs.IBootstrapper {
         if (sessionSocket.session != null) {
             next();
         } else {
-            this._sessionStore.get(socket.request.sessionId, (err, session) => {
+            this._sessionStore.get(socket.request.sessionId,(err, session) => {
                 if (err == null) {
                     sessionSocket.session = session;
                     sessionSocket.session.id = socket.request.sessionId;

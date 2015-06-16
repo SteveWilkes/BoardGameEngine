@@ -24,17 +24,24 @@ import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
 var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
 
-var serverGameCoordinator = new Bge.Games.ServerGameCoordinator(
-    new Bge.Games.GameMapper(
-        new Bge.Games.GameFactory(
-            new Bge.Games.GetGameTypeQuery(
-                new Bge.Games.GameTypeMapper(
-                    new Bge.Boards.GetBoardTypeQuery(),
-                    new Bge.Games.GameEntityAnnotationMapper(patternMapper),
-                    patternMapper))),
-        new Bge.Teams.TeamFactory()),
-    new Bge.Games.GetGameDataQuery(fileManager),
-    new Bge.Games.SaveGameCommand(fileManager));
+var gameMapper = new Bge.Games.GameMapper(
+    new Bge.Games.GameFactory(
+        new Bge.Games.GetGameTypeQuery(
+            new Bge.Games.GameTypeMapper(
+                new Bge.Boards.GetBoardTypeQuery(),
+                new Bge.Games.GameEntityAnnotationMapper(patternMapper),
+                patternMapper))),
+    new Bge.Teams.TeamFactory());
+
+var getGameDataQuery = new Bge.Games.GetGameDataQuery(fileManager);
+var saveGameCommand = new Bge.Games.SaveGameCommand(fileManager);
+
+var serverEventHandlers = [
+    new Bge.Games.PlayerJoinRequestedHandler(getGameDataQuery),
+    new Bge.Games.GameStartedHandler(gameMapper, getGameDataQuery, saveGameCommand),
+    new Bge.Games.TurnStartedHandler(),
+    new Bge.Games.TurnEndedHandler(gameMapper, saveGameCommand)
+];
 
 var bootstrappers = [
     new CssGenerator(fileManager, stylus),
@@ -44,7 +51,7 @@ var bootstrappers = [
         express,
         new Ts.RandomStringGenerator(),
         sessionStore),
-    new CommunicationManager(socketFactory(), sessionStore, serverGameCoordinator)
+    new CommunicationManager(socketFactory(), sessionStore, serverEventHandlers)
 ];
 
 import NodeApp = require("./NodeApp");
