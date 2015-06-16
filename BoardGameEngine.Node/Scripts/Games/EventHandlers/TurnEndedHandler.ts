@@ -18,7 +18,7 @@
                 var turnInteractionData = turnData.interactionData[i];
                 var interactionId = Interactions.InteractionId.from(turnInteractionData.interactionId);
                 this._gameMapper.completeInteraction(interactionId, game);
-                console.log("Interaction synchronised: " + interactionId);
+                console.log("Interaction synchronised: " + interactionId.signature);
             }
         }
 

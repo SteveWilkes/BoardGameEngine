@@ -22,7 +22,7 @@
 
         public globalEvents: GlobalEventSet;
         public displayManager: B.BoardDisplayManager;
-        public game: Games.Game;
+        public game: Game;
 
         public startGame(): void {
             this.startDefaultGame("run-the-bomb");
@@ -39,7 +39,7 @@
             this.globalEvents.playerJoinRequested.publish(joinRequest);
         }
 
-        private _handleGameLoaded(game: G.Game): void {
+        private _handleGameLoaded(game: Game): void {
             this.game = game;
             this._clientComponentSet.initialise(this.game);
         }

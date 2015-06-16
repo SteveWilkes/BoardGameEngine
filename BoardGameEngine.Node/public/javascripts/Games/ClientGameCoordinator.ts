@@ -15,6 +15,7 @@
             this._socket.on("playerJoinValidated",(gameData: GameData) => {
                 var game = this._gameMapper.map(gameData);
                 GlobalEventSet.instance.gameLoaded.publish(game);
+                this._socketEmit("gameRestarted", game.id);
             });
         }
 
