@@ -1,7 +1,12 @@
 ﻿module AgileObjects.BoardGameEngine.Players {
 
     export class Player implements T.ITeamOwner {
-        constructor(public id: string, public isHuman: boolean, public isLocal: boolean = false) {
+        constructor(
+            public id: string,
+            public name: string,
+            public isHuman: boolean,
+            public isLocal: boolean = false) {
+
             this.teams = new Array<Teams.Team>();
         }
 

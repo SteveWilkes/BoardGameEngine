@@ -6,6 +6,7 @@
         private _localPlayer: Pl.Player;
 
         constructor(
+            private _localPlayerService: Pl.LocalPlayerService,
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
@@ -13,11 +14,14 @@
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._clientComponentSet.displayManager;
-            this._localPlayer = new Players.Player("Guest", true, true);
 
             var requestedGameId = this._clientComponentSet.urlManager.gameId();
 
-            (requestedGameId !== undefined) ? this.loadGame(requestedGameId) : this.startGame();
+            this._localPlayerService.get(localPlayer => {
+                this._localPlayer = localPlayer;
+
+                (requestedGameId !== undefined) ? this.loadGame(requestedGameId) : this.startGame();
+            });
         }
 
         public globalEvents: GlobalEventSet;
@@ -48,6 +52,7 @@
     angular
         .module(strategyGameApp)
         .controller("GameController", [
+        Players.$localPlayerService,
         $gameService,
         Ui.$clientComponentSet,
         GameController]);

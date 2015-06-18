@@ -14,14 +14,14 @@
             public urlManager: UrlManager,
             pieceInteractionMonitorService: IClientComponent,
             gameEventPropogator: IClientComponent,
-            gameCoordinationClient: IClientComponent,
+            gameCoordinator: IClientComponent,
             public displayManager: B.BoardDisplayManager) {
 
             this._components = new Array<IClientComponent>(
                 urlManager,
                 pieceInteractionMonitorService,
                 gameEventPropogator,
-                gameCoordinationClient,
+                gameCoordinator,
                 displayManager);
         }
 

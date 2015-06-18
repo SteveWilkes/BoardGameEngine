@@ -61,6 +61,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ICommand.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\InteractionId.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\LocalPlayerService.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinRequestedHandler.ts" />
@@ -202,7 +203,6 @@
     <TypeScriptCompile Include="public\javascripts\Ui\GameEventPropogator.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\CompositeClientComponentSet.ts" />
     <TypeScriptCompile Include="public\javascripts\Ui\UrlManager.ts" />
-    <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="public\javascripts\App.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.InternalModuleLoader.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.ISessionSocketEventHandler.ts" />
@@ -213,12 +213,17 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaderBase.ts" />
+    <TypeScriptCompile Include="Scripts\Routing\RouteBase.ts" />
+    <TypeScriptCompile Include="Scripts\Routing\Routes\GameIndex.ts" />
+    <TypeScriptCompile Include="Scripts\Routing\Routes\Index.ts" />
+    <TypeScriptCompile Include="Scripts\Routing\Routes\PlayerGet.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CssGenerator.ts" />
     <TypeScriptCompile Include="Scripts\Startup\Bootstrap.ts" />
     <TypeScriptCompile Include="Scripts\Startup\BundleUpResourceBundler.ts" />
-    <TypeScriptCompile Include="Scripts\Startup\Router.ts" />
+    <TypeScriptCompile Include="Scripts\Routing\Router.ts" />
     <TypeScriptCompile Include="Scripts\Startup\CommunicationManager.ts" />
     <TypeScriptCompile Include="Scripts\Startup\SessionWrapper.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular\angular.cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.route.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\BoardGameEngine.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />
@@ -289,6 +294,8 @@
     <Folder Include="public\javascripts\Interactions\" />
     <Folder Include="Scripts\Games\EventHandlers\" />
     <Folder Include="Scripts\Games\QueryObjects\" />
+    <Folder Include="Scripts\Routing\" />
+    <Folder Include="Scripts\Routing\Routes\" />
     <Folder Include="Scripts\typings\jasmine\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />
@@ -306,7 +313,6 @@
     <Folder Include="public\javascripts\Pieces\" />
     <Folder Include="public\javascripts\Teams\" />
     <Folder Include="public\stylesheets\" />
-    <Folder Include="routes\" />
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\Generic\" />
     <Folder Include="Scripts\Games\" />

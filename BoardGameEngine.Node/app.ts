@@ -11,16 +11,24 @@ var Bge = Ao.BoardGameEngine;
 var Ts = Ao.TypeScript;
 
 import socketFactory = require("socket.io");
-import routes = require("./routes/index");
 import stylus = require("stylus");
 import express = require("express");
 var sessionStore: Node.ISessionStore = new express.session["MemoryStore"]();
 
+var IndexRoute = require("./Scripts/Routing/Routes/Index");
+var GameIndexRoute = require("./Scripts/Routing/Routes/GameIndex");
+var PlayerGetRoute = require("./Scripts/Routing/Routes/PlayerGet");
+
 import CssGenerator = require("./Scripts/Startup/CssGenerator");
-import Router = require("./Scripts/Startup/Router");
+import Router = require("./Scripts/Routing/Router");
 import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
+
+var routes = [
+    new IndexRoute(),
+    new GameIndexRoute(),
+    new PlayerGetRoute()];
 
 var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
 

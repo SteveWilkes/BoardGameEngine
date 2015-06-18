@@ -221,10 +221,10 @@ class GameConfiguration {
     public teamConfigurations: Array<TeamConfiguration>;
 
     public addPlayer(isHuman: boolean, isLocal: boolean) {
-        var player = new Bge.Players.Player("Player" + this.players.length + 1, isHuman, isLocal);
+        var playerId = this.players.length + 1;
+        var player = new Bge.Players.Player(playerId.toString(), "Player" + playerId, isHuman, isLocal);
         this.players.push(player);
     }
-
 }
 
 class GameConfigurator {

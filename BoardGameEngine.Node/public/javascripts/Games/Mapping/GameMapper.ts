@@ -12,8 +12,7 @@
             var i;
             for (i = 0; i < gameData.playerData.length; i++) {
                 var playerData = gameData.playerData[i];
-                // TODO: Map whether a player is local
-                var player = new Players.Player(playerData.id, playerData.isHuman);
+                var player = new Players.Player(playerData.id, playerData.name, playerData.isHuman);
                 game.add(player);
 
                 for (var j = 0; j < playerData.numberOfTeams; j++) {

@@ -52,7 +52,6 @@ class NodeApp {
     }
 
     private _completeAppConfiguration() {
-
         this._app.use(this._app.router);
 
         this._app.use(express.static(this._systemInfo.getPath("public")));

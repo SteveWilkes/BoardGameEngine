@@ -75,7 +75,7 @@
             var boardTilesByCoordinates = this._game.board.getTiles();
             for (var i = 0; i < this._configurations.count; i++) {
                 var teamNumber = this._configurations.keys[i];
-                var player = new Players.Player("Player-" + teamNumber, true, true);
+                var player = new Players.Player(teamNumber.toString(), "Player-" + teamNumber, true, true);
                 this._game.add(player);
 
                 var configData = this._configurations.values[i];

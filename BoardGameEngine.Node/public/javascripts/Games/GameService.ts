@@ -14,7 +14,7 @@
 
             var i;
             for (i = 1; i < game.type.maximumNumberOfTeams; i++) {
-                game.add(new Players.Player("CPU", false));
+                game.add(new Players.Player("CPU" + i, "CPU", false));
             }
 
             for (i = 0; i < game.players.length; i++) {
