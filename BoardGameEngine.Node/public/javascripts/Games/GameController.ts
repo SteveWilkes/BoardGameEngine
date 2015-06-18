@@ -17,10 +17,14 @@
 
             var requestedGameId = this._clientComponentSet.urlManager.gameId();
 
+            if (requestedGameId !== undefined) {
+                this.loadGame(requestedGameId);
+                return;
+            }
+
             this._localPlayerService.get(localPlayer => {
                 this._localPlayer = localPlayer;
-
-                (requestedGameId !== undefined) ? this.loadGame(requestedGameId) : this.startGame();
+                this.startGame();
             });
         }
 
@@ -33,19 +37,37 @@
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            this.game = this._gameService.createDefaultGame(gameTypeId, this._localPlayer);
-            this._clientComponentSet.initialise(this.game);
+            this._initialiseGame(this._gameService.createDefaultGame(gameTypeId, this._localPlayer));
             this.game.start();
         }
 
         public loadGame(gameId: string): void {
-            var joinRequest = new Players.PlayerJoinRequest(this._localPlayer.id, gameId);
+            var localPlayerId = this._localPlayerService.getId();
+            var joinRequest = new Players.PlayerJoinRequest(localPlayerId, gameId);
             this.globalEvents.playerJoinRequested.publish(joinRequest);
         }
 
         private _handleGameLoaded(game: Game): void {
+            this._assignLocalPlayer(game);
+            this._initialiseGame(game);
+        }
+
+        private _assignLocalPlayer(game: Game): void {
+            var localPlayerId = this._localPlayerService.getId();
+
+            for (var i = 0; i < game.players.length; i++) {
+                var player = game.players[i];
+                if (player.id === localPlayerId) {
+                    player.isLocal = true;
+                    this._localPlayer = player;
+                    return;
+                }
+            }
+        }
+
+        private _initialiseGame(game: Game): void {
             this.game = game;
-            this._clientComponentSet.initialise(this.game);
+            this._clientComponentSet.initialise(game);
         }
     }
 
