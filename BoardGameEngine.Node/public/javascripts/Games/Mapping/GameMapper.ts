@@ -22,6 +22,7 @@
             }
 
             var validateTurn = () => {
+                // TODO: Deduplicate logic from TurnEndedHandler:
                 var currentTeamIndex = game.teams.indexOf(game.status.turnManager.currentTeam);
                 var nextTeamIndex = currentTeamIndex + 1;
                 if (nextTeamIndex === game.teams.length) {

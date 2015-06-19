@@ -15,6 +15,8 @@ class TurnStartedHandler implements ISessionSocketEventHandler {
     public setup(socket: ISessionSocket): void {
         socket.on("turnStarted",(teamId: string) => {
             var game: G.Game = socket.session.game;
+            if (game === undefined) { return; }
+
             var currentTeam = game.status.turnManager.currentTeam;
             if (currentTeam.id !== teamId) {
                 throw new Error(

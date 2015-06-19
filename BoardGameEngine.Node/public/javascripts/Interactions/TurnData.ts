@@ -18,5 +18,7 @@
             }
             return new TurnData(interactionData);
         }
+
+        public gameData: G.GameData;
     }
 }

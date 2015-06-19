@@ -5,19 +5,37 @@ var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
 class TurnEndedHandler implements ISessionSocketEventHandler {
-    constructor(private _gameMapper: G.GameMapper, private _saveGameCommand: Ts.ICommand<G.Game>) { }
+    constructor(
+        private _gameMapper: G.GameMapper,
+        private _saveGameCommand: Ts.ICommand<G.Game>) {
+    }
 
     public setup(socket: ISessionSocket): void {
         socket.on("turnEnded",(turnData: I.TurnData) => {
-            if (socket.session.game.status.turnManager.currentTeam.owner.isHuman) {
-                this._applyTurn(turnData, socket);
+            var game = this._getGame(turnData, socket);
+
+            if (game.status.turnManager.currentTeam.owner.isHuman) {
+                this._applyTurn(turnData, game);
             }
-            this._handleTurnEnded(socket);
+
+            var nextTeamIndex = this._endTurn(game);
+
+            this._saveGameCommand.execute(game);
+
+            socket.emit("turnValidated", nextTeamIndex);
         });
     }
 
-    private _applyTurn(turnData: I.TurnData, socket: ISessionSocket): void {
-        var game: G.Game = socket.session.game;
+    private _getGame(turnData: I.TurnData, socket: ISessionSocket): G.Game {
+        if (!socket.session.hasOwnProperty("game")) {
+            var game = this._gameMapper.map(turnData.gameData);
+            socket.session.game = game;
+        }
+
+        return socket.session.game;
+    }
+
+    private _applyTurn(turnData: I.TurnData, game: G.Game): void {
         for (var i = 0; i < turnData.interactionData.length; i++) {
             var turnInteractionData = turnData.interactionData[i];
             var interactionId = Bge.Interactions.InteractionId.from(turnInteractionData.interactionId);
@@ -26,18 +44,19 @@ class TurnEndedHandler implements ISessionSocketEventHandler {
         }
     }
 
-    private _handleTurnEnded(socket: ISessionSocket): void {
-        var game: G.Game = socket.session.game;
+    private _endTurn(game: G.Game): number {
+        // TODO: Deduplicate logic from GameMapper:
         var currentTeam = game.status.turnManager.currentTeam;
         var currentTeamIndex = game.teams.indexOf(currentTeam);
         var nextTeamIndex = currentTeamIndex + 1;
         if (nextTeamIndex === game.teams.length) {
             nextTeamIndex = 0;
         }
+
         var nextTeam = game.teams[nextTeamIndex];
         game.events.turnValidated.publish(nextTeam);
-        this._saveGameCommand.execute(game);
-        socket.emit("turnValidated", nextTeamIndex);
+
+        return nextTeamIndex;
     }
 }
 

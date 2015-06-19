@@ -25,28 +25,35 @@
         }
 
         private _registerClientEventHandlers(game: G.Game) {
-
-            game.events.gameStarted.subscribe(() => {
-                return this._socketEmit("gameStarted", new GameData(game));
-            });
-
             game.events.turnStarted.subscribe(team => {
                 return this._socketEmit("turnStarted", team.id);
             });
 
             game.events.turnEnded.subscribe(team => {
                 var turnActions = new Array<I.IGameAction>();
+                var isFirstMove = true;
                 if (team.isLocal()) {
                     var actions = game.status.history.actions;
                     for (var i = actions.length - 1; i >= 0; i--) {
                         if (actions[i].piece.team === team) {
                             turnActions.unshift(actions[i]);
                         } else {
+                            isFirstMove = false;
                             break;
                         }
                     }
+                } else {
+                    isFirstMove = false;
                 }
-                return this._socketEmit("turnEnded", Interactions.TurnData.forActions(turnActions));
+
+                var turnData = Interactions.TurnData.forActions(turnActions);
+
+                if (isFirstMove) {
+                    turnData.gameData = new GameData(game);
+                    turnData.gameData.historyData.clear();
+                }
+
+                return this._socketEmit("turnEnded", turnData);
             });
         }
 
@@ -60,6 +67,7 @@
             });
 
             this._socket.on("turnEnded",(turnData: I.TurnData) => {
+                // TODO: Deduplicate from GameMapper.completeInteraction:
                 var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
                 for (var i = 0; i < turnData.interactionData.length; i++) {
                     var turnInteraction = turnData.interactionData[i];
