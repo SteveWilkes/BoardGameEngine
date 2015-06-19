@@ -4,6 +4,8 @@
 
     "ClientOnly";
     class ClientGameCoordinator implements Ui.IClientComponent {
+        private _turnApplicationManager: I.TurnApplicationManager;
+
         constructor(
             private _socket: SocketIO.Socket,
             private _gameMapper: G.GameMapper) {
@@ -20,6 +22,8 @@
         }
 
         public initialise(game: Games.Game): void {
+            this._turnApplicationManager = new Interactions.TurnApplicationManager(game);
+
             this._registerClientEventHandlers(game);
             this._registerServerEventHandlers(game);
         }
@@ -46,7 +50,7 @@
                     isFirstMove = false;
                 }
 
-                var turnData = Interactions.TurnData.forActions(turnActions);
+                var turnData = Interactions.TurnData.from(turnActions);
 
                 if (isFirstMove) {
                     turnData.gameData = new GameData(game);
@@ -67,20 +71,7 @@
             });
 
             this._socket.on("turnEnded",(turnData: I.TurnData) => {
-                // TODO: Deduplicate from GameMapper.completeInteraction:
-                var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
-                for (var i = 0; i < turnData.interactionData.length; i++) {
-                    var turnInteraction = turnData.interactionData[i];
-                    if (!currentTeamPieces.hasOwnProperty(turnInteraction.pieceId)) {
-                        // Out of sync
-                    }
-                    var piece = currentTeamPieces[turnInteraction.pieceId];
-                    var potentialInteractions = piece.interactionProfile.getPotentialInteractions();
-                    if (!potentialInteractions.hasOwnProperty(turnInteraction.interactionId)) {
-                        // Out of sync
-                    }
-                    potentialInteractions[turnInteraction.interactionId].complete();
-                }
+                this._turnApplicationManager.apply(turnData);
             });
         }
     }

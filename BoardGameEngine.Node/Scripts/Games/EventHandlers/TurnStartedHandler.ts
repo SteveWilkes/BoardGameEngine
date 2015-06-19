@@ -31,7 +31,7 @@ class TurnStartedHandler implements ISessionSocketEventHandler {
     }
 
     private _performCpuTurn(currentCpuTeam: T.Team): I.TurnData {
-        var cpuTurnInteractions = new Array<IPieceInteraction>();
+        var cpuTurnInteractions = new Array<I.InteractionId>();
 
         while (true) {
             var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam);
@@ -39,10 +39,11 @@ class TurnStartedHandler implements ISessionSocketEventHandler {
             if (nextCpuTurnInteraction === undefined) { break; }
 
             nextCpuTurnInteraction.complete();
-            cpuTurnInteractions.push(nextCpuTurnInteraction);
+            var interactionId = Bge.Interactions.InteractionId.from(nextCpuTurnInteraction.id);
+            cpuTurnInteractions.push(interactionId);
         }
 
-        return Bge.Interactions.TurnData.forInteractions(cpuTurnInteractions);
+        return Bge.Interactions.TurnData.from(cpuTurnInteractions);
     }
 }
 

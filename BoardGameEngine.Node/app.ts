@@ -58,7 +58,7 @@ import TurnEndedHandler = require("./Scripts/Games/EventHandlers/TurnEndedHandle
 
 var serverEventHandlers = [
     new PlayerJoinRequestedHandler(getGameDataQuery),
-    new GameStartedHandler(gameMapper, getGameDataQuery, saveGameCommand),
+    new GameStartedHandler(gameMapper, getGameDataQuery),
     new TurnStartedHandler(),
     new TurnEndedHandler(gameMapper, saveGameCommand)
 ];

@@ -3,8 +3,7 @@
     export class GameMapper {
         constructor(
             private _gameFactory: GameFactory,
-            private _teamFactory: T.TeamFactory) {
-        }
+            private _teamFactory: T.TeamFactory) { }
 
         public map(gameData: GameData): Game {
             var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
@@ -34,33 +33,16 @@
             game.start();
             game.events.turnEnded.subscribe(validateTurn);
 
+            var turnApplicationManager = new Interactions.TurnApplicationManager(game);
+
             for (i = 0; i < gameData.historyData.length; i++) {
                 var interactionId = Interactions.InteractionId.from(gameData.historyData[i]);
-                this.completeInteraction(interactionId, game);
+                turnApplicationManager.apply(interactionId);
             }
 
             game.events.turnEnded.unsubscribe(validateTurn);
 
             return game;
-        }
-
-        public completeInteraction(interactionId: I.InteractionId, game: G.Game): void {
-            var currentTeamPieces = game.status.turnManager.currentTeam.getPieces();
-            if (!currentTeamPieces.hasOwnProperty(interactionId.pieceId)) {
-                throw new Error(
-                    "Interaction completion out of sync: " +
-                    "expected pieces for team " + game.status.turnManager.currentTeam.id + ", " +
-                    "got piece " + interactionId.pieceId);
-            }
-            var piece = currentTeamPieces[interactionId.pieceId];
-            var potentialInteractions = piece.interactionProfile.getPotentialInteractions();
-            if (!potentialInteractions.hasOwnProperty(interactionId.signature)) {
-                throw new Error(
-                    "Interaction completion out of sync: " +
-                    "expected interactions for piece " + interactionId.pieceId + ", " +
-                    "got interaction " + interactionId.signature);
-            }
-            potentialInteractions[interactionId.signature].complete();
         }
     }
 }

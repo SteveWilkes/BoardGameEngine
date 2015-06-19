@@ -92,9 +92,9 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/TakenPieceLocation.js");
     assets.addJs("/public/javascripts/Interactions/TurnDefinition.js");
     assets.addJs("/public/javascripts/Interactions/TurnInteractionDefinition.js");
-    assets.addJs("/public/javascripts/Interactions/InteractionData.js");
     assets.addJs("/public/javascripts/Interactions/TurnData.js");
     assets.addJs("/public/javascripts/Interactions/PotentialInteractionsData.js");
+    assets.addJs("/public/javascripts/Interactions/TurnApplicationManager.js");
     assets.addJs("/public/javascripts/Interactions/TurnRegulator.js");
     assets.addJs("/public/javascripts/Status/TurnManager.js");
     assets.addJs("/public/javascripts/Status/History.js");

@@ -61,6 +61,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ICommand.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\InteractionId.ts" />
+    <TypeScriptCompile Include="public\javascripts\Interactions\TurnApplicationManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\LocalPlayerService.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
@@ -177,7 +178,6 @@
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerJoinRequest.ts" />
     <TypeScriptCompile Include="public\javascripts\Routing.ts" />
-    <TypeScriptCompile Include="public\javascripts\Interactions\InteractionData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />

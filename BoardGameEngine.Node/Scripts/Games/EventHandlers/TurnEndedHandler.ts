@@ -36,10 +36,11 @@ class TurnEndedHandler implements ISessionSocketEventHandler {
     }
 
     private _applyTurn(turnData: I.TurnData, game: G.Game): void {
+        var turnApplicationManager = new Bge.Interactions.TurnApplicationManager(game);
+
         for (var i = 0; i < turnData.interactionData.length; i++) {
-            var turnInteractionData = turnData.interactionData[i];
-            var interactionId = Bge.Interactions.InteractionId.from(turnInteractionData.interactionId);
-            this._gameMapper.completeInteraction(interactionId, game);
+            var interactionId = turnData.interactionData[i];
+            turnApplicationManager.apply(interactionId);
             console.log("Interaction synchronised: " + interactionId.signature);
         }
     }
