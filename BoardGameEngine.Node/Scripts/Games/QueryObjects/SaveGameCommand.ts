@@ -6,7 +6,7 @@
         constructor(private _fileManager: Ts.IFileManager) {
             this._rootSaveDirectory = this._fileManager.joinPaths(
                 this._fileManager.getAppRootDirectory(),
-                "_savedGames");
+                "_savedData");
         }
 
         public execute(game: Game): void {
@@ -15,7 +15,7 @@
 
             var pathToGameSaveFile = this._fileManager.joinPaths(
                 this._rootSaveDirectory,
-                game.id + ".json");
+                "game_" + game.id + ".json");
 
             this._fileManager.deleteFile(pathToGameSaveFile);
             this._fileManager.writeAllText(pathToGameSaveFile, gameDataJson);
