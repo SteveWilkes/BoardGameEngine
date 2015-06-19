@@ -59,6 +59,7 @@
     interface Interactions {
         InteractionId: typeof I.InteractionId;
         TurnApplicationManager: new (game: G.Game) => I.TurnApplicationManager;
+        TurnCompletionManager: typeof I.TurnCompletionManager;
         TurnData: typeof I.TurnData;
         TurnDefinition: new (interactionDefinitions: Array<I.TurnInteractionDefinition>) => I.TurnDefinition;
         TurnInteractionDefinition: new (interactionType: InteractionType, availabilityEvaluator: I.IPotentialInteractionsEvaluator) => I.TurnInteractionDefinition;

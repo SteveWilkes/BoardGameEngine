@@ -46,16 +46,9 @@ class TurnEndedHandler implements ISessionSocketEventHandler {
     }
 
     private _endTurn(game: G.Game): number {
-        // TODO: Deduplicate logic from GameMapper:
-        var currentTeam = game.status.turnManager.currentTeam;
-        var currentTeamIndex = game.teams.indexOf(currentTeam);
-        var nextTeamIndex = currentTeamIndex + 1;
-        if (nextTeamIndex === game.teams.length) {
-            nextTeamIndex = 0;
-        }
+        var nextTeamIndex: number;
 
-        var nextTeam = game.teams[nextTeamIndex];
-        game.events.turnValidated.publish(nextTeam);
+        Bge.Interactions.TurnCompletionManager.complete(game, nti => nextTeamIndex = nti);
 
         return nextTeamIndex;
     }
