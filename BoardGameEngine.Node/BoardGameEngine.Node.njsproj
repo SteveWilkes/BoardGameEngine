@@ -214,6 +214,7 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaderBase.ts" />
+    <TypeScriptCompile Include="Scripts\Players\PlayerRepository.ts" />
     <TypeScriptCompile Include="Scripts\Players\QueryObjects\GetPlayerDataQuery.ts" />
     <TypeScriptCompile Include="Scripts\Players\QueryObjects\SavePlayerCommand.ts" />
     <TypeScriptCompile Include="Scripts\Routing\RouteBase.ts" />

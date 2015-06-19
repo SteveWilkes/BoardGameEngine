@@ -29,10 +29,13 @@ import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataQuery");
 var getPlayerDataQuery = new GetPlayerDataQuery(fileManager);
 
+import PlayerRepository = require("./Scripts/Players/PlayerRepository");
+var playerRepository = new PlayerRepository(getPlayerDataQuery);
+
 var routes = [
     new IndexRoute(),
     new GameIndexRoute(),
-    new PlayerGetRoute(getPlayerDataQuery)];
+    new PlayerGetRoute(playerRepository)];
 
 var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
 
