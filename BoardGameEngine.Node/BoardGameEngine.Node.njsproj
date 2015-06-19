@@ -213,6 +213,8 @@
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.IFileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.Node.FileManager.ts" />
     <TypeScriptCompile Include="Scripts\Generic\AgileObjects.TypeScript.InternalModuleLoaderBase.ts" />
+    <TypeScriptCompile Include="Scripts\Players\QueryObjects\GetPlayerDataQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Players\QueryObjects\SavePlayerCommand.ts" />
     <TypeScriptCompile Include="Scripts\Routing\RouteBase.ts" />
     <TypeScriptCompile Include="Scripts\Routing\Routes\GameIndex.ts" />
     <TypeScriptCompile Include="Scripts\Routing\Routes\Index.ts" />
@@ -294,6 +296,7 @@
     <Folder Include="public\javascripts\Interactions\" />
     <Folder Include="Scripts\Games\EventHandlers\" />
     <Folder Include="Scripts\Games\QueryObjects\" />
+    <Folder Include="Scripts\Players\QueryObjects\" />
     <Folder Include="Scripts\Routing\" />
     <Folder Include="Scripts\Routing\Routes\" />
     <Folder Include="Scripts\typings\jasmine\" />

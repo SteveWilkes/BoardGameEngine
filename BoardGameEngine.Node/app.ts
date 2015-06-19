@@ -1,5 +1,4 @@
-﻿import Node = AgileObjects.Node;
-import Angular = AgileObjects.Angular;
+﻿import Angular = AgileObjects.Angular;
 
 require("./public/javascripts/Generic/AgileObjects.TypeScript.Extensions");
 
@@ -13,11 +12,13 @@ var Ts = Ao.TypeScript;
 import socketFactory = require("socket.io");
 import stylus = require("stylus");
 import express = require("express");
-var sessionStore: Node.ISessionStore = new express.session["MemoryStore"]();
 
-var IndexRoute = require("./Scripts/Routing/Routes/Index");
-var GameIndexRoute = require("./Scripts/Routing/Routes/GameIndex");
-var PlayerGetRoute = require("./Scripts/Routing/Routes/PlayerGet");
+import ISessionStore = require("./Scripts/Generic/AgileObjects.Node.ISessionStore");
+var sessionStore: ISessionStore = new express.session["MemoryStore"]();
+
+import IndexRoute = require("./Scripts/Routing/Routes/Index");
+import GameIndexRoute = require("./Scripts/Routing/Routes/GameIndex");
+import PlayerGetRoute = require("./Scripts/Routing/Routes/PlayerGet");
 
 import CssGenerator = require("./Scripts/Startup/CssGenerator");
 import Router = require("./Scripts/Routing/Router");
@@ -25,10 +26,13 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
+import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataQuery");
+var getPlayerDataQuery = new GetPlayerDataQuery(fileManager);
+
 var routes = [
     new IndexRoute(),
     new GameIndexRoute(),
-    new PlayerGetRoute()];
+    new PlayerGetRoute(getPlayerDataQuery)];
 
 var patternMapper = new Bge.Games.GameEvaluatorPatternMapper();
 
@@ -41,14 +45,22 @@ var gameMapper = new Bge.Games.GameMapper(
                 patternMapper))),
     new Bge.Teams.TeamFactory());
 
-var getGameDataQuery = new Bge.Games.GetGameDataQuery(fileManager);
-var saveGameCommand = new Bge.Games.SaveGameCommand(fileManager);
+import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataQuery");
+var getGameDataQuery = new GetGameDataQuery(fileManager);
+
+import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameCommand");
+var saveGameCommand = new SaveGameCommand(fileManager);
+
+import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinRequestedHandler");
+import GameStartedHandler = require("./Scripts/Games/EventHandlers/GameStartedHandler");
+import TurnStartedHandler = require("./Scripts/Games/EventHandlers/TurnStartedHandler");
+import TurnEndedHandler = require("./Scripts/Games/EventHandlers/TurnEndedHandler");
 
 var serverEventHandlers = [
-    new Bge.Games.PlayerJoinRequestedHandler(getGameDataQuery),
-    new Bge.Games.GameStartedHandler(gameMapper, getGameDataQuery, saveGameCommand),
-    new Bge.Games.TurnStartedHandler(),
-    new Bge.Games.TurnEndedHandler(gameMapper, saveGameCommand)
+    new PlayerJoinRequestedHandler(getGameDataQuery),
+    new GameStartedHandler(gameMapper, getGameDataQuery, saveGameCommand),
+    new TurnStartedHandler(),
+    new TurnEndedHandler(gameMapper, saveGameCommand)
 ];
 
 var bootstrappers = [

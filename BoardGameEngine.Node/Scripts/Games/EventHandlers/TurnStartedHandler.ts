@@ -1,41 +1,47 @@
-﻿module AgileObjects.BoardGameEngine.Games {
+﻿import ISessionSocketEventHandler = require("../../Generic/AgileObjects.Node.ISessionSocketEventHandler");
+import ISessionSocket = require("../../Generic/AgileObjects.Node.ISessionSocket");
+import CpuPlayerAi = require("../../Players/CpuPlayerAi");
 
-    export class TurnStartedHandler implements Node.ISessionSocketEventHandler {
-        private _cpuPlayerAi: Pl.CpuPlayerAi;
+var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
+var Bge = Ao.BoardGameEngine;
 
-        constructor() {
-            this._cpuPlayerAi = new Players.CpuPlayerAi();
-        }
+class TurnStartedHandler implements ISessionSocketEventHandler {
+    private _cpuPlayerAi: CpuPlayerAi;
 
-        public setup(socket: Node.ISessionSocket): void {
-            socket.on("turnStarted",(teamId: string) => {
-                var game: Game = socket.session.game;
-                var currentTeam = game.status.turnManager.currentTeam;
-                if (currentTeam.id !== teamId) {
-                    throw new Error(
-                        "Turn starting out of sync: " +
-                        "expected team " + currentTeam.id + ", got team " + teamId);
-                }
-                if (currentTeam.owner.isHuman) { return; }
+    constructor() {
+        this._cpuPlayerAi = new CpuPlayerAi();
+    }
 
-                var cpuTurnData = this._performCpuTurn(currentTeam);
-                socket.emit("turnEnded", cpuTurnData);
-            });
-        }
-
-        private _performCpuTurn(currentCpuTeam: T.Team): I.TurnData {
-            var cpuTurnInteractions = new Array<IPieceInteraction>();
-
-            while (true) {
-                var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam);
-
-                if (nextCpuTurnInteraction === undefined) { break; }
-
-                nextCpuTurnInteraction.complete();
-                cpuTurnInteractions.push(nextCpuTurnInteraction);
+    public setup(socket: ISessionSocket): void {
+        socket.on("turnStarted",(teamId: string) => {
+            var game: G.Game = socket.session.game;
+            var currentTeam = game.status.turnManager.currentTeam;
+            if (currentTeam.id !== teamId) {
+                throw new Error(
+                    "Turn starting out of sync: " +
+                    "expected team " + currentTeam.id + ", got team " + teamId);
             }
+            if (currentTeam.owner.isHuman) { return; }
 
-            return Interactions.TurnData.forInteractions(cpuTurnInteractions);
+            var cpuTurnData = this._performCpuTurn(currentTeam);
+            socket.emit("turnEnded", cpuTurnData);
+        });
+    }
+
+    private _performCpuTurn(currentCpuTeam: T.Team): I.TurnData {
+        var cpuTurnInteractions = new Array<IPieceInteraction>();
+
+        while (true) {
+            var nextCpuTurnInteraction = this._cpuPlayerAi.getNextInteraction(currentCpuTeam);
+
+            if (nextCpuTurnInteraction === undefined) { break; }
+
+            nextCpuTurnInteraction.complete();
+            cpuTurnInteractions.push(nextCpuTurnInteraction);
         }
+
+        return Bge.Interactions.TurnData.forInteractions(cpuTurnInteractions);
     }
 }
+
+export = TurnStartedHandler;

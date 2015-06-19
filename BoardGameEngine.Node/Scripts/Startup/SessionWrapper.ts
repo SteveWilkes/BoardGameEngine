@@ -2,12 +2,13 @@
 import express = require("express");
 import IExpressModule = require("../Generic/AgileObjects.Node.IExpressModule");
 import bs = require("Bootstrap");
+import ISessionStore = require("../Generic/AgileObjects.Node.ISessionStore");
 
 class SessionWrapper implements bs.IBootstrapper {
     constructor(
         private _express: IExpressModule,
         private _randomStringGenerator: AgileObjects.Angular.Services.IIdGenerator,
-        private _sessionStore: AgileObjects.Node.ISessionStore) { }
+        private _sessionStore: ISessionStore) { }
 
     public appCreated(info: bs.SystemInfo, app: express.Express): void {
         var cookieSecret = this._randomStringGenerator.generate(16);

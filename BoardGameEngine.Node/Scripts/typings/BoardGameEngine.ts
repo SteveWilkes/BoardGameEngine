@@ -41,28 +41,24 @@
 
     interface Games {
         Game: new (id: string, type: G.GameType, board: B.Board, events: G.GameEventSet) => G.Game;
+        GameData: new (game: G.Game) => G.GameData;
         GameEntityAnnotationMapper: new (patternExpander: TsEv.IEvaluatorPatternExpander) => G.GameEntityAnnotationMapper;
         GameEvaluatorPatternMapper: typeof G.GameEvaluatorPatternMapper;
         GameEventSet: new () => G.GameEventSet;
         GameFactory: new (getGameTypeQuery: Ts.IGetQuery<G.GameType>) => G.GameFactory;
         GameMapper: new (gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.GameMapper;
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.GameService;
-        GameStartedHandler: new (gameMapper: G.GameMapper, getGetDataQuery: Ts.IGetQuery<G.GameData>, saveGameCommand: Ts.ICommand<G.Game>) => G.GameStartedHandler;
         GameType: new (id: string, boardType: B.BoardType, maximumNumberOfTeams: number, turnDefinition: I.TurnDefinition, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>, annotations: Array<Ts.Annotations.IEntityAnnotation>, eventMappings: Array<Ts.EventMapping>) => G.GameType;
         GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>, annotationMapper: TsAn.IEntityAnnotationMapper, patternMapper: TsEv.IEvaluatorPatternMapper) => G.GameTypeMapper;
         GameWrapper: new <TTeamConfigurator extends G.ITeamConfigurator>(teamConfigurator: TTeamConfigurator, game: G.Game) => G.GameWrapper<TTeamConfigurator>;
-        GetGameDataQuery: new (fileManager: Ts.IFileManager) => G.GetGameDataQuery;
         GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
         PieceWrapper: new (piece: Piece) => G.PieceWrapper;
-        PlayerJoinRequestedHandler: new (getGetDataQuery: Ts.IGetQuery<G.GameData>) => G.PlayerJoinRequestedHandler;
         RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
-        SaveGameCommand: new (fileManager: Ts.IFileManager) => G.SaveGameCommand;
-        TurnEndedHandler: new (gameMapper: G.GameMapper, saveGameCommand: Ts.ICommand<G.Game>) => G.TurnEndedHandler;
-        TurnStartedHandler: new () => G.TurnStartedHandler;
     }
 
     interface Interactions {
-        InteractionId: new (pieceId: string, type: InteractionType, startingPoint: string, interactionPoint: string) => I.InteractionId;
+        InteractionId: typeof I.InteractionId;
+        TurnData: typeof I.TurnData;
         TurnDefinition: new (interactionDefinitions: Array<I.TurnInteractionDefinition>) => I.TurnDefinition;
         TurnInteractionDefinition: new (interactionType: InteractionType, availabilityEvaluator: I.IPotentialInteractionsEvaluator) => I.TurnInteractionDefinition;
     }

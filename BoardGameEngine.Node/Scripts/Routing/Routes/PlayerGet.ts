@@ -5,18 +5,20 @@ var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
 class PlayerGet extends RouteBase {
-    constructor() {
+    constructor(getPlayerDataQuery: Ts.IGetQuery<Pl.PlayerData>) {
         super(
             ["/api/players/" + RouteBase.idPattern],
-            (req: express.Request, res: express.Response) => res.json(this._getPlayerData(req)));
-    }
+            (req: express.Request, res: express.Response) => {
+                var playerId = req.url.substring(req.url.lastIndexOf("/") + 1);
+                var playerData = getPlayerDataQuery.execute(playerId);
 
-    private _getPlayerData(req: express.Request) {
-        var playerId = req.url.substring(req.url.lastIndexOf("/") + 1);
-        var player = new Bge.Players.Player(playerId, "Guest", true);
-        var playerData = new Bge.Players.PlayerData(player);
+                if (playerData == null) {
+                    var guest = new Bge.Players.Player(playerId, "Guest", true);
+                    playerData = new Bge.Players.PlayerData(guest);
+                }
 
-        return playerData;
+                res.json(playerData)
+            });
     }
 }
 

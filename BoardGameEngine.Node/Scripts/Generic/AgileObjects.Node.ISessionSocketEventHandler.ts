@@ -1,6 +1,7 @@
-﻿module AgileObjects.Node {
+﻿import ISessionSocket = require("./AgileObjects.Node.ISessionSocket");
 
-    export interface ISessionSocketEventHandler {
-        setup(socket: Node.ISessionSocket): void;
-    }
+interface ISessionSocketEventHandler {
+    setup(socket: ISessionSocket): void;
 }
+
+export = ISessionSocketEventHandler;

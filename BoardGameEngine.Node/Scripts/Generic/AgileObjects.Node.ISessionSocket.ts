@@ -1,6 +1,5 @@
-﻿module AgileObjects.Node {
-
-    export interface ISessionSocket extends SocketIO.Socket {
-        session: any;
-    }
+﻿interface ISessionSocket extends SocketIO.Socket {
+    session: any;
 }
+
+export = ISessionSocket;

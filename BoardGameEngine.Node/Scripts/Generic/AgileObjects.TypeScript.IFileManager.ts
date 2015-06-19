@@ -13,6 +13,7 @@
     export interface IFileManager {
         joinPaths(...paths: string[]): string;
         getAppRootDirectory(): string;
+        fileExists(path: string): boolean;
         getFileName(filePath: string): string;
         getPathToTempFile(extension?: string): string;
         getPathInfo(path: string): IPathInfo;

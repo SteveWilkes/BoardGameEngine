@@ -215,4 +215,4 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-BoardGameEngine.Node/_savedGames/
+BoardGameEngine.Node/_savedData/

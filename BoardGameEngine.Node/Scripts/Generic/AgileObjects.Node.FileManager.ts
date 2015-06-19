@@ -1,6 +1,4 @@
-﻿import Ts = AgileObjects.TypeScript;
-
-class FileManager implements Ts.IFileManager {
+﻿class FileManager implements Ts.IFileManager {
     private _appRootDirectory: string;
 
     constructor(private _path, private _fs, private _temp, appRootFileName: string) {

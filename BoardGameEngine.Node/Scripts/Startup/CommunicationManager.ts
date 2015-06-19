@@ -1,16 +1,17 @@
 ﻿import bs = require("Bootstrap");
 import express = require("express");
 import http = require("http");
-import Games = AgileObjects.BoardGameEngine.Games;
-import Node = AgileObjects.Node;
+import ISessionSocket = require("../Generic/AgileObjects.Node.ISessionSocket");
+import ISessionSocketEventHandler = require("../Generic/AgileObjects.Node.ISessionSocketEventHandler");
+import ISessionStore = require("../Generic/AgileObjects.Node.ISessionStore");
 
 class CommunicationManager implements bs.IBootstrapper {
     private _app: express.Express;
 
     constructor(
         private _socketServer: SocketIO.Server,
-        private _sessionStore: Node.ISessionStore,
-        private _socketEventHandlers: Array<Node.ISessionSocketEventHandler>) { }
+        private _sessionStore: ISessionStore,
+        private _socketEventHandlers: Array<ISessionSocketEventHandler>) { }
 
     public appCreated(info: bs.SystemInfo, app: express.Express): void {
         this._app = app;
@@ -25,7 +26,7 @@ class CommunicationManager implements bs.IBootstrapper {
             "connection",
             socket => {
                 for (var i = 0; i < this._socketEventHandlers.length; i++) {
-                    this._socketEventHandlers[i].setup(<Node.ISessionSocket>socket);
+                    this._socketEventHandlers[i].setup(<ISessionSocket>socket);
                 }
             });
     }
@@ -54,7 +55,7 @@ class CommunicationManager implements bs.IBootstrapper {
     }
 
     private _retrieveSessionObject(socket: SocketIO.Socket, next: (err?: Error) => void) {
-        var sessionSocket = <Node.ISessionSocket>socket;
+        var sessionSocket = <ISessionSocket>socket;
         if (sessionSocket.session != null) {
             next();
         } else {
