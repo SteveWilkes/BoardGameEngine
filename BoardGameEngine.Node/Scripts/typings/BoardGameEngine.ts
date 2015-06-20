@@ -40,7 +40,7 @@
     }
 
     interface Games {
-        Game: new (id: string, type: G.GameType, board: B.Board, events: G.GameEventSet) => G.Game;
+        Game: new (id: string, type: G.GameType, owner: Pl.Player, board: B.Board, events: G.GameEventSet) => G.Game;
         GameData: new (game: G.Game) => G.GameData;
         GameEntityAnnotationMapper: new (patternExpander: TsEv.IEvaluatorPatternExpander) => G.GameEntityAnnotationMapper;
         GameEvaluatorPatternMapper: typeof G.GameEvaluatorPatternMapper;
@@ -50,10 +50,10 @@
         GameService: new (idGenerator: Svc.IIdGenerator, gameFactory: G.GameFactory, teamFactory: T.TeamFactory) => G.GameService;
         GameType: new (id: string, boardType: B.BoardType, maximumNumberOfTeams: number, turnDefinition: I.TurnDefinition, pieceDefinitions: Ts.IStringDictionary<P.PieceDefinition>, pieceConfigData: Array<P.PieceConfigData>, annotations: Array<Ts.Annotations.IEntityAnnotation>, eventMappings: Array<Ts.EventMapping>) => G.GameType;
         GameTypeMapper: new (getBoardTypeQuery: Ts.IGetQuery<B.BoardType>, annotationMapper: TsAn.IEntityAnnotationMapper, patternMapper: TsEv.IEvaluatorPatternMapper) => G.GameTypeMapper;
-        GameWrapper: new <TTeamConfigurator extends G.ITeamConfigurator>(teamConfigurator: TTeamConfigurator, game: G.Game) => G.GameWrapper<TTeamConfigurator>;
+        GameWrapper: new <TTeamConfigurator extends G.ITeamConfigurator>(gameFactory: G.GameFactory, teamConfigurator: TTeamConfigurator) => G.GameWrapper<TTeamConfigurator>;
         GetGameTypeQuery: new (gameTypeMapper: G.GameTypeMapper) => G.GetGameTypeQuery;
         PieceWrapper: new (piece: Piece) => G.PieceWrapper;
-        RunTheBombTeamConfigurator: new (game: G.Game) => G.RunTheBombTeamConfigurator;
+        RunTheBombTeamConfigurator: new () => G.RunTheBombTeamConfigurator;
     }
 
     interface Interactions {

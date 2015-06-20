@@ -6,13 +6,17 @@
             private _teamFactory: T.TeamFactory) { }
 
         public map(gameData: GameData): Game {
-            var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId);
+            var gameOwner = this._getGameOwner(gameData);
+            var game = this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId, gameOwner);
 
             var i;
             for (i = 0; i < gameData.playerData.length; i++) {
                 var playerData = gameData.playerData[i];
-                var player = new Players.Player(playerData.id, playerData.name, playerData.isHuman);
-                game.add(player);
+                var player = playerData.toPlayer();
+
+                if (player.id !== gameData.ownerId) {
+                    game.add(player);
+                }
 
                 for (var j = 0; j < playerData.numberOfTeams; j++) {
                     var team = this._teamFactory.createTeamFor(player, game);
@@ -37,6 +41,16 @@
             game.events.turnEnded.unsubscribe(validateTurn);
 
             return game;
+        }
+
+        private _getGameOwner(gameData: GameData): Pl.Player {
+            for (var i = 0; i < gameData.playerData.length; i++) {
+                if (gameData.playerData[i].id === gameData.ownerId) {
+                    return gameData.playerData[i].toPlayer();
+                }
+            }
+
+            throw new Error("Unable to find Game Owner with id " + gameData.ownerId);
         }
     }
 }

@@ -339,7 +339,7 @@ class GameBuilder {
         var gameEvents = new Bge.Games.GameEventSet();
         var board = new Bge.Boards.Board(boardType, gameEvents);
 
-        var game = new Bge.Games.Game("test", gameType, board, gameEvents);
+        var game = new Bge.Games.Game("test", gameType, configuration.players[0], board, gameEvents);
 
         this._addPlayers(configuration, game);
         this._addTeams(configuration, game);
@@ -357,7 +357,7 @@ class GameBuilder {
     }
 
     private _addPlayers(configuration: GameConfiguration, game: G.Game) {
-        for (var i = 0; i < configuration.players.length; i++) {
+        for (var i = 1; i < configuration.players.length; i++) {
             game.add(configuration.players[i]);
         }
     }

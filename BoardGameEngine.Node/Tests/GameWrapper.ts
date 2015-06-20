@@ -2,14 +2,12 @@
     import Ts = TypeScript;
 
     export class GameWrapper<TTeamConfigurator extends ITeamConfigurator> {
-        constructor(private _teamConfigurator: TTeamConfigurator, private _game: Game) {
-            this.teams = this._game.teams;
-            this.events = this._game.events;
-            this.status = this._game.status;
-        }
+        private _game: Game;
+
+        constructor(private _gameFactory: GameFactory, private _teamConfigurator: TTeamConfigurator) { }
 
         public teams: Array<T.Team>;
-        public events: G.GameEventSet;
+        public events: GameEventSet;
         public status: Status.StatusData;
 
         public getPieceAt(coordinatesSignature: string): PieceWrapper {
@@ -35,9 +33,26 @@
         public setupPieces(configuration: (configurator: TTeamConfigurator) => void): GameWrapper<TTeamConfigurator> {
             configuration(this._teamConfigurator);
 
-            this._teamConfigurator.setupTeams();
+            this._game = this._createGame();
+
+            this._teamConfigurator.setupTeams(this._game);
 
             return this;
+        }
+
+        private _createGame(): Game {
+            var gameOwner = this._teamConfigurator.getGameOwner();
+            var game = this._gameFactory.createNewGame("test", "run-the-bomb", gameOwner);
+
+            this.teams = game.teams;
+            this.events = game.events;
+            this.status = game.status;
+
+            return game;
+        }
+
+        public start(): void {
+            this._game.start();
         }
     }
 }

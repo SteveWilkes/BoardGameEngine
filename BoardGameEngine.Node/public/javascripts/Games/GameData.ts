@@ -4,6 +4,7 @@
         constructor(game: Game) {
             this.gameId = game.id;
             this.gameTypeId = game.type.id;
+            this.ownerId = game.owner.id;
             this.playerData = new Array<Pl.PlayerData>(game.players.length);
             this.historyData = new Array<string>(game.status.history.actions.length);
 
@@ -19,6 +20,7 @@
 
         public gameId: string;
         public gameTypeId: string;
+        public ownerId: string;
         public playerData: Array<Pl.PlayerData>;
         public historyData: Array<string>;
     }

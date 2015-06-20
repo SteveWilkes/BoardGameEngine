@@ -3,7 +3,7 @@
     export class GameFactory {
         constructor(private _getGameTypeQuery: Ts.IGetQuery<GameType>) { }
 
-        public createNewGame(id: string, gameTypeId: string): Game {
+        public createNewGame(id: string, gameTypeId: string, owner: Pl.Player): Game {
             var events = new GameEventSet();
 
             var gameType = this._getGameTypeQuery.execute(gameTypeId);
@@ -13,7 +13,7 @@
 
             var board = new Boards.Board(gameType.boardType, events);
 
-            var game = new Game(id, gameType, board, events);
+            var game = new Game(id, gameType, owner, board, events);
 
             return game;
         }

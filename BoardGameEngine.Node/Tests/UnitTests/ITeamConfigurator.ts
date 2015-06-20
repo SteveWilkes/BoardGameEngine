@@ -1,6 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
     export interface ITeamConfigurator {
-        setupTeams(): void;
+        getGameOwner(): Pl.Player;
+        setupTeams(game: Game): void;
     }
 }

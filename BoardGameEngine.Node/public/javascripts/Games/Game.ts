@@ -4,13 +4,14 @@
         constructor(
             public id: string,
             public type: GameType,
+            public owner: Pl.Player,
             public board: B.Board,
             public events: GameEventSet) {
 
             this.events.teamAdded.subscribe(data => this.teams.push(data.team) > 0);
             this.events.teamRemoved.subscribe(team => this.teams.remove(team) === void (0));
 
-            this.players = new Array<Pl.Player>();
+            this.players = new Array<Pl.Player>(this.owner);
             this.teams = new Array<T.Team>();
             this.status = new Status.StatusData(this.type.turnDefinition, this);
         }

@@ -1,11 +1,11 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
     import Ts = TypeScript;
 
-    export class RunTheBombTeamConfigurator implements G.ITeamConfigurator {
+    export class RunTheBombTeamConfigurator implements ITeamConfigurator {
         private _configurations: Ts.Dictionary<number, Array<P.PieceConfigData>>;
         private _customHealthSettings: Ts.Dictionary<Ts.Coordinates, number>;
 
-        constructor(private _game: G.Game) {
+        constructor() {
             this._configurations = new Ts.Dictionary<number, Array<P.PieceConfigData>>();
             this._customHealthSettings = new Ts.Dictionary<Ts.Coordinates, number>();
         }
@@ -69,19 +69,33 @@
             return this;
         }
 
-        public setupTeams(): void {
+        public getGameOwner(): Pl.Player {
+            return this._createPlayer(this._configurations.keys[0].toString(), "GameOwner");
+        }
+
+        private _createPlayer(id: string, name: string) {
+            return new Players.Player(id, name, true, true);
+        }
+
+        public setupTeams(game: Game): void {
             var teamFactory = new Teams.TeamFactory();
-            var defaultPieceData = this._game.type.pieceData;
-            var boardTilesByCoordinates = this._game.board.getTiles();
+            var defaultPieceData = game.type.pieceData;
+            var boardTilesByCoordinates = game.board.getTiles();
             for (var i = 0; i < this._configurations.count; i++) {
-                var teamNumber = this._configurations.keys[i];
-                var player = new Players.Player(teamNumber.toString(), "Player-" + teamNumber, true, true);
-                this._game.add(player);
+                var playerId = this._configurations.keys[i].toString();
+                var player;
+
+                if (playerId !== game.owner.id) {
+                    player = this._createPlayer(playerId, "Player-" + playerId);
+                    game.add(player);
+                } else {
+                    player = game.owner;
+                }
 
                 var configData = this._configurations.values[i];
-                this._game.type.pieceData = new Pieces.PieceDataSet(defaultPieceData.definitions, configData);
-                var customTeam = teamFactory.createTeamFor(player, this._game);
-                this._game.board.add(customTeam);
+                game.type.pieceData = new Pieces.PieceDataSet(defaultPieceData.definitions, configData);
+                var customTeam = teamFactory.createTeamFor(player, game);
+                game.board.add(customTeam);
 
                 var customTeamPiecesById = customTeam.getPieces();
 
