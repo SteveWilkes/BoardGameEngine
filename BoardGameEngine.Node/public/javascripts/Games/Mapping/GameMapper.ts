@@ -12,10 +12,13 @@
             var i;
             for (i = 0; i < gameData.playerData.length; i++) {
                 var playerData = gameData.playerData[i];
-                var player = playerData.toPlayer();
+                var player;
 
-                if (player.id !== gameData.ownerId) {
+                if (playerData.id !== gameOwner.id) {
+                    player = this._getPlayerFor(playerData);
                     game.add(player);
+                } else {
+                    player = gameOwner;
                 }
 
                 for (var j = 0; j < playerData.numberOfTeams; j++) {
@@ -46,11 +49,15 @@
         private _getGameOwner(gameData: GameData): Pl.Player {
             for (var i = 0; i < gameData.playerData.length; i++) {
                 if (gameData.playerData[i].id === gameData.ownerId) {
-                    return gameData.playerData[i].toPlayer();
+                    return this._getPlayerFor(gameData.playerData[i]);
                 }
             }
 
             throw new Error("Unable to find Game Owner with id " + gameData.ownerId);
+        }
+
+        private _getPlayerFor(playerData: Pl.PlayerData): Pl.Player {
+            return new Players.Player(playerData.id, playerData.name, playerData.isHuman);
         }
     }
 }

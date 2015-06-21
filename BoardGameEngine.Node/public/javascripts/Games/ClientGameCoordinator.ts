@@ -24,11 +24,11 @@
         public initialise(game: Games.Game): void {
             this._turnApplicationManager = new Interactions.TurnApplicationManager(game);
 
-            this._registerClientEventHandlers(game);
-            this._registerServerEventHandlers(game);
+            this._registerLocalGameEventHandlers(game);
+            this._registerRemoteGameEventHandlers(game);
         }
 
-        private _registerClientEventHandlers(game: G.Game) {
+        private _registerLocalGameEventHandlers(game: G.Game) {
             game.events.turnStarted.subscribe(team => {
                 return this._socketEmit("turnStarted", team.id);
             });
@@ -65,7 +65,7 @@
             return this._socket.emit(eventName, data) !== undefined;
         }
 
-        private _registerServerEventHandlers(game: G.Game) {
+        private _registerRemoteGameEventHandlers(game: G.Game) {
             this._socket.on("turnValidated",(nextTeamIndex: number) => {
                 game.events.turnValidated.publish(game.teams[nextTeamIndex]);
             });

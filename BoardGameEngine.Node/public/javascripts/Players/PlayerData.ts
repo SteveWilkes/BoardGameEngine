@@ -12,9 +12,5 @@
         public name: string;
         public isHuman: boolean;
         public numberOfTeams: number;
-
-        public toPlayer(): Player {
-            return new Players.Player(this.id, this.name, this.isHuman);
-        }
     }
 }
