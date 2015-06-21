@@ -4,14 +4,14 @@
         public createTeamFor(owner: ITeamOwner, game: G.Game): Team {
             var pieceCoordinatesByPiece = this._getPieceCoordinatesByPiece(game);
 
-            var teamName = owner.id + " Team";
-            var team = new Teams.Team(owner, teamName, pieceCoordinatesByPiece);
+            var teamName = owner.name + " Team";
+            var team = new Team(owner, teamName, pieceCoordinatesByPiece);
 
             return team;
         }
 
-        private _getPieceCoordinatesByPiece(game: G.Game): Ts.Dictionary<P.Piece, Ts.Coordinates> {
-            var pieceCoordinatesByPiece = new TypeScript.Dictionary<P.Piece, TypeScript.Coordinates>();
+        private _getPieceCoordinatesByPiece(game: G.Game): Ts.Dictionary<Piece, Ts.Coordinates> {
+            var pieceCoordinatesByPiece = new TypeScript.Dictionary<Piece, Ts.Coordinates>();
             var teamNumber = game.teams.length + 1;
 
             for (var i = 0; i < game.type.pieceData.configData.length; i++) {
