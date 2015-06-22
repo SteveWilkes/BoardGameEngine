@@ -24,10 +24,10 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
     }
 
     private _getGame(turnData: I.TurnData, socket: G.IGameSocket): G.Game {
-        var game = socket.getGame(turnData.gameId);
-        if (game == null) {
+        var game = socket.getGameOrNull(turnData.gameId);
+        if (game === null) {
             game = this._gameMapper.map(turnData.gameData);
-            socket.setGame(game);
+            socket.addGame(game);
         }
 
         return game;

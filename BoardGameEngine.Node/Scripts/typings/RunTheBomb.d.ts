@@ -4,8 +4,8 @@
 
         export interface IGameSocket extends Nd.ISessionSocket {
             getGameRoomId(gameId: string): string;
-            getGame(gameId: string): G.Game;
-            setGame(game: G.Game): void;
+            getGameOrNull(gameId: string): G.Game;
+            addGame(game: G.Game): void;
             broadcastToGameRoom<TData>(eventName: string, data: TData, gameId: string): void;
         }
 

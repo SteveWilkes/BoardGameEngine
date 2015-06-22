@@ -12,8 +12,8 @@ class TurnStartedHandler implements G.IGameSocketEventHandler {
 
     public setup(socket: G.IGameSocket): void {
         socket.on("turnStarted",(gameId: string, teamId: string) => {
-            var game = socket.getGame(gameId);
-            if (game === undefined) { return; }
+            var game = socket.getGameOrNull(gameId);
+            if (game === null) { return; }
 
             var currentTeam = game.status.turnManager.currentTeam;
             if (currentTeam.id !== teamId) {

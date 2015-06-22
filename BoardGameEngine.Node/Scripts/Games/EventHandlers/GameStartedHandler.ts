@@ -7,7 +7,7 @@
         socket.on("gameRestarted",(gameId: string) => {
             var gameData = this._getGetDataQuery.execute(gameId);
             var game = this._gameMapper.map(gameData);
-            socket.setGame(game);
+            socket.addGame(game);
             console.log("Game " + game.id + " recreated");
         });
     }
