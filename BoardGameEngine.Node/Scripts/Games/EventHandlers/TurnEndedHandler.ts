@@ -1,16 +1,13 @@
-﻿import ISessionSocketEventHandler = require("../../Generic/AgileObjects.Node.ISessionSocketEventHandler");
-import ISessionSocket = require("../../Generic/AgileObjects.Node.ISessionSocket");
-
-var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
+﻿var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
-class TurnEndedHandler implements ISessionSocketEventHandler {
+class TurnEndedHandler implements G.IGameSocketEventHandler {
     constructor(
         private _gameMapper: G.GameMapper,
         private _saveGameCommand: Ts.ICommand<G.Game>) {
     }
 
-    public setup(socket: ISessionSocket): void {
+    public setup(socket: G.IGameSocket): void {
         socket.on("turnEnded",(turnData: I.TurnData) => {
             var game = this._getGame(turnData, socket);
 
@@ -22,17 +19,18 @@ class TurnEndedHandler implements ISessionSocketEventHandler {
 
             this._saveGameCommand.execute(game);
 
-            socket.emit("turnValidated", nextTeamIndex);
+            socket.broadcastToGameRoom("turnValidated", nextTeamIndex, game.id);
         });
     }
 
-    private _getGame(turnData: I.TurnData, socket: ISessionSocket): G.Game {
-        if (!socket.session.hasOwnProperty("game")) {
-            var game = this._gameMapper.map(turnData.gameData);
-            socket.session.game = game;
+    private _getGame(turnData: I.TurnData, socket: G.IGameSocket): G.Game {
+        var game = socket.getGame(turnData.gameId);
+        if (game == null) {
+            game = this._gameMapper.map(turnData.gameData);
+            socket.setGame(game);
         }
 
-        return socket.session.game;
+        return game;
     }
 
     private _applyTurn(turnData: I.TurnData, game: G.Game): void {

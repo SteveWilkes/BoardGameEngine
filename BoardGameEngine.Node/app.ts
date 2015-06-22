@@ -13,8 +13,7 @@ import socketFactory = require("socket.io");
 import stylus = require("stylus");
 import express = require("express");
 
-import ISessionStore = require("./Scripts/Generic/AgileObjects.Node.ISessionStore");
-var sessionStore: ISessionStore = new express.session["MemoryStore"]();
+var sessionStore: Nd.ISessionStore = new express.session["MemoryStore"]();
 
 import IndexRoute = require("./Scripts/Routing/Routes/Index");
 import GameIndexRoute = require("./Scripts/Routing/Routes/GameIndex");

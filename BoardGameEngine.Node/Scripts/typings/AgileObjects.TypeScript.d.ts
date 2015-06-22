@@ -1,4 +1,4 @@
-﻿module AgileObjects.TypeScript {
+﻿declare module AgileObjects.TypeScript {
 
     export interface IPathInfo {
         isFile(): boolean;

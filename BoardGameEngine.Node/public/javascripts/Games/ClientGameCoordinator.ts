@@ -30,7 +30,7 @@
 
         private _registerLocalGameEventHandlers(game: G.Game) {
             game.events.turnStarted.subscribe(team => {
-                return this._socketEmit("turnStarted", team.id);
+                return this._socketEmit("turnStarted", game.id, team.id);
             });
 
             game.events.turnEnded.subscribe(team => {
@@ -50,7 +50,7 @@
                     isFirstMove = false;
                 }
 
-                var turnData = Interactions.TurnData.from(turnActions);
+                var turnData = Interactions.TurnData.from(turnActions, game.id);
 
                 if (isFirstMove) {
                     turnData.gameData = new GameData(game);
@@ -61,8 +61,9 @@
             });
         }
 
-        private _socketEmit<TData>(eventName: string, data: TData): boolean {
-            return this._socket.emit(eventName, data) !== undefined;
+        private _socketEmit(eventName: string, ...data: Array<any>): boolean {
+            var args = [eventName].concat(data);
+            return this._socket.emit.apply(this._socket, args) !== undefined;
         }
 
         private _registerRemoteGameEventHandlers(game: G.Game) {

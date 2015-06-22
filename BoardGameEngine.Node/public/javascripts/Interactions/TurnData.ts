@@ -1,12 +1,10 @@
 ﻿module AgileObjects.BoardGameEngine.Interactions {
 
     export class TurnData {
-        constructor(public interactionData: Array<InteractionId>) { }
+        constructor(public interactionData: Array<InteractionId>, public gameId: string) { }
 
-        static noInteractions = new TurnData([]);
-
-        static from(items: Array<InteractionId>|Array<IGameAction>) {
-            if (items.length === 0) { return TurnData.noInteractions; }
+        static from(items: Array<InteractionId>|Array<IGameAction>, gameId: string) {
+            if (items.length === 0) { return new TurnData([], gameId); }
 
             var interactionData;
 
@@ -20,7 +18,7 @@
                 }
             }
 
-            return new TurnData(interactionData);
+            return new TurnData(interactionData, gameId);
         }
 
         public gameData: G.GameData;

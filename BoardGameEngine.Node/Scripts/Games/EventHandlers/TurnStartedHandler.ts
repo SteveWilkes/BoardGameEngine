@@ -1,20 +1,18 @@
-﻿import ISessionSocketEventHandler = require("../../Generic/AgileObjects.Node.ISessionSocketEventHandler");
-import ISessionSocket = require("../../Generic/AgileObjects.Node.ISessionSocket");
-import CpuPlayerAi = require("../../Players/CpuPlayerAi");
+﻿import CpuPlayerAi = require("../../Players/CpuPlayerAi");
 
 var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
-class TurnStartedHandler implements ISessionSocketEventHandler {
+class TurnStartedHandler implements G.IGameSocketEventHandler {
     private _cpuPlayerAi: CpuPlayerAi;
 
     constructor() {
         this._cpuPlayerAi = new CpuPlayerAi();
     }
 
-    public setup(socket: ISessionSocket): void {
-        socket.on("turnStarted",(teamId: string) => {
-            var game: G.Game = socket.session.game;
+    public setup(socket: G.IGameSocket): void {
+        socket.on("turnStarted",(gameId: string, teamId: string) => {
+            var game = socket.getGame(gameId);
             if (game === undefined) { return; }
 
             var currentTeam = game.status.turnManager.currentTeam;
@@ -25,12 +23,12 @@ class TurnStartedHandler implements ISessionSocketEventHandler {
             }
             if (currentTeam.owner.isHuman) { return; }
 
-            var cpuTurnData = this._performCpuTurn(currentTeam);
-            socket.emit("turnEnded", cpuTurnData);
+            var cpuTurnData = this._performCpuTurn(currentTeam, game.id);
+            socket.broadcastToGameRoom("turnEnded", cpuTurnData, game.id);
         });
     }
 
-    private _performCpuTurn(currentCpuTeam: T.Team): I.TurnData {
+    private _performCpuTurn(currentCpuTeam: T.Team, gameId: string): I.TurnData {
         var cpuTurnInteractions = new Array<I.InteractionId>();
 
         while (true) {
@@ -43,7 +41,7 @@ class TurnStartedHandler implements ISessionSocketEventHandler {
             cpuTurnInteractions.push(interactionId);
         }
 
-        return Bge.Interactions.TurnData.from(cpuTurnInteractions);
+        return Bge.Interactions.TurnData.from(cpuTurnInteractions, gameId);
     }
 }
 

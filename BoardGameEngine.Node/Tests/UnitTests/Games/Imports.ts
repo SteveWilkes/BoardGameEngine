@@ -6,6 +6,7 @@ import I = AgileObjects.BoardGameEngine.Interactions;
 import P = AgileObjects.BoardGameEngine.Pieces;
 import Pl = AgileObjects.BoardGameEngine.Players;
 import T = AgileObjects.BoardGameEngine.Teams;
+import Nd = AgileObjects.Node;
 import Ts = AgileObjects.TypeScript;
 import IPieceInteraction = P.IPieceInteraction;
 import Piece = P.Piece;
