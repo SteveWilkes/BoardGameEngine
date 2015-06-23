@@ -32,6 +32,10 @@
 
         private _registerLocalGameEventHandlers(game: G.Game) {
             game.events.turnEnded.subscribe(team => {
+                if (!team.isHuman()) {
+                    return Interactions.TurnCompletionManager.complete(game);
+                }
+
                 var turnActions = new Array<I.IGameAction>();
                 var isFirstMove = true;
                 if (team.isLocal()) {

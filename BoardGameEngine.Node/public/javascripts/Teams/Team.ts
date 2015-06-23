@@ -29,7 +29,8 @@
             return this._pieceInitialCoordinates.get(piece);
         }
 
-        // TODO: Remove
+        public isHuman(): boolean { return this.owner.isHuman; }
+
         public isLocal(): boolean { return this.owner.isLocal; }
 
         public owns(piece: P.Piece): boolean {

@@ -18,7 +18,6 @@ class SaveGameCommand implements Ts.ICommand<G.Game> {
             this._rootSaveDirectory,
             "game_" + game.id + ".json");
 
-        this._fileManager.deleteFile(pathToGameSaveFile);
         this._fileManager.writeAllText(pathToGameSaveFile, gameDataJson);
     }
 }
