@@ -29,6 +29,8 @@
             return this._pieceInitialCoordinates.get(piece);
         }
 
+        public ownerId(): string { return this.owner.id; }
+
         public isHuman(): boolean { return this.owner.isHuman; }
 
         public isLocal(): boolean { return this.owner.isLocal; }

@@ -32,9 +32,11 @@
 
         private _registerLocalGameEventHandlers(game: G.Game) {
             game.events.turnEnded.subscribe(team => {
-                if (!team.isHuman()) {
+                if (this._wasNotLocalPlayerTurn(team, game)) {
                     return Interactions.TurnCompletionManager.complete(game);
                 }
+
+                var localPlayerId = this._localPlayerService.getPlayerId();
 
                 var turnActions = new Array<I.IGameAction>();
                 var isFirstMove = true;
@@ -61,6 +63,14 @@
 
                 return this._socketEmit("turnEnded", turnData);
             });
+        }
+
+        private _wasNotLocalPlayerTurn(team: P.IPieceOwner, game: G.Game): boolean {
+            if (!team.isHuman()) { return true; }
+
+            var localPlayerId = this._localPlayerService.getPlayerId();
+
+            return team.ownerId() !== localPlayerId;
         }
 
         private _socketEmit(eventName: string, ...data: Array<any>): boolean {
