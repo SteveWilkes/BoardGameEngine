@@ -62,92 +62,26 @@ img.attachedPiece
 	left 50%
 	margin -30% 0 0 -5%
 
-div#game-status
+div#game-menu
 	position absolute
 	z-index 5
 	top 0
-	right 0
-	width 25%
+	left 0
+	width 20em
+	background-color #3A3145
 	color white
+	
+	h3
+		font bold 13pt Segoe UI Light, Calibri, sans-serif
+		margin-top .3em
 
-	.heading, .body
+	#menu-button
 		background-color #3A3145
-		padding .4em .5em
+		border-color #3A3145
+		margin: .1em .3em .1em 0
 
-		h3, h4, h5
-			font bold 18pt Segoe UI Light, Calibri, sans-serif
-			margin 0
-
-		h4
-			font-size 13pt
-
-		h5
-			font-size 11pt
-
-	.body
-		padding 0
-		
-		.body-content
-			background-color #4E4658
-			padding .3em .5em
-			height 10em
-			overflow auto
-
-			.history
-				div
-					padding-bottom .2em
-					overflow auto
-
-					span
-						float left
-
-					span.history-item-number
-						width 1.8em
-						text-align right
-						margin-right .2em
-
-					span.no-moves
-						font-size 90%
-						margin-left .5em
-
-			.debug
-				div
-					overflow auto
-					float left
-					clear left
-				h5
-					clear left
-					margin .1em 0
-
-				div.coords
-					width 2.2em
-					margin-left .3em
-
-				div.identifier
-					width 2.6em
-					margin-left .3em
-
-				div.info
-					clear none
-
-					span
-						float left
-						margin-right .6em
-
-.tabsContainer
-	overflow hidden
-
-	h4.tabHeading
-		float left
-		margin 0
-		padding .2em .6em .3em .6em
-		cursor pointer
-
-	h4.tabHeading.active
-		background-color #4E4658
-
-	div.tabContent
-		clear left
+	ul li a i
+		margin-right .1em
 
 div.dialog
 	position absolute
@@ -192,3 +126,5 @@ div#screen-block
 	-moz-opacity .5
 	-khtml-opacity .5
 	opacity .3
+	
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

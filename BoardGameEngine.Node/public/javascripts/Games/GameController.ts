@@ -28,6 +28,8 @@
             });
         }
 
+        public menu = { isOpen: false, selected: null };
+
         public globalEvents: GlobalEventSet;
         public displayManager: B.BoardDisplayManager;
         public game: Game;

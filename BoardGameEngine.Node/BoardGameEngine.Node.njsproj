@@ -99,7 +99,6 @@
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Tabs.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEventSet.ts" />
@@ -285,6 +284,7 @@
     <Content Include="views\Games\debug.jade" />
     <Content Include="views\Games\history.jade" />
     <Content Include="views\Games\game.jade" />
+    <Content Include="views\Games\menu.jade" />
     <Content Include="views\index.jade" />
   </ItemGroup>
   <ItemGroup>

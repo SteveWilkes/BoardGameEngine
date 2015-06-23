@@ -1,0 +1,15 @@
+﻿#game-menu(class="btn-group", dropdown is-open="gameCtrl.menu.isOpen")
+    button#menu-button(type="button", class="btn btn-primary dropdown-toggle", dropdown-toggle, ng-disabled="disabled") <i class="fa fa-bars"></i>
+    h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'")
+
+    ul(class="dropdown-menu", role="menu")
+        li
+            a(href="#" data-ng-click="gameCtrl.menu.selected = 'players'") <i class="fa fa-users fa-fw"></i> Players
+            a(href="#" data-ng-click="gameCtrl.menu.selected = 'history'") <i class="fa fa-history fa-fw"></i> Game history
+            a(href="#" data-ng-click="gameCtrl.menu.selected = 'debug'") <i class="fa fa-bug fa-fw"></i> Debug
+
+    div(data-ng-show="gameCtrl.menu.selected === 'history'")
+        include history
+
+    div(data-ng-show="gameCtrl.menu.selected === 'debug'")
+        include debug

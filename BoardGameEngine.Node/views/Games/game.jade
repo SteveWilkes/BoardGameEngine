@@ -2,12 +2,7 @@
 
     include board
 
-    #game-status
-        .heading
-            h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'") Initialising...
-        .body(data-tabs)
-            include history
-            include debug
+    include menu
 
     #game-dialog.ng-cloak.dialog(
         data-ng-cloak
