@@ -6,7 +6,8 @@
             getGameRoomId(gameId: string): string;
             getGameOrNull(gameId: string): G.Game;
             addGame(game: G.Game): void;
-            broadcastToGameRoom<TData>(eventName: string, data: TData, gameId: string): void;
+            emitToGameListeners<TData>(eventName: string, data: TData, gameId: string): void;
+            emitToGameRoom<TData>(eventName: string, data: TData, gameId: string): void;
         }
 
         export interface IGameSocketEventHandler extends Nd.ISocketEventHandler<IGameSocket> { }

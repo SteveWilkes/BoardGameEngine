@@ -96,14 +96,15 @@ class CommunicationManager implements bs.IBootstrapper {
             thisGameSocket.join(thisGameSocket.getGameRoomId(game.id));
         }
 
-        gameSocket.on("turnValidated",() => {
-            console.log("server side message received");
-        });
+        gameSocket.emitToGameListeners = function <TData>(eventName: string, data: TData, gameId: string) {
+            var thisGameSocket = <G.IGameSocket>this;
+            thisGameSocket.broadcast.to(thisGameSocket.getGameRoomId(gameId)).emit(eventName, data);
+        }
 
-        gameSocket.broadcastToGameRoom = function <TData>(eventName: string, data: TData, gameId: string) {
+        gameSocket.emitToGameRoom = function <TData>(eventName: string, data: TData, gameId: string) {
             var thisGameSocket = <G.IGameSocket>this;
             thisGameSocket.emit(eventName, data);
-            thisGameSocket.broadcast.to(thisGameSocket.getGameRoomId(gameId)).emit(eventName, data);
+            thisGameSocket.emitToGameListeners(eventName, data, gameId);
         }
 
         next();

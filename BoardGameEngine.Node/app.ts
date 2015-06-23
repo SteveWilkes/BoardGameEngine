@@ -55,13 +55,11 @@ var saveGameCommand = new SaveGameCommand(fileManager);
 
 import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinRequestedHandler");
 import GameStartedHandler = require("./Scripts/Games/EventHandlers/GameStartedHandler");
-import TurnStartedHandler = require("./Scripts/Games/EventHandlers/TurnStartedHandler");
 import TurnEndedHandler = require("./Scripts/Games/EventHandlers/TurnEndedHandler");
 
 var serverEventHandlers = [
     new PlayerJoinRequestedHandler(getGameDataQuery),
     new GameStartedHandler(gameMapper, getGameDataQuery),
-    new TurnStartedHandler(),
     new TurnEndedHandler(gameMapper, saveGameCommand)
 ];
 

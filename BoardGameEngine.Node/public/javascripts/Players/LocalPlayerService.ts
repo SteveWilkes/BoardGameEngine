@@ -10,7 +10,7 @@
             private _httpService: ng.IHttpService) { }
 
         public get(callback: (player: Player) => void): void {
-            var playerId = this.getId();
+            var playerId = this.getPlayerId();
 
             if (playerId) {
                 this._httpService.get("/api/players/" + playerId).then(result => {
@@ -24,7 +24,7 @@
             callback(this._createGuestPlayer());
         }
 
-        public getId(): string {
+        public getPlayerId(): string {
             return this._cookieService.get("playerId");
         }
 

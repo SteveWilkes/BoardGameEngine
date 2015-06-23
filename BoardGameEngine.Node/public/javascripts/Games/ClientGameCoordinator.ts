@@ -8,6 +8,7 @@
 
         constructor(
             private _socket: SocketIO.Socket,
+            private _localPlayerService: Pl.LocalPlayerService,
             private _gameMapper: G.GameMapper) {
 
             GlobalEventSet.instance.playerJoinRequested.subscribe(request => {
@@ -17,7 +18,8 @@
             this._socket.on("playerJoinValidated",(gameData: GameData) => {
                 var game = this._gameMapper.map(gameData);
                 GlobalEventSet.instance.gameLoaded.publish(game);
-                this._socketEmit("gameRestarted", game.id);
+                var localPlayerId = this._localPlayerService.getPlayerId();
+                this._socketEmit("gameRestarted", game.id, localPlayerId);
             });
         }
 
@@ -29,10 +31,6 @@
         }
 
         private _registerLocalGameEventHandlers(game: G.Game) {
-            game.events.turnStarted.subscribe(team => {
-                return this._socketEmit("turnStarted", game.id, team.id);
-            });
-
             game.events.turnEnded.subscribe(team => {
                 var turnActions = new Array<I.IGameAction>();
                 var isFirstMove = true;
@@ -77,7 +75,12 @@
         }
     }
 
+    var dependencies: Array<string|Function> = [
+        Angular.Services.$socketFactory,
+        Players.$localPlayerService,
+        Games.$gameMapper];
+
     angular
         .module(strategyGameApp)
-        .service($clientGameCoordinator, [Angular.Services.$socketFactory, Games.$gameMapper, ClientGameCoordinator]);
+        .service($clientGameCoordinator, dependencies.concat(ClientGameCoordinator));
 }

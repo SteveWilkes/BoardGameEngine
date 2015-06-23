@@ -1,10 +1,16 @@
-﻿var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
+﻿import CpuPlayerAi = require("../../Players/CpuPlayerAi");
+
+var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
 class TurnEndedHandler implements G.IGameSocketEventHandler {
+    private _cpuPlayerAi: CpuPlayerAi;
+
     constructor(
         private _gameMapper: G.GameMapper,
         private _saveGameCommand: Ts.ICommand<G.Game>) {
+
+        this._cpuPlayerAi = new CpuPlayerAi();
     }
 
     public setup(socket: G.IGameSocket): void {
@@ -19,7 +25,10 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
 
             this._saveGameCommand.execute(game);
 
-            socket.broadcastToGameRoom("turnValidated", nextTeamIndex, game.id);
+            socket.emit("turnValidated", nextTeamIndex);
+            socket.emitToGameListeners("turnEnded", turnData, game.id);
+
+            process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
         });
     }
 
@@ -49,6 +58,16 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
         Bge.Interactions.TurnCompletionManager.complete(game, nti => nextTeamIndex = nti);
 
         return nextTeamIndex;
+    }
+
+    private _performCpuTurnIfNecessary(game: G.Game, socket: G.IGameSocket) {
+        var currentTeam = game.status.turnManager.currentTeam;
+
+        if (currentTeam.owner.isHuman) { return; }
+
+        var cpuTurnData = this._cpuPlayerAi.getNextTurn(currentTeam, game.id);
+
+        socket.emitToGameRoom("turnEnded", cpuTurnData, game.id);
     }
 }
 

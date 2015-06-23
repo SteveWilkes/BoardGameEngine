@@ -1,5 +1,24 @@
-﻿class CpuPlayerAi {
-    public getNextInteraction(team: T.Team): IPieceInteraction {
+﻿var Ao: Typings.AgileObjectsNs = require("../../InternalModules");
+var Bge = Ao.BoardGameEngine;
+
+class CpuPlayerAi {
+    public getNextTurn(currentCpuTeam: T.Team, gameId: string): I.TurnData {
+        var cpuTurnInteractions = new Array<I.InteractionId>();
+
+        while (true) {
+            var nextCpuTurnInteraction = this._getNextInteraction(currentCpuTeam);
+
+            if (nextCpuTurnInteraction === undefined) { break; }
+
+            nextCpuTurnInteraction.complete();
+            var interactionId = Bge.Interactions.InteractionId.from(nextCpuTurnInteraction.id);
+            cpuTurnInteractions.push(interactionId);
+        }
+
+        return Bge.Interactions.TurnData.from(cpuTurnInteractions, gameId);
+    }
+
+    private _getNextInteraction(team: T.Team): IPieceInteraction {
         var allPotentialInteractions = this._getAllPotentialInteractions(team);
 
         if (allPotentialInteractions.length === 0) { return undefined; }

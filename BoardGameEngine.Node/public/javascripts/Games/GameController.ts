@@ -42,7 +42,7 @@
         }
 
         public loadGame(gameId: string): void {
-            var localPlayerId = this._localPlayerService.getId();
+            var localPlayerId = this._localPlayerService.getPlayerId();
             var joinRequest = new Players.PlayerJoinRequest(localPlayerId, gameId);
             this.globalEvents.playerJoinRequested.publish(joinRequest);
         }
@@ -53,7 +53,7 @@
         }
 
         private _assignLocalPlayer(game: Game): void {
-            var localPlayerId = this._localPlayerService.getId();
+            var localPlayerId = this._localPlayerService.getPlayerId();
 
             for (var i = 0; i < game.players.length; i++) {
                 var player = game.players[i];

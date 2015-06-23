@@ -5,7 +5,7 @@
         socket.on("playerJoinRequested",(request: Pl.PlayerJoinRequest) => {
             // TODO: Validate join request
             var gameData = this._getGetDataQuery.execute(request.gameId);
-            socket.broadcastToGameRoom("playerJoinValidated", gameData, gameData.gameId);
+            socket.emitToGameRoom("playerJoinValidated", gameData, gameData.gameId);
         });
     }
 }

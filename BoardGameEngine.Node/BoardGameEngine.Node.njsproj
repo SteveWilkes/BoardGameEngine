@@ -70,7 +70,6 @@
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinRequestedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\TurnEndedHandler.ts" />
-    <TypeScriptCompile Include="Scripts\Games\EventHandlers\TurnStartedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.ts" />
