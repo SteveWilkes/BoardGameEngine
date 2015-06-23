@@ -28,7 +28,9 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
             socket.emit("turnValidated", nextTeamIndex);
             socket.emitToGameListeners("turnEnded", turnData, game.id);
 
-            process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
+            if (!game.status.turnManager.currentTeam.owner.isHuman) {
+                process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
+            }
         });
     }
 
@@ -61,11 +63,7 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
     }
 
     private _performCpuTurnIfNecessary(game: G.Game, socket: G.IGameSocket) {
-        var currentTeam = game.status.turnManager.currentTeam;
-
-        if (currentTeam.owner.isHuman) { return; }
-
-        var cpuTurnData = this._cpuPlayerAi.getNextTurn(currentTeam, game.id);
+        var cpuTurnData = this._cpuPlayerAi.getNextTurn(game.status.turnManager.currentTeam, game.id);
 
         socket.emitToGameRoom("turnEnded", cpuTurnData, game.id);
     }
