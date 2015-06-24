@@ -49,6 +49,7 @@
     <TypeScriptCompile Include="gruntfile.ts" />
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
+    <TypeScriptCompile Include="public\javascripts\ControllerBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Moveable.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameCompletionMonitor.ts" />

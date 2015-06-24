@@ -2,13 +2,15 @@
     import Boards = BoardGameEngine.Boards;
 
     "ClientOnly";
-    class GameController {
+    class GameController extends ControllerBase {
         private _localPlayer: Pl.Player;
 
         constructor(
             private _localPlayerService: Pl.LocalPlayerService,
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
+
+            super();
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
 
@@ -27,8 +29,6 @@
                 this.startGame();
             });
         }
-
-        public menu = { isOpen: false, selected: null };
 
         public globalEvents: GlobalEventSet;
         public displayManager: B.BoardDisplayManager;

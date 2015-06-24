@@ -1,15 +1,28 @@
-﻿#game-menu(class="btn-group", dropdown is-open="gameCtrl.menu.isOpen")
-    button#menu-button(type="button", class="btn btn-primary dropdown-toggle", dropdown-toggle, ng-disabled="disabled") <i class="fa fa-bars"></i>
+﻿#game-menu
     h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'")
 
-    ul(class="dropdown-menu", role="menu")
-        li
-            a(href="#" data-ng-click="gameCtrl.menu.selected = 'players'") <i class="fa fa-users fa-fw"></i> Players
-            a(href="#" data-ng-click="gameCtrl.menu.selected = 'history'") <i class="fa fa-history fa-fw"></i> Game history
-            a(href="#" data-ng-click="gameCtrl.menu.selected = 'debug'") <i class="fa fa-bug fa-fw"></i> Debug
+    button(type="button", class="btn btn-default" title="Players"
+           data-ng-class="{ selected: gameCtrl.menu.selected === 'players' }" 
+           data-ng-click="gameCtrl.menu.toggle('players')") 
+        i(class="fa fa-users fa-fw")
+    
+    button(type="button", class="btn btn-default" title="Game history" 
+           data-ng-class="{ selected: gameCtrl.menu.selected === 'history' }"
+           data-ng-click="gameCtrl.menu.toggle('history')")
+        i(class="fa fa-history fa-fw")
+    
+    button(type="button", class="btn btn-default" title="Debug"
+           data-ng-class="{ selected: gameCtrl.menu.selected === 'debug' }"
+           data-ng-click="gameCtrl.menu.toggle('debug')")
+        i(class="fa fa-bug fa-fw")
+    
+    button(type="button", class="btn btn-default" title="Settings"
+           data-ng-class="{ selected: gameCtrl.menu.selected === 'settings' }"
+           data-ng-click="gameCtrl.menu.toggle('settings')")
+        i(class="fa fa-bars fa-fw")
 
-    div(data-ng-show="gameCtrl.menu.selected === 'history'")
+    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'history'")
         include history
 
-    div(data-ng-show="gameCtrl.menu.selected === 'debug'")
+    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'debug'")
         include debug

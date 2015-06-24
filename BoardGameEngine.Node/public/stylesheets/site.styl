@@ -66,22 +66,46 @@ div#game-menu
 	position absolute
 	z-index 5
 	top 0
-	left 0
-	width 20em
-	background-color #3A3145
+	right 0
+	width 22em
 	color white
+	background-color #3A3145
 	
-	h3
-		font bold 13pt Segoe UI Light, Calibri, sans-serif
-		margin-top .3em
+	h3, h4
+		margin .2em 0 .2em .4em
+		font bold 16pt Segoe UI Light, Calibri, sans-serif
 
-	#menu-button
+	h4
+		font-size 11pt
+
+	button
 		background-color #3A3145
 		border-color #3A3145
-		margin: .1em .3em .1em 0
+		outline none
 
-	ul li a i
-		margin-right .1em
+		i
+			color white
+
+	button:hover, button.selected
+		background-color #4E4658
+
+	button.selected
+		border-color #4E4658
+		border-bottom-left-radius 0
+		border-bottom-right-radius 0
+		-moz-border-bottom-left-radius 0
+		-moz-border-bottom-right-radius 0
+		-webkit-border-bottom-left-radius 0
+		-webkit-border-bottom-right-radius 0
+
+	div.menu-item
+		background-color #4E4658
+		padding-top .5em
+		
+		.body-content
+			padding 0 .8em .5em .8em
+			height 20em
+			overflow auto
 
 div.dialog
 	position absolute

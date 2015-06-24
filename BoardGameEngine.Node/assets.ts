@@ -132,5 +132,6 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Games/GameCompletionMonitor.js");
     assets.addJs("/public/javascripts/Games/GameService.js");
     assets.addJs("/public/javascripts/Games/GameService.Angular.js");
+    assets.addJs("/public/javascripts/ControllerBase.js");
     assets.addJs("/public/javascripts/Games/GameController.js");
 }
