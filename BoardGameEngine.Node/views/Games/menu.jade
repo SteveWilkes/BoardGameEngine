@@ -21,6 +21,9 @@
            data-ng-click="gameCtrl.menu.toggle('settings')")
         i(class="fa fa-bars fa-fw")
 
+    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'players'")
+        include players
+
     div.menu-item(data-ng-show="gameCtrl.menu.selected === 'history'")
         include history
 

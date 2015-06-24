@@ -1,21 +1,20 @@
 ﻿.body-content
-    .debug
-        h4 Tiles
-        div(data-ng-repeat="row in gameCtrl.game.board.rows")
-            div(data-ng-repeat="tile in row | filter: { isGameTile: true }")
-                .coords(data-ng-bind="tile.coordinates.signature")
-                .info(data-ng-if="tile.isOccupied()")
-                    span T {{tile.piece.definitionId}}
-                    span(data-ng-bind="(tile.piece.location === tile ? 'L ok' : tile.piece.location.coordinates)")
-                    span(data-ng-bind="(tile.piece.location.piece === tile.piece) ? 'P ok' : tile.piece.location.piece.definitionId")
-                .info(data-ng-if="!tile.isOccupied()") [unoccupied]
+    h4 Tiles
+    div(data-ng-repeat="row in gameCtrl.game.board.rows")
+        div(data-ng-repeat="tile in row | filter: { isGameTile: true }")
+            .coords(data-ng-bind="tile.coordinates.signature")
+            .info(data-ng-if="tile.isOccupied()")
+                span T {{tile.piece.definitionId}}
+                span(data-ng-bind="(tile.piece.location === tile ? 'L ok' : tile.piece.location.coordinates)")
+                span(data-ng-bind="(tile.piece.location.piece === tile.piece) ? 'P ok' : tile.piece.location.piece.definitionId")
+            .info(data-ng-if="!tile.isOccupied()") [unoccupied]
         
-        h4 Pieces
-        div(data-ng-repeat="player in gameCtrl.game.players")
-            div(data-ng-repeat="team in player.teams")
-                div(data-ng-repeat="piece in team.pieces")
-                    .identifier(data-ng-bind="piece.id")
-                    .info
-                        span T {{piece.definitionId}}
-                        span(data-ng-bind="(piece.location ? 'L ' + piece.location.coordinates.signature : 'L NULL')")
-                        span(data-ng-bind="(piece.location.piece === piece) ? 'P ok' : piece.location.piece.definitionId")
+    h4 Pieces
+    div(data-ng-repeat="player in gameCtrl.game.players")
+        div(data-ng-repeat="team in player.teams")
+            div(data-ng-repeat="piece in team.pieces")
+                .identifier(data-ng-bind="piece.id")
+                .info
+                    span T {{piece.definitionId}}
+                    span(data-ng-bind="(piece.location ? 'L ' + piece.location.coordinates.signature : 'L NULL')")
+                    span(data-ng-bind="(piece.location.piece === piece) ? 'P ok' : piece.location.piece.definitionId")

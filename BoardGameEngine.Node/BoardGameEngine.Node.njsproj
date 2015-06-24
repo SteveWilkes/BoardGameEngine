@@ -286,6 +286,7 @@
     <Content Include="views\Games\history.jade" />
     <Content Include="views\Games\game.jade" />
     <Content Include="views\Games\menu.jade" />
+    <Content Include="views\Games\players.jade" />
     <Content Include="views\index.jade" />
   </ItemGroup>
   <ItemGroup>
