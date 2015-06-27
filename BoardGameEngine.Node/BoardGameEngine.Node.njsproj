@@ -227,6 +227,7 @@
     <TypeScriptCompile Include="Scripts\Startup\SessionWrapper.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.TypeScript.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.cookies.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\angular\angular.localStorage.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.route.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\BoardGameEngine.ClientTypes.ts" />
     <TypeScriptCompile Include="Scripts\typings\angular\angular.d.ts" />

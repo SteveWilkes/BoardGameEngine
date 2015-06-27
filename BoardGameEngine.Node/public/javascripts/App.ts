@@ -3,7 +3,7 @@
     export var strategyGameApp = "strategyGameApp";
 
     var game = angular
-        .module(strategyGameApp, ["ngAnimate", "ngRoute", "ngCookies", "btford.socket-io"]);
+        .module(strategyGameApp, ["ngAnimate", "ngRoute", "LocalStorageModule", "btford.socket-io"]);
 
     Angular.Directives.addAddClassOnEvent(game);
     Angular.Directives.addDraggable(game);

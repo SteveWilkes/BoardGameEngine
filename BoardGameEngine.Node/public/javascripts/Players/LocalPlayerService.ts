@@ -2,11 +2,14 @@
 
     export var $localPlayerService = "$localPlayerService";
 
+    var localPlayerId = "Ao.Bge.localPlayer.id";
+    var localPlayerName = "Ao.Bge.localPlayer.name";
+
     "ClientOnly"
     export class LocalPlayerService {
         constructor(
             private _idGenerator: Angular.Services.IIdGenerator,
-            private _cookieService: ng.cookies.ICookiesService,
+            private _localStorage: ng.localStorage.ILocalStorageService,
             private _httpService: ng.IHttpService) { }
 
         public get(callback: (player: Player) => void): void {
@@ -27,17 +30,14 @@
         }
 
         public getPlayerId(): string {
-            return this._cookieService.get("playerId");
+            return this._localStorage.get(localPlayerId);
         }
 
         private _createGuestPlayer(id: string = this._idGenerator.generate()): Player {
-            var playerName = this._cookieService.get("playerName") || "Guest";
+            var playerName = this._localStorage.get(localPlayerName) || "Guest";
             var guest = this._createLocalHumanPlayer(id, playerName);
             guest["_isGuest"] = true;
-            var expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + 30);
-            this._cookieService.put("playerId", guest.id, { expires: expiryDate });
-            this._cookieService.put("playerExpiry", expiryDate.toString(), { expires: expiryDate });
+            this._localStorage.set(localPlayerId, guest.id);
 
             return guest;
         }
@@ -48,8 +48,7 @@
 
         public setPlayerName(localPlayer: Player) {
             if (localPlayer["_isGuest"]) {
-                var playerExpiryDate = this._cookieService.get("playerExpiry");
-                this._cookieService.put("playerName", localPlayer.name, { expires: playerExpiryDate });
+                this._localStorage.set(localPlayerName, localPlayer.name);
             }
         }
     }
@@ -58,7 +57,7 @@
         .module(strategyGameApp)
         .service($localPlayerService, [
         Angular.Services.$idGenerator,
-        "$cookies",
+        "localStorageService",
         "$http",
         LocalPlayerService]);
 }
