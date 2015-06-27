@@ -1,9 +1,14 @@
 ﻿@require "/public/stylesheets/common"
 
-body
+body, input
 	margin 0
 	padding 0
+	color #333
 	font normal 11pt Segoe UI, Calibri, sans-serif
+
+input
+	font-size 10pt
+	padding 0 0.3em .1em .2em
 
 .hidden
 	visibility hidden
@@ -139,8 +144,20 @@ div#game-menu
 				padding-left 0
 				list-style-type none
 
-				li i
-					margin-right .3em
+				li
+					line-height: 1.8em
+
+					i
+						margin-right .3em
+
+					i.fa-edit, i.fa-save
+						margin-left .5em
+
+i.fa-edit, i.fa-save, i.fa-close
+	cursor pointer
+
+i.fa-close
+	margin-left .1em
 
 div.dialog
 	position absolute

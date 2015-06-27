@@ -1,6 +1,23 @@
 ﻿.body-content
     ul
         li(data-ng-repeat="player in gameCtrl.game.players")
-            i(class="fa fa-fw" data-ng-class="{ 'fa-long-arrow-right': gameCtrl.game.status.turnManager.currentTeam.owner.id === player.id }" )
-            span(data-ng-bind="player.name")
+            i(class="fa fa-fw" data-ng-class="{ 'fa-long-arrow-right': gameCtrl.game.status.turnManager.currentTeam.owner === player }")
+            span(data-ng-bind="player.name" data-ng-show="gameCtrl.localPlayer !== player || gameCtrl.editing !== 'localPlayerName'")
+            
+            input(
+              data-ng-model="player.name" 
+              required="true" ng-minlength="3" ng-maxlength="25" 
+              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'" data-ng-change="true")
+            
+            i(Title="Edit" class="fa fa-edit"
+              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing !== 'localPlayerName'"
+              data-ng-click="gameCtrl.edit('localPlayerName')")
+            
+            i(Title="Save" class="fa fa-save"
+              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
+              data-ng-click="gameCtrl.save('localPlayerName')")
+            
+            i(Title="Cancel" class="fa fa-close fa-lg"
+              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
+              data-ng-click="gameCtrl.save('localPlayerName')")
                 

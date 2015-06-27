@@ -8,8 +8,6 @@
 
     "ClientOnly";
     class GameController extends ControllerBase {
-        private _localPlayer: Pl.Player;
-
         constructor(
             private _localPlayerService: Pl.LocalPlayerService,
             private _gameService: GameService,
@@ -30,21 +28,23 @@
             }
 
             this._localPlayerService.get(localPlayer => {
-                this._localPlayer = localPlayer;
+                this.localPlayer = localPlayer;
                 this.startGame();
             });
         }
 
         public globalEvents: GlobalEventSet;
         public displayManager: B.BoardDisplayManager;
+        public localPlayer: Pl.Player;
         public game: Game;
+        public editing: string;
 
         public startGame(): void {
             this.startDefaultGame("run-the-bomb");
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            this._initialiseGame(this._gameService.createDefaultGame(gameTypeId, this._localPlayer));
+            this._initialiseGame(this._gameService.createDefaultGame(gameTypeId, this.localPlayer));
             this.game.start();
         }
 
@@ -66,7 +66,7 @@
                 var player = game.players[i];
                 if (player.id === localPlayerId) {
                     player.isLocal = true;
-                    this._localPlayer = player;
+                    this.localPlayer = player;
                     return;
                 }
             }
@@ -75,6 +75,14 @@
         private _initialiseGame(game: Game): void {
             this.game = game;
             this._clientComponentSet.initialise(game);
+        }
+
+        public edit(element: string): void {
+            this.editing = element;
+        }
+
+        public save(element: string): void {
+            this.editing = undefined;
         }
     }
 
