@@ -1,5 +1,5 @@
 ﻿.body-content
-    h4 Tiles
+    h5 Tiles
     div(data-ng-repeat="row in gameCtrl.game.board.rows")
         div(data-ng-repeat="tile in row | filter: { isGameTile: true }")
             .coords(data-ng-bind="tile.coordinates.signature")
@@ -9,7 +9,7 @@
                 span(data-ng-bind="(tile.piece.location.piece === tile.piece) ? 'P ok' : tile.piece.location.piece.definitionId")
             .info(data-ng-if="!tile.isOccupied()") [unoccupied]
         
-    h4 Pieces
+    h5 Pieces
     div(data-ng-repeat="player in gameCtrl.game.players")
         div(data-ng-repeat="team in player.teams")
             div(data-ng-repeat="piece in team.pieces")

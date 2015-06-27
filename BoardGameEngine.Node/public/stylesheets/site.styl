@@ -69,37 +69,65 @@ div#game-menu
 	right 0
 	width 22em
 	color white
-	background-color #3A3145
+	background-color $dark-blue
+
+	div
+		position relative
+		overflow hidden
+
+	h3#whos-turn
+		float left
 	
-	h3, h4
-		margin .2em 0 .2em .4em
-		font bold 16pt Segoe UI Light, Calibri, sans-serif
+	h3, h4, h5
+		margin .2em 0 .4em .4em
+		font bold 18pt Segoe UI Light, Calibri, sans-serif
 
 	h4
-		font-size 11pt
+		font-size 14pt
+
+	h5
+		font-size 12pt
 
 	button
-		background-color #3A3145
-		border-color #3A3145
+		position absolute
+		bottom 0
+		right 0
+		background-color $dark-blue
+		height 2.2em
+		border-width 0px
 		outline none
-
-		i
-			color white
+		padding 2px 7px 6px 7px
 
 	button:hover, button.selected
-		background-color #4E4658
+		background-color $medium-blue
 
-	button.selected
-		border-color #4E4658
-		border-bottom-left-radius 0
-		border-bottom-right-radius 0
-		-moz-border-bottom-left-radius 0
-		-moz-border-bottom-right-radius 0
-		-webkit-border-bottom-left-radius 0
-		-webkit-border-bottom-right-radius 0
+	div#menu, div.menu-item
+		clear both
+		background-color $medium-blue
 
 	div.menu-item
-		background-color #4E4658
+		cursor pointer
+		height 2.6em
+		
+		h4
+			float left
+			margin .2em 0 0 .7em
+			background-color transparent
+
+		i
+			float right
+			margin .6em
+
+		i.back-arrow
+			float left
+			margin-top .2em
+			margin-left 0
+
+	div.menu-item.unselected:hover
+		background-color $dark-blue
+
+	div.menu-detail
+		background-color $light-blue
 		padding-top .5em
 		
 		.body-content
@@ -123,7 +151,7 @@ div.dialog
 	padding 0
 	width 26em
 	height 6em
-	border #3A3145
+	border $dark-blue
 	background-color white
 
 	h3
@@ -131,7 +159,7 @@ div.dialog
 		margin 0 0 .1em 0
 		padding 0 0 .2em .3em
 		color white
-		background-color #3A3145
+		background-color $dark-blue
 
 	span
 		text-align center

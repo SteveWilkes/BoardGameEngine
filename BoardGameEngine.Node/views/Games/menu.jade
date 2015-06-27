@@ -1,31 +1,46 @@
 ﻿#game-menu
-    h3(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'")
+    div
+        h3#whos-turn(data-ng-bind="gameCtrl.game.status.getCurrentTeamName().withOwnership() + ' turn'")
 
-    button(type="button", class="btn btn-default" title="Players"
-           data-ng-class="{ selected: gameCtrl.menu.selected === 'players' }" 
-           data-ng-click="gameCtrl.menu.toggle('players')") 
-        i(class="fa fa-users fa-fw")
-    
-    button(type="button", class="btn btn-default" title="Game history" 
-           data-ng-class="{ selected: gameCtrl.menu.selected === 'history' }"
-           data-ng-click="gameCtrl.menu.toggle('history')")
-        i(class="fa fa-history fa-fw")
-    
-    button(type="button", class="btn btn-default" title="Debug"
-           data-ng-class="{ selected: gameCtrl.menu.selected === 'debug' }"
-           data-ng-click="gameCtrl.menu.toggle('debug')")
-        i(class="fa fa-bug fa-fw")
-    
-    button(type="button", class="btn btn-default" title="Settings"
-           data-ng-class="{ selected: gameCtrl.menu.selected === 'settings' }"
-           data-ng-click="gameCtrl.menu.toggle('settings')")
-        i(class="fa fa-bars fa-fw")
+        button#menu-button(
+          title="Open menu"
+          data-ng-class="{ selected: gameCtrl.menu.isOpen }"
+          data-ng-click="gameCtrl.menu.toggleOpen()")
+            i(class="fa fa-bars fa-fw fa-lg")
 
-    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'players'")
+    #menu(data-ng-show="gameCtrl.menu.isOpen")
+        .menu-item(
+          title="Players"
+          data-ng-show="gameCtrl.menu.show('players')"
+          data-ng-class="{ selected: gameCtrl.menu.selected === 'players', unselected: gameCtrl.menu.selected !== 'players' }" 
+          data-ng-click="gameCtrl.menu.toggle('players')")
+            h4 Players
+                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'players'")
+            i(class="fa fa-users fa-fw fa-lg")
+        
+        .menu-item(
+          title="Game history"
+          data-ng-show="gameCtrl.menu.show('history')"
+          data-ng-class="{ selected: gameCtrl.menu.selected === 'history', unselected: gameCtrl.menu.selected !== 'history' }" 
+          data-ng-click="gameCtrl.menu.toggle('history')")
+            h4 Game history
+                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'history'")
+            i(class="fa fa-history fa-fw fa-lg")
+        
+        .menu-item(
+          title="Debug"
+          data-ng-show="gameCtrl.menu.show('debug')"
+          data-ng-class="{ selected: gameCtrl.menu.selected === 'debug', unselected: gameCtrl.menu.selected !== 'debug' }" 
+          data-ng-click="gameCtrl.menu.toggle('debug')")
+            h4 Debug
+                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'debug'")
+            i(class="fa fa-bug fa-fw fa-lg")
+
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'players'")
         include players
 
-    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'history'")
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'history'")
         include history
 
-    div.menu-item(data-ng-show="gameCtrl.menu.selected === 'debug'")
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'debug'")
         include debug
