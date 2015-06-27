@@ -33,6 +33,7 @@
         private _createGuestPlayer(id: string = this._idGenerator.generate()): Player {
             var playerName = this._cookieService.get("playerName") || "Guest";
             var guest = this._createLocalHumanPlayer(id, playerName);
+            guest["_isGuest"] = true;
             var expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + 30);
             this._cookieService.put("playerId", guest.id, { expires: expiryDate });
@@ -45,9 +46,11 @@
             return new Player(id, name, true, true);
         }
 
-        public setPlayerName(name: string) {
-            var playerExpiryDate = this._cookieService.get("playerExpiry");
-            this._cookieService.put("playerName", name, { expires: playerExpiryDate });
+        public setPlayerName(localPlayer: Player) {
+            if (localPlayer["_isGuest"]) {
+                var playerExpiryDate = this._cookieService.get("playerExpiry");
+                this._cookieService.put("playerName", localPlayer.name, { expires: playerExpiryDate });
+            }
         }
     }
 
