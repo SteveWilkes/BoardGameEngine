@@ -53,7 +53,7 @@ var getGameDataQuery = new GetGameDataQuery(fileManager);
 import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameCommand");
 var saveGameCommand = new SaveGameCommand(fileManager);
 
-import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinRequestedHandler");
+import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinHandler");
 import GameStartedHandler = require("./Scripts/Games/EventHandlers/GameStartedHandler");
 import TurnEndedHandler = require("./Scripts/Games/EventHandlers/TurnEndedHandler");
 

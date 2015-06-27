@@ -69,7 +69,7 @@
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
-    <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinRequestedHandler.ts" />
+    <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\TurnEndedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />

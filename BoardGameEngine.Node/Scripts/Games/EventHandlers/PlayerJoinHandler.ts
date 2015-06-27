@@ -1,4 +1,4 @@
-﻿class PlayerJoinRequestedHandler implements G.IGameSocketEventHandler {
+﻿class PlayerJoinHandler implements G.IGameSocketEventHandler {
     constructor(private _getGetDataQuery: Ts.IGetQuery<G.GameData>) { }
 
     public setup(socket: G.IGameSocket): void {
@@ -10,4 +10,4 @@
     }
 }
 
-export = PlayerJoinRequestedHandler;
+export = PlayerJoinHandler;
