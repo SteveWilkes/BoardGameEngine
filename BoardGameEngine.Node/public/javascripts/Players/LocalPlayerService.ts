@@ -15,7 +15,9 @@
             if (playerId) {
                 this._httpService.get("/api/players/" + playerId).then(result => {
                     var playerData = <PlayerData>result.data;
-                    var player = new Player(playerData.id, playerData.name, true, true);
+                    var player = (playerData == null)
+                        ? this._createLocalHumanPlayer(playerData.id, playerData.name)
+                        : this._createGuestPlayer(playerId);
                     callback(player);
                 });
                 return;
@@ -28,12 +30,24 @@
             return this._cookieService.get("playerId");
         }
 
-        private _createGuestPlayer(): Player {
-            var playerId = this._idGenerator.generate();
-            var guest = new Player(playerId, "Guest", true, true);
-            this._cookieService.put("playerId", guest.id);
+        private _createGuestPlayer(id: string = this._idGenerator.generate()): Player {
+            var playerName = this._cookieService.get("playerName") || "Guest";
+            var guest = this._createLocalHumanPlayer(id, playerName);
+            var expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + 30);
+            this._cookieService.put("playerId", guest.id, { expires: expiryDate });
+            this._cookieService.put("playerExpiry", expiryDate.toString(), { expires: expiryDate });
 
             return guest;
+        }
+
+        private _createLocalHumanPlayer(id: string, name: string) {
+            return new Player(id, name, true, true);
+        }
+
+        public setPlayerName(name: string) {
+            var playerExpiryDate = this._cookieService.get("playerExpiry");
+            this._cookieService.put("playerName", name, { expires: playerExpiryDate });
         }
     }
 
@@ -41,7 +55,7 @@
         .module(strategyGameApp)
         .service($localPlayerService, [
         Angular.Services.$idGenerator,
-        "$cookieStore",
+        "$cookies",
         "$http",
         LocalPlayerService]);
 }

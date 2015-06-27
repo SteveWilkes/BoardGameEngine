@@ -82,6 +82,11 @@
         }
 
         public save(element: string): void {
+            switch (element) {
+                case "localPlayerName":
+                    this._localPlayerService.setPlayerName(this.localPlayer.name);
+                    break;
+            }
             this.editing = undefined;
         }
     }
