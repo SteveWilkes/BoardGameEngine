@@ -4,7 +4,7 @@
         public createTeamFor(owner: ITeamOwner, game: G.Game): Team {
             var pieceCoordinatesByPiece = this._getPieceCoordinatesByPiece(game);
 
-            var teamName = owner.name + " Team";
+            var teamName = owner.name.withOwnership() + " Team";
             var team = new Team(owner, teamName, pieceCoordinatesByPiece);
 
             return team;
