@@ -1,6 +1,11 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
     import Boards = BoardGameEngine.Boards;
 
+    var menuItems = [
+        new Ui.MenuItem("players", "Players", "users"),
+        new Ui.MenuItem("history", "Game history", "history"),
+        new Ui.MenuItem("debug", "Debug", "bug")];
+
     "ClientOnly";
     class GameController extends ControllerBase {
         private _localPlayer: Pl.Player;
@@ -10,7 +15,7 @@
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
-            super();
+            super(menuItems);
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
 

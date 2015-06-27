@@ -8,39 +8,21 @@
           data-ng-click="gameCtrl.menu.toggleOpen()")
             i(class="fa fa-bars fa-fw fa-lg")
 
-    #menu(data-ng-show="gameCtrl.menu.isOpen")
+    #menu(data-ng-show="gameCtrl.menu.isOpen" data-ng-repeat="item in gameCtrl.menu.items")
         .menu-item(
-          title="Players"
-          data-ng-show="gameCtrl.menu.show('players')"
-          data-ng-class="{ selected: gameCtrl.menu.selected === 'players', unselected: gameCtrl.menu.selected !== 'players' }" 
-          data-ng-click="gameCtrl.menu.toggle('players')")
-            h4 Players
-                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'players'")
-            i(class="fa fa-users fa-fw fa-lg")
-        
-        .menu-item(
-          title="Game history"
-          data-ng-show="gameCtrl.menu.show('history')"
-          data-ng-class="{ selected: gameCtrl.menu.selected === 'history', unselected: gameCtrl.menu.selected !== 'history' }" 
-          data-ng-click="gameCtrl.menu.toggle('history')")
-            h4 Game history
-                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'history'")
-            i(class="fa fa-history fa-fw fa-lg")
-        
-        .menu-item(
-          title="Debug"
-          data-ng-show="gameCtrl.menu.show('debug')"
-          data-ng-class="{ selected: gameCtrl.menu.selected === 'debug', unselected: gameCtrl.menu.selected !== 'debug' }" 
-          data-ng-click="gameCtrl.menu.toggle('debug')")
-            h4 Debug
-                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === 'debug'")
-            i(class="fa fa-bug fa-fw fa-lg")
+          title="{{item.label}}"
+          data-ng-show="gameCtrl.menu.shouldShow(item)"
+          data-ng-class="{ selected: gameCtrl.menu.selected === item, unselected: gameCtrl.menu.selected !== item }" 
+          data-ng-click="gameCtrl.menu.toggle(item)")
+            h4 {{item.label}}
+                i(class="back-arrow fa fa-arrow-circle-left" data-ng-show="gameCtrl.menu.selected === item")
+            i(class="fa fa-fw fa-lg" data-ng-class="{ 'fa-{{item.iconName}}': true }")
 
-    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'players'")
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === gameCtrl.menu.players")
         include players
 
-    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'history'")
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === gameCtrl.menu.history")
         include history
 
-    div.menu-detail(data-ng-show="gameCtrl.menu.selected === 'debug'")
+    div.menu-detail(data-ng-show="gameCtrl.menu.selected === gameCtrl.menu.debug")
         include debug

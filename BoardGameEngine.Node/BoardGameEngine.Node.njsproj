@@ -66,6 +66,8 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnCompletionManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\LocalPlayerService.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
+    <TypeScriptCompile Include="public\javascripts\Ui\Menu.ts" />
+    <TypeScriptCompile Include="public\javascripts\Ui\MenuItem.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
