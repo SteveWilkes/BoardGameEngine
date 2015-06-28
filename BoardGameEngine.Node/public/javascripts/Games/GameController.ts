@@ -50,8 +50,8 @@
 
         public loadGame(gameId: string): void {
             var localPlayerId = this._localPlayerService.getPlayerId();
-            var joinRequest = new Players.PlayerJoinRequest(localPlayerId, gameId);
-            this.globalEvents.playerJoinRequested.publish(joinRequest);
+            var loadRequest = new Players.PlayerRequest(localPlayerId, gameId);
+            this.globalEvents.gameLoadRequested.publish(loadRequest);
         }
 
         private _handleGameLoaded(game: Game): void {

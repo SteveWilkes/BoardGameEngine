@@ -59,7 +59,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/PieceLocationBase.js");
     assets.addJs("/public/javascripts/Players/Player.js");
     assets.addJs("/public/javascripts/Players/PlayerData.js");
-    assets.addJs("/public/javascripts/Players/PlayerJoinRequest.js");
+    assets.addJs("/public/javascripts/Players/PlayerRequest.js");
     assets.addJs("/public/javascripts/Players/LocalPlayerService.js");
     assets.addJs("/public/javascripts/Boards/BoardTile.js");
     assets.addJs("/public/javascripts/Boards/BoardTileAnnotation.js");

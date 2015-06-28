@@ -11,15 +11,20 @@
             private _localPlayerService: Pl.LocalPlayerService,
             private _gameMapper: G.GameMapper) {
 
+            GlobalEventSet.instance.gameLoadRequested.subscribe(request => {
+                return this._socketEmit("gameLoadRequested", request);
+            });
+
             GlobalEventSet.instance.playerJoinRequested.subscribe(request => {
                 return this._socketEmit("playerJoinRequested", request);
             });
 
-            this._socket.on("playerJoinValidated",(gameData: GameData) => {
+            this._socket.on("gameLoadValidated",(gameData: GameData) => {
                 var game = this._gameMapper.map(gameData);
                 GlobalEventSet.instance.gameLoaded.publish(game);
                 var localPlayerId = this._localPlayerService.getPlayerId();
-                this._socketEmit("gameRestarted", game.id, localPlayerId);
+                var data = new Players.PlayerRequest(localPlayerId, game.id);
+                this._socketEmit("gameRestarted", data);
             });
         }
 

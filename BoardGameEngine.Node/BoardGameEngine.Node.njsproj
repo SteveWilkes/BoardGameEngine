@@ -70,7 +70,7 @@
     <TypeScriptCompile Include="public\javascripts\Ui\MenuItem.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
-    <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameStartedHandler.ts" />
+    <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameLoadHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\TurnEndedHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
@@ -180,7 +180,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslator.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\Interactions\PieceInteractionProfile.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\Player.ts" />
-    <TypeScriptCompile Include="public\javascripts\Players\PlayerJoinRequest.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\PlayerRequest.ts" />
     <TypeScriptCompile Include="public\javascripts\Routing.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnRegulator.ts" />
