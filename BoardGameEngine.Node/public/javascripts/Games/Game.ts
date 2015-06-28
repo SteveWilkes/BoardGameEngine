@@ -22,9 +22,11 @@
 
         public add(player: Pl.Player): void {
             if (this.players.indexOf(player) === -1) {
-                this.players.push(player);
+                for (var i = 0; i < this.players.length; i++) {
+                    if (this.players[i].id === player.id) { return; }
+                }
 
-                this.events.playerJoined.publish(player);
+                this.players.push(player);
             }
         }
 

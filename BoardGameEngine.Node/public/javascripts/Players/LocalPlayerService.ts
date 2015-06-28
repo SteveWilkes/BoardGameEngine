@@ -33,8 +33,12 @@
             return this._localStorage.get(localPlayerId);
         }
 
+        public getPlayerName(): string {
+            return this._localStorage.get(localPlayerName) || "Guest";
+        }
+
         private _createGuestPlayer(id: string = this._idGenerator.generate()): Player {
-            var playerName = this._localStorage.get(localPlayerName) || "Guest";
+            var playerName = this.getPlayerName();
             var guest = this._createLocalHumanPlayer(id, playerName);
             guest["_isGuest"] = true;
             this._localStorage.set(localPlayerId, guest.id);

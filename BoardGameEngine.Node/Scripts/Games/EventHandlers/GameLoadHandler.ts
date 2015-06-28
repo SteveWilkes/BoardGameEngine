@@ -14,6 +14,7 @@
             var gameData = this._getGetDataQuery.execute(data.gameId);
             var game = this._gameMapper.map(gameData);
             socket.addGame(game);
+            socket.emitToGameRoom("playerJoinValidated", data, game.id);
             console.log("Game " + game.id + " recreated for player " + data.playerId);
         });
     }

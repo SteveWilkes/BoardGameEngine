@@ -80,7 +80,7 @@
 
     interface Players {
         Player: new (id: string, name: string, isHuman: boolean, isLocal?: boolean) => Pl.Player;
-        PlayerData: new (player: Pl.Player) => Pl.PlayerData;
+        PlayerData: new (player?: Pl.Player) => Pl.PlayerData;
     }
 
     interface Teams {

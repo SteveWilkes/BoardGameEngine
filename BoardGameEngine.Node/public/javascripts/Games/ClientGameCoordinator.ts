@@ -15,16 +15,23 @@
                 return this._socketEmit("gameLoadRequested", request);
             });
 
+            this._socket.on("gameLoadValidated",(gameData: GameData) => {
+                var game = this._gameMapper.map(gameData);
+                GlobalEventSet.instance.gameLoaded.publish(game);
+
+                var localPlayerId = this._localPlayerService.getPlayerId();
+                var localPlayerName = this._localPlayerService.getPlayerName();
+                var data = new Players.PlayerRequest(localPlayerId, localPlayerName, game.id);
+                this._socketEmit("gameRestarted", data);
+            });
+
             GlobalEventSet.instance.playerJoinRequested.subscribe(request => {
                 return this._socketEmit("playerJoinRequested", request);
             });
 
-            this._socket.on("gameLoadValidated",(gameData: GameData) => {
-                var game = this._gameMapper.map(gameData);
-                GlobalEventSet.instance.gameLoaded.publish(game);
-                var localPlayerId = this._localPlayerService.getPlayerId();
-                var data = new Players.PlayerRequest(localPlayerId, game.id);
-                this._socketEmit("gameRestarted", data);
+            this._socket.on("playerJoinValidated",(request: Pl.PlayerRequest) => {
+                var playerData = new Players.Player(request.playerId, request.playerName, true, false);
+                GlobalEventSet.instance.playerJoined.publish(playerData);
             });
         }
 

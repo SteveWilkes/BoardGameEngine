@@ -16,6 +16,7 @@
             super(menuItems);
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
+            GlobalEventSet.instance.playerJoined.subscribe(player => this.game.add(player) === void (0));
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._clientComponentSet.displayManager;
@@ -50,7 +51,8 @@
 
         public loadGame(gameId: string): void {
             var localPlayerId = this._localPlayerService.getPlayerId();
-            var loadRequest = new Players.PlayerRequest(localPlayerId, gameId);
+            var localPlayerName = this._localPlayerService.getPlayerName();
+            var loadRequest = new Players.PlayerRequest(localPlayerId, localPlayerName, gameId);
             this.globalEvents.gameLoadRequested.publish(loadRequest);
         }
 
