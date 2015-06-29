@@ -9,14 +9,15 @@
     "ClientOnly";
     class GameController extends ControllerBase {
         constructor(
+            scope: ng.IScope,
             private _localPlayerService: Pl.LocalPlayerService,
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
-            super(menuItems);
+            super(scope, menuItems);
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
-            GlobalEventSet.instance.playerJoined.subscribe(player => this.game.add(player) === void (0));
+            GlobalEventSet.instance.playerJoined.subscribe(player => this._handlePlayerJoined(player) === void (0));
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._clientComponentSet.displayManager;
@@ -79,6 +80,11 @@
             this._clientComponentSet.initialise(game);
         }
 
+        private _handlePlayerJoined(player: Pl.Player): void {
+            this.game.add(player);
+            this.refreshUi;
+        }
+
         public edit(element: string): void {
             this.editing = element;
         }
@@ -96,6 +102,7 @@
     angular
         .module(strategyGameApp)
         .controller("GameController", [
+        "$scope",
         Players.$localPlayerService,
         $gameService,
         Ui.$clientComponentSet,

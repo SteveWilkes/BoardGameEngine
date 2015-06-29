@@ -6,7 +6,7 @@
 
             var func: (item: Object) => boolean;
             if (typeof $s["subject"] === "object") {
-                var subject = <AgileObjects.TypeScript.IStringDictionary<(item: Object) => boolean>>$s["subject"];
+                var subject = <Ts.IStringDictionary<(item: Object) => boolean>>$s["subject"];
                 var instanceMethodNameGetter = <() => string>$s[functionName];
                 if (typeof instanceMethodNameGetter === "function") {
                     var instanceMethodName = instanceMethodNameGetter();
@@ -15,7 +15,7 @@
                         func = (item: Object) => instanceMethod.call(subject, item);
                     }
                     else if (instanceMethod instanceof AgileObjects.TypeScript.EventHub) {
-                        var eventHub = <AgileObjects.TypeScript.EventHub<Object>><Object>instanceMethod;
+                        var eventHub = <Ts.EventHub<Object>><Object>instanceMethod;
                         func = (item: Object) => eventHub.publish(item);
                     }
                 }
