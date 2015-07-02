@@ -6,6 +6,7 @@
         .module(strategyGameApp, ["ngAnimate", "ngRoute", "LocalStorageModule", "btford.socket-io"]);
 
     Angular.Directives.addAddClassOnEvent(game);
+    Angular.Directives.addRefreshOnEvent(game);
     Angular.Directives.addDraggable(game);
     Angular.Directives.addDraggableDroppable(game);
     Angular.Directives.addDroppable(game);

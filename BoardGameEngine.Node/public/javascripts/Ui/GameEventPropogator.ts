@@ -11,6 +11,11 @@
                 game.events.pieceAttacked,
                 "attack",
                 attack => attack.target.coordinates.signature);
+
+            this._eventPropogator.propogate(
+                game.events.playerJoined,
+                "playerJoined",
+                () => "player-list");
         }
     }
 

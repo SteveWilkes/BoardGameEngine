@@ -1,5 +1,5 @@
 ﻿.body-content
-    ul
+    ul#player-list(data-refresh-on-event data-event-name="'playerJoined'")
         li(data-ng-repeat="player in gameCtrl.game.players")
             i(class="fa fa-fw" data-ng-class="{ 'fa-long-arrow-right': gameCtrl.game.status.turnManager.currentTeam.owner === player }")
             span(data-ng-bind="player.name" data-ng-show="gameCtrl.localPlayer !== player || gameCtrl.editing !== 'localPlayerName'")

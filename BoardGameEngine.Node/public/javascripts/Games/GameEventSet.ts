@@ -1,6 +1,7 @@
 ﻿module AgileObjects.BoardGameEngine.Games {
 
     export class GameEventSet {
+        public playerJoined = new TypeScript.EventHub<Pl.Player>();
         public teamAdded = new TypeScript.EventHub<B.TeamAdditionData>();
         public teamRemoved = new TypeScript.EventHub<T.Team>();
 

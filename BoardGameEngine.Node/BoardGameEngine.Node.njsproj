@@ -50,6 +50,7 @@
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
     <TypeScriptCompile Include="public\javascripts\ControllerBase.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.RefreshOnEvent.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.Moveable.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameCompletionMonitor.ts" />

@@ -27,6 +27,7 @@
                 }
 
                 this.players.push(player);
+                this.events.playerJoined.publish(player);
             }
         }
 
