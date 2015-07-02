@@ -50,7 +50,7 @@
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
     <TypeScriptCompile Include="public\javascripts\ControllerBase.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.Moveable.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.Moveable.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameCompletionMonitor.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameData.ts" />
@@ -77,7 +77,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\SaveGameCommand.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Routing.NoReloadPath.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Routing.NoReloadPath.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPotentialInteractionsEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Annotations\AgileObjects.TypeScript.EntityAnnotationBase.ts" />
@@ -97,11 +97,11 @@
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\GetBoardTypeQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\TeamAdditionData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.AddClassOnEvent.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.DragAndDrop.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.RemoveClass.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
-    <TypeScriptCompile Include="public\javascripts\Directives\AgileObjects.Angular.Directives.SizeToContainer.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.AddClassOnEvent.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.DragAndDrop.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.RemoveClass.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.ScrollToBottom.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.SizeToContainer.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\Game.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameController.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\GameEventSet.ts" />
@@ -131,8 +131,8 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnInteractionDefinition.ts" />
     <TypeScriptCompile Include="public\javascripts\Pieces\PieceDataSet.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.EventPropogation.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.Sockets.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Services.EventPropogation.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Services.Sockets.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinatesLibrary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.CoordinateTranslatorLibrary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventCallbackSet.ts" />
@@ -146,8 +146,8 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.Iterator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Joq\AgileObjects.TypeScript.Joq.ts" />
     <TypeScriptCompile Include="public\javascripts\GlobalEventSet.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.Services.IdGeneration.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.JQuery.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Services.IdGeneration.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.JQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Extensions.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IEntity.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IGetQuery.ts" />
@@ -185,7 +185,7 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnData.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnRegulator.ts" />
     <TypeScriptCompile Include="public\javascripts\Status\TurnManager.ts" />
-    <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.Angular.ScopeEvaluator.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.ScopeEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventHub.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.Dictionary.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.IStringDictionary.ts" />
@@ -298,6 +298,7 @@
     <Folder Include="public\javascripts\Generic\Joq\" />
     <Folder Include="public\javascripts\Generic\Evaluation\" />
     <Folder Include="public\javascripts\Generic\Annotations\" />
+    <Folder Include="public\javascripts\Generic\Angular\" />
     <Folder Include="public\javascripts\Interactions\" />
     <Folder Include="Scripts\Games\EventHandlers\" />
     <Folder Include="Scripts\Games\QueryObjects\" />
@@ -311,7 +312,6 @@
     <Folder Include="public\images\pieces\" />
     <Folder Include="public\javascripts\" />
     <Folder Include="public\javascripts\Boards\" />
-    <Folder Include="public\javascripts\Directives\" />
     <Folder Include="public\javascripts\Games\" />
     <Folder Include="public\javascripts\Generic\" />
     <Folder Include="public\javascripts\Ui\" />
