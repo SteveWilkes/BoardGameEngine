@@ -1,4 +1,4 @@
-﻿module AgileObjects.BoardGameEngine.Ui {
+﻿module AgileObjects.Angular {
 
     "ClientOnly"
     export class Menu {

@@ -2,12 +2,12 @@
     import Boards = BoardGameEngine.Boards;
 
     var menuItems = [
-        new Ui.MenuItem("players", "Players", "users"),
-        new Ui.MenuItem("history", "Game history", "history"),
-        new Ui.MenuItem("debug", "Debug", "bug")];
+        new Angular.MenuItem("players", "Players", "users"),
+        new Angular.MenuItem("history", "Game history", "history"),
+        new Angular.MenuItem("debug", "Debug", "bug")];
 
     "ClientOnly";
-    class GameController extends ControllerBase {
+    class GameController extends Angular.ControllerBase {
         constructor(
             private _localPlayerService: Pl.LocalPlayerService,
             private _gameService: GameService,

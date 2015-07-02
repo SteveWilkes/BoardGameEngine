@@ -130,11 +130,11 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Games/Mapping/GameMapper.Angular.js");
     assets.addJs("/public/javascripts/Games/ClientGameCoordinator.js");
     assets.addJs("/public/javascripts/Ui/CompositeClientComponentSet.js");
-    assets.addJs("/public/javascripts/Ui/MenuItem.js");
-    assets.addJs("/public/javascripts/Ui/Menu.js");
+    assets.addJs("/public/javascripts/Generic/Angular/MenuItem.js");
+    assets.addJs("/public/javascripts/Generic/Angular/Menu.js");
     assets.addJs("/public/javascripts/Games/GameCompletionMonitor.js");
     assets.addJs("/public/javascripts/Games/GameService.js");
     assets.addJs("/public/javascripts/Games/GameService.Angular.js");
-    assets.addJs("/public/javascripts/ControllerBase.js");
+    assets.addJs("/public/javascripts/Generic/Angular/ControllerBase.js");
     assets.addJs("/public/javascripts/Games/GameController.js");
 }

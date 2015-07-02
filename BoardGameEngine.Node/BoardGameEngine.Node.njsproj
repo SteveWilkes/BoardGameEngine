@@ -49,7 +49,7 @@
     <TypeScriptCompile Include="gruntfile.ts" />
     <TypeScriptCompile Include="NodeApp.ts" />
     <TypeScriptCompile Include="public\javascripts\Boards\BoardTileAnnotation.ts" />
-    <TypeScriptCompile Include="public\javascripts\ControllerBase.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\ControllerBase.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.RefreshOnEvent.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Directives.Moveable.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\ClientGameCoordinator.ts" />
@@ -67,8 +67,8 @@
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnCompletionManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\LocalPlayerService.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
-    <TypeScriptCompile Include="public\javascripts\Ui\Menu.ts" />
-    <TypeScriptCompile Include="public\javascripts\Ui\MenuItem.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\Menu.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\MenuItem.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameLoadHandler.ts" />
