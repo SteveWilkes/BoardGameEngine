@@ -62,6 +62,7 @@
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\Mapping\GameMapper.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.ICommand.ts" />
+    <TypeScriptCompile Include="public\javascripts\Generic\Angular\IEditHandler.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\InteractionId.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnApplicationManager.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\TurnCompletionManager.ts" />
@@ -69,6 +70,7 @@
     <TypeScriptCompile Include="public\javascripts\Players\PlayerData.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\Menu.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\MenuItem.ts" />
+    <TypeScriptCompile Include="public\javascripts\Players\PlayerNameEditHandler.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameLoadHandler.ts" />

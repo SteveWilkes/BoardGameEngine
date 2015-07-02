@@ -8,5 +8,6 @@
         public gameLoaded = new TypeScript.EventHub<G.Game>();
         public playerJoinRequested = new TypeScript.EventHub<Pl.PlayerRequest>();
         public playerJoined = new TypeScript.EventHub<Pl.Player>();
+        public playerNameUpdated = new TypeScript.EventHub<Pl.Player>();
     }
 } 

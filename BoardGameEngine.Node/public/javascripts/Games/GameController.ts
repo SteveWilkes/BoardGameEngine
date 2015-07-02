@@ -6,6 +6,9 @@
         new Angular.MenuItem("history", "Game history", "history"),
         new Angular.MenuItem("debug", "Debug", "bug")];
 
+    var editHandlers = [
+        new Players.PlayerNameEditHandler()];
+
     "ClientOnly";
     class GameController extends Angular.ControllerBase {
         constructor(
@@ -13,7 +16,7 @@
             private _gameService: GameService,
             private _clientComponentSet: Ui.CompositeClientComponentSet) {
 
-            super(menuItems);
+            super(menuItems, editHandlers);
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
             GlobalEventSet.instance.playerJoined.subscribe(player => this._handlePlayerJoined(player) === void (0));
@@ -38,7 +41,6 @@
         public displayManager: B.BoardDisplayManager;
         public localPlayer: Pl.Player;
         public game: Game;
-        public editing: string;
 
         public startGame(): void {
             this.startDefaultGame("run-the-bomb");
@@ -81,19 +83,6 @@
 
         private _handlePlayerJoined(player: Pl.Player): void {
             this.game.add(player);
-        }
-
-        public edit(element: string): void {
-            this.editing = element;
-        }
-
-        public save(element: string): void {
-            switch (element) {
-                case "localPlayerName":
-                    this._localPlayerService.setPlayerName(this.localPlayer);
-                    break;
-            }
-            this.editing = undefined;
         }
     }
 

@@ -11,13 +11,13 @@
             
             i(Title="Edit" class="fa fa-edit"
               data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing !== 'localPlayerName'"
-              data-ng-click="gameCtrl.edit('localPlayerName')")
+              data-ng-click="gameCtrl.edit('localPlayerName', player)")
             
             i(Title="Save" class="fa fa-save"
               data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
-              data-ng-click="gameCtrl.save('localPlayerName')")
+              data-ng-click="gameCtrl.save('localPlayerName', player)")
             
             i(Title="Cancel" class="fa fa-close fa-lg"
               data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
-              data-ng-click="gameCtrl.save('localPlayerName')")
+              data-ng-click="gameCtrl.cancel('localPlayerName', player)")
                 
