@@ -4,20 +4,21 @@
             i(class="fa fa-fw" data-ng-class="{ 'fa-long-arrow-right': gameCtrl.game.status.turnManager.currentTeam.owner === player }")
             span(data-ng-bind="player.name" data-ng-show="gameCtrl.localPlayer !== player || gameCtrl.editing !== 'localPlayerName'")
             
-            input(
-              data-ng-model="player.name" 
-              required="true" ng-minlength="3" ng-maxlength="25" 
-              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'" data-ng-change="true")
+            span(data-ng-show="gameCtrl.localPlayer === player")
+                
+                input(
+                  data-ng-model="player.name" 
+                  required="true" ng-minlength="3" ng-maxlength="25" 
+                  data-ng-show="gameCtrl.editing === 'localPlayerName'" data-ng-change="true")
             
-            i(Title="Edit" class="fa fa-edit"
-              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing !== 'localPlayerName'"
-              data-ng-click="gameCtrl.edit('localPlayerName', player)")
+                i(Title="Edit" class="fa fa-edit"
+                  data-ng-show="gameCtrl.editing !== 'localPlayerName'"
+                  data-ng-click="gameCtrl.edit('localPlayerName', player)")
             
-            i(Title="Save" class="fa fa-save"
-              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
-              data-ng-click="gameCtrl.save('localPlayerName', player)")
+                span(data-ng-show="gameCtrl.editing === 'localPlayerName'")
+                    i(Title="Save" class="fa fa-save"
+                      data-ng-click="gameCtrl.save('localPlayerName', player)")
             
-            i(Title="Cancel" class="fa fa-close fa-lg"
-              data-ng-show="gameCtrl.localPlayer === player && gameCtrl.editing === 'localPlayerName'"
-              data-ng-click="gameCtrl.cancel('localPlayerName', player)")
+                    i(Title="Cancel" class="fa fa-close fa-lg"
+                      data-ng-click="gameCtrl.cancel('localPlayerName', player)")
                 
