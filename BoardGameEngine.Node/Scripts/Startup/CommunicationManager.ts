@@ -87,12 +87,17 @@ class CommunicationManager implements bs.IBootstrapper {
                 ? thisGameSocket.session.games[gameId] : null;
         }
 
-        gameSocket.addGame = function (game: G.Game) {
+        gameSocket.getGames = function () {
             var thisGameSocket = <G.IGameSocket>this;
             if (!thisGameSocket.session.hasOwnProperty("games")) {
                 thisGameSocket.session.games = {};
             }
-            thisGameSocket.session.games[game.id] = game;
+            return thisGameSocket.session.games;
+        }
+
+        gameSocket.addGame = function (game: G.Game) {
+            var thisGameSocket = <G.IGameSocket>this;
+            thisGameSocket.getGames()[game.id] = game;
             thisGameSocket.join(thisGameSocket.getGameRoomId(game.id));
         }
 
