@@ -11,7 +11,9 @@
         }
 
         public save<TItem>(item: TItem): void {
-            GlobalEventSet.instance.playerNameUpdated.publish(<Player><Object>item);
+            var player = <Player><Object>item;
+            var request = new PlayerRequest(player.id, player.name, null);
+            GlobalEventSet.instance.playerNameUpdated.publish(request);
             this._originalPlayerName = undefined;
         }
 

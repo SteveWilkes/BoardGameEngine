@@ -71,6 +71,7 @@
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\Menu.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\MenuItem.ts" />
     <TypeScriptCompile Include="public\javascripts\Players\PlayerNameEditHandler.ts" />
+    <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerUpdateHandler.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameLoadHandler.ts" />

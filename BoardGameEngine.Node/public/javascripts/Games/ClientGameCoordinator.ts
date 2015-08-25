@@ -33,6 +33,17 @@
                 var playerData = new Players.Player(request.playerId, request.playerName, true, false);
                 GlobalEventSet.instance.playerJoined.publish(playerData);
             });
+
+            GlobalEventSet.instance.playerNameUpdated.subscribe(request => {
+                var localPlayerId = this._localPlayerService.getPlayerId();
+                if (request.playerId === localPlayerId) {
+                    return this._socketEmit("playerNameUpdated", request);
+                }
+            });
+
+            this._socket.on("playerNameUpdateValidated",(request: Pl.PlayerRequest) => {
+                GlobalEventSet.instance.playerNameUpdated.publish(request);
+            });
         }
 
         public initialise(game: Games.Game): void {

@@ -20,6 +20,7 @@
 
             GlobalEventSet.instance.gameLoaded.subscribe(game => this._handleGameLoaded(game) === void (0));
             GlobalEventSet.instance.playerJoined.subscribe(player => this._handlePlayerJoined(player) === void (0));
+            GlobalEventSet.instance.playerNameUpdated.subscribe(data => this._handlePlayerNameUpdate(data) === void (0));
 
             this.globalEvents = GlobalEventSet.instance;
             this.displayManager = this._clientComponentSet.displayManager;
@@ -83,6 +84,14 @@
 
         private _handlePlayerJoined(player: Pl.Player): void {
             this.game.add(player);
+        }
+
+        private _handlePlayerNameUpdate(data: Pl.PlayerRequest): void {
+            for (var i = 0; i < this.game.players.length; i++) {
+                if (this.game.players[i].id === data.playerId) {
+                    this.game.players[i].name = data.playerName;
+                }
+            }
         }
     }
 
