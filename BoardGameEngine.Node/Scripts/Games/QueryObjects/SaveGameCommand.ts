@@ -7,7 +7,8 @@ class SaveGameCommand implements Ts.ICommand<G.Game> {
     constructor(private _fileManager: Ts.IFileManager) {
         this._rootSaveDirectory = this._fileManager.joinPaths(
             this._fileManager.getAppRootDirectory(),
-            "_savedData");
+            "_savedData",
+            "games");
     }
 
     public execute(game: G.Game): void {
@@ -16,7 +17,7 @@ class SaveGameCommand implements Ts.ICommand<G.Game> {
 
         var pathToGameSaveFile = this._fileManager.joinPaths(
             this._rootSaveDirectory,
-            "game_" + game.id + ".json");
+            game.id + ".json");
 
         this._fileManager.writeAllText(pathToGameSaveFile, gameDataJson);
     }

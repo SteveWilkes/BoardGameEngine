@@ -4,14 +4,15 @@
     constructor(private _fileManager: Ts.IFileManager) {
         this._rootSaveDirectory = this._fileManager.joinPaths(
             this._fileManager.getAppRootDirectory(),
-            "_savedData");
+            "_savedData",
+            "games");
     }
 
 
     public execute(gameId: string): G.GameData {
         var pathToGameSaveFile = this._fileManager.joinPaths(
             this._rootSaveDirectory,
-            "game_" + gameId + ".json");
+            gameId + ".json");
 
         var gameDataJson = this._fileManager.readAllText(pathToGameSaveFile);
         var gameData = JSON.parse(gameDataJson);
