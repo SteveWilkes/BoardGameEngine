@@ -1,7 +1,7 @@
 ﻿var Ao: Typings.AgileObjectsNs = require("../../../InternalModules");
 var Bge = Ao.BoardGameEngine;
 
-class SaveGameCommand implements Ts.ICommand<G.Game> {
+class SaveGameToFileCommand implements Ts.ICommand<G.Game> {
     private _rootSaveDirectory: string;
 
     constructor(private _fileManager: Ts.IFileManager) {
@@ -23,4 +23,4 @@ class SaveGameCommand implements Ts.ICommand<G.Game> {
     }
 }
 
-export = SaveGameCommand;
+export = SaveGameToFileCommand;

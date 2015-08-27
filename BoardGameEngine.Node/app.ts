@@ -47,10 +47,10 @@ var gameMapper = new Bge.Games.GameMapper(
                 patternMapper))),
     new Bge.Teams.TeamFactory());
 
-import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataQuery");
+import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataFromFileQuery");
 var getGameDataQuery = new GetGameDataQuery(fileManager);
 
-import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameCommand");
+import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameToFileCommand");
 var saveGameCommand = new SaveGameCommand(fileManager);
 
 import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinHandler");

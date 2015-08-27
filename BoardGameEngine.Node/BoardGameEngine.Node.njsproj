@@ -77,10 +77,10 @@
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\GameLoadHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerJoinHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\TurnEndedHandler.ts" />
-    <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataFromFileQuery.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.Angular.ts" />
     <TypeScriptCompile Include="public\javascripts\Games\QueryObjects\GetGameTypeQuery.ts" />
-    <TypeScriptCompile Include="Scripts\Games\QueryObjects\SaveGameCommand.ts" />
+    <TypeScriptCompile Include="Scripts\Games\QueryObjects\SaveGameToFileCommand.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\Angular\AgileObjects.Angular.Routing.NoReloadPath.ts" />
     <TypeScriptCompile Include="public\javascripts\Interactions\IPotentialInteractionsEvaluator.ts" />
     <TypeScriptCompile Include="public\javascripts\Generic\AgileObjects.TypeScript.EventMapping.ts" />

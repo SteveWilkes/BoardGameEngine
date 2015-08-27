@@ -1,4 +1,4 @@
-﻿class GetGameDataQuery implements Ts.IGetQuery<G.GameData> {
+﻿class GetGameDataFromFileQuery implements Ts.IGetQuery<G.GameData> {
     private _rootSaveDirectory: string;
 
     constructor(private _fileManager: Ts.IFileManager) {
@@ -7,7 +7,6 @@
             "_savedData",
             "games");
     }
-
 
     public execute(gameId: string): G.GameData {
         var pathToGameSaveFile = this._fileManager.joinPaths(
@@ -21,4 +20,4 @@
     }
 }
 
-export = GetGameDataQuery;
+export = GetGameDataFromFileQuery;

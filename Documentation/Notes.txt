@@ -1,0 +1,16 @@
+// Retrieve
+var MongoClient = require("mongodb").MongoClient;
+
+// Connect to the db
+MongoClient.connect("mongodb://bge_user:NC*oAjpm4$U76D@ds040948.mongolab.com:40948/boardgameengine", function (err, db) {
+    if (!err) {
+        console.log("Connected!");
+
+        var games = db.collection("games");
+        var game = { "gameId": "eve67ax6mbt65hfrfxv5", "gameTypeId": "run-the-bomb", "ownerId": "ba6mcj6j7deljtt9tqbj", "playerData": [{ "id": "ba6mcj6j7deljtt9tqbj", "name": "Steve! :o", "isHuman": true, "numberOfTeams": 1 }, { "id": "CPU1", "name": "CPU", "isHuman": false, "numberOfTeams": 1 }], "historyData": ["1-7:0:3x5>5x5", "2-9:0:7x7>6x6", "1-9:0:3x7>4x8", "2-9:0:6x6>4x6", "1-1:0:1x5>2x5", "2-4:0:8x6>7x7", "1-5:0:3x3>4x2", "2-7:0:7x5>6x4"] };
+
+        games.insert(game, { w: 1 }, function (err, result) {
+            console.log("err = " + err + ", result = " + result);
+        });
+    }
+});
