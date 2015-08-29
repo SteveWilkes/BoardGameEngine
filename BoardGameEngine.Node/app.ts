@@ -60,8 +60,8 @@ var gameMapper = new Bge.Games.GameMapper(
                 patternMapper))),
     new Bge.Teams.TeamFactory());
 
-import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataFromFileQuery");
-var getGameDataQuery = new GetGameDataQuery(fileManager);
+import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataFromMongoQuery");
+var getGameDataQuery = new GetGameDataQuery(mongoCallback);
 
 import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameToFileCommand");
 var saveGameCommand = new SaveGameCommand(fileManager);
