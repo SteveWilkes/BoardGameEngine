@@ -109,6 +109,7 @@ module.exports = (assets: bundleUp.IBundleUpAssets) => {
     assets.addJs("/public/javascripts/Pieces/PieceDataSet.js");
     assets.addJs("/public/javascripts/Pieces/PieceDefinitionMapper.js");
     assets.addJs("/public/javascripts/Teams/Team.js");
+    assets.addJs("/public/javascripts/Teams/TeamData.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.js");
     assets.addJs("/public/javascripts/Teams/TeamFactory.Angular.js");
     assets.addJs("/public/javascripts/Boards/BoardDisplayData.js");
