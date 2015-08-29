@@ -14,10 +14,10 @@
                     return;
                 }
 
-                var i;
+                var i, player;
+                var players = <Ts.IStringDictionary<Pl.Player>>{};
                 for (i = 0; i < gameData.playerData.length; i++) {
                     var playerData = gameData.playerData[i];
-                    var player;
 
                     if (playerData.id !== gameOwner.id) {
                         player = this._getPlayerFor(playerData);
@@ -25,11 +25,13 @@
                     } else {
                         player = gameOwner;
                     }
+                    players[playerData.id] = player;
+                }
 
-                    for (var j = 0; j < playerData.numberOfTeams; j++) {
-                        var team = this._teamFactory.createTeamFor(player, game);
-                        game.board.add(team);
-                    }
+                for (i = 0; i < gameData.teamData.length; i++) {
+                    player = players[gameData.teamData[i].playerId];
+                    var team = this._teamFactory.createTeamFor(player, game);
+                    game.board.add(team);
                 }
 
                 var validateTurn = () => {
@@ -63,7 +65,7 @@
         }
 
         private _getPlayerFor(playerData: Pl.PlayerData): Pl.Player {
-            return new Players.Player(playerData.id, playerData.name, playerData.isHuman);
+            return new Players.Player(playerData.id, playerData.name, !playerData.id.startsWith("CPU"));
         }
     }
 }
