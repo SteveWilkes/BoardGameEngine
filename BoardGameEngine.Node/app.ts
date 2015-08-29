@@ -25,8 +25,21 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataFromFileQuery");
-var getPlayerDataQuery = new GetPlayerDataQuery(fileManager);
+var MongoClient = require("mongodb").MongoClient;
+
+var mongoCallback = (callback: (db) => void) => {
+    MongoClient.connect("mongodb://localhost:27017/boardgameengine", function (connectError, db) {
+        if (connectError) {
+            // TODO: Handle error
+            return;
+        }
+
+        callback(db);
+    });
+}
+
+import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataFromMongoQuery");
+var getPlayerDataQuery = new GetPlayerDataQuery(mongoCallback);
 
 import PlayerRepository = require("./Scripts/Players/PlayerRepository");
 var playerRepository = new PlayerRepository(getPlayerDataQuery);

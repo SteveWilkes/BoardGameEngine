@@ -18,9 +18,7 @@
             if (playerId) {
                 this._httpService.get("/api/players/" + playerId).then(result => {
                     var playerData = <PlayerData>result.data;
-                    var player = (playerData == null)
-                        ? this._createLocalHumanPlayer(playerData.id, playerData.name)
-                        : this._createGuestPlayer(playerId);
+                    var player = this._createLocalHumanPlayer(playerData.id, playerData.name);
                     callback(player);
                 });
                 return;
