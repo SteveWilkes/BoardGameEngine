@@ -1,5 +1,5 @@
 ﻿module AgileObjects.TypeScript {
     export interface ICommand<TEntity extends Object> {
-        execute(entity: TEntity): void;
+        execute(entity: TEntity, callback: (err: Error) => void): void;
     }
 }

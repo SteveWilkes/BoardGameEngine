@@ -7,7 +7,7 @@
             "_savedData");
     }
 
-    public execute(player: Pl.Player): void {
+    public execute(player: Pl.Player, callback: (err: Error) => void): void {
         var playerJson = JSON.stringify(player);
 
         var pathToPlayerSaveFile = this._fileManager.joinPaths(
@@ -16,6 +16,8 @@
 
         this._fileManager.deleteFile(pathToPlayerSaveFile);
         this._fileManager.writeAllText(pathToPlayerSaveFile, playerJson);
+
+        callback(null);
     }
 }
 

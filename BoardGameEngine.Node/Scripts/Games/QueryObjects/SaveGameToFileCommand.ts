@@ -11,7 +11,7 @@ class SaveGameToFileCommand implements Ts.ICommand<G.Game> {
             "games");
     }
 
-    public execute(game: G.Game): void {
+    public execute(game: G.Game, callback: (err: Error) => void): void {
         var gameData = new Bge.Games.GameData(game);
         var gameDataJson = JSON.stringify(gameData);
 
@@ -20,6 +20,8 @@ class SaveGameToFileCommand implements Ts.ICommand<G.Game> {
             game.id + ".json");
 
         this._fileManager.writeAllText(pathToGameSaveFile, gameDataJson);
+
+        callback(null);
     }
 }
 
