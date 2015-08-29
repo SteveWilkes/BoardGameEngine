@@ -13,8 +13,7 @@
 
             this._getGameTypeQuery.execute(gameTypeId,(err, gameType) => {
                 if (err) {
-                    callback(err);
-                    return;
+                    return callback(err);
                 }
 
                 GameCompletionMonitor.create(events);

@@ -34,8 +34,7 @@
 
             this._gameFactory.createNewGame("test", "run-the-bomb", gameOwner,(createError, g) => {
                 if (createError) {
-                    callback(createError);
-                    return;
+                    return callback(createError);
                 }
 
                 this.teams = g.teams;

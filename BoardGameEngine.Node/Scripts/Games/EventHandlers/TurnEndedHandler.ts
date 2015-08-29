@@ -43,14 +43,12 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
     private _getGame(turnData: I.TurnData, socket: G.IGameSocket, callback: (err: Error, game?: G.Game) => void): void {
         var game = socket.getGameOrNull(turnData.gameId);
         if (game !== null) {
-            callback(null, game);
-            return;
+            return callback(null, game);
         }
 
-        this._gameMapper.map(turnData.gameData,(err, g) => {
-            if (err) {
-                callback(err);
-                return;
+        this._gameMapper.map(turnData.gameData,(mapError, g) => {
+            if (mapError) {
+                return callback(mapError);
             }
 
             socket.addGame(g);
@@ -75,8 +73,7 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
             game,
             nextTeamIndex => this._saveGameCommand.execute(game, saveError => {
                 if (saveError) {
-                    callback(saveError);
-                    return;
+                    return callback(saveError);
                 }
 
                 callback(null, nextTeamIndex);

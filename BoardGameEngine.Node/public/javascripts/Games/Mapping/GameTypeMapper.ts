@@ -18,8 +18,7 @@
             
             this._getBoardTypeQuery.execute(boardTypeId,(getBoardTypeError, boardType) => {
                 if (getBoardTypeError) {
-                    callback(getBoardTypeError);
-                    return;
+                    return callback(getBoardTypeError);
                 }
 
                 var gameType = new GameType(

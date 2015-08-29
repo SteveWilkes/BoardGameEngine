@@ -11,8 +11,7 @@
 
             this._gameFactory.createNewGame(gameId, gameTypeId, owner,(createError, game) => {
                 if (createError) {
-                    callback(createError);
-                    return;
+                    return callback(createError);
                 }
 
                 var i;

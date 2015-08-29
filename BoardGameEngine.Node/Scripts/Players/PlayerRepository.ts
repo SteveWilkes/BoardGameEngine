@@ -7,8 +7,7 @@ class PlayerRepository {
     public getData(playerId: string, callback: (err: Error, pd?: Pl.PlayerData) => void) {
         this._getPlayerDataQuery.execute(playerId,(playerDataError, playerData) => {
             if (playerDataError) {
-                callback(playerDataError);
-                return;
+                return callback(playerDataError);
             }
 
             if (playerData == null) {

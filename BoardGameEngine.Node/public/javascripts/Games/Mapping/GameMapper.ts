@@ -10,8 +10,7 @@
 
             this._gameFactory.createNewGame(gameData.gameId, gameData.gameTypeId, gameOwner,(createError, game) => {
                 if (createError) {
-                    callback(createError);
-                    return;
+                    return callback(createError);
                 }
 
                 game["_id"] = gameData["_id"];
