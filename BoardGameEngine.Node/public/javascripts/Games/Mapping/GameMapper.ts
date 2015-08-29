@@ -14,6 +14,9 @@
                     return;
                 }
 
+                game["_id"] = gameData["_id"];
+                game["_latestMoveIndex"] = gameData.historyData.length;
+
                 var i, player;
                 var players = <Ts.IStringDictionary<Pl.Player>>{};
                 for (i = 0; i < gameData.playerData.length; i++) {

@@ -74,6 +74,7 @@
     <TypeScriptCompile Include="public\javascripts\Teams\TeamData.ts" />
     <TypeScriptCompile Include="Scripts\Games\EventHandlers\PlayerUpdateHandler.ts" />
     <TypeScriptCompile Include="Scripts\Games\QueryObjects\GetGameDataFromMongoQuery.ts" />
+    <TypeScriptCompile Include="Scripts\Games\QueryObjects\SaveGameToMongoCommand.ts" />
     <TypeScriptCompile Include="Scripts\Players\QueryObjects\GetPlayerDataFromMongoQuery.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\AgileObjects.Node.d.ts" />

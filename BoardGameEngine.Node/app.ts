@@ -63,8 +63,8 @@ var gameMapper = new Bge.Games.GameMapper(
 import GetGameDataQuery = require("./Scripts/Games/QueryObjects/GetGameDataFromMongoQuery");
 var getGameDataQuery = new GetGameDataQuery(mongoCallback);
 
-import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameToFileCommand");
-var saveGameCommand = new SaveGameCommand(fileManager);
+import SaveGameCommand = require("./Scripts/Games/QueryObjects/SaveGameToMongoCommand");
+var saveGameCommand = new SaveGameCommand(mongoCallback);
 
 import PlayerJoinRequestedHandler = require("./Scripts/Games/EventHandlers/PlayerJoinHandler");
 import PlayerUpdateHandler = require("./Scripts/Games/EventHandlers/PlayerUpdateHandler");
