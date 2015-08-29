@@ -32,8 +32,9 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
                     socket.emit("turnValidated", nextTeamIndex);
                     socket.emitToGameListeners("turnEnded", turnData, game.id);
 
+                    // TODO: Isn't this always true?
                     if (!game.status.turnManager.currentTeam.owner.isHuman) {
-                        process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
+                        process.nextTick(() => this._performCpuTurn(game, socket));
                     }
                 });
             }));
@@ -70,21 +71,19 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
     }
 
     private _endTurn(game: G.Game, callback: (err: Error, nti?: number) => void): void {
-        var nextTeamIndex: number;
+        Bge.Interactions.TurnCompletionManager.complete(
+            game,
+            nextTeamIndex => this._saveGameCommand.execute(game, saveError => {
+                if (saveError) {
+                    callback(saveError);
+                    return;
+                }
 
-        Bge.Interactions.TurnCompletionManager.complete(game, nti => nextTeamIndex = nti);
-
-        this._saveGameCommand.execute(game, saveError => {
-            if (saveError) {
-                callback(saveError);
-                return;
-            }
-
-            callback(null, nextTeamIndex);
-        });
+                callback(null, nextTeamIndex);
+            }));
     }
 
-    private _performCpuTurnIfNecessary(game: G.Game, socket: G.IGameSocket) {
+    private _performCpuTurn(game: G.Game, socket: G.IGameSocket) {
         var cpuTurnData = this._cpuPlayerAi.getNextTurn(game.status.turnManager.currentTeam, game.id);
 
         this._endTurn(game, err => {
