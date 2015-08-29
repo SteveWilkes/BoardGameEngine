@@ -241,6 +241,7 @@
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jasmine\jasmine.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\mongodb\mongodb.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\RunTheBomb.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\socket.io\socket.io.d.ts" />
@@ -312,6 +313,7 @@
     <Folder Include="Scripts\Routing\" />
     <Folder Include="Scripts\Routing\Routes\" />
     <Folder Include="Scripts\typings\jasmine\" />
+    <Folder Include="Scripts\typings\mongodb\" />
     <Folder Include="Tests\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />

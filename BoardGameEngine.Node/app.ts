@@ -25,10 +25,10 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-var MongoClient = require("mongodb").MongoClient;
+import MongoDb = require("mongodb");
 
-var mongoCallback = (callback: (db) => void) => {
-    MongoClient.connect("mongodb://localhost:27017/boardgameengine", function (connectError, db) {
+var mongoCallback = (callback: (db: MongoDb.Db) => void) => {
+    MongoDb.MongoClient.connect("mongodb://localhost:27017/boardgameengine", function (connectError, db) {
         if (connectError) {
             // TODO: Handle error
             return;
