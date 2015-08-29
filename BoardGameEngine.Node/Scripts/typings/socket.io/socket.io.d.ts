@@ -42,7 +42,7 @@ declare module SocketIO {
         on(event: string, listener: Function): any;
     }
 
-    interface Namespace /*extends NodeJS.EventEmitter*/ {
+    interface Namespace extends NodeEventEmitter {
         name: string;
         connected: { [id: number]: Socket };
         use(fn: Function): Namespace
