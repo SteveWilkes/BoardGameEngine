@@ -25,7 +25,7 @@ import ResourceBundler = require("./Scripts/Startup/BundleUpResourceBundler");
 import SessionWrapper = require("./Scripts/Startup/SessionWrapper");
 import CommunicationManager = require("./Scripts/Startup/CommunicationManager");
 
-import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataQuery");
+import GetPlayerDataQuery = require("./Scripts/Players/QueryObjects/GetPlayerDataFromFileQuery");
 var getPlayerDataQuery = new GetPlayerDataQuery(fileManager);
 
 import PlayerRepository = require("./Scripts/Players/PlayerRepository");

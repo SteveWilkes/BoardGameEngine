@@ -1,4 +1,4 @@
-﻿class GetPlayerDataQuery implements Ts.IGetQuery<Pl.PlayerData> {
+﻿class GetPlayerDataFromFileQuery implements Ts.IGetQuery<Pl.PlayerData> {
     private _rootSaveDirectory: string;
 
     constructor(private _fileManager: Ts.IFileManager) {
@@ -24,4 +24,4 @@
     }
 }
 
-export = GetPlayerDataQuery;
+export = GetPlayerDataFromFileQuery;
