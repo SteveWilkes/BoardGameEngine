@@ -3,19 +3,29 @@
     export class GameFactory {
         constructor(private _getGameTypeQuery: Ts.IGetQuery<GameType>) { }
 
-        public createNewGame(id: string, gameTypeId: string, owner: Pl.Player): Game {
+        public createNewGame(
+            id: string,
+            gameTypeId: string,
+            owner: Pl.Player,
+            callback: (err: Error, game?: Game) => void): void {
+
             var events = new GameEventSet();
 
-            var gameType = this._getGameTypeQuery.execute(gameTypeId);
+            this._getGameTypeQuery.execute(gameTypeId,(err, gameType) => {
+                if (err) {
+                    callback(err);
+                    return;
+                }
 
-            GameCompletionMonitor.create(events);
-            this._setupCustomEvents(events, gameType);
+                GameCompletionMonitor.create(events);
+                this._setupCustomEvents(events, gameType);
 
-            var board = new Boards.Board(gameType.boardType, events);
+                var board = new Boards.Board(gameType.boardType, events);
 
-            var game = new Game(id, gameType, owner, board, events);
+                var game = new Game(id, gameType, owner, board, events);
 
-            return game;
+                callback(null, game);
+            });
         }
 
         private _setupCustomEvents(events: GameEventSet, gameType: GameType) {

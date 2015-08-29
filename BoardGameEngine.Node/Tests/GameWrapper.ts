@@ -10,6 +10,46 @@
         public events: GameEventSet;
         public status: Status.StatusData;
 
+        public setupPieces(
+            configuration: (configurator: TTeamConfigurator) => void,
+            callback: (gw: GameWrapper<TTeamConfigurator>) => void): void {
+
+            configuration(this._teamConfigurator);
+
+            this._createGame((createError, game) => {
+                if (createError) {
+                    throw createError;
+                }
+
+                this._game = game
+
+                this._teamConfigurator.setupTeams(this._game);
+
+                callback(this);
+            });
+        }
+
+        private _createGame(callback: (err: Error, game?: Game) => void): void {
+            var gameOwner = this._teamConfigurator.getGameOwner();
+
+            this._gameFactory.createNewGame("test", "run-the-bomb", gameOwner,(createError, g) => {
+                if (createError) {
+                    callback(createError);
+                    return;
+                }
+
+                this.teams = g.teams;
+                this.events = g.events;
+                this.status = g.status;
+
+                callback(null, g);
+            });
+        }
+
+        public start(): void {
+            this._game.start();
+        }
+
         public getPieceAt(coordinatesSignature: string): PieceWrapper {
             try {
                 var piece = Ts.Joq
@@ -28,31 +68,6 @@
         public startNextTurn(): void {
             var nextTeamIndex = (this._game.status.turnManager.currentTeam === this.teams[0]) ? 1 : 0;
             this.events.turnValidated.publish(this.teams[nextTeamIndex]);
-        }
-
-        public setupPieces(configuration: (configurator: TTeamConfigurator) => void): GameWrapper<TTeamConfigurator> {
-            configuration(this._teamConfigurator);
-
-            this._game = this._createGame();
-
-            this._teamConfigurator.setupTeams(this._game);
-
-            return this;
-        }
-
-        private _createGame(): Game {
-            var gameOwner = this._teamConfigurator.getGameOwner();
-            var game = this._gameFactory.createNewGame("test", "run-the-bomb", gameOwner);
-
-            this.teams = game.teams;
-            this.events = game.events;
-            this.status = game.status;
-
-            return game;
-        }
-
-        public start(): void {
-            this._game.start();
         }
     }
 }

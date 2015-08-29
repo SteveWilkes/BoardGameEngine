@@ -8,7 +8,7 @@
             "games");
     }
 
-    public execute(gameId: string): G.GameData {
+    public execute(gameId: string, callback: (err: Error, gd: G.GameData) => void): void {
         var pathToGameSaveFile = this._fileManager.joinPaths(
             this._rootSaveDirectory,
             gameId + ".json");
@@ -16,7 +16,7 @@
         var gameDataJson = this._fileManager.readAllText(pathToGameSaveFile);
         var gameData = JSON.parse(gameDataJson);
 
-        return gameData;
+        callback(null, gameData);
     }
 }
 

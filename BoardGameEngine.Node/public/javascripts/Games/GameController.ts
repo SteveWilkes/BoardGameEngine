@@ -48,8 +48,15 @@
         }
 
         public startDefaultGame(gameTypeId: string): void {
-            this._initialiseGame(this._gameService.createDefaultGame(gameTypeId, this.localPlayer));
-            this.game.start();
+            this._gameService.createDefaultGame(gameTypeId, this.localPlayer,(err, game) => {
+                if (err) {
+                    // TODO: Handle error
+                    return;
+                }
+
+                this._initialiseGame(game);
+                this.game.start();
+            });
         }
 
         public loadGame(gameId: string): void {

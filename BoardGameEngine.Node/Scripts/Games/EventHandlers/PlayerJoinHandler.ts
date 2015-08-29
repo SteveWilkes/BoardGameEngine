@@ -4,8 +4,13 @@
     public setup(socket: G.IGameSocket): void {
         socket.on("playerJoinRequested",(request: Pl.PlayerRequest) => {
             // TODO: Validate join request
-            var gameData = this._getGameDataQuery.execute(request.gameId);
-            socket.emitToGameRoom("playerJoinValidated", gameData, gameData.gameId);
+            this._getGameDataQuery.execute(request.gameId,(err, gameData) => {
+                if (err) {
+                    return;
+                }
+
+                socket.emitToGameRoom("playerJoinValidated", gameData, gameData.gameId);
+            });
         });
     }
 }

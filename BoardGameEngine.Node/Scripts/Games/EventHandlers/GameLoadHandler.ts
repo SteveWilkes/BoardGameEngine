@@ -6,16 +6,31 @@
     public setup(socket: G.IGameSocket): void {
         socket.on("gameLoadRequested",(request: Pl.PlayerRequest) => {
             // TODO: Validate load request
-            var gameData = this._getGameDataQuery.execute(request.gameId);
-            socket.emit("gameLoadValidated", gameData);
+            this._getGameDataQuery.execute(request.gameId,(err, gameData) => {
+                if (err) {
+                    return;
+                }
+
+                socket.emit("gameLoadValidated", gameData);
+            });
         });
 
         socket.on("gameRestarted",(data: Pl.PlayerRequest) => {
-            var gameData = this._getGameDataQuery.execute(data.gameId);
-            var game = this._gameMapper.map(gameData);
-            socket.addGame(game);
-            socket.emitToGameRoom("playerJoinValidated", data, game.id);
-            console.log("Game " + game.id + " recreated for player " + data.playerId);
+            this._getGameDataQuery.execute(data.gameId,(gameDataError, gameData) => {
+                if (gameDataError) {
+                    return;
+                }
+
+                this._gameMapper.map(gameData,(gameMapperError, game) => {
+                    if (gameMapperError) {
+                        return;
+                    }
+
+                    socket.addGame(game);
+                    socket.emitToGameRoom("playerJoinValidated", data, game.id);
+                    console.log("Game " + game.id + " recreated for player " + data.playerId);
+                });
+            });
         });
     }
 }

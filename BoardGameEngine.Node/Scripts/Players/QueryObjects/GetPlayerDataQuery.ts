@@ -8,7 +8,7 @@
     }
 
 
-    public execute(playerId: string): Pl.PlayerData {
+    public execute(playerId: string, callback: (err: Error, pd: Pl.PlayerData) => void): void {
         var pathToPlayerSaveFile = this._fileManager.joinPaths(
             this._rootSaveDirectory,
             "player_" + playerId + ".json");
@@ -20,7 +20,7 @@
             playerData = JSON.parse(playerDataJson);
         }
 
-        return playerData;
+        callback(null, playerData);
     }
 }
 

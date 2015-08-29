@@ -15,29 +15,37 @@ class TurnEndedHandler implements G.IGameSocketEventHandler {
 
     public setup(socket: G.IGameSocket): void {
         socket.on("turnEnded",(turnData: I.TurnData) => {
-            var game = this._getGame(turnData, socket);
+            this._getGame(turnData, socket,(err, game) => {
+                if (!game.status.turnManager.currentTeam.owner.isHuman) { return; }
 
-            if (!game.status.turnManager.currentTeam.owner.isHuman) { return; }
+                var nextTeamIndex = this._applyTurn(turnData, game);
 
-            var nextTeamIndex = this._applyTurn(turnData, game);
+                socket.emit("turnValidated", nextTeamIndex);
+                socket.emitToGameListeners("turnEnded", turnData, game.id);
 
-            socket.emit("turnValidated", nextTeamIndex);
-            socket.emitToGameListeners("turnEnded", turnData, game.id);
-
-            if (!game.status.turnManager.currentTeam.owner.isHuman) {
-                process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
-            }
+                if (!game.status.turnManager.currentTeam.owner.isHuman) {
+                    process.nextTick(() => this._performCpuTurnIfNecessary(game, socket));
+                }
+            });
         });
     }
 
-    private _getGame(turnData: I.TurnData, socket: G.IGameSocket): G.Game {
+    private _getGame(turnData: I.TurnData, socket: G.IGameSocket, callback: (err: Error, game?: G.Game) => void): void {
         var game = socket.getGameOrNull(turnData.gameId);
-        if (game === null) {
-            game = this._gameMapper.map(turnData.gameData);
-            socket.addGame(game);
+        if (game !== null) {
+            callback(null, game);
+            return;
         }
 
-        return game;
+        this._gameMapper.map(turnData.gameData,(err, g) => {
+            if (err) {
+                callback(err);
+                return;
+            }
+
+            socket.addGame(g);
+            callback(null, g);
+        });
     }
 
     private _applyTurn(turnData: I.TurnData, game: G.Game): number {

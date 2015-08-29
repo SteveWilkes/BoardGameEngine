@@ -6,7 +6,7 @@
             private _annotationMapper: Ts.Annotations.IEntityAnnotationMapper,
             private _patternMapper: Ts.Evaluation.IEvaluatorPatternMapper) { }
 
-        public map(gameTypeData: string): GameType {
+        public map(gameTypeData: string, callback: (err: Error, gameType?: GameType) => void): void {
             var gameTypeDataItems = gameTypeData.split("/");
             var gameTypeId = gameTypeDataItems[0];
             var boardTypeId = gameTypeDataItems[1];
@@ -15,17 +15,26 @@
             var annotations = this._mapEntityAnnotations(gameTypeDataItems[3]);
             var evaluatorPatternMapper = this._getEvaluatorPatternMapper(annotations);
             var evaluatorMapper = new TypeScript.Evaluation.EvaluatorMapper(evaluatorPatternMapper);
+            
+            this._getBoardTypeQuery.execute(boardTypeId,(getBoardTypeError, boardType) => {
+                if (getBoardTypeError) {
+                    callback(getBoardTypeError);
+                    return;
+                }
 
-            return new GameType(
-                gameTypeId,
-                this._getBoardTypeQuery.execute(boardTypeId),
-                maximumNumberOfTeams,
-                this._mapTurnDefinition(gameTypeDataItems[4], evaluatorMapper),
-                new Pieces.PieceDataSet(
-                    this._mapPieceDefinitions(gameTypeDataItems[5], evaluatorMapper),
-                    this._mapPieceConfigDataSet(gameTypeDataItems[6])),
-                annotations,
-                this._mapEventMappings(gameTypeDataItems[7], evaluatorPatternMapper));
+                var gameType = new GameType(
+                    gameTypeId,
+                    boardType,
+                    maximumNumberOfTeams,
+                    this._mapTurnDefinition(gameTypeDataItems[4], evaluatorMapper),
+                    new Pieces.PieceDataSet(
+                        this._mapPieceDefinitions(gameTypeDataItems[5], evaluatorMapper),
+                        this._mapPieceConfigDataSet(gameTypeDataItems[6])),
+                    annotations,
+                    this._mapEventMappings(gameTypeDataItems[7], evaluatorPatternMapper));
+
+                callback(null, gameType);
+            });
         }
 
         private _mapEntityAnnotations(annotationData: string): Array<Ts.Annotations.IEntityAnnotation> {

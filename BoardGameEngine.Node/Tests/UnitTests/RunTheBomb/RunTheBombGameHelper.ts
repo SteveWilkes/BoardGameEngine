@@ -4,8 +4,9 @@ var Bge = Ao.BoardGameEngine;
 var TsNs = Ao.TypeScript;
 
 class RunTheBombGameHelper implements It.IGameHelper {
-    public startDefaultGame(configurator: (gameWrapper: G.GameWrapper<G.RunTheBombTeamConfigurator>) => void):
-        G.GameWrapper<G.RunTheBombTeamConfigurator> {
+    public startDefaultGame(
+        configuration: (configurator: G.RunTheBombTeamConfigurator) => void,
+        callback: (gw: G.GameWrapper<G.RunTheBombTeamConfigurator>) => void): void {
 
         var gameFactory = new Bge.Games.GameFactory(
             new Bge.Games.GetGameTypeQuery(
@@ -17,11 +18,10 @@ class RunTheBombGameHelper implements It.IGameHelper {
 
         var gameWrapper = new Bge.Games.GameWrapper(gameFactory, new Bge.Games.RunTheBombTeamConfigurator());
 
-        configurator(gameWrapper);
-
-        gameWrapper.start();
-
-        return gameWrapper;
+        gameWrapper.setupPieces(configuration, gw => {
+            gw.start();
+            callback(gw);
+        });
     }
 }
 

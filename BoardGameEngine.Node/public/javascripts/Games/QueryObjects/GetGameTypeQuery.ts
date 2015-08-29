@@ -3,10 +3,10 @@
     export class GetGameTypeQuery implements Ts.IGetQuery<GameType> {
         constructor(private _gameTypeMapper: GameTypeMapper) { }
 
-        public execute(gameTypeId: string): Games.GameType {
+        public execute(gameTypeId: string, callback: (err: Error, gameType?: GameType) => void): void {
             var gameTypeData = this._getGameTypeData(gameTypeId);
 
-            return this._gameTypeMapper.map(gameTypeData);
+            this._gameTypeMapper.map(gameTypeData, callback);
         }
 
         private _getGameTypeData(gameTypeId: string): string {
