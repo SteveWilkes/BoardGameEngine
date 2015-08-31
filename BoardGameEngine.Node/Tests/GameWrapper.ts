@@ -21,7 +21,7 @@
                     throw createError;
                 }
 
-                this._game = game
+                this._game = game;
 
                 this._teamConfigurator.setupTeams(this._game);
 

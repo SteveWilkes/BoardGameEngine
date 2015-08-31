@@ -20,24 +20,24 @@
                 "/" +
             // PieceDefinitions
                 "1`Bomb`Bomb.png`" + // PieceDefinition 1 - Bomb
-                "0~m3~" +
+                "0~m3~" + // Attach (be picked up)
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
                 "@" +
                 "@l.p.d=2,3+l.p.t=D:p.t" +
                 "_" + // PieceDefinition 2 - Soldier
                 "2`Human Soldier`Soldier.png`" +
-                "0~m2~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "0~m2~" + // Move
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
                 "@!l.io" +
                 "^" +
-                "0~m1~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "0~m1~" + // Attach(pick up)
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
                 "@l.p.d=1+l.p.t=D:p.t" +
                 "^" +
-                "1~a1~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // 1-space attack
+                "1~a1~" + // Attack
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
                 "@l.io+!l.p.t=D:p.t" +
                 "~" +
@@ -45,27 +45,27 @@
                 "`rp" + // Leave the Bomb on the board when a Solder is taken
                 "_" + // PieceDefinition 3 - Ninja
                 "3`Human Ninja`Ninja.png`" +
-                "0~m2~" +
-                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // 2-space movement 
+                "0~m2~" + // Move
+                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // Over two board tiles
                 "@!l.io" +
                 "@!l.io" +
                 "~" +
                 "!io" + // ...if unoccupied
                 "^" +
-                "0~m2~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // 1-space movement
+                "0~m2~" + // Move
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
                 "@!l.io" +
                 "~" +
                 "io" + // ...if occupied
                 "^" +
-                "0~m1~" +
-                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
+                "0~m1~" + // Attach (pick up)
+                "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
                 "@l.p.d=1+l.p.t=D:p.t" +
                 "^" +
-                "1~a1~" +
-                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // 2-space attack
+                "1~a1~" + // Attack
+                "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // Over two board tiles
                 "@!l.io" +
                 "@l.io+!l.p.t=D:p.t" +
                 "~" +
