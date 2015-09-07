@@ -17,6 +17,10 @@
         "a1": Pieces.AttackDestinationPieceInteraction,
     };
 
+    var _attackDamageCalculatorConstructorsById = {
+        "d1": Pieces.AttackDefenceDivisionDamageCalculatorOne
+    };
+
     var _takenPieceProcessorConstructorsById = {
         "rp": Pieces.ReplacePieceWithAttachedPiece
     };
@@ -32,13 +36,15 @@
             var id = pieceDefinitionDataItems[0];
             var name = pieceDefinitionDataItems[1];
             var image = "/images/pieces/" + pieceDefinitionDataItems[2];
-            var interactionCalculators = this._mapInteractionCalculators(pieceDefinitionDataItems[3]);
-            var takenPieceProcessors = this._mapTakenPieceProcessors(pieceDefinitionDataItems[4]);
+            var vitalStats = pieceDefinitionDataItems[3].split("^");
+            var interactionCalculators = this._mapInteractionCalculators(pieceDefinitionDataItems[4]);
+            var takenPieceProcessors = this._mapTakenPieceProcessors(pieceDefinitionDataItems[5]);
 
             return new PieceDefinition(
                 id,
                 name,
                 image,
+                vitalStats,
                 (pieceId: string, game: G.Game) => new PieceInteractionProfile(
                     interactionCalculators,
                     takenPieceProcessors,

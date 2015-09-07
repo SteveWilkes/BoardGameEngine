@@ -70,7 +70,7 @@
         MovePieceToDestinationInteraction: new (id: string, piece: Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationInteraction;
         MovePieceToDestinationPieceInteraction: new (id: string, piece: Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.MovePieceToDestinationPieceInteraction;
         NullPotentialInteraction: typeof P.NullPotentialInteraction;
-        Piece: new (id: string, definitionId: string, imageSource: string, interactionProfile: P.PieceInteractionProfile) => Piece;
+        Piece: new (id: string, definitionId: string, imageSource: string, vitalStats: Array<number>, interactionProfile: P.PieceInteractionProfile) => Piece;
         PieceConfigData: new (pieceDefinitionId: string, pieceLocation: Ts.Coordinates) => P.PieceConfigData;
         PieceInteractionCalculator: new (type: InteractionType, locationCalculators: Array<P.RelatedLocationCalculator>, interaction: new (id: string, piece: Piece, path: Array<P.IPieceLocation>, events: G.GameEventSet) => P.IPieceInteraction, availabilityEvaluator: P.IPieceEvaluator) => P.PieceInteractionCalculator;
         PieceInteractionMonitor: new (timeoutService: (action: () => void, delay: number) => void, game: G.Game) => P.PieceInteractionMonitor;

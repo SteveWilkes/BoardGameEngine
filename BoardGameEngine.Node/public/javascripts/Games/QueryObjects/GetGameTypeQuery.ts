@@ -20,12 +20,14 @@
                 "/" +
             // PieceDefinitions
                 "1`Bomb`Bomb.png`" + // PieceDefinition 1 - Bomb
+                "0^0^0`"+ // Health - Defence - Attack
                 "0~m3~" + // Attach (be picked up)
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" +
                 "@" +
                 "@l.p.d=2,3+l.p.t=D:p.t" +
                 "_" + // PieceDefinition 2 - Soldier
                 "2`Human Soldier`Soldier.png`" +
+                "100^100^100`" + // Health - Defence - Attack
                 "0~m2~" + // Move
                 "u-1#ur-1#r-1#dr-1#d-1#dl-1#l-1#ul-1" + // Over one board tile
                 "@" +
@@ -45,6 +47,7 @@
                 "`rp" + // Leave the Bomb on the board when a Solder is taken
                 "_" + // PieceDefinition 3 - Ninja
                 "3`Human Ninja`Ninja.png`" +
+                "100^66^66`" + // Health - Defence - Attack
                 "0~m2~" + // Move
                 "u-2#ur-2#r-2#dr-2#d-2#dl-2#l-2#ul-2" + // Over two board tiles
                 "@!l.io" +

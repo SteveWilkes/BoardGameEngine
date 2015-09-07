@@ -138,6 +138,7 @@ class PieceBuilder {
             pieceId,
             configuration.pieceDefinitionId,
             "test.gif",
+            [100,100,100],
             interactionProfile);
     }
 }

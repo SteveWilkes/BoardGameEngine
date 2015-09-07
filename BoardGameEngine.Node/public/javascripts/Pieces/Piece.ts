@@ -5,15 +5,20 @@
             public id: string,
             public definitionId: string,
             public imageSource: string,
+            vitalStats: Array<number>,
             public interactionProfile: PieceInteractionProfile) {
             super();
 
             this.moveCount = -1; // <- Set to zero when the Piece is first added to the Board
-            this.health = 100;
+            this.health = vitalStats[0];
+            this.defence = vitalStats[1];
+            this.attack = vitalStats[2];
         }
 
         public team: IPieceOwner;
         public health: number;
+        public defence: number;
+        public attack: number;
         public location: IPieceLocation;
         public attachedPiece: Piece;
         public moveCount: number;

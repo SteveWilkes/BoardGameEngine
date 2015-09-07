@@ -8,19 +8,19 @@
         constructor(
             private _interactionCalculators: Array<PieceInteractionCalculator>,
             private _pieceTakenProcessors: Array<ITakenPieceProcessor>,
-            private _pieceId: string,
+            pieceId: string,
             private _game: G.Game) {
 
             this._game.events.gameStarted.subscribe(() => {
                 for (var i = 0; i < this._game.teams.length; i++) {
                     var piecesById = this._game.teams[i].getPieces();
-                    if (piecesById.hasOwnProperty(this._pieceId)) {
-                        this._piece = piecesById[this._pieceId];
+                    if (piecesById.hasOwnProperty(pieceId)) {
+                        this._piece = piecesById[pieceId];
                         break;
                     }
                 }
                 if (this._piece === undefined) {
-                    throw new Error("Unable to find piece " + this._pieceId);
+                    throw new Error("Unable to find piece " + pieceId);
                 }
                 return true;
             });

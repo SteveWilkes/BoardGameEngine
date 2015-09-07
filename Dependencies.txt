@@ -1,4 +1,0 @@
-Root -> Boards -> Teamsx
-Root -> Status -> Boards -> Pieces
-Root -> Teams -> Pieces
-Status -> Teams
